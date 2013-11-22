@@ -7,6 +7,7 @@
 //
 
 #import "PLYAPIOperation.h"
+#import "NSString+DTURLEncoding.h"
 
 @implementation PLYAPIOperation
 {
@@ -22,9 +23,35 @@
 	
 	if (self)
 	{
+		NSMutableString *tmpQuery = [NSMutableString string];
 		
+		[parameters enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
+			
+			if ([tmpQuery length])
+			{
+				[tmpQuery appendString:@"&"];
+			}
+			else
+			{
+				[tmpQuery appendString:@"?"];
+			}
+			
+			[tmpQuery appendString:[key stringByURLEncoding]];
+
+			[tmpQuery appendString:@"="];
+
+			NSString *encoded = [[obj description] stringByURLEncoding];
+			[tmpQuery appendString:encoded];
+		}];
 		
+		if (parameters)
+		{
+			functionPath = [functionPath stringByAppendingString:tmpQuery];
+		}
 		
+		_operationURL = [NSURL URLWithString:functionPath relativeToURL:endpointURL];
+		
+		NSAssert(_operationURL, @"Something went wrong with creating a %@", NSStringFromClass([self class]));
 	}
 	
 	return self;
