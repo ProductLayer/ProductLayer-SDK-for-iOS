@@ -100,4 +100,18 @@
 	[self _enqueueOperation:op];
 }
 
+- (void)loginWithNickname:(NSString *)nickname password:(NSString *)password completion:(PLYAPIOperationResult)completion
+{
+	NSParameterAssert(nickname);
+	NSParameterAssert(password);
+	
+	NSString *path = @"/ProductLayer/user/login";
+	NSDictionary *parameters = @{@"nickName": nickname, @"password": password};
+	
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:parameters];
+	op.resultHandler = completion;
+	
+	[self _enqueueOperation:op];
+}
+
 @end

@@ -29,6 +29,24 @@
     [super viewDidLoad];
 	
 	_server = [[PLYServer alloc] initWithHostURL:PLY_ENDPOINT_URL];
+	
+	[_server loginWithNickname:@"drops" password:@"magic" completion:^(id result, NSError *error) {
+		
+		if (error)
+		{
+			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+				[alert show];
+			});
+		}
+		else
+		{
+			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+				
+			});
+		}
+		
+	}];
 }
 
 - (void)didReceiveMemoryWarning

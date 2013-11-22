@@ -19,4 +19,7 @@
 // creates a new user account
 - (void)createUserWithNickname:(NSString *)nickname email:(NSString *)email password:(NSString *)password completion:(PLYAPIOperationResult)completion;
 
+// login
+- (void)loginWithNickname:(NSString *)nickname password:(NSString *)password completion:(PLYAPIOperationResult)completion;
+
 @end

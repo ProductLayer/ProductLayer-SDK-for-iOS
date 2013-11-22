@@ -86,8 +86,8 @@
 	
 	NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
 	
-	NSUInteger statusCode;
-	NSString *contentType;
+	NSInteger statusCode = 0;
+	NSString *contentType = nil;
 	
 	// check response class
 	
