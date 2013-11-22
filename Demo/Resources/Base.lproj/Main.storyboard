@@ -102,6 +102,9 @@
                                                 <constraint firstItem="YCX-lT-ufc" firstAttribute="leading" secondItem="hGQ-7s-UkD" secondAttribute="trailing" constant="3" id="mkz-xm-hm3"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="textField" destination="YCX-lT-ufc" id="fbP-wL-sP0"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="44" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="FcD-dJ-Ug3" customClass="EditableCell">
                                         <rect key="frame" x="0.0" y="163" width="320" height="44"/>
@@ -133,6 +136,9 @@
                                                 <constraint firstItem="897-1K-OcH" firstAttribute="leading" secondItem="E3N-SA-QTO" secondAttribute="trailing" constant="8" id="zdb-k9-hgB"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="textField" destination="897-1K-OcH" id="yAF-v8-tWr"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="44" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Nl7-iK-cSM" customClass="EditableCell">
                                         <rect key="frame" x="0.0" y="207" width="320" height="44"/>
@@ -164,6 +170,9 @@
                                                 <constraint firstAttribute="trailing" secondItem="6YA-tD-Azk" secondAttribute="trailing" constant="20" symbolic="YES" id="nff-ad-K9t"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="textField" destination="6YA-tD-Azk" id="hck-jk-P2d"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>

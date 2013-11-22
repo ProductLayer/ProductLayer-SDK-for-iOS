@@ -56,7 +56,7 @@
 	NSString *path = @"/ProductLayer/user/register";
 
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
-	op.verb = @"POST";
+	op.HTTPMethod = @"POST";
 	op.resultHandler = completion;
 	
 	NSDictionary *payloadDictionary = @{@"nickName": nickname, @"email": email, @"password": password};

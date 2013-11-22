@@ -62,9 +62,9 @@
 {
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:_operationURL cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10];
 	
-	if (_verb)
+	if (_HTTPMethod)
 	{
-		request.HTTPMethod = _verb;
+		request.HTTPMethod = _HTTPMethod;
 	}
 	
 	if (_payload)
