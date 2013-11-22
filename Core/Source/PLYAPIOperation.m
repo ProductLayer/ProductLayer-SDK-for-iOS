@@ -60,20 +60,73 @@
 
 - (void)main
 {
-	NSURLRequest *request = [[NSURLRequest alloc] initWithURL:_operationURL];
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:_operationURL cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10];
+	
+	if (_verb)
+	{
+		request.HTTPMethod = _verb;
+	}
+	
+	if (_payload)
+	{
+		[request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+		
+		NSData *payloadData = [NSJSONSerialization dataWithJSONObject:_payload options:0 error:NULL];
+		[request setHTTPBody:payloadData];
+	}
 	
 	NSHTTPURLResponse *response;
 	NSError *error;
 	
 	NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
 	
+	NSUInteger statusCode;
+	NSString *contentType;
+	
+	// check response class
+	
 	if (!error)
 	{
 		if ([response isKindOfClass:[NSHTTPURLResponse class]])
 		{
-			NSString *contentType = [response allHeaderFields][@"Content-Type"];
+			contentType = [response allHeaderFields][@"Content-Type"];
+			statusCode = [response statusCode];
+		}
+		else
+		{
+			NSString *errorMessage = [NSString stringWithFormat:@"Invalid response object of class '%@'", NSStringFromClass([response class])];
+			NSDictionary *userInfo = @{NSLocalizedDescriptionKey: errorMessage};
+			error = [NSError errorWithDomain:PLYErrorDomain code:0 userInfo:userInfo];
+		}
+	}
+	
+	// check status code range
+	
+	if (!error)
+	{
+		if (statusCode>0 && statusCode<300)
+		{
 			
-			if (![contentType isEqualToString:@"application/json"])
+		}
+		else
+		{
+			NSString *errorMessage = [NSString stringWithFormat:@"Server returned error code %d", statusCode];
+			NSDictionary *userInfo = @{NSLocalizedDescriptionKey:  errorMessage};
+			error = [NSError errorWithDomain:PLYErrorDomain code:statusCode userInfo:userInfo];
+		}
+	}
+	
+	// check response content type
+	
+	if (!error)
+	{
+		if ([responseData length])
+		{
+			if ([contentType isEqualToString:@"application/json"])
+			{
+				
+			}
+			else
 			{
 				// unknown error
 				NSString *errorMessage;
@@ -90,12 +143,6 @@
 				NSDictionary *userInfo = @{NSLocalizedDescriptionKey:  errorMessage};
 				error = [NSError errorWithDomain:PLYErrorDomain code:0 userInfo:userInfo];
 			}
-		}
-		else
-		{
-			NSString *errorMessage = [NSString stringWithFormat:@"Invalid response object of class '%@'", NSStringFromClass([response class])];
-			NSDictionary *userInfo = @{NSLocalizedDescriptionKey: errorMessage};
-			error = [NSError errorWithDomain:PLYErrorDomain code:0 userInfo:userInfo];
 		}
 	}
 	

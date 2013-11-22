@@ -42,8 +42,25 @@
 	NSDictionary *parameters = @{@"gtin": gtin};
 	
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:parameters];
-	
 	op.resultHandler = completion;
+	
+	[_queue addOperation:op];
+}
+
+- (void)createUserWithNickname:(NSString *)nickname email:(NSString *)email password:(NSString *)password completion:(PLYAPIOperationResult)completion
+{
+	NSParameterAssert(nickname);
+	NSParameterAssert(email);
+	NSParameterAssert(password);
+
+	NSString *path = @"/ProductLayer/user/register";
+
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
+	op.verb = @"POST";
+	op.resultHandler = completion;
+	
+	NSDictionary *payloadDictionary = @{@"nickName": nickname, @"email": email, @"password": password};
+	op.payload = payloadDictionary;
 	
 	[_queue addOperation:op];
 }

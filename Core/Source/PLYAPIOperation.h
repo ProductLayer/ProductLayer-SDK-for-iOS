@@ -18,4 +18,10 @@ typedef void(^PLYAPIOperationResult)(id result, NSError *error);
 
 @property (nonatomic, copy) PLYAPIOperationResult resultHandler;
 
+// the verb for the operation, default is GET
+@property (nonatomic, copy) NSString *verb;
+
+// the payload, will be converted to JSON
+@property (nonatomic, copy) id payload;
+
 @end

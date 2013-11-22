@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class PLYServer;
+
 @interface SignUpViewController : UITableViewController
 
 @property (weak, nonatomic) IBOutlet UITextField *nicknameTextfield;
@@ -19,5 +21,8 @@
 - (IBAction)emailChanged:(id)sender;
 - (IBAction)passwordChanged:(id)sender;
 
+- (IBAction)save:(id)sender;
+
+@property (nonatomic, strong) PLYServer *server;
 
 @end

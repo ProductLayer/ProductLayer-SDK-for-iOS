@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "SignUpViewController.h"
+
 #import "ProductLayer.h"
 #import "ProductLayerConfig.h"
 #import "DTScannedCode.h"
@@ -41,6 +43,12 @@
 		UINavigationController *navController = segue.destinationViewController;
 		DTCodeScannerViewController *scannerVC = (DTCodeScannerViewController *)[navController topViewController];
 		scannerVC.scanDelegate = self;
+	}
+	else if ([[segue identifier] isEqualToString:@"SignUp"])
+	{
+		UINavigationController *navController = segue.destinationViewController;
+		SignUpViewController *signUpVC = (SignUpViewController *)[navController topViewController];
+		signUpVC.server = _server;
 	}
 }
 

@@ -33,7 +33,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="A3e-9A-CCo" kind="modal" id="vbC-Uv-tKK"/>
+                                    <segue destination="A3e-9A-CCo" kind="modal" identifier="SignUp" id="vbC-Uv-tKK"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -172,12 +172,12 @@
                     <navigationItem key="navigationItem" title="Sign Up" id="ixY-7o-Ffp">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="CgX-0t-hLo">
                             <connections>
-                                <segue destination="EJK-oO-nNm" kind="unwind" unwindAction="unwindFromSignUp:" id="d0R-EJ-4rG"/>
+                                <segue destination="EJK-oO-nNm" kind="unwind" identifier="UnwindFromSignUp" unwindAction="unwindFromSignUp:" id="d0R-EJ-4rG"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="save" id="gEn-xE-YhJ">
                             <connections>
-                                <segue destination="EJK-oO-nNm" kind="unwind" unwindAction="unwindFromSignUp:" id="xoS-TN-Ze9"/>
+                                <action selector="save:" destination="2rP-rv-0Yq" id="ggC-JO-fXU"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

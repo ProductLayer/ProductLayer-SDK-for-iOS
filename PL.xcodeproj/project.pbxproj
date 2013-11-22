@@ -939,6 +939,7 @@
 				INFOPLIST_FILE = "Demo/PL-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -953,6 +954,7 @@
 				INFOPLIST_FILE = "Demo/PL-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -7,6 +7,8 @@
 //
 
 #import "SignUpViewController.h"
+#import "PLYServer.h"
+#import "DTBlockFunctions.h"
 
 @interface SignUpViewController ()
 
@@ -46,6 +48,29 @@
 - (IBAction)passwordChanged:(id)sender
 {
 	[self _updateSaveButtonState];
+}
+
+- (IBAction)save:(id)sender
+{
+	NSAssert(_server, @"Server needs to be set");
+	
+	[self.server createUserWithNickname:self.nicknameTextfield.text email:self.emailTextField.text password:self.passwordTextfield.text completion:^(id result, NSError *error) {
+		
+		if (error)
+		{
+			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sign Up Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+				[alert show];
+			});
+		}
+		else
+		{
+			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+				
+				[self performSegueWithIdentifier:@"UnwindFromSignUp" sender:self];
+			});
+		}
+	}];
 }
 
 @end
