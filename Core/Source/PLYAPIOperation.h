@@ -16,4 +16,6 @@ typedef void(^PLYAPIOperationResult)(NSDictionary *dictionary, NSError *error);
 
 - (instancetype)initWithEndpointURL:(NSURL *)endpointURL functionPath:(NSString *)functionPath parameters:(NSDictionary *)parameters;
 
+@property (nonatomic, copy) PLYAPIOperationResult resultHandler;
+
 @end

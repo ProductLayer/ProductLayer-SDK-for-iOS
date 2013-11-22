@@ -6,7 +6,8 @@
 //  Copyright (c) 2013 Cocoanetics. All rights reserved.
 //
 
-#import "PLYAPIOperation.h"
+#import "ProductLayer.h"
+
 #import "NSString+DTURLEncoding.h"
 
 @implementation PLYAPIOperation
@@ -55,6 +56,60 @@
 	}
 	
 	return self;
+}
+
+- (void)main
+{
+	NSURLRequest *request = [[NSURLRequest alloc] initWithURL:_operationURL];
+	
+	NSHTTPURLResponse *response;
+	NSError *error;
+	
+	NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+	
+	if (!error)
+	{
+		if ([response isKindOfClass:[NSHTTPURLResponse class]])
+		{
+			NSString *contentType = [response allHeaderFields][@"Content-Type"];
+			
+			if (![contentType isEqualToString:@"application/json"])
+			{
+				// unknown error
+				NSString *errorMessage;
+				
+				if ([contentType hasPrefix:@"text"])
+				{
+					errorMessage = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+				}
+				else
+				{
+					errorMessage = [NSString stringWithFormat:@"Unknown response content type '%@'", contentType];
+				}
+				
+				NSDictionary *userInfo = @{NSLocalizedDescriptionKey:  errorMessage};
+				error = [NSError errorWithDomain:PLYErrorDomain code:0 userInfo:userInfo];
+			}
+		}
+		else
+		{
+			NSString *errorMessage = [NSString stringWithFormat:@"Invalid response object of class '%@'", NSStringFromClass([response class])];
+			NSDictionary *userInfo = @{NSLocalizedDescriptionKey: errorMessage};
+			error = [NSError errorWithDomain:PLYErrorDomain code:0 userInfo:userInfo];
+		}
+	}
+	
+	if (_resultHandler)
+	{
+		id result;
+		
+		if (!error)
+		{
+			result = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
+		}
+		
+		_resultHandler(result, error);
+	}
 }
 
 @end

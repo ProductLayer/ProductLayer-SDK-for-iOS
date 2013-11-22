@@ -37,6 +37,7 @@
 		A7B4428A183F935800E8A170 /* libDTFoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B4420E183F913000E8A170 /* libDTFoundation.a */; };
 		A7B4428B183F937D00E8A170 /* PLYAPIOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B44244183F91E700E8A170 /* PLYAPIOperation.m */; };
 		A7B4428C183F937D00E8A170 /* PLYServer.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B44247183F91E700E8A170 /* PLYServer.m */; };
+		A7B442A4183F97B800E8A170 /* PLYConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B442A3183F97B800E8A170 /* PLYConstants.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -255,6 +256,8 @@
 		A7B44281183F92D600E8A170 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		A7B44282183F92D600E8A170 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A7B4428D183F939F00E8A170 /* ProductLayer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ProductLayer-Prefix.pch"; sourceTree = "<group>"; };
+		A7B442A2183F97B800E8A170 /* PLYConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYConstants.h; sourceTree = "<group>"; };
+		A7B442A3183F97B800E8A170 /* PLYConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -431,6 +434,8 @@
 				A7B44247183F91E700E8A170 /* PLYServer.m */,
 				A7B44248183F91E700E8A170 /* ProductLayer.h */,
 				A7B44245183F91E700E8A170 /* ProductLayerConfig.h */,
+				A7B442A2183F97B800E8A170 /* PLYConstants.h */,
+				A7B442A3183F97B800E8A170 /* PLYConstants.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -811,6 +816,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7B4428C183F937D00E8A170 /* PLYServer.m in Sources */,
+				A7B442A4183F97B800E8A170 /* PLYConstants.m in Sources */,
 				A7B4428B183F937D00E8A170 /* PLYAPIOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1191,6 +1197,7 @@
 				A7B4427B183F92B800E8A170 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A7B4427C183F92B800E8A170 /* Build configuration list for PBXNativeTarget "PL1Tests" */ = {
 			isa = XCConfigurationList;
@@ -1199,6 +1206,7 @@
 				A7B4427E183F92B800E8A170 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
