@@ -30,6 +30,12 @@
 		A7B4428B183F937D00E8A170 /* PLYAPIOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B44244183F91E700E8A170 /* PLYAPIOperation.m */; };
 		A7B4428C183F937D00E8A170 /* PLYServer.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B44247183F91E700E8A170 /* PLYServer.m */; };
 		A7B442A4183F97B800E8A170 /* PLYConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B442A3183F97B800E8A170 /* PLYConstants.m */; };
+		A7B442AF183F9CA200E8A170 /* DTCodeScannerOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B442A8183F9CA200E8A170 /* DTCodeScannerOverlayView.m */; };
+		A7B442B0183F9CA200E8A170 /* DTCodeScannerPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B442AA183F9CA200E8A170 /* DTCodeScannerPreviewView.m */; };
+		A7B442B1183F9CA200E8A170 /* DTCodeScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B442AC183F9CA200E8A170 /* DTCodeScannerViewController.m */; };
+		A7B442B2183F9CA200E8A170 /* DTScannedCode.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B442AE183F9CA200E8A170 /* DTScannedCode.m */; };
+		A7B442B5183F9CB300E8A170 /* DTVideoPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B442B4183F9CB300E8A170 /* DTVideoPreviewView.m */; };
+		A7B442B8183F9D0300E8A170 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B442B7183F9D0300E8A170 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -237,6 +243,17 @@
 		A7B4428D183F939F00E8A170 /* ProductLayer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ProductLayer-Prefix.pch"; sourceTree = "<group>"; };
 		A7B442A2183F97B800E8A170 /* PLYConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYConstants.h; sourceTree = "<group>"; };
 		A7B442A3183F97B800E8A170 /* PLYConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYConstants.m; sourceTree = "<group>"; };
+		A7B442A7183F9CA200E8A170 /* DTCodeScannerOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTCodeScannerOverlayView.h; sourceTree = "<group>"; };
+		A7B442A8183F9CA200E8A170 /* DTCodeScannerOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTCodeScannerOverlayView.m; sourceTree = "<group>"; };
+		A7B442A9183F9CA200E8A170 /* DTCodeScannerPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTCodeScannerPreviewView.h; sourceTree = "<group>"; };
+		A7B442AA183F9CA200E8A170 /* DTCodeScannerPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTCodeScannerPreviewView.m; sourceTree = "<group>"; };
+		A7B442AB183F9CA200E8A170 /* DTCodeScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTCodeScannerViewController.h; sourceTree = "<group>"; };
+		A7B442AC183F9CA200E8A170 /* DTCodeScannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTCodeScannerViewController.m; sourceTree = "<group>"; };
+		A7B442AD183F9CA200E8A170 /* DTScannedCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTScannedCode.h; sourceTree = "<group>"; };
+		A7B442AE183F9CA200E8A170 /* DTScannedCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTScannedCode.m; sourceTree = "<group>"; };
+		A7B442B3183F9CB300E8A170 /* DTVideoPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTVideoPreviewView.h; sourceTree = "<group>"; };
+		A7B442B4183F9CB300E8A170 /* DTVideoPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTVideoPreviewView.m; sourceTree = "<group>"; };
+		A7B442B7183F9D0300E8A170 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +261,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7B442B8183F9D0300E8A170 /* AVFoundation.framework in Frameworks */,
 				A7B4428A183F935800E8A170 /* libDTFoundation.a in Frameworks */,
 				A7B21746183F8A5800C38635 /* libProductLayer.a in Frameworks */,
 				A7B214FC183F842000C38635 /* CoreGraphics.framework in Frameworks */,
@@ -319,6 +337,7 @@
 		A7B214F8183F842000C38635 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A7B442B7183F9D0300E8A170 /* AVFoundation.framework */,
 				A7B214F9183F842000C38635 /* Foundation.framework */,
 				A7B214FB183F842000C38635 /* CoreGraphics.framework */,
 				A7B214FD183F842000C38635 /* UIKit.framework */,
@@ -384,6 +403,7 @@
 		A7B4423B183F91E700E8A170 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				A7B442B6183F9CC500E8A170 /* Scanner View */,
 				A7B4423C183F91E700E8A170 /* AppDelegate.h */,
 				A7B4423D183F91E700E8A170 /* AppDelegate.m */,
 				A7B4423E183F91E700E8A170 /* main.m */,
@@ -415,6 +435,23 @@
 				A7B442A3183F97B800E8A170 /* PLYConstants.m */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		A7B442B6183F9CC500E8A170 /* Scanner View */ = {
+			isa = PBXGroup;
+			children = (
+				A7B442A7183F9CA200E8A170 /* DTCodeScannerOverlayView.h */,
+				A7B442A8183F9CA200E8A170 /* DTCodeScannerOverlayView.m */,
+				A7B442A9183F9CA200E8A170 /* DTCodeScannerPreviewView.h */,
+				A7B442AA183F9CA200E8A170 /* DTCodeScannerPreviewView.m */,
+				A7B442AB183F9CA200E8A170 /* DTCodeScannerViewController.h */,
+				A7B442AC183F9CA200E8A170 /* DTCodeScannerViewController.m */,
+				A7B442B3183F9CB300E8A170 /* DTVideoPreviewView.h */,
+				A7B442B4183F9CB300E8A170 /* DTVideoPreviewView.m */,
+				A7B442AD183F9CA200E8A170 /* DTScannedCode.h */,
+				A7B442AE183F9CA200E8A170 /* DTScannedCode.m */,
+			);
+			name = "Scanner View";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -729,8 +766,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7B44287183F934800E8A170 /* ViewController.m in Sources */,
+				A7B442B0183F9CA200E8A170 /* DTCodeScannerPreviewView.m in Sources */,
+				A7B442B1183F9CA200E8A170 /* DTCodeScannerViewController.m in Sources */,
+				A7B442B5183F9CB300E8A170 /* DTVideoPreviewView.m in Sources */,
+				A7B442B2183F9CA200E8A170 /* DTScannedCode.m in Sources */,
 				A7B44286183F934800E8A170 /* main.m in Sources */,
 				A7B44285183F934800E8A170 /* AppDelegate.m in Sources */,
+				A7B442AF183F9CA200E8A170 /* DTCodeScannerOverlayView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
