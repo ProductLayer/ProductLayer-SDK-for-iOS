@@ -37,6 +37,7 @@
 		A7B442B5183F9CB300E8A170 /* DTVideoPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B442B4183F9CB300E8A170 /* DTVideoPreviewView.m */; };
 		A7B442B8183F9D0300E8A170 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B442B7183F9D0300E8A170 /* AVFoundation.framework */; };
 		A7B442BB183FA99B00E8A170 /* EditableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B442BA183FA99B00E8A170 /* EditableCell.m */; };
+		A7B442BE183FADAC00E8A170 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B442BD183FADAC00E8A170 /* SignUpViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -257,6 +258,8 @@
 		A7B442B7183F9D0300E8A170 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A7B442B9183FA99B00E8A170 /* EditableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditableCell.h; sourceTree = "<group>"; };
 		A7B442BA183FA99B00E8A170 /* EditableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditableCell.m; sourceTree = "<group>"; };
+		A7B442BC183FADAC00E8A170 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
+		A7B442BD183FADAC00E8A170 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -414,6 +417,8 @@
 				A7B44240183F91E700E8A170 /* ViewController.m */,
 				A7B442B9183FA99B00E8A170 /* EditableCell.h */,
 				A7B442BA183FA99B00E8A170 /* EditableCell.m */,
+				A7B442BC183FADAC00E8A170 /* SignUpViewController.h */,
+				A7B442BD183FADAC00E8A170 /* SignUpViewController.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -776,6 +781,7 @@
 				A7B442B1183F9CA200E8A170 /* DTCodeScannerViewController.m in Sources */,
 				A7B442B5183F9CB300E8A170 /* DTVideoPreviewView.m in Sources */,
 				A7B442B2183F9CA200E8A170 /* DTScannedCode.m in Sources */,
+				A7B442BE183FADAC00E8A170 /* SignUpViewController.m in Sources */,
 				A7B44286183F934800E8A170 /* main.m in Sources */,
 				A7B44285183F934800E8A170 /* AppDelegate.m in Sources */,
 				A7B442AF183F9CA200E8A170 /* DTCodeScannerOverlayView.m in Sources */,
