@@ -22,4 +22,7 @@
 // login
 - (void)loginWithUser:(NSString *)user password:(NSString *)password completion:(PLYAPIOperationResult)completion;
 
+// logout
+- (void)logoutUserWithCompletion:(PLYAPIOperationResult)completion;
+
 @end

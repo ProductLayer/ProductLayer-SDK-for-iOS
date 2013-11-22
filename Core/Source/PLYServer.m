@@ -123,4 +123,14 @@
 	[self _enqueueOperation:op];
 }
 
+- (void)logoutUserWithCompletion:(PLYAPIOperationResult)completion
+{
+	NSString *path = @"/ProductLayer/user/logout";
+	
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
+	op.resultHandler = completion;
+	
+	[self _enqueueOperation:op];
+}
+
 @end

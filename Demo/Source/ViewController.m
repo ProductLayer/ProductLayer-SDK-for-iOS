@@ -74,6 +74,25 @@
 	
 }
 
+- (IBAction)logout:(id)sender
+{
+	[_server logoutUserWithCompletion:^(id result, NSError *error) {
+		if (error)
+		{
+			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Logout Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+				[alert show];
+			});
+		}
+		else
+		{
+			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+				
+			});
+		}
+	}];
+}
+
 #pragma mark - DTCodeScannerViewControllerDelegate
 
 
@@ -104,5 +123,7 @@
 		
 	}
 }
+
+
 
 @end
