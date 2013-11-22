@@ -13,12 +13,13 @@ typedef void(^PLYAPIOperationResult)(id result, NSError *error);
 
 @class PLYAPIOperation;
 
-
 @protocol PLYAPIOperationDelegate <NSObject>
 
 @optional
+// called a the begin of main when the execution of the operation is about to start
 - (void)operationWillExecute:(PLYAPIOperation *)operation;
 
+// called at the end of main when the execution of the operation has finished or failed
 - (void)operation:(PLYAPIOperation *)operation didExecuteWithError:(NSError *)error;
 
 @end
@@ -27,8 +28,10 @@ typedef void(^PLYAPIOperationResult)(id result, NSError *error);
 
 @interface PLYAPIOperation : NSOperation
 
+// creates an operation, endpoing URL and function path are mandatory
 - (instancetype)initWithEndpointURL:(NSURL *)endpointURL functionPath:(NSString *)functionPath parameters:(NSDictionary *)parameters;
 
+// optional handler for the result
 @property (nonatomic, copy) PLYAPIOperationResult resultHandler;
 
 // the verb for the operation, default is GET
