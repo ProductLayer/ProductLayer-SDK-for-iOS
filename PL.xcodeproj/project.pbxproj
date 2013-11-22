@@ -18,17 +18,9 @@
 		A7B44250183F92B800E8A170 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214F9183F842000C38635 /* Foundation.framework */; };
 		A7B44251183F92B800E8A170 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FB183F842000C38635 /* CoreGraphics.framework */; };
 		A7B44252183F92B800E8A170 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FD183F842000C38635 /* UIKit.framework */; };
-		A7B44258183F92B800E8A170 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A7B44256183F92B800E8A170 /* InfoPlist.strings */; };
-		A7B4425A183F92B800E8A170 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B44259183F92B800E8A170 /* main.m */; };
-		A7B4425E183F92B800E8A170 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B4425D183F92B800E8A170 /* AppDelegate.m */; };
-		A7B44261183F92B800E8A170 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7B4425F183F92B800E8A170 /* Main.storyboard */; };
-		A7B44264183F92B800E8A170 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B44263183F92B800E8A170 /* ViewController.m */; };
-		A7B44266183F92B800E8A170 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7B44265183F92B800E8A170 /* Images.xcassets */; };
 		A7B4426C183F92B800E8A170 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B21518183F842000C38635 /* XCTest.framework */; };
 		A7B4426D183F92B800E8A170 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214F9183F842000C38635 /* Foundation.framework */; };
 		A7B4426E183F92B800E8A170 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FD183F842000C38635 /* UIKit.framework */; };
-		A7B44276183F92B800E8A170 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A7B44274183F92B800E8A170 /* InfoPlist.strings */; };
-		A7B44278183F92B800E8A170 /* PL1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B44277183F92B800E8A170 /* PL1Tests.m */; };
 		A7B44283183F92D600E8A170 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7B44280183F92D600E8A170 /* Main.storyboard */; };
 		A7B44284183F92D600E8A170 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7B44282183F92D600E8A170 /* Images.xcassets */; };
 		A7B44285183F934800E8A170 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B4423D183F91E700E8A170 /* AppDelegate.m */; };
@@ -239,20 +231,7 @@
 		A7B44249183F921200E8A170 /* PL-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PL-Info.plist"; sourceTree = "<group>"; };
 		A7B4424A183F921200E8A170 /* PL-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PL-Prefix.pch"; sourceTree = "<group>"; };
 		A7B4424F183F92B800E8A170 /* PL1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PL1.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A7B44255183F92B800E8A170 /* PL1-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PL1-Info.plist"; sourceTree = "<group>"; };
-		A7B44257183F92B800E8A170 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A7B44259183F92B800E8A170 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		A7B4425B183F92B800E8A170 /* PL1-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PL1-Prefix.pch"; sourceTree = "<group>"; };
-		A7B4425C183F92B800E8A170 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		A7B4425D183F92B800E8A170 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		A7B44260183F92B800E8A170 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		A7B44262183F92B800E8A170 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		A7B44263183F92B800E8A170 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		A7B44265183F92B800E8A170 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A7B4426B183F92B800E8A170 /* PL1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PL1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A7B44273183F92B800E8A170 /* PL1Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PL1Tests-Info.plist"; sourceTree = "<group>"; };
-		A7B44275183F92B800E8A170 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A7B44277183F92B800E8A170 /* PL1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PL1Tests.m; sourceTree = "<group>"; };
 		A7B44281183F92D600E8A170 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		A7B44282183F92D600E8A170 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A7B4428D183F939F00E8A170 /* ProductLayer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ProductLayer-Prefix.pch"; sourceTree = "<group>"; };
@@ -320,8 +299,6 @@
 				A7B44241183F91E700E8A170 /* Core */,
 				A7B44234183F91E700E8A170 /* Demo */,
 				A7B440A0183F90B800E8A170 /* Externals */,
-				A7B44253183F92B800E8A170 /* PL1 */,
-				A7B44271183F92B800E8A170 /* PL1Tests */,
 				A7B214F8183F842000C38635 /* Frameworks */,
 				A7B214F7183F842000C38635 /* Products */,
 			);
@@ -438,49 +415,6 @@
 				A7B442A3183F97B800E8A170 /* PLYConstants.m */,
 			);
 			path = Source;
-			sourceTree = "<group>";
-		};
-		A7B44253183F92B800E8A170 /* PL1 */ = {
-			isa = PBXGroup;
-			children = (
-				A7B4425C183F92B800E8A170 /* AppDelegate.h */,
-				A7B4425D183F92B800E8A170 /* AppDelegate.m */,
-				A7B4425F183F92B800E8A170 /* Main.storyboard */,
-				A7B44262183F92B800E8A170 /* ViewController.h */,
-				A7B44263183F92B800E8A170 /* ViewController.m */,
-				A7B44265183F92B800E8A170 /* Images.xcassets */,
-				A7B44254183F92B800E8A170 /* Supporting Files */,
-			);
-			path = PL1;
-			sourceTree = "<group>";
-		};
-		A7B44254183F92B800E8A170 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				A7B44255183F92B800E8A170 /* PL1-Info.plist */,
-				A7B44256183F92B800E8A170 /* InfoPlist.strings */,
-				A7B44259183F92B800E8A170 /* main.m */,
-				A7B4425B183F92B800E8A170 /* PL1-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		A7B44271183F92B800E8A170 /* PL1Tests */ = {
-			isa = PBXGroup;
-			children = (
-				A7B44277183F92B800E8A170 /* PL1Tests.m */,
-				A7B44272183F92B800E8A170 /* Supporting Files */,
-			);
-			path = PL1Tests;
-			sourceTree = "<group>";
-		};
-		A7B44272183F92B800E8A170 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				A7B44273183F92B800E8A170 /* PL1Tests-Info.plist */,
-				A7B44274183F92B800E8A170 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -777,9 +711,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7B44266183F92B800E8A170 /* Images.xcassets in Resources */,
-				A7B44258183F92B800E8A170 /* InfoPlist.strings in Resources */,
-				A7B44261183F92B800E8A170 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -787,7 +718,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7B44276183F92B800E8A170 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -825,9 +755,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7B44264183F92B800E8A170 /* ViewController.m in Sources */,
-				A7B4425E183F92B800E8A170 /* AppDelegate.m in Sources */,
-				A7B4425A183F92B800E8A170 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -835,7 +762,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7B44278183F92B800E8A170 /* PL1Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -865,30 +791,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A7B44256183F92B800E8A170 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A7B44257183F92B800E8A170 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		A7B4425F183F92B800E8A170 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A7B44260183F92B800E8A170 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		A7B44274183F92B800E8A170 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A7B44275183F92B800E8A170 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		A7B44280183F92D600E8A170 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
