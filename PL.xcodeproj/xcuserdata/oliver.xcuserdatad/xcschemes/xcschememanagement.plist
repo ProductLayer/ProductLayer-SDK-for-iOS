@@ -6,13 +6,17 @@
 	<dict>
 		<key>PL.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
 		<key>ProductLayer.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
-			<integer>21</integer>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -33,6 +37,16 @@
 			<true/>
 		</dict>
 		<key>A7B2172D183F8A3800C38635</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A7B4424E183F92B800E8A170</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A7B4426A183F92B800E8A170</key>
 		<dict>
 			<key>primary</key>
 			<true/>

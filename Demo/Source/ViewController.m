@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "ProductLayer.h"
-#import "Config.h"
+#import "ProductLayerConfig.h"
 	
 
 @interface ViewController ()
@@ -27,9 +27,10 @@
 	
 	
 	_server = [[PLYServer alloc] initWithHostURL:PLY_ENDPOINT_URL];
-	
-	
-	
+
+	[_server performSearchForGTIN:@"123" language:@"de" completion:^(NSDictionary *dictionary, NSError *error) {
+		NSLog(@"%@", dictionary);
+	}];
 }
 
 - (void)didReceiveMemoryWarning
