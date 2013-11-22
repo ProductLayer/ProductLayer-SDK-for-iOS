@@ -19,9 +19,6 @@ typedef void(^PLYAPIOperationResult)(id result, NSError *error);
 // called a the begin of main when the execution of the operation is about to start
 - (void)operationWillExecute:(PLYAPIOperation *)operation;
 
-// called if an successful operation received an access token
-- (void)operation:(PLYAPIOperation *)operation didReceiveAccessToken:(NSString *)token;
-
 // called at the end of main when the execution of the operation has finished or failed
 - (void)operation:(PLYAPIOperation *)operation didExecuteWithError:(NSError *)error;
 

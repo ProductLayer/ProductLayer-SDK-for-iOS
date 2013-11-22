@@ -118,7 +118,28 @@
 	NSDictionary *parameters = @{@"user": user, @"password": password};
 	
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:parameters];
-	op.resultHandler = completion;
+	
+	PLYAPIOperationResult wrappedCompletion = [completion copy];
+	
+	PLYAPIOperationResult ownCompletion = ^(id result, NSError *error) {
+		
+		if (!error && [result isKindOfClass:[NSDictionary class]])
+		{
+			NSString *token = result[@"accesstoken"];
+			
+			if (token)
+			{
+				_accessToken = token;
+			}
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+	};
+	
+	op.resultHandler = ownCompletion;
 	
 	[self _enqueueOperation:op];
 }
@@ -128,9 +149,12 @@
 	NSString *path = @"/ProductLayer/user/logout";
 	
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
+	
 	op.resultHandler = completion;
 	
 	[self _enqueueOperation:op];
+	
+	_accessToken = nil;
 }
 
 @end

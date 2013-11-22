@@ -187,16 +187,6 @@
 		_resultHandler(result, error);
 	}
 	
-	NSString *token = result[@"accesstoken"];
-	
-	if (token)
-	{
-		if ([_delegate respondsToSelector:@selector(operation:didReceiveAccessToken:)])
-		{
-			[_delegate operation:self didReceiveAccessToken:token];
-		}
-	}
-	
 	if ([_delegate respondsToSelector:@selector(operation:didExecuteWithError:)])
 	{
 		[_delegate operation:self didExecuteWithError:error];
