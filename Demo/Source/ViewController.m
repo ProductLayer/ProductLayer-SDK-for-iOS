@@ -12,6 +12,7 @@
 #import "ProductLayer.h"
 #import "ProductLayerConfig.h"
 #import "DTScannedCode.h"
+#import "DTBlockFunctions.h"
 	
 
 @interface ViewController () <DTCodeScannerViewControllerDelegate>
@@ -73,17 +74,23 @@
 		
 		[_server performSearchForGTIN:code.content language:locale.localeIdentifier completion:^(id result, NSError *error) {
 			
-			if (result)
+			if (error)
 			{
-				NSLog(@"%@", result);
+				DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+					UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Search Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+					[alert show];
+				});
 			}
 			else
 			{
-				NSLog(@"%@", error);
+				DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+					
+					[codeScanner performSegueWithIdentifier:@"UnwindFromScanner" sender:self];
+				});
 			}
 		}];
 		
-		[codeScanner performSegueWithIdentifier:@"UnwindFromScanner" sender:self];
+		
 	}
 }
 
