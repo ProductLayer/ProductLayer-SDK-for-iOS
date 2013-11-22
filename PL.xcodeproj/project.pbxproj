@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A71C2B75183FDBC000B77DB4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A71C2B74183FDBC000B77DB4 /* LoginViewController.m */; };
 		A7B214FA183F842000C38635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214F9183F842000C38635 /* Foundation.framework */; };
 		A7B214FC183F842000C38635 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FB183F842000C38635 /* CoreGraphics.framework */; };
 		A7B214FE183F842000C38635 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FD183F842000C38635 /* UIKit.framework */; };
@@ -217,6 +218,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A71C2B73183FDBC000B77DB4 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		A71C2B74183FDBC000B77DB4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		A7B214F6183F842000C38635 /* PL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7B214F9183F842000C38635 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A7B214FB183F842000C38635 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -419,6 +422,8 @@
 				A7B442BA183FA99B00E8A170 /* EditableCell.m */,
 				A7B442BC183FADAC00E8A170 /* SignUpViewController.h */,
 				A7B442BD183FADAC00E8A170 /* SignUpViewController.m */,
+				A71C2B73183FDBC000B77DB4 /* LoginViewController.h */,
+				A71C2B74183FDBC000B77DB4 /* LoginViewController.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -787,6 +792,7 @@
 				A7B442BE183FADAC00E8A170 /* SignUpViewController.m in Sources */,
 				A7B44286183F934800E8A170 /* main.m in Sources */,
 				A7B44285183F934800E8A170 /* AppDelegate.m in Sources */,
+				A71C2B75183FDBC000B77DB4 /* LoginViewController.m in Sources */,
 				A7B442AF183F9CA200E8A170 /* DTCodeScannerOverlayView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

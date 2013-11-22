@@ -25,14 +25,34 @@
 
 - (void)_updateSaveButtonState
 {
-	if ([self.nicknameTextfield.text length] && [self.passwordTextfield.text length] && [self.emailTextField.text length])
+	if (self.nicknameTextfield)
 	{
-		self.saveButtonItem.enabled = YES;
+		if (![self.nicknameTextfield.text length])
+		{
+			self.saveButtonItem.enabled = NO;
+			return;
+		}
 	}
-	else
+
+	if (self.passwordTextfield)
 	{
-		self.saveButtonItem.enabled = NO;
+		if (![self.passwordTextfield.text length])
+		{
+			self.saveButtonItem.enabled = NO;
+			return;
+		}
 	}
+	
+	if (self.emailTextField)
+	{
+		if (![self.emailTextField.text length])
+		{
+			self.emailTextField.enabled = NO;
+			return;
+		}
+	}
+	
+	self.saveButtonItem.enabled = YES;
 }
 
 - (IBAction)nicknameChanged:(id)sender

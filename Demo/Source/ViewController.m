@@ -29,24 +29,6 @@
     [super viewDidLoad];
 	
 	_server = [[PLYServer alloc] initWithHostURL:PLY_ENDPOINT_URL];
-	
-	[_server loginWithNickname:@"drops" password:@"magic" completion:^(id result, NSError *error) {
-		
-		if (error)
-		{
-			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-				[alert show];
-			});
-		}
-		else
-		{
-			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-				
-			});
-		}
-		
-	}];
 }
 
 - (void)didReceiveMemoryWarning
@@ -63,11 +45,17 @@
 		DTCodeScannerViewController *scannerVC = (DTCodeScannerViewController *)[navController topViewController];
 		scannerVC.scanDelegate = self;
 	}
-	else if ([[segue identifier] isEqualToString:@"SignUp"])
+	
+	// inject server
+	if ([segue.destinationViewController isKindOfClass:[UINavigationController class]])
 	{
 		UINavigationController *navController = segue.destinationViewController;
-		SignUpViewController *signUpVC = (SignUpViewController *)[navController topViewController];
-		signUpVC.server = _server;
+		id topVC = navController.topViewController;
+		
+		if ([topVC respondsToSelector:@selector(setServer:)])
+		{
+			[topVC setServer:_server];
+		}
 	}
 }
 
@@ -77,6 +65,11 @@
 }
 
 - (IBAction)unwindFromSignUp:(UIStoryboardSegue *)unwindSegue
+{
+	
+}
+
+- (IBAction)unwindFromLogin:(UIStoryboardSegue *)unwindSegue
 {
 	
 }
