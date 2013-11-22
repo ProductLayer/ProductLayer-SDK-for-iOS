@@ -74,7 +74,7 @@
 {
 	NSAssert(_server, @"Server needs to be set");
 	
-	[self.server createUserWithNickname:self.nicknameTextfield.text email:self.emailTextField.text password:self.passwordTextfield.text completion:^(id result, NSError *error) {
+	[self.server createUserWithUser:self.nicknameTextfield.text email:self.emailTextField.text password:self.passwordTextfield.text completion:^(id result, NSError *error) {
 		
 		if (error)
 		{

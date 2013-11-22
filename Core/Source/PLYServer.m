@@ -82,9 +82,9 @@
 	[self _enqueueOperation:op];
 }
 
-- (void)createUserWithNickname:(NSString *)nickname email:(NSString *)email password:(NSString *)password completion:(PLYAPIOperationResult)completion
+- (void)createUserWithUser:(NSString *)user email:(NSString *)email password:(NSString *)password completion:(PLYAPIOperationResult)completion
 {
-	NSParameterAssert(nickname);
+	NSParameterAssert(user);
 	NSParameterAssert(email);
 	NSParameterAssert(password);
 
@@ -94,7 +94,7 @@
 	op.HTTPMethod = @"POST";
 	op.resultHandler = completion;
 	
-	NSDictionary *payloadDictionary = @{@"nickName": nickname, @"email": email, @"password": password};
+	NSDictionary *payloadDictionary = @{@"user": user, @"email": email, @"password": password};
 	op.payload = payloadDictionary;
 	
 	[self _enqueueOperation:op];

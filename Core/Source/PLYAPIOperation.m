@@ -66,26 +66,39 @@
 	{
 		[_delegate operationWillExecute:self];
 	}
-	
+
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:_operationURL cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10];
 	
+	// set method if set
 	if (_HTTPMethod)
 	{
 		request.HTTPMethod = _HTTPMethod;
 	}
 	
+	NSMutableString *debugMessage = [NSMutableString string];
+	[debugMessage appendFormat:@"%@ %@\n", request.HTTPMethod, [_operationURL absoluteString]];
+
+	// add body if set
 	if (_payload)
 	{
 		[request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
 		
 		NSData *payloadData = [NSJSONSerialization dataWithJSONObject:_payload options:0 error:NULL];
 		[request setHTTPBody:payloadData];
+		
+		NSString *payloadString = [[NSString alloc] initWithData:payloadData encoding:NSUTF8StringEncoding];
+		[debugMessage appendString:payloadString];
 	}
+	
+	DTLogDebug(@"%@", debugMessage);
 	
 	NSHTTPURLResponse *response;
 	NSError *error;
 	
 	NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+	
+	NSString *resultString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+	DTLogDebug(@"%@", resultString);
 	
 	NSInteger statusCode = 0;
 	NSString *contentType = nil;
@@ -98,6 +111,8 @@
 		{
 			contentType = [response allHeaderFields][@"Content-Type"];
 			statusCode = [response statusCode];
+			
+			DTLogDebug(@"%@", [response allHeaderFields]);
 		}
 		else
 		{
@@ -160,9 +175,6 @@
 		if (!error)
 		{
 			result = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
-			
-			NSString *resultString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-			DTLogDebug(@"%@", resultString);
 		}
 		
 		_resultHandler(result, error);
