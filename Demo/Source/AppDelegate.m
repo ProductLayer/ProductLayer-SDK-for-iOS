@@ -7,11 +7,14 @@
 //
 
 #import "AppDelegate.h"
+#import "DTLog.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+	DTLogSetLogLevel(DTLogLevelDebug);
+	
     // Override point for customization after application launch.
     return YES;
 }

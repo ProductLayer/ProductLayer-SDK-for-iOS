@@ -10,6 +10,7 @@
 
 #import "NSString+DTURLEncoding.h"
 #import "UIApplication+DTNetworkActivity.h"
+#import "DTLog.h"
 
 @implementation PLYAPIOperation
 {
@@ -159,6 +160,9 @@
 		if (!error)
 		{
 			result = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
+			
+			NSString *resultString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+			DTLogDebug(@"%@", resultString);
 		}
 		
 		_resultHandler(result, error);

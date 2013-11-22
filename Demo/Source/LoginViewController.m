@@ -17,7 +17,7 @@
 {
 	NSAssert(self.server, @"Server needs to be set");
 	
-	[self.server loginWithNickname:@"drops" password:@"magic" completion:^(id result, NSError *error) {
+	[self.server loginWithUser:self.nicknameTextfield.text password:self.passwordTextfield.text completion:^(id result, NSError *error) {
 		
 		if (error)
 		{
