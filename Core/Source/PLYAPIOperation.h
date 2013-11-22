@@ -11,6 +11,19 @@
 // result block
 typedef void(^PLYAPIOperationResult)(id result, NSError *error);
 
+@class PLYAPIOperation;
+
+
+@protocol PLYAPIOperationDelegate <NSObject>
+
+@optional
+- (void)operationWillExecute:(PLYAPIOperation *)operation;
+
+- (void)operation:(PLYAPIOperation *)operation didExecuteWithError:(NSError *)error;
+
+@end
+
+
 
 @interface PLYAPIOperation : NSOperation
 
@@ -23,5 +36,8 @@ typedef void(^PLYAPIOperationResult)(id result, NSError *error);
 
 // the payload, will be converted to JSON and sent with content-type 'application/json'
 @property (nonatomic, copy) id payload;
+
+// delegate to inform about starting and ending of operation
+@property (nonatomic, weak) id <PLYAPIOperationDelegate> delegate;
 
 @end

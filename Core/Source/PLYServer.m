@@ -7,6 +7,15 @@
 //
 
 #import "PLYServer.h"
+#import "DTLog.h"
+
+#if TARGET_OS_IPHONE
+	#import "UIApplication+DTNetworkActivity.h"
+#endif
+
+@interface PLYServer () <PLYAPIOperationDelegate>
+
+@end
 
 @implementation PLYServer
 {
@@ -31,6 +40,32 @@
 	return self;
 }
 
+- (void)_enqueueOperation:(PLYAPIOperation *)operation
+{
+	operation.delegate = self;
+	[_queue addOperation:operation];
+}
+
+#pragma mark - PLYAPIOperationDelegate
+
+- (void)operationWillExecute:(PLYAPIOperation *)operation
+{
+#if TARGET_OS_IPHONE
+	[[UIApplication sharedApplication] pushActiveNetworkOperation];
+#endif
+}
+
+- (void)operation:(PLYAPIOperation *)operation didExecuteWithError:(NSError *)error
+{
+#if TARGET_OS_IPHONE
+	[[UIApplication sharedApplication] popActiveNetworkOperation];
+#endif
+	
+	if (error)
+	{
+		DTLogError(@"PLYAPIOperation failed: %@", [error localizedDescription]);
+	}
+}
 
 #pragma mark - API Operations
 
@@ -44,7 +79,7 @@
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:parameters];
 	op.resultHandler = completion;
 	
-	[_queue addOperation:op];
+	[self _enqueueOperation:op];
 }
 
 - (void)createUserWithNickname:(NSString *)nickname email:(NSString *)email password:(NSString *)password completion:(PLYAPIOperationResult)completion
@@ -62,7 +97,7 @@
 	NSDictionary *payloadDictionary = @{@"nickName": nickname, @"email": email, @"password": password};
 	op.payload = payloadDictionary;
 	
-	[_queue addOperation:op];
+	[self _enqueueOperation:op];
 }
 
 @end

@@ -9,6 +9,7 @@
 #import "ProductLayer.h"
 
 #import "NSString+DTURLEncoding.h"
+#import "UIApplication+DTNetworkActivity.h"
 
 @implementation PLYAPIOperation
 {
@@ -60,6 +61,11 @@
 
 - (void)main
 {
+	if ([_delegate respondsToSelector:@selector(operationWillExecute:)])
+	{
+		[_delegate operationWillExecute:self];
+	}
+	
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:_operationURL cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10];
 	
 	if (_HTTPMethod)
@@ -156,6 +162,11 @@
 		}
 		
 		_resultHandler(result, error);
+	}
+	
+	if ([_delegate respondsToSelector:@selector(operation:didExecuteWithError:)])
+	{
+		[_delegate operation:self didExecuteWithError:error];
 	}
 }
 
