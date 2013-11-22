@@ -19,9 +19,11 @@
 		A7B21519183F842000C38635 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B21518183F842000C38635 /* XCTest.framework */; };
 		A7B2151A183F842000C38635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214F9183F842000C38635 /* Foundation.framework */; };
 		A7B2151B183F842000C38635 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FD183F842000C38635 /* UIKit.framework */; };
-		A7B21523183F842000C38635 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A7B21521183F842000C38635 /* InfoPlist.strings */; };
-		A7B21525183F842000C38635 /* PLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B21524183F842000C38635 /* PLTests.m */; };
 		A7B21531183F873E00C38635 /* PLYAPIOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B21530183F873E00C38635 /* PLYAPIOperation.m */; };
+		A7B21722183F8A3800C38635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214F9183F842000C38635 /* Foundation.framework */; };
+		A7B21743183F8A4A00C38635 /* PLYAPIOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B2171C183F8A2400C38635 /* PLYAPIOperation.m */; };
+		A7B21746183F8A5800C38635 /* libProductLayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B21721183F8A3800C38635 /* libProductLayer.a */; };
+		A7B21749183F8A9D00C38635 /* PLYServer.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B21748183F8A9D00C38635 /* PLYServer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,7 +34,159 @@
 			remoteGlobalIDString = A7B214F5183F842000C38635;
 			remoteInfo = PL;
 		};
+		A7B21744183F8A5400C38635 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B214EE183F842000C38635 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A7B21720183F8A3800C38635;
+			remoteInfo = ProductLayer;
+		};
+		A7F6352F183F8DF600F5B074 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B2161C183F889800C38635 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A7BAD10E1483F934000E2B6A;
+			remoteInfo = "Static Framework";
+		};
+		A7F63531183F8DF600F5B074 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B2161C183F889800C38635 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A70B4CE71486637E00873A4A;
+			remoteInfo = "Static Library";
+		};
+		A7F63533183F8DF600F5B074 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B2161C183F889800C38635 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A7D60FCF15D3B0BC00AEDD1B;
+			remoteInfo = "Unit Tests";
+		};
+		A7F63535183F8DF600F5B074 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B2161C183F889800C38635 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A710A5001607556000437D36;
+			remoteInfo = "Static Library (Mac)";
+		};
+		A7F63537183F8DF600F5B074 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B2161C183F889800C38635 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A79D999C1792D1F50082BC06;
+			remoteInfo = "DTAWS (iOS)";
+		};
+		A7F63539183F8DF600F5B074 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B2161C183F889800C38635 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FA9CB80C17ABDEF200A596C5;
+			remoteInfo = "DTASN1 (iOS)";
+		};
+		A7F6353B183F8DF600F5B074 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B2161C183F889800C38635 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A7E383C2160DFEDB00CF72D6;
+			remoteInfo = "DTHTMLParser (iOS)";
+		};
+		A7F6353D183F8DF600F5B074 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B2161C183F889800C38635 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D7CE547166613B60028D339;
+			remoteInfo = "DTHTMLParser (Mac)";
+		};
+		A7F6353F183F8DF600F5B074 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B2161C183F889800C38635 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A7E383DA160DFF8600CF72D6;
+			remoteInfo = "DTZipArchive (iOS)";
+		};
+		A7F63541183F8DF600F5B074 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B2161C183F889800C38635 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A7D8C7C21723174600025675;
+			remoteInfo = "DTZipArchive (Mac)";
+		};
+		A7F63543183F8DF600F5B074 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B2161C183F889800C38635 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A78220BA168060CA005B602D;
+			remoteInfo = "DTUTI (iOS)";
+		};
+		A7F63545183F8DF600F5B074 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B2161C183F889800C38635 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A7E889A416A9B190009EF0DF;
+			remoteInfo = "DTUTI (Mac)";
+		};
+		A7F63547183F8DF600F5B074 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B2161C183F889800C38635 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A72121DA173BFFB1003C6F0A;
+			remoteInfo = "DTReachability (iOS)";
+		};
+		A7F63549183F8DF600F5B074 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B2161C183F889800C38635 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A72121EA173BFFED003C6F0A;
+			remoteInfo = "DTReachability (Mac)";
+		};
+		A7F6354B183F8DF600F5B074 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B2161C183F889800C38635 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A7C92B7A174FB8900019D70A;
+			remoteInfo = "DTSQLite (iOS)";
+		};
+		A7F6354D183F8DF600F5B074 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B2161C183F889800C38635 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A7C92B8C174FB9720019D70A;
+			remoteInfo = "DTSQLite (Mac)";
+		};
+		A7F6354F183F8DF600F5B074 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B2161C183F889800C38635 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A70D74D01743AFBC00E6E626;
+			remoteInfo = "DTSidePanels Demo";
+		};
+		A7F63551183F8DF600F5B074 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B2161C183F889800C38635 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A7D9D62D1758C89800C29B6F;
+			remoteInfo = "DTReachability Demo";
+		};
+		A7F63553183F8DF600F5B074 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B2161C183F889800C38635 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FAF37A2017AFDD93009AC27C;
+			remoteInfo = "DTZipArchive Demo";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A7B2171F183F8A3800C38635 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A7B214F6183F842000C38635 /* PL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PL.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,13 +205,18 @@
 		A7B21511183F842000C38635 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A7B21517183F842000C38635 /* PLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7B21518183F842000C38635 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		A7B21520183F842000C38635 /* PLTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PLTests-Info.plist"; sourceTree = "<group>"; };
-		A7B21522183F842000C38635 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A7B21524183F842000C38635 /* PLTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLTests.m; sourceTree = "<group>"; };
 		A7B2152E183F846500C38635 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
 		A7B2152F183F873E00C38635 /* PLYAPIOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYAPIOperation.h; sourceTree = "<group>"; };
 		A7B21530183F873E00C38635 /* PLYAPIOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYAPIOperation.m; sourceTree = "<group>"; };
 		A7B2161C183F889800C38635 /* DTFoundation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTFoundation.xcodeproj; path = DTFoundation/DTFoundation.xcodeproj; sourceTree = "<group>"; };
+		A7B2171B183F8A2400C38635 /* PLYAPIOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLYAPIOperation.h; sourceTree = "<group>"; };
+		A7B2171C183F8A2400C38635 /* PLYAPIOperation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLYAPIOperation.m; sourceTree = "<group>"; };
+		A7B21721183F8A3800C38635 /* libProductLayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libProductLayer.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7B21747183F8A9D00C38635 /* PLYServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYServer.h; sourceTree = "<group>"; };
+		A7B21748183F8A9D00C38635 /* PLYServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYServer.m; sourceTree = "<group>"; };
+		A7B2174A183F8B1100C38635 /* ProductLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductLayer.h; sourceTree = "<group>"; };
+		A7B2174B183F8BAC00C38635 /* PLYConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYConfig.h; sourceTree = "<group>"; };
+		A7B2174C183F8DE400C38635 /* ProductLayer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ProductLayer-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +224,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7B21746183F8A5800C38635 /* libProductLayer.a in Frameworks */,
 				A7B214FC183F842000C38635 /* CoreGraphics.framework in Frameworks */,
 				A7B214FE183F842000C38635 /* UIKit.framework in Frameworks */,
 				A7B214FA183F842000C38635 /* Foundation.framework in Frameworks */,
@@ -81,15 +241,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A7B2171E183F8A3800C38635 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7B21722183F8A3800C38635 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		A7B214ED183F842000C38635 = {
 			isa = PBXGroup;
 			children = (
+				A7B21719183F8A1600C38635 /* Core */,
 				A7B21532183F889800C38635 /* Externals */,
 				A7B214FF183F842000C38635 /* PL */,
-				A7B2151E183F842000C38635 /* PLTests */,
 				A7B214F8183F842000C38635 /* Frameworks */,
 				A7B214F7183F842000C38635 /* Products */,
 			);
@@ -100,6 +268,7 @@
 			children = (
 				A7B214F6183F842000C38635 /* PL.app */,
 				A7B21517183F842000C38635 /* PLTests.xctest */,
+				A7B21721183F8A3800C38635 /* libProductLayer.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -143,30 +312,60 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		A7B2151E183F842000C38635 /* PLTests */ = {
-			isa = PBXGroup;
-			children = (
-				A7B21524183F842000C38635 /* PLTests.m */,
-				A7B2151F183F842000C38635 /* Supporting Files */,
-			);
-			path = PLTests;
-			sourceTree = "<group>";
-		};
-		A7B2151F183F842000C38635 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				A7B21520183F842000C38635 /* PLTests-Info.plist */,
-				A7B21521183F842000C38635 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		A7B21532183F889800C38635 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
 				A7B2161C183F889800C38635 /* DTFoundation.xcodeproj */,
 			);
 			path = Externals;
+			sourceTree = "<group>";
+		};
+		A7B21719183F8A1600C38635 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				A7B2174C183F8DE400C38635 /* ProductLayer-Prefix.pch */,
+				A7B2171A183F8A1600C38635 /* Source */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		A7B2171A183F8A1600C38635 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				A7B2174B183F8BAC00C38635 /* PLYConfig.h */,
+				A7B2171B183F8A2400C38635 /* PLYAPIOperation.h */,
+				A7B2171C183F8A2400C38635 /* PLYAPIOperation.m */,
+				A7B21747183F8A9D00C38635 /* PLYServer.h */,
+				A7B21748183F8A9D00C38635 /* PLYServer.m */,
+				A7B2174A183F8B1100C38635 /* ProductLayer.h */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		A7F63519183F8DF600F5B074 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A7F63530183F8DF600F5B074 /* DTFoundation.framework */,
+				A7F63532183F8DF600F5B074 /* libDTFoundation.a */,
+				A7F63534183F8DF600F5B074 /* UnitTests.octest */,
+				A7F63536183F8DF600F5B074 /* libDTFoundation_Mac.a */,
+				A7F63538183F8DF600F5B074 /* libDTAWS.a */,
+				A7F6353A183F8DF600F5B074 /* libDTASN1.a */,
+				A7F6353C183F8DF600F5B074 /* libDTHTMLParser_iOS.a */,
+				A7F6353E183F8DF600F5B074 /* libDTHTMLParser_Mac.a */,
+				A7F63540183F8DF600F5B074 /* libDTZipArchive_iOS.a */,
+				A7F63542183F8DF600F5B074 /* libDTZipArchive_Mac.a */,
+				A7F63544183F8DF600F5B074 /* libDTUTI_iOS.a */,
+				A7F63546183F8DF600F5B074 /* libDTUTI_Mac.a */,
+				A7F63548183F8DF600F5B074 /* libDTReachability_iOS.a */,
+				A7F6354A183F8DF600F5B074 /* libDTReachability_Mac.a */,
+				A7F6354C183F8DF600F5B074 /* libDTSQLite_iOS.a */,
+				A7F6354E183F8DF600F5B074 /* libDTSQLite_Mac.a */,
+				A7F63550183F8DF600F5B074 /* DTSidePanels Demo.app */,
+				A7F63552183F8DF600F5B074 /* DTReachability Demo.app */,
+				A7F63554183F8DF600F5B074 /* DTZipArchive.app */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,6 +382,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A7B21745183F8A5400C38635 /* PBXTargetDependency */,
 			);
 			name = PL;
 			productName = PL;
@@ -206,6 +406,23 @@
 			productName = PLTests;
 			productReference = A7B21517183F842000C38635 /* PLTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A7B21720183F8A3800C38635 /* ProductLayer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7B2173D183F8A3800C38635 /* Build configuration list for PBXNativeTarget "ProductLayer" */;
+			buildPhases = (
+				A7B2171D183F8A3800C38635 /* Sources */,
+				A7B2171E183F8A3800C38635 /* Frameworks */,
+				A7B2171F183F8A3800C38635 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ProductLayer;
+			productName = ProductLayer;
+			productReference = A7B21721183F8A3800C38635 /* libProductLayer.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
@@ -232,13 +449,156 @@
 			mainGroup = A7B214ED183F842000C38635;
 			productRefGroup = A7B214F7183F842000C38635 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = A7F63519183F8DF600F5B074 /* Products */;
+					ProjectRef = A7B2161C183F889800C38635 /* DTFoundation.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				A7B214F5183F842000C38635 /* PL */,
 				A7B21516183F842000C38635 /* PLTests */,
+				A7B21720183F8A3800C38635 /* ProductLayer */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		A7F63530183F8DF600F5B074 /* DTFoundation.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = DTFoundation.framework;
+			remoteRef = A7F6352F183F8DF600F5B074 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7F63532183F8DF600F5B074 /* libDTFoundation.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDTFoundation.a;
+			remoteRef = A7F63531183F8DF600F5B074 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7F63534183F8DF600F5B074 /* UnitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UnitTests.octest;
+			remoteRef = A7F63533183F8DF600F5B074 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7F63536183F8DF600F5B074 /* libDTFoundation_Mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDTFoundation_Mac.a;
+			remoteRef = A7F63535183F8DF600F5B074 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7F63538183F8DF600F5B074 /* libDTAWS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDTAWS.a;
+			remoteRef = A7F63537183F8DF600F5B074 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7F6353A183F8DF600F5B074 /* libDTASN1.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDTASN1.a;
+			remoteRef = A7F63539183F8DF600F5B074 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7F6353C183F8DF600F5B074 /* libDTHTMLParser_iOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDTHTMLParser_iOS.a;
+			remoteRef = A7F6353B183F8DF600F5B074 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7F6353E183F8DF600F5B074 /* libDTHTMLParser_Mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDTHTMLParser_Mac.a;
+			remoteRef = A7F6353D183F8DF600F5B074 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7F63540183F8DF600F5B074 /* libDTZipArchive_iOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDTZipArchive_iOS.a;
+			remoteRef = A7F6353F183F8DF600F5B074 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7F63542183F8DF600F5B074 /* libDTZipArchive_Mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDTZipArchive_Mac.a;
+			remoteRef = A7F63541183F8DF600F5B074 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7F63544183F8DF600F5B074 /* libDTUTI_iOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDTUTI_iOS.a;
+			remoteRef = A7F63543183F8DF600F5B074 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7F63546183F8DF600F5B074 /* libDTUTI_Mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDTUTI_Mac.a;
+			remoteRef = A7F63545183F8DF600F5B074 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7F63548183F8DF600F5B074 /* libDTReachability_iOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDTReachability_iOS.a;
+			remoteRef = A7F63547183F8DF600F5B074 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7F6354A183F8DF600F5B074 /* libDTReachability_Mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDTReachability_Mac.a;
+			remoteRef = A7F63549183F8DF600F5B074 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7F6354C183F8DF600F5B074 /* libDTSQLite_iOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDTSQLite_iOS.a;
+			remoteRef = A7F6354B183F8DF600F5B074 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7F6354E183F8DF600F5B074 /* libDTSQLite_Mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDTSQLite_Mac.a;
+			remoteRef = A7F6354D183F8DF600F5B074 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7F63550183F8DF600F5B074 /* DTSidePanels Demo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "DTSidePanels Demo.app";
+			remoteRef = A7F6354F183F8DF600F5B074 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7F63552183F8DF600F5B074 /* DTReachability Demo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "DTReachability Demo.app";
+			remoteRef = A7F63551183F8DF600F5B074 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7F63554183F8DF600F5B074 /* DTZipArchive.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = DTZipArchive.app;
+			remoteRef = A7F63553183F8DF600F5B074 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A7B214F4183F842000C38635 /* Resources */ = {
@@ -255,7 +615,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7B21523183F842000C38635 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +636,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7B21525183F842000C38635 /* PLTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7B2171D183F8A3800C38635 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7B21743183F8A4A00C38635 /* PLYAPIOperation.m in Sources */,
+				A7B21749183F8A9D00C38635 /* PLYServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +655,11 @@
 			isa = PBXTargetDependency;
 			target = A7B214F5183F842000C38635 /* PL */;
 			targetProxy = A7B2151C183F842000C38635 /* PBXContainerItemProxy */;
+		};
+		A7B21745183F8A5400C38635 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A7B21720183F8A3800C38635 /* ProductLayer */;
+			targetProxy = A7B21744183F8A5400C38635 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -306,14 +678,6 @@
 				A7B2150C183F842000C38635 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		A7B21521183F842000C38635 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A7B21522183F842000C38635 /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -459,6 +823,36 @@
 			};
 			name = Release;
 		};
+		A7B2173E183F8A3800C38635 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				DSTROOT = /tmp/ProductLayer.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A7B2173F183F8A3800C38635 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				DSTROOT = /tmp/ProductLayer.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -478,6 +872,7 @@
 				A7B2152A183F842000C38635 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A7B2152B183F842000C38635 /* Build configuration list for PBXNativeTarget "PLTests" */ = {
 			isa = XCConfigurationList;
@@ -486,6 +881,16 @@
 				A7B2152D183F842000C38635 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A7B2173D183F8A3800C38635 /* Build configuration list for PBXNativeTarget "ProductLayer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7B2173E183F8A3800C38635 /* Debug */,
+				A7B2173F183F8A3800C38635 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

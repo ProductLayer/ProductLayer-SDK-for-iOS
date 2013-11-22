@@ -7,17 +7,29 @@
 //
 
 #import "ViewController.h"
+#import "ProductLayer.h"
+#import "Config.h"
+	
 
 @interface ViewController ()
 
 @end
 
 @implementation ViewController
+{
+	PLYServer *_server;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+	
+	
+	_server = [[PLYServer alloc] initWithHostURL:PLY_ENDPOINT_URL];
+	
+	
+	
 }
 
 - (void)didReceiveMemoryWarning
