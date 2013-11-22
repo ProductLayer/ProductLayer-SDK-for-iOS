@@ -11,6 +11,7 @@
 #import "DTScannedCode.h"
 #import "DTVideoPreviewView.h"
 #import "DTCodeScannerPreviewView.h"
+#import "DTLog.h"
 
 
 #import <AVFoundation/AVFoundation.h>
@@ -97,7 +98,7 @@
 	}
 	else
 	{
-		NSLog(@"Cannot lock cam device, %@", [error localizedDescription]);
+		DTLogError(@"Cannot lock cam device, %@", [error localizedDescription]);
 	}
 	
 	// observe indicators
@@ -234,7 +235,7 @@
 		}
 		else
 		{
-			NSLog(@"Cannot lock camera for configuration: %@", [error localizedDescription]);
+			DTLogError(@"Cannot lock camera for configuration: %@", [error localizedDescription]);
 		}
 	}
 }
@@ -310,7 +311,7 @@
 	{
 		if (![reportedCodes containsObject:oneCode])
 		{
-			NSLog(@"code disappeared: %@", oneCode);
+			DTLogDebug(@"code disappeared: %@", oneCode);
 			[_visibleCodes removeObject:oneCode];
 		}
 	}
@@ -320,7 +321,7 @@
 		if (![_visibleCodes containsObject:oneCode])
 		{
 			[_visibleCodes addObject:oneCode];
-			NSLog(@"code appeared: %@", oneCode);
+			DTLogDebug(@"code appeared: %@", oneCode);
 			
 			if ([_scanDelegate respondsToSelector:@selector(codeScanner:didScanCode:)])
 			{
