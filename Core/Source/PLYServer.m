@@ -21,6 +21,8 @@
 {
 	NSURL *_hostURL;
 	NSOperationQueue *_queue;
+	
+	NSString *_accessToken;
 }
 
 - (instancetype)initWithHostURL:(NSURL *)hostURL
@@ -43,6 +45,8 @@
 - (void)_enqueueOperation:(PLYAPIOperation *)operation
 {
 	operation.delegate = self;
+	operation.accessToken = _accessToken;
+	
 	[_queue addOperation:operation];
 }
 
@@ -65,6 +69,11 @@
 	{
 		DTLogError(@"PLYAPIOperation failed: %@", [error localizedDescription]);
 	}
+}
+
+- (void)operation:(PLYAPIOperation *)operation didReceiveAccessToken:(NSString *)token
+{
+	_accessToken = token;
 }
 
 #pragma mark - API Operations

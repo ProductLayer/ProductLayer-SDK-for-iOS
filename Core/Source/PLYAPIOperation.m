@@ -75,6 +75,13 @@
 		request.HTTPMethod = _HTTPMethod;
 	}
 	
+	// set token if set
+	if (_accessToken)
+	{
+		NSString *value = [NSString stringWithFormat:@"Token %@", _accessToken];
+		[request setValue:value forHTTPHeaderField:@"Authorization"];
+	}
+	
 	NSMutableString *debugMessage = [NSMutableString string];
 	[debugMessage appendFormat:@"%@ %@\n", request.HTTPMethod, [_operationURL absoluteString]];
 
@@ -167,17 +174,27 @@
 			}
 		}
 	}
-	
+
+	id result;
+
 	if (_resultHandler)
 	{
-		id result;
-		
 		if (!error)
 		{
 			result = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
 		}
 		
 		_resultHandler(result, error);
+	}
+	
+	NSString *token = result[@"accesstoken"];
+	
+	if (token)
+	{
+		if ([_delegate respondsToSelector:@selector(operation:didReceiveAccessToken:)])
+		{
+			[_delegate operation:self didReceiveAccessToken:token];
+		}
 	}
 	
 	if ([_delegate respondsToSelector:@selector(operation:didExecuteWithError:)])
