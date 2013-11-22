@@ -36,9 +36,10 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-	if ([[segue identifier] isEqualToString:@"ScanBarCode"])
+	if ([[segue identifier] isEqualToString:@"ScanBarcode"])
 	{
-		DTCodeScannerViewController *scannerVC = segue.destinationViewController;
+		UINavigationController *navController = segue.destinationViewController;
+		DTCodeScannerViewController *scannerVC = (DTCodeScannerViewController *)[navController topViewController];
 		scannerVC.scanDelegate = self;
 	}
 }
@@ -68,9 +69,9 @@
 				NSLog(@"%@", error);
 			}
 		}];
+		
+		[codeScanner performSegueWithIdentifier:@"UnwindFromScanner" sender:self];
 	}
-	
-	[codeScanner performSegueWithIdentifier:@"UnwindFromScanner" sender:self];
 }
 
 @end

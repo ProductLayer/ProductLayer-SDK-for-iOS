@@ -23,7 +23,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="gu0-Vz-Eio" kind="modal" identifier="ScanBarCode" id="1Xa-GE-Eds"/>
+                                    <segue destination="nzz-8J-imC" kind="modal" identifier="ScanBarcode" id="HZ6-bW-vzn"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -32,8 +32,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="348" y="227"/>
         </scene>
-        <!--Code Scanner View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="v7H-Td-TPJ">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="nzz-8J-imC" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hOE-Uj-SKc">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="gu0-Vz-Eio" kind="relationship" relationship="rootViewController" id="mQT-xJ-CKA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="64y-Vr-ude" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="849" y="227"/>
+        </scene>
+        <!--Code Scanner View Controller - Scan Barcode-->
         <scene sceneID="MsZ-8w-rDy">
             <objects>
                 <viewController id="gu0-Vz-Eio" customClass="DTCodeScannerViewController" sceneMemberID="viewController">
@@ -58,6 +74,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Scan Barcode" id="N7B-vw-uiR">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="HND-XW-XmT">
+                            <connections>
+                                <segue destination="mgE-a6-rzG" kind="unwind" unwindAction="unwindFromScanner:" id="KJV-CV-5dS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="codeScannerPreviewView" destination="FqI-aq-rVa" id="uYS-oo-WGe"/>
                     </connections>
@@ -65,7 +88,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZsV-0k-K0l" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="mgE-a6-rzG" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="983" y="160"/>
+            <point key="canvasLocation" x="1277" y="227"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
