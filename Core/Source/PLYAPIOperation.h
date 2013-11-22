@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 // result block
-typedef void(^PLYAPIOperationResult)(NSDictionary *dictionary, NSError *error);
+typedef void(^PLYAPIOperationResult)(id result, NSError *error);
 
 
 @interface PLYAPIOperation : NSOperation

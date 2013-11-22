@@ -23,13 +23,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-	
 	
 	_server = [[PLYServer alloc] initWithHostURL:PLY_ENDPOINT_URL];
 
-	[_server performSearchForGTIN:@"123" language:@"de" completion:^(NSDictionary *dictionary, NSError *error) {
-		NSLog(@"%@", dictionary);
+	[_server performSearchForGTIN:@"123" language:@"de" completion:^(id result, NSError *error) {
+		
+		if (result)
+		{
+			NSLog(@"%@", result);
+		}
+		else
+		{
+			NSLog(@"%@", error);
+		}
 	}];
 }
 
