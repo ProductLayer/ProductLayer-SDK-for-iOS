@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "DTCodeScannerViewController.h"
+
 @interface ViewController : UIViewController
+
+- (IBAction)unwindFromScanner:(UIStoryboardSegue *)unwindSegue;
 
 @end

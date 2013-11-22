@@ -43,6 +43,8 @@
 	
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:parameters];
 	
+	op.resultHandler = completion;
+	
 	[_queue addOperation:op];
 }
 

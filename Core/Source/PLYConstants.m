@@ -10,3 +10,4 @@
 
 NSString * const PLYErrorDomain = @"Product Layer API";
 
+NSString * const PLYCodeTypeEAN13 = @"org.gs1.EAN-13";

@@ -7,3 +7,5 @@
 //
 
 extern NSString * const PLYErrorDomain;
+
+extern NSString * const PLYCodeTypeEAN13;
