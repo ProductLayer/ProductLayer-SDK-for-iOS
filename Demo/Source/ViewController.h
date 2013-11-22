@@ -14,4 +14,6 @@
 
 - (IBAction)unwindFromScanner:(UIStoryboardSegue *)unwindSegue;
 
+- (IBAction)unwindFromSignUp:(UIStoryboardSegue *)unwindSegue;
+
 @end
