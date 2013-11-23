@@ -9,3 +9,4 @@
 extern NSString * const PLYErrorDomain;
 
 extern NSString * const PLYCodeTypeEAN13;
+extern NSString * const PLYCodeTypeEAN8;

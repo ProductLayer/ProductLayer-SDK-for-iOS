@@ -124,7 +124,7 @@
 
 - (void)codeScanner:(DTCodeScannerViewController *)codeScanner didScanCode:(DTScannedCode *)code
 {
-	if ([code.type isEqualToString:PLYCodeTypeEAN13])
+	if ([code.type isEqualToString:PLYCodeTypeEAN13] || [code.type isEqualToString:PLYCodeTypeEAN8])
 	{
 		NSLocale *locale = [NSLocale currentLocale];
 		
@@ -142,6 +142,17 @@
 				if (![result count])
 				{
 					_gtinForEditingProduct = code.content;
+				}
+				else
+				{
+					NSDictionary *firstItem = result[0];
+					NSString *name = firstItem[@"name"];
+					NSString *gtin = firstItem[@"gtin"];
+					
+					DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+						UIAlertView *alert = [[UIAlertView alloc] initWithTitle:gtin message:name delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+						[alert show];
+					});
 				}
 				
 				DTBlockPerformSyncIfOnMainThreadElseAsync(^{

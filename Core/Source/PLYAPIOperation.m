@@ -140,7 +140,7 @@
 		}
 		else
 		{
-			NSString *errorMessage = [NSString stringWithFormat:@"Server returned error code %d", statusCode];
+			NSString *errorMessage = [NSString stringWithFormat:@"Server returned error code %ld", (long)statusCode];
 			NSDictionary *userInfo = @{NSLocalizedDescriptionKey:  errorMessage};
 			error = [NSError errorWithDomain:PLYErrorDomain code:statusCode userInfo:userInfo];
 		}
@@ -160,6 +160,9 @@
 			{
 				if (statusCode >= 200 && statusCode < 300)
 				{
+					NSString *plainText = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+					DTLogDebug(@"%@", plainText);
+					
 					ignoreContent = YES;
 				}
 				else
