@@ -18,6 +18,8 @@
 
 - (IBAction)unwindFromLogin:(UIStoryboardSegue *)unwindSegue;
 
+- (IBAction)unwindToRoot:(UIStoryboardSegue *)unwindSegue;
+
 - (IBAction)logout:(id)sender;
 
 @end

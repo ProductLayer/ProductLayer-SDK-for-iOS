@@ -109,6 +109,7 @@
 	
 	NSInteger statusCode = 0;
 	NSString *contentType = nil;
+	BOOL ignoreContent = NO;
 	
 	// check response class
 	
@@ -155,19 +156,26 @@
 			{
 				
 			}
-			else
+			else if ([contentType isEqualToString:@"text/plain"])
 			{
-				// unknown error
-				NSString *errorMessage;
+				ignoreContent = YES;
 				
-				if ([contentType hasPrefix:@"text"])
+				if (statusCode >= 200 && statusCode < 300)
 				{
-					errorMessage = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+					// ignore
 				}
 				else
 				{
-					errorMessage = [NSString stringWithFormat:@"Unknown response content type '%@'", contentType];
+					NSString *plainText = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+					NSString *errorMessage = [NSString stringWithFormat:@"Server returned plain text error '%@'", plainText];
+					
+					NSDictionary *userInfo = @{NSLocalizedDescriptionKey:  errorMessage};
+					error = [NSError errorWithDomain:PLYErrorDomain code:0 userInfo:userInfo];
 				}
+			}
+			else
+			{
+				NSString *errorMessage = [NSString stringWithFormat:@"Unknown response content type '%@'", contentType];
 				
 				NSDictionary *userInfo = @{NSLocalizedDescriptionKey:  errorMessage};
 				error = [NSError errorWithDomain:PLYErrorDomain code:0 userInfo:userInfo];
@@ -179,7 +187,7 @@
 
 	if (_resultHandler)
 	{
-		if (!error)
+		if (!error && !ignoreContent)
 		{
 			result = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
 		}

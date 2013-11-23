@@ -12,9 +12,17 @@
 
 - (instancetype)initWithHostURL:(NSURL *)hostURL;
 
+/**
+ @name Search
+ */
+
 // searches for a GTIN
 - (void)performSearchForGTIN:(NSString *)gtin language:(NSString *)language completion:(PLYAPIOperationResult)completion;
 
+
+/**
+ @name Managing Users
+ */
 
 // creates a new user account
 - (void)createUserWithUser:(NSString *)user email:(NSString *)email password:(NSString *)password completion:(PLYAPIOperationResult)completion;
@@ -24,5 +32,14 @@
 
 // logout
 - (void)logoutUserWithCompletion:(PLYAPIOperationResult)completion;
+
+
+/**
+ @name Managing Products
+ */
+
+// create
+
+- (void)createProductWithGTIN:(NSString *)gtin dictionary:(NSDictionary *)dictionary completion:(PLYAPIOperationResult)completion;
 
 @end
