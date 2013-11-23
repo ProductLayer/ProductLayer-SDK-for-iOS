@@ -158,11 +158,9 @@
 			}
 			else if ([contentType isEqualToString:@"text/plain"])
 			{
-				ignoreContent = YES;
-				
 				if (statusCode >= 200 && statusCode < 300)
 				{
-					// ignore
+					ignoreContent = YES;
 				}
 				else
 				{
