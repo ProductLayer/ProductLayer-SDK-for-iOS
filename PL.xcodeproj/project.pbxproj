@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A71C2B75183FDBC000B77DB4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A71C2B74183FDBC000B77DB4 /* LoginViewController.m */; };
 		A71C2B7918408A4A00B77DB4 /* EditProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A71C2B7818408A4A00B77DB4 /* EditProductViewController.m */; };
+		A71C2B8F1840F3DF00B77DB4 /* SearchProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A71C2B8E1840F3DF00B77DB4 /* SearchProductViewController.m */; };
 		A7B214FA183F842000C38635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214F9183F842000C38635 /* Foundation.framework */; };
 		A7B214FC183F842000C38635 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FB183F842000C38635 /* CoreGraphics.framework */; };
 		A7B214FE183F842000C38635 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FD183F842000C38635 /* UIKit.framework */; };
@@ -223,6 +224,8 @@
 		A71C2B74183FDBC000B77DB4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		A71C2B7718408A4A00B77DB4 /* EditProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProductViewController.h; sourceTree = "<group>"; };
 		A71C2B7818408A4A00B77DB4 /* EditProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProductViewController.m; sourceTree = "<group>"; };
+		A71C2B8D1840F3DF00B77DB4 /* SearchProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchProductViewController.h; sourceTree = "<group>"; };
+		A71C2B8E1840F3DF00B77DB4 /* SearchProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchProductViewController.m; sourceTree = "<group>"; };
 		A7B214F6183F842000C38635 /* PL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7B214F9183F842000C38635 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A7B214FB183F842000C38635 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -429,6 +432,8 @@
 				A71C2B74183FDBC000B77DB4 /* LoginViewController.m */,
 				A71C2B7718408A4A00B77DB4 /* EditProductViewController.h */,
 				A71C2B7818408A4A00B77DB4 /* EditProductViewController.m */,
+				A71C2B8D1840F3DF00B77DB4 /* SearchProductViewController.h */,
+				A71C2B8E1840F3DF00B77DB4 /* SearchProductViewController.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -800,6 +805,7 @@
 				A7B44285183F934800E8A170 /* AppDelegate.m in Sources */,
 				A71C2B75183FDBC000B77DB4 /* LoginViewController.m in Sources */,
 				A7B442AF183F9CA200E8A170 /* DTCodeScannerOverlayView.m in Sources */,
+				A71C2B8F1840F3DF00B77DB4 /* SearchProductViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

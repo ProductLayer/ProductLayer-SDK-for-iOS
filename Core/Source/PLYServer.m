@@ -105,6 +105,19 @@
 	[self _enqueueOperation:op];
 }
 
+- (void)performSearchForName:(NSString *)name language:(NSString *)language completion:(PLYAPIOperationResult)completion
+{
+	NSParameterAssert(name);
+	
+	NSString *path = [self _functionPathForFunction:@"product/search"];
+	NSDictionary *parameters = @{@"name": name};
+	
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:parameters];
+	op.resultHandler = completion;
+	
+	[self _enqueueOperation:op];
+}
+
 #pragma mark - Managing Users
 
 - (void)createUserWithUser:(NSString *)user email:(NSString *)email password:(NSString *)password completion:(PLYAPIOperationResult)completion

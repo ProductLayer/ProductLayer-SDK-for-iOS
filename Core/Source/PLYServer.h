@@ -19,6 +19,8 @@
 // searches for a GTIN
 - (void)performSearchForGTIN:(NSString *)gtin language:(NSString *)language completion:(PLYAPIOperationResult)completion;
 
+// searches for a product name
+- (void)performSearchForName:(NSString *)name language:(NSString *)language completion:(PLYAPIOperationResult)completion;
 
 /**
  @name Managing Users
