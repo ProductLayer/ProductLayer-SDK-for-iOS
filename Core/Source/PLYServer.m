@@ -154,7 +154,7 @@
 		
 		if (!error && [result isKindOfClass:[NSDictionary class]])
 		{
-			NSString *token = result[@"accesstoken"];
+			NSString *token = result[@"access_token"];
 			
 			if (token)
 			{
