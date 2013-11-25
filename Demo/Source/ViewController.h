@@ -22,4 +22,7 @@
 
 - (IBAction)logout:(id)sender;
 
+- (IBAction)addImageToProduct:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UILabel *lastScannedCodeLabel;
 @end

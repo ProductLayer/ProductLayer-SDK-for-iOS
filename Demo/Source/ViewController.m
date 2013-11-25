@@ -25,6 +25,8 @@
 	PLYServer *_server;
 	
 	NSString *_gtinForEditingProduct;
+	
+	NSString *_previousScannedGTIN;
 }
 
 - (void)viewDidLoad
@@ -119,6 +121,18 @@
 	}];
 }
 
+- (IBAction)addImageToProduct:(id)sender
+{
+	if (![_previousScannedGTIN length])
+	{
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cannot add Image" message:@"Please scan something first, we need a GTIN to add an image to" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+		[alert show];
+		
+		return;
+	}
+	
+}
+
 #pragma mark - DTCodeScannerViewControllerDelegate
 
 
@@ -129,10 +143,14 @@
 		NSLocale *locale = [NSLocale currentLocale];
 		
 		[_server performSearchForGTIN:code.content language:locale.localeIdentifier completion:^(id result, NSError *error) {
-			
+
 			if (error)
 			{
 				DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+					
+					_previousScannedGTIN = nil;
+					_lastScannedCodeLabel.text = @"Not Found";
+					
 					UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Search Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
 					[alert show];
 				});
@@ -156,6 +174,10 @@
 				}
 				
 				DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+					
+					_previousScannedGTIN = code.content;
+					_lastScannedCodeLabel.text = code.content;
+
 					[codeScanner performSegueWithIdentifier:@"UnwindFromScanner" sender:self];
 				});
 			}
