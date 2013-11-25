@@ -16,7 +16,7 @@
 #import "DTBlockFunctions.h"
 	
 
-@interface ViewController () <DTCodeScannerViewControllerDelegate>
+@interface ViewController () <DTCodeScannerViewControllerDelegate, UIImagePickerControllerDelegate>
 
 @end
 
@@ -131,6 +131,12 @@
 		return;
 	}
 	
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    imagePickerController.delegate = (id)self;
+	
+	[self presentViewController:imagePickerController animated:YES completion:nil];
 }
 
 #pragma mark - DTCodeScannerViewControllerDelegate
@@ -185,6 +191,26 @@
 	}
 }
 
+#pragma mark - UIImagePickerControllerDelegate
 
+// This method is called when an image has been chosen from the library or taken from the camera.
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+	[self dismissViewControllerAnimated:YES completion:NULL];
+
+    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+	NSData *data = UIImageJPEGRepresentation(image, 0.1);
+	
+	[_server uploadFileData:data forGTIN:_previousScannedGTIN completion:^(id result, NSError *error) {
+		
+		NSLog(@"%@ %@", result, error);
+	}];
+}
+
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
 
 @end

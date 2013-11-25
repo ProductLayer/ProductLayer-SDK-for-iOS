@@ -44,4 +44,11 @@
 
 - (void)createProductWithGTIN:(NSString *)gtin dictionary:(NSDictionary *)dictionary completion:(PLYAPIOperationResult)completion;
 
+/**
+ @name Image Handling
+ */
+
+
+- (void)uploadFileData:(NSData *)data forGTIN:(NSString *)gtin completion:(PLYAPIOperationResult)completion;
+
 @end

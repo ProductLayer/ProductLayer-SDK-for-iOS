@@ -37,7 +37,7 @@ typedef void(^PLYAPIOperationResult)(id result, NSError *error);
 // the verb for the operation, default is GET
 @property (nonatomic, copy) NSString *HTTPMethod;
 
-// the payload, will be converted to JSON and sent with content-type 'application/json'
+// the payload, will be converted to JSON and sent with content-type 'application/json' if it is an `NSArray` or `NSDictionary` or as multipart form data for `NSData`
 @property (nonatomic, copy) id payload;
 
 // delegate to inform about starting and ending of operation

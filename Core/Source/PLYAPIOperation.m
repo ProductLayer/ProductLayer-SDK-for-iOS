@@ -88,13 +88,46 @@
 	// add body if set
 	if (_payload)
 	{
-		[request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-		
-		NSData *payloadData = [NSJSONSerialization dataWithJSONObject:_payload options:0 error:NULL];
-		[request setHTTPBody:payloadData];
-		
-		NSString *payloadString = [[NSString alloc] initWithData:payloadData encoding:NSUTF8StringEncoding];
-		[debugMessage appendString:payloadString];
+		if ([_payload isKindOfClass:[NSData class]])
+		{
+			NSString *stringBoundary = @"0xKhTmLbOuNdArY---This_Is_ThE_BoUnDaRyy---pqo";
+			
+			// header value
+			NSString *headerBoundary = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", stringBoundary];
+			
+			// set header
+			[request addValue:headerBoundary forHTTPHeaderField:@"Content-Type"];
+			
+			//NSData *imageData = (NSData *)_payload;
+			NSData *base64Data = [_payload base64EncodedDataWithOptions:NSDataBase64Encoding64CharacterLineLength | NSDataBase64EncodingEndLineWithCarriageReturn];
+			
+			NSMutableData *postBody = [NSMutableData data];
+			
+			// media part
+			[postBody appendData:[[NSString stringWithFormat:@"--%@\r\n", stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+			[postBody appendData:[@"Content-Disposition: form-data; name=\"media\"; filename=\"dummy.jpg\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+			[postBody appendData:[@"Content-Type: image/jpeg\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+			[postBody appendData:[@"Content-ID: attachment\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+			[postBody appendData:[@"Content-Transfer-Encoding: base64\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+			
+			[postBody appendData:base64Data];
+			
+			// final boundary
+			[postBody appendData:[[NSString stringWithFormat:@"--%@--\r\n", stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+			
+			request.HTTPBody = postBody;
+			request.timeoutInterval = 60;
+		}
+		else if ([NSJSONSerialization isValidJSONObject:_payload])
+		{
+			[request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+			
+			NSData *payloadData = [NSJSONSerialization dataWithJSONObject:_payload options:0 error:NULL];
+			[request setHTTPBody:payloadData];
+			
+			NSString *payloadString = [[NSString alloc] initWithData:payloadData encoding:NSUTF8StringEncoding];
+			[debugMessage appendString:payloadString];
+		}
 	}
 	
 	DTLogDebug(@"%@", debugMessage);
