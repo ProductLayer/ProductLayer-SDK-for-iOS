@@ -10,6 +10,7 @@
 #import "SignUpViewController.h"
 #import "EditProductViewController.h"
 #import "LoginViewController.h"
+#import "ProductImageViewController.h"
 
 #import "ProductLayer.h"
 #import "ProductLayerConfig.h"
@@ -74,6 +75,13 @@
 		UINavigationController *navController = segue.destinationViewController;
 		EditProductViewController *vc = (EditProductViewController *)[navController topViewController];
 		vc.navigationItem.title = @"Add New Product";
+		vc.gtin = _gtinForEditingProduct;
+	}
+	else if ([[segue identifier] isEqualToString:@"ProductImages"])
+	{
+		UINavigationController *navController = segue.destinationViewController;
+		ProductImageViewController *vc = (ProductImageViewController *)[navController topViewController];
+		vc.navigationItem.title = @"Images";
 		vc.gtin = _gtinForEditingProduct;
 	}
 	
@@ -242,8 +250,8 @@
 {
 	[self dismissViewControllerAnimated:YES completion:NULL];
 
-    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-	NSData *data = UIImageJPEGRepresentation(image, 0.1);
+	UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+	NSData *data = UIImageJPEGRepresentation(image, 0.5);
 	
 	[_server uploadFileData:data forGTIN:_previousScannedGTIN completion:^(id result, NSError *error) {
 		

@@ -114,7 +114,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="1Mx-NJ-8Tz" kind="modal" id="uGj-sG-axp"/>
+                                    <segue destination="1Mx-NJ-8Tz" kind="modal" identifier="ProductImages" id="uGj-sG-axp"/>
                                 </connections>
                             </button>
                         </subviews>

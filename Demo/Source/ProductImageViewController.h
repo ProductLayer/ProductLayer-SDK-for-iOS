@@ -10,4 +10,6 @@
 
 @interface ProductImageViewController : UICollectionViewController
 
+@property (nonatomic, strong) NSString *gtin;
+
 @end
