@@ -22,6 +22,12 @@
 // searches for a product name
 - (void)performSearchForName:(NSString *)name language:(NSString *)language completion:(PLYAPIOperationResult)completion;
 
+
+/**
+ @name Products
+ */
+- (void)getImagesForGTIN:(NSString *)gtin completion:(PLYAPIOperationResult)completion;
+
 /**
  @name Managing Users
  */

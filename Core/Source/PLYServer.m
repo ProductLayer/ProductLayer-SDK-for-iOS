@@ -154,6 +154,22 @@
 	[self _enqueueOperation:op];
 }
 
+#pragma mark - Products
+
+- (void)getImagesForGTIN:(NSString *)gtin completion:(PLYAPIOperationResult)completion
+{
+	NSParameterAssert(gtin);
+	
+	NSString *function = [NSString stringWithFormat:@"product/%@/images", gtin];
+	NSString *path = [self _functionPathForFunction:function];
+	
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
+	
+	op.resultHandler = completion;
+	
+	[self _enqueueOperation:op];
+}
+
 #pragma mark - Managing Users
 
 - (void)createUserWithUser:(NSString *)user email:(NSString *)email password:(NSString *)password completion:(PLYAPIOperationResult)completion

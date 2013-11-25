@@ -112,6 +112,14 @@
 	}
 }
 
+- (void)_updateImagesButtons
+{
+	BOOL buttonsEnabled = (_previousScannedGTIN!=nil);
+	
+	self.viewImagesButton.enabled = buttonsEnabled;
+	self.addImageButton.enabled = buttonsEnabled;
+}
+
 #pragma mark - Actions
 
 - (IBAction)unwindFromScanner:(UIStoryboardSegue *)unwindSegue
@@ -235,6 +243,8 @@
 					
 					_previousScannedGTIN = code.content;
 					_lastScannedCodeLabel.text = code.content;
+					
+					[self _updateImagesButtons];
 
 					[codeScanner performSegueWithIdentifier:@"UnwindFromScanner" sender:self];
 				});

@@ -10,6 +10,8 @@
 		A71C2B75183FDBC000B77DB4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A71C2B74183FDBC000B77DB4 /* LoginViewController.m */; };
 		A71C2B7918408A4A00B77DB4 /* EditProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A71C2B7818408A4A00B77DB4 /* EditProductViewController.m */; };
 		A71C2B8F1840F3DF00B77DB4 /* SearchProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A71C2B8E1840F3DF00B77DB4 /* SearchProductViewController.m */; };
+		A71C2BBB1843AD9B00B77DB4 /* libDTDownload_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A71C2B9D1843AD8D00B77DB4 /* libDTDownload_iOS.a */; };
+		A71C2BBD1843ADA600B77DB4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71C2BBC1843ADA600B77DB4 /* CoreData.framework */; };
 		A7B214FA183F842000C38635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214F9183F842000C38635 /* Foundation.framework */; };
 		A7B214FC183F842000C38635 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FB183F842000C38635 /* CoreGraphics.framework */; };
 		A7B214FE183F842000C38635 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FD183F842000C38635 /* UIKit.framework */; };
@@ -46,6 +48,48 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A71C2B9C1843AD8D00B77DB4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A71C2B921843AD8C00B77DB4 /* DTDownload.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A71902A716A8029400C1EC52;
+			remoteInfo = "DTDownload (iOS)";
+		};
+		A71C2B9E1843AD8D00B77DB4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A71C2B921843AD8C00B77DB4 /* DTDownload.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A71903D316A8068B00C1EC52;
+			remoteInfo = "DTDownload (Mac)";
+		};
+		A71C2BA01843AD8D00B77DB4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A71C2B921843AD8C00B77DB4 /* DTDownload.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A71903F416A808A700C1EC52;
+			remoteInfo = "Unit Tests (iOS)";
+		};
+		A71C2BA21843AD8D00B77DB4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A71C2B921843AD8C00B77DB4 /* DTDownload.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A71F5BC417FB0B7B00D5E42C;
+			remoteInfo = "Unit Tests (Mac)";
+		};
+		A71C2BA41843AD8D00B77DB4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A71C2B921843AD8C00B77DB4 /* DTDownload.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A78445461802B10D00965447;
+			remoteInfo = ImageDownload;
+		};
+		A71C2BB91843AD9600B77DB4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A71C2B921843AD8C00B77DB4 /* DTDownload.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A71902A616A8029400C1EC52;
+			remoteInfo = "DTDownload (iOS)";
+		};
 		A7B2151C183F842000C38635 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A7B214EE183F842000C38635 /* Project object */;
@@ -228,6 +272,8 @@
 		A71C2B7818408A4A00B77DB4 /* EditProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProductViewController.m; sourceTree = "<group>"; };
 		A71C2B8D1840F3DF00B77DB4 /* SearchProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchProductViewController.h; sourceTree = "<group>"; };
 		A71C2B8E1840F3DF00B77DB4 /* SearchProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchProductViewController.m; sourceTree = "<group>"; };
+		A71C2B921843AD8C00B77DB4 /* DTDownload.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTDownload.xcodeproj; path = DTDownload/DTDownload.xcodeproj; sourceTree = "<group>"; };
+		A71C2BBC1843ADA600B77DB4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A7B214F6183F842000C38635 /* PL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7B214F9183F842000C38635 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A7B214FB183F842000C38635 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -282,6 +328,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A71C2BBD1843ADA600B77DB4 /* CoreData.framework in Frameworks */,
+				A71C2BBB1843AD9B00B77DB4 /* libDTDownload_iOS.a in Frameworks */,
 				A7B442B8183F9D0300E8A170 /* AVFoundation.framework in Frameworks */,
 				A7B4428A183F935800E8A170 /* libDTFoundation.a in Frameworks */,
 				A7B21746183F8A5800C38635 /* libProductLayer.a in Frameworks */,
@@ -332,6 +380,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A71C2B931843AD8C00B77DB4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A71C2B9D1843AD8D00B77DB4 /* libDTDownload_iOS.a */,
+				A71C2B9F1843AD8D00B77DB4 /* libDTDownload (Mac).a */,
+				A71C2BA11843AD8D00B77DB4 /* UnitTests.octest */,
+				A71C2BA31843AD8D00B77DB4 /* Unit Tests copy.octest */,
+				A71C2BA51843AD8D00B77DB4 /* ImageDownload.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		A7B214ED183F842000C38635 = {
 			isa = PBXGroup;
 			children = (
@@ -358,6 +418,7 @@
 		A7B214F8183F842000C38635 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A71C2BBC1843ADA600B77DB4 /* CoreData.framework */,
 				A7B442B7183F9D0300E8A170 /* AVFoundation.framework */,
 				A7B214F9183F842000C38635 /* Foundation.framework */,
 				A7B214FB183F842000C38635 /* CoreGraphics.framework */,
@@ -370,6 +431,7 @@
 		A7B440A0183F90B800E8A170 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				A71C2B921843AD8C00B77DB4 /* DTDownload.xcodeproj */,
 				A7B4418A183F90B900E8A170 /* DTFoundation.xcodeproj */,
 			);
 			path = Externals;
@@ -503,6 +565,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A71C2BBA1843AD9600B77DB4 /* PBXTargetDependency */,
 				A7B44289183F935200E8A170 /* PBXTargetDependency */,
 				A7B21745183F8A5400C38635 /* PBXTargetDependency */,
 			);
@@ -614,6 +677,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = A71C2B931843AD8C00B77DB4 /* Products */;
+					ProjectRef = A71C2B921843AD8C00B77DB4 /* DTDownload.xcodeproj */;
+				},
+				{
 					ProductGroup = A7B441F5183F913000E8A170 /* Products */;
 					ProjectRef = A7B4418A183F90B900E8A170 /* DTFoundation.xcodeproj */;
 				},
@@ -630,6 +697,41 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		A71C2B9D1843AD8D00B77DB4 /* libDTDownload_iOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDTDownload_iOS.a;
+			remoteRef = A71C2B9C1843AD8D00B77DB4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A71C2B9F1843AD8D00B77DB4 /* libDTDownload (Mac).a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libDTDownload (Mac).a";
+			remoteRef = A71C2B9E1843AD8D00B77DB4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A71C2BA11843AD8D00B77DB4 /* UnitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UnitTests.octest;
+			remoteRef = A71C2BA01843AD8D00B77DB4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A71C2BA31843AD8D00B77DB4 /* Unit Tests copy.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Unit Tests copy.octest";
+			remoteRef = A71C2BA21843AD8D00B77DB4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A71C2BA51843AD8D00B77DB4 /* ImageDownload.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = ImageDownload.app;
+			remoteRef = A71C2BA41843AD8D00B77DB4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		A7B4420C183F913000E8A170 /* DTFoundation.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
@@ -855,6 +957,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A71C2BBA1843AD9600B77DB4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "DTDownload (iOS)";
+			targetProxy = A71C2BB91843AD9600B77DB4 /* PBXContainerItemProxy */;
+		};
 		A7B2151D183F842000C38635 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A7B214F5183F842000C38635 /* PL */;
@@ -975,7 +1082,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/**";
+				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/** Externals/DTDownload/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -993,7 +1100,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/**";
+				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/** Externals/DTDownload/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

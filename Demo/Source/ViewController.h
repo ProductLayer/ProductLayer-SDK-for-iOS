@@ -26,6 +26,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (weak, nonatomic) IBOutlet UILabel *loginNameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *addImageButton;
+@property (weak, nonatomic) IBOutlet UIButton *viewImagesButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *lastScannedCodeLabel;
 @end
