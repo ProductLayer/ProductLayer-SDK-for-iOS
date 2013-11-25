@@ -20,9 +20,12 @@
 
 - (IBAction)unwindToRoot:(UIStoryboardSegue *)unwindSegue;
 
-- (IBAction)logout:(id)sender;
-
 - (IBAction)addImageToProduct:(id)sender;
+
+- (IBAction)login:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (weak, nonatomic) IBOutlet UILabel *loginNameLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *lastScannedCodeLabel;
 @end

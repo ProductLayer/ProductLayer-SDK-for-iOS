@@ -160,6 +160,8 @@
 			{
 				_accessToken = token;
 			}
+			
+			_loggedInUser = result[@"user"];
 		}
 		
 		if (wrappedCompletion)
@@ -184,6 +186,7 @@
 	[self _enqueueOperation:op];
 	
 	_accessToken = nil;
+	_loggedInUser = nil;
 }
 
 #pragma mark - Managing Products

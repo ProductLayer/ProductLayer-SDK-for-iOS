@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ck-c7-1iJ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ck-c7-1iJ">
                                 <rect key="frame" x="136" y="270" width="104" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Create Product">
@@ -26,7 +26,7 @@
                                     <segue destination="Fbz-py-Oi5" kind="modal" identifier="EditProduct" id="GY6-7c-M68"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZX-Ip-Im8">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZX-Ip-Im8">
                                 <rect key="frame" x="130" y="47" width="75" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Scan Now!">
@@ -36,8 +36,8 @@
                                     <segue destination="nzz-8J-imC" kind="modal" identifier="ScanBarcode" id="HZ6-bW-vzn"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5r-Fw-q1y">
-                                <rect key="frame" x="130" y="402" width="94" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5r-Fw-q1y">
+                                <rect key="frame" x="130" y="401" width="94" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Register User">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -46,27 +46,7 @@
                                     <segue destination="A3e-9A-CCo" kind="modal" identifier="SignUp" id="vbC-Uv-tKK"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bAj-rr-gIx">
-                                <rect key="frame" x="130" y="478" width="38" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Login">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="iI5-4f-WzF" kind="modal" id="cJd-Fs-YCG"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBV-6O-sRj">
-                                <rect key="frame" x="130" y="518" width="49" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Logout">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="logout:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="uqz-gt-SN3"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ced-DV-jHk">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ced-DV-jHk">
                                 <rect key="frame" x="120" y="169" width="114" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Search by Name">
@@ -76,14 +56,17 @@
                                     <segue destination="1id-ZH-Mfe" kind="modal" id="03w-rb-GUX"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Scan Something" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efS-mL-jRB">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan Something" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efS-mL-jRB">
                                 <rect key="frame" x="20" y="89" width="197" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="197" id="jUJ-Kj-RfZ"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCH-aW-4Ur">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCH-aW-4Ur">
                                 <rect key="frame" x="225" y="85" width="75" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add Image">
@@ -93,14 +76,62 @@
                                     <action selector="addImageToProduct:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="XBS-1a-kuT"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tgy-pB-WHN" userLabel="Tinted Bar">
+                                <rect key="frame" x="0.0" y="517" width="320" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBV-6O-sRj">
+                                        <rect key="frame" x="132" y="11" width="157" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Login">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="login:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="rcD-XF-ibb"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not logged in" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2CW-dA-PbW">
+                                        <rect key="frame" x="20" y="15" width="104" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="KBV-6O-sRj" secondAttribute="trailing" constant="31" id="1uA-sz-RuN"/>
+                                    <constraint firstItem="KBV-6O-sRj" firstAttribute="top" secondItem="Tgy-pB-WHN" secondAttribute="top" constant="11" id="NHw-PR-e69"/>
+                                    <constraint firstAttribute="height" constant="51" id="Oo9-Yw-AoV"/>
+                                    <constraint firstItem="KBV-6O-sRj" firstAttribute="baseline" secondItem="2CW-dA-PbW" secondAttribute="baseline" id="jSU-JE-1gC"/>
+                                    <constraint firstItem="KBV-6O-sRj" firstAttribute="leading" secondItem="2CW-dA-PbW" secondAttribute="trailing" constant="8" symbolic="YES" id="jtZ-GB-ky3"/>
+                                    <constraint firstItem="2CW-dA-PbW" firstAttribute="leading" secondItem="Tgy-pB-WHN" secondAttribute="leading" constant="20" id="nec-zU-un8"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="LCH-aW-4Ur" firstAttribute="leading" secondItem="efS-mL-jRB" secondAttribute="trailing" constant="8" id="2o0-ef-KY9"/>
+                            <constraint firstAttribute="trailing" secondItem="Tgy-pB-WHN" secondAttribute="trailing" id="5oh-dt-niz"/>
+                            <constraint firstItem="efS-mL-jRB" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="89" id="7Bv-lq-FDj"/>
+                            <constraint firstItem="TCJ-Pj-Bs4" firstAttribute="top" secondItem="Tgy-pB-WHN" secondAttribute="bottom" id="7EY-jc-IXd"/>
+                            <constraint firstItem="efS-mL-jRB" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" symbolic="YES" id="TRg-8l-2Ep"/>
+                            <constraint firstAttribute="trailing" secondItem="5ck-c7-1iJ" secondAttribute="trailing" constant="80" id="Xy8-Yt-WIU"/>
+                            <constraint firstItem="efS-mL-jRB" firstAttribute="baseline" secondItem="LCH-aW-4Ur" secondAttribute="baseline" id="bd4-WF-wA8"/>
+                            <constraint firstItem="wZX-Ip-Im8" firstAttribute="leading" secondItem="Z5r-Fw-q1y" secondAttribute="leading" id="ePK-fg-Uiv"/>
+                            <constraint firstItem="efS-mL-jRB" firstAttribute="top" secondItem="wZX-Ip-Im8" secondAttribute="bottom" constant="12" id="f0s-cs-ha0"/>
+                            <constraint firstItem="Ced-DV-jHk" firstAttribute="centerX" secondItem="Z5r-Fw-q1y" secondAttribute="centerX" id="jgZ-Ra-qMq"/>
+                            <constraint firstItem="Tgy-pB-WHN" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="kWv-I3-x7d"/>
+                            <constraint firstItem="wZX-Ip-Im8" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="130" id="uIZ-Ik-dAo"/>
+                            <constraint firstItem="Ced-DV-jHk" firstAttribute="top" secondItem="efS-mL-jRB" secondAttribute="bottom" constant="59" id="vO9-Hi-Pfp"/>
+                            <constraint firstItem="5ck-c7-1iJ" firstAttribute="top" secondItem="Ced-DV-jHk" secondAttribute="bottom" constant="71" id="wpU-og-kwY"/>
+                            <constraint firstItem="Tgy-pB-WHN" firstAttribute="top" secondItem="Z5r-Fw-q1y" secondAttribute="bottom" constant="86" id="x2N-TB-SZh"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="lastScannedCodeLabel" destination="efS-mL-jRB" id="GTI-Zz-0GA"/>
+                        <outlet property="loginButton" destination="KBV-6O-sRj" id="bfe-xd-nao"/>
+                        <outlet property="loginNameLabel" destination="2CW-dA-PbW" id="Jbe-c2-RIX"/>
+                        <segue destination="iI5-4f-WzF" kind="modal" identifier="LogIn" id="DLx-i1-5o9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -683,7 +714,7 @@
                     <navigationItem key="navigationItem" title="Log In" id="6YX-zO-cw1">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="rOY-v8-MeS">
                             <connections>
-                                <segue destination="mba-de-5lv" kind="unwind" identifier="UnwindFromSignUp" unwindAction="unwindFromSignUp:" id="dZT-M8-gAa"/>
+                                <segue destination="mba-de-5lv" kind="unwind" identifier="UnwindFromLogin" unwindAction="unwindFromLogin:" id="9ih-Bz-cqg"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="done" id="jga-6J-27L" userLabel="Bar Button Item - Done">

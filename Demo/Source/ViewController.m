@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "SignUpViewController.h"
 #import "EditProductViewController.h"
+#import "LoginViewController.h"
 
 #import "ProductLayer.h"
 #import "ProductLayerConfig.h"
@@ -34,6 +35,13 @@
     [super viewDidLoad];
 	
 	_server = [[PLYServer alloc] initWithHostURL:PLY_ENDPOINT_URL];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	
+	[self _updateLoginBar];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -82,6 +90,22 @@
 	}
 }
 
+- (void)_updateLoginBar
+{
+	if (_server.loggedInUser)
+	{
+		[self.loginButton setTitle:@"Log out" forState:UIControlStateNormal];
+		self.loginNameLabel.text = _server.loggedInUser;
+	}
+	else
+	{
+		self.loginNameLabel.text = @"Not logged in";
+		[self.loginButton setTitle:@"Log in" forState:UIControlStateNormal];
+	}
+}
+
+#pragma mark - Actions
+
 - (IBAction)unwindFromScanner:(UIStoryboardSegue *)unwindSegue
 {
 	
@@ -89,12 +113,25 @@
 
 - (IBAction)unwindFromSignUp:(UIStoryboardSegue *)unwindSegue
 {
+	if (![[unwindSegue sourceViewController] isKindOfClass:[LoginViewController class]])
+	{
+		return;
+	}
 	
+	if (_server.loggedInUser)
+	{
+		[self.loginButton setTitle:@"Log out" forState:UIControlStateNormal];
+	}
+	else
+	{
+		self.loginNameLabel.text = @"Not logged in";
+		[self.loginButton setTitle:@"Log in" forState:UIControlStateNormal];
+	}
 }
 
 - (IBAction)unwindFromLogin:(UIStoryboardSegue *)unwindSegue
 {
-	
+	[self _updateLoginBar];
 }
 
 - (IBAction)unwindToRoot:(UIStoryboardSegue *)unwindSegue
@@ -102,23 +139,30 @@
 	
 }
 
-- (IBAction)logout:(id)sender
+
+- (IBAction)login:(id)sender
 {
-	[_server logoutUserWithCompletion:^(id result, NSError *error) {
-		if (error)
-		{
-			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Logout Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-				[alert show];
-			});
-		}
-		else
-		{
+	if (_server.loggedInUser)
+	{
+		[_server logoutUserWithCompletion:^(id result, NSError *error) {
+			
 			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
 				
+				[self _updateLoginBar];
+				
+				if (error)
+				{
+					UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Logout Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+					[alert show];
+					
+				}
 			});
-		}
-	}];
+		}];
+	}
+	else
+	{
+		[self performSegueWithIdentifier:@"LogIn" sender:self];
+	}
 }
 
 - (IBAction)addImageToProduct:(id)sender

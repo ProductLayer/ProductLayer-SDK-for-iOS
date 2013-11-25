@@ -10,3 +10,7 @@ extern NSString * const PLYErrorDomain;
 
 extern NSString * const PLYCodeTypeEAN13;
 extern NSString * const PLYCodeTypeEAN8;
+
+
+extern NSString * const PLYServerUserDidLogInNotification;
+extern NSString * const PLYServerUserDidLogOutNotification;

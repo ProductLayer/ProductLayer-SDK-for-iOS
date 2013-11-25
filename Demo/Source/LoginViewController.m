@@ -13,6 +13,13 @@
 
 @implementation LoginViewController
 
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	
+	[self.nicknameTextfield becomeFirstResponder];
+}
+
 - (IBAction)save:(id)sender
 {
 	NSAssert(self.server, @"Server needs to be set");
@@ -29,7 +36,7 @@
 		else
 		{
 			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-				[self performSegueWithIdentifier:@"UnwindFromSignUp" sender:self];
+				[self performSegueWithIdentifier:@"UnwindFromLogin" sender:self];
 			});
 		}
 		

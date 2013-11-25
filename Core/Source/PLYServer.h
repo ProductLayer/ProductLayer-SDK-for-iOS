@@ -35,6 +35,9 @@
 // logout
 - (void)logoutUserWithCompletion:(PLYAPIOperationResult)completion;
 
+// name of the currently logged in use or `nil` if not logged in
+@property (nonatomic, readonly) NSString *loggedInUser;
+
 
 /**
  @name Managing Products
