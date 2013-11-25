@@ -38,6 +38,8 @@
 		
 		_queue = [[NSOperationQueue alloc] init];
 		_queue.maxConcurrentOperationCount = 1;
+		
+		[self _loadState];
 	}
 	
 	return self;
@@ -63,6 +65,40 @@
 	
 	return tmpString;
 }
+
+- (void)_loadState
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
+	_accessToken = [defaults objectForKey:@"PLYServerAccessTokenKey"];
+	_loggedInUser = [defaults objectForKey:@"PLYServerLoggedInUserKey"];
+}
+
+- (void)_storeState
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
+	if (_accessToken)
+	{
+		[defaults setObject:_accessToken forKey:@"PLYServerAccessTokenKey"];
+	}
+	else
+	{
+		[defaults removeObjectForKey:@"PLYServerAccessTokenKey"];
+	}
+
+	if (_loggedInUser)
+	{
+		[defaults setObject:_loggedInUser forKey:@"PLYServerLoggedInUserKey"];
+	}
+	else
+	{
+		[defaults removeObjectForKey:@"PLYServerLoggedInUserKey"];
+	}
+	
+	[defaults synchronize];
+}
+
 
 #pragma mark - PLYAPIOperationDelegate
 
@@ -162,6 +198,8 @@
 			}
 			
 			_loggedInUser = result[@"user"];
+			
+			[self _storeState];
 		}
 		
 		if (wrappedCompletion)
@@ -187,6 +225,8 @@
 	
 	_accessToken = nil;
 	_loggedInUser = nil;
+	
+	[self _storeState];
 }
 
 #pragma mark - Managing Products

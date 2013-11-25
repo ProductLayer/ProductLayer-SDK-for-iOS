@@ -80,8 +80,8 @@
                                 <rect key="frame" x="0.0" y="517" width="320" height="51"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBV-6O-sRj">
-                                        <rect key="frame" x="132" y="11" width="157" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBV-6O-sRj">
+                                        <rect key="frame" x="143" y="11" width="157" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Login">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -99,11 +99,11 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="KBV-6O-sRj" secondAttribute="trailing" constant="31" id="1uA-sz-RuN"/>
+                                    <constraint firstAttribute="trailing" secondItem="KBV-6O-sRj" secondAttribute="trailing" constant="20" id="1uA-sz-RuN"/>
                                     <constraint firstItem="KBV-6O-sRj" firstAttribute="top" secondItem="Tgy-pB-WHN" secondAttribute="top" constant="11" id="NHw-PR-e69"/>
                                     <constraint firstAttribute="height" constant="51" id="Oo9-Yw-AoV"/>
                                     <constraint firstItem="KBV-6O-sRj" firstAttribute="baseline" secondItem="2CW-dA-PbW" secondAttribute="baseline" id="jSU-JE-1gC"/>
-                                    <constraint firstItem="KBV-6O-sRj" firstAttribute="leading" secondItem="2CW-dA-PbW" secondAttribute="trailing" constant="8" symbolic="YES" id="jtZ-GB-ky3"/>
+                                    <constraint firstItem="KBV-6O-sRj" firstAttribute="leading" secondItem="2CW-dA-PbW" secondAttribute="trailing" constant="19" id="jtZ-GB-ky3"/>
                                     <constraint firstItem="2CW-dA-PbW" firstAttribute="leading" secondItem="Tgy-pB-WHN" secondAttribute="leading" constant="20" id="nec-zU-un8"/>
                                 </constraints>
                             </view>
