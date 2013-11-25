@@ -41,6 +41,8 @@
 		A7B442B8183F9D0300E8A170 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B442B7183F9D0300E8A170 /* AVFoundation.framework */; };
 		A7B442BB183FA99B00E8A170 /* EditableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B442BA183FA99B00E8A170 /* EditableCell.m */; };
 		A7B442BE183FADAC00E8A170 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B442BD183FADAC00E8A170 /* SignUpViewController.m */; };
+		A7C8A2B81843A35C00AF799F /* ProductImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C8A2B71843A35C00AF799F /* ProductImageCollectionViewCell.m */; };
+		A7C8A2BB1843A41400AF799F /* ProductImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C8A2BA1843A41400AF799F /* ProductImageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -269,6 +271,10 @@
 		A7B442BA183FA99B00E8A170 /* EditableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditableCell.m; sourceTree = "<group>"; };
 		A7B442BC183FADAC00E8A170 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		A7B442BD183FADAC00E8A170 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		A7C8A2B61843A35C00AF799F /* ProductImageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductImageCollectionViewCell.h; sourceTree = "<group>"; };
+		A7C8A2B71843A35C00AF799F /* ProductImageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductImageCollectionViewCell.m; sourceTree = "<group>"; };
+		A7C8A2B91843A41400AF799F /* ProductImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductImageViewController.h; sourceTree = "<group>"; };
+		A7C8A2BA1843A41400AF799F /* ProductImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductImageViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -434,6 +440,10 @@
 				A71C2B7818408A4A00B77DB4 /* EditProductViewController.m */,
 				A71C2B8D1840F3DF00B77DB4 /* SearchProductViewController.h */,
 				A71C2B8E1840F3DF00B77DB4 /* SearchProductViewController.m */,
+				A7C8A2B61843A35C00AF799F /* ProductImageCollectionViewCell.h */,
+				A7C8A2B71843A35C00AF799F /* ProductImageCollectionViewCell.m */,
+				A7C8A2B91843A41400AF799F /* ProductImageViewController.h */,
+				A7C8A2BA1843A41400AF799F /* ProductImageViewController.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -799,6 +809,8 @@
 				A7B442B1183F9CA200E8A170 /* DTCodeScannerViewController.m in Sources */,
 				A7B442B5183F9CB300E8A170 /* DTVideoPreviewView.m in Sources */,
 				A7B442B2183F9CA200E8A170 /* DTScannedCode.m in Sources */,
+				A7C8A2BB1843A41400AF799F /* ProductImageViewController.m in Sources */,
+				A7C8A2B81843A35C00AF799F /* ProductImageCollectionViewCell.m in Sources */,
 				A7B442BE183FADAC00E8A170 /* SignUpViewController.m in Sources */,
 				A7B44286183F934800E8A170 /* main.m in Sources */,
 				A71C2B7918408A4A00B77DB4 /* EditProductViewController.m in Sources */,
