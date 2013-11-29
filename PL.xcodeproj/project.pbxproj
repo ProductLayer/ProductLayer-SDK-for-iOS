@@ -45,6 +45,8 @@
 		A7B442BE183FADAC00E8A170 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B442BD183FADAC00E8A170 /* SignUpViewController.m */; };
 		A7C8A2B81843A35C00AF799F /* ProductImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C8A2B71843A35C00AF799F /* ProductImageCollectionViewCell.m */; };
 		A7C8A2BB1843A41400AF799F /* ProductImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C8A2BA1843A41400AF799F /* ProductImageViewController.m */; };
+		A7D64C681848CB2100AB8823 /* DTImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D64C671848CB2100AB8823 /* DTImageCache.m */; };
+		A7D64C6B1848CE1000AB8823 /* DTManagedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D64C6A1848CE1000AB8823 /* DTManagedImage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -321,6 +323,10 @@
 		A7C8A2B71843A35C00AF799F /* ProductImageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductImageCollectionViewCell.m; sourceTree = "<group>"; };
 		A7C8A2B91843A41400AF799F /* ProductImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductImageViewController.h; sourceTree = "<group>"; };
 		A7C8A2BA1843A41400AF799F /* ProductImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductImageViewController.m; sourceTree = "<group>"; };
+		A7D64C661848CB2100AB8823 /* DTImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTImageCache.h; sourceTree = "<group>"; };
+		A7D64C671848CB2100AB8823 /* DTImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTImageCache.m; sourceTree = "<group>"; };
+		A7D64C691848CE1000AB8823 /* DTManagedImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTManagedImage.h; sourceTree = "<group>"; };
+		A7D64C6A1848CE1000AB8823 /* DTManagedImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTManagedImage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -506,6 +512,10 @@
 				A7C8A2B71843A35C00AF799F /* ProductImageCollectionViewCell.m */,
 				A7C8A2B91843A41400AF799F /* ProductImageViewController.h */,
 				A7C8A2BA1843A41400AF799F /* ProductImageViewController.m */,
+				A7D64C661848CB2100AB8823 /* DTImageCache.h */,
+				A7D64C671848CB2100AB8823 /* DTImageCache.m */,
+				A7D64C691848CE1000AB8823 /* DTManagedImage.h */,
+				A7D64C6A1848CE1000AB8823 /* DTManagedImage.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -908,11 +918,13 @@
 				A7B442BB183FA99B00E8A170 /* EditableCell.m in Sources */,
 				A7B44287183F934800E8A170 /* ViewController.m in Sources */,
 				A7B442B0183F9CA200E8A170 /* DTCodeScannerPreviewView.m in Sources */,
+				A7D64C6B1848CE1000AB8823 /* DTManagedImage.m in Sources */,
 				A7B442B1183F9CA200E8A170 /* DTCodeScannerViewController.m in Sources */,
 				A7B442B5183F9CB300E8A170 /* DTVideoPreviewView.m in Sources */,
 				A7B442B2183F9CA200E8A170 /* DTScannedCode.m in Sources */,
 				A7C8A2BB1843A41400AF799F /* ProductImageViewController.m in Sources */,
 				A7C8A2B81843A35C00AF799F /* ProductImageCollectionViewCell.m in Sources */,
+				A7D64C681848CB2100AB8823 /* DTImageCache.m in Sources */,
 				A7B442BE183FADAC00E8A170 /* SignUpViewController.m in Sources */,
 				A7B44286183F934800E8A170 /* main.m in Sources */,
 				A71C2B7918408A4A00B77DB4 /* EditProductViewController.m in Sources */,

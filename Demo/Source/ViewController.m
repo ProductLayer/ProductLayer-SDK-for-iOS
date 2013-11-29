@@ -82,7 +82,7 @@
 		UINavigationController *navController = segue.destinationViewController;
 		ProductImageViewController *vc = (ProductImageViewController *)[navController topViewController];
 		vc.navigationItem.title = @"Images";
-		vc.gtin = _gtinForEditingProduct;
+		vc.gtin = _previousScannedGTIN;
 	}
 	
 	// inject server

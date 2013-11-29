@@ -22,6 +22,7 @@
 {
 	NSURL *_hostURL;
 	NSOperationQueue *_queue;
+	NSOperationQueue *_uploadQueue;
 	
 	NSString *_accessToken;
 }
@@ -39,6 +40,9 @@
 		_queue = [[NSOperationQueue alloc] init];
 		_queue.maxConcurrentOperationCount = 1;
 		
+		_uploadQueue = [[NSOperationQueue alloc] init];
+		_uploadQueue.maxConcurrentOperationCount = 1;
+		
 		[self _loadState];
 	}
 	
@@ -51,6 +55,14 @@
 	operation.accessToken = _accessToken;
 	
 	[_queue addOperation:operation];
+}
+
+- (void)_enqueueUploadOperation:(PLYAPIOperation *)operation
+{
+	operation.delegate = self;
+	operation.accessToken = _accessToken;
+	
+	[_uploadQueue addOperation:operation];
 }
 
 - (NSString *)_functionPathForFunction:(NSString *)function
@@ -278,7 +290,7 @@
 	
 	op.resultHandler = completion;
 	
-	[self _enqueueOperation:op];
+	[self _enqueueUploadOperation:op];
 }
 
 @end
