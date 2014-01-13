@@ -41,10 +41,11 @@
 	
 	cell.backgroundColor = [UIColor whiteColor];
 	
-	NSString *urlString = imageDict[@"url"];
-	NSURL *imageURL = [NSURL URLWithString:urlString];
+   NSString *image_id = imageDict[@"image_id"];
+   
+	NSURL *imageURL = [_server imageURLForProductGTIN:_gtin imageIdentifier:image_id maxWidth:153*[UIScreen mainScreen].scale];
 	
-	[cell setImageURL:imageURL];
+	[cell setThumbnailImageURL:imageURL];
 	
 	return cell;
 }

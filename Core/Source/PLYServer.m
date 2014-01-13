@@ -78,6 +78,19 @@
 	return tmpString;
 }
 
+- (NSURL *)imageURLForProductGTIN:(NSString *)gtin imageIdentifier:(NSString *)imageIdentifier maxWidth:(CGFloat)maxWidth
+{
+   NSString *tmpString = [NSString stringWithFormat:@"product/%@/image/%@", gtin, imageIdentifier];
+   
+   if (maxWidth>0)
+   {
+      tmpString = [tmpString stringByAppendingFormat:@"?max_width=%lu", (unsigned long)maxWidth];
+   }
+   
+   NSString *path = [self _functionPathForFunction:tmpString];
+   return [NSURL URLWithString:path relativeToURL:_hostURL];
+}
+
 - (void)_loadState
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

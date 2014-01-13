@@ -60,4 +60,10 @@
 
 - (void)uploadFileData:(NSData *)data forGTIN:(NSString *)gtin completion:(PLYAPIOperationResult)completion;
 
+
+/**
+ Construct fully qualified image URL for a product image
+ */
+- (NSURL *)imageURLForProductGTIN:(NSString *)gtin imageIdentifier:(NSString *)imageIdentifier maxWidth:(CGFloat)maxWidth;
+
 @end

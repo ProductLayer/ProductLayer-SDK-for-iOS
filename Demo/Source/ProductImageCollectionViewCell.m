@@ -51,6 +51,50 @@
 }
 
 
+
+- (void)setThumbnailImageURL:(NSURL *)imageURL
+{
+	if ([_imageURL isEqualToURL:imageURL])
+	{
+		return;
+	}
+	
+	_imageURL = imageURL;
+	
+	NSString *imageIdentifier = [imageURL lastPathComponent];
+	
+	// check if we have a cached version
+	DTImageCache *imageCache = [DTImageCache sharedCache];
+	UIImage *thumbnail = [imageCache imageForUniqueIdentifier:imageIdentifier variantIdentifier:@"thumbnail"];
+	
+	if (thumbnail)
+	{
+		[self _setImage:thumbnail];
+		
+		return;
+	}
+	
+	// need to load it
+	UIImage *image = [[DTDownloadCache sharedInstance] cachedImageForURL:imageURL option:DTDownloadCacheOptionLoadIfNotCached completion:^(NSURL *URL, UIImage *image, NSError *error) {
+		
+		if (error)
+		{
+			DTLogError(@"Error loading image %@", [error localizedDescription]);
+		}
+		else
+		{
+			[imageCache addImage:image forUniqueIdentifier:imageIdentifier variantIdentifier:nil];
+         
+         [self _setImage:image];
+		}
+	}];
+	
+	if (image)
+	{
+      [self _setImage:image];
+	}
+}
+
 - (void)setImageURL:(NSURL *)imageURL
 {
 	if ([_imageURL isEqualToURL:imageURL])

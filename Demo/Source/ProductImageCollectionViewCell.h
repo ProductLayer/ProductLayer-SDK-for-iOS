@@ -12,6 +12,14 @@
 
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
 
+/*
+ Prepares a thumbnail if necessary for the image
+ */
 - (void)setImageURL:(NSURL *)imageURL;
+
+/*
+ Simply sets the image or loads it if necessary
+ */
+- (void)setThumbnailImageURL:(NSURL *)imageURL;
 
 @end
