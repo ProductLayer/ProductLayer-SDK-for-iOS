@@ -29,7 +29,10 @@
 	
 	NSDictionary *product = _products[indexPath.row];
 	cell.textLabel.text = product[@"name"];
-	cell.detailTextLabel.text = product[@"vendor"];
+    
+    NSString * vendor = product[@"vendor"];
+    if(vendor && ![vendor isKindOfClass:[NSNull class]])
+        cell.detailTextLabel.text = vendor;
 	
 	return cell;
 }

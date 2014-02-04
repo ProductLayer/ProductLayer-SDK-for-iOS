@@ -80,7 +80,7 @@
 
 - (NSURL *)imageURLForProductGTIN:(NSString *)gtin imageIdentifier:(NSString *)imageIdentifier maxWidth:(CGFloat)maxWidth
 {
-   NSString *tmpString = [NSString stringWithFormat:@"product/%@/image/%@", gtin, imageIdentifier];
+   NSString *tmpString = [NSString stringWithFormat:@"products/%@/images/%@", gtin, imageIdentifier];
    
    if (maxWidth>0)
    {
@@ -157,7 +157,7 @@
 {
 	NSParameterAssert(gtin);
 	
-	NSString *path = [self _functionPathForFunction:@"product/search"];
+	NSString *path = [self _functionPathForFunction:@"products"];
 	NSDictionary *parameters = @{@"gtin": gtin};
 	
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:parameters];
@@ -170,7 +170,7 @@
 {
 	NSParameterAssert(name);
 	
-	NSString *path = [self _functionPathForFunction:@"product/search"];
+	NSString *path = [self _functionPathForFunction:@"products"];
 	NSDictionary *parameters = @{@"name": name};
 	
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:parameters];
@@ -185,7 +185,7 @@
 {
 	NSParameterAssert(gtin);
 	
-	NSString *function = [NSString stringWithFormat:@"product/%@/images", gtin];
+	NSString *function = [NSString stringWithFormat:@"products/%@/images", gtin];
 	NSString *path = [self _functionPathForFunction:function];
 	
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
@@ -203,13 +203,13 @@
 	NSParameterAssert(email);
 	NSParameterAssert(password);
 
-	NSString *path = [self _functionPathForFunction:@"user/register"];
+	NSString *path = [self _functionPathForFunction:@"users"];
 
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
 	op.HTTPMethod = @"POST";
 	op.resultHandler = completion;
 	
-	NSDictionary *payloadDictionary = @{@"user": user, @"email": email, @"password": password};
+	NSDictionary *payloadDictionary = @{@"nickname": user, @"email": email, @"password": password};
 	op.payload = payloadDictionary;
 	
 	[self _enqueueOperation:op];
@@ -220,11 +220,19 @@
 	NSParameterAssert(user);
 	NSParameterAssert(password);
 	
-	NSString *path = [self _functionPathForFunction:@"user/login"];
-	NSDictionary *parameters = @{@"user": user, @"password": password};
+	NSString *path = [self _functionPathForFunction:@"users/login"];
+	//NSDictionary *parameters = @{@"user": user, @"password": password};
 	
-	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:parameters];
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
 	
+    // Basic Authentication
+    NSString *authStr = [NSString stringWithFormat:@"%@:%@", user, password];
+    NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64Encoding]];
+    
+    op.BasicAuthentication = authValue;
+    op.HTTPMethod = @"POST";
+    
 	PLYAPIOperationResult wrappedCompletion = [completion copy];
 	
 	PLYAPIOperationResult ownCompletion = ^(id result, NSError *error) {
@@ -238,7 +246,7 @@
 				_accessToken = token;
 			}
 			
-			_loggedInUser = result[@"user"];
+			_loggedInUser = result[@"nickname"];
 			
 			[self _storeState];
 		}
@@ -276,7 +284,7 @@
 {
 	NSParameterAssert(gtin);
 	
-	NSString *path = [self _functionPathForFunction:@"product"];
+	NSString *path = [self _functionPathForFunction:@"products"];
 	
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
 	op.HTTPMethod = @"POST";
@@ -289,12 +297,31 @@
 
 #pragma mark - Image Handling
 
+- (void)uploadImageData:(UIImage *)data forGTIN:(NSString *)gtin completion:(PLYAPIOperationResult)completion
+{
+	NSParameterAssert(gtin);
+	NSParameterAssert(data);
+	
+	NSString *function = [NSString stringWithFormat:@"products/%@/images", gtin];
+	NSString *path = [self _functionPathForFunction:function];
+	
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
+	op.HTTPMethod = @"POST";
+	op.payload = data;
+	
+	op.resultHandler = completion;
+	
+	[self _enqueueUploadOperation:op];
+}
+
+#pragma mark - File Handling
+
 - (void)uploadFileData:(NSData *)data forGTIN:(NSString *)gtin completion:(PLYAPIOperationResult)completion
 {
 	NSParameterAssert(gtin);
 	NSParameterAssert(data);
 	
-	NSString *function = [NSString stringWithFormat:@"product/%@/images", gtin];
+	NSString *function = [NSString stringWithFormat:@"products/%@/files", gtin];
 	NSString *path = [self _functionPathForFunction:function];
 	
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];

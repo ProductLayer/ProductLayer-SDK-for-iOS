@@ -261,9 +261,9 @@
 	[self dismissViewControllerAnimated:YES completion:NULL];
 
 	UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-	NSData *data = UIImageJPEGRepresentation(image, 0.5);
+	//NSData *data = UIImageJPEGRepresentation(image, 0.5);
 	
-	[_server uploadFileData:data forGTIN:_previousScannedGTIN completion:^(id result, NSError *error) {
+	[_server uploadImageData:image forGTIN:_previousScannedGTIN completion:^(id result, NSError *error) {
 		
 		NSLog(@"%@ %@", result, error);
 	}];

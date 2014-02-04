@@ -664,7 +664,7 @@
 				ORGANIZATIONNAME = Cocoanetics;
 				TargetAttributes = {
 					A7B214F5183F842000C38635 = {
-						DevelopmentTeam = Z7L2YCUH45;
+						DevelopmentTeam = W2S2NPRZSQ;
 					};
 					A7B21516183F842000C38635 = {
 						TestTargetID = A7B214F5183F842000C38635;

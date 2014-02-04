@@ -41,9 +41,14 @@
 	
 	cell.backgroundColor = [UIColor whiteColor];
 	
-   NSString *image_id = imageDict[@"image_id"];
-   
-	NSURL *imageURL = [_server imageURLForProductGTIN:_gtin imageIdentifier:image_id maxWidth:153*[UIScreen mainScreen].scale];
+    NSString *image_id = imageDict[@"image_id"];
+    NSString *urlString = imageDict[@"url"];
+    
+    NSURL *imageURL;
+    if(urlString)
+        imageURL = [NSURL URLWithString:urlString];
+    else
+        imageURL = [_server imageURLForProductGTIN:_gtin imageIdentifier:image_id maxWidth:153*[UIScreen mainScreen].scale];
 	
 	[cell setThumbnailImageURL:imageURL];
 	

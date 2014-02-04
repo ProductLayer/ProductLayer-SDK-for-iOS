@@ -57,7 +57,11 @@
  @name Image Handling
  */
 
+- (void)uploadImageData:(UIImage *)data forGTIN:(NSString *)gtin completion:(PLYAPIOperationResult)completion;
 
+/**
+ @name File Handling
+ */
 - (void)uploadFileData:(NSData *)data forGTIN:(NSString *)gtin completion:(PLYAPIOperationResult)completion;
 
 

@@ -11,6 +11,7 @@
 #import "NSString+DTURLEncoding.h"
 #import "UIApplication+DTNetworkActivity.h"
 #import "DTLog.h"
+#import "ProductLayerConfig.h"
 
 @implementation PLYAPIOperation
 {
@@ -75,12 +76,17 @@
 		request.HTTPMethod = _HTTPMethod;
 	}
 	
-	// set token if set
+	// set cookie session token if set
 	if (_accessToken)
 	{
-		NSString *value = [NSString stringWithFormat:@"Token %@", _accessToken];
-		[request setValue:value forHTTPHeaderField:@"Authorization"];
-	}
+		NSString *value = [NSString stringWithFormat:@"JSESSIONID=%@", _accessToken];
+		[request setValue:value forHTTPHeaderField:@"Cookie"];
+	} else if (_BasicAuthentication){
+        [request setValue:_BasicAuthentication forHTTPHeaderField:@"Authorization"];
+    }
+    
+    // Add the api key to each request.
+    [request setValue:PLY_API_KEY forHTTPHeaderField:@"API_KEY"];
 	
 	NSMutableString *debugMessage = [NSMutableString string];
 	[debugMessage appendFormat:@"%@ %@\n", request.HTTPMethod, [_operationURL absoluteString]];
@@ -88,9 +94,46 @@
 	// add body if set
 	if (_payload)
 	{
-		if ([_payload isKindOfClass:[NSData class]])
+        if ([_payload isKindOfClass:[UIImage class]])
 		{
 			NSString *stringBoundary = @"0xKhTmLbOuNdArY---This_Is_ThE_BoUnDaRyy---pqo";
+			
+			// header value
+			NSString *headerBoundary = [NSString stringWithFormat:@"multipart/form-data; boundary=\"%@\"", stringBoundary];
+			
+			// set header
+			[request addValue:headerBoundary forHTTPHeaderField:@"Content-Type"];
+			
+			//NSData *imageData = (NSData *)_payload;
+            NSData *tmpPayload = UIImageJPEGRepresentation(_payload, 0.5);
+			//NSData *base64Data = [tmpPayload base64EncodedDataWithOptions:NSDataBase64Encoding64CharacterLineLength | NSDataBase64EncodingEndLineWithCarriageReturn];
+            
+			NSMutableData *postBody = [NSMutableData data];
+			
+			// media part
+			[postBody appendData:[[NSString stringWithFormat:@"--%@\r\n", stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+			[postBody appendData:[@"Content-Disposition: form-data; name=\"file\"; filename=\"dummy.jpg\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+			[postBody appendData:[@"Content-Type: image/jpeg; name=dummy.jpg\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+            [postBody appendData:[@"Content-ID: file\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+			[postBody appendData:[@"Content-Transfer-Encoding: binary\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+			
+			[postBody appendData:[NSData dataWithData:tmpPayload]];
+            [postBody appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+			
+			// final boundary
+			[postBody appendData:[[NSString stringWithFormat:@"--%@--\r\n", stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+			
+			request.HTTPBody = postBody;
+            
+            // set the content-length
+            NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postBody length]];
+            [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+            
+			request.timeoutInterval = 60;
+		}
+		else if ([_payload isKindOfClass:[NSData class]])
+		{
+			NSString *stringBoundary = @"----=_Part_15_1001769400.1389805800711";
 			
 			// header value
 			NSString *headerBoundary = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", stringBoundary];
@@ -101,21 +144,30 @@
 			//NSData *imageData = (NSData *)_payload;
 			NSData *base64Data = [_payload base64EncodedDataWithOptions:NSDataBase64Encoding64CharacterLineLength | NSDataBase64EncodingEndLineWithCarriageReturn];
 			
+            //NSData *base64Data = UIImageJPEGRepresentation(_payload, 1.0);
+            
 			NSMutableData *postBody = [NSMutableData data];
 			
 			// media part
 			[postBody appendData:[[NSString stringWithFormat:@"--%@\r\n", stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
-			[postBody appendData:[@"Content-Disposition: form-data; name=\"media\"; filename=\"dummy.jpg\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-			[postBody appendData:[@"Content-Type: image/jpeg\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+			[postBody appendData:[@"Content-Disposition: form-data; name=\"file\"; filename=\"dummy.jpg\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+			[postBody appendData:[@"Content-Type: image/jpeg\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
 			[postBody appendData:[@"Content-ID: attachment\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
 			[postBody appendData:[@"Content-Transfer-Encoding: base64\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
 			
 			[postBody appendData:base64Data];
+            [postBody appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+
 			
 			// final boundary
 			[postBody appendData:[[NSString stringWithFormat:@"--%@--\r\n", stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
 			
 			request.HTTPBody = postBody;
+            
+            // set the content-length
+            NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postBody length]];
+            [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+            
 			request.timeoutInterval = 60;
 		}
 		else if ([NSJSONSerialization isValidJSONObject:_payload])
@@ -185,11 +237,11 @@
 	{
 		if ([responseData length])
 		{
-			if ([contentType isEqualToString:@"application/json"])
+			if ([contentType hasPrefix:@"application/json"])
 			{
 				
 			}
-			else if ([contentType isEqualToString:@"text/plain"])
+			else if ([contentType hasPrefix:@"text/plain"])
 			{
 				if (statusCode >= 200 && statusCode < 300)
 				{

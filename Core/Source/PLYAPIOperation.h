@@ -34,6 +34,9 @@ typedef void(^PLYAPIOperationResult)(id result, NSError *error);
 // optional handler for the result
 @property (nonatomic, copy) PLYAPIOperationResult resultHandler;
 
+// optinal basic authentication header
+@property (nonatomic, copy) NSString *BasicAuthentication;
+
 // the verb for the operation, default is GET
 @property (nonatomic, copy) NSString *HTTPMethod;
 
