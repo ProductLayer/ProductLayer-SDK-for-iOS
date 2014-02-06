@@ -86,7 +86,7 @@
     }
     
     // Add the api key to each request.
-    [request setValue:PLY_API_KEY forHTTPHeaderField:@"API_KEY"];
+    [request setValue:PLY_API_KEY forHTTPHeaderField:@"API-KEY"];
 	
 	NSMutableString *debugMessage = [NSMutableString string];
 	[debugMessage appendFormat:@"%@ %@\n", request.HTTPMethod, [_operationURL absoluteString]];
