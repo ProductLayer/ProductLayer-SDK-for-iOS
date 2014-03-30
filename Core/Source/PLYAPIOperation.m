@@ -75,6 +75,18 @@
 	{
 		request.HTTPMethod = _HTTPMethod;
 	}
+    
+    for (NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies])
+    {
+        if([[cookie name] isEqualToString:@"JSESSIONID"]){
+            _accessToken = [cookie value];
+            break;
+        }
+        NSLog(@"name: '%@'\n",   [cookie name]);
+        NSLog(@"value: '%@'\n",  [cookie value]);
+        NSLog(@"domain: '%@'\n", [cookie domain]);
+        NSLog(@"path: '%@'\n",   [cookie path]);
+    }
 	
 	// set cookie session token if set
 	if (_accessToken)
@@ -188,7 +200,7 @@
 	NSError *error;
 	
 	NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-	
+    
 	NSString *resultString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
 	DTLogDebug(@"%@", resultString);
 	

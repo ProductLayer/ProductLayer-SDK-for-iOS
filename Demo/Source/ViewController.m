@@ -230,8 +230,8 @@
 				else
 				{
 					NSDictionary *firstItem = result[0];
-					NSString *name = firstItem[@"name"];
-					NSString *gtin = firstItem[@"gtin"];
+					NSString *name = firstItem[@"pl-prod-name"];
+					NSString *gtin = firstItem[@"pl-prod-gtin"];
 					
 					DTBlockPerformSyncIfOnMainThreadElseAsync(^{
 						UIAlertView *alert = [[UIAlertView alloc] initWithTitle:gtin message:name delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];

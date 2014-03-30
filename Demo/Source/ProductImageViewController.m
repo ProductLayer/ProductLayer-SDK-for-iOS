@@ -41,8 +41,8 @@
 	
 	cell.backgroundColor = [UIColor whiteColor];
 	
-    NSString *image_id = imageDict[@"image_id"];
-    NSString *urlString = imageDict[@"url"];
+    NSString *image_id = imageDict[@"pl-img-file_id"];
+    NSString *urlString = imageDict[@"pl-img-url"];
     
     NSURL *imageURL;
     if(urlString)

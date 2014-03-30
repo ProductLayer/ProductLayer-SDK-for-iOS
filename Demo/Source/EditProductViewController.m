@@ -55,28 +55,28 @@
 	
 	_gtin = self.gtinTextField.text;
 	
-	NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObject:_gtin forKey:@"gtin"];
+	NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObject:_gtin forKey:@"pl-prod-gtin"];
 
 	NSString *name = self.productNameTextfield.text;
 	if ([name length])
 	{
-		dictionary[@"name"] = name;
+		dictionary[@"pl-prod-name"] = name;
 	}
 	
 	NSString *vendor = self.vendorTextField.text;
 	if ([vendor length])
 	{
-		dictionary[@"vendor"] = vendor;
+		dictionary[@"pl-brand-name"] = vendor;
 	}
 
 	NSString *category = self.categoryTextField.text;
 	if ([category length])
 	{
-		dictionary[@"category"] = category;
+		dictionary[@"pl-prod-cat"] = category;
 	}
 	
 	NSLocale *locale = [NSLocale currentLocale];
-	dictionary[@"language"] = locale.localeIdentifier;
+	dictionary[@"pl-prod-lng"] = locale.localeIdentifier;
 
 	[self.server createProductWithGTIN:_gtin dictionary:dictionary completion:^(id result, NSError *error) {
 		

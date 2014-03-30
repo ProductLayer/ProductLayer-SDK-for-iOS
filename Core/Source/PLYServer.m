@@ -80,7 +80,7 @@
 
 - (NSURL *)imageURLForProductGTIN:(NSString *)gtin imageIdentifier:(NSString *)imageIdentifier maxWidth:(CGFloat)maxWidth
 {
-   NSString *tmpString = [NSString stringWithFormat:@"products/%@/images/%@", gtin, imageIdentifier];
+   NSString *tmpString = [NSString stringWithFormat:@"product/%@/images/%@", gtin, imageIdentifier];
    
    if (maxWidth>0)
    {
@@ -185,7 +185,7 @@
 {
 	NSParameterAssert(gtin);
 	
-	NSString *function = [NSString stringWithFormat:@"products/%@/images", gtin];
+	NSString *function = [NSString stringWithFormat:@"product/%@/images", gtin];
 	NSString *path = [self _functionPathForFunction:function];
 	
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
@@ -209,7 +209,7 @@
 	op.HTTPMethod = @"POST";
 	op.resultHandler = completion;
 	
-	NSDictionary *payloadDictionary = @{@"nickname": user, @"email": email, @"password": password};
+	NSDictionary *payloadDictionary = @{@"pl-usr-nickname": user, @"pl-usr-email": email, @"password": password};
 	op.payload = payloadDictionary;
 	
 	[self _enqueueOperation:op];
@@ -220,7 +220,7 @@
 	NSParameterAssert(user);
 	NSParameterAssert(password);
 	
-	NSString *path = [self _functionPathForFunction:@"users/login"];
+	NSString *path = [self _functionPathForFunction:@"user/login"];
 	//NSDictionary *parameters = @{@"user": user, @"password": password};
 	
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
@@ -246,7 +246,7 @@
 				_accessToken = token;
 			}
 			
-			_loggedInUser = result[@"nickname"];
+			_loggedInUser = result[@"pl-usr-nickname"];
 			
 			[self _storeState];
 		}
@@ -302,7 +302,7 @@
 	NSParameterAssert(gtin);
 	NSParameterAssert(data);
 	
-	NSString *function = [NSString stringWithFormat:@"products/%@/images", gtin];
+	NSString *function = [NSString stringWithFormat:@"product/%@/images", gtin];
 	NSString *path = [self _functionPathForFunction:function];
 	
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
@@ -321,7 +321,7 @@
 	NSParameterAssert(gtin);
 	NSParameterAssert(data);
 	
-	NSString *function = [NSString stringWithFormat:@"products/%@/files", gtin];
+	NSString *function = [NSString stringWithFormat:@"product/%@/files", gtin];
 	NSString *path = [self _functionPathForFunction:function];
 	
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
