@@ -76,7 +76,7 @@
 	}
 	
 	NSLocale *locale = [NSLocale currentLocale];
-	dictionary[@"pl-prod-lng"] = locale.localeIdentifier;
+	dictionary[@"pl-lng"] = locale.localeIdentifier;
 
 	[self.server createProductWithGTIN:_gtin dictionary:dictionary completion:^(id result, NSError *error) {
 		

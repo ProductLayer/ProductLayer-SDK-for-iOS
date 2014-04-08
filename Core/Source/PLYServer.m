@@ -158,7 +158,8 @@
 	NSParameterAssert(gtin);
 	
 	NSString *path = [self _functionPathForFunction:@"products"];
-	NSDictionary *parameters = @{@"gtin": gtin};
+    NSLocale *locale = [NSLocale currentLocale];
+	NSDictionary *parameters = @{@"gtin": gtin, @"language":locale.localeIdentifier};
 	
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:parameters];
 	op.resultHandler = completion;
@@ -171,7 +172,8 @@
 	NSParameterAssert(name);
 	
 	NSString *path = [self _functionPathForFunction:@"products"];
-	NSDictionary *parameters = @{@"name": name};
+    NSLocale *locale = [NSLocale currentLocale];
+	NSDictionary *parameters = @{@"name": name, @"language":locale.localeIdentifier};
 	
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:parameters];
 	op.resultHandler = completion;
