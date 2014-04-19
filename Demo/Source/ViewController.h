@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "DTCodeScannerViewController.h"
+#import "ProductImageViewController.h"
 
 @interface ViewController : UIViewController
 
@@ -28,6 +29,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *loginNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addImageButton;
 @property (weak, nonatomic) IBOutlet UIButton *viewImagesButton;
+@property (weak, nonatomic) IBOutlet UISearchBar *productSearchBar;
+@property (weak, nonatomic) IBOutlet ProductImageViewController *productImagesVC;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @property (weak, nonatomic) IBOutlet UILabel *lastScannedCodeLabel;
 @end

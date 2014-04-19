@@ -16,6 +16,7 @@
 #import "ProductLayerConfig.h"
 #import "DTScannedCode.h"
 #import "DTBlockFunctions.h"
+#import "SearchProductViewController.h"
 	
 
 @interface ViewController () <DTCodeScannerViewControllerDelegate, UIImagePickerControllerDelegate>
@@ -36,6 +37,10 @@
     [super viewDidLoad];
 	
 	_server = [[PLYServer alloc] initWithHostURL:PLY_ENDPOINT_URL];
+    
+    UIImageView *titleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"productlayer_title.png"]];
+    
+    [self.navigationController.navigationBar addSubview:titleImageView];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -54,6 +59,10 @@
 		[self performSegueWithIdentifier:@"EditProduct" sender:self];
 		_gtinForEditingProduct = nil;
 	}
+    
+    [self.productImagesVC setServer:_server];
+    self.productImagesVC.collectionView = self.collectionView;
+    [self.productImagesVC loadLastImages];
 }
 
 - (void)didReceiveMemoryWarning
@@ -102,13 +111,11 @@
 {
 	if (_server.loggedInUser)
 	{
-		[self.loginButton setTitle:@"Log out" forState:UIControlStateNormal];
-		self.loginNameLabel.text = _server.loggedInUser;
+		[self.loginButton setTitle:_server.loggedInUser forState:UIControlStateNormal];
 	}
 	else
 	{
-		self.loginNameLabel.text = @"Not logged in";
-		[self.loginButton setTitle:@"Log in" forState:UIControlStateNormal];
+		[self.loginButton setTitle:@"Sign in" forState:UIControlStateNormal];
 	}
 }
 
@@ -273,6 +280,17 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    SearchProductViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"SearchProductViewController"];
+    [self.navigationController pushViewController:viewController animated:YES];
+    
+    [viewController setServer:_server];
+    [viewController searchBarSearchButtonClicked:searchBar];
 }
 
 @end

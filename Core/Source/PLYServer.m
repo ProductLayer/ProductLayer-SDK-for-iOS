@@ -197,6 +197,18 @@
 	[self _enqueueOperation:op];
 }
 
+- (void) getLastUploadedImagesWithPage:(int)page andRPP:(int)rpp completion:(PLYAPIOperationResult)completion{
+	
+	NSString *function = [NSString stringWithFormat:@"/products/images/last?page=%d&records_per_page=%d", page, rpp];
+	NSString *path = [self _functionPathForFunction:function];
+	
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
+	
+	op.resultHandler = completion;
+	
+	[self _enqueueOperation:op];
+}
+
 #pragma mark - Managing Users
 
 - (void)createUserWithUser:(NSString *)user email:(NSString *)email password:(NSString *)password completion:(PLYAPIOperationResult)completion

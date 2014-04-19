@@ -10,6 +10,11 @@
 
 @interface ProductImageViewController : UICollectionViewController
 
+@property (nonatomic, strong) PLYServer *server;
 @property (nonatomic, strong) NSString *gtin;
+@property (nonatomic, strong) NSArray *images;
+
+- (void) loadLastImages;
+- (void) loadImagesFromGtin:(NSString *)gtin;
 
 @end

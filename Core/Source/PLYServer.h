@@ -28,6 +28,8 @@
  */
 - (void)getImagesForGTIN:(NSString *)gtin completion:(PLYAPIOperationResult)completion;
 
+- (void) getLastUploadedImagesWithPage:(int)page andRPP:(int)rpp completion:(PLYAPIOperationResult)completion;
+
 /**
  @name Managing Users
  */

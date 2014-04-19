@@ -24,10 +24,12 @@
 
 - (void)_setImage:(UIImage *)image
 {
-	if (self.imageView.image)
+    // Ask Oliver why this was necessary. Caused re-ordering bug from UICollectionView.
+	/*
+     if (self.imageView.image)
 	{
 		return;
-	}
+	}*/
 	
 	DTBlockPerformSyncIfOnMainThreadElseAsync(^{
 		self.imageView.image = image;
@@ -62,6 +64,7 @@
 	_imageURL = imageURL;
 	
 	NSString *imageIdentifier = [imageURL lastPathComponent];
+    NSLog(@"imageIdentifier : %@", imageIdentifier);
 	
 	// check if we have a cached version
 	DTImageCache *imageCache = [DTImageCache sharedCache];
