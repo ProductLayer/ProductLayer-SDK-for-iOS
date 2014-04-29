@@ -11,6 +11,7 @@
 #import "PLYServer.h"
 #import "DTBlockFunctions.h"
 #import "ProductImageCollectionViewCell.h"
+#import "PLYProductImage.h"
 //#import "DTDownloadCache.h"
 
 @interface ProductImageViewController () <UICollectionViewDataSource>
@@ -33,24 +34,22 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSDictionary *imageDict = _images[indexPath.item];
+	PLYProductImage *imageData = _images[indexPath.item];
 	
 	ProductImageCollectionViewCell *cell = (ProductImageCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"ProductImage" forIndexPath:indexPath];
 	
 	cell.backgroundColor = [UIColor whiteColor];
-	
-    NSString *image_id = imageDict[@"pl-img-file_id"];
-    NSString *urlString = imageDict[@"pl-img-url"];
     
-    NSURL *imageURL;
-    if(urlString)
-        imageURL = [NSURL URLWithString:[urlString stringByAppendingFormat:@"?max_width=%d",(int)(floor((collectionView.frame.size.width-50)/4.0)*[UIScreen mainScreen].scale)]];
-    else
-        imageURL = [_server imageURLForProductGTIN:_gtin imageIdentifier:image_id maxWidth:floor((collectionView.frame.size.width-50)/4.0)*[UIScreen mainScreen].scale];
+    NSLog(@"collectionView: %f", collectionView.frame.size.width);
+    NSLog(@"scale: %f", [UIScreen mainScreen].scale);
+    
+    int imageSize = floor((collectionView.frame.size.width-50)/2.0)*[UIScreen mainScreen].scale;
+    
+    NSURL *imageURL = [NSURL URLWithString:[imageData getUrlForWidth:imageSize andHeight:imageSize crop:@"true"]];
 	
 	[cell setThumbnailImageURL:imageURL];
 	
-    NSLog(@"%ld - %@", (long)indexPath.item, image_id);
+    NSLog(@"%ld - %@", (long)indexPath.item, imageData.fileId);
     
 	return cell;
 }
@@ -82,7 +81,7 @@
 }
 
 - (void) loadLastImages{
-    [self.server getLastUploadedImagesWithPage:0 andRPP:10 completion:^(id result, NSError *error) {
+    [[PLYServer sharedPLYServer] getLastUploadedImagesWithPage:0 andRPP:8 completion:^(id result, NSError *error) {
 		
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
             
@@ -101,7 +100,7 @@
 		return;
 	}
 	
-	[self.server getImagesForGTIN:_gtin completion:^(id result, NSError *error) {
+	[[PLYServer sharedPLYServer] getImagesForGTIN:_gtin completion:^(id result, NSError *error) {
 		
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
             

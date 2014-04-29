@@ -10,7 +10,7 @@
 
 @interface PLYServer : NSObject
 
-- (instancetype)initWithHostURL:(NSURL *)hostURL;
++ (id)sharedPLYServer;
 
 /**
  @name Search
@@ -29,6 +29,8 @@
 - (void)getImagesForGTIN:(NSString *)gtin completion:(PLYAPIOperationResult)completion;
 
 - (void) getLastUploadedImagesWithPage:(int)page andRPP:(int)rpp completion:(PLYAPIOperationResult)completion;
+
+- (void) getCategoriesForLocale:(NSString *)language completion:(PLYAPIOperationResult)completion;
 
 /**
  @name Managing Users
@@ -55,6 +57,8 @@
 
 - (void)createProductWithGTIN:(NSString *)gtin dictionary:(NSDictionary *)dictionary completion:(PLYAPIOperationResult)completion;
 
+- (void)updateProductWithGTIN:(NSString *)gtin dictionary:(NSDictionary *)dictionary completion:(PLYAPIOperationResult)completion;
+
 /**
  @name Image Handling
  */
@@ -70,6 +74,27 @@
 /**
  Construct fully qualified image URL for a product image
  */
-- (NSURL *)imageURLForProductGTIN:(NSString *)gtin imageIdentifier:(NSString *)imageIdentifier maxWidth:(CGFloat)maxWidth;
+- (NSURL *)imageURLForProductGTIN:(NSString *)gtin imageIdentifier:(NSString *)imageIdentifier maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop __attribute__ ((deprecated));
 
+/**
+ @name Reviews
+ */
+// Search for reviews
+- (void) performSearchForReviewWithGTIN:(NSString *)gtin
+                           withLanguage:(NSString *)language
+                   fromUserWithNickname:(NSString *)nickname
+                             withRating:(NSNumber *)rating
+                                orderBy:(NSString *)orderBy
+                                   page:(NSNumber *)page
+                         recordsPerPage:(NSNumber *)recordsPerPage
+                             completion:(PLYAPIOperationResult)completion;
+
+// Create a review for a product.
+- (void) createReviewForGTIN:(NSString *)gtin
+                  dictionary:(NSDictionary *)dictionary
+                  completion:(PLYAPIOperationResult)completion;
+
+
++ (NSString *)_functionPathForFunction:(NSString *)function parameters:(NSDictionary *)parameters;
++ (NSString *)_addQueryParameterToUrl:(NSString *)url parameters:(NSDictionary *)parameters;
 @end

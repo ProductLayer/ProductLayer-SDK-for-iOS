@@ -13,3 +13,7 @@
 // Openshift
 //#define PLY_ENDPOINT_URL [NSURL URLWithString:@"http://api-productlayer.rhcloud.com"]
 //#define PLY_API_KEY @"4ddcef6b-3b15-4867-b435-82cfe244ce9d"
+
+// Acer Aspire
+//#define PLY_ENDPOINT_URL [NSURL URLWithString:@"http://192.168.178.34:28080"]
+//#define PLY_API_KEY @"52ceabd7-433c-4c2f-b139-1f32db1964c3"

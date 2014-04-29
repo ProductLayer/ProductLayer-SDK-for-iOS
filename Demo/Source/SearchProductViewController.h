@@ -10,8 +10,6 @@
 
 @interface SearchProductViewController : UITableViewController
 
-@property (nonatomic, strong) PLYServer *server;
-
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar;
 
 @end

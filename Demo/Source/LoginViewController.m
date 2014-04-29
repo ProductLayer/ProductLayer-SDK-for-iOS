@@ -22,9 +22,8 @@
 
 - (IBAction)save:(id)sender
 {
-	NSAssert(self.server, @"Server needs to be set");
 	
-	[self.server loginWithUser:self.nicknameTextfield.text password:self.passwordTextfield.text completion:^(id result, NSError *error) {
+	[[PLYServer sharedPLYServer] loginWithUser:self.nicknameTextfield.text password:self.passwordTextfield.text completion:^(id result, NSError *error) {
 		
 		if (error)
 		{

@@ -13,6 +13,10 @@
 #import "DTLog.h"
 #import "ProductLayerConfig.h"
 
+#import "PLYProduct.h"
+#import "PLYProductImage.h"
+#import "PLYReview.h"
+
 @implementation PLYAPIOperation
 {
 	NSURL *_operationURL;
@@ -56,9 +60,19 @@
 		_operationURL = [NSURL URLWithString:functionPath relativeToURL:endpointURL];
 		
 		NSAssert(_operationURL, @"Something went wrong with creating a %@", NSStringFromClass([self class]));
+        
+        [self addAuthenticationIfAvailable];
+        
 	}
 	
 	return self;
+}
+
+- (void) addAuthenticationIfAvailable{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if([defaults objectForKey:@"PLYBasicAuth"]){
+        self.BasicAuthentication = [defaults objectForKey:@"PLYBasicAuth"];
+    }
 }
 
 - (void)main
@@ -89,11 +103,12 @@
     }
 	
 	// set cookie session token if set
-	if (_accessToken)
+	/*if (_accessToken)
 	{
 		NSString *value = [NSString stringWithFormat:@"JSESSIONID=%@", _accessToken];
 		[request setValue:value forHTTPHeaderField:@"Cookie"];
-	} else if (_BasicAuthentication){
+	} else */
+    if (_BasicAuthentication){
         [request setValue:_BasicAuthentication forHTTPHeaderField:@"Authorization"];
     }
     
@@ -270,7 +285,10 @@
 					NSDictionary *userInfo = @{NSLocalizedDescriptionKey:  errorMessage};
 					error = [NSError errorWithDomain:PLYErrorDomain code:0 userInfo:userInfo];
 				}
-			}
+			} else if ([contentType hasPrefix:@"text/html"])
+			{
+                ignoreContent = YES;
+            }
 			else
 			{
 				NSString *errorMessage = [NSString stringWithFormat:@"Unknown response content type '%@'", contentType];
@@ -287,7 +305,37 @@
 	{
 		if (!error && !ignoreContent)
 		{
-			result = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
+			id jsonObject = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
+            
+            // Try to parse the json object
+            if([jsonObject isKindOfClass:[NSArray class]] && [jsonObject count] != 0){
+                NSMutableArray *objectArray = [NSMutableArray arrayWithCapacity:1];
+                
+                for(NSDictionary *dictObject in jsonObject){
+                    id object = [self parseObjectForDictionary:dictObject];
+                    
+                    if(object == nil)
+                        break;
+                    
+                    [objectArray addObject:object];
+                }
+                
+                // If the objects couldn't be parsed return the json object.
+                if(objectArray.count > 0){
+                    result = objectArray;
+                } else {
+                    result = jsonObject;
+                }
+            } else if ([jsonObject isKindOfClass:[NSDictionary class]]){
+                id object = [self parseObjectForDictionary:jsonObject];
+                
+                if(object == nil) {
+                    result = jsonObject;
+                }
+                else {
+                    result = object;
+                }
+            }
 		}
 		
 		_resultHandler(result, error);
@@ -297,6 +345,25 @@
 	{
 		[_delegate operation:self didExecuteWithError:error];
 	}
+}
+
+- (id) parseObjectForDictionary:(NSDictionary *)_dict{
+    NSString *class = [_dict objectForKey:@"pl-class"];
+    
+    if(class == nil || [class isEqual:@""]){
+        DTLogDebug(@"Couldn't parse object from dictionary: %@", _dict);
+        return nil;
+    }
+    
+    if([class isEqual:PLYProduct.classIdentifier]){
+        return [PLYProduct instanceFromDictionary:_dict];
+    } else if([class isEqual:PLYProductImage.classIdentifier]){
+        return [PLYProductImage instanceFromDictionary:_dict];
+    } else if([class isEqual:PLYReview.classIdentifier]){
+        return [PLYReview instanceFromDictionary:_dict];
+    }
+    
+    return nil;
 }
 
 @end

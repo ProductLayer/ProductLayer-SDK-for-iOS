@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Cocoanetics. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "HomeViewController.h"
 #import "SignUpViewController.h"
 #import "EditProductViewController.h"
 #import "LoginViewController.h"
@@ -17,16 +17,22 @@
 #import "DTScannedCode.h"
 #import "DTBlockFunctions.h"
 #import "SearchProductViewController.h"
+#import "WriteReviewViewController.h"
+#import "ProductViewController.h"
+#import "SWRevealViewController.h"
+
+#import "UIViewTags.h"
+#import "AppSettings.h"
+
+#import "PLYProduct.h"
 	
 
-@interface ViewController () <DTCodeScannerViewControllerDelegate, UIImagePickerControllerDelegate>
+@interface HomeViewController () <DTCodeScannerViewControllerDelegate, UIImagePickerControllerDelegate>
 
 @end
 
-@implementation ViewController
+@implementation HomeViewController
 {
-	PLYServer *_server;
-	
 	NSString *_gtinForEditingProduct;
 	
 	NSString *_previousScannedGTIN;
@@ -35,17 +41,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-	_server = [[PLYServer alloc] initWithHostURL:PLY_ENDPOINT_URL];
     
-    UIImageView *titleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"productlayer_title.png"]];
+    // Set the side bar button action. When it's tapped, it'll show up the sidebar.
+    _sidebarButton.target = self.revealViewController;
+    _sidebarButton.action = @selector(revealToggle:);
     
-    [self.navigationController.navigationBar addSubview:titleImageView];
+    // Set the gesture
+    [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
+    
+    if(![self.navigationController.navigationBar viewWithTag:ProductLayerTitleImage]) {
+        UIImageView *titleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"productlayer_title.png"]];
+        [titleImageView setTag:ProductLayerTitleImage];
+        [self.navigationController.navigationBar addSubview:titleImageView];
+    }
 	
 	[self _updateLoginBar];
 }
@@ -60,7 +74,6 @@
 		_gtinForEditingProduct = nil;
 	}
     
-    [self.productImagesVC setServer:_server];
     self.productImagesVC.collectionView = self.collectionView;
     [self.productImagesVC loadLastImages];
 }
@@ -84,7 +97,10 @@
 		UINavigationController *navController = segue.destinationViewController;
 		EditProductViewController *vc = (EditProductViewController *)[navController topViewController];
 		vc.navigationItem.title = @"Add New Product";
-		vc.gtin = _gtinForEditingProduct;
+        
+        PLYProduct *newProduct = [[PLYProduct alloc] init];
+        [newProduct setGtin:_gtinForEditingProduct];
+		[vc setProduct:newProduct];
 	}
 	else if ([[segue identifier] isEqualToString:@"ProductImages"])
 	{
@@ -93,25 +109,20 @@
 		vc.navigationItem.title = @"Images";
 		vc.gtin = _previousScannedGTIN;
 	}
-	
-	// inject server
-	if ([segue.destinationViewController isKindOfClass:[UINavigationController class]])
+    else if ([[segue identifier] isEqualToString:@"WriteReview"])
 	{
 		UINavigationController *navController = segue.destinationViewController;
-		id topVC = navController.topViewController;
-		
-		if ([topVC respondsToSelector:@selector(setServer:)])
-		{
-			[topVC setServer:_server];
-		}
+		WriteReviewViewController *vc = (WriteReviewViewController *)[navController topViewController];
+		vc.navigationItem.title = @"Write Review";
+		vc.gtin = _previousScannedGTIN;
 	}
 }
 
 - (void)_updateLoginBar
 {
-	if (_server.loggedInUser)
+	if ([[PLYServer sharedPLYServer] loggedInUser])
 	{
-		[self.loginButton setTitle:_server.loggedInUser forState:UIControlStateNormal];
+		[self.loginButton setTitle:[[PLYServer sharedPLYServer] loggedInUser] forState:UIControlStateNormal];
 	}
 	else
 	{
@@ -123,6 +134,7 @@
 {
 	BOOL buttonsEnabled = (_previousScannedGTIN!=nil);
 	
+    self.writeReviewButton.enabled = buttonsEnabled;
 	self.viewImagesButton.enabled = buttonsEnabled;
 	self.addImageButton.enabled = buttonsEnabled;
 }
@@ -132,24 +144,6 @@
 - (IBAction)unwindFromScanner:(UIStoryboardSegue *)unwindSegue
 {
 	
-}
-
-- (IBAction)unwindFromSignUp:(UIStoryboardSegue *)unwindSegue
-{
-	if (![[unwindSegue sourceViewController] isKindOfClass:[LoginViewController class]])
-	{
-		return;
-	}
-	
-	if (_server.loggedInUser)
-	{
-		[self.loginButton setTitle:@"Log out" forState:UIControlStateNormal];
-	}
-	else
-	{
-		self.loginNameLabel.text = @"Not logged in";
-		[self.loginButton setTitle:@"Log in" forState:UIControlStateNormal];
-	}
 }
 
 - (IBAction)unwindFromLogin:(UIStoryboardSegue *)unwindSegue
@@ -165,9 +159,9 @@
 
 - (IBAction)login:(id)sender
 {
-	if (_server.loggedInUser)
+	if ([[PLYServer sharedPLYServer] loggedInUser])
 	{
-		[_server logoutUserWithCompletion:^(id result, NSError *error) {
+		[[PLYServer sharedPLYServer] logoutUserWithCompletion:^(id result, NSError *error) {
 			
 			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
 				
@@ -213,9 +207,7 @@
 {
 	if ([code.type isEqualToString:PLYCodeTypeEAN13] || [code.type isEqualToString:PLYCodeTypeEAN8])
 	{
-		NSLocale *locale = [NSLocale currentLocale];
-		
-		[_server performSearchForGTIN:code.content language:locale.localeIdentifier completion:^(id result, NSError *error) {
+		[[PLYServer sharedPLYServer] performSearchForGTIN:code.content language:[AppSettings currentAppLocale].localeIdentifier completion:^(id result, NSError *error) {
 
 			if (error)
 			{
@@ -230,31 +222,31 @@
 			}
 			else
 			{
+                DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+					
+					_previousScannedGTIN = code.content;
+					_lastScannedCodeLabel.text = code.content;
+					
+					[self _updateImagesButtons];
+                    
+					[codeScanner performSegueWithIdentifier:@"UnwindFromScanner" sender:self];
+				});
+                
 				if (![result count])
 				{
 					_gtinForEditingProduct = code.content;
 				}
 				else
 				{
-					NSDictionary *firstItem = result[0];
-					NSString *name = firstItem[@"pl-prod-name"];
-					NSString *gtin = firstItem[@"pl-prod-gtin"];
-					
-					DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-						UIAlertView *alert = [[UIAlertView alloc] initWithTitle:gtin message:name delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-						[alert show];
-					});
+					PLYProduct *firstItem = result[0];
+                    
+                    DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+                        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                        ProductViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"ProductViewController"];
+                        [viewController setProduct:firstItem];
+                        [self.navigationController pushViewController:viewController animated:YES];
+                    });
 				}
-				
-				DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-					
-					_previousScannedGTIN = code.content;
-					_lastScannedCodeLabel.text = code.content;
-					
-					[self _updateImagesButtons];
-
-					[codeScanner performSegueWithIdentifier:@"UnwindFromScanner" sender:self];
-				});
 			}
 		}];
 	}
@@ -270,7 +262,7 @@
 	UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
 	//NSData *data = UIImageJPEGRepresentation(image, 0.5);
 	
-	[_server uploadImageData:image forGTIN:_previousScannedGTIN completion:^(id result, NSError *error) {
+	[[PLYServer sharedPLYServer] uploadImageData:image forGTIN:_previousScannedGTIN completion:^(id result, NSError *error) {
 		
 		NSLog(@"%@ %@", result, error);
 	}];
@@ -289,7 +281,6 @@
     SearchProductViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"SearchProductViewController"];
     [self.navigationController pushViewController:viewController animated:YES];
     
-    [viewController setServer:_server];
     [viewController searchBarSearchButtonClicked:searchBar];
 }
 

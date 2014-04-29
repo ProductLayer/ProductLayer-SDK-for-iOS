@@ -9,6 +9,9 @@
 #import "PLYServer.h"
 #import "DTLog.h"
 #import "ProductLayerConfig.h"
+#import "NSString+DTURLEncoding.h"
+
+#import "AppSettings.h"
 
 #if TARGET_OS_IPHONE
 	#import "UIApplication+DTNetworkActivity.h"
@@ -27,26 +30,34 @@
 	NSString *_accessToken;
 }
 
-- (instancetype)initWithHostURL:(NSURL *)hostURL
-{
-	NSParameterAssert(hostURL);
-	
-	self = [super init];
-	
-	if (self)
-	{
-		_hostURL = [hostURL copy];
-		
-		_queue = [[NSOperationQueue alloc] init];
+#pragma mark Singleton Methods
+
++ (id)sharedPLYServer {
+    static PLYServer *instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [[self alloc] init];
+    });
+    return instance;
+}
+
+- (id)init {
+    if (self = [super init]) {
+        _hostURL = PLY_ENDPOINT_URL;
+        
+        _queue = [[NSOperationQueue alloc] init];
 		_queue.maxConcurrentOperationCount = 1;
 		
 		_uploadQueue = [[NSOperationQueue alloc] init];
 		_uploadQueue.maxConcurrentOperationCount = 1;
 		
 		[self _loadState];
-	}
-	
-	return self;
+    }
+    return self;
+}
+
+- (void)dealloc {
+    // Should never be called, but just here for clarity really.
 }
 
 - (void)_enqueueOperation:(PLYAPIOperation *)operation
@@ -78,16 +89,72 @@
 	return tmpString;
 }
 
-- (NSURL *)imageURLForProductGTIN:(NSString *)gtin imageIdentifier:(NSString *)imageIdentifier maxWidth:(CGFloat)maxWidth
++ (NSString *)_functionPathForFunction:(NSString *)function parameters:(NSDictionary *)parameters
+{
+	NSString *tmpString = @"/";
+	
+    function = [PLYServer _addQueryParameterToUrl:function parameters:parameters];
+    
+#ifdef PLY_PATH_PREFIX
+	tmpString = [tmpString stringByAppendingPathComponent:PLY_PATH_PREFIX];
+#endif
+	
+	tmpString = [tmpString stringByAppendingPathComponent:function];
+	
+	return tmpString;
+}
+
++ (NSString *)_addQueryParameterToUrl:(NSString *)url parameters:(NSDictionary *)parameters{
+    NSMutableString *tmpQuery = [NSMutableString string];
+    
+    [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
+        
+        if ([tmpQuery length])
+        {
+            [tmpQuery appendString:@"&"];
+        }
+        else
+        {
+            [tmpQuery appendString:@"?"];
+        }
+        
+        [tmpQuery appendString:[key stringByURLEncoding]];
+        
+        [tmpQuery appendString:@"="];
+        
+        NSString *encoded = [[obj description] stringByURLEncoding];
+        [tmpQuery appendString:encoded];
+    }];
+    
+    if (parameters)
+    {
+        url = [url stringByAppendingString:tmpQuery];
+    }
+    
+    return url;
+}
+
+- (NSURL *)imageURLForProductGTIN:(NSString *)gtin imageIdentifier:(NSString *)imageIdentifier maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop
 {
    NSString *tmpString = [NSString stringWithFormat:@"product/%@/images/%@", gtin, imageIdentifier];
-   
+   NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:3];
+    
    if (maxWidth>0)
    {
-      tmpString = [tmpString stringByAppendingFormat:@"?max_width=%lu", (unsigned long)maxWidth];
+       [parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxWidth] forKey:@"max_width"];
    }
+    
+   if (maxHeight>0)
+   {
+       [parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxHeight] forKey:@"max_height"];
+   }
+    
+    if (crop)
+    {
+        [parameters setObject:@"true" forKey:@"crop"];
+    }
    
-   NSString *path = [self _functionPathForFunction:tmpString];
+   NSString *path = [PLYServer _functionPathForFunction:tmpString parameters:parameters];
    return [NSURL URLWithString:path relativeToURL:_hostURL];
 }
 
@@ -119,6 +186,7 @@
 	else
 	{
 		[defaults removeObjectForKey:@"PLYServerLoggedInUserKey"];
+        [defaults removeObjectForKey:@"PLYBasicAuth"];
 	}
 	
 	[defaults synchronize];
@@ -157,25 +225,48 @@
 {
 	NSParameterAssert(gtin);
 	
-	NSString *path = [self _functionPathForFunction:@"products"];
-    NSLocale *locale = [NSLocale currentLocale];
-	NSDictionary *parameters = @{@"gtin": gtin, @"language":locale.localeIdentifier};
-	
-	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:parameters];
-	op.resultHandler = completion;
-	
-	[self _enqueueOperation:op];
+	[self performSearchForProduct:gtin
+                             name:nil
+                         language:language
+                          orderBy:@"pl-lng_asc"
+                             page:nil
+                   recordsPerPage:nil
+                       completion:completion];
 }
 
-- (void)performSearchForName:(NSString *)name language:(NSString *)language completion:(PLYAPIOperationResult)completion
-{
-	NSParameterAssert(name);
+- (void)performSearchForName:(NSString *)name language:(NSString *)language completion:(PLYAPIOperationResult)completion{
+    NSParameterAssert(name);
 	
+	[self performSearchForProduct:nil
+                             name:name
+                         language:language
+                          orderBy:@"pl-prod-name_asc"
+                             page:nil
+                   recordsPerPage:nil
+                       completion:completion];
+}
+
+- (void)performSearchForProduct:(NSString *)gtin
+                           name:(NSString *)name
+                       language:(NSString *)language
+                        orderBy:(NSString *)orderBy
+                           page:(NSNumber *)page
+                 recordsPerPage:(NSNumber *)rpp
+                  completion:(PLYAPIOperationResult)completion
+{
 	NSString *path = [self _functionPathForFunction:@"products"];
-    NSLocale *locale = [NSLocale currentLocale];
-	NSDictionary *parameters = @{@"name": name, @"language":locale.localeIdentifier};
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
+    
+    if (gtin)       [parameters setObject:gtin     forKey:@"gtin"];
+    if (language)   [parameters setObject:language forKey:@"language"];
+    if (name)       [parameters setObject:name     forKey:@"name"];
+    if (orderBy)    [parameters setObject:orderBy  forKey:@"order_by"];
+    if (page)       [parameters setObject:page     forKey:@"page"];
+    if (rpp)        [parameters setObject:rpp      forKey:@"records_per_page"];
 	
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:parameters];
+    
 	op.resultHandler = completion;
 	
 	[self _enqueueOperation:op];
@@ -191,7 +282,7 @@
 	NSString *path = [self _functionPathForFunction:function];
 	
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
-	
+    
 	op.resultHandler = completion;
 	
 	[self _enqueueOperation:op];
@@ -203,7 +294,20 @@
 	NSString *path = [self _functionPathForFunction:function];
 	
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
+    
+	op.resultHandler = completion;
 	
+	[self _enqueueOperation:op];
+}
+
+
+
+- (void) getCategoriesForLocale:(NSString *)language completion:(PLYAPIOperationResult)completion{
+    NSString *function = [NSString stringWithFormat:@"/products/categories?language=%@", language];
+	NSString *path = [self _functionPathForFunction:function];
+    
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
+    
 	op.resultHandler = completion;
 	
 	[self _enqueueOperation:op];
@@ -220,6 +324,7 @@
 	NSString *path = [self _functionPathForFunction:@"users"];
 
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
+    
 	op.HTTPMethod = @"POST";
 	op.resultHandler = completion;
 	
@@ -260,6 +365,9 @@
 				_accessToken = token;
 			}
 			
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:authValue forKey:@"PLYBasicAuth"];
+            
 			_loggedInUser = result[@"pl-usr-nickname"];
 			
 			[self _storeState];
@@ -282,6 +390,7 @@
 	
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
 	
+    op.HTTPMethod = @"POST";
 	op.resultHandler = completion;
 	
 	[self _enqueueOperation:op];
@@ -302,6 +411,21 @@
 	
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
 	op.HTTPMethod = @"POST";
+	op.payload = dictionary;
+	
+	op.resultHandler = completion;
+	
+	[self _enqueueOperation:op];
+}
+
+- (void)updateProductWithGTIN:(NSString *)gtin dictionary:(NSDictionary *)dictionary completion:(PLYAPIOperationResult)completion
+{
+	NSParameterAssert(gtin);
+	
+	NSString *path = [self _functionPathForFunction:[NSString stringWithFormat:@"/product/%@",gtin]];
+	
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
+	op.HTTPMethod = @"PUT";
 	op.payload = dictionary;
 	
 	op.resultHandler = completion;
@@ -345,6 +469,84 @@
 	op.resultHandler = completion;
 	
 	[self _enqueueUploadOperation:op];
+}
+
+#pragma mark - Reviews
+
+- (void) performSearchForReviewWithGTIN:(NSString *)gtin
+                           withLanguage:(NSString *)language
+                   fromUserWithNickname:(NSString *)nickname
+                             withRating:(NSNumber *)rating
+                                orderBy:(NSString *)orderBy
+                                   page:(NSNumber *)page
+                         recordsPerPage:(NSNumber *)rpp
+                             completion:(PLYAPIOperationResult)completion
+{
+	NSString *function = @"reviews";
+	NSString *path = [self _functionPathForFunction:function];
+	
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
+    
+    if (gtin)       [parameters setObject:gtin     forKey:@"gtin"];
+    if (language)   [parameters setObject:language forKey:@"language"];
+    if (nickname)   [parameters setObject:nickname forKey:@"nickname"];
+    if (rating)     [parameters setObject:rating   forKey:@"rating"];
+    if (orderBy)    [parameters setObject:orderBy  forKey:@"order_by"];
+    if (page)       [parameters setObject:page     forKey:@"page"];
+    if (rpp)        [parameters setObject:rpp      forKey:@"records_per_page"];
+    
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:parameters];
+    
+	op.resultHandler = completion;
+	
+	[self _enqueueOperation:op];
+}
+
+- (void) createReviewForGTIN:(NSString *)gtin
+           dictionary:(NSDictionary *)dictionary
+           completion:(PLYAPIOperationResult)completion
+{
+	NSString *function = [NSString stringWithFormat:@"product/%@/review",gtin];
+	NSString *path = [self _functionPathForFunction:function];
+    
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
+    op.HTTPMethod = @"POST";
+	op.payload = dictionary;
+    
+	op.resultHandler = completion;
+	
+	[self _enqueueOperation:op];
+}
+
+#pragma mark - Lists
+
+- (void) createProductList:(NSString *)gtin
+                           withLanguage:(NSString *)language
+                   fromUserWithNickname:(NSString *)nickname
+                             withRating:(NSNumber *)rating
+                                orderBy:(NSString *)orderBy
+                                   page:(NSNumber *)page
+                         recordsPerPage:(NSNumber *)rpp
+                             completion:(PLYAPIOperationResult)completion
+{
+	NSString *function = @"reviews";
+	NSString *path = [self _functionPathForFunction:function];
+	
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
+    
+    if (gtin)       [parameters setObject:gtin     forKey:@"gtin"];
+    if (language)   [parameters setObject:language forKey:@"language"];
+    if (nickname)   [parameters setObject:nickname forKey:@"nickname"];
+    if (rating)     [parameters setObject:rating   forKey:@"rating"];
+    if (orderBy)    [parameters setObject:orderBy  forKey:@"order_by"];
+    if (page)       [parameters setObject:page     forKey:@"page"];
+    if (rpp)        [parameters setObject:rpp      forKey:@"records_per_page"];
+    
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:parameters];
+    
+	op.resultHandler = completion;
+	
+	[self _enqueueOperation:op];
 }
 
 @end

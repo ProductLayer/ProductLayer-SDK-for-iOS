@@ -7,8 +7,8 @@
 //
 
 #import "SignUpViewController.h"
-#import "PLYServer.h"
 #import "DTBlockFunctions.h"
+#import "PLYServer.h"
 
 @interface SignUpViewController ()
 
@@ -18,6 +18,8 @@
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
+    
 	[self.nicknameTextfield addTarget:self action:@selector(nicknameChanged:) forControlEvents:UIControlEventAllEditingEvents];
 	[self.emailTextField addTarget:self action:@selector(emailChanged:) forControlEvents:UIControlEventAllEditingEvents];
 	[self.passwordTextfield addTarget:self action:@selector(passwordChanged:) forControlEvents:UIControlEventAllEditingEvents];
@@ -72,9 +74,7 @@
 
 - (IBAction)save:(id)sender
 {
-	NSAssert(_server, @"Server needs to be set");
-	
-	[self.server createUserWithUser:self.nicknameTextfield.text email:self.emailTextField.text password:self.passwordTextfield.text completion:^(id result, NSError *error) {
+	[[PLYServer sharedPLYServer] createUserWithUser:self.nicknameTextfield.text email:self.emailTextField.text password:self.passwordTextfield.text completion:^(id result, NSError *error) {
 		
 		if (error)
 		{

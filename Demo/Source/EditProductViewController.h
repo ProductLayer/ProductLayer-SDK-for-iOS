@@ -7,19 +7,29 @@
 //
 
 #import "ProductLayer.h"
+#import "LocalePickerView.h"
+#import "PLYProduct.h"
 
-@interface EditProductViewController : UITableViewController
+@interface EditProductViewController : UITableViewController <UIPickerViewDelegate, UIPickerViewDataSource, LocalePickerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *productNameTextfield;
 @property (weak, nonatomic) IBOutlet UITextField *vendorTextField;
-@property (weak, nonatomic) IBOutlet UITextField *categoryTextField;
+
+
 @property (weak, nonatomic) IBOutlet UITextField *gtinTextField;
 
-@property (nonatomic, strong) PLYServer *server;
+@property (weak, nonatomic) IBOutlet UITextField *localeTextField;
+@property (weak, nonatomic) IBOutlet LocalePickerView *localePicker;
+@property (nonatomic) bool localePickerIsShowing;
 
+@property (weak, nonatomic) IBOutlet UITextField *categoryTextField;
+@property (weak, nonatomic) IBOutlet UIPickerView *categoryPicker;
+@property (nonatomic, strong) NSDictionary *categories;
+@property (nonatomic) bool categoryPickerIsShowing;
 
 - (IBAction)save:(id)sender;
+- (IBAction) cancel:(id)sender;
 
-@property (nonatomic, copy) NSString *gtin;
+@property (nonatomic, strong) PLYProduct *product;
 
 @end
