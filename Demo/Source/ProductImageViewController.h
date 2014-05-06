@@ -14,4 +14,7 @@
 - (void) loadLastImages;
 - (void) loadImagesFromGtin:(NSString *)gtin;
 
+
+- (IBAction)addImageToProduct:(id)sender;
+
 @end

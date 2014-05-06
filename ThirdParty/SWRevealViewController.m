@@ -1052,6 +1052,10 @@ static NSString * const SWSegueRightIdentifier = @"sw_right";
     return NO;
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+
 
 - (BOOL)_tapGestureShouldBegin
 {

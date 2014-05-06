@@ -182,5 +182,35 @@
     return dict;
 }
 
+/**
+ * Simple check if the product list can be send to the server for saving.
+ **/
+- (BOOL) isValidForSaving{
+    if([title length] > 5 && [listType length] && [shareType length]){
+        return true;
+    }
+    
+    return false;
+}
+
++ (NSArray *) availableListTypes{
+    NSMutableArray *listTypes = [NSMutableArray arrayWithObjects:@"pl-list-type-wish",
+                               @"pl-list-type-shopping",
+                               @"pl-list-type-borrowed",
+                               @"pl-list-type-owned",
+                               @"pl-list-type-other", nil];
+    
+    return listTypes;
+}
+
++ (NSArray *) availableSharingTypes{
+    NSMutableArray *sharingTypes = [NSMutableArray arrayWithObjects:@"pl-list-share-public",
+                                 @"pl-list-share-friends",
+                                 @"pl-list-share-specific",
+                                 @"pl-list-share-none", nil];
+    
+    return sharingTypes;
+}
+
 
 @end

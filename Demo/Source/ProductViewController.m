@@ -15,6 +15,7 @@
 #import "ProductImageViewController.h"
 #import "KeyValueTableViewController.h"
 #import "EditProductViewController.h"
+#import "ProductListsViewController.h"
 
 #import "UIViewTags.h"
 
@@ -80,9 +81,9 @@
                 
                 PLYProductImage *imageMeta = images[0];
                 
-                int imageSize = _productImage.frame.size.width*2;
+                int imageSize = _productImage.frame.size.width*[[UIScreen mainScreen] scale];
                 
-                NSURL *imageURL = [NSURL URLWithString:[imageMeta getUrlForWidth:imageSize andHeight:imageSize crop:@"true"]];
+                NSURL *imageURL = [NSURL URLWithString:[imageMeta getUrlForWidth:imageSize andHeight:imageSize crop:true]];
                 
                 NSString *imageIdentifier = [imageURL lastPathComponent];
                 NSLog(@"imageIdentifier : %@", imageIdentifier);
@@ -209,6 +210,19 @@
 
 #pragma mark - Navigation
 
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    if ([identifier isEqualToString:@"addProductToList"] && ![[PLYServer sharedPLYServer] loggedInUser])
+	{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login required" message:@"You need to login to view your product lists." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alert show];
+        
+        return NO;
+    }
+    
+    return YES;
+    
+}
+
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -239,6 +253,14 @@
 		EditProductViewController *editVC = (EditProductViewController *)[navController topViewController];
         editVC.navigationItem.title = @"Edit Product";
 		[editVC setProduct:_product];
+	}  else if ([[segue identifier] isEqualToString:@"addProductToList"])
+	{
+        UINavigationController *navController = segue.destinationViewController;
+		ProductListsViewController *listVC = (ProductListsViewController *)[navController topViewController];
+        listVC.navigationItem.title = @"Add to List";
+        listVC.product = _product;
+        listVC.addProductView = true;
+		[listVC loadProductListsForUser:[[PLYServer sharedPLYServer] loggedInUser] andType:nil];
 	}
 }
 

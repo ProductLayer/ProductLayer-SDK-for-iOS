@@ -12,9 +12,10 @@
 
 @implementation PLYListItem
 
+@synthesize Id;
 @synthesize gtin;
 @synthesize note;
-@synthesize count;
+@synthesize qty;
 @synthesize prio;
 
 + (NSString *) classIdentifier{
@@ -22,19 +23,9 @@
 }
 
 + (PLYListItem *)instanceFromDictionary:(NSDictionary *)aDictionary {
-    
-    NSString *class = [aDictionary objectForKey:@"pl-class"];
-    
-    // Check if class identifier is valid for parsing.
-    if(class != nil && [class isEqualToString: [PLYListItem classIdentifier]]){
-        PLYListItem *instance = [[PLYListItem alloc] init];
-        [instance setAttributesFromDictionary:aDictionary];
-        return instance;
-    }
-    
-    DTLogError(@"No valid classIdentifier found for PLYListItem in dictionary: %@", aDictionary);
-    
-    return nil;
+    PLYListItem *instance = [[PLYListItem alloc] init];
+    [instance setAttributesFromDictionary:aDictionary];
+    return instance;
 }
 
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary {
@@ -49,12 +40,14 @@
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key {
     
-    if ([key isEqualToString:@"pl-prod-gtin"]) {
+    if ([key isEqualToString:@"pl-id"]) {
+        [self setValue:value forKey:@"Id"];
+    } else if ([key isEqualToString:@"pl-prod-gtin"]) {
         [self setValue:value forKey:@"gtin"];
     } else if ([key isEqualToString:@"pl-list-prod-note"]) {
         [self setValue:value forKey:@"note"];
     }  else if ([key isEqualToString:@"pl-list-prod-cnt"]) {
-        [self setValue:value forKey:@"count"];
+        [self setValue:value forKey:@"qty"];
     } else if ([key isEqualToString:@"pl-list-prod-prio"]) {
         [self setValue:value forKey:@"prio"];
     } else {
@@ -65,14 +58,18 @@
 - (NSDictionary *) getDictionary{
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:1];
     
+    if(Id){
+        [dict setObject:Id forKey:@"pl-id"];
+    }
+    
     if (gtin != nil) {
         [dict setObject:gtin forKey:@"pl-prod-gtin"];
     }
     if (note != nil) {
         [dict setObject:note forKey:@"pl-list-prod-note"];
     }
-    if (count != nil) {
-        [dict setObject:count forKey:@"pl-list-prod-cnt"];
+    if (qty != nil) {
+        [dict setObject:qty forKey:@"pl-list-prod-cnt"];
     }
     if (prio != nil) {
         [dict setObject:prio forKey:@"pl-list-prod-prio"];

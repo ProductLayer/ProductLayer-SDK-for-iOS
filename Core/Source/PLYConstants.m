@@ -16,3 +16,5 @@ NSString * const PLYCodeTypeEAN8 = @"org.gs1.EAN-8";
 
 NSString * const PLYServerUserDidLogInNotification = @"PLYServerUserDidLogInNotification";
 NSString * const PLYServerUserDidLogOutNotification = @"PLYServerUserDidLogOutNotification";
+
+NSString * const PLYNotifyUserStatusChanged = @"PLYNotifyUserStatusChanged";

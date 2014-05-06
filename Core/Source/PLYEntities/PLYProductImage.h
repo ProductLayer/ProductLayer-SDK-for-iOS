@@ -24,6 +24,8 @@
     
     NSString *url;
     NSNumber *votingScore;
+    NSMutableArray *upVoters;
+    NSMutableArray *downVoters;
 }
 
 @property (nonatomic, strong) NSString *Class;
@@ -42,6 +44,8 @@
 @property (nonatomic, strong) NSNumber *votingScore;
 @property (nonatomic, strong) NSNumber *width;
 @property (nonatomic, strong) NSString *gtin;
+@property (nonatomic, strong) NSMutableArray *upVoters;
+@property (nonatomic, strong) NSMutableArray *downVoters;
 
 
 

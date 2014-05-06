@@ -19,8 +19,6 @@
 
 - (IBAction)unwindToRoot:(UIStoryboardSegue *)unwindSegue;
 
-- (IBAction)addImageToProduct:(id)sender;
-
 - (IBAction)login:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;

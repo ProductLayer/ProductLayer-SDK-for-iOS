@@ -34,7 +34,7 @@
     NSString *shareType;
     NSArray *sharedUsers;
     
-    NSArray  *listItems;
+    NSMutableArray  *listItems;
 }
 
 @property (nonatomic, strong) NSString *Class;
@@ -53,12 +53,17 @@
 @property (nonatomic, strong) NSString *shareType;
 @property (nonatomic, strong) NSArray *sharedUsers;
 
-@property (nonatomic, strong) NSArray *listItems;
+@property (nonatomic, strong) NSMutableArray *listItems;
 
 
 + (NSString *) classIdentifier;
 + (PLYList *)instanceFromDictionary:(NSDictionary *)aDictionary;
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
 - (NSDictionary *) getDictionary;
+
+- (BOOL) isValidForSaving;
+
++ (NSArray *) availableListTypes;
++ (NSArray *) availableSharingTypes;
 
 @end

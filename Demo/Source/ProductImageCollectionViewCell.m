@@ -22,121 +22,50 @@
 	NSURL *_imageURL;
 }
 
-- (void)_setImage:(UIImage *)image
+- (void)_setImage:(UIImage *)image  forMetadata:(PLYProductImage *)_metadata
 {
-    // Ask Oliver why this was necessary. Caused re-ordering bug from UICollectionView.
-	/*
-     if (self.imageView.image)
-	{
-		return;
-	}*/
-	
-	DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-		self.imageView.image = image;
-	});
+    /* Only set image if the image for the metadata is the valid one.
+     * Needed because the Cell is re-used and it can happen, that the
+     * current valid image takes longer to load than the previous already invalid one.
+     */
+    if([_metadata isEqual:_imageMetadata]){
+        DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+            self.imageView.image = image;
+        });
+    }
 }
 
-
-- (void)_prepareAndStoreThumbnailForImage:(UIImage *)image
-{
-	DTImageCache *cache = [DTImageCache sharedCache];
-	
-	// store the original
-	NSString *imageIdentifier = [_imageURL lastPathComponent];
-	
-	CGSize optimalSize = DTCGSizeThatFillsKeepingAspectRatio(image.size, CGSizeMake(153, 153));
-	UIImage *scaledImage = [image imageScaledToSize:optimalSize];
-	
-	[cache addImage:scaledImage forUniqueIdentifier:imageIdentifier variantIdentifier:@"thumbnail"];
-	
-	[self _setImage:scaledImage];
-}
-
-
-
-- (void)setThumbnailImageURL:(NSURL *)imageURL
-{
-	if ([_imageURL isEqualToURL:imageURL])
+- (void) loadImageForMetadata:(PLYProductImage *)_metadata withSize:(CGSize)_size crop:(BOOL)_crop{
+    NSString *imageURLString = [_metadata getUrlForWidth:_size.width andHeight:_size.height crop:_crop];
+    NSURL *imageURL = [NSURL URLWithString:imageURLString];
+    
+    if ([_imageURL isEqualToURL:imageURL])
 	{
 		return;
 	}
-	
+    
+	_imageMetadata = _metadata;
 	_imageURL = imageURL;
-	
-	NSString *imageIdentifier = [imageURL lastPathComponent];
-    NSLog(@"imageIdentifier : %@", imageIdentifier);
-	
-	// check if we have a cached version
-	DTImageCache *imageCache = [DTImageCache sharedCache];
-	UIImage *thumbnail = [imageCache imageForUniqueIdentifier:imageIdentifier variantIdentifier:@"thumbnail"];
-	
-	if (thumbnail)
-	{
-		[self _setImage:thumbnail];
-		
-		return;
-	}
-	
-	// need to load it
-	UIImage *image = [[DTDownloadCache sharedInstance] cachedImageForURL:imageURL option:DTDownloadCacheOptionLoadIfNotCached completion:^(NSURL *URL, UIImage *image, NSError *error) {
-		
-		if (error)
-		{
-			DTLogError(@"Error loading image %@", [error localizedDescription]);
-		}
-		else
-		{
-			[imageCache addImage:image forUniqueIdentifier:imageIdentifier variantIdentifier:nil];
-         
-         [self _setImage:image];
-		}
-	}];
-	
-	if (image)
-	{
-      [self _setImage:image];
-	}
-}
-
-- (void)setImageURL:(NSURL *)imageURL
-{
-	if ([_imageURL isEqualToURL:imageURL])
-	{
-		return;
-	}
-	
-	_imageURL = imageURL;
-	
+    
 	NSString *imageIdentifier = [imageURL lastPathComponent];
 	
 	// check if we have a thumbnail
 	
 	DTImageCache *imageCache = [DTImageCache sharedCache];
-	UIImage *thumbnail = [imageCache imageForUniqueIdentifier:imageIdentifier variantIdentifier:@"thumbnail"];
-	
-	if (thumbnail)
+    
+    NSString *variantIdentifier = [NSString stringWithFormat:@"%fx%f_%d",_size.width,_size.height,_crop];
+    
+	UIImage *image = [imageCache imageForUniqueIdentifier:imageIdentifier variantIdentifier:variantIdentifier];
+    
+	if (image)
 	{
-		[self _setImage:thumbnail];
+		[self _setImage:image forMetadata:_metadata];
 		
 		return;
 	}
 	
-	// get the original
-
-	UIImage *originalImage = [imageCache imageForUniqueIdentifier:imageIdentifier variantIdentifier:nil];
-	
-	if (originalImage)
-	{
-		
-		[self _prepareAndStoreThumbnailForImage:originalImage];
-		
-		return;
-	}
-		
 	// need to load it
-	
-
-	UIImage *image = [[DTDownloadCache sharedInstance] cachedImageForURL:imageURL option:DTDownloadCacheOptionLoadIfNotCached completion:^(NSURL *URL, UIImage *image, NSError *error) {
+	image = [[DTDownloadCache sharedInstance] cachedImageForURL:imageURL option:DTDownloadCacheOptionLoadIfNotCached completion:^(NSURL *URL, UIImage *image, NSError *error) {
 		
 		if (error)
 		{
@@ -144,15 +73,15 @@
 		}
 		else
 		{
-			[imageCache addImage:image forUniqueIdentifier:imageIdentifier variantIdentifier:nil];
-
-			[self _prepareAndStoreThumbnailForImage:image];
+			[imageCache addImage:image forUniqueIdentifier:imageIdentifier variantIdentifier:variantIdentifier];
+            
+            [self _setImage:image forMetadata:_metadata];
 		}
 	}];
 	
 	if (image)
 	{
-		[self _prepareAndStoreThumbnailForImage:image];
+        [self _setImage:image forMetadata:_metadata];
 	}
 }
 

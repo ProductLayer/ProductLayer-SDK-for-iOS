@@ -9,15 +9,17 @@
 #import <Foundation/Foundation.h>
 
 @interface PLYListItem : NSObject {
+    NSString *Id;
     NSString *gtin;
     NSString *note;
-    NSNumber *count;
+    NSNumber *qty;
     NSNumber *prio;
 }
 
+@property (nonatomic, strong) NSString *Id;
 @property (nonatomic, strong) NSString *gtin;
 @property (nonatomic, strong) NSString *note;
-@property (nonatomic, strong) NSNumber *count;
+@property (nonatomic, strong) NSNumber *qty;
 @property (nonatomic, strong) NSNumber *prio;
 
 

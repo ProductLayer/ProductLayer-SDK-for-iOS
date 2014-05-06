@@ -11,6 +11,14 @@
 #import "ProductLayerConfig.h"
 #import "NSString+DTURLEncoding.h"
 
+#import "DTBlockFunctions.h"
+
+#import "PLYConstants.h"
+
+#import "PLYUser.h"
+#import "PLYList.h"
+#import "PLYListItem.h"
+
 #import "AppSettings.h"
 
 #if TARGET_OS_IPHONE
@@ -163,7 +171,34 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	_accessToken = [defaults objectForKey:@"PLYServerAccessTokenKey"];
-	_loggedInUser = [defaults objectForKey:@"PLYServerLoggedInUserKey"];
+    
+	NSString *nickname = [defaults objectForKey:@"PLYServerLoggedInUserNickname"];
+    
+    // Load User from Server
+    if(nickname && ![nickname isEqualToString:@""]){
+        [self getUserByNickname:nickname completion:^(id result, NSError *error) {
+            
+            if (error)
+            {
+                DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Request you user data failed." message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                    [alert show];
+                });
+            }
+            else
+            {
+                DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+                    [self setLoggedInUser:result];
+                });
+            }
+        }];
+    }
+}
+
+- (void) setLoggedInUser:(PLYUser *)loggedInUser{
+    _loggedInUser = loggedInUser;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:PLYNotifyUserStatusChanged object:nil];
 }
 
 - (void)_storeState
@@ -181,11 +216,13 @@
 
 	if (_loggedInUser)
 	{
-		[defaults setObject:_loggedInUser forKey:@"PLYServerLoggedInUserKey"];
+		[defaults setObject:_loggedInUser.nickname forKey:@"PLYServerLoggedInUserNickname"];
+        [defaults setObject:_loggedInUser.Id forKey:@"PLYServerLoggedInUserId"];
 	}
 	else
 	{
-		[defaults removeObjectForKey:@"PLYServerLoggedInUserKey"];
+		[defaults removeObjectForKey:@"PLYServerLoggedInUserNickname"];
+        [defaults removeObjectForKey:@"PLYServerLoggedInUserId"];
         [defaults removeObjectForKey:@"PLYBasicAuth"];
 	}
 	
@@ -356,19 +393,12 @@
 	
 	PLYAPIOperationResult ownCompletion = ^(id result, NSError *error) {
 		
-		if (!error && [result isKindOfClass:[NSDictionary class]])
+		if (!error && [result isKindOfClass:PLYUser.class])
 		{
-			NSString *token = result[@"access_token"];
-			
-			if (token)
-			{
-				_accessToken = token;
-			}
-			
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             [defaults setObject:authValue forKey:@"PLYBasicAuth"];
             
-			_loggedInUser = result[@"pl-usr-nickname"];
+			[self setLoggedInUser:result];
 			
 			[self _storeState];
 		}
@@ -396,7 +426,7 @@
 	[self _enqueueOperation:op];
 	
 	_accessToken = nil;
-	_loggedInUser = nil;
+	[self setLoggedInUser:nil];
 	
 	[self _storeState];
 }
@@ -446,6 +476,38 @@
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
 	op.HTTPMethod = @"POST";
 	op.payload = data;
+	
+	op.resultHandler = completion;
+	
+	[self _enqueueUploadOperation:op];
+}
+
+- (void) upVoteImageWithId:(NSString *)imageFileId andGTIN:(NSString *)gtin completion:(PLYAPIOperationResult)completion
+{
+	NSParameterAssert(gtin);
+	NSParameterAssert(imageFileId);
+	
+	NSString *function = [NSString stringWithFormat:@"product/%@/image/%@/up_vote", gtin, imageFileId];
+	NSString *path = [self _functionPathForFunction:function];
+	
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
+	op.HTTPMethod = @"POST";
+	
+	op.resultHandler = completion;
+	
+	[self _enqueueUploadOperation:op];
+}
+
+- (void) downVoteImageWithId:(NSString *)imageFileId andGTIN:(NSString *)gtin completion:(PLYAPIOperationResult)completion
+{
+	NSParameterAssert(gtin);
+	NSParameterAssert(imageFileId);
+	
+	NSString *function = [NSString stringWithFormat:@"product/%@/image/%@/down_vote", gtin, imageFileId];
+	NSString *path = [self _functionPathForFunction:function];
+	
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
+	op.HTTPMethod = @"POST";
 	
 	op.resultHandler = completion;
 	
@@ -520,30 +582,328 @@
 
 #pragma mark - Lists
 
-- (void) createProductList:(NSString *)gtin
-                           withLanguage:(NSString *)language
-                   fromUserWithNickname:(NSString *)nickname
-                             withRating:(NSNumber *)rating
-                                orderBy:(NSString *)orderBy
-                                   page:(NSNumber *)page
-                         recordsPerPage:(NSNumber *)rpp
-                             completion:(PLYAPIOperationResult)completion
+/**
+ * Create a new product list for the authenticated user.
+ **/
+- (void) createProductList:(PLYList *)list
+                completion:(PLYAPIOperationResult)completion
 {
-	NSString *function = @"reviews";
+	NSString *function = @"lists";
 	NSString *path = [self _functionPathForFunction:function];
+    
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
+    
+    op.HTTPMethod = @"POST";
+    op.payload = [list getDictionary];
+    
+	op.resultHandler = completion;
 	
+	[self _enqueueOperation:op];
+}
+
+/**
+ * Request product lists for a specific user and type.
+ **/
+- (void) performSearchForProductListFromUser:(PLYUser *)user
+                                 andListType:(NSString *)listType
+                                        page:(NSNumber *)page
+                              recordsPerPage:(NSNumber *)rpp
+                                  completion:(PLYAPIOperationResult)completion{
+    
+    NSString *function = @"lists";
+	NSString *path = [self _functionPathForFunction:function];
+    
     NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
     
-    if (gtin)       [parameters setObject:gtin     forKey:@"gtin"];
-    if (language)   [parameters setObject:language forKey:@"language"];
-    if (nickname)   [parameters setObject:nickname forKey:@"nickname"];
-    if (rating)     [parameters setObject:rating   forKey:@"rating"];
-    if (orderBy)    [parameters setObject:orderBy  forKey:@"order_by"];
+    if (user)       [parameters setObject:user.Id  forKey:@"user_id"];
+    if (listType)   [parameters setObject:listType forKey:@"language"];
     if (page)       [parameters setObject:page     forKey:@"page"];
     if (rpp)        [parameters setObject:rpp      forKey:@"records_per_page"];
     
 	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:parameters];
     
+    op.HTTPMethod = @"GET";
+    
+	op.resultHandler = completion;
+	
+	[self _enqueueOperation:op];
+}
+
+/**
+ * Request a product list by id.
+ * The product list can only be requested if the user is the owner, the list is shared with the user or if the list is public.
+ **/
+- (void) getProductListWithId:(NSString *)listId
+                   completion:(PLYAPIOperationResult)completion{
+    NSParameterAssert(listId);
+    
+    NSString *function = [NSString stringWithFormat:@"list/%@", listId];
+	NSString *path = [self _functionPathForFunction:function];
+    
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
+    
+    op.HTTPMethod = @"GET";
+    
+	op.resultHandler = completion;
+	
+	[self _enqueueOperation:op];
+}
+
+/**
+ * Update a product list.
+ * The product list can only be updated by the owner of the list.
+ **/
+- (void) updateProductList:(PLYList *)list
+                completion:(PLYAPIOperationResult)completion{
+    NSParameterAssert(list);
+    NSParameterAssert(list.Id);
+    
+    NSString *function = [NSString stringWithFormat:@"list/%@", list.Id];
+	NSString *path = [self _functionPathForFunction:function];
+    
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
+    op.payload = [list getDictionary];
+    op.HTTPMethod = @"PUT";
+    
+	op.resultHandler = completion;
+	
+	[self _enqueueOperation:op];
+}
+
+/**
+ * Delete the product list with id.
+ * The product list can only be deleted by the owner of the list.
+ **/
+- (void) deleteProductListWithId:(NSString *)listId
+                      completion:(PLYAPIOperationResult)completion{
+    NSParameterAssert(listId);
+    
+    NSString *function = [NSString stringWithFormat:@"list/%@", listId];
+	NSString *path = [self _functionPathForFunction:function];
+    
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
+    
+    op.HTTPMethod = @"DELETE";
+    
+	op.resultHandler = completion;
+	
+	[self _enqueueOperation:op];
+}
+
+#pragma mark List Items
+
+/**
+ * Replaces or add's the product to the list if it doesn't exist.
+ **/
+- (void) addOrReplaceListItem:(PLYListItem *)listItem
+                 toListWithId:(NSString *)listId
+                   completion:(PLYAPIOperationResult)completion{
+    NSParameterAssert(listItem);
+    NSParameterAssert(listItem.gtin);
+    NSParameterAssert(listId);
+    
+    NSString *function = [NSString stringWithFormat:@"list/%@/product/%@", listId,listItem.gtin];
+	NSString *path = [self _functionPathForFunction:function];
+    
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
+    op.payload = [listItem getDictionary];
+    op.HTTPMethod = @"PUT";
+    
+	op.resultHandler = completion;
+	
+	[self _enqueueOperation:op];
+}
+
+/**
+ * Delete a product from the list.
+ **/
+- (void) deleteProductWithgGTIN:(NSString *)gtin
+                 fromListWithId:(NSString *)listId
+                     completion:(PLYAPIOperationResult)completion{
+    NSParameterAssert(gtin);
+    NSParameterAssert(listId);
+    
+    NSString *function = [NSString stringWithFormat:@"list/%@/product/%@", listId,gtin];
+	NSString *path = [self _functionPathForFunction:function];
+    
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
+    op.HTTPMethod = @"DELETE";
+    
+	op.resultHandler = completion;
+	
+	[self _enqueueOperation:op];
+}
+
+#pragma mark List Sharing
+
+/**
+ * Share the list with a user.
+ **/
+- (void) shareProductListWithId:(NSString *)listId
+                     withUserId:(NSString *)userId
+                     completion:(PLYAPIOperationResult)completion{
+    NSParameterAssert(userId);
+    NSParameterAssert(listId);
+    
+    NSString *function = [NSString stringWithFormat:@"list/%@/share/%@", listId,userId];
+	NSString *path = [self _functionPathForFunction:function];
+    
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
+    op.HTTPMethod = @"POST";
+    
+	op.resultHandler = completion;
+	
+	[self _enqueueOperation:op];
+}
+
+/**
+ * Unshare the list with a user.
+ **/
+- (void) unshareProductListWithId:(NSString *)listId
+                       withUserId:(NSString *)userId
+                       completion:(PLYAPIOperationResult)completion{
+    NSParameterAssert(userId);
+    NSParameterAssert(listId);
+    
+    NSString *function = [NSString stringWithFormat:@"list/%@/share/%@", listId,userId];
+	NSString *path = [self _functionPathForFunction:function];
+    
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
+    op.HTTPMethod = @"DELETE";
+    
+	op.resultHandler = completion;
+	
+	[self _enqueueOperation:op];
+}
+
+#pragma mark - Users
+- (void) performUserSearch:(NSString *)searchText
+                completion:(PLYAPIOperationResult)completion
+{
+    NSParameterAssert(searchText);
+
+	NSString *function = @"users";
+	NSString *path = [self _functionPathForFunction:function];
+	
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
+    
+    if (searchText)       [parameters setObject:searchText     forKey:@"query"];
+    
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:parameters];
+    
+	op.resultHandler = completion;
+	
+	[self _enqueueOperation:op];
+}
+
+- (void) getAvatarImageUrlFromUser:(PLYUser *)user
+                     completion:(PLYAPIOperationResult)completion{
+    NSParameterAssert(user);
+    
+    NSURL *url = nil;
+    
+    if(user.avatarUrl) {
+        url = [NSURL URLWithString:user.avatarUrl];
+    } else if(user.nickname){
+        NSString *function = [NSString stringWithFormat:@"user/%@/avatar", user.nickname];
+        NSString *path = [self _functionPathForFunction:function];
+        
+        url = [NSURL URLWithString:path relativeToURL:_hostURL];
+    }
+    
+    completion(url, nil);
+}
+
+- (void) getFollowerFromUser:(NSString *)nickname
+                        page:(NSNumber *)page
+              recordsPerPage:(NSNumber *)rpp
+                  completion:(PLYAPIOperationResult)completion{
+    NSParameterAssert(nickname);
+    
+	NSString *function = [NSString stringWithFormat:@"user/%@/follower", nickname];
+	NSString *path = [self _functionPathForFunction:function];
+	
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
+    
+    if (page)       [parameters setObject:page     forKey:@"page"];
+    if (rpp)        [parameters setObject:rpp      forKey:@"records_per_page"];
+    
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:parameters];
+    
+	op.resultHandler = completion;
+	
+	[self _enqueueOperation:op];
+}
+
+- (void) getFollowingFromUser:(NSString *)nickname
+                         page:(NSNumber *)page
+               recordsPerPage:(NSNumber *)rpp
+                  completion:(PLYAPIOperationResult)completion{
+    NSParameterAssert(nickname);
+    
+	NSString *function = [NSString stringWithFormat:@"user/%@/following", nickname];
+	NSString *path = [self _functionPathForFunction:function];
+	
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
+    
+    if (page)       [parameters setObject:page     forKey:@"page"];
+    if (rpp)        [parameters setObject:rpp      forKey:@"records_per_page"];
+    
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:parameters];
+    
+	op.resultHandler = completion;
+	
+	[self _enqueueOperation:op];
+}
+
+- (void) followUserWithNickname:(NSString *)nickname
+                     completion:(PLYAPIOperationResult)completion{
+    NSParameterAssert(nickname);
+    
+	NSString *function = @"/user/follow";
+	NSString *path = [self _functionPathForFunction:function];
+	
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
+    
+    if (nickname)   [parameters setObject:nickname forKey:@"nickname"];
+    
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:parameters];
+    
+    op.HTTPMethod = @"POST";
+	op.resultHandler = completion;
+	
+	[self _enqueueOperation:op];
+}
+
+- (void) unfollowUserWithNickname:(NSString *)nickname
+                       completion:(PLYAPIOperationResult)completion{
+    NSParameterAssert(nickname);
+    
+	NSString *function = @"/user/unfollow";
+	NSString *path = [self _functionPathForFunction:function];
+	
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
+    
+    if (nickname)   [parameters setObject:nickname forKey:@"nickname"];
+    
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:parameters];
+    
+    op.HTTPMethod = @"POST";
+	op.resultHandler = completion;
+	
+	[self _enqueueOperation:op];
+}
+
+- (void)  getUserByNickname:(NSString *)nickname
+                 completion:(PLYAPIOperationResult)completion{
+    NSParameterAssert(nickname);
+    
+	NSString *function = [NSString stringWithFormat:@"/user/%@", nickname];
+	NSString *path = [self _functionPathForFunction:function];
+    
+	PLYAPIOperation *op = [[PLYAPIOperation alloc] initWithEndpointURL:_hostURL functionPath:path parameters:nil];
+    
+    op.HTTPMethod = @"GET";
 	op.resultHandler = completion;
 	
 	[self _enqueueOperation:op];

@@ -17,3 +17,7 @@
 // Acer Aspire
 //#define PLY_ENDPOINT_URL [NSURL URLWithString:@"http://192.168.178.34:28080"]
 //#define PLY_API_KEY @"52ceabd7-433c-4c2f-b139-1f32db1964c3"
+
+// Ubuntu-Mac VM
+//#define PLY_ENDPOINT_URL [NSURL URLWithString:@"http://192.168.178.44:8080"]
+//#define PLY_API_KEY @"07db921b-2a45-4191-ba6c-1392e9d3b44d"

@@ -8,18 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+#import "PLYProductImage.h"
+
 @interface ProductImageCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic, weak) IBOutlet UIImageView *imageView;
+@property (nonatomic, weak)   IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) PLYProductImage *imageMetadata;
 
-/*
- Prepares a thumbnail if necessary for the image
- */
-- (void)setImageURL:(NSURL *)imageURL;
-
-/*
- Simply sets the image or loads it if necessary
- */
-- (void)setThumbnailImageURL:(NSURL *)imageURL;
+- (void) loadImageForMetadata:(PLYProductImage *)_metadata withSize:(CGSize)_size crop:(BOOL)_crop;
 
 @end

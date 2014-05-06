@@ -25,6 +25,7 @@
 #import "AppSettings.h"
 
 #import "PLYProduct.h"
+#import "PLYUser.h"
 	
 
 @interface HomeViewController () <DTCodeScannerViewControllerDelegate, UIImagePickerControllerDelegate>
@@ -49,6 +50,7 @@
     // Set the gesture
     [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_updateLoginBar) name:PLYNotifyUserStatusChanged object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -120,14 +122,17 @@
 
 - (void)_updateLoginBar
 {
-	if ([[PLYServer sharedPLYServer] loggedInUser])
-	{
-		[self.loginButton setTitle:[[PLYServer sharedPLYServer] loggedInUser] forState:UIControlStateNormal];
-	}
-	else
-	{
-		[self.loginButton setTitle:@"Sign in" forState:UIControlStateNormal];
-	}
+    
+    DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+        if ([[PLYServer sharedPLYServer] loggedInUser])
+        {
+            [self.loginButton setTitle:[[[PLYServer sharedPLYServer] loggedInUser] nickname] forState:UIControlStateNormal];
+        }
+        else
+        {
+            [self.loginButton setTitle:@"Sign in" forState:UIControlStateNormal];
+        }
+    });
 }
 
 - (void)_updateImagesButtons
@@ -182,24 +187,6 @@
 	}
 }
 
-- (IBAction)addImageToProduct:(id)sender
-{
-	if (![_previousScannedGTIN length])
-	{
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cannot add Image" message:@"Please scan something first, we need a GTIN to add an image to" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-		[alert show];
-		
-		return;
-	}
-	
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
-    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    imagePickerController.delegate = (id)self;
-	
-	[self presentViewController:imagePickerController animated:YES completion:nil];
-}
-
 #pragma mark - DTCodeScannerViewControllerDelegate
 
 
@@ -250,28 +237,6 @@
 			}
 		}];
 	}
-}
-
-#pragma mark - UIImagePickerControllerDelegate
-
-// This method is called when an image has been chosen from the library or taken from the camera.
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-	[self dismissViewControllerAnimated:YES completion:NULL];
-
-	UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-	//NSData *data = UIImageJPEGRepresentation(image, 0.5);
-	
-	[[PLYServer sharedPLYServer] uploadImageData:image forGTIN:_previousScannedGTIN completion:^(id result, NSError *error) {
-		
-		NSLog(@"%@ %@", result, error);
-	}];
-}
-
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar

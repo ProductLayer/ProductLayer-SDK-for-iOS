@@ -115,7 +115,7 @@
 		else
 		{
 			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-                [self performSegueWithIdentifier:@"UnwindFromWriteReview" sender:self];
+                [self.navigationController popViewControllerAnimated:true];
 			});
 		}
 	}];

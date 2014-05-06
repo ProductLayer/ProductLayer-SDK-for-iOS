@@ -16,6 +16,8 @@
 #import "PLYProduct.h"
 #import "PLYProductImage.h"
 #import "PLYReview.h"
+#import "PLYUser.h"
+#import "PLYList.h"
 
 @implementation PLYAPIOperation
 {
@@ -361,6 +363,10 @@
         return [PLYProductImage instanceFromDictionary:_dict];
     } else if([class isEqual:PLYReview.classIdentifier]){
         return [PLYReview instanceFromDictionary:_dict];
+    } else if([class isEqual:PLYUser.classIdentifier]){
+        return [PLYUser instanceFromDictionary:_dict];
+    } else if([class isEqual:PLYList.classIdentifier]){
+        return [PLYList instanceFromDictionary:_dict];
     }
     
     return nil;

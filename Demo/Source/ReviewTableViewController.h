@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addReviewButton;
 
 @property (nonatomic, strong) NSString *gtin;
+@property (nonatomic, strong) NSString *userNickname;
+@property (nonatomic, strong) NSLocale *locale;
 @property (nonatomic, strong) NSMutableArray *reviews;
 
 - (void) reloadReviews;

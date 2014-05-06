@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *productBrand;
 @property (weak, nonatomic) IBOutlet UIImageView *productImage;
 
+@property (weak, nonatomic) IBOutlet UIButton *addToListButton;
+
 @property (weak, nonatomic) IBOutlet EditableCell *productCharacteristics;
 @property (weak, nonatomic) IBOutlet EditableCell *productNutritious;
 

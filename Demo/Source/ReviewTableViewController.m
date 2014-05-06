@@ -34,10 +34,9 @@
     if(_isLoading) return;
     
     _isLoading = true;
-    NSLocale *locale = [AppSettings currentAppLocale];
     [[PLYServer sharedPLYServer] performSearchForReviewWithGTIN:_gtin
-                                   withLanguage:locale.localeIdentifier
-                           fromUserWithNickname:nil
+                                   withLanguage:_locale.localeIdentifier
+                           fromUserWithNickname:_userNickname
                                      withRating:nil
                                         orderBy:@"pl-id_asc"
                                            page:[NSNumber numberWithInt:0]
@@ -71,7 +70,9 @@
     
     if(!_gtin){
         self.navigationItem.rightBarButtonItem = nil;
-    } else {
+    }
+    
+    if(_gtin || _userNickname){
         self.navigationItem.leftBarButtonItem = nil;
     }
 }

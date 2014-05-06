@@ -20,6 +20,8 @@
 @synthesize updatedBy;
 @synthesize updatedTime;
 @synthesize version;
+@synthesize upVoters;
+@synthesize downVoters;
 
 + (NSString *) classIdentifier{
     return @"com.productlayer.core.domain.beans.ProductImage";
@@ -66,7 +68,23 @@
             self.updatedBy = [PLYAuditor instanceFromDictionary:value];
         }
 
-    } else {
+    } else if ([key isEqualToString:@"pl-img-usr_upvotes"]) {
+        self.upVoters = [NSMutableArray arrayWithCapacity:1];
+        if ([value isKindOfClass:[NSArray class]]) {
+            for(NSDictionary *user in value){
+                [self.upVoters addObject:[PLYAuditor instanceFromDictionary:user]];
+            }
+        }
+        
+    } else if ([key isEqualToString:@"pl-img-usr_downvotes"]) {
+        self.downVoters = [NSMutableArray arrayWithCapacity:1];
+        if ([value isKindOfClass:[NSArray class]]) {
+            for(NSDictionary *user in value){
+                [self.downVoters addObject:[PLYAuditor instanceFromDictionary:user]];
+            }
+        }
+        
+    }  else {
         [super setValue:value forKey:key];
     }
 
@@ -152,6 +170,24 @@
     }
     if (gtin != nil) {
         [dict setObject:gtin forKey:@"pl-prod-gtin"];
+    }
+    
+    if(upVoters != nil && [upVoters count] > 0){
+        NSMutableArray *tmpArray = [NSMutableArray arrayWithCapacity:[upVoters count]];
+        for(PLYAuditor *user in upVoters){
+            [tmpArray addObject:[user getDictionary]];
+        }
+        
+        [dict setObject:tmpArray forKey:@"pl-img-usr_upvotes"];
+    }
+    
+    if(downVoters != nil && [downVoters count] > 0){
+        NSMutableArray *tmpArray = [NSMutableArray arrayWithCapacity:[downVoters count]];
+        for(PLYAuditor *user in downVoters){
+            [tmpArray addObject:[user getDictionary]];
+        }
+        
+        [dict setObject:tmpArray forKey:@"pl-img-usr_downvotes"];
     }
     
     return dict;

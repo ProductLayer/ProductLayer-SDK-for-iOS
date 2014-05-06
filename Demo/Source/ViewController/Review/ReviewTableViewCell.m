@@ -78,9 +78,9 @@
                 
                 PLYProductImage *imageMeta = images[0];
                 
-                int imageSize = _productImage.frame.size.width*2;
+                int imageSize = _productImage.frame.size.width*[[UIScreen mainScreen] scale];
                 
-                NSURL *imageURL = [NSURL URLWithString:[imageMeta getUrlForWidth:imageSize andHeight:imageSize crop:@"true"]];
+                NSURL *imageURL = [NSURL URLWithString:[imageMeta getUrlForWidth:imageSize andHeight:imageSize crop:true]];
                 
                 NSString *imageIdentifier = [imageURL lastPathComponent];
                 NSLog(@"imageIdentifier : %@", imageIdentifier);

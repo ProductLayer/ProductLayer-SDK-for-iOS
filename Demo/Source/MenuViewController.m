@@ -14,6 +14,7 @@
 #import "PLYServer.h"
 
 #import "HomeViewController.h"
+#import "ProductListsViewController.h"
 
 @interface MenuViewController ()
 
@@ -128,6 +129,19 @@
 }
 */
 
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    if ([identifier isEqualToString:@"showMyProductLists"] && ![[PLYServer sharedPLYServer] loggedInUser])
+	{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login required" message:@"You need to login to view your product lists." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alert show];
+        
+        return false;
+    }
+    
+    return YES;
+    
+}
+
 -(void) prepareForSegue:(UIStoryboardSegue *) segue sender: (id) sender
 {
     if ( [segue isKindOfClass: [SWRevealViewControllerSegue class]] ) {
@@ -136,10 +150,17 @@
         swSegue.performBlock = ^(SWRevealViewControllerSegue* rvc_segue, UIViewController* svc, id dvc) {
             UINavigationController* navController = (UINavigationController*)self.revealViewController.frontViewController;
             [navController setViewControllers: @[dvc] animated: NO ];
+            
+            if ([[segue identifier] isEqualToString:@"showMyProductLists"])
+            {
+                ProductListsViewController *productLists = dvc;
+                productLists.addProductView = false;
+                [productLists loadProductListsForUser:[[PLYServer sharedPLYServer] loggedInUser] andType:nil];
+            }
+            
             [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
         };
     }
-    
 }
 
 - (IBAction)unwindToMenu:(UIStoryboardSegue *)unwindSegue
