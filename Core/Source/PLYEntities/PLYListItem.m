@@ -3,7 +3,7 @@
 //  PL
 //
 //  Created by René Swoboda on 29/04/14.
-//  Copyright (c) 2014 Cocoanetics. All rights reserved.
+//  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
 #import "PLYListItem.h"

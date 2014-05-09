@@ -2,7 +2,6 @@
 
 #import "PLYConstants.h"
 #import "PLYServer.h"
-#import "PLYAPIOperation.h"
 
 #import "PLYProduct.h"
 #import "PLYProductImage.h"
@@ -12,3 +11,5 @@
 #import "PLYList.h"
 #import "PLYListItem.h"
 #import "PLYUser.h"
+#import "PLYErrorMessage.h"
+#import "PLYErrorResponse.h"

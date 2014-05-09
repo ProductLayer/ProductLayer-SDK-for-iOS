@@ -30,6 +30,15 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>ProductLayer</key>
+	<dict>
+		<key>PLYAPIEndpoint</key>
+		<string>http://api.productlayer.com</string>
+		<key>PLYAPIVersion</key>
+		<string>v1-alpha</string>
+		<key>PLYAPIKey</key>
+		<string>07db921b-2a45-4191-ba6c-1392e9d3b44d</string>
+	</dict>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

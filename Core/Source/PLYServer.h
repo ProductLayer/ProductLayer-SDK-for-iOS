@@ -6,7 +6,11 @@
 //  Copyright (c) 2013 Cocoanetics. All rights reserved.
 //
 
-#import "PLYAPIOperation.h"
+
+/*
+ Completion handler for Discogs API calls
+ */
+typedef void (^PLYCompletion)(id result, NSError *error);
 
 @class PLYUser;
 @class PLYList;
@@ -15,6 +19,7 @@
 @interface PLYServer : NSObject
 
 + (id)sharedPLYServer;
+- (NSURLSession *)session;
 
 /**
  @name Search
@@ -23,26 +28,26 @@
 // searches for a GTIN
 - (void)performSearchForGTIN:(NSString *)gtin
                     language:(NSString *)language
-                  completion:(PLYAPIOperationResult)completion;
+                  completion:(PLYCompletion)completion;
 
 // searches for a product name
 - (void)performSearchForName:(NSString *)name
                     language:(NSString *)language
-                  completion:(PLYAPIOperationResult)completion;
+                  completion:(PLYCompletion)completion;
 
 
 /**
  @name Products
  */
 - (void) getImagesForGTIN:(NSString *)gtin
-               completion:(PLYAPIOperationResult)completion;
+               completion:(PLYCompletion)completion;
 
 - (void) getLastUploadedImagesWithPage:(int)page
                                 andRPP:(int)rpp
-                            completion:(PLYAPIOperationResult)completion;
+                            completion:(PLYCompletion)completion;
 
 - (void) getCategoriesForLocale:(NSString *)language
-                     completion:(PLYAPIOperationResult)completion;
+                     completion:(PLYCompletion)completion;
 
 /**
  @name Managing Users
@@ -51,16 +56,19 @@
 // creates a new user account
 - (void)createUserWithUser:(NSString *)user
                      email:(NSString *)email
-                  password:(NSString *)password
-                completion:(PLYAPIOperationResult)completion;
+                completion:(PLYCompletion)completion;
 
 // login
 - (void)loginWithUser:(NSString *)user
              password:(NSString *)password
-           completion:(PLYAPIOperationResult)completion;
+           completion:(PLYCompletion)completion;
 
 // logout
-- (void)logoutUserWithCompletion:(PLYAPIOperationResult)completion;
+- (void)logoutUserWithCompletion:(PLYCompletion)completion;
+
+// Request new password
+- (void)requestNewPasswordForUserWithEmail:(NSString *)email
+                                completion:(PLYCompletion)completion;
 
 // name of the currently logged in use or `nil` if not logged in
 @property (nonatomic, readonly) PLYUser *loggedInUser;
@@ -74,11 +82,11 @@
 
 - (void)createProductWithGTIN:(NSString *)gtin
                    dictionary:(NSDictionary *)dictionary
-                   completion:(PLYAPIOperationResult)completion;
+                   completion:(PLYCompletion)completion;
 
 - (void)updateProductWithGTIN:(NSString *)gtin
                    dictionary:(NSDictionary *)dictionary
-                   completion:(PLYAPIOperationResult)completion;
+                   completion:(PLYCompletion)completion;
 
 /**
  @name Image Handling
@@ -86,22 +94,22 @@
 
 - (void)uploadImageData:(UIImage *)data
                 forGTIN:(NSString *)gtin
-             completion:(PLYAPIOperationResult)completion;
+             completion:(PLYCompletion)completion;
 
 - (void) upVoteImageWithId:(NSString *)imageFileId
                    andGTIN:(NSString *)gtin
-                completion:(PLYAPIOperationResult)completion;
+                completion:(PLYCompletion)completion;
 
 - (void) downVoteImageWithId:(NSString *)imageFileId
                      andGTIN:(NSString *)gtin
-                  completion:(PLYAPIOperationResult)completion;
+                  completion:(PLYCompletion)completion;
 
 /**
  @name File Handling
  */
 - (void)uploadFileData:(NSData *)data
                forGTIN:(NSString *)gtin
-            completion:(PLYAPIOperationResult)completion;
+            completion:(PLYCompletion)completion;
 
 
 /**
@@ -124,82 +132,82 @@
                                 orderBy:(NSString *)orderBy
                                    page:(NSNumber *)page
                          recordsPerPage:(NSNumber *)rpp
-                             completion:(PLYAPIOperationResult)completion;
+                             completion:(PLYCompletion)completion;
 
 // Create a review for a product.
 - (void) createReviewForGTIN:(NSString *)gtin
                   dictionary:(NSDictionary *)dictionary
-                  completion:(PLYAPIOperationResult)completion;
+                  completion:(PLYCompletion)completion;
 /**
  @name Lists
  */
 - (void) createProductList:(PLYList *)list
-                completion:(PLYAPIOperationResult)completion;
+                completion:(PLYCompletion)completion;
 
 - (void) performSearchForProductListFromUser:(PLYUser *)user
                                  andListType:(NSString *)listType
                                         page:(NSNumber *)page
                               recordsPerPage:(NSNumber *)rpp
-                                  completion:(PLYAPIOperationResult)completion;
+                                  completion:(PLYCompletion)completion;
 
 - (void) getProductListWithId:(NSString *)listId
-                   completion:(PLYAPIOperationResult)completion;
+                   completion:(PLYCompletion)completion;
 
 - (void) updateProductList:(PLYList *)list
-                completion:(PLYAPIOperationResult)completion;
+                completion:(PLYCompletion)completion;
 
 - (void) deleteProductListWithId:(NSString *)listId
-                      completion:(PLYAPIOperationResult)completion;
+                      completion:(PLYCompletion)completion;
 
 /**
  * Add/Remove list items
  **/
 - (void) addOrReplaceListItem:(PLYListItem *)listItem
                  toListWithId:(NSString *)listId
-                   completion:(PLYAPIOperationResult)completion;
+                   completion:(PLYCompletion)completion;
 
-- (void) deleteProductWithgGTIN:(NSString *)gtin
+- (void) deleteProductWithGTIN:(NSString *)gtin
                  fromListWithId:(NSString *)listId
-                     completion:(PLYAPIOperationResult)completion;
+                     completion:(PLYCompletion)completion;
 
 /**
  * List sharing
  **/
 - (void) shareProductListWithId:(NSString *)listId
                      withUserId:(NSString *)userId
-                     completion:(PLYAPIOperationResult)completion;
+                     completion:(PLYCompletion)completion;
 
 - (void) unshareProductListWithId:(NSString *)listId
                        withUserId:(NSString *)userId
-                       completion:(PLYAPIOperationResult)completion;
+                       completion:(PLYCompletion)completion;
 
 /**
  @name Users
  */
 - (void) performUserSearch:(NSString *)searchText
-                completion:(PLYAPIOperationResult)completion;
+                completion:(PLYCompletion)completion;
 
 - (void)  getUserByNickname:(NSString *)nickname
-                 completion:(PLYAPIOperationResult)completion;
+                 completion:(PLYCompletion)completion;
 
 - (void) getAvatarImageUrlFromUser:(PLYUser *)user
-                        completion:(PLYAPIOperationResult)completion;
+                        completion:(PLYCompletion)completion;
 
 - (void) getFollowerFromUser:(NSString *)nickname
                         page:(NSNumber *)page
               recordsPerPage:(NSNumber *)rpp
-                  completion:(PLYAPIOperationResult)completion;
+                  completion:(PLYCompletion)completion;
 
 - (void) getFollowingFromUser:(NSString *)nickname
                          page:(NSNumber *)page
                recordsPerPage:(NSNumber *)rpp
-                   completion:(PLYAPIOperationResult)completion;
+                   completion:(PLYCompletion)completion;
 
 - (void) followUserWithNickname:(NSString *)nickname
-                     completion:(PLYAPIOperationResult)completion;
+                     completion:(PLYCompletion)completion;
 
 - (void) unfollowUserWithNickname:(NSString *)nickname
-                       completion:(PLYAPIOperationResult)completion;
+                       completion:(PLYCompletion)completion;
 
 
 

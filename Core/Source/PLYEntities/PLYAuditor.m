@@ -1,3 +1,11 @@
+//
+//  PLYAuditor.m
+//  PL
+//
+//  Created by René Swoboda on 25/04/14.
+//  Copyright (c) 2014 productlayer. All rights reserved.
+//
+
 #import "PLYAuditor.h"
 
 @implementation PLYAuditor
@@ -52,7 +60,5 @@
     
     return dict;
 }
-
-
 
 @end
