@@ -7,16 +7,16 @@
 //
 
 #import "ProductImageViewController.h"
-
-#import "PLYServer.h"
-#import "DTBlockFunctions.h"
 #import "ProductImageCollectionViewCell.h"
-#import "PLYProductImage.h"
-#import "DTAlertView.h"
 #import "LoginViewController.h"
 #import "BigImageViewController.h"
-
 #import "UIViewController+Login.h"
+
+#import "ProductLayer.h"
+
+#import "DTProgressHUD.h"
+#import "DTAlertView.h"
+#import "DTBlockFunctions.h"
 
 @interface ProductImageViewController () <UICollectionViewDataSource>
 @end
@@ -164,10 +164,14 @@
 // This method is called when an image has been chosen from the library or taken from the camera.
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    DTProgressHUD *_hud = [[DTProgressHUD alloc] init];
+    _hud.showAnimationType = HUDProgressAnimationTypeFade;
+    _hud.hideAnimationType = HUDProgressAnimationTypeFade;
+    [_hud showWithText:@"saving" progressType:HUDProgressTypeInfinite];
+    
 	[self dismissViewControllerAnimated:YES completion:NULL];
     
 	UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-	//NSData *data = UIImageJPEGRepresentation(image, 0.5);
 	
 	[[PLYServer sharedPLYServer] uploadImageData:image forGTIN:self.gtin completion:^(id result, NSError *error) {
 		if(!error && [result isKindOfClass:[PLYProductImage class]]){
@@ -181,6 +185,10 @@
                 [self.collectionView reloadData];
             });
         }
+        
+        DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+            [_hud hide];
+        });
 	}];
 }
 

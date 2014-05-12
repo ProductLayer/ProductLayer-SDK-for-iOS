@@ -14,6 +14,7 @@
 
 #import "DTBlockFunctions.h"
 #import "DTLog.h"
+#import "DTProgressHUD.h"
 
 typedef enum : NSUInteger {
     LandscapeCell,
@@ -177,11 +178,17 @@ typedef enum : NSUInteger {
 }
 
 - (void) loadSocialFeed{
+    DTProgressHUD *_hud = [[DTProgressHUD alloc] init];
+    _hud.showAnimationType = HUDProgressAnimationTypeFade;
+    _hud.hideAnimationType = HUDProgressAnimationTypeFade;
+    
+    [_hud showWithText:@"loading" progressType:HUDProgressTypeInfinite];
     
     // TODO: Load all social Feeds (Images, Reviews, Opinions, ...)
     [[PLYServer sharedPLYServer] getLastUploadedImagesWithPage:0 andRPP:20 completion:^(id result, NSError *error) {
-		
+        
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+            [_hud hide];
             
 			_socialFeeds = result;
 			

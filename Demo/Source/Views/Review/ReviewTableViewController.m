@@ -15,6 +15,8 @@
 #import "DTBlockFunctions.h"
 #import "AppSettings.h"
 
+#import "DTProgressHUD.h"
+
 #import "ProductLayer.h"
 
 @interface ReviewTableViewController ()
@@ -35,6 +37,11 @@
 - (void) reloadReviews{
     if(_isLoading) return;
     
+    DTProgressHUD *_hud = [[DTProgressHUD alloc] init];
+    _hud.showAnimationType = HUDProgressAnimationTypeFade;
+    _hud.hideAnimationType = HUDProgressAnimationTypeFade;
+    [_hud showWithText:@"loading" progressType:HUDProgressTypeInfinite];
+    
     _isLoading = true;
     _locale = [AppSettings currentAppLocale];
     [[PLYServer sharedPLYServer] performSearchForReviewWithGTIN:_gtin
@@ -47,9 +54,18 @@
                                      completion:^(id result, NSError *error) {
                                          if(error) {
                                              DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+                                                 
                                                  if(error.code == 404){
-                                                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No reviews found" message:[NSString stringWithFormat:@"There are no reviews from %@ available!",_userNickname] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-                                                     [alert show];
+                                                     // Reviews from user.
+                                                     if(_userNickname){
+                                                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No reviews found" message:[NSString stringWithFormat:@"There are no reviews from %@ available!",_userNickname] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                                                         [alert show];
+                                                     }
+                                                     // Reviews for product
+                                                     else {
+                                                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No reviews found" message:@"There are no reviews for the product available! Be the first to write a review!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                                                         [alert show];
+                                                     }
                                                  } else {
                                                      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Load Reviews Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
                                                      [alert show];
@@ -65,6 +81,10 @@
                                                  _isLoading = false;
                                              });
                                          }
+                                         
+                                         DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+                                             [_hud hide];
+                                         });
                                      }];
 }
 
@@ -79,9 +99,6 @@
     // Set the side bar button action. When it's tapped, it'll show up the sidebar.
     _sidebarButton.target = self.revealViewController;
     _sidebarButton.action = @selector(revealToggle:);
-    
-    // Set the gesture
-    [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     
     if(!_gtin){
         self.navigationItem.rightBarButtonItem = nil;
@@ -111,32 +128,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
-    if ([identifier isEqualToString:@"writeReview"] && ![self checkIfLoggedInAndShowLoginView:YES])
-	{
-        return NO;
-    }
-    
-    return YES;
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-	if ([[segue identifier] isEqualToString:@"writeReview"])
-	{
-		WriteReviewViewController *writeReview = (WriteReviewViewController *)segue.destinationViewController;
-		writeReview.gtin = _gtin;
-        writeReview.gtinTextField.enabled = false;
-	}
-	/*else if ([[segue identifier] isEqualToString:@"viewFullReview"])
-	{
-		UINavigationController *navController = segue.destinationViewController;
-		EditProductViewController *vc = (EditProductViewController *)[navController topViewController];
-		vc.navigationItem.title = @"Add New Product";
-		vc.gtin = _gtinForEditingProduct;
-	}*/
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -161,58 +152,31 @@
     return cell;
 }
 
+    - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+        return 70;
+    }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
 #pragma mark - Navigation
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    if ([identifier isEqualToString:@"writeReview"] && ![self checkIfLoggedInAndShowLoginView:YES])
+	{
+        return NO;
+    }
+    
+    return YES;
+}
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 70;
+	if ([[segue identifier] isEqualToString:@"writeReview"])
+	{
+		WriteReviewViewController *writeReview = (WriteReviewViewController *)segue.destinationViewController;
+		writeReview.gtin = _gtin;
+        writeReview.gtinTextField.enabled = false;
+	}
 }
 
 @end

@@ -150,8 +150,6 @@
         [self setValue:value forKey:@"nutritious"];
     } else if ([key isEqualToString:@"pl-version"]) {
         [self setValue:value forKey:@"version"];
-    }else {
-        [super setValue:value forUndefinedKey:key];
     }
 }
 

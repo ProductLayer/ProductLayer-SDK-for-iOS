@@ -43,6 +43,8 @@
             
             self.errors = myMembers;
         }
+    } else {
+        [super setValue:value forKey:key];
     }
 }
 

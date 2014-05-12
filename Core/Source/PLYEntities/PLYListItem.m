@@ -50,8 +50,6 @@
         [self setValue:value forKey:@"qty"];
     } else if ([key isEqualToString:@"pl-list-prod-prio"]) {
         [self setValue:value forKey:@"prio"];
-    } else {
-        [super setValue:value forUndefinedKey:key];
     }
 }
 

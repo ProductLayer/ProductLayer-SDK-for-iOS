@@ -40,8 +40,6 @@
         [self setValue:value forKey:@"appId"];
     } else if ([key isEqualToString:@"pl-usr-nickname"]) {
         [self setValue:value forKey:@"userNickname"];
-    } else {
-        [super setValue:value forUndefinedKey:key];
     }
 }
 

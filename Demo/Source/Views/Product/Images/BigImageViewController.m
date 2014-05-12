@@ -12,6 +12,7 @@
 #import "DTDownloadCache.h"
 #import "DTLog.h"
 #import "DTBlockFunctions.h"
+#import "DTProgressHUD.h"
 
 #import "PLYServer.h"
 
@@ -59,17 +60,6 @@
 - (void)updateView{
     [_votingScoreLabel setText:[NSString stringWithFormat:@"%d (up=%lu, down=%lu)",[metadata.votingScore intValue], (unsigned long)[metadata.upVoters count], (unsigned long)[metadata.downVoters count]]];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (void) setImageMetadata:(PLYProductImage *)imageMetadata{
     if(metadata != nil && [metadata.Id isEqualToString:imageMetadata.Id]){
@@ -130,48 +120,62 @@
 }
 
 - (IBAction) upVoteImage:(id)sender{
+    DTProgressHUD *_hud = [[DTProgressHUD alloc] init];
+    _hud.showAnimationType = HUDProgressAnimationTypeFade;
+    _hud.hideAnimationType = HUDProgressAnimationTypeFade;
+    
+    [_hud showWithText:@"saving" progressType:HUDProgressTypeInfinite];
+    
     [[PLYServer sharedPLYServer] upVoteImageWithId:metadata.fileId andGTIN:metadata.gtin completion:^(id result, NSError *error) {
-		
+        
 		if (error)
 		{
 			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+                [_hud hide];
+                
 				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Up-Vote Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
 				[alert show];
 			});
 		}
 		else
 		{
-			
 			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
                 metadata = result;
                 [self updateView];
-                
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You up-voted the image!" message:[NSString stringWithFormat:@"New image score is: %d", [metadata.votingScore intValue]] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-				[alert show];
+
+                [_hud showWithText:[NSString stringWithFormat:@"Voting score: %d", [metadata.votingScore intValue]] image:[UIImage imageNamed:@"up_vote.png"]];
+                [_hud hideAfterDelay:2.0f];
 			});
 		}
 	}];
 }
 
 - (IBAction) downVoteImage:(id)sender{
+    DTProgressHUD *_hud = [[DTProgressHUD alloc] init];
+    _hud.showAnimationType = HUDProgressAnimationTypeFade;
+    _hud.hideAnimationType = HUDProgressAnimationTypeFade;
+    
+    [_hud showWithText:@"saving" progressType:HUDProgressTypeInfinite];
+    
     [[PLYServer sharedPLYServer] downVoteImageWithId:metadata.fileId andGTIN:metadata.gtin completion:^(id result, NSError *error) {
 		
 		if (error)
 		{
 			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+                [_hud hide];
+                
 				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Down-Vote Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
 				[alert show];
 			});
 		}
 		else
 		{
-			
 			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
                 metadata = result;
                 [self updateView];
                 
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You down-voted the image!" message:[NSString stringWithFormat:@"New image score is: %d", [metadata.votingScore intValue]] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-				[alert show];
+                [_hud showWithText:[NSString stringWithFormat:@"Voting score: %d", [metadata.votingScore intValue]] image:[UIImage imageNamed:@"down_vote.png"]];
+                [_hud hideAfterDelay:2.0f];
 			});
 		}
 	}];

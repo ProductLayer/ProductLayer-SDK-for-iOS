@@ -11,6 +11,7 @@
 #import "ProductLayer.h"
 
 #import "DTBlockFunctions.h"
+#import "DTProgressHUD.h"
 
 @interface LostPasswordViewController ()
 
@@ -69,6 +70,11 @@
 
 
 - (IBAction) requestNewPassword:(id)sender{
+    DTProgressHUD *_hud = [[DTProgressHUD alloc] init];
+    _hud.showAnimationType = HUDProgressAnimationTypeFade;
+    _hud.hideAnimationType = HUDProgressAnimationTypeFade;
+    [_hud showWithText:@"requesting new password" progressType:HUDProgressTypeInfinite];
+    
     [[PLYServer sharedPLYServer] requestNewPasswordForUserWithEmail:_emailTextfield.text completion:^(id result, NSError *error) {
         
         DTBlockPerformSyncIfOnMainThreadElseAsync(^{
@@ -77,8 +83,15 @@
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Lost Password Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
                 [alert show];
             } else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"New Password Send" message:@"A new password was send to you via email." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                [alert show];
+                
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
+            
+            DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+                [_hud hide];
+            });
         });
     }];
 }

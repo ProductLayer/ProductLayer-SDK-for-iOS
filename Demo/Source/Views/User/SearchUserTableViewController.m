@@ -17,6 +17,7 @@
 #import "PLYUser.h"
 
 #import "DTBlockFunctions.h"
+#import "DTProgressHUD.h"
 
 @interface SearchUserTableViewController ()
 
@@ -44,9 +45,6 @@
     // Set the side bar button action. When it's tapped, it'll show up the sidebar.
     _sidebarButton.target = self.revealViewController;
     _sidebarButton.action = @selector(revealToggle:);
-    
-    // Set the gesture
-    [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
 }
 
 - (void)didReceiveMemoryWarning
@@ -82,45 +80,6 @@
     return 70;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -138,6 +97,11 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    DTProgressHUD *_hud = [[DTProgressHUD alloc] init];
+    _hud.showAnimationType = HUDProgressAnimationTypeFade;
+    _hud.hideAnimationType = HUDProgressAnimationTypeFade;
+    [_hud showWithText:@"searching" progressType:HUDProgressTypeInfinite];
+    
     // Search user
     [[PLYServer sharedPLYServer] performUserSearch:searchBar.text completion:^(id result, NSError *error) {
 		
@@ -157,10 +121,19 @@
 				[self.tableView reloadData];
 			});
 		}
+        
+        DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+            [_hud hide];
+        });
 	}];
 }
 
 - (void) loadFollowerFromUser:(PLYUser *)_user{
+    DTProgressHUD *_hud = [[DTProgressHUD alloc] init];
+    _hud.showAnimationType = HUDProgressAnimationTypeFade;
+    _hud.hideAnimationType = HUDProgressAnimationTypeFade;
+    [_hud showWithText:@"loading" progressType:HUDProgressTypeInfinite];
+    
     [[PLYServer sharedPLYServer] getFollowerFromUser:_user.nickname page:[NSNumber numberWithInt:0] recordsPerPage:[NSNumber numberWithInt:50] completion:^(id result, NSError *error) {
 		
 		if (error)
@@ -179,10 +152,19 @@
 				[self.tableView reloadData];
 			});
 		}
+        
+        DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+            [_hud hide];
+        });
 	}];
 }
 
 - (void) loadFollowingFromUser:(PLYUser *)_user{
+    DTProgressHUD *_hud = [[DTProgressHUD alloc] init];
+    _hud.showAnimationType = HUDProgressAnimationTypeFade;
+    _hud.hideAnimationType = HUDProgressAnimationTypeFade;
+    [_hud showWithText:@"loading" progressType:HUDProgressTypeInfinite];
+    
     [[PLYServer sharedPLYServer] getFollowingFromUser:_user.nickname page:[NSNumber numberWithInt:0] recordsPerPage:[NSNumber numberWithInt:50] completion:^(id result, NSError *error) {
 		
 		if (error)
@@ -201,6 +183,10 @@
 				[self.tableView reloadData];
 			});
 		}
+        
+        DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+            [_hud hide];
+        });
 	}];
 }
 

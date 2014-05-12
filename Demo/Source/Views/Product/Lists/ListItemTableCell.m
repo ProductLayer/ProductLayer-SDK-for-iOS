@@ -54,10 +54,6 @@
                 }
                 else
                 {
-                    DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-                        [self loadMainImage];
-                    });
-                    
                     if ([result count] == 1) {
                         _product = result[0];
                     } else if ([result count] > 1){
@@ -82,6 +78,7 @@
                     }
                     
                     DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+                        [self loadMainImage];
                         [self updateCell];
                     });
                 }
@@ -122,10 +119,6 @@
                 
                 PLYProductImage *imageMeta = images[0];
                 
-                // Check if _product has changed since request
-                if(![_product.gtin isEqualToString:imageMeta.gtin])
-                    return;
-                
                 int imageSize = _productImage.frame.size.width*[[UIScreen mainScreen] scale];
                 
                 NSURL *imageURL = [NSURL URLWithString:[imageMeta getUrlForWidth:imageSize andHeight:imageSize crop:true]];
@@ -146,8 +139,9 @@
                 {
                     DTBlockPerformSyncIfOnMainThreadElseAsync(^{
                         [_productImage setImage:thumbnail];
+                        _productImage.hidden = false;
                     });
-                    
+
                     return;
                 }
                 
@@ -168,6 +162,7 @@
                                 return;
                             
                             [_productImage setImage:image];
+                            _productImage.hidden = false;
                         }
                     });
                 }];
@@ -176,16 +171,18 @@
                 {
                     DTBlockPerformSyncIfOnMainThreadElseAsync(^{
                         [_productImage setImage:image];
+                        _productImage.hidden = false;
                     });
                 }
                 
             } else {
                 DTBlockPerformSyncIfOnMainThreadElseAsync(^{
                     [_productImage setImage:[UIImage imageNamed:@"no_image.png"]];
+                    _productImage.hidden = false;
                 });
             }
             
-            _productImage.hidden = false;
+            
 		});
 	}];
 }

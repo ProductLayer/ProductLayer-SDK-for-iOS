@@ -43,11 +43,6 @@
 {
 	[super loadView];
 	
-//	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_handleTap:)];
-//	tap.numberOfTapsRequired = 1;
-//	tap.numberOfTouchesRequired = 1;
-//	[view addGestureRecognizer:tap];
-//	
 	UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(_handlePan:)];
 	[self.view addGestureRecognizer:pan];
 }
@@ -193,12 +188,6 @@
 
 #pragma mark - Actions
 
-- (void)_handleTap:(UITapGestureRecognizer *)gesture
-{
-//	[self _updateRectOfInterest:self.view.bounds];
-//	[self _updateRectOfInterest:CGRectMake(20, 40, self.view.bounds.size.width - 40, 100)];
-}
-
 - (void)_handlePan:(UIPanGestureRecognizer *)gesture
 {
 	if (gesture.state == UIGestureRecognizerStateChanged)
@@ -266,40 +255,6 @@
 	{
 		if ([object isKindOfClass:[AVMetadataMachineReadableCodeObject class]])
 		{
-/**
-			AVMetadataMachineReadableCodeObject *transformedObject = (AVMetadataMachineReadableCodeObject *)[_videoPreviewLayer transformedMetadataObjectForMetadataObject:object];
-			
-			CGMutablePathRef path = CGPathCreateMutable();
-			
-			CGPoint point;
-			CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(transformedObject.corners[0]), &point);
-			
-			CGPathMoveToPoint(path, NULL, point.x, point.y);
-			
-			CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(transformedObject.corners[1]), &point);
-			CGPathAddLineToPoint(path, NULL, point.x, point.y);
-			
-			CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(transformedObject.corners[2]), &point);
-			CGPathAddLineToPoint(path, NULL, point.x, point.y);
-
-			CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(transformedObject.corners[3]), &point);
-			CGPathAddLineToPoint(path, NULL, point.x, point.y);
-			
-			CGPathCloseSubpath(path);
-			
-			CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-			shapeLayer.frame = _videoPreviewLayer.bounds;
-			shapeLayer.path = path;
-			shapeLayer.strokeColor = [UIColor redColor].CGColor;
-			shapeLayer.lineWidth = 2;
-			[_videoPreviewLayer addSublayer:shapeLayer];
-			
-			[_visibleShapes addObject:shapeLayer];
- 
-			CGPathRelease(path);
- */
-			
-			
 			DTScannedCode *scannedCode = [DTScannedCode scannedCodeFromMetadataObject:object];
 			[reportedCodes addObject:scannedCode];
 		}
@@ -342,11 +297,6 @@
 		BOOL currentlySeeingCodes = ([_visibleCodes count]>0);
 		
 		[self.codeScannerPreviewView.overlayView setShowRecognizedBox:currentlySeeingCodes animated:YES];
-		
-//		if (!currentlySeeingCodes)
-//		{
-//			[self _updateRectOfInterest:CGRectMake(20, 40, self.view.bounds.size.width - 40, 100)];
-//		}
 	});
 }
 

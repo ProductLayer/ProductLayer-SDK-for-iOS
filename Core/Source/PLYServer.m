@@ -69,6 +69,8 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
     return instance;
 }
 
+#pragma mark - request handling
+
 // construct a suitable error
 - (NSError *)_errorWithCode:(NSUInteger)code
                     message:(NSString *)message {
@@ -457,24 +459,6 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
     
     return nil;
 }
-                                  
-                                  
-
-/*- (void)_enqueueOperation:(PLYAPIOperation *)operation
-{
-	operation.delegate = self;
-	operation.accessToken = _accessToken;
-	
-	[_queue addOperation:operation];
-}
-
-- (void)_enqueueUploadOperation:(PLYAPIOperation *)operation
-{
-	operation.delegate = self;
-	operation.accessToken = _accessToken;
-	
-	[_uploadQueue addOperation:operation];
-}*/
 
 - (NSString *)_functionPathForFunction:(NSString *)function
 {
@@ -534,29 +518,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
     return url;
 }
 
-- (NSURL *)imageURLForProductGTIN:(NSString *)gtin imageIdentifier:(NSString *)imageIdentifier maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop
-{
-   NSString *tmpString = [NSString stringWithFormat:@"product/%@/images/%@", gtin, imageIdentifier];
-   NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:3];
-    
-   if (maxWidth>0)
-   {
-       [parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxWidth] forKey:@"max_width"];
-   }
-    
-   if (maxHeight>0)
-   {
-       [parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxHeight] forKey:@"max_height"];
-   }
-    
-    if (crop)
-    {
-        [parameters setObject:@"true" forKey:@"crop"];
-    }
-   
-   NSString *path = [PLYServer _functionPathForFunction:tmpString parameters:parameters];
-   return [NSURL URLWithString:path relativeToURL:_hostURL];
-}
+#pragma mark - load and store state
 
 - (void)_loadState
 {
@@ -619,33 +581,6 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	}
 	
 	[defaults synchronize];
-}
-
-
-#pragma mark - PLYAPIOperationDelegate
-
-- (void)operationWillExecute:(PLYCompletion *)operation
-{
-#if TARGET_OS_IPHONE
-	[[UIApplication sharedApplication] pushActiveNetworkOperation];
-#endif
-}
-
-- (void)operation:(PLYCompletion *)operation didExecuteWithError:(NSError *)error
-{
-#if TARGET_OS_IPHONE
-	[[UIApplication sharedApplication] popActiveNetworkOperation];
-#endif
-	
-	if (error)
-	{
-		DTLogError(@"PLYAPIOperation failed: %@", [error localizedDescription]);
-	}
-}
-
-- (void)operation:(PLYCompletion *)operation didReceiveAccessToken:(NSString *)token
-{
-	_accessToken = token;
 }
 
 #pragma mark - Search
@@ -846,6 +781,30 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 }
 
 #pragma mark - Image Handling
+
+- (NSURL *)imageURLForProductGTIN:(NSString *)gtin imageIdentifier:(NSString *)imageIdentifier maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop
+{
+    NSString *tmpString = [NSString stringWithFormat:@"product/%@/images/%@", gtin, imageIdentifier];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:3];
+    
+    if (maxWidth>0)
+    {
+        [parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxWidth] forKey:@"max_width"];
+    }
+    
+    if (maxHeight>0)
+    {
+        [parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxHeight] forKey:@"max_height"];
+    }
+    
+    if (crop)
+    {
+        [parameters setObject:@"true" forKey:@"crop"];
+    }
+    
+    NSString *path = [PLYServer _functionPathForFunction:tmpString parameters:parameters];
+    return [NSURL URLWithString:path relativeToURL:_hostURL];
+}
 
 - (void)uploadImageData:(UIImage *)data forGTIN:(NSString *)gtin completion:(PLYCompletion)completion
 {

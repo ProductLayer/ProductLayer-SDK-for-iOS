@@ -37,6 +37,7 @@
 
 - (void) loadImageForMetadata:(PLYProductImage *)_metadata withSize:(CGSize)_size crop:(BOOL)_crop{
     NSString *imageURLString = [_metadata getUrlForWidth:_size.width andHeight:_size.height crop:_crop];
+    
     NSURL *imageURL = [NSURL URLWithString:imageURLString];
     
     if ([_imageURL isEqualToURL:imageURL])
@@ -54,6 +55,9 @@
 	DTImageCache *imageCache = [DTImageCache sharedCache];
     
     NSString *variantIdentifier = [NSString stringWithFormat:@"%dx%d_%d",(int)_size.width,(int)_size.height,_crop];
+    
+    if(!imageIdentifier)
+        return;
     
 	UIImage *image = [imageCache imageForUniqueIdentifier:imageIdentifier variantIdentifier:variantIdentifier];
     

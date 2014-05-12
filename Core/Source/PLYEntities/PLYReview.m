@@ -146,8 +146,6 @@
         [self setValue:value forKey:@"upVoter"];
     } else if ([key isEqualToString:@"pl-rev-usr_downvotes"]) {
         [self setValue:value forKey:@"downVoter"];
-    } else {
-        [super setValue:value forUndefinedKey:key];
     }
 }
 

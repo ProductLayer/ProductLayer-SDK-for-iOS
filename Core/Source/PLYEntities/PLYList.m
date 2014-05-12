@@ -124,8 +124,6 @@
         [self setValue:value forKey:@"shareType"];
     } else if ([key isEqualToString:@"pl-list-shared-users"]) {
         [self setValue:value forKey:@"sharedUsers"];
-    } else {
-        [super setValue:value forUndefinedKey:key];
     }
 }
 

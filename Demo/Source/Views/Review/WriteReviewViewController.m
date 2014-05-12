@@ -11,6 +11,7 @@
 #import "ProductLayer.h"
 
 #import "DTBlockFunctions.h"
+#import "DTProgressHUD.h"
 
 #import "RatingTableCell.h"
 
@@ -66,19 +67,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 - (IBAction)save:(id)sender
 {
+    DTProgressHUD *_hud = [[DTProgressHUD alloc] init];
+    _hud.showAnimationType = HUDProgressAnimationTypeFade;
+    _hud.hideAnimationType = HUDProgressAnimationTypeFade;
+    [_hud showWithText:@"saving" progressType:HUDProgressTypeInfinite];
+    
     PLYReview *newReview = [[PLYReview alloc] init];
     
 	newReview.gtin = self.gtinTextField.text;
@@ -110,6 +105,7 @@
 		if (error)
 		{
 			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+                
 				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Review Creation Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
 				[alert show];
 			});
@@ -120,6 +116,10 @@
                 [self.navigationController popViewControllerAnimated:true];
 			});
 		}
+        
+        DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+            [_hud hide];
+        });
 	}];
 }
 

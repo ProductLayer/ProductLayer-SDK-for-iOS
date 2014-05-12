@@ -47,9 +47,6 @@
     // Set the side bar button action. When it's tapped, it'll show up the sidebar.
     _sidebarButton.target = self.revealViewController;
     _sidebarButton.action = @selector(revealToggle:);
-    
-    // Set the gesture
-    // [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_updateLoginBar) name:PLYNotifyUserStatusChanged object:nil];
 }
@@ -121,11 +118,7 @@
 		WriteReviewViewController *vc = (WriteReviewViewController *)[navController topViewController];
 		vc.navigationItem.title = @"Write Review";
 		vc.gtin = _previousScannedGTIN;
-	} /*else if ([[segue identifier] isEqualToString:@"loadSocialFeed"])
-	{
-		SocialFeedViewController *socialVC = (SocialFeedViewController *)segue.destinationViewController;
-        [socialVC loadSocialFeed];
-	}*/
+	}
 }
 
 - (void)_updateLoginBar

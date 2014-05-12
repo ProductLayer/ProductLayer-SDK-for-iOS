@@ -88,11 +88,9 @@
         if ([value isKindOfClass:[NSDictionary class]]) {
             self.updatedBy = [PLYAuditor instanceFromDictionary:value];
         }
-        
     } else {
         [super setValue:value forKey:key];
     }
-    
 }
 
 
@@ -140,8 +138,6 @@
         followed = [(NSNumber *)value boolValue];
     } else if ([key isEqualToString:@"pl-usr-following"]) {
         following = [(NSNumber *)value boolValue];
-    } else {
-        [super setValue:value forUndefinedKey:key];
     }
 }
 

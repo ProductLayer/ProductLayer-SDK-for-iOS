@@ -767,8 +767,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IWv-W5-kW2">
-                                <rect key="frame" x="0.0" y="44" width="320" height="428"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IWv-W5-kW2">
+                                <rect key="frame" x="0.0" y="64" width="320" height="408"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1b-m6-CMr">
@@ -823,17 +823,17 @@
                             <constraint firstItem="K1b-m6-CMr" firstAttribute="leading" secondItem="2EY-Gt-0AG" secondAttribute="leading" id="0F7-ye-59s"/>
                             <constraint firstAttribute="trailing" secondItem="gW0-e3-Yp2" secondAttribute="trailing" constant="20" symbolic="YES" id="4JX-5j-3vk"/>
                             <constraint firstItem="gW0-e3-Yp2" firstAttribute="baseline" secondItem="b7Z-OV-pu7" secondAttribute="baseline" id="83l-Qg-zO8"/>
-                            <constraint firstItem="IWv-W5-kW2" firstAttribute="leading" secondItem="K1b-m6-CMr" secondAttribute="leading" id="HAm-jx-y3M"/>
                             <constraint firstItem="b7Z-OV-pu7" firstAttribute="leading" secondItem="2EY-Gt-0AG" secondAttribute="leading" constant="20" symbolic="YES" id="LX9-x6-y4l"/>
                             <constraint firstItem="gW0-e3-Yp2" firstAttribute="leading" secondItem="b7Z-OV-pu7" secondAttribute="trailing" constant="27" id="LnS-Dm-ilO"/>
-                            <constraint firstAttribute="trailing" secondItem="IWv-W5-kW2" secondAttribute="trailing" id="MbC-Mp-AJv"/>
-                            <constraint firstItem="IWv-W5-kW2" firstAttribute="trailing" secondItem="hA9-Uf-8bQ" secondAttribute="trailing" id="PUb-u5-YiG"/>
+                            <constraint firstItem="IWv-W5-kW2" firstAttribute="top" secondItem="FU7-nL-Vrm" secondAttribute="bottom" id="Q7x-Pe-Ehc"/>
                             <constraint firstAttribute="bottom" secondItem="hA9-Uf-8bQ" secondAttribute="bottom" id="R1x-aN-i5r"/>
+                            <constraint firstItem="IWv-W5-kW2" firstAttribute="leading" secondItem="K1b-m6-CMr" secondAttribute="leading" id="WMZ-5v-hhb"/>
                             <constraint firstItem="K1b-m6-CMr" firstAttribute="top" secondItem="b7Z-OV-pu7" secondAttribute="bottom" constant="3" id="Wd4-Q4-hJW"/>
-                            <constraint firstItem="IWv-W5-kW2" firstAttribute="top" secondItem="FU7-nL-Vrm" secondAttribute="bottom" id="b3l-tq-AVg"/>
+                            <constraint firstAttribute="trailing" secondItem="IWv-W5-kW2" secondAttribute="trailing" id="YRH-e5-ce2"/>
+                            <constraint firstItem="gW0-e3-Yp2" firstAttribute="top" secondItem="IWv-W5-kW2" secondAttribute="bottom" constant="28" id="gRW-r6-D9z"/>
+                            <constraint firstItem="IWv-W5-kW2" firstAttribute="trailing" secondItem="hA9-Uf-8bQ" secondAttribute="trailing" id="gh5-d1-K1g"/>
                             <constraint firstItem="K1b-m6-CMr" firstAttribute="bottom" secondItem="hA9-Uf-8bQ" secondAttribute="bottom" id="mM4-iW-fnD"/>
                             <constraint firstItem="hA9-Uf-8bQ" firstAttribute="top" secondItem="K1b-m6-CMr" secondAttribute="top" id="pZZ-0k-MDp"/>
-                            <constraint firstItem="b7Z-OV-pu7" firstAttribute="top" secondItem="IWv-W5-kW2" secondAttribute="bottom" constant="28" id="vNM-Gv-4v6"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Do you like it?" id="Z1m-2b-qEd"/>

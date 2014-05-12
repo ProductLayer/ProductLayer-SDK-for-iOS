@@ -43,9 +43,7 @@
         [self setValue:value forKey:@"description"];
     } else if ([key isEqualToString:@"pl-prod-pkg-units"]) {
         [self setValue:value forKey:@"unit"];
-    } else {
-        [super setValue:value forUndefinedKey:key];
-    }
+    } 
 }
 
 - (NSDictionary *) getDictionary{

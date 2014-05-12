@@ -7,7 +7,9 @@
 //
 
 #import "LoginViewController.h"
+
 #import "DTBlockFunctions.h"
+#import "DTProgressHUD.h"
 
 #import "ProductLayer.h"
 
@@ -43,6 +45,11 @@
 
 - (IBAction)save:(id)sender
 {
+    DTProgressHUD *_hud = [[DTProgressHUD alloc] init];
+    _hud.showAnimationType = HUDProgressAnimationTypeFade;
+    _hud.hideAnimationType = HUDProgressAnimationTypeFade;
+    [_hud showWithText:@"logging in" progressType:HUDProgressTypeInfinite];
+    
 	[[PLYServer sharedPLYServer] loginWithUser:self.nicknameTextfield.text password:self.passwordTextfield.text completion:^(id result, NSError *error) {
 		
 		if (error)
@@ -63,6 +70,10 @@
 				[self dismissViewControllerAnimated:YES completion:nil];
 			});
 		}
+        
+        DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+            [_hud hide];
+        });
 		
 	}];
 }

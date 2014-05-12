@@ -7,7 +7,10 @@
 //
 
 #import "EditProductViewController.h"
+
 #import "DTBlockFunctions.h"
+#import "DTProgressHUD.h"
+
 #import "PLYProduct.h"
 
 #import "AppSettings.h"
@@ -122,6 +125,11 @@
 	
 	_product.language = [_localePicker.selectedLocale localeIdentifier];
 
+    DTProgressHUD *_hud = [[DTProgressHUD alloc] init];
+    _hud.showAnimationType = HUDProgressAnimationTypeFade;
+    _hud.hideAnimationType = HUDProgressAnimationTypeFade;
+    [_hud showWithText:@"saving" progressType:HUDProgressTypeInfinite];
+    
     // Insert Product
     if(_product.Id == nil) {
         [[PLYServer sharedPLYServer] createProductWithGTIN:_product.gtin dictionary:[_product getDictionary] completion:^(id result, NSError *error) {
@@ -143,6 +151,10 @@
                     [self cancel:self];
                 });
             }
+            
+            DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+                [_hud hide];
+            });
         }];
     }
     // Update product
@@ -166,6 +178,10 @@
                     [self cancel:self];
                 });
             }
+            
+            DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+                [_hud hide];
+            });
         }];
     }
 }

@@ -13,7 +13,7 @@
 #import "UIViewTags.h"
 #import "DTBlockFunctions.h"
 #import "AppSettings.h"
-#import "MBProgressHUD.h"
+#import "DTProgressHUD.h"
 #import "DetailedProductListViewControllerTableViewController.h"
 
 @interface ProductListsViewController ()
@@ -26,7 +26,7 @@
     PLYUser *_user;
     NSString *_type;
     
-    MBProgressHUD *_hud;
+    DTProgressHUD *_hud;
     
     unsigned long _runningOperations;
     
@@ -108,9 +108,11 @@
     failedOperations = 0;
     successfullOperations = 0;
     
-    _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    _hud.mode = MBProgressHUDModeAnnularDeterminate;
-    _hud.labelText = [NSString stringWithFormat:@"saving ... (failed = %d)", failedOperations];
+    _hud = [[DTProgressHUD alloc] init];
+    _hud.showAnimationType = HUDProgressAnimationTypeFade;
+    _hud.hideAnimationType = HUDProgressAnimationTypeFade;
+    
+    [_hud showWithText:@"saving" progressType:HUDProgressTypePie];
     
     for(PLYList *list in _productLists){
         
@@ -149,10 +151,11 @@
             
             [self.tableView reloadData];
         }
-        [_hud hide:YES];
+        [_hud setProgress:1.0f];
+        [_hud hideAfterDelay:1.0f];
     } else {
-        _hud.progress = (successfullOperations + failedOperations) / (successfullOperations + failedOperations + _runningOperations);
-        _hud.labelText = [NSString stringWithFormat:@"saving ... (failed = %d)", failedOperations];
+        float progress = (float)(successfullOperations + failedOperations) / (float)(successfullOperations + failedOperations + _runningOperations);
+        [_hud setProgress:progress];
     }
 }
 
@@ -201,11 +204,6 @@
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
-    /*if (_addProductView){
-        return NO;
-    }*/
-    
     return YES;
 }
 
@@ -283,24 +281,6 @@
         [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:NO];
     }
 }
-
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 
 #pragma mark - Navigation
 

@@ -7,7 +7,10 @@
 //
 
 #import "SignUpViewController.h"
+
 #import "DTBlockFunctions.h"
+#import "DTProgressHUD.h"
+
 #import "PLYServer.h"
 
 @interface SignUpViewController ()
@@ -59,6 +62,11 @@
 
 - (IBAction)save:(id)sender
 {
+    DTProgressHUD *_hud = [[DTProgressHUD alloc] init];
+    _hud.showAnimationType = HUDProgressAnimationTypeFade;
+    _hud.hideAnimationType = HUDProgressAnimationTypeFade;
+    [_hud showWithText:@"signing up" progressType:HUDProgressTypeInfinite];
+    
 	[[PLYServer sharedPLYServer] createUserWithUser:self.nicknameTextfield.text email:self.emailTextField.text completion:^(id result, NSError *error) {
 		
 		if (error)
@@ -75,6 +83,10 @@
 				[self dismissViewControllerAnimated:YES completion:nil];
 			});
 		}
+        
+        DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+            [_hud hide];
+        });
 	}];
 }
 

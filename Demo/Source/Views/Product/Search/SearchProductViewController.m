@@ -11,6 +11,7 @@
 
 #import "ProductLayer.h"
 #import "DTBlockFunctions.h"
+#import "DTProgressHUD.h"
 
 #import "PLYProduct.h"
 #import "ProductTableViewCell.h"
@@ -77,10 +78,19 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    DTProgressHUD *_hud = [[DTProgressHUD alloc] init];
+    _hud.showAnimationType = HUDProgressAnimationTypeFade;
+    _hud.hideAnimationType = HUDProgressAnimationTypeFade;
+    [_hud showWithText:@"searching" progressType:HUDProgressTypeInfinite];
+    
+    __block int running = 2;
+    
     // Search with my locale
 	NSLocale *locale = [AppSettings currentAppLocale];
 	[[PLYServer sharedPLYServer] performSearchForName:searchBar.text language:locale.localeIdentifier completion:^(id result, NSError *error) {
 		
+        running --;
+        
 		if (error)
 		{
 			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
@@ -97,11 +107,19 @@
 				[self.tableView reloadData];
 			});
 		}
+        
+        DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+            if(running == 0){
+                [_hud hide];
+            }
+        });
 	}];
     
     // Search with no locale
     [[PLYServer sharedPLYServer] performSearchForName:searchBar.text language:nil completion:^(id result, NSError *error) {
 		
+        running --;
+        
 		if (error)
 		{
 			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
@@ -124,6 +142,12 @@
 				[self.tableView reloadData];
 			});
 		}
+        
+        DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+            if(running == 0){
+                [_hud hide];
+            }
+        });
 	}];
 }
 

@@ -91,8 +91,7 @@
                 [self.downVoters addObject:[PLYAuditor instanceFromDictionary:user]];
             }
         }
-        
-    }  else {
+    } else {
         [super setValue:value forKey:key];
     }
 
@@ -129,8 +128,6 @@
         [self setValue:value forKey:@"width"];
     } else if ([key isEqualToString:@"pl-prod-gtin"]) {
         [self setValue:value forKey:@"gtin"];
-    }   else {
-        [super setValue:value forUndefinedKey:key];
     }
 }
 
