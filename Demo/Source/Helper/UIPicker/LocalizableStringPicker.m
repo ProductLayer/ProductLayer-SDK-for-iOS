@@ -93,4 +93,17 @@ numberOfRowsInComponent:(NSInteger)component
     return NSLocalizedString([_stringList objectAtIndex:row], @"");
 }
 
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
+    UILabel* tView = (UILabel*)view;
+    if (!tView){
+        tView = [[UILabel alloc] init];
+        // Setup label properties - frame, font, colors etc
+        [tView setFont:[UIFont boldSystemFontOfSize:12]];
+    }
+    // Fill the label text here
+    [tView setText:[self pickerView:pickerView titleForRow:row forComponent:component]];
+    
+    return tView;
+}
+
 @end
