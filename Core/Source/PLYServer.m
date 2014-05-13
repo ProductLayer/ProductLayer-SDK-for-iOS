@@ -491,7 +491,8 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	return tmpString;
 }
 
-+ (NSString *)_addQueryParameterToUrl:(NSString *)url parameters:(NSDictionary *)parameters{
+// FIXME: Clean this up, this should not be a private class method
++ (NSString *)_addQueryParameterToUrl:(NSString *)url parameters:(NSDictionary *)parameters {
     NSMutableString *tmpQuery = [NSMutableString string];
     
     [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {

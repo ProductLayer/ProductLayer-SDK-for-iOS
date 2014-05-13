@@ -108,7 +108,7 @@
     }
     
     // Check if the user is the current logged in user
-    if([_user.nickname isEqualToString:[[PLYServer sharedPLYServer] loggedInUser].nickname]){
+    if([_user.nickname isEqualToString:[[PLYServer sharedServer] loggedInUser].nickname]){
         _followUnFollowButton.hidden = true;
     } else {
         _followUnFollowButton.hidden = false;

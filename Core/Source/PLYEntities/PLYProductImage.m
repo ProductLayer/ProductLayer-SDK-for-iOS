@@ -12,6 +12,11 @@
 #import "DTLog.h"
 #import "PLYServer.h"
 
+@interface PLYServer (private)
+   +(NSString *)_addQueryParameterToUrl:(NSString *)url parameters:(NSDictionary *)parameters;
+@end
+
+
 @implementation PLYProductImage
 {
    
