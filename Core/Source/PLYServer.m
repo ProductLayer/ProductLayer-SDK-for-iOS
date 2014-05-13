@@ -657,11 +657,6 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	NSParameterAssert(gtin);
     NSParameterAssert(completion);
     
-    // convert EAN-13 to UPC if leading 0
-    if ([gtin length]==13 && [gtin hasPrefix:@"0"]) {
-        gtin = [gtin substringFromIndex:1];
-    }
-	
 	NSString *function = [NSString stringWithFormat:@"product/%@/images", gtin];
 	NSString *path = [self _functionPathForFunction:function];
     
