@@ -1543,7 +1543,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = PL;
 				PROVISIONING_PROFILE = "E903DAEF-E5F6-4CE8-AB70-050E33C1FA97";
-				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/** Externals/DTDownload/**";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1561,7 +1561,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = PL;
 				PROVISIONING_PROFILE = "E903DAEF-E5F6-4CE8-AB70-050E33C1FA97";
-				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/** Externals/DTDownload/**";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1664,7 +1664,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = PL;
 				PROVISIONING_PROFILE = "569C5D9F-E1B5-4968-81E7-480E22800F93";
-				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/** Externals/DTDownload/**";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = AdHoc;
