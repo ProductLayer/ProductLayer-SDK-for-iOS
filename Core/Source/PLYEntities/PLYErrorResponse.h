@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 /**
  * This object will be returned if an error occurred.
  **/

@@ -12,17 +12,8 @@
 		A7B214FA183F842000C38635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214F9183F842000C38635 /* Foundation.framework */; };
 		A7B214FC183F842000C38635 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FB183F842000C38635 /* CoreGraphics.framework */; };
 		A7B214FE183F842000C38635 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FD183F842000C38635 /* UIKit.framework */; };
-		A7B21519183F842000C38635 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B21518183F842000C38635 /* XCTest.framework */; };
-		A7B2151A183F842000C38635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214F9183F842000C38635 /* Foundation.framework */; };
-		A7B2151B183F842000C38635 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FD183F842000C38635 /* UIKit.framework */; };
 		A7B21722183F8A3800C38635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214F9183F842000C38635 /* Foundation.framework */; };
 		A7B21746183F8A5800C38635 /* libProductLayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B21721183F8A3800C38635 /* libProductLayer.a */; };
-		A7B44250183F92B800E8A170 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214F9183F842000C38635 /* Foundation.framework */; };
-		A7B44251183F92B800E8A170 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FB183F842000C38635 /* CoreGraphics.framework */; };
-		A7B44252183F92B800E8A170 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FD183F842000C38635 /* UIKit.framework */; };
-		A7B4426C183F92B800E8A170 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B21518183F842000C38635 /* XCTest.framework */; };
-		A7B4426D183F92B800E8A170 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214F9183F842000C38635 /* Foundation.framework */; };
-		A7B4426E183F92B800E8A170 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FD183F842000C38635 /* UIKit.framework */; };
 		A7B44283183F92D600E8A170 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7B44280183F92D600E8A170 /* Main.storyboard */; };
 		A7B44284183F92D600E8A170 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7B44282183F92D600E8A170 /* Images.xcassets */; };
 		A7B44285183F934800E8A170 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B4423D183F91E700E8A170 /* AppDelegate.m */; };
@@ -164,13 +155,6 @@
 			remoteGlobalIDString = A71902A616A8029400C1EC52;
 			remoteInfo = "DTDownload (iOS)";
 		};
-		A7B2151C183F842000C38635 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A7B214EE183F842000C38635 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A7B214F5183F842000C38635;
-			remoteInfo = PL;
-		};
 		A7B21744183F8A5400C38635 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A7B214EE183F842000C38635 /* Project object */;
@@ -311,13 +295,6 @@
 			remoteGlobalIDString = FAF37A2017AFDD93009AC27C;
 			remoteInfo = "DTZipArchive Demo";
 		};
-		A7B4426F183F92B800E8A170 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A7B214EE183F842000C38635 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A7B4424E183F92B800E8A170;
-			remoteInfo = PL1;
-		};
 		A7B44288183F935200E8A170 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A7B4418A183F90B900E8A170 /* DTFoundation.xcodeproj */;
@@ -367,7 +344,6 @@
 		A7B214F9183F842000C38635 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A7B214FB183F842000C38635 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A7B214FD183F842000C38635 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		A7B21517183F842000C38635 /* PLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7B21518183F842000C38635 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		A7B21721183F8A3800C38635 /* libProductLayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libProductLayer.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7B4418A183F90B900E8A170 /* DTFoundation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTFoundation.xcodeproj; path = DTFoundation/DTFoundation.xcodeproj; sourceTree = "<group>"; };
@@ -380,8 +356,6 @@
 		A7B44248183F91E700E8A170 /* ProductLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductLayer.h; sourceTree = "<group>"; };
 		A7B44249183F921200E8A170 /* PL-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PL-Info.plist"; sourceTree = "<group>"; };
 		A7B4424A183F921200E8A170 /* PL-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PL-Prefix.pch"; sourceTree = "<group>"; };
-		A7B4424F183F92B800E8A170 /* PL1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PL1.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A7B4426B183F92B800E8A170 /* PL1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PL1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7B44281183F92D600E8A170 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		A7B44282183F92D600E8A170 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A7B4428D183F939F00E8A170 /* ProductLayer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ProductLayer-Prefix.pch"; sourceTree = "<group>"; };
@@ -550,41 +524,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A7B21514183F842000C38635 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A7B21519183F842000C38635 /* XCTest.framework in Frameworks */,
-				A7B2151B183F842000C38635 /* UIKit.framework in Frameworks */,
-				A7B2151A183F842000C38635 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		A7B2171E183F8A3800C38635 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				A7B21722183F8A3800C38635 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A7B4424C183F92B800E8A170 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A7B44251183F92B800E8A170 /* CoreGraphics.framework in Frameworks */,
-				A7B44252183F92B800E8A170 /* UIKit.framework in Frameworks */,
-				A7B44250183F92B800E8A170 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A7B44268183F92B800E8A170 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A7B4426C183F92B800E8A170 /* XCTest.framework in Frameworks */,
-				A7B4426E183F92B800E8A170 /* UIKit.framework in Frameworks */,
-				A7B4426D183F92B800E8A170 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -618,10 +562,7 @@
 			isa = PBXGroup;
 			children = (
 				A7B214F6183F842000C38635 /* PL.app */,
-				A7B21517183F842000C38635 /* PLTests.xctest */,
 				A7B21721183F8A3800C38635 /* libProductLayer.a */,
-				A7B4424F183F92B800E8A170 /* PL1.app */,
-				A7B4426B183F92B800E8A170 /* PL1Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -671,7 +612,7 @@
 				A7B4422E183F913000E8A170 /* DTReachability Demo.app */,
 				A7B44230183F913000E8A170 /* DTZipArchive.app */,
 				C97FAAE719221C7E00144D2C /* DTProgressHUD Demo.app */,
-				A7B44210183F913000E8A170 /* UnitTests.octest */,
+				A7B44210183F913000E8A170 /* Unit Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1057,9 +998,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A7B214F5183F842000C38635 /* PL */ = {
+		A7B214F5183F842000C38635 /* Demo App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A7B21528183F842000C38635 /* Build configuration list for PBXNativeTarget "PL" */;
+			buildConfigurationList = A7B21528183F842000C38635 /* Build configuration list for PBXNativeTarget "Demo App" */;
 			buildPhases = (
 				A7B214F2183F842000C38635 /* Sources */,
 				A7B214F3183F842000C38635 /* Frameworks */,
@@ -1073,32 +1014,14 @@
 				A7B44289183F935200E8A170 /* PBXTargetDependency */,
 				A7B21745183F8A5400C38635 /* PBXTargetDependency */,
 			);
-			name = PL;
+			name = "Demo App";
 			productName = PL;
 			productReference = A7B214F6183F842000C38635 /* PL.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A7B21516183F842000C38635 /* PLTests */ = {
+		A7B21720183F8A3800C38635 /* Static Library */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A7B2152B183F842000C38635 /* Build configuration list for PBXNativeTarget "PLTests" */;
-			buildPhases = (
-				A7B21513183F842000C38635 /* Sources */,
-				A7B21514183F842000C38635 /* Frameworks */,
-				A7B21515183F842000C38635 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A7B2151D183F842000C38635 /* PBXTargetDependency */,
-			);
-			name = PLTests;
-			productName = PLTests;
-			productReference = A7B21517183F842000C38635 /* PLTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		A7B21720183F8A3800C38635 /* ProductLayer */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A7B2173D183F8A3800C38635 /* Build configuration list for PBXNativeTarget "ProductLayer" */;
+			buildConfigurationList = A7B2173D183F8A3800C38635 /* Build configuration list for PBXNativeTarget "Static Library" */;
 			buildPhases = (
 				A7B2171D183F8A3800C38635 /* Sources */,
 				A7B2171E183F8A3800C38635 /* Frameworks */,
@@ -1108,45 +1031,10 @@
 			);
 			dependencies = (
 			);
-			name = ProductLayer;
+			name = "Static Library";
 			productName = ProductLayer;
 			productReference = A7B21721183F8A3800C38635 /* libProductLayer.a */;
 			productType = "com.apple.product-type.library.static";
-		};
-		A7B4424E183F92B800E8A170 /* PL1 */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A7B44279183F92B800E8A170 /* Build configuration list for PBXNativeTarget "PL1" */;
-			buildPhases = (
-				A7B4424B183F92B800E8A170 /* Sources */,
-				A7B4424C183F92B800E8A170 /* Frameworks */,
-				A7B4424D183F92B800E8A170 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = PL1;
-			productName = PL1;
-			productReference = A7B4424F183F92B800E8A170 /* PL1.app */;
-			productType = "com.apple.product-type.application";
-		};
-		A7B4426A183F92B800E8A170 /* PL1Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A7B4427C183F92B800E8A170 /* Build configuration list for PBXNativeTarget "PL1Tests" */;
-			buildPhases = (
-				A7B44267183F92B800E8A170 /* Sources */,
-				A7B44268183F92B800E8A170 /* Frameworks */,
-				A7B44269183F92B800E8A170 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A7B44270183F92B800E8A170 /* PBXTargetDependency */,
-			);
-			name = PL1Tests;
-			productName = PL1Tests;
-			productReference = A7B4426B183F92B800E8A170 /* PL1Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -1159,12 +1047,6 @@
 				TargetAttributes = {
 					A7B214F5183F842000C38635 = {
 						DevelopmentTeam = W2S2NPRZSQ;
-					};
-					A7B21516183F842000C38635 = {
-						TestTargetID = A7B214F5183F842000C38635;
-					};
-					A7B4426A183F92B800E8A170 = {
-						TestTargetID = A7B214F5183F842000C38635;
 					};
 				};
 			};
@@ -1192,11 +1074,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				A7B214F5183F842000C38635 /* PL */,
-				A7B21516183F842000C38635 /* PLTests */,
-				A7B21720183F8A3800C38635 /* ProductLayer */,
-				A7B4424E183F92B800E8A170 /* PL1 */,
-				A7B4426A183F92B800E8A170 /* PL1Tests */,
+				A7B214F5183F842000C38635 /* Demo App */,
+				A7B21720183F8A3800C38635 /* Static Library */,
 			);
 		};
 /* End PBXProject section */
@@ -1251,10 +1130,10 @@
 			remoteRef = A7B4420D183F913000E8A170 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A7B44210183F913000E8A170 /* UnitTests.octest */ = {
+		A7B44210183F913000E8A170 /* Unit Tests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = UnitTests.octest;
+			path = "Unit Tests.xctest";
 			remoteRef = A7B4420F183F913000E8A170 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -1429,27 +1308,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A7B21515183F842000C38635 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A7B4424D183F92B800E8A170 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A7B44269183F92B800E8A170 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1505,13 +1363,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A7B21513183F842000C38635 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		A7B2171D183F8A3800C38635 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1532,20 +1383,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A7B4424B183F92B800E8A170 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A7B44267183F92B800E8A170 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1554,20 +1391,10 @@
 			name = "DTDownload (iOS)";
 			targetProxy = A71C2BB91843AD9600B77DB4 /* PBXContainerItemProxy */;
 		};
-		A7B2151D183F842000C38635 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A7B214F5183F842000C38635 /* PL */;
-			targetProxy = A7B2151C183F842000C38635 /* PBXContainerItemProxy */;
-		};
 		A7B21745183F8A5400C38635 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A7B21720183F8A3800C38635 /* ProductLayer */;
+			target = A7B21720183F8A3800C38635 /* Static Library */;
 			targetProxy = A7B21744183F8A5400C38635 /* PBXContainerItemProxy */;
-		};
-		A7B44270183F92B800E8A170 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A7B4424E183F92B800E8A170 /* PL1 */;
-			targetProxy = A7B4426F183F92B800E8A170 /* PBXContainerItemProxy */;
 		};
 		A7B44289183F935200E8A170 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1684,7 +1511,7 @@
 				GCC_PREFIX_HEADER = "Demo/PL-Prefix.pch";
 				INFOPLIST_FILE = "Demo/PL-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PL;
 				PROVISIONING_PROFILE = "E903DAEF-E5F6-4CE8-AB70-050E33C1FA97";
 				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/** Externals/DTDownload/**";
 				WRAPPER_EXTENSION = app;
@@ -1702,50 +1529,10 @@
 				GCC_PREFIX_HEADER = "Demo/PL-Prefix.pch";
 				INFOPLIST_FILE = "Demo/PL-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PL;
 				PROVISIONING_PROFILE = "E903DAEF-E5F6-4CE8-AB70-050E33C1FA97";
 				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/** Externals/DTDownload/**";
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		A7B2152C183F842000C38635 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PL.app/PL";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PL/PL-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "PLTests/PLTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		A7B2152D183F842000C38635 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PL.app/PL";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PL/PL-Prefix.pch";
-				INFOPLIST_FILE = "PLTests/PLTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -1761,7 +1548,7 @@
 					"$(inherited)",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ProductLayer;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "${PROJECT_DIR}/Externals/DTFoundation/**";
 			};
@@ -1775,79 +1562,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ProductLayer;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "${PROJECT_DIR}/Externals/DTFoundation/**";
-			};
-			name = Release;
-		};
-		A7B4427A183F92B800E8A170 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PL1/PL1-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "PL1/PL1-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		A7B4427B183F92B800E8A170 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PL1/PL1-Prefix.pch";
-				INFOPLIST_FILE = "PL1/PL1-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		A7B4427D183F92B800E8A170 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PL.app/PL";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PL1/PL1-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "PL1Tests/PL1Tests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		A7B4427E183F92B800E8A170 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PL.app/PL";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PL1/PL1-Prefix.pch";
-				INFOPLIST_FILE = "PL1Tests/PL1Tests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -1894,28 +1611,10 @@
 				GCC_PREFIX_HEADER = "Demo/PL-Prefix.pch";
 				INFOPLIST_FILE = "Demo/PL-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PL;
 				PROVISIONING_PROFILE = "569C5D9F-E1B5-4968-81E7-480E22800F93";
 				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/** Externals/DTDownload/**";
 				WRAPPER_EXTENSION = app;
-			};
-			name = AdHoc;
-		};
-		C98CD26E1910E1450035647C /* AdHoc */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PL.app/PL";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PL/PL-Prefix.pch";
-				INFOPLIST_FILE = "PLTests/PLTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = AdHoc;
 		};
@@ -1927,40 +1626,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ProductLayer;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "${PROJECT_DIR}/Externals/DTFoundation/**";
-			};
-			name = AdHoc;
-		};
-		C98CD2701910E1450035647C /* AdHoc */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PL1/PL1-Prefix.pch";
-				INFOPLIST_FILE = "PL1/PL1-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = AdHoc;
-		};
-		C98CD2711910E1450035647C /* AdHoc */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PL.app/PL";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PL1/PL1-Prefix.pch";
-				INFOPLIST_FILE = "PL1Tests/PL1Tests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = AdHoc;
 		};
@@ -1977,7 +1645,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A7B21528183F842000C38635 /* Build configuration list for PBXNativeTarget "PL" */ = {
+		A7B21528183F842000C38635 /* Build configuration list for PBXNativeTarget "Demo App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A7B21529183F842000C38635 /* Debug */,
@@ -1987,42 +1655,12 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A7B2152B183F842000C38635 /* Build configuration list for PBXNativeTarget "PLTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A7B2152C183F842000C38635 /* Debug */,
-				A7B2152D183F842000C38635 /* Release */,
-				C98CD26E1910E1450035647C /* AdHoc */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A7B2173D183F8A3800C38635 /* Build configuration list for PBXNativeTarget "ProductLayer" */ = {
+		A7B2173D183F8A3800C38635 /* Build configuration list for PBXNativeTarget "Static Library" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A7B2173E183F8A3800C38635 /* Debug */,
 				A7B2173F183F8A3800C38635 /* Release */,
 				C98CD26F1910E1450035647C /* AdHoc */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A7B44279183F92B800E8A170 /* Build configuration list for PBXNativeTarget "PL1" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A7B4427A183F92B800E8A170 /* Debug */,
-				A7B4427B183F92B800E8A170 /* Release */,
-				C98CD2701910E1450035647C /* AdHoc */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A7B4427C183F92B800E8A170 /* Build configuration list for PBXNativeTarget "PL1Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A7B4427D183F92B800E8A170 /* Debug */,
-				A7B4427E183F92B800E8A170 /* Release */,
-				C98CD2711910E1450035647C /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

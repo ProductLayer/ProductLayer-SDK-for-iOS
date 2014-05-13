@@ -6,12 +6,10 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @class PLYAuditor;
 
-@interface PLYUser : NSObject{
-    
+@interface PLYUser : NSObject
+{
     // The class identifier.
     NSString *Class;
     // The object id.

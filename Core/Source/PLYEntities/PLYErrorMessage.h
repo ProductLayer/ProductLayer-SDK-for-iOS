@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 /**
  * The error message with all needed information.
  **/

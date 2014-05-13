@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface PLYAuditor : NSObject {
 
     // The id of the user who created/updated the object

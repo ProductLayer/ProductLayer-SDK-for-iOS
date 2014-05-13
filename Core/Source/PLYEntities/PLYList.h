@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @class PLYAuditor;
 
 #define kLIST_WISHLIST  @"pl-list-type-wish"

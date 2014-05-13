@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A7B214F5183F842000C38635"
                BuildableName = "PL.app"
-               BlueprintName = "PL"
+               BlueprintName = "Demo App"
                ReferencedContainer = "container:PL.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -64,7 +64,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A7B214F5183F842000C38635"
             BuildableName = "PL.app"
-            BlueprintName = "PL"
+            BlueprintName = "Demo App"
             ReferencedContainer = "container:PL.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -83,7 +83,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A7B214F5183F842000C38635"
             BuildableName = "PL.app"
-            BlueprintName = "PL"
+            BlueprintName = "Demo App"
             ReferencedContainer = "container:PL.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -101,7 +101,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A7B214F5183F842000C38635"
             BuildableName = "PL.app"
-            BlueprintName = "PL"
+            BlueprintName = "Demo App"
             ReferencedContainer = "container:PL.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

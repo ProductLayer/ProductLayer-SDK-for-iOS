@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 /**
  * This object identifies a product in a product list.
  **/

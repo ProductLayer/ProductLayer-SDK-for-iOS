@@ -6,13 +6,11 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @class PLYAuditor;
 @class PLYPackaging;
 
-@interface PLYProduct : NSObject {
-
+@interface PLYProduct : NSObject
+{
     // The class identifier.
     NSString *Class;
     // The object id.
