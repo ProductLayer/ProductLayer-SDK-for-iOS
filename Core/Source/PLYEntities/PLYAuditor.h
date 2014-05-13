@@ -6,18 +6,7 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
-@interface PLYAuditor : NSObject {
-
-    // The id of the user who created/updated the object
-    NSString *userId;
-    
-    // The id of the application the object was created/updated with.
-    NSString *appId;
-    
-    // The nickname of the user
-    NSString *userNickname;
-
-}
+@interface PLYAuditor : NSObject 
 
 @property (nonatomic, copy) NSString *userId;
 @property (nonatomic, copy) NSString *appId;
