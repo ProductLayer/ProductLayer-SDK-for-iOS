@@ -60,7 +60,7 @@
     _hud.hideAnimationType = HUDProgressAnimationTypeFade;
     [_hud showWithText:@"loading" progressType:HUDProgressTypeInfinite];
     
-    [[PLYServer sharedPLYServer] performSearchForGTIN:_gtin language:nil completion:^(id result, NSError *error) {
+    [[PLYServer sharedServer] performSearchForGTIN:_gtin language:nil completion:^(id result, NSError *error) {
         if (error)
         {
             DTBlockPerformSyncIfOnMainThreadElseAsync(^{
@@ -94,7 +94,7 @@
                     if(defaultLocaleProduct) {
                         
                         [alertView addButtonWithTitle:[NSString stringWithFormat:@"Show locale %@", defaultLocaleProduct.language] block:^() {
-                            [[PLYServer sharedPLYServer] logoutUserWithCompletion:^(id result, NSError *error) {
+                            [[PLYServer sharedServer] logoutUserWithCompletion:^(id result, NSError *error) {
                                 DTBlockPerformSyncIfOnMainThreadElseAsync(^{
                                     [self setProduct:defaultLocaleProduct];
                                 });
@@ -180,7 +180,7 @@
 		return;
 	}
 	
-	[[PLYServer sharedPLYServer] getImagesForGTIN:gtin completion:^(id result, NSError *error) {
+	[[PLYServer sharedServer] getImagesForGTIN:gtin completion:^(id result, NSError *error) {
 		
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
             NSArray *images = result;
@@ -299,7 +299,7 @@
         listVC.navigationItem.title = @"Add to List";
         listVC.product = _product;
         listVC.addProductView = true;
-		[listVC loadProductListsForUser:[[PLYServer sharedPLYServer] loggedInUser] andType:nil];
+		[listVC loadProductListsForUser:[[PLYServer sharedServer] loggedInUser] andType:nil];
 	}
 }
 

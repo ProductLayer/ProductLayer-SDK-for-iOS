@@ -75,7 +75,7 @@
     _hud.hideAnimationType = HUDProgressAnimationTypeFade;
     [_hud showWithText:@"requesting new password" progressType:HUDProgressTypeInfinite];
     
-    [[PLYServer sharedPLYServer] requestNewPasswordForUserWithEmail:_emailTextfield.text completion:^(id result, NSError *error) {
+    [[PLYServer sharedServer] requestNewPasswordForUserWithEmail:_emailTextfield.text completion:^(id result, NSError *error) {
         
         DTBlockPerformSyncIfOnMainThreadElseAsync(^{
             if (error)

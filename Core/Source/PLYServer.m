@@ -60,7 +60,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 
 #pragma mark Singleton Methods
 
-+ (id)sharedPLYServer {
++ (id)sharedServer {
     static PLYServer *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -672,7 +672,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 /**
  * Get the metadata of the last uploaded images of all products.
  **/
-- (void) getLastUploadedImagesWithPage:(int)page andRPP:(int)rpp completion:(PLYCompletion)completion{
+- (void)getLastUploadedImagesWithPage:(NSInteger)page andRPP:(NSInteger)rpp completion:(PLYCompletion)completion{
 	NSParameterAssert(completion);
     
 	NSString *function = [NSString stringWithFormat:@"/products/images/last?page=%d&records_per_page=%d", page, rpp];
@@ -820,33 +820,6 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 }
 
 #pragma mark - Image Handling
-
-/**
- * Returns the url string for a product image with Size and cropping.
- **/
-- (NSURL *)imageURLForProductGTIN:(NSString *)gtin imageIdentifier:(NSString *)imageIdentifier maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop
-{
-    NSString *tmpString = [NSString stringWithFormat:@"product/%@/images/%@", gtin, imageIdentifier];
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:3];
-    
-    if (maxWidth>0)
-    {
-        [parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxWidth] forKey:@"max_width"];
-    }
-    
-    if (maxHeight>0)
-    {
-        [parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxHeight] forKey:@"max_height"];
-    }
-    
-    if (crop)
-    {
-        [parameters setObject:@"true" forKey:@"crop"];
-    }
-    
-    NSString *path = [PLYServer _functionPathForFunction:tmpString parameters:parameters];
-    return [NSURL URLWithString:path relativeToURL:_hostURL];
-}
 
 /**
  * Upload a image for a product.

@@ -15,7 +15,7 @@
 @implementation UIViewController (UIViewControllerLogin)
 
 - (BOOL) checkIfLoggedInAndShowLoginView:(BOOL) showLogin{
-    if (![[PLYServer sharedPLYServer] loggedInUser])
+    if (![[PLYServer sharedServer] loggedInUser])
     {
         if(showLogin){
             DTAlertView *alertView = [[DTAlertView alloc] initWithTitle:@"Login required" message:@"Do you want to login?"];

@@ -45,7 +45,7 @@
     if(![_listItem.gtin isEqualToString:listItem.gtin]){
         // Load product data
         
-        [[PLYServer sharedPLYServer] performSearchForGTIN:listItem.gtin language:nil completion:^(id result, NSError *error) {
+        [[PLYServer sharedServer] performSearchForGTIN:listItem.gtin language:nil completion:^(id result, NSError *error) {
                 if (error)
                 {
                     DTBlockPerformSyncIfOnMainThreadElseAsync(^{
@@ -110,7 +110,7 @@
 		return;
 	}
 	
-	[[PLYServer sharedPLYServer] getImagesForGTIN:gtin completion:^(id result, NSError *error) {
+	[[PLYServer sharedServer] getImagesForGTIN:gtin completion:^(id result, NSError *error) {
 		
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
             NSArray *images = result;

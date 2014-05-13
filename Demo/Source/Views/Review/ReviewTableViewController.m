@@ -44,7 +44,7 @@
     
     _isLoading = true;
     _locale = [AppSettings currentAppLocale];
-    [[PLYServer sharedPLYServer] performSearchForReviewWithGTIN:_gtin
+    [[PLYServer sharedServer] performSearchForReviewWithGTIN:_gtin
                                    withLanguage:_locale.localeIdentifier
                            fromUserWithNickname:_userNickname
                                      withRating:nil

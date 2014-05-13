@@ -40,7 +40,7 @@
 }
 
 - (IBAction)ChangeRelationButtonClicked:(id)sender {
-    if(![[PLYServer sharedPLYServer] loggedInUser]){
+    if(![[PLYServer sharedServer] loggedInUser]){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login required" message:@"You need to login to follow a user!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         
         [alert show];
@@ -48,7 +48,7 @@
     }
     
     if(!_user.followed){
-    [[PLYServer sharedPLYServer] followUserWithNickname:_user.nickname completion:^(id result, NSError *error) {
+    [[PLYServer sharedServer] followUserWithNickname:_user.nickname completion:^(id result, NSError *error) {
 		
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
             if(error){
@@ -63,7 +63,7 @@
 		});
 	}];
     } else {
-        [[PLYServer sharedPLYServer] unfollowUserWithNickname:_user.nickname completion:^(id result, NSError *error) {
+        [[PLYServer sharedServer] unfollowUserWithNickname:_user.nickname completion:^(id result, NSError *error) {
             
             DTBlockPerformSyncIfOnMainThreadElseAsync(^{
                 if(error){
@@ -127,7 +127,7 @@
 - (void) loadUserImage{
     _userImageView.hidden = true;
     
-    [[PLYServer sharedPLYServer] getAvatarImageUrlFromUser:_user completion:^(id result, NSError *error) {
+    [[PLYServer sharedServer] getAvatarImageUrlFromUser:_user completion:^(id result, NSError *error) {
 		
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
             NSURL *avatarImageUrl = result;

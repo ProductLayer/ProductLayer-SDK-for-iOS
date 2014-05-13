@@ -64,7 +64,7 @@
         _hud.hideAnimationType = HUDProgressAnimationTypeFade;
         [_hud showWithText:@"saving" progressType:HUDProgressTypeInfinite];
         
-        [[PLYServer sharedPLYServer] createProductList:_list completion:^(id result, NSError *error) {
+        [[PLYServer sharedServer] createProductList:_list completion:^(id result, NSError *error) {
             if (error)
             {
                 DTBlockPerformSyncIfOnMainThreadElseAsync(^{
