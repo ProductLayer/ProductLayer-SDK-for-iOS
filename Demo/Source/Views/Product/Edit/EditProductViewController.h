@@ -10,12 +10,13 @@
 #import "LocalePickerView.h"
 #import "PLYProduct.h"
 #import "ProductLayerViewController.h"
+#import "LocalizableStringPicker.h"
 
 @protocol ProductUpdateDelegate <NSObject>
 - (void) productUpdated:(PLYProduct *)product;
 @end
 
-@interface EditProductViewController : ProductLayerViewController <UIPickerViewDelegate, UIPickerViewDataSource, LocalePickerDelegate>
+@interface EditProductViewController : ProductLayerViewController <LocalePickerDelegate, LocalizableStringPickerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *productNameTextfield;
 @property (weak, nonatomic) IBOutlet UITextField *vendorTextField;
@@ -27,8 +28,7 @@
 @property (nonatomic) bool localePickerIsShowing;
 
 @property (weak, nonatomic) IBOutlet UITextField *categoryTextField;
-@property (weak, nonatomic) IBOutlet UIPickerView *categoryPicker;
-@property (nonatomic, strong) NSDictionary *categories;
+@property (weak, nonatomic) IBOutlet LocalizableStringPicker *categoryPicker;
 @property (nonatomic) bool categoryPickerIsShowing;
 
 // delegate to inform about product changes

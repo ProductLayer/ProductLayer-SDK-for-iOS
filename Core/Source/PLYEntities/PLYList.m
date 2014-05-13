@@ -192,20 +192,20 @@
 }
 
 + (NSArray *) availableListTypes{
-    NSMutableArray *listTypes = [NSMutableArray arrayWithObjects:@"pl-list-type-wish",
-                               @"pl-list-type-shopping",
-                               @"pl-list-type-borrowed",
-                               @"pl-list-type-owned",
-                               @"pl-list-type-other", nil];
+    NSMutableArray *listTypes = [NSMutableArray arrayWithObjects:kLIST_WISHLIST,
+                               kLIST_WISHLIST,
+                               kLIST_BORROWED,
+                               kLIST_OWNED,
+                               kLIST_OTHER, nil];
     
     return listTypes;
 }
 
 + (NSArray *) availableSharingTypes{
-    NSMutableArray *sharingTypes = [NSMutableArray arrayWithObjects:@"pl-list-share-public",
-                                 @"pl-list-share-friends",
-                                 @"pl-list-share-specific",
-                                 @"pl-list-share-none", nil];
+    NSMutableArray *sharingTypes = [NSMutableArray arrayWithObjects:kSHARE_PUBLIC,
+                                 kSHARE_FRIENDS,
+                                 kSHARE_SPECIFIC,
+                                 kSHARE_NONE, nil];
     
     return sharingTypes;
 }

@@ -29,7 +29,13 @@
 	
 	[self _updateSaveButtonStatus];
     
-    NSLocale *locale = [AppSettings currentAppLocale];
+    _categoryPicker._delegate = self;
+    [_categoryPicker setStringListAndSort:[PLYProductCategory getAllAvailableCategories] sortByLocalizedString:NO];
+    [_categoryPicker reloadAllComponents];
+    [_categoryPicker selectRow:0 inComponent:0 animated:NO];
+    
+    // Use this if you always want to receive
+    /*NSLocale *locale = [AppSettings currentAppLocale];
     [[PLYServer sharedPLYServer] getCategoriesForLocale:locale.localeIdentifier completion:^(id result, NSError *error) {
 		
 		if (error)
@@ -42,12 +48,14 @@
 		else
 		{
 			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-				_categories = result;
-				
+                NSDictionary *dict = result;
+                
+				[self.categoryPicker setStringListAndSort:[dict allKeys] sortByLocalizedString:NO];
 				[self.categoryPicker reloadAllComponents];
+                [self.categoryPicker selectRow:0 inComponent:0 animated:NO];
 			});
 		}
-	}];
+	}];*/
     
     [self updateView];
 }
@@ -117,11 +125,10 @@
 		_product.brandName = vendor;
 	}
 
-	NSString *category = self.categoryTextField.text;
-	if ([category length])
-	{
-        _product.category = [[_categories allKeys] objectAtIndex:[_categoryPicker selectedRowInComponent:0]];
-	}
+    NSString *category = self.categoryPicker.selectedString;
+    if([category length]){
+        _product.category = category;
+    }
 	
 	_product.language = [_localePicker.selectedLocale localeIdentifier];
 
@@ -234,57 +241,6 @@
     }
 }
 
-#pragma mark -
-#pragma mark PickerView DataSource
-
-- (NSInteger)numberOfComponentsInPickerView:
-(UIPickerView *)pickerView
-{
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView
-numberOfRowsInComponent:(NSInteger)component
-{
-    if (pickerView == _categoryPicker) {
-        return [_categories count];
-    }
-
-    return 0;
-}
-
-- (NSString *)pickerView:(UIPickerView *)pickerView
-             titleForRow:(NSInteger)row
-            forComponent:(NSInteger)component
-{
-    if (pickerView == _categoryPicker) {
-        return [self getCategoryValueforIndex:row];
-    }
-    
-    return @"";
-}
-
-#pragma mark -
-#pragma mark PickerView Delegate
--(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row
-      inComponent:(NSInteger)component
-{
-    if (pickerView == _categoryPicker) {
-        [self.categoryTextField setText:[self getCategoryValueforIndex:row]];
-    }
-}
-
--(NSString *) getCategoryValueforIndex:(NSInteger)index{
-    NSString *key = [[_categories allKeys] objectAtIndex:index];
-    id value = ((NSString *)[_categories objectForKey:key]);
-    
-    if([value isEqual:[NSNull null]] || value == nil || [value isEqualToString:@"TBL"]){
-        return key;
-    }
-    
-    return value;
-}
-
 #pragma mark - Hide & Show Locale Picker
 
 - (void)showCategoryPickerCell {
@@ -339,6 +295,12 @@ numberOfRowsInComponent:(NSInteger)component
                      completion:^(BOOL finished){
                          self.localePicker.hidden = YES;
                      }];
+}
+
+#pragma mark - Localized String Picker Delegate
+
+- (void) localizedStringPicker:(LocalizableStringPicker *)_picker selectedString:(NSString *)_string{
+    [_categoryTextField setText:NSLocalizedString(_string, @"")];
 }
 
 #pragma mark - Locale Picker Delegate

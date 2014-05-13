@@ -10,29 +10,48 @@
 
 @class PLYAuditor;
 
+/**
+ * The metadata of the product images.
+ **/
 @interface PLYProductImage : NSObject {
 
+    // The class identifier.
     NSString *Class;
+    // The object id.
     NSString *Id;
+    // The version.
     NSNumber *version;
     
+    // The user who created the object.
     PLYAuditor *createdBy;
+    // The timestamp when object was created.
     NSNumber *createdTime;
     
+    // The user who updated the object the last time.
     PLYAuditor *updatedBy;
+    // The timestamp when object was updated the last time.
     NSNumber *updatedTime;
     
+    // The name of the image.
     NSString *name;
+    // The gtin (barcode) of the product.
     NSString *gtin;
 
+    // The image file id.
     NSString *fileId;
     
+    // The height in pixel of the image.
     NSNumber *height;
+    // The width in pixel of the image.
     NSNumber *width;
     
+    // The url of the image.
     NSString *url;
+    // The voting score of the image. (+1 for a up vote, -1 for a down vote)
     NSNumber *votingScore;
+    // The users who up voted image.
     NSMutableArray *upVoters;
+    // The users who down voted image.
     NSMutableArray *downVoters;
 }
 

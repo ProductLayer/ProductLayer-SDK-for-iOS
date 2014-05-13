@@ -8,7 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ * This object will be returned if an error occurred.
+ **/
 @interface PLYErrorResponse : NSObject {
+    // A list of error messages.
     NSArray *errors;
 }
 

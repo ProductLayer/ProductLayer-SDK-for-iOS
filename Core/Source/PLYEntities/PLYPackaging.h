@@ -10,9 +10,16 @@
 
 @interface PLYPackaging : NSObject {
 
+    // All what's packed into.
     NSString *contains;
+    
+    // The name of the package.
     NSString *name;
+    
+    // The package description.
     NSString *description;
+    
+    // The units per package.
     NSNumber *unit;
 
 }

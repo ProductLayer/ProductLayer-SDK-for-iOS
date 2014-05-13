@@ -13,34 +13,55 @@
 
 @interface PLYProduct : NSObject {
 
+    // The class identifier.
     NSString *Class;
+    // The object id.
     NSString *Id;
+    // The version.
     NSNumber *version;
     
+    // The user who created the object.
     PLYAuditor *createdBy;
+    // The timestamp when object was created.
     NSNumber *createdTime;
     
+    // The user who updated the object the last time.
     PLYAuditor *updatedBy;
+    // The timestamp when object was updated the last time.
     NSNumber *updatedTime;
     
+    // The gtin (barcode) of the product.
     NSString *gtin;
+    // The name of the product.
     NSString *name;
+    // The product category
     NSString *category;
+    // The language of the product.
     NSString *language;
     
+    // The short description of the product.
     NSString *shortDescription;
+    // The detailed description of the product.
     NSString *longDescription;
     
+    // The name of the brand information.
     NSString *brandName;
+    // The name of the brand owner information.
     NSString *brandOwner;
     
+    // The homepage or landingpage of the product.
     NSString *homepage;
+    // Additional links for the product. e.g.: Support Forum, FAQ's, ...
     NSArray *links;
     
+    // The packaging information.
     PLYPackaging *packaging;
+    // The product rating.
     NSNumber *rating;
     
+    // The characteristics information.
     NSMutableDictionary *characteristics;
+    // The nutrition information.
     NSMutableDictionary *nutritious;
 }
 

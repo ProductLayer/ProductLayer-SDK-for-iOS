@@ -8,9 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ * The error message with all needed information.
+ **/
 @interface PLYErrorMessage : NSObject {
+    // The error message.
     NSString *message;
+    // The productlayer error code.
     NSNumber *code;
+    // The stacktrace will only be available for alpha and beta api's.
     NSString *throwable;
 }
 

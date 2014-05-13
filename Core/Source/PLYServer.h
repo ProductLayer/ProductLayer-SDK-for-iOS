@@ -54,7 +54,7 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  */
 
 // creates a new user account
-- (void)createUserWithUser:(NSString *)user
+- (void)createUserWithName:(NSString *)user
                      email:(NSString *)email
                 completion:(PLYCompletion)completion;
 
@@ -103,13 +103,6 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 - (void) downVoteImageWithId:(NSString *)imageFileId
                      andGTIN:(NSString *)gtin
                   completion:(PLYCompletion)completion;
-
-/**
- @name File Handling
- */
-- (void)uploadFileData:(NSData *)data
-               forGTIN:(NSString *)gtin
-            completion:(PLYCompletion)completion;
 
 
 /**

@@ -75,13 +75,13 @@
 		C97FAABC191D618C00144D2C /* UserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA92191D618C00144D2C /* UserTableViewCell.m */; };
 		C97FAAC5191D62AD00144D2C /* RFQuiltLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAAC1191D62AD00144D2C /* RFQuiltLayout.m */; };
 		C97FAAC6191D62AD00144D2C /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAAC3191D62AD00144D2C /* SWRevealViewController.m */; };
-		C97FAAD1192102CA00144D2C /* DTProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAACE192102CA00144D2C /* DTProgressHUD.m */; };
-		C97FAAD2192102CA00144D2C /* DTWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAAD0192102CA00144D2C /* DTWindow.m */; };
 		C97FAAD5192145F800144D2C /* LocalizableStringPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAAD3192145F800144D2C /* LocalizableStringPicker.m */; };
 		C97FAADA192152D900144D2C /* down_vote.png in Resources */ = {isa = PBXBuildFile; fileRef = C97FAAD6192152D900144D2C /* down_vote.png */; };
 		C97FAADB192152D900144D2C /* down_vote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C97FAAD7192152D900144D2C /* down_vote@2x.png */; };
 		C97FAADC192152D900144D2C /* up_vote.png in Resources */ = {isa = PBXBuildFile; fileRef = C97FAAD8192152D900144D2C /* up_vote.png */; };
 		C97FAADD192152D900144D2C /* up_vote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C97FAAD9192152D900144D2C /* up_vote@2x.png */; };
+		C97FAAE11921FD1900144D2C /* PLYProductCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAADF1921FCFA00144D2C /* PLYProductCategory.m */; };
+		C97FAAE819221CD800144D2C /* libDTProgressHUD (iOS).a in Frameworks */ = {isa = PBXBuildFile; fileRef = C97FAAE519221C7E00144D2C /* libDTProgressHUD (iOS).a */; };
 		C98CD248190E857C0035647C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C98CD24A190E857C0035647C /* Localizable.strings */; };
 		C98CD254190F9FB00035647C /* register_user.png in Resources */ = {isa = PBXBuildFile; fileRef = C98CD252190F9FB00035647C /* register_user.png */; };
 		C98CD255190F9FB00035647C /* register_user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C98CD253190F9FB00035647C /* register_user@2x.png */; };
@@ -325,6 +325,27 @@
 			remoteGlobalIDString = A70B4CE61486637E00873A4A;
 			remoteInfo = "Static Library";
 		};
+		C97FAAE419221C7E00144D2C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B4418A183F90B900E8A170 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F88FF6801920A83300120808;
+			remoteInfo = "DTProgressHUD (iOS)";
+		};
+		C97FAAE619221C7E00144D2C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B4418A183F90B900E8A170 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F88FF6A51920AAB600120808;
+			remoteInfo = "DTProgressHUD Demo";
+		};
+		C97FAAE919221CE800144D2C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B4418A183F90B900E8A170 /* DTFoundation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F88FF6771920A83300120808;
+			remoteInfo = "DTProgressHUD (iOS)";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -456,16 +477,14 @@
 		C97FAAC1191D62AD00144D2C /* RFQuiltLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFQuiltLayout.m; sourceTree = "<group>"; };
 		C97FAAC2191D62AD00144D2C /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		C97FAAC3191D62AD00144D2C /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
-		C97FAACD192102CA00144D2C /* DTProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTProgressHUD.h; sourceTree = "<group>"; };
-		C97FAACE192102CA00144D2C /* DTProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTProgressHUD.m; sourceTree = "<group>"; };
-		C97FAACF192102CA00144D2C /* DTWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTWindow.h; sourceTree = "<group>"; };
-		C97FAAD0192102CA00144D2C /* DTWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTWindow.m; sourceTree = "<group>"; };
 		C97FAAD3192145F800144D2C /* LocalizableStringPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalizableStringPicker.m; sourceTree = "<group>"; };
 		C97FAAD4192145F800144D2C /* LocalizableStringPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalizableStringPicker.h; sourceTree = "<group>"; };
 		C97FAAD6192152D900144D2C /* down_vote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down_vote.png; sourceTree = "<group>"; };
 		C97FAAD7192152D900144D2C /* down_vote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down_vote@2x.png"; sourceTree = "<group>"; };
 		C97FAAD8192152D900144D2C /* up_vote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up_vote.png; sourceTree = "<group>"; };
 		C97FAAD9192152D900144D2C /* up_vote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "up_vote@2x.png"; sourceTree = "<group>"; };
+		C97FAADE1921FCFA00144D2C /* PLYProductCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYProductCategory.h; path = PLYEntities/PLYProductCategory.h; sourceTree = "<group>"; };
+		C97FAADF1921FCFA00144D2C /* PLYProductCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYProductCategory.m; path = PLYEntities/PLYProductCategory.m; sourceTree = "<group>"; };
 		C98CD249190E857C0035647C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C98CD24B190E859A0035647C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C98CD252190F9FB00035647C /* register_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = register_user.png; sourceTree = "<group>"; };
@@ -519,6 +538,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C97FAAE819221CD800144D2C /* libDTProgressHUD (iOS).a in Frameworks */,
 				A71C2BBD1843ADA600B77DB4 /* CoreData.framework in Frameworks */,
 				A71C2BBB1843AD9B00B77DB4 /* libDTDownload_iOS.a in Frameworks */,
 				A7B442B8183F9D0300E8A170 /* AVFoundation.framework in Frameworks */,
@@ -633,7 +653,6 @@
 			children = (
 				A7B4420C183F913000E8A170 /* DTFoundation.framework */,
 				A7B4420E183F913000E8A170 /* libDTFoundation.a */,
-				A7B44210183F913000E8A170 /* UnitTests.octest */,
 				A7B44212183F913000E8A170 /* libDTFoundation_Mac.a */,
 				A7B44214183F913000E8A170 /* libDTAWS.a */,
 				A7B44216183F913000E8A170 /* libDTASN1.a */,
@@ -647,9 +666,12 @@
 				A7B44226183F913000E8A170 /* libDTReachability_Mac.a */,
 				A7B44228183F913000E8A170 /* libDTSQLite_iOS.a */,
 				A7B4422A183F913000E8A170 /* libDTSQLite_Mac.a */,
+				C97FAAE519221C7E00144D2C /* libDTProgressHUD (iOS).a */,
 				A7B4422C183F913000E8A170 /* DTSidePanels Demo.app */,
 				A7B4422E183F913000E8A170 /* DTReachability Demo.app */,
 				A7B44230183F913000E8A170 /* DTZipArchive.app */,
+				C97FAAE719221C7E00144D2C /* DTProgressHUD Demo.app */,
+				A7B44210183F913000E8A170 /* UnitTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -745,10 +767,6 @@
 		C97FAA2D191D618C00144D2C /* DTComponents */ = {
 			isa = PBXGroup;
 			children = (
-				C97FAACD192102CA00144D2C /* DTProgressHUD.h */,
-				C97FAACE192102CA00144D2C /* DTProgressHUD.m */,
-				C97FAACF192102CA00144D2C /* DTWindow.h */,
-				C97FAAD0192102CA00144D2C /* DTWindow.m */,
 				C97FAA2E191D618C00144D2C /* DTImageCache.h */,
 				C97FAA2F191D618C00144D2C /* DTImageCache.m */,
 				C97FAA30191D618C00144D2C /* DTManagedImage.h */,
@@ -1030,6 +1048,8 @@
 				C97FAA17191CCA3400144D2C /* PLYErrorMessage.m */,
 				C97FAA1A191CCA4D00144D2C /* PLYErrorResponse.h */,
 				C97FAA1B191CCA4D00144D2C /* PLYErrorResponse.m */,
+				C97FAADE1921FCFA00144D2C /* PLYProductCategory.h */,
+				C97FAADF1921FCFA00144D2C /* PLYProductCategory.m */,
 			);
 			name = PLYEntities;
 			sourceTree = "<group>";
@@ -1048,6 +1068,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				C97FAAEA19221CE800144D2C /* PBXTargetDependency */,
 				A71C2BBA1843AD9600B77DB4 /* PBXTargetDependency */,
 				A7B44289183F935200E8A170 /* PBXTargetDependency */,
 				A7B21745183F8A5400C38635 /* PBXTargetDependency */,
@@ -1349,6 +1370,20 @@
 			remoteRef = A7B4422F183F913000E8A170 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		C97FAAE519221C7E00144D2C /* libDTProgressHUD (iOS).a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libDTProgressHUD (iOS).a";
+			remoteRef = C97FAAE419221C7E00144D2C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C97FAAE719221C7E00144D2C /* DTProgressHUD Demo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "DTProgressHUD Demo.app";
+			remoteRef = C97FAAE619221C7E00144D2C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1430,7 +1465,6 @@
 				C97FAAB4191D618C00144D2C /* SettingsViewController.m in Sources */,
 				C97FAA9A191D618C00144D2C /* KeyValueTableViewCell.m in Sources */,
 				C97FAAB8191D618C00144D2C /* SignUpViewController.m in Sources */,
-				C97FAAD1192102CA00144D2C /* DTProgressHUD.m in Sources */,
 				C97FAA99191D618C00144D2C /* MenuViewController.m in Sources */,
 				C97FAA94191D618C00144D2C /* DTImageCache.m in Sources */,
 				A7B44286183F934800E8A170 /* main.m in Sources */,
@@ -1443,7 +1477,6 @@
 				C97FAAA2191D618C00144D2C /* DetailedProductListViewControllerTableViewController.m in Sources */,
 				C97FAAB9191D618C00144D2C /* LostPasswordViewController.m in Sources */,
 				C97FAAAC191D618C00144D2C /* ReviewTableViewCell.m in Sources */,
-				C97FAAD2192102CA00144D2C /* DTWindow.m in Sources */,
 				C97FAAB0191D618C00144D2C /* DTCodeScannerPreviewView.m in Sources */,
 				C97FAAB6191D618C00144D2C /* UIViewController+Login.m in Sources */,
 				C97FAA9D191D618C00144D2C /* BigImageViewController.m in Sources */,
@@ -1492,6 +1525,7 @@
 				C98CD26A1910E0D70035647C /* PLYList.m in Sources */,
 				C97FAA1C191CCA4D00144D2C /* PLYErrorResponse.m in Sources */,
 				C98CD26B1910E0D70035647C /* PLYListItem.m in Sources */,
+				C97FAAE11921FD1900144D2C /* PLYProductCategory.m in Sources */,
 				A7B4428C183F937D00E8A170 /* PLYServer.m in Sources */,
 				C9ADBDD41911502B004C81B3 /* PLYUser.m in Sources */,
 				A7B442A4183F97B800E8A170 /* PLYConstants.m in Sources */,
@@ -1539,6 +1573,11 @@
 			isa = PBXTargetDependency;
 			name = "Static Library";
 			targetProxy = A7B44288183F935200E8A170 /* PBXContainerItemProxy */;
+		};
+		C97FAAEA19221CE800144D2C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "DTProgressHUD (iOS)";
+			targetProxy = C97FAAE919221CE800144D2C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

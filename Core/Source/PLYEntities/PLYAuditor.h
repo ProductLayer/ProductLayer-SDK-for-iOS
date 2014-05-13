@@ -10,8 +10,13 @@
 
 @interface PLYAuditor : NSObject {
 
+    // The id of the user who created/updated the object
     NSString *userId;
+    
+    // The id of the application the object was created/updated with.
     NSString *appId;
+    
+    // The nickname of the user
     NSString *userNickname;
 
 }

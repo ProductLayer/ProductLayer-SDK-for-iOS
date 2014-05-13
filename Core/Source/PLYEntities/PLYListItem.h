@@ -8,11 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ * This object identifies a product in a product list.
+ **/
 @interface PLYListItem : NSObject {
     NSString *Id;
+    // The gtin (barcode) of the product.
     NSString *gtin;
+    // A simple note for people you share the list.
     NSString *note;
+    // The amount for the list.
     NSNumber *qty;
+    // The priority to sort the list. e.g.: Which present i prefer for my birthday.
     NSNumber *prio;
 }
 

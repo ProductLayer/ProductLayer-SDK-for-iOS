@@ -23,4 +23,6 @@
 
 @property (nonatomic, weak) id<LocalizableStringPickerDelegate> _delegate;
 
+- (void) setStringListAndSort:(NSArray *)stringList sortByLocalizedString:(BOOL)localizedSort;
+
 @end
