@@ -27,6 +27,11 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 + (id)sharedServer;
 
 /**
+ Sets the API Key to be used for authenticating the app for using Product Layer.
+ */
+- (void)setAPIKey:(NSString *)APIKey;
+
+/**
  @name Searching for Products
  */
 
