@@ -1,13 +1,10 @@
+// Configuration for Product Layer End Point and API Key
+//
+// sign up for a developer account at http://api.productlayer.com, create an API key for your app
+// and paste it below, removing the comment slashes
 
+// #define PLY_API_KEY @"00000000-0000-0000-0000-000000000000"
 
-#define PLYConfig [[NSBundle mainBundle] objectForInfoDictionaryKey:@"ProductLayer"]
-
-// this is the URL for the endpoint server
-#define PLY_ENDPOINT_URL [NSURL URLWithString:[PLYConfig objectForKey:@"PLYAPIEndpoint"]]
-
-
-// this is a prefix added before REST methods, e.g. for a version of the API
-#define PLY_PATH_PREFIX [PLYConfig objectForKey:@"PLYAPIVersion"]
-
-// this is the api key which is needed in every api call. If the key is not present in the Header of the request you will get an error message.
-#define PLY_API_KEY [PLYConfig objectForKey:@"PLYAPIKey"]
+#ifndef PLY_API_KEY
+#error Please create an API key and add it to ProductLayerConfig.h
+#endif

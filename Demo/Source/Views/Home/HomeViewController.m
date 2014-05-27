@@ -13,7 +13,6 @@
 #import "ProductImageViewController.h"
 
 #import "ProductLayer.h"
-#import "ProductLayerConfig.h"
 #import "DTScannedCode.h"
 #import "DTBlockFunctions.h"
 #import "SearchProductViewController.h"

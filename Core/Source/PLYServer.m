@@ -6,16 +6,14 @@
 //  Copyright (c) 2013 Cocoanetics. All rights reserved.
 //
 
-#import "PLYServer.h"
-#import "DTLog.h"
-#import "ProductLayerConfig.h"
-#import "NSString+DTURLEncoding.h"
-
-#import "DTBlockFunctions.h"
+#import "AppSettings.h"
 
 #import "ProductLayer.h"
 
-#import "AppSettings.h"
+#import "DTLog.h"
+#import "NSString+DTURLEncoding.h"
+#import "DTBlockFunctions.h"
+
 
 #if TARGET_OS_IPHONE
 	#import "UIApplication+DTNetworkActivity.h"
@@ -25,9 +23,17 @@
 stringByAddingPercentEncodingWithAllowedCharacters:\
 [NSCharacterSet URLQueryAllowedCharacterSet]];
 
+// this is the URL for the endpoint server
+#define PLY_ENDPOINT_URL [NSURL URLWithString:@"http://api.productlayer.com"]
+
+// this is a prefix added before REST methods, e.g. for a version of the API
+#define PLY_PATH_PREFIX @"v1-alpha"
+
+
 @implementation PLYServer
 {
 	NSURL *_hostURL;
+	NSString *_APIKey;
 	
 	NSString *_accessToken;
     
@@ -69,7 +75,12 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
     return instance;
 }
 
-#pragma mark - request handling
+- (void)setAPIKey:(NSString *)APIKey
+{
+	_APIKey = APIKey;
+}
+
+#pragma mark - Request Handling
 
 // construct a suitable error
 - (NSError *)_errorWithCode:(NSUInteger)code
@@ -182,7 +193,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
     }
     
     // Add the api key to each request.
-    [request setValue:PLY_API_KEY forHTTPHeaderField:@"API-KEY"];
+    [request setValue:_APIKey forHTTPHeaderField:@"API-KEY"];
 	
 	NSMutableString *debugMessage = [NSMutableString string];
 	[debugMessage appendFormat:@"%@ %@\n", request.HTTPMethod, [methodURL absoluteString]];
