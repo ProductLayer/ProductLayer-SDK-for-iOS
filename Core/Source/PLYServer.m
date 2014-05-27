@@ -49,8 +49,6 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
         _hostURL = PLY_ENDPOINT_URL;
         
         _configuration = configuration;
-        
-        [self _loadState];
     }
     
     return self;
@@ -79,6 +77,9 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 - (void)setAPIKey:(NSString *)APIKey
 {
 	_APIKey = APIKey;
+    
+    // load last state (login user)
+    [self _loadState];
 }
 
 #pragma mark - Request Handling
