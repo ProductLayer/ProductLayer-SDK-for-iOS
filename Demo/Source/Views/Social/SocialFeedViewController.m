@@ -190,9 +190,18 @@ typedef enum : NSUInteger {
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
             [_hud hide];
             
-			_socialFeeds = result;
+            if([result isKindOfClass:PLYErrorResponse.class]){
+                NSArray *errors = [((PLYErrorResponse *)result) errors];
+                
+                for(PLYErrorMessage *errorMessage in errors){
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[errorMessage message] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    [alertView show];
+                }
+            } else {
+                _socialFeeds = result;
 			
-			[self.collectionView reloadData];
+                [self.collectionView reloadData];
+            }
 		});
 	}];
 }
