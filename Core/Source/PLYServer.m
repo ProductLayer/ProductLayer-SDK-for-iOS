@@ -41,8 +41,8 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
     NSURLSessionConfiguration *_configuration;
 }
 
-- (instancetype)initWithSessionConfiguration:
-(NSURLSessionConfiguration *)configuration {
+- (instancetype)initWithSessionConfiguration:(NSURLSessionConfiguration *)configuration
+{
     self = [super init];
     
     if (self) {
@@ -57,16 +57,17 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 }
 
 // designated initializer
-- (instancetype)init {
+- (instancetype)init
+{
     // use default config, we need credential & caching
-    NSURLSessionConfiguration *config =
-    [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
     return [self initWithSessionConfiguration:config];
 }
 
 #pragma mark Singleton Methods
 
-+ (id)sharedServer {
++ (id)sharedServer
+{
     static PLYServer *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -83,11 +84,11 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 #pragma mark - Request Handling
 
 // construct a suitable error
-- (NSError *)_errorWithCode:(NSUInteger)code
-                    message:(NSString *)message {
+- (NSError *)_errorWithCode:(NSUInteger)code message:(NSString *)message {
     NSDictionary *userInfo;
     
-    if (message) {
+    if (message)
+{
         userInfo = @{NSLocalizedDescriptionKey : message};
     }
     
@@ -191,7 +192,8 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
     if (basicAuth){
         [request setValue:basicAuth forHTTPHeaderField:@"Authorization"];
     }
-    
+   
+	
     // Add the api key to each request.
     [request setValue:_APIKey forHTTPHeaderField:@"API-KEY"];
 	
