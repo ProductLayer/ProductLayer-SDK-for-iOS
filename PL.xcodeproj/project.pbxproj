@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		A7D2A0A819224754003C256C /* Documentation */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = A7D2A0C519224754003C256C /* Build configuration list for PBXAggregateTarget "Documentation" */;
+			buildPhases = (
+				A7D2A0C619224759003C256C /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Documentation;
+			productName = Documentation;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		A71C2BBB1843AD9B00B77DB4 /* libDTDownload_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A71C2B9D1843AD8D00B77DB4 /* libDTDownload_iOS.a */; };
 		A71C2BBD1843ADA600B77DB4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71C2BBC1843ADA600B77DB4 /* CoreData.framework */; };
@@ -1075,6 +1089,7 @@
 			targets = (
 				A7B214F5183F842000C38635 /* Demo App */,
 				A7B21720183F8A3800C38635 /* Static Library */,
+				A7D2A0A819224754003C256C /* Documentation */,
 			);
 		};
 /* End PBXProject section */
@@ -1309,6 +1324,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		A7D2A0C619224759003C256C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/appledoc --print-settings --output \"${BUILD_DIR}/Documentation/\" \"${PROJECT_DIR}\"\necho \"Documentation Output directory: ${BUILD_DIR}/Documentation/\"";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A7B214F2183F842000C38635 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1511,7 +1543,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = PL;
 				PROVISIONING_PROFILE = "E903DAEF-E5F6-4CE8-AB70-050E33C1FA97";
-				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/** Externals/DTDownload/**";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1529,7 +1561,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = PL;
 				PROVISIONING_PROFILE = "E903DAEF-E5F6-4CE8-AB70-050E33C1FA97";
-				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/** Externals/DTDownload/**";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1565,6 +1597,27 @@
 				USER_HEADER_SEARCH_PATHS = "${PROJECT_DIR}/Externals/DTFoundation/**";
 			};
 			name = Release;
+		};
+		A7D2A0A919224754003C256C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A7D2A0AA19224754003C256C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		A7D2A0AB19224754003C256C /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = AdHoc;
 		};
 		C98CD26C1910E1450035647C /* AdHoc */ = {
 			isa = XCBuildConfiguration;
@@ -1611,7 +1664,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = PL;
 				PROVISIONING_PROFILE = "569C5D9F-E1B5-4968-81E7-480E22800F93";
-				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/** Externals/DTDownload/**";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = AdHoc;
@@ -1662,6 +1715,15 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		A7D2A0C519224754003C256C /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7D2A0A919224754003C256C /* Debug */,
+				A7D2A0AA19224754003C256C /* Release */,
+				A7D2A0AB19224754003C256C /* AdHoc */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

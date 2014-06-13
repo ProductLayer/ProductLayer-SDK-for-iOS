@@ -125,9 +125,9 @@
 {
     
     DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-        if ([[PLYServer sharedPLYServer] loggedInUser])
+        if ([[PLYServer sharedServer] loggedInUser])
         {
-            [self.loginButton setTitle:[[[PLYServer sharedPLYServer] loggedInUser] nickname] forState:UIControlStateNormal];
+            [self.loginButton setTitle:[[[PLYServer sharedServer] loggedInUser] nickname] forState:UIControlStateNormal];
         }
         else
         {
@@ -156,12 +156,12 @@
 
 - (IBAction)login:(id)sender
 {
-	if ([[PLYServer sharedPLYServer] loggedInUser])
+	if ([[PLYServer sharedServer] loggedInUser])
 	{
         DTAlertView *alertView = [[DTAlertView alloc] initWithTitle:@"Logout?" message:@"Do you realy want to logout?"];
         
         [alertView addButtonWithTitle:@"yes" block:^() {
-            [[PLYServer sharedPLYServer] logoutUserWithCompletion:^(id result, NSError *error) {
+            [[PLYServer sharedServer] logoutUserWithCompletion:^(id result, NSError *error) {
                 
                 DTBlockPerformSyncIfOnMainThreadElseAsync(^{
                     

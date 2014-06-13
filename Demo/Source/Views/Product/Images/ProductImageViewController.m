@@ -93,7 +93,7 @@
 
 
 - (void) loadLastImages{
-    [[PLYServer sharedPLYServer] getLastUploadedImagesWithPage:0 andRPP:8 completion:^(id result, NSError *error) {
+    [[PLYServer sharedServer] getLastUploadedImagesWithPage:0 andRPP:8 completion:^(id result, NSError *error) {
 		
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
             
@@ -112,7 +112,7 @@
 		return;
 	}
 	
-	[[PLYServer sharedPLYServer] getImagesForGTIN:_gtin completion:^(id result, NSError *error) {
+	[[PLYServer sharedServer] getImagesForGTIN:_gtin completion:^(id result, NSError *error) {
 		
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
             
@@ -173,7 +173,7 @@
     
 	UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
 	
-	[[PLYServer sharedPLYServer] uploadImageData:image forGTIN:self.gtin completion:^(id result, NSError *error) {
+	[[PLYServer sharedServer] uploadImageData:image forGTIN:self.gtin completion:^(id result, NSError *error) {
 		if(!error && [result isKindOfClass:[PLYProductImage class]]){
             if(!_images){
                 _images = [NSMutableArray arrayWithCapacity:1];

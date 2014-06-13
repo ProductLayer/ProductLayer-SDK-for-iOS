@@ -83,7 +83,7 @@
     _user = user;
     _type = type;
     
-    [[PLYServer sharedPLYServer] performSearchForProductListFromUser:user andListType:type page:nil recordsPerPage:nil completion:^(id result, NSError *error) {
+    [[PLYServer sharedServer] performSearchForProductListFromUser:user andListType:type page:nil recordsPerPage:nil completion:^(id result, NSError *error) {
 		if (error)
 		{
 			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
@@ -116,7 +116,7 @@
     
     for(PLYList *list in _productLists){
         
-        [[PLYServer sharedPLYServer] updateProductList:list completion:^(id result, NSError *error) {
+        [[PLYServer sharedServer] updateProductList:list completion:^(id result, NSError *error) {
             if (error)
             {
                 DTBlockPerformSyncIfOnMainThreadElseAsync(^{
@@ -215,7 +215,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         PLYList *list = [_productLists objectAtIndex:indexPath.row];
         
-        [[PLYServer sharedPLYServer] deleteProductListWithId:list.Id completion:^(id result, NSError *error) {
+        [[PLYServer sharedServer] deleteProductListWithId:list.Id completion:^(id result, NSError *error) {
             if (error)
             {
                 DTBlockPerformSyncIfOnMainThreadElseAsync(^{

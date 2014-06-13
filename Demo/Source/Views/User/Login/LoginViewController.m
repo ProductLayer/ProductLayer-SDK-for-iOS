@@ -50,7 +50,7 @@
     _hud.hideAnimationType = HUDProgressAnimationTypeFade;
     [_hud showWithText:@"logging in" progressType:HUDProgressTypeInfinite];
     
-	[[PLYServer sharedPLYServer] loginWithUser:self.nicknameTextfield.text password:self.passwordTextfield.text completion:^(id result, NSError *error) {
+	[[PLYServer sharedServer] loginWithUser:self.nicknameTextfield.text password:self.passwordTextfield.text completion:^(id result, NSError *error) {
 		
 		if (error)
 		{

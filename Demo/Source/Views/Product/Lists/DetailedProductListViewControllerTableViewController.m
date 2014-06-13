@@ -91,7 +91,7 @@
         PLYListItem *listItem = [_list.listItems objectAtIndex:indexPath.row];
         
         
-        [[PLYServer sharedPLYServer] deleteProductWithGTIN:listItem.gtin fromListWithId:_list.Id completion:^(id result, NSError *error) {
+        [[PLYServer sharedServer] deleteProductWithGTIN:listItem.gtin fromListWithId:_list.Id completion:^(id result, NSError *error) {
             if (error)
             {
                 DTBlockPerformSyncIfOnMainThreadElseAsync(^{

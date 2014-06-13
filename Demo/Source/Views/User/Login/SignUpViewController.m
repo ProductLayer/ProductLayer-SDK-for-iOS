@@ -67,7 +67,7 @@
     _hud.hideAnimationType = HUDProgressAnimationTypeFade;
     [_hud showWithText:@"signing up" progressType:HUDProgressTypeInfinite];
     
-	[[PLYServer sharedPLYServer] createUserWithName:self.nicknameTextfield.text email:self.emailTextField.text completion:^(id result, NSError *error) {
+	[[PLYServer sharedServer] createUserWithName:self.nicknameTextfield.text email:self.emailTextField.text completion:^(id result, NSError *error) {
 		
 		if (error)
 		{

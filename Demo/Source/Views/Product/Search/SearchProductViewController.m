@@ -87,7 +87,7 @@
     
     // Search with my locale
 	NSLocale *locale = [AppSettings currentAppLocale];
-	[[PLYServer sharedPLYServer] performSearchForName:searchBar.text language:locale.localeIdentifier completion:^(id result, NSError *error) {
+	[[PLYServer sharedServer] performSearchForName:searchBar.text language:locale.localeIdentifier completion:^(id result, NSError *error) {
 		
         running --;
         
@@ -116,7 +116,7 @@
 	}];
     
     // Search with no locale
-    [[PLYServer sharedPLYServer] performSearchForName:searchBar.text language:nil completion:^(id result, NSError *error) {
+    [[PLYServer sharedServer] performSearchForName:searchBar.text language:nil completion:^(id result, NSError *error) {
 		
         running --;
         

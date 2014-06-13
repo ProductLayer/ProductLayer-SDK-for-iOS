@@ -126,7 +126,7 @@
     
     [_hud showWithText:@"saving" progressType:HUDProgressTypeInfinite];
     
-    [[PLYServer sharedPLYServer] upVoteImageWithId:metadata.fileId andGTIN:metadata.gtin completion:^(id result, NSError *error) {
+    [[PLYServer sharedServer] upVoteImageWithId:metadata.fileId andGTIN:metadata.gtin completion:^(id result, NSError *error) {
         
 		if (error)
 		{
@@ -157,7 +157,7 @@
     
     [_hud showWithText:@"saving" progressType:HUDProgressTypeInfinite];
     
-    [[PLYServer sharedPLYServer] downVoteImageWithId:metadata.fileId andGTIN:metadata.gtin completion:^(id result, NSError *error) {
+    [[PLYServer sharedServer] downVoteImageWithId:metadata.fileId andGTIN:metadata.gtin completion:^(id result, NSError *error) {
 		
 		if (error)
 		{

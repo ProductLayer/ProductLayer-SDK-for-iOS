@@ -70,7 +70,7 @@
 		return;
 	}
 	
-	[[PLYServer sharedPLYServer] getImagesForGTIN:gtin completion:^(id result, NSError *error) {
+	[[PLYServer sharedServer] getImagesForGTIN:gtin completion:^(id result, NSError *error) {
 		
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
             NSArray *images = result;

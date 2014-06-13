@@ -75,7 +75,7 @@
             {
                 ProductListsViewController *productLists = dvc;
                 productLists.addProductView = false;
-                [productLists loadProductListsForUser:[[PLYServer sharedPLYServer] loggedInUser] andType:nil];
+                [productLists loadProductListsForUser:[[PLYServer sharedServer] loggedInUser] andType:nil];
             }
             
             [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
