@@ -460,7 +460,6 @@
 		C97FAADE1921FCFA00144D2C /* PLYProductCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYProductCategory.h; path = PLYEntities/PLYProductCategory.h; sourceTree = "<group>"; };
 		C97FAADF1921FCFA00144D2C /* PLYProductCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYProductCategory.m; path = PLYEntities/PLYProductCategory.m; sourceTree = "<group>"; };
 		C98CD249190E857C0035647C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		C98CD24B190E859A0035647C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C98CD252190F9FB00035647C /* register_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = register_user.png; sourceTree = "<group>"; };
 		C98CD253190F9FB00035647C /* register_user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register_user@2x.png"; sourceTree = "<group>"; };
 		C98CD25A190FA86B0035647C /* no_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_image.png; sourceTree = "<group>"; };
@@ -1422,7 +1421,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				C98CD249190E857C0035647C /* Base */,
-				C98CD24B190E859A0035647C /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

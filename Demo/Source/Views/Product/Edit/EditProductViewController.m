@@ -34,7 +34,7 @@
     [_categoryPicker reloadAllComponents];
     [_categoryPicker selectRow:0 inComponent:0 animated:NO];
     
-    // Use this if you always want to receive
+    // Use this if you always want to receive the categories from the productlayer api. ATTENTION: Some Categories may not be localized.
     /*NSLocale *locale = [AppSettings currentAppLocale];
     [[PLYServer sharedPLYServer] getCategoriesForLocale:locale.localeIdentifier completion:^(id result, NSError *error) {
 		
@@ -300,7 +300,12 @@
 #pragma mark - Localized String Picker Delegate
 
 - (void) localizedStringPicker:(LocalizableStringPicker *)_picker selectedString:(NSString *)_string{
-    [_categoryTextField setText:NSLocalizedString(_string, @"")];
+    NSString *localizedString = NSLocalizedString(_string, @"");
+    if([localizedString length] > 28){
+        localizedString = [NSString stringWithFormat:@"...%@",[localizedString substringWithRange:NSMakeRange([localizedString length] - 28, 28)]];
+    }
+    
+    [_categoryTextField setText:localizedString];
 }
 
 #pragma mark - Locale Picker Delegate
