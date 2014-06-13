@@ -86,7 +86,7 @@
 		C97FAADC192152D900144D2C /* up_vote.png in Resources */ = {isa = PBXBuildFile; fileRef = C97FAAD8192152D900144D2C /* up_vote.png */; };
 		C97FAADD192152D900144D2C /* up_vote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C97FAAD9192152D900144D2C /* up_vote@2x.png */; };
 		C97FAAE11921FD1900144D2C /* PLYProductCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAADF1921FCFA00144D2C /* PLYProductCategory.m */; };
-		C97FAAE819221CD800144D2C /* libDTProgressHUD (iOS).a in Frameworks */ = {isa = PBXBuildFile; fileRef = C97FAAE519221C7E00144D2C /* libDTProgressHUD (iOS).a */; };
+		C97FAAE819221CD800144D2C /* libDTProgressHUD_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C97FAAE519221C7E00144D2C /* libDTProgressHUD_iOS.a */; };
 		C98CD248190E857C0035647C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C98CD24A190E857C0035647C /* Localizable.strings */; };
 		C98CD254190F9FB00035647C /* register_user.png in Resources */ = {isa = PBXBuildFile; fileRef = C98CD252190F9FB00035647C /* register_user.png */; };
 		C98CD255190F9FB00035647C /* register_user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C98CD253190F9FB00035647C /* register_user@2x.png */; };
@@ -525,7 +525,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C97FAAE819221CD800144D2C /* libDTProgressHUD (iOS).a in Frameworks */,
+				C97FAAE819221CD800144D2C /* libDTProgressHUD_iOS.a in Frameworks */,
 				A71C2BBD1843ADA600B77DB4 /* CoreData.framework in Frameworks */,
 				A71C2BBB1843AD9B00B77DB4 /* libDTDownload_iOS.a in Frameworks */,
 				A7B442B8183F9D0300E8A170 /* AVFoundation.framework in Frameworks */,
@@ -620,7 +620,7 @@
 				A7B44226183F913000E8A170 /* libDTReachability_Mac.a */,
 				A7B44228183F913000E8A170 /* libDTSQLite_iOS.a */,
 				A7B4422A183F913000E8A170 /* libDTSQLite_Mac.a */,
-				C97FAAE519221C7E00144D2C /* libDTProgressHUD (iOS).a */,
+				C97FAAE519221C7E00144D2C /* libDTProgressHUD_iOS.a */,
 				A7B4422C183F913000E8A170 /* DTSidePanels Demo.app */,
 				A7B4422E183F913000E8A170 /* DTReachability Demo.app */,
 				A7B44230183F913000E8A170 /* DTZipArchive.app */,
@@ -1263,10 +1263,10 @@
 			remoteRef = A7B4422F183F913000E8A170 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C97FAAE519221C7E00144D2C /* libDTProgressHUD (iOS).a */ = {
+		C97FAAE519221C7E00144D2C /* libDTProgressHUD_iOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libDTProgressHUD (iOS).a";
+			path = libDTProgressHUD_iOS.a;
 			remoteRef = C97FAAE419221C7E00144D2C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -1543,6 +1543,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = PL;
 				PROVISIONING_PROFILE = "E903DAEF-E5F6-4CE8-AB70-050E33C1FA97";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1561,6 +1562,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = PL;
 				PROVISIONING_PROFILE = "E903DAEF-E5F6-4CE8-AB70-050E33C1FA97";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1664,6 +1666,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = PL;
 				PROVISIONING_PROFILE = "569C5D9F-E1B5-4968-81E7-480E22800F93";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1724,6 +1727,7 @@
 				A7D2A0AB19224754003C256C /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
