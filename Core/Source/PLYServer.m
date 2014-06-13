@@ -6,16 +6,14 @@
 //  Copyright (c) 2013 Cocoanetics. All rights reserved.
 //
 
-#import "PLYServer.h"
-#import "DTLog.h"
-#import "ProductLayerConfig.h"
-#import "NSString+DTURLEncoding.h"
-
-#import "DTBlockFunctions.h"
+#import "AppSettings.h"
 
 #import "ProductLayer.h"
 
-#import "AppSettings.h"
+#import "DTLog.h"
+#import "NSString+DTURLEncoding.h"
+#import "DTBlockFunctions.h"
+
 
 #if TARGET_OS_IPHONE
 	#import "UIApplication+DTNetworkActivity.h"
@@ -25,9 +23,17 @@
 stringByAddingPercentEncodingWithAllowedCharacters:\
 [NSCharacterSet URLQueryAllowedCharacterSet]];
 
+// this is the URL for the endpoint server
+#define PLY_ENDPOINT_URL [NSURL URLWithString:@"http://api.productlayer.com"]
+
+// this is a prefix added before REST methods, e.g. for a version of the API
+#define PLY_PATH_PREFIX @"v1-alpha"
+
+
 @implementation PLYServer
 {
 	NSURL *_hostURL;
+	NSString *_APIKey;
 	
 	NSString *_accessToken;
     
@@ -35,32 +41,31 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
     NSURLSessionConfiguration *_configuration;
 }
 
-- (instancetype)initWithSessionConfiguration:
-(NSURLSessionConfiguration *)configuration {
+- (instancetype)initWithSessionConfiguration:(NSURLSessionConfiguration *)configuration
+{
     self = [super init];
     
     if (self) {
         _hostURL = PLY_ENDPOINT_URL;
         
         _configuration = configuration;
-        
-        [self _loadState];
     }
     
     return self;
 }
 
 // designated initializer
-- (instancetype)init {
+- (instancetype)init
+{
     // use default config, we need credential & caching
-    NSURLSessionConfiguration *config =
-    [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
     return [self initWithSessionConfiguration:config];
 }
 
 #pragma mark Singleton Methods
 
-+ (id)sharedServer {
++ (id)sharedServer
+{
     static PLYServer *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -69,14 +74,22 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
     return instance;
 }
 
-#pragma mark - request handling
+- (void)setAPIKey:(NSString *)APIKey
+{
+	_APIKey = APIKey;
+    
+    // load last state (login user)
+    [self _loadState];
+}
+
+#pragma mark - Request Handling
 
 // construct a suitable error
-- (NSError *)_errorWithCode:(NSUInteger)code
-                    message:(NSString *)message {
+- (NSError *)_errorWithCode:(NSUInteger)code message:(NSString *)message {
     NSDictionary *userInfo;
     
-    if (message) {
+    if (message)
+{
         userInfo = @{NSLocalizedDescriptionKey : message};
     }
     
@@ -180,9 +193,10 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
     if (basicAuth){
         [request setValue:basicAuth forHTTPHeaderField:@"Authorization"];
     }
-    
+   
+	
     // Add the api key to each request.
-    [request setValue:PLY_API_KEY forHTTPHeaderField:@"API-KEY"];
+    [request setValue:_APIKey forHTTPHeaderField:@"API-KEY"];
 	
 	NSMutableString *debugMessage = [NSMutableString string];
 	[debugMessage appendFormat:@"%@ %@\n", request.HTTPMethod, [methodURL absoluteString]];

@@ -6,3 +6,8 @@ The ultimate product information API, enabling a new breed of [product-centric a
 You can sign up for a developer account at [api.productlayer.com](http://api.productlayer.com)
 
 Documentation coming soon, have a look at the included Demo app in the meantime.
+
+To clone the project with all the sub-modules execute the following command:
+```
+git clone --recursive https://github.com/ProductLayer/ProductLayer-SDK-for-iOS.git
+```

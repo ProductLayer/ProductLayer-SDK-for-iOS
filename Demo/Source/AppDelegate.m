@@ -8,12 +8,18 @@
 
 #import "AppDelegate.h"
 #import "DTLog.h"
+#import "ProductLayer.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	DTLogSetLogLevel(DTLogLevelDebug);
+	
+	// sets the API key to be used by this app for authenticating with PL
+#ifdef PLY_API_KEY
+	[[PLYServer sharedServer] setAPIKey:PLY_API_KEY];
+#endif
 	
     // Override point for customization after application launch.
     return YES;
