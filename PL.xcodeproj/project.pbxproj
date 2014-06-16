@@ -360,11 +360,11 @@
 		A7B214FD183F842000C38635 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A7B21518183F842000C38635 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		A7B21721183F8A3800C38635 /* libProductLayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libProductLayer.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7B26EDC194F253A00E536A3 /* ProductLayerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductLayerConfig.h; sourceTree = "<group>"; };
 		A7B4418A183F90B900E8A170 /* DTFoundation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTFoundation.xcodeproj; path = DTFoundation/DTFoundation.xcodeproj; sourceTree = "<group>"; };
 		A7B4423C183F91E700E8A170 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A7B4423D183F91E700E8A170 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		A7B4423E183F91E700E8A170 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		A7B44245183F91E700E8A170 /* ProductLayerConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductLayerConfig.h; sourceTree = "<group>"; };
 		A7B44246183F91E700E8A170 /* PLYServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLYServer.h; sourceTree = "<group>"; };
 		A7B44247183F91E700E8A170 /* PLYServer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLYServer.m; sourceTree = "<group>"; };
 		A7B44248183F91E700E8A170 /* ProductLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductLayer.h; sourceTree = "<group>"; };
@@ -671,6 +671,7 @@
 		A7B4423B183F91E700E8A170 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				A7B26EDC194F253A00E536A3 /* ProductLayerConfig.h */,
 				A7B4423C183F91E700E8A170 /* AppDelegate.h */,
 				A7B4423D183F91E700E8A170 /* AppDelegate.m */,
 				A7B4423E183F91E700E8A170 /* main.m */,
@@ -697,7 +698,6 @@
 				A7B44246183F91E700E8A170 /* PLYServer.h */,
 				A7B44247183F91E700E8A170 /* PLYServer.m */,
 				A7B44248183F91E700E8A170 /* ProductLayer.h */,
-				A7B44245183F91E700E8A170 /* ProductLayerConfig.h */,
 				A7B442A2183F97B800E8A170 /* PLYConstants.h */,
 				A7B442A3183F97B800E8A170 /* PLYConstants.m */,
 			);
