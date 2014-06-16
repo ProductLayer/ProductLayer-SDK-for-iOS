@@ -1,6 +1,5 @@
 // all-inclusive header for Product Layer API
 
-#import "ProductLayerConfig.h"
 #import "PLYConstants.h"
 #import "PLYServer.h"
 
