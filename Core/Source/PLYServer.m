@@ -196,6 +196,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
    
 	
     // Add the api key to each request.
+   NSAssert(_APIKey, @"Setting an API Key is required to perform requests. Use [[PLYServer sharedServer] setAPIKey:]");
     [request setValue:_APIKey forHTTPHeaderField:@"API-KEY"];
 	
 	NSMutableString *debugMessage = [NSMutableString string];
@@ -440,8 +441,9 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
                                               retError = [self _errorWithCode:statusCode
                                                                       message:[NSHTTPURLResponse localizedStringForStatusCode:(NSInteger)statusCode]];
                                           }
-                                          
-                                          result = errorResponse;
+                                         
+                                         // error(s) means that there was no usable result
+                                          result = nil;
                                       }
                                       
                                       completion(result, retError);
