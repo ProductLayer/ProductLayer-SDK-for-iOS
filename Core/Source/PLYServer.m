@@ -685,7 +685,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 - (void)getLastUploadedImagesWithPage:(NSInteger)page andRPP:(NSInteger)rpp completion:(PLYCompletion)completion{
 	NSParameterAssert(completion);
     
-	NSString *function = [NSString stringWithFormat:@"/products/images/last?page=%d&records_per_page=%d", page, rpp];
+	NSString *function = [NSString stringWithFormat:@"/products/images/last?page=%ld&records_per_page=%ld", (long)page, (long)rpp];
 	NSString *path = [self _functionPathForFunction:function];
 	
 	[self _performMethodCallWithPath:path
