@@ -546,6 +546,11 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	
 	_accessToken = [defaults objectForKey:@"PLYServerAccessTokenKey"];
 	
+	if (!_accessToken)
+	{
+		return;
+	}
+	
 	NSString *nickname = [defaults objectForKey:@"PLYServerLoggedInUserNickname"];
 	
 	// Load User from Server
