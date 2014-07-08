@@ -6,9 +6,11 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
+#import "PLYEntity.h"
+
 @class PLYAuditor;
 
-@interface PLYUser : NSObject
+@interface PLYUser : PLYEntity
 {
     // The class identifier.
     NSString *Class;
@@ -88,10 +90,5 @@
 
 @property (nonatomic) bool following;
 @property (nonatomic) bool followed;
-
-+ (NSString *) classIdentifier;
-+ (PLYUser *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *) getDictionary;
 
 @end

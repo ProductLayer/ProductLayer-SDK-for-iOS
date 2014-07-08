@@ -18,14 +18,21 @@
 @synthesize qty;
 @synthesize prio;
 
-+ (NSString *) classIdentifier{
++ (NSString *)entityTypeIdentifier
+{
     return @"com.productlayer.ProductListItem";
 }
 
-+ (PLYListItem *)instanceFromDictionary:(NSDictionary *)aDictionary {
-    PLYListItem *instance = [[PLYListItem alloc] init];
-    [instance setAttributesFromDictionary:aDictionary];
-    return instance;
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary
+{
+	self = [super initWithDictionary:dictionary];
+	
+	if (self)
+	{
+		[self setAttributesFromDictionary:dictionary];
+	}
+	
+	return self;
 }
 
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary {
@@ -53,7 +60,7 @@
     }
 }
 
-- (NSDictionary *) getDictionary{
+- (NSDictionary *) dictionaryRepresentation{
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:1];
     
     if(Id){

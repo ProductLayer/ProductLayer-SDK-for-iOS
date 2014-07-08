@@ -43,24 +43,21 @@
 @synthesize followed;
 @synthesize following;
 
-+ (NSString *) classIdentifier{
++ (NSString *)entityTypeIdentifier
+{
     return @"com.productlayer.User";
 }
 
-+ (PLYUser *)instanceFromDictionary:(NSDictionary *)aDictionary {
-    
-    NSString *class = [aDictionary objectForKey:@"pl-class"];
-    
-    // Check if class identifier is valid for parsing.
-    if(class != nil && [class isEqualToString: [PLYUser classIdentifier]]){
-        PLYUser *instance = [[PLYUser alloc] init];
-        [instance setAttributesFromDictionary:aDictionary];
-        return instance;
-    }
-    
-    DTLogError(@"No valid classIdentifier found for PLYUser in dictionary: %@", aDictionary);
-    
-    return nil;
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary
+{
+	self = [super initWithDictionary:dictionary];
+	
+	if (self)
+	{
+		[self setAttributesFromDictionary:dictionary];
+	}
+	
+	return self;
 }
 
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary {
@@ -78,7 +75,7 @@
     if ([key isEqualToString:@"pl-created-by"]) {
         
         if ([value isKindOfClass:[NSDictionary class]]) {
-            self.createdBy = [PLYAuditor instanceFromDictionary:value];
+            self.createdBy = [[PLYAuditor alloc] initWithDictionary:value];
         }
         
     } else if ([key isEqualToString:@"pl-app"] || [key isEqualToString:@"pl-usr-roles"]) {
@@ -86,7 +83,7 @@
     } else if ([key isEqualToString:@"pl-upd-by"]) {
         
         if ([value isKindOfClass:[NSDictionary class]]) {
-            self.updatedBy = [PLYAuditor instanceFromDictionary:value];
+            self.updatedBy = [[PLYAuditor alloc] initWithDictionary:value];
         }
     } else {
         [super setValue:value forKey:key];
@@ -141,7 +138,7 @@
     }
 }
 
-- (NSDictionary *) getDictionary{
+- (NSDictionary *) dictionaryRepresentation{
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:1];
     
     if (Class) {
@@ -154,13 +151,13 @@
         [dict setObject:version forKey:@"pl-version"];
     }
     if (createdBy) {
-        [dict setObject:[createdBy getDictionary] forKey:@"pl-created-by"];
+        [dict setObject:[createdBy dictionaryRepresentation] forKey:@"pl-created-by"];
     }
     if (createdTime) {
         [dict setObject:createdTime forKey:@"pl-created-time"];
     }
     if (updatedBy) {
-        [dict setObject:[updatedBy getDictionary] forKey:@"pl-upd-by"];
+        [dict setObject:[updatedBy dictionaryRepresentation] forKey:@"pl-upd-by"];
     }
     if (updatedTime) {
         [dict setObject:updatedTime forKey:@"pl-upd-time"];

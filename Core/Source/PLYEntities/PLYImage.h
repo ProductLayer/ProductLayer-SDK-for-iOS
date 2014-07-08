@@ -6,12 +6,14 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
+#import "PLYEntity.h"
+
 @class PLYAuditor;
 
 /**
  * The metadata of the product images.
  **/
-@interface PLYProductImage : NSObject 
+@interface PLYImage : PLYEntity
 
 @property (nonatomic, strong) NSString *Class;
 @property (nonatomic, strong) NSString *Id;
@@ -31,13 +33,6 @@
 @property (nonatomic, strong) NSString *gtin;
 @property (nonatomic, strong) NSMutableArray *upVoters;
 @property (nonatomic, strong) NSMutableArray *downVoters;
-
-
-
-+ (NSString *) classIdentifier;
-+ (PLYProductImage *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *) getDictionary;
 
 - (NSString *)getUrlForWidth:(CGFloat)maxWidth andHeight:(CGFloat)maxHeight crop:(BOOL)crop;
 

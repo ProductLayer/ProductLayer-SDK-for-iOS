@@ -100,7 +100,7 @@
 	
 	newReview.language = [_localePicker.selectedLocale localeIdentifier];
     
-	[[PLYServer sharedServer] createReviewForGTIN:newReview.gtin dictionary:[newReview getDictionary] completion:^(id result, NSError *error) {
+	[[PLYServer sharedServer] createReviewForGTIN:newReview.gtin dictionary:[newReview dictionaryRepresentation] completion:^(id result, NSError *error) {
 		
 		if (error)
 		{

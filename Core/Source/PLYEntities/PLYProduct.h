@@ -6,10 +6,12 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
+#import "PLYEntity.h"
+
 @class PLYAuditor;
 @class PLYPackaging;
 
-@interface PLYProduct : NSObject
+@interface PLYProduct : PLYEntity
 {
     // The class identifier.
     NSString *Class;
@@ -85,9 +87,4 @@
 @property (nonatomic, strong) NSMutableDictionary *characteristics;
 @property (nonatomic, strong) NSMutableDictionary *nutritious;
 
-+ (NSString *) classIdentifier;
-
-+ (PLYProduct *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *) getDictionary;
 @end

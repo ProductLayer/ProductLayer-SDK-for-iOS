@@ -33,24 +33,21 @@
 @synthesize upVoter;
 @synthesize downVoter;
 
-+ (NSString *) classIdentifier{
++ (NSString *) entityTypeIdentifier
+{
     return @"com.productlayer.Review";
 }
 
-+ (PLYReview *)instanceFromDictionary:(NSDictionary *)aDictionary {
-    
-    NSString *class = [aDictionary objectForKey:@"pl-class"];
-    
-    // Check if class identifier is valid for parsing.
-    if(class != nil && [class isEqualToString: [PLYReview classIdentifier]]){
-        PLYReview *instance = [[PLYReview alloc] init];
-        [instance setAttributesFromDictionary:aDictionary];
-        return instance;
-    }
-    
-    DTLogError(@"No valid classIdentifier found for PLYReview in dictionary: %@", aDictionary);
-    
-    return nil;
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary
+{
+	self = [super initWithDictionary:dictionary];
+	
+	if (self)
+	{
+		[self setAttributesFromDictionary:dictionary];
+	}
+	
+	return self;
 }
 
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary {
@@ -68,7 +65,7 @@
     if ([key isEqualToString:@"pl-created-by"]) {
         
         if ([value isKindOfClass:[NSDictionary class]]) {
-            self.createdBy = [PLYAuditor instanceFromDictionary:value];
+            self.createdBy = [[PLYAuditor alloc] initWithDictionary:value];
         }
         
     } else if ([key isEqualToString:@"pl-rev-usr_upvotes"]) {
@@ -100,7 +97,7 @@
     } else if ([key isEqualToString:@"pl-upd-by"]) {
         
         if ([value isKindOfClass:[NSDictionary class]]) {
-            self.updatedBy = [PLYAuditor instanceFromDictionary:value];
+            self.updatedBy = [[PLYAuditor alloc] initWithDictionary:value];
         }
         
     } else {
@@ -149,7 +146,7 @@
     }
 }
 
-- (NSDictionary *) getDictionary{
+- (NSDictionary *) dictionaryRepresentation{
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:1];
     
     if (Class != nil) {
@@ -162,13 +159,13 @@
         [dict setObject:version forKey:@"pl-version"];
     }
     if (createdBy != nil) {
-        [dict setObject:[createdBy getDictionary] forKey:@"pl-created-by"];
+        [dict setObject:[createdBy dictionaryRepresentation] forKey:@"pl-created-by"];
     }
     if (createdTime != nil) {
         [dict setObject:createdTime forKey:@"pl-created-time"];
     }
     if (updatedBy != nil) {
-        [dict setObject:[updatedBy getDictionary] forKey:@"pl-upd-by"];
+        [dict setObject:[updatedBy dictionaryRepresentation] forKey:@"pl-upd-by"];
     }
     if (updatedTime != nil) {
         [dict setObject:updatedTime forKey:@"pl-upd-time"];

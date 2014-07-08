@@ -14,14 +14,6 @@
 @synthesize code;
 @synthesize throwable;
 
-+ (PLYErrorMessage *)instanceFromDictionary:(NSDictionary *)aDictionary {
-    
-    PLYErrorMessage *instance = [[PLYErrorMessage alloc] init];
-    [instance setAttributesFromDictionary:aDictionary];
-    return instance;
-    
-}
-
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary {
     
     if (![aDictionary isKindOfClass:[NSDictionary class]]) {

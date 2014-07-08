@@ -6,7 +6,9 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
-@interface PLYPackaging : NSObject
+#import "PLYEntity.h"
+
+@interface PLYPackaging : PLYEntity
 {
     // All what's packed into.
     NSString *contains;
@@ -27,7 +29,4 @@
 @property (nonatomic, copy) NSString *description;
 @property (nonatomic, copy) NSNumber *unit;
 
-+ (PLYPackaging *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *) getDictionary;
 @end

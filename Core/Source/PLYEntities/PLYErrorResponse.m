@@ -13,14 +13,6 @@
 
 @synthesize errors;
 
-+ (PLYErrorResponse *)instanceFromDictionary:(NSDictionary *)aDictionary {
-    
-    PLYErrorResponse *instance = [[PLYErrorResponse alloc] init];
-    [instance setAttributesFromDictionary:aDictionary];
-    return instance;
-    
-}
-
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary {
     
     if (![aDictionary isKindOfClass:[NSDictionary class]]) {
@@ -37,8 +29,9 @@
         if ([value isKindOfClass:[NSArray class]]) {
             
             NSMutableArray *myMembers = [NSMutableArray arrayWithCapacity:[(NSArray *)value count]];
-            for (id valueMember in value) {
-                [myMembers addObject:[PLYErrorMessage instanceFromDictionary:valueMember]];
+            for (id valueMember in value)
+				{
+                [myMembers addObject:[[PLYErrorMessage alloc] initWithDictionary:valueMember]];
             }
             
             self.errors = myMembers;

@@ -6,9 +6,11 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
+#import "PLYEntity.h"
+
 @class PLYAuditor;
 
-@interface PLYReview : NSObject
+@interface PLYReview : PLYEntity
 {
     // The class identifier.
     NSString *Class;
@@ -64,12 +66,5 @@
 @property (nonatomic, strong) NSNumber *votingScore;
 @property (nonatomic, strong) NSArray *upVoter;
 @property (nonatomic, strong) NSArray *downVoter;
-
-
-
-+ (NSString *) classIdentifier;
-+ (PLYReview *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *) getDictionary;
 
 @end

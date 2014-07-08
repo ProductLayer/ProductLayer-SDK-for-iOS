@@ -6,10 +6,12 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
+#import "PLYEntity.h"
+
 /**
  * This object identifies a product in a product list.
  **/
-@interface PLYListItem : NSObject {
+@interface PLYListItem : PLYEntity {
     NSString *Id;
     // The gtin (barcode) of the product.
     NSString *gtin;
@@ -26,11 +28,5 @@
 @property (nonatomic, strong) NSString *note;
 @property (nonatomic, strong) NSNumber *qty;
 @property (nonatomic, strong) NSNumber *prio;
-
-
-+ (NSString *) classIdentifier;
-+ (PLYListItem *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *) getDictionary;
 
 @end

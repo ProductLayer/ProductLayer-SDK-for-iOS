@@ -23,6 +23,8 @@
 /* Begin PBXBuildFile section */
 		A71C2BBB1843AD9B00B77DB4 /* libDTDownload_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A71C2B9D1843AD8D00B77DB4 /* libDTDownload_iOS.a */; };
 		A71C2BBD1843ADA600B77DB4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71C2BBC1843ADA600B77DB4 /* CoreData.framework */; };
+		A7548AEB196C2E7C000B72EB /* PLYEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548AEA196C2E7C000B72EB /* PLYEntity.m */; };
+		A7548B24196C4C16000B72EB /* PLYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548B23196C4C16000B72EB /* PLYImage.m */; };
 		A7B214FA183F842000C38635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214F9183F842000C38635 /* Foundation.framework */; };
 		A7B214FC183F842000C38635 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FB183F842000C38635 /* CoreGraphics.framework */; };
 		A7B214FE183F842000C38635 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FD183F842000C38635 /* UIKit.framework */; };
@@ -92,7 +94,6 @@
 		C98CD255190F9FB00035647C /* register_user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C98CD253190F9FB00035647C /* register_user@2x.png */; };
 		C98CD25C190FA86B0035647C /* no_image.png in Resources */ = {isa = PBXBuildFile; fileRef = C98CD25A190FA86B0035647C /* no_image.png */; };
 		C98CD25D190FA86B0035647C /* no_image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C98CD25B190FA86B0035647C /* no_image@2x.png */; };
-		C98CD2651910E0D70035647C /* PLYProductImage.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D31F74190A7C0F00C91A08 /* PLYProductImage.m */; };
 		C98CD2661910E0D70035647C /* PLYAuditor.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D31F6B190A742500C91A08 /* PLYAuditor.m */; };
 		C98CD2671910E0D70035647C /* PLYPackaging.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D31F6D190A742500C91A08 /* PLYPackaging.m */; };
 		C98CD2681910E0D70035647C /* PLYProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D31F6F190A742500C91A08 /* PLYProduct.m */; };
@@ -354,6 +355,10 @@
 /* Begin PBXFileReference section */
 		A71C2B921843AD8C00B77DB4 /* DTDownload.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTDownload.xcodeproj; path = DTDownload/DTDownload.xcodeproj; sourceTree = "<group>"; };
 		A71C2BBC1843ADA600B77DB4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		A7548AE9196C2E7C000B72EB /* PLYEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYEntity.h; path = PLYEntities/PLYEntity.h; sourceTree = "<group>"; };
+		A7548AEA196C2E7C000B72EB /* PLYEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYEntity.m; path = PLYEntities/PLYEntity.m; sourceTree = "<group>"; };
+		A7548B22196C4C16000B72EB /* PLYImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYImage.h; path = PLYEntities/PLYImage.h; sourceTree = "<group>"; };
+		A7548B23196C4C16000B72EB /* PLYImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYImage.m; path = PLYEntities/PLYImage.m; sourceTree = "<group>"; };
 		A7B214F6183F842000C38635 /* PL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7B214F9183F842000C38635 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A7B214FB183F842000C38635 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -514,8 +519,6 @@
 		C9D31F6D190A742500C91A08 /* PLYPackaging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYPackaging.m; path = PLYEntities/PLYPackaging.m; sourceTree = "<group>"; };
 		C9D31F6E190A742500C91A08 /* PLYProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYProduct.h; path = PLYEntities/PLYProduct.h; sourceTree = "<group>"; };
 		C9D31F6F190A742500C91A08 /* PLYProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYProduct.m; path = PLYEntities/PLYProduct.m; sourceTree = "<group>"; };
-		C9D31F73190A7C0F00C91A08 /* PLYProductImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYProductImage.h; path = PLYEntities/PLYProductImage.h; sourceTree = "<group>"; };
-		C9D31F74190A7C0F00C91A08 /* PLYProductImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYProductImage.m; path = PLYEntities/PLYProductImage.m; sourceTree = "<group>"; };
 		C9D31F76190ABE0E00C91A08 /* PLYReview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYReview.h; path = PLYEntities/PLYReview.h; sourceTree = "<group>"; };
 		C9D31F77190ABE0E00C91A08 /* PLYReview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYReview.m; path = PLYEntities/PLYReview.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -982,10 +985,10 @@
 		C9D31F45190A705200C91A08 /* PLYEntities */ = {
 			isa = PBXGroup;
 			children = (
-				C9D31F73190A7C0F00C91A08 /* PLYProductImage.h */,
-				C9D31F74190A7C0F00C91A08 /* PLYProductImage.m */,
 				C9D31F6A190A742500C91A08 /* PLYAuditor.h */,
 				C9D31F6B190A742500C91A08 /* PLYAuditor.m */,
+				A7548B22196C4C16000B72EB /* PLYImage.h */,
+				A7548B23196C4C16000B72EB /* PLYImage.m */,
 				C9D31F6C190A742500C91A08 /* PLYPackaging.h */,
 				C9D31F6D190A742500C91A08 /* PLYPackaging.m */,
 				C9D31F6E190A742500C91A08 /* PLYProduct.h */,
@@ -1004,6 +1007,8 @@
 				C97FAA1B191CCA4D00144D2C /* PLYErrorResponse.m */,
 				C97FAADE1921FCFA00144D2C /* PLYProductCategory.h */,
 				C97FAADF1921FCFA00144D2C /* PLYProductCategory.m */,
+				A7548AE9196C2E7C000B72EB /* PLYEntity.h */,
+				A7548AEA196C2E7C000B72EB /* PLYEntity.m */,
 			);
 			name = PLYEntities;
 			sourceTree = "<group>";
@@ -1398,16 +1403,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C98CD2651910E0D70035647C /* PLYProductImage.m in Sources */,
 				C98CD2661910E0D70035647C /* PLYAuditor.m in Sources */,
 				C98CD2671910E0D70035647C /* PLYPackaging.m in Sources */,
 				C98CD2681910E0D70035647C /* PLYProduct.m in Sources */,
+				A7548B24196C4C16000B72EB /* PLYImage.m in Sources */,
 				C97FAA18191CCA3400144D2C /* PLYErrorMessage.m in Sources */,
 				C98CD2691910E0D70035647C /* PLYReview.m in Sources */,
 				C98CD26A1910E0D70035647C /* PLYList.m in Sources */,
 				C97FAA1C191CCA4D00144D2C /* PLYErrorResponse.m in Sources */,
 				C98CD26B1910E0D70035647C /* PLYListItem.m in Sources */,
 				C97FAAE11921FD1900144D2C /* PLYProductCategory.m in Sources */,
+				A7548AEB196C2E7C000B72EB /* PLYEntity.m in Sources */,
 				A7B4428C183F937D00E8A170 /* PLYServer.m in Sources */,
 				C9ADBDD41911502B004C81B3 /* PLYUser.m in Sources */,
 				A7B442A4183F97B800E8A170 /* PLYConstants.m in Sources */,

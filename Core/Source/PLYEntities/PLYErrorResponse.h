@@ -6,17 +6,18 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
+#import "PLYEntity.h"
+
 /**
  * This object will be returned if an error occurred.
  **/
-@interface PLYErrorResponse : NSObject {
+@interface PLYErrorResponse : PLYEntity
+{
     // A list of error messages.
     NSArray *errors;
 }
 
 @property (nonatomic, copy) NSArray *errors;
 
-+ (PLYErrorResponse *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
 
 @end

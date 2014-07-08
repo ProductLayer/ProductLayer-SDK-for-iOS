@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
-#import "PLYProductImage.h"
+#import "PLYImage.h"
 
 #import "PLYAuditor.h"
 #import "DTLog.h"
@@ -17,7 +17,7 @@
 @end
 
 
-@implementation PLYProductImage
+@implementation PLYImage
 {
    
    // The class identifier.
@@ -77,25 +77,9 @@
 @synthesize upVoters;
 @synthesize downVoters;
 
-+ (NSString *) classIdentifier{
++ (NSString *)entityTypeIdentifier
+{
     return @"com.productlayer.Image";
-}
-
-+ (PLYProductImage *)instanceFromDictionary:(NSDictionary *)aDictionary {
-    
-    NSString *class = [aDictionary objectForKey:@"pl-class"];
-    
-    // Check if class identifier is valid for parsing.
-    if(class != nil && [class isEqualToString: [PLYProductImage classIdentifier]]){
-        PLYProductImage *instance = [[PLYProductImage alloc] init];
-        [instance setAttributesFromDictionary:aDictionary];
-        return instance;
-    }
-    
-    DTLogError(@"No valid classIdentifier found for PLYProductImage in dictionary: %@", aDictionary);
-    
-    return nil;
-
 }
 
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary {
@@ -113,20 +97,20 @@
     if ([key isEqualToString:@"pl-created-by"]) {
 
         if ([value isKindOfClass:[NSDictionary class]]) {
-            self.createdBy = [PLYAuditor instanceFromDictionary:value];
+            self.createdBy = [[PLYAuditor alloc] initWithDictionary:value];
         }
 
     } else if ([key isEqualToString:@"pl-upd-by"]) {
 
         if ([value isKindOfClass:[NSDictionary class]]) {
-            self.updatedBy = [PLYAuditor instanceFromDictionary:value];
+            self.updatedBy = [[PLYAuditor alloc] initWithDictionary:value];
         }
 
     } else if ([key isEqualToString:@"pl-img-usr_upvotes"]) {
         self.upVoters = [NSMutableArray arrayWithCapacity:1];
         if ([value isKindOfClass:[NSArray class]]) {
             for(NSDictionary *user in value){
-                [self.upVoters addObject:[PLYAuditor instanceFromDictionary:user]];
+                [self.upVoters addObject:[[PLYAuditor alloc] initWithDictionary:user]];
             }
         }
         
@@ -134,7 +118,7 @@
         self.downVoters = [NSMutableArray arrayWithCapacity:1];
         if ([value isKindOfClass:[NSArray class]]) {
             for(NSDictionary *user in value){
-                [self.downVoters addObject:[PLYAuditor instanceFromDictionary:user]];
+                [self.downVoters addObject:[[PLYAuditor alloc] initWithDictionary:user]];
             }
         }
     } else {
@@ -177,7 +161,7 @@
     }
 }
 
-- (NSDictionary *) getDictionary{
+- (NSDictionary *) dictionaryRepresentation{
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:1];
     
     if (Class != nil) {
@@ -190,13 +174,13 @@
         [dict setObject:version forKey:@"pl-version"];
     }
     if (createdBy != nil) {
-        [dict setObject:[createdBy getDictionary] forKey:@"pl-created-by"];
+        [dict setObject:[createdBy dictionaryRepresentation] forKey:@"pl-created-by"];
     }
     if (createdTime != nil) {
         [dict setObject:createdTime forKey:@"pl-created-time"];
     }
     if (updatedBy != nil) {
-        [dict setObject:[updatedBy getDictionary] forKey:@"pl-upd-by"];
+        [dict setObject:[updatedBy dictionaryRepresentation] forKey:@"pl-upd-by"];
     }
     if (updatedTime != nil) {
         [dict setObject:updatedTime forKey:@"pl-upd-time"];
@@ -226,7 +210,7 @@
     if(upVoters != nil && [upVoters count] > 0){
         NSMutableArray *tmpArray = [NSMutableArray arrayWithCapacity:[upVoters count]];
         for(PLYAuditor *user in upVoters){
-            [tmpArray addObject:[user getDictionary]];
+            [tmpArray addObject:[user dictionaryRepresentation]];
         }
         
         [dict setObject:tmpArray forKey:@"pl-img-usr_upvotes"];
@@ -235,7 +219,7 @@
     if(downVoters != nil && [downVoters count] > 0){
         NSMutableArray *tmpArray = [NSMutableArray arrayWithCapacity:[downVoters count]];
         for(PLYAuditor *user in downVoters){
-            [tmpArray addObject:[user getDictionary]];
+            [tmpArray addObject:[user dictionaryRepresentation]];
         }
         
         [dict setObject:tmpArray forKey:@"pl-img-usr_downvotes"];

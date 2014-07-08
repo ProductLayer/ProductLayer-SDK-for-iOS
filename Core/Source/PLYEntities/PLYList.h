@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
+#import "PLYEntity.h"
+
 @class PLYAuditor;
 
 #define kLIST_WISHLIST  @"pl-list-type-wish"
@@ -22,7 +24,8 @@
 /**
  * With the product list you can group products which are important to you. Like a wishlist for your birthday.
  **/
-@interface PLYList : NSObject {
+@interface PLYList : PLYEntity
+{
     // The class identifier.
     NSString *Class;
     // The object id.
@@ -74,11 +77,6 @@
 
 @property (nonatomic, strong) NSMutableArray *listItems;
 
-
-+ (NSString *) classIdentifier;
-+ (PLYList *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *) getDictionary;
 
 - (BOOL) isValidForSaving;
 

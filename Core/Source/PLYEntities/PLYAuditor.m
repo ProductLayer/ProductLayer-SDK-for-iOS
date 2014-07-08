@@ -24,14 +24,6 @@
 @synthesize appId;
 @synthesize userNickname;
 
-+ (PLYAuditor *)instanceFromDictionary:(NSDictionary *)aDictionary {
-
-    PLYAuditor *instance = [[PLYAuditor alloc] init];
-    [instance setAttributesFromDictionary:aDictionary];
-    return instance;
-
-}
-
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary {
 
     if (![aDictionary isKindOfClass:[NSDictionary class]]) {
@@ -53,7 +45,7 @@
     }
 }
 
-- (NSDictionary *) getDictionary{
+- (NSDictionary *) dictionaryRepresentation{
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:1];
     
     if (userId != nil) {

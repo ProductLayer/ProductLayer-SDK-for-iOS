@@ -6,10 +6,12 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
+#import "PLYEntity.h"
+
 /**
  * The error message with all needed information.
  **/
-@interface PLYErrorMessage : NSObject {
+@interface PLYErrorMessage : PLYEntity {
     // The error message.
     NSString *message;
     // The productlayer error code.
@@ -22,7 +24,5 @@
 @property (nonatomic, copy) NSNumber *code;
 @property (nonatomic, copy) NSString *throwable;
 
-+ (PLYErrorMessage *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
 
 @end

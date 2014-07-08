@@ -404,8 +404,9 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 													if([jsonObject isKindOfClass:[NSArray class]] && [jsonObject count] != 0){
 														NSMutableArray *objectArray = [NSMutableArray arrayWithCapacity:1];
 														
-														for(NSDictionary *dictObject in jsonObject){
-															id object = [self parseObjectForDictionary:dictObject];
+														for(NSDictionary *dictObject in jsonObject)
+														{
+															id object = [PLYEntity entityFromDictionary:dictObject];
 															
 															if(object == nil)
 																break;
@@ -420,7 +421,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 															result = jsonObject;
 														}
 													} else if ([jsonObject isKindOfClass:[NSDictionary class]]){
-														id object = [self parseObjectForDictionary:jsonObject];
+														id object = [PLYEntity entityFromDictionary:jsonObject];
 														
 														if(object == nil) {
 															result = jsonObject;
@@ -432,7 +433,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 												}
 												
 												if (statusCode >= 400) {
-													PLYErrorResponse *errorResponse = [PLYErrorResponse instanceFromDictionary:result];
+													PLYErrorResponse *errorResponse = [[PLYErrorResponse alloc] initWithDictionary:result];
 													
 													if(errorResponse && [errorResponse.errors count] > 0){
 														retError = [self _errorWithCode:statusCode
@@ -451,32 +452,6 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	
 	// tasks are created suspended, this starts it
 	[task resume];
-}
-
-/**
- * Try to parse the dictionary and return an object if possible.
- **/
-- (id) parseObjectForDictionary:(NSDictionary *)_dict{
-	NSString *class = [_dict objectForKey:@"pl-class"];
-	
-	if(class == nil || [class isEqual:@""]){
-		DTLogDebug(@"Couldn't parse object from dictionary: %@", _dict);
-		return nil;
-	}
-	
-	if([class isEqual:PLYProduct.classIdentifier]){
-		return [PLYProduct instanceFromDictionary:_dict];
-	} else if([class isEqual:PLYProductImage.classIdentifier]){
-		return [PLYProductImage instanceFromDictionary:_dict];
-	} else if([class isEqual:PLYReview.classIdentifier]){
-		return [PLYReview instanceFromDictionary:_dict];
-	} else if([class isEqual:PLYUser.classIdentifier]){
-		return [PLYUser instanceFromDictionary:_dict];
-	} else if([class isEqual:PLYList.classIdentifier]){
-		return [PLYList instanceFromDictionary:_dict];
-	}
-	
-	return nil;
 }
 
 - (NSString *)_functionPathForFunction:(NSString *)function
@@ -951,7 +926,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	NSString *function = @"lists";
 	NSString *path = [self _functionPathForFunction:function];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:[list getDictionary] completion:completion];
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:[list dictionaryRepresentation] completion:completion];
 }
 
 /**
@@ -1009,7 +984,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	NSString *function = [NSString stringWithFormat:@"list/%@", list.Id];
 	NSString *path = [self _functionPathForFunction:function];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:[list getDictionary] completion:completion];
+	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:[list dictionaryRepresentation] completion:completion];
 }
 
 /**
@@ -1045,7 +1020,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	NSString *function = [NSString stringWithFormat:@"list/%@/product/%@", listId,listItem.gtin];
 	NSString *path = [self _functionPathForFunction:function];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:[listItem getDictionary] completion:completion];
+	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:[listItem dictionaryRepresentation] completion:completion];
 }
 
 /**

@@ -15,14 +15,6 @@
 @synthesize description;
 @synthesize unit;
 
-+ (PLYPackaging *)instanceFromDictionary:(NSDictionary *)aDictionary {
-
-    PLYPackaging *instance = [[PLYPackaging alloc] init];
-    [instance setAttributesFromDictionary:aDictionary];
-    return instance;
-
-}
-
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary {
 
     if (![aDictionary isKindOfClass:[NSDictionary class]]) {
@@ -46,7 +38,7 @@
     } 
 }
 
-- (NSDictionary *) getDictionary{
+- (NSDictionary *) dictionaryRepresentation{
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:1];
     
     if (contains != nil) {

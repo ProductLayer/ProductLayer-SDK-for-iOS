@@ -6,14 +6,12 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
-@interface PLYAuditor : NSObject 
+#import "PLYEntity.h"
+
+@interface PLYAuditor : PLYEntity
 
 @property (nonatomic, copy) NSString *userId;
 @property (nonatomic, copy) NSString *appId;
 @property (nonatomic, copy) NSString *userNickname;
-
-+ (PLYAuditor *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *) getDictionary;
 
 @end

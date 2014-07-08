@@ -132,7 +132,7 @@
                     successfullOperations ++;
                     
                     [self dismissIfAllOperationFinished];
-                    [list setValuesForKeysWithDictionary:[result getDictionary]];
+                    [list setValuesForKeysWithDictionary:[result dictionaryRepresentation]];
                 });
             }
         }];
