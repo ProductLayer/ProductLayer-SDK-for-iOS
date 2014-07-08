@@ -44,7 +44,7 @@
 @synthesize following;
 
 + (NSString *) classIdentifier{
-    return @"com.productlayer.core.domain.beans.User";
+    return @"com.productlayer.User";
 }
 
 + (PLYUser *)instanceFromDictionary:(NSDictionary *)aDictionary {

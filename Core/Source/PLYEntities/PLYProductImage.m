@@ -78,7 +78,7 @@
 @synthesize downVoters;
 
 + (NSString *) classIdentifier{
-    return @"com.productlayer.core.domain.beans.ProductImage";
+    return @"com.productlayer.Image";
 }
 
 + (PLYProductImage *)instanceFromDictionary:(NSDictionary *)aDictionary {

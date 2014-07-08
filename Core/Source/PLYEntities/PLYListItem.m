@@ -19,7 +19,7 @@
 @synthesize prio;
 
 + (NSString *) classIdentifier{
-    return @"com.productlayer.core.domain.beans.lists.ProductListItem";
+    return @"com.productlayer.ProductListItem";
 }
 
 + (PLYListItem *)instanceFromDictionary:(NSDictionary *)aDictionary {

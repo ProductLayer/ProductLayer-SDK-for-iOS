@@ -34,7 +34,7 @@
 @synthesize downVoter;
 
 + (NSString *) classIdentifier{
-    return @"com.productlayer.core.domain.beans.Review";
+    return @"com.productlayer.Review";
 }
 
 + (PLYReview *)instanceFromDictionary:(NSDictionary *)aDictionary {

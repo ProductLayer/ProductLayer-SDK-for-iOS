@@ -34,7 +34,7 @@
 @synthesize listItems;
 
 + (NSString *) classIdentifier{
-    return @"com.productlayer.core.domain.beans.lists.ProductList";
+    return @"com.productlayer.ProductList";
 }
 
 + (PLYList *)instanceFromDictionary:(NSDictionary *)aDictionary {

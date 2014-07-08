@@ -37,7 +37,7 @@
 @synthesize nutritious;
 
 + (NSString *) classIdentifier{
-    return @"com.productlayer.core.domain.beans.Product";
+    return @"com.productlayer.Product";
 }
 
 + (PLYProduct *)instanceFromDictionary:(NSDictionary *)aDictionary {
