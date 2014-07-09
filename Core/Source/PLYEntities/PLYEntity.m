@@ -7,19 +7,14 @@
 //
 
 #import "PLYEntity.h"
-
 #import <objc/runtime.h>
-#import "PLYImage.h"
 
+// lookup table mapping class strings to objc classes
 NSDictionary *_entityClassLookup;
 
-
 @implementation PLYEntity
-{
-	
-}
 
-
+// helper function to get all sub-classes of PLYEntity
 NSArray *PLYAllEntityClasses()
 {
 	int numClasses = objc_getClassList(NULL, 0);
@@ -30,15 +25,21 @@ NSArray *PLYAllEntityClasses()
 	numClasses = objc_getClassList(classes, numClasses);
 	
 	NSMutableArray *result = [NSMutableArray array];
+	
 	for (NSInteger i = 0; i < numClasses; i++) {
 		Class superClass = classes[i];
-		do{
-			superClass = class_getSuperclass(superClass);
-		} while(superClass && superClass != parentClass);
 		
-		if (superClass == nil) {
+		do
+		{
+			superClass = class_getSuperclass(superClass);
+		}
+		while (superClass && superClass != parentClass);
+		
+		if (!superClass)
+		{
 			continue;
 		}
+		
 		[result addObject:classes[i]];
 	}
 	free(classes);
@@ -106,6 +107,7 @@ NSArray *PLYAllEntityClasses()
 	
 	if (self)
 	{
+		[self setValuesForKeysWithDictionary:dictionary];
 	}
 	
 	return self;
