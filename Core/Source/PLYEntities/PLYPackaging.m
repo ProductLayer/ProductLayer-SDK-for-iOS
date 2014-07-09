@@ -34,24 +34,24 @@
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:1];
     
-    if (contains)
+    if (_contains)
 	 {
-        [dict setObject:contains forKey:@"pl-prod-pkg-cont"];
+        [dict setObject:_contains forKey:@"pl-prod-pkg-cont"];
     }
 	
-    if (name)
+    if (_name)
 	 {
-        [dict setObject:name forKey:@"pl-prod-pkg-name"];
+        [dict setObject:_name forKey:@"pl-prod-pkg-name"];
     }
 	
-    if (description)
+    if (_description)
 	 {
-        [dict setObject:description forKey:@"pl-prod-pkg-desc"];
+        [dict setObject:_description forKey:@"pl-prod-pkg-desc"];
     }
 	
-    if (unit)
+    if (_unit)
 	 {
-        [dict setObject:unit forKey:@"pl-prod-pkg-units"];
+        [dict setObject:_unit forKey:@"pl-prod-pkg-units"];
     }
     
     return dict;
