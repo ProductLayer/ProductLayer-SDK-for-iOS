@@ -4,7 +4,7 @@
 #import "PLYServer.h"
 
 #import "PLYProduct.h"
-#import "PLYProductImage.h"
+#import "PLYImage.h"
 #import "PLYProductCategory.h"
 #import "PLYAuditor.h"
 #import "PLYPackaging.h"
