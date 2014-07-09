@@ -10,8 +10,23 @@
 
 @interface PLYAuditor : PLYEntity
 
+/**
+ @name Properties
+ */
+
+/**
+ The id of the user who created/updated the object
+ */
 @property (nonatomic, copy) NSString *userId;
+
+/**
+ The id of the application the object was created/updated with.
+ */
 @property (nonatomic, copy) NSString *appId;
+
+/**
+ The nickname of the user
+ */
 @property (nonatomic, copy) NSString *userNickname;
 
 @end
