@@ -9,24 +9,29 @@
 #import "PLYEntity.h"
 
 @interface PLYPackaging : PLYEntity
-{
-    // All what's packed into.
-    NSString *contains;
-    
-    // The name of the package.
-    NSString *name;
-    
-    // The package description.
-    NSString *description;
-    
-    // The units per package.
-    NSNumber *unit;
 
-}
+/**
+ @name Properties
+ */
 
+/**
+ All what's packed into.
+ */
 @property (nonatomic, copy) NSString *contains;
+
+/**
+ The name of the package.
+ */
 @property (nonatomic, copy) NSString *name;
+
+/** 
+ The package description.
+ */
 @property (nonatomic, copy) NSString *description;
+
+/**
+ The units per package.
+ */
 @property (nonatomic, copy) NSNumber *unit;
 
 @end

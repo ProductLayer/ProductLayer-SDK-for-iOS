@@ -10,53 +10,51 @@
 
 @implementation PLYPackaging
 
-@synthesize contains;
-@synthesize name;
-@synthesize description;
-@synthesize unit;
-
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary {
-
-    if (![aDictionary isKindOfClass:[NSDictionary class]]) {
-        return;
-    }
-
-    [self setValuesForKeysWithDictionary:aDictionary];
-
-}
-
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key {
-
-    if ([key isEqualToString:@"pl-prod-pkg-cont"]) {
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+    if ([key isEqualToString:@"pl-prod-pkg-cont"])
+	 {
         [self setValue:value forKey:@"contains"];
-    } else if ([key isEqualToString:@"pl-prod-pkg-name"]) {
+    }
+	 else if ([key isEqualToString:@"pl-prod-pkg-name"])
+	 {
         [self setValue:value forKey:@"name"];
-    } else if ([key isEqualToString:@"pl-prod-pkg-desc"]) {
+    }
+	 else if ([key isEqualToString:@"pl-prod-pkg-desc"])
+	 {
         [self setValue:value forKey:@"description"];
-    } else if ([key isEqualToString:@"pl-prod-pkg-units"]) {
+    }
+	 else if ([key isEqualToString:@"pl-prod-pkg-units"])
+	 {
         [self setValue:value forKey:@"unit"];
     } 
 }
 
-- (NSDictionary *) dictionaryRepresentation{
+- (NSDictionary *) dictionaryRepresentation
+{
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:1];
     
-    if (contains != nil) {
+    if (contains)
+	 {
         [dict setObject:contains forKey:@"pl-prod-pkg-cont"];
     }
-    if (name != nil) {
+	
+    if (name)
+	 {
         [dict setObject:name forKey:@"pl-prod-pkg-name"];
     }
-    if (description != nil) {
+	
+    if (description)
+	 {
         [dict setObject:description forKey:@"pl-prod-pkg-desc"];
     }
-    if (unit != nil) {
+	
+    if (unit)
+	 {
         [dict setObject:unit forKey:@"pl-prod-pkg-units"];
     }
     
     return dict;
 }
-
-
 
 @end
