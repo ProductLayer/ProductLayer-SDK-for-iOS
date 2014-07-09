@@ -285,4 +285,13 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 
 - (void)unfollowUserWithNickname:(NSString *)nickname completion:(PLYCompletion)completion;
 
+/**
+ @name Timelines
+ */
+
+/**
+ The the latest timeline entries
+ */
+- (void)timelineForAllUsersWithCount:(NSUInteger)count completion:(PLYCompletion)completion;
+
 @end

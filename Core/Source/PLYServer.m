@@ -45,9 +45,9 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 {
 	self = [super init];
 	
-	if (self) {
+	if (self)
+	{
 		_hostURL = PLY_ENDPOINT_URL;
-		
 		_configuration = configuration;
 	}
 	
@@ -667,7 +667,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 - (void)getLastUploadedImagesWithPage:(NSInteger)page andRPP:(NSInteger)rpp completion:(PLYCompletion)completion{
 	NSParameterAssert(completion);
 	
-	NSString *function = [NSString stringWithFormat:@"/products/images/last?page=%ld&records_per_page=%ld", (long)page, (long)rpp];
+	NSString *function = [NSString stringWithFormat:@"/images/last?page=%ld&records_per_page=%ld", (long)page, (long)rpp];
 	NSString *path = [self _functionPathForFunction:function];
 	
 	[self _performMethodCallWithPath:path
@@ -1101,15 +1101,19 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
  * Get the avatar of an specific user with nickname.
  **/
 - (void) getAvatarImageUrlFromUser:(PLYUser *)user
-								completion:(PLYCompletion)completion{
+								completion:(PLYCompletion)completion
+{
 	NSParameterAssert(user);
 	NSParameterAssert(completion);
 	
 	NSURL *url = nil;
 	
-	if(user.avatarUrl) {
+	if(user.avatarUrl)
+	{
 		url = [NSURL URLWithString:user.avatarUrl];
-	} else if(user.nickname){
+	}
+	else if(user.nickname)
+	{
 		NSString *function = [NSString stringWithFormat:@"user/%@/avatar", user.nickname];
 		NSString *path = [self _functionPathForFunction:function];
 		
@@ -1214,6 +1218,21 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	
 	[self _performMethodCallWithPath:path parameters:nil completion:completion];
 }
+
+#pragma mark - Timelines
+
+- (void)timelineForAllUsersWithCount:(NSUInteger)count completion:(PLYCompletion)completion
+{
+	NSParameterAssert(completion);
+	
+	NSString *function = @"/timeline";
+	NSString *path = [self _functionPathForFunction:function];
+	
+	[self _performMethodCallWithPath:path parameters:nil completion:completion];
+}
+
+
+#pragma mark - Properties
 
 // lazy initializer for URL session
 - (NSURLSession *)session {
