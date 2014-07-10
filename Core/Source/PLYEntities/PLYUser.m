@@ -174,6 +174,7 @@
 		[dict setObject:[NSNumber numberWithBool:self.followed] forKey:@"pl-usr-followed"];
 	}
 	
-	return dict;
+	// return immutable
+	return [dict copy];
 }
 @end

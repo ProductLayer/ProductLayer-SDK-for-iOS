@@ -144,6 +144,7 @@ NSArray *PLYAllEntityClasses()
 	}
 }
 
+// create dict representation with basic common values
 - (NSDictionary *)dictionaryRepresentation
 {
 	NSMutableDictionary *dict = [NSMutableDictionary dictionary];

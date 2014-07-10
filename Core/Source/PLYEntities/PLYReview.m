@@ -28,7 +28,6 @@
 		{
 			self.createdBy = [[PLYAuditor alloc] initWithDictionary:value];
 		}
-		
 	}
 	else if ([key isEqualToString:@"pl-rev-usr_upvotes"])
 	{
@@ -45,7 +44,6 @@
 			self.upVoter = myMembers;
 			
 		}
-		
 	}
 	else if ([key isEqualToString:@"pl-rev-usr_downvotes"])
 	{
@@ -64,12 +62,10 @@
 	}
 	else if ([key isEqualToString:@"pl-upd-by"])
 	{
-		
 		if ([value isKindOfClass:[NSDictionary class]])
 		{
 			self.updatedBy = [[PLYAuditor alloc] initWithDictionary:value];
 		}
-		
 	}
 	else
 	{

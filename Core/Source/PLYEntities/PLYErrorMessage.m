@@ -12,18 +12,18 @@
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key
 {
-    if ([key isEqualToString:@"message"])
-	 {
-        [self setValue:value forKey:@"message"];
-    }
-	 else if ([key isEqualToString:@"code"])
-	 {
-        [self setValue:value forKey:@"code"];
-    }
-	 else if ([key isEqualToString:@"throwable"])
-	 {
-        [self setValue:value forKey:@"throwable"];
-    }
+	if ([key isEqualToString:@"message"])
+	{
+		[self setValue:value forKey:@"message"];
+	}
+	else if ([key isEqualToString:@"code"])
+	{
+		[self setValue:value forKey:@"code"];
+	}
+	else if ([key isEqualToString:@"throwable"])
+	{
+		[self setValue:value forKey:@"throwable"];
+	}
 	else
 	{
 		[super setValue:value forUndefinedKey:key];

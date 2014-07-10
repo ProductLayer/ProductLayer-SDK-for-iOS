@@ -15,7 +15,6 @@
 {
     if ([key isEqualToString:@"errors"])
 	 {
-        
         if ([value isKindOfClass:[NSArray class]])
 		  {
             
