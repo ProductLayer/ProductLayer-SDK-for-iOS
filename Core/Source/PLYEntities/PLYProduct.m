@@ -10,7 +10,6 @@
 
 #import "PLYAuditor.h"
 #import "PLYPackaging.h"
-#import "DTLog.h"
 
 @implementation PLYProduct
 
