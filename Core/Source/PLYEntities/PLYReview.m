@@ -14,193 +14,212 @@
 
 @implementation PLYReview
 
-@synthesize Class;
-@synthesize Id;
-@synthesize version;
-
-@synthesize createdBy;
-@synthesize createdTime;
-@synthesize updatedBy;
-@synthesize updatedTime;
-
-@synthesize gtin;
-@synthesize subject;
-@synthesize body;
-@synthesize rating;
-@synthesize language;
-
-@synthesize votingScore;
-@synthesize upVoter;
-@synthesize downVoter;
-
-+ (NSString *) entityTypeIdentifier
++ (NSString *)entityTypeIdentifier
 {
-    return @"com.productlayer.Review";
+	return @"com.productlayer.Review";
 }
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary
+- (void)setValue:(id)value forKey:(NSString *)key
 {
-	self = [super initWithDictionary:dictionary];
-	
-	if (self)
+	if ([key isEqualToString:@"pl-created-by"])
 	{
-		[self setAttributesFromDictionary:dictionary];
+		
+		if ([value isKindOfClass:[NSDictionary class]])
+		{
+			self.createdBy = [[PLYAuditor alloc] initWithDictionary:value];
+		}
+		
+	}
+	else if ([key isEqualToString:@"pl-rev-usr_upvotes"])
+	{
+		
+		if ([value isKindOfClass:[NSArray class]])
+		{
+			
+			NSMutableArray *myMembers = [NSMutableArray arrayWithCapacity:[value count]];
+			for (id valueMember in value)
+			{
+				[myMembers addObject:valueMember];
+			}
+			
+			self.upVoter = myMembers;
+			
+		}
+		
+	}
+	else if ([key isEqualToString:@"pl-rev-usr_downvotes"])
+	{
+		
+		if ([value isKindOfClass:[NSArray class]])
+		{
+			
+			NSMutableArray *myMembers = [NSMutableArray arrayWithCapacity:[value count]];
+			for (id valueMember in value)
+			{
+				[myMembers addObject:valueMember];
+			}
+			
+			self.downVoter = myMembers;
+		}
+	}
+	else if ([key isEqualToString:@"pl-upd-by"])
+	{
+		
+		if ([value isKindOfClass:[NSDictionary class]])
+		{
+			self.updatedBy = [[PLYAuditor alloc] initWithDictionary:value];
+		}
+		
+	}
+	else
+	{
+		[super setValue:value forKey:key];
+	}
+}
+
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+	if ([key isEqualToString:@"pl-class"])
+	{
+		[self setValue:value forKey:@"Class"];
+	}
+	else if ([key isEqualToString:@"pl-id"])
+	{
+		[self setValue:value forKey:@"Id"];
+	}  else if ([key isEqualToString:@"pl-version"])
+	{
+		[self setValue:value forKey:@"version"];
+	}
+	else if ([key isEqualToString:@"pl-created-by"])
+	{
+		[self setValue:value forKey:@"createdBy"];
+	}
+	else if ([key isEqualToString:@"pl-created-time"])
+	{
+		[self setValue:value forKey:@"createdTime"];
+	}
+	else if ([key isEqualToString:@"pl-upd-by"])
+	{
+		[self setValue:value forKey:@"updatedBy"];
+	}
+	else if ([key isEqualToString:@"pl-upd-time"])
+	{
+		[self setValue:value forKey:@"updatedTime"];
+	}
+	else if ([key isEqualToString:@"pl-prod-gtin"])
+	{
+		[self setValue:value forKey:@"gtin"];
+	}
+	else if ([key isEqualToString:@"pl-rev-subj"])
+	{
+		[self setValue:value forKey:@"subject"];
+	}
+	else if ([key isEqualToString:@"pl-rev-body"])
+	{
+		[self setValue:value forKey:@"body"];
+	}
+	else if ([key isEqualToString:@"pl-rev-rating"])
+	{
+		[self setValue:value forKey:@"rating"];
+	}
+	else if ([key isEqualToString:@"pl-lng"])
+	{
+		[self setValue:value forKey:@"language"];
+	}
+	else if ([key isEqualToString:@"pl-rev-votes"])
+	{
+		[self setValue:value forKey:@"votingScore"];
+	}
+	else if ([key isEqualToString:@"pl-rev-usr_upvotes"])
+	{
+		[self setValue:value forKey:@"upVoter"];
+	}
+	else if ([key isEqualToString:@"pl-rev-usr_downvotes"])
+	{
+		[self setValue:value forKey:@"downVoter"];
+	}
+}
+
+- (NSDictionary *) dictionaryRepresentation
+{
+	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+	
+	if (_Class)
+	{
+		[dict setObject:_Class forKey:@"pl-class"];
 	}
 	
-	return self;
+	if (_Id)
+	{
+		[dict setObject:_Id forKey:@"pl-id"];
+	}
+	
+	if (_version)
+	{
+		[dict setObject:_version forKey:@"pl-version"];
+	}
+	
+	if (_createdBy)
+	{
+		[dict setObject:[_createdBy dictionaryRepresentation] forKey:@"pl-created-by"];
+	}
+	
+	if (_createdTime)
+	{
+		[dict setObject:_createdTime forKey:@"pl-created-time"];
+	}
+	
+	if (_updatedBy)
+	{
+		[dict setObject:[_updatedBy dictionaryRepresentation] forKey:@"pl-upd-by"];
+	}
+	
+	if (_updatedTime)
+	{
+		[dict setObject:_updatedTime forKey:@"pl-upd-time"];
+	}
+	
+	if (_gtin)
+	{
+		[dict setObject:_gtin forKey:@"pl-prod-gtin"];
+	}
+	
+	if (_subject)
+	{
+		[dict setObject:_subject forKey:@"pl-rev-subj"];
+	}
+	
+	if (_body)
+	{
+		[dict setObject:_body forKey:@"pl-rev-body"];
+	}
+	
+	if (_rating)
+	{
+		[dict setObject:_rating forKey:@"pl-rev-rating"];
+	}
+	
+	if (_language)
+	{
+		[dict setObject:_language forKey:@"pl-lng"];
+	}
+	
+	if (_votingScore)
+	{
+		[dict setObject:_votingScore forKey:@"pl-rev-votes"];
+	}
+	
+	if (_upVoter)
+	{
+		[dict setObject:_upVoter forKey:@"pl-rev-usr_upvotes"];
+	}
+	
+	if (_downVoter)
+	{
+		[dict setObject:_downVoter forKey:@"pl-rev-usr_downvotes"];
+	}
+	
+	return dict;
 }
-
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary {
-    
-    if (![aDictionary isKindOfClass:[NSDictionary class]]) {
-        return;
-    }
-    
-    [self setValuesForKeysWithDictionary:aDictionary];
-    
-}
-
-- (void)setValue:(id)value forKey:(NSString *)key {
-    
-    if ([key isEqualToString:@"pl-created-by"]) {
-        
-        if ([value isKindOfClass:[NSDictionary class]]) {
-            self.createdBy = [[PLYAuditor alloc] initWithDictionary:value];
-        }
-        
-    } else if ([key isEqualToString:@"pl-rev-usr_upvotes"]) {
-        
-        if ([value isKindOfClass:[NSArray class]]) {
-            
-            NSMutableArray *myMembers = [NSMutableArray arrayWithCapacity:[value count]];
-            for (id valueMember in value) {
-                [myMembers addObject:valueMember];
-            }
-            
-            self.upVoter = myMembers;
-            
-        }
-        
-    } else if ([key isEqualToString:@"pl-rev-usr_downvotes"]) {
-        
-        if ([value isKindOfClass:[NSArray class]]) {
-            
-            NSMutableArray *myMembers = [NSMutableArray arrayWithCapacity:[value count]];
-            for (id valueMember in value) {
-                [myMembers addObject:valueMember];
-            }
-            
-            self.downVoter = myMembers;
-            
-        }
-        
-    } else if ([key isEqualToString:@"pl-upd-by"]) {
-        
-        if ([value isKindOfClass:[NSDictionary class]]) {
-            self.updatedBy = [[PLYAuditor alloc] initWithDictionary:value];
-        }
-        
-    } else {
-        [super setValue:value forKey:key];
-    }
-    
-}
-
-
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key {
-    
-    if ([key isEqualToString:@"pl-class"]) {
-        [self setValue:value forKey:@"Class"];
-    } else if ([key isEqualToString:@"pl-id"]) {
-        [self setValue:value forKey:@"Id"];
-    }  else if ([key isEqualToString:@"pl-version"]) {
-        [self setValue:value forKey:@"version"];
-    } else if ([key isEqualToString:@"pl-created-by"]) {
-        [self setValue:value forKey:@"createdBy"];
-    } else if ([key isEqualToString:@"pl-created-time"]) {
-        [self setValue:value forKey:@"createdTime"];
-    } else if ([key isEqualToString:@"pl-upd-by"]) {
-        [self setValue:value forKey:@"updatedBy"];
-    } else if ([key isEqualToString:@"pl-upd-time"]) {
-        [self setValue:value forKey:@"updatedTime"];
-    }
-    
-    else if ([key isEqualToString:@"pl-prod-gtin"]) {
-        [self setValue:value forKey:@"gtin"];
-    } else if ([key isEqualToString:@"pl-rev-subj"]) {
-        [self setValue:value forKey:@"subject"];
-    }  else if ([key isEqualToString:@"pl-rev-body"]) {
-        [self setValue:value forKey:@"body"];
-    } else if ([key isEqualToString:@"pl-rev-rating"]) {
-        [self setValue:value forKey:@"rating"];
-    } else if ([key isEqualToString:@"pl-lng"]) {
-        [self setValue:value forKey:@"language"];
-    }
-    
-    else if ([key isEqualToString:@"pl-rev-votes"]) {
-        [self setValue:value forKey:@"votingScore"];
-    } else if ([key isEqualToString:@"pl-rev-usr_upvotes"]) {
-        [self setValue:value forKey:@"upVoter"];
-    } else if ([key isEqualToString:@"pl-rev-usr_downvotes"]) {
-        [self setValue:value forKey:@"downVoter"];
-    }
-}
-
-- (NSDictionary *) dictionaryRepresentation{
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:1];
-    
-    if (Class != nil) {
-        [dict setObject:Class forKey:@"pl-class"];
-    }
-    if (Id != nil) {
-        [dict setObject:Id forKey:@"pl-id"];
-    }
-    if (version != nil) {
-        [dict setObject:version forKey:@"pl-version"];
-    }
-    if (createdBy != nil) {
-        [dict setObject:[createdBy dictionaryRepresentation] forKey:@"pl-created-by"];
-    }
-    if (createdTime != nil) {
-        [dict setObject:createdTime forKey:@"pl-created-time"];
-    }
-    if (updatedBy != nil) {
-        [dict setObject:[updatedBy dictionaryRepresentation] forKey:@"pl-upd-by"];
-    }
-    if (updatedTime != nil) {
-        [dict setObject:updatedTime forKey:@"pl-upd-time"];
-    }
-    
-    if (gtin != nil) {
-        [dict setObject:gtin forKey:@"pl-prod-gtin"];
-    }
-    if (subject != nil) {
-        [dict setObject:subject forKey:@"pl-rev-subj"];
-    }
-    if (body != nil) {
-        [dict setObject:body forKey:@"pl-rev-body"];
-    }
-    if (rating != nil) {
-        [dict setObject:rating forKey:@"pl-rev-rating"];
-    }
-    if (language != nil) {
-        [dict setObject:language forKey:@"pl-lng"];
-    }
-    
-    if (votingScore != nil) {
-        [dict setObject:votingScore forKey:@"pl-rev-votes"];
-    }
-    if (upVoter != nil) {
-        [dict setObject:upVoter forKey:@"pl-rev-usr_upvotes"];
-    }
-    if (downVoter != nil) {
-        [dict setObject:downVoter forKey:@"pl-rev-usr_downvotes"];
-    }
-    
-    return dict;
-}
-
-
 
 @end
-
