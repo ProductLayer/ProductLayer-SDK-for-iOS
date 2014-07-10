@@ -24,6 +24,10 @@
 	 {
         [self setValue:value forKey:@"throwable"];
     }
+	else
+	{
+		[super setValue:value forUndefinedKey:key];
+	}
 }
 
 @end

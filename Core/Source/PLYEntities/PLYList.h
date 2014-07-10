@@ -22,61 +22,47 @@
 #define kSHARE_NONE     @"pl-list-share-none"
 
 /**
- * With the product list you can group products which are important to you. Like a wishlist for your birthday.
+ With the product list you can group products which are important to you. Like a wishlist for your birthday.
  **/
 @interface PLYList : PLYEntity
-{
-    // The class identifier.
-    NSString *Class;
-    // The object id.
-    NSString *Id;
-    // The version.
-    NSNumber *version;
-    
-    // The user who created the object.
-    PLYAuditor *createdBy;
-    // The timestamp when object was created.
-    NSNumber *createdTime;
-    
-    // The user who updated the object the last time.
-    PLYAuditor *updatedBy;
-    // The timestamp when object was updated the last time.
-    NSNumber *updatedTime;
 
-    // The title of the list.
-    NSString *title;
-    // The description for the list.
-    NSString *description;
-    // The list type for the list.
-    NSString *listType;
-    
-    // The sharing type for the list.
-    NSString *shareType;
-    // A list of user id's the product list is shared.
-    NSArray *sharedUsers;
-    
-    // The list of products.
-    NSMutableArray  *listItems;
-}
+/**
+ @name Properties
+ */
 
-@property (nonatomic, strong) NSString *Class;
-@property (nonatomic, strong) NSString *Id;
-@property (nonatomic, strong) NSNumber *version;
-
-@property (nonatomic, strong) PLYAuditor *createdBy;
-@property (nonatomic, strong) NSNumber *createdTime;
-@property (nonatomic, strong) PLYAuditor *updatedBy;
-@property (nonatomic, strong) NSNumber *updatedTime;
-
+/**
+ The title of the list.
+ */
 @property (nonatomic, strong) NSString *title;
+
+/**
+ The description for the list.
+ */
 @property (nonatomic, strong) NSString *description;
+
+/**
+ The list type for the list.
+ */
 @property (nonatomic, strong) NSString *listType;
 
+/**
+ The sharing type for the list.
+ */
 @property (nonatomic, strong) NSString *shareType;
+
+/**
+ A list of user id's the product list is shared.
+ */
 @property (nonatomic, strong) NSArray *sharedUsers;
 
+/**
+ The list of products.
+ */
 @property (nonatomic, strong) NSMutableArray *listItems;
 
+/**
+ @name Managing Lists
+ */
 
 - (BOOL) isValidForSaving;
 

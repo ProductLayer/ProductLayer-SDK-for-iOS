@@ -142,42 +142,7 @@
 
 - (NSDictionary *) dictionaryRepresentation
 {
-	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-	
-	if (_Class)
-	{
-		[dict setObject:_Class forKey:@"pl-class"];
-	}
-	
-	if (_Id)
-	{
-		[dict setObject:_Id forKey:@"pl-id"];
-	}
-	
-	if (_version)
-	{
-		[dict setObject:_version forKey:@"pl-version"];
-	}
-	
-	if (_createdBy)
-	{
-		[dict setObject:[_createdBy dictionaryRepresentation] forKey:@"pl-created-by"];
-	}
-	
-	if (_createdTime)
-	{
-		[dict setObject:_createdTime forKey:@"pl-created-time"];
-	}
-	
-	if (_updatedBy)
-	{
-		[dict setObject:[_updatedBy dictionaryRepresentation] forKey:@"pl-upd-by"];
-	}
-	
-	if (_updatedTime)
-	{
-		[dict setObject:_updatedTime forKey:@"pl-upd-time"];
-	}
+	NSMutableDictionary *dict = [[super dictionaryRepresentation] mutableCopy];
 	
 	if (_gtin)
 	{
@@ -219,7 +184,8 @@
 		[dict setObject:_downVoter forKey:@"pl-rev-usr_downvotes"];
 	}
 	
-	return dict;
+	// return immutable
+	return [dict copy];
 }
 
 @end

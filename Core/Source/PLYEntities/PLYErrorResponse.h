@@ -9,15 +9,17 @@
 #import "PLYEntity.h"
 
 /**
- * This object will be returned if an error occurred.
+ This object will be returned if an error occurred.
  **/
 @interface PLYErrorResponse : PLYEntity
-{
-    // A list of error messages.
-    NSArray *errors;
-}
 
+/**
+ @name Properties
+ */
+
+/**
+ A list of error messages.
+ */
 @property (nonatomic, copy) NSArray *errors;
-
 
 @end

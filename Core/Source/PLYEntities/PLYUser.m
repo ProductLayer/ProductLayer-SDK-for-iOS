@@ -47,35 +47,7 @@
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key
 {
-	if ([key isEqualToString:@"pl-class"])
-	{
-		[self setValue:value forKey:@"Class"];
-	}
-	else if ([key isEqualToString:@"pl-id"])
-	{
-		[self setValue:value forKey:@"Id"];
-	}
-	else if ([key isEqualToString:@"pl-version"])
-	{
-		[self setValue:value forKey:@"version"];
-	}
-	else if ([key isEqualToString:@"pl-created-by"])
-	{
-		[self setValue:value forKey:@"createdBy"];
-	}
-	else if ([key isEqualToString:@"pl-created-time"])
-	{
-		[self setValue:value forKey:@"createdTime"];
-	}
-	else if ([key isEqualToString:@"pl-upd-by"])
-	{
-		[self setValue:value forKey:@"updatedBy"];
-	}
-	else if ([key isEqualToString:@"pl-upd-time"])
-	{
-		[self setValue:value forKey:@"updatedTime"];
-	}
-	else if ([key isEqualToString:@"pl-usr-nickname"])
+	if ([key isEqualToString:@"pl-usr-nickname"])
 	{
 		[self setValue:value forKey:@"nickname"];
 	}
@@ -103,15 +75,15 @@
 	{
 		[self setValue:value forKey:@"points"];
 	}
-	else if ([key isEqualToString:@"pl-usr-achv_unlocked"])
+	else if ([key isEqualToString:@"pl-usr-achvself.unlocked"])
 	{
 		[self setValue:value forKey:@"unlockedAchievements"];
 	}
-	else if ([key isEqualToString:@"pl-usr-follower_cnt"])
+	else if ([key isEqualToString:@"pl-usr-followerself.cnt"])
 	{
 		[self setValue:value forKey:@"followerCount"];
 	}
-	else if ([key isEqualToString:@"pl-usr-following_cnt"])
+	else if ([key isEqualToString:@"pl-usr-followingself.cnt"])
 	{
 		[self setValue:value forKey:@"followingCount"];
 	}
@@ -127,110 +99,79 @@
 	{
 		self.following = [(NSNumber *)value boolValue];
 	}
+	else
+	{
+		[super setValue:value forUndefinedKey:key];
+	}
 }
 
 - (NSDictionary *)dictionaryRepresentation
 {
-	NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:1];
+	NSMutableDictionary *dict = [[super dictionaryRepresentation] mutableCopy];
 	
-	if (_Class)
+	if (self.nickname)
 	{
-		[dict setObject:_Class forKey:@"pl-class"];
+		[dict setObject:self.nickname forKey:@"pl-usr-nickname"];
 	}
 	
-	if (_Id)
+	if (self.firstName)
 	{
-		[dict setObject:_Id forKey:@"pl-id"];
+		[dict setObject:self.firstName forKey:@"pl-usr-fname"];
 	}
 	
-	if (_version)
+	if (self.lastName)
 	{
-		[dict setObject:_version forKey:@"pl-version"];
+		[dict setObject:self.lastName forKey:@"pl-usr-lname"];
 	}
 	
-	if (_createdBy)
+	if (self.email)
 	{
-		[dict setObject:[_createdBy dictionaryRepresentation] forKey:@"pl-created-by"];
+		[dict setObject:self.email forKey:@"pl-usr-email"];
 	}
 	
-	if (_createdTime)
+	if (self.birthday)
 	{
-		[dict setObject:_createdTime forKey:@"pl-created-time"];
+		[dict setObject:self.birthday forKey:@"pl-usr-bday"];
 	}
 	
-	if (_updatedBy)
+	if (self.gender)
 	{
-		[dict setObject:[_updatedBy dictionaryRepresentation] forKey:@"pl-upd-by"];
+		[dict setObject:self.gender forKey:@"pl-usr-gender"];
 	}
 	
-	if (_updatedTime)
+	if (self.points)
 	{
-		[dict setObject:_updatedTime forKey:@"pl-upd-time"];
+		[dict setObject:self.points forKey:@"pl-usr-points"];
 	}
 	
-	if (_nickname)
+	if (self.unlockedAchievements)
 	{
-		[dict setObject:_nickname forKey:@"pl-usr-nickname"];
+		[dict setObject:self.unlockedAchievements forKey:@"pl-usr-achvself.unlocked"];
 	}
 	
-	if (_firstName)
+	if (self.followerCount)
 	{
-		[dict setObject:_firstName forKey:@"pl-usr-fname"];
+		[dict setObject:self.followerCount forKey:@"pl-usr-followerself.cnt"];
 	}
 	
-	if (_lastName)
+	if (self.followingCount)
 	{
-		[dict setObject:_lastName forKey:@"pl-usr-lname"];
+		[dict setObject:self.followingCount forKey:@"pl-usr-followingself.cnt"];
 	}
 	
-	if (_email)
+	if (self.avatarUrl)
 	{
-		[dict setObject:_email forKey:@"pl-usr-email"];
+		[dict setObject:self.avatarUrl forKey:@"pl-usr-img"];
 	}
 	
-	if (_birthday)
+	if (self.following)
 	{
-		[dict setObject:_birthday forKey:@"pl-usr-bday"];
+		[dict setObject:[NSNumber numberWithBool:self.following] forKey:@"pl-usr-following"];
 	}
 	
-	if (_gender)
+	if (self.followed)
 	{
-		[dict setObject:_gender forKey:@"pl-usr-gender"];
-	}
-	
-	if (_points)
-	{
-		[dict setObject:_points forKey:@"pl-usr-points"];
-	}
-	
-	if (_unlockedAchievements)
-	{
-		[dict setObject:_unlockedAchievements forKey:@"pl-usr-achv_unlocked"];
-	}
-	
-	if (_followerCount)
-	{
-		[dict setObject:_followerCount forKey:@"pl-usr-follower_cnt"];
-	}
-	
-	if (_followingCount)
-	{
-		[dict setObject:_followingCount forKey:@"pl-usr-following_cnt"];
-	}
-	
-	if (_avatarUrl)
-	{
-		[dict setObject:_avatarUrl forKey:@"pl-usr-img"];
-	}
-	
-	if (_following)
-	{
-		[dict setObject:[NSNumber numberWithBool:_following] forKey:@"pl-usr-following"];
-	}
-	
-	if (_followed)
-	{
-		[dict setObject:[NSNumber numberWithBool:_followed] forKey:@"pl-usr-followed"];
+		[dict setObject:[NSNumber numberWithBool:self.followed] forKey:@"pl-usr-followed"];
 	}
 	
 	return dict;

@@ -7,6 +7,7 @@
 //
 
 #import "PLYEntity.h"
+#import "PLYAuditor.h"
 #import <objc/runtime.h>
 
 // lookup table mapping class strings to objc classes
@@ -74,11 +75,6 @@ NSArray *PLYAllEntityClasses()
 	return nil;
 }
 
-- (NSDictionary *)dictionaryRepresentation
-{
-	return nil;
-}
-
 + (PLYEntity *)entityFromDictionary:(NSDictionary *)dictionary
 {
 	NSString *objectType = dictionary[@"pl-class"];
@@ -111,6 +107,84 @@ NSArray *PLYAllEntityClasses()
 	}
 	
 	return self;
+}
+
+#pragma mark - Value Getting/Setting
+
+// setting common values from dictionary
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+	if ([key isEqualToString:@"pl-class"])
+	{
+		[self setValue:value forKey:@"Class"];
+	}
+	else if ([key isEqualToString:@"pl-id"])
+	{
+		[self setValue:value forKey:@"Id"];
+	}
+	else if ([key isEqualToString:@"pl-created-by"])
+	{
+		[self setValue:value forKey:@"createdBy"];
+	}
+	else if ([key isEqualToString:@"pl-created-time"])
+	{
+		[self setValue:value forKey:@"createdTime"];
+	}
+	else if ([key isEqualToString:@"pl-upd-by"])
+	{
+		[self setValue:value forKey:@"updatedBy"];
+	}
+	else if ([key isEqualToString:@"pl-upd-time"])
+	{
+		[self setValue:value forKey:@"updatedTime"];
+	}
+	else if ([key isEqualToString:@"pl-version"])
+	{
+		[self setValue:value forKey:@"version"];
+	}
+}
+
+- (NSDictionary *)dictionaryRepresentation
+{
+	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+	
+	if (self.Class)
+	{
+		[dict setObject:self.Class forKey:@"pl-class"];
+	}
+	
+	if (self.Id)
+	{
+		[dict setObject:self.Id forKey:@"pl-id"];
+	}
+	
+	if (self.createdBy)
+	{
+		[dict setObject:[self.createdBy dictionaryRepresentation] forKey:@"pl-created-by"];
+	}
+	
+	if (self.createdTime)
+	{
+		[dict setObject:self.createdTime forKey:@"pl-created-time"];
+	}
+	
+	if (self.updatedBy)
+	{
+		[dict setObject:[self.updatedBy dictionaryRepresentation] forKey:@"pl-upd-by"];
+	}
+	
+	if (self.updatedTime)
+	{
+		[dict setObject:self.updatedTime forKey:@"pl-upd-time"];
+	}
+	
+	if (self.version)
+	{
+		[dict setObject:self.version forKey:@"pl-version"];
+	}
+	
+	// return immutable
+	return [dict copy];
 }
 
 @end

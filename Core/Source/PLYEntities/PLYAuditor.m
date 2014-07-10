@@ -24,11 +24,15 @@
 	{
 		[self setValue:value forKey:@"userNickname"];
 	}
+	else
+	{
+		[super setValue:value forUndefinedKey:key];
+	}
 }
 
 - (NSDictionary *)dictionaryRepresentation
 {
-	NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:1];
+	NSMutableDictionary *dict = [[super dictionaryRepresentation] mutableCopy];
 	
 	if (_userId)
 	{
@@ -45,7 +49,8 @@
 		[dict setObject:_userNickname forKey:@"pl-usr-nickname"];
 	}
 	
-	return dict;
+	// return immutable
+	return [dict copy];
 }
 
 @end
