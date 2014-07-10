@@ -8,13 +8,14 @@
 
 #import "MenuViewController.h"
 #import "HomeViewController.h"
-#import "SWRevealViewController.h"
 #import "ProductLayerConfig.h"
 
 #import "PLYServer.h"
 
 #import "DTAlertView.h"
 #import "DTBlockFunctions.h"
+#import "DTSidePanelController.h"
+#import "DTSidePanelControllerSegue.h"
 
 #import "HomeViewController.h"
 #import "ProductListsViewController.h"
@@ -64,21 +65,21 @@
 
 -(void) prepareForSegue:(UIStoryboardSegue *) segue sender: (id) sender
 {
-    if ( [segue isKindOfClass: [SWRevealViewControllerSegue class]] ) {
-        SWRevealViewControllerSegue *swSegue = (SWRevealViewControllerSegue*) segue;
+    if ( [segue isKindOfClass: [DTSidePanelControllerSegue class]] ) {
+        DTSidePanelControllerSegue *_segue = (DTSidePanelControllerSegue*) segue;
         
-        swSegue.performBlock = ^(SWRevealViewControllerSegue* rvc_segue, UIViewController* svc, id dvc) {
-            UINavigationController* navController = (UINavigationController*)self.revealViewController.frontViewController;
-            [navController setViewControllers: @[dvc] animated: NO ];
+        _segue.performBlock = ^(DTSidePanelControllerSegue* _segue, UIViewController* source, id destination) {
+            UINavigationController* navController = (UINavigationController*)self.getSidePanelController.centerPanelController;
+            [navController setViewControllers: @[destination] animated: NO ];
             
             if ([[segue identifier] isEqualToString:@"showMyProductLists"])
             {
-                ProductListsViewController *productLists = dvc;
+                ProductListsViewController *productLists = destination;
                 productLists.addProductView = false;
                 [productLists loadProductListsForUser:[[PLYServer sharedServer] loggedInUser] andType:nil];
             }
             
-            [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
+            [self.getSidePanelController presentPanel:DTSidePanelControllerPanelCenter animated:YES];
         };
     }
 }

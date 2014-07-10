@@ -8,7 +8,7 @@
 
 #import "ProductTableViewCell.h"
 #import "PLYServer.h"
-#import "PLYProductImage.h"
+#import "PLYImage.h"
 
 #import "DTImageCache.h"
 #import "DTDownloadCache.h"
@@ -77,7 +77,7 @@
             
             if(images != nil && images.count > 0){
                 
-                PLYProductImage *imageMeta = images[0];
+                PLYImage *imageMeta = images[0];
                 
                 // Check if _product has changed since request
                 if(![_product.gtin isEqualToString:imageMeta.gtin])

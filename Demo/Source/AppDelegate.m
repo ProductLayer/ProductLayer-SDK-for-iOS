@@ -10,6 +10,7 @@
 #import "DTLog.h"
 #import "ProductLayer.h"
 #import "ProductLayerConfig.h"
+#import "PLYSidePanelProtocol.h"
 
 @implementation AppDelegate
 
@@ -21,6 +22,10 @@
 #ifdef PLY_API_KEY
 	[[PLYServer sharedServer] setAPIKey:PLY_API_KEY];
 #endif
+    
+    if([_window.rootViewController isKindOfClass:[DTSidePanelController class]]){
+        ((DTSidePanelController *) _window.rootViewController).sidePanelDelegate = self;
+    }
 	
     // Override point for customization after application launch.
     return YES;
@@ -51,6 +56,29 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
 	// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)sidePanelController:(DTSidePanelController *)sidePanelController shouldAllowClosingOfSidePanel:(DTSidePanelControllerPanel)sidePanel{
+    
+    UINavigationController *navController;
+    
+    if (sidePanel == DTSidePanelControllerPanelRight) {
+        navController = (UINavigationController *)sidePanelController.rightPanelController;
+	} else if (sidePanel == DTSidePanelControllerPanelCenter) {
+        navController = (UINavigationController *)sidePanelController.centerPanelController;
+    } else if (sidePanel == DTSidePanelControllerPanelLeft) {
+        navController = (UINavigationController *)sidePanelController.leftPanelController;
+    }
+    
+    if(navController) {
+        UIViewController *viewController = [[navController viewControllers] objectAtIndex:0];
+        
+        if ( [viewController respondsToSelector:@selector(allowClosing)] ) {
+            return (BOOL)[viewController performSelector:@selector(allowClosing)];
+        }
+    }
+    
+	return YES;
 }
 
 @end

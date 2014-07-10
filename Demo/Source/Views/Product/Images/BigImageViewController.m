@@ -17,7 +17,7 @@
 #import "PLYServer.h"
 
 @interface BigImageViewController () {
-    PLYProductImage *metadata;
+    PLYImage *metadata;
 }
 
 @end
@@ -61,7 +61,7 @@
     [_votingScoreLabel setText:[NSString stringWithFormat:@"%d (up=%lu, down=%lu)",[metadata.votingScore intValue], (unsigned long)[metadata.upVoters count], (unsigned long)[metadata.downVoters count]]];
 }
 
-- (void) setImageMetadata:(PLYProductImage *)imageMetadata{
+- (void) setImageMetadata:(PLYImage *)imageMetadata{
     if(metadata != nil && [metadata.Id isEqualToString:imageMetadata.Id]){
         return;
     }

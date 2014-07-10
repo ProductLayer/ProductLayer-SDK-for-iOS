@@ -53,7 +53,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-	PLYProductImage *imageData = _images[indexPath.item];
+	PLYImage *imageData = _images[indexPath.item];
 	
 	ProductImageCollectionViewCell *cell = (ProductImageCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"ProductImage" forIndexPath:indexPath];
 	
@@ -174,7 +174,7 @@
 	UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
 	
 	[[PLYServer sharedServer] uploadImageData:image forGTIN:self.gtin completion:^(id result, NSError *error) {
-		if(!error && [result isKindOfClass:[PLYProductImage class]]){
+		if(!error && [result isKindOfClass:[PLYImage class]]){
             if(!_images){
                 _images = [NSMutableArray arrayWithCapacity:1];
             }

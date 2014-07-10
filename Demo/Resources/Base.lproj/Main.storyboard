@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="i6n-8m-VGd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="14A283o" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="i6n-8m-VGd">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -670,6 +670,7 @@
         <scene sceneID="skX-cw-3Go">
             <objects>
                 <navigationController definesPresentationContext="YES" id="t5r-o7-CxQ" sceneMemberID="viewController">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bNS-bC-M4Z">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -832,10 +833,10 @@
             </objects>
             <point key="canvasLocation" x="3137" y="-1334"/>
         </scene>
-        <!--Reveal View Controller-->
+        <!--Side Panel Controller-->
         <scene sceneID="igC-F3-l25">
             <objects>
-                <viewController id="i6n-8m-VGd" customClass="SWRevealViewController" sceneMemberID="viewController">
+                <viewController id="i6n-8m-VGd" customClass="DTSidePanelController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BlZ-eZ-gmv"/>
                         <viewControllerLayoutGuide type="bottom" id="Kty-SV-So4"/>
@@ -845,9 +846,12 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <segue destination="t5r-o7-CxQ" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegue" id="Cll-V4-uOJ"/>
-                        <segue destination="XhV-T0-NZJ" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegue" id="dB7-06-ffE"/>
+                        <segue destination="t5r-o7-CxQ" kind="custom" identifier="DTSidePanelCenter" customClass="DTSidePanelControllerSegue" id="Cll-V4-uOJ"/>
+                        <segue destination="XhV-T0-NZJ" kind="custom" identifier="DTSidePanelLeft" customClass="DTSidePanelControllerSegue" id="dB7-06-ffE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ykJ-Nx-n7w" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -890,7 +894,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <segue destination="vXZ-lx-hvc" kind="custom" identifier="showHome" customClass="SWRevealViewControllerSegue" id="m3I-6F-MJz"/>
+                                            <segue destination="vXZ-lx-hvc" kind="custom" identifier="showHome" customClass="DTSidePanelControllerSegue" id="m3I-6F-MJz"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Xew-RH-PUr">
@@ -940,7 +944,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <segue destination="lcX-W4-nQh" kind="custom" identifier="showReviews" customClass="SWRevealViewControllerSegue" id="e13-da-Ueh"/>
+                                            <segue destination="lcX-W4-nQh" kind="custom" identifier="showReviews" customClass="DTSidePanelControllerSegue" id="e13-da-Ueh"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="g5y-VQ-kub">
@@ -965,7 +969,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <segue destination="QMI-0T-04D" kind="custom" identifier="showFindFriends" customClass="SWRevealViewControllerSegue" id="e7l-hi-VuK"/>
+                                            <segue destination="QMI-0T-04D" kind="custom" identifier="showFindFriends" customClass="DTSidePanelControllerSegue" id="e7l-hi-VuK"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Mb1-7g-mdW">
@@ -990,7 +994,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <segue destination="5O7-yt-lbL" kind="custom" identifier="showMyProductLists" customClass="SWRevealViewControllerSegue" id="A2c-YN-7Xr"/>
+                                            <segue destination="5O7-yt-lbL" kind="custom" identifier="showMyProductLists" customClass="DTSidePanelControllerSegue" id="A2c-YN-7Xr"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="vH0-Ma-ppF">
@@ -1040,7 +1044,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <segue destination="vK2-ss-M3u" kind="custom" identifier="showSettings" customClass="SWRevealViewControllerSegue" id="Yfb-W8-7oW"/>
+                                            <segue destination="vK2-ss-M3u" kind="custom" identifier="showSettings" customClass="DTSidePanelControllerSegue" id="Yfb-W8-7oW"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -1064,9 +1068,14 @@
         <scene sceneID="upK-cP-bY6">
             <objects>
                 <navigationController definesPresentationContext="YES" id="XhV-T0-NZJ" sceneMemberID="viewController">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="23a-O6-aNE">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="giD-M0-FVn">
+                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="kha-QJ-efA" kind="relationship" relationship="rootViewController" id="v83-Wf-qwy"/>
                     </connections>
@@ -2859,13 +2868,13 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="Cap-NF-Vj0"/>
         <segue reference="m3I-6F-MJz"/>
+        <segue reference="Gnx-Hs-mfF"/>
         <segue reference="A2c-YN-7Xr"/>
         <segue reference="e13-da-Ueh"/>
-        <segue reference="Gnx-Hs-mfF"/>
         <segue reference="x8t-B1-vyC"/>
         <segue reference="jtd-mj-8Nf"/>
-        <segue reference="Cap-NF-Vj0"/>
         <segue reference="FsK-7P-xAR"/>
     </inferredMetricsTieBreakers>
 </document>

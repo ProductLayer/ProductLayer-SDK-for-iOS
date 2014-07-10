@@ -81,7 +81,6 @@
 		C97FAABB191D618C00144D2C /* UserDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA90191D618C00144D2C /* UserDetailsViewController.m */; };
 		C97FAABC191D618C00144D2C /* UserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA92191D618C00144D2C /* UserTableViewCell.m */; };
 		C97FAAC5191D62AD00144D2C /* RFQuiltLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAAC1191D62AD00144D2C /* RFQuiltLayout.m */; };
-		C97FAAC6191D62AD00144D2C /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAAC3191D62AD00144D2C /* SWRevealViewController.m */; };
 		C97FAAD5192145F800144D2C /* LocalizableStringPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAAD3192145F800144D2C /* LocalizableStringPicker.m */; };
 		C97FAADA192152D900144D2C /* down_vote.png in Resources */ = {isa = PBXBuildFile; fileRef = C97FAAD6192152D900144D2C /* down_vote.png */; };
 		C97FAADB192152D900144D2C /* down_vote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C97FAAD7192152D900144D2C /* down_vote@2x.png */; };
@@ -338,6 +337,20 @@
 			remoteGlobalIDString = F88FF6771920A83300120808;
 			remoteInfo = "DTProgressHUD (iOS)";
 		};
+		C982681D196DAA1800A84677 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B4418A183F90B900E8A170 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A7AC21AF196417830009E1B9;
+			remoteInfo = "DTAnimatedGIF (iOS)";
+		};
+		C982681F196DAA1800A84677 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B4418A183F90B900E8A170 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A78381C31963F8D700AF09D3;
+			remoteInfo = "DTAnimatedGIF Demo";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -468,8 +481,6 @@
 		C97FAA92191D618C00144D2C /* UserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTableViewCell.m; sourceTree = "<group>"; };
 		C97FAAC0191D62AD00144D2C /* RFQuiltLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFQuiltLayout.h; sourceTree = "<group>"; };
 		C97FAAC1191D62AD00144D2C /* RFQuiltLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFQuiltLayout.m; sourceTree = "<group>"; };
-		C97FAAC2191D62AD00144D2C /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
-		C97FAAC3191D62AD00144D2C /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		C97FAAD3192145F800144D2C /* LocalizableStringPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalizableStringPicker.m; sourceTree = "<group>"; };
 		C97FAAD4192145F800144D2C /* LocalizableStringPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalizableStringPicker.h; sourceTree = "<group>"; };
 		C97FAAD6192152D900144D2C /* down_vote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down_vote.png; sourceTree = "<group>"; };
@@ -478,6 +489,7 @@
 		C97FAAD9192152D900144D2C /* up_vote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "up_vote@2x.png"; sourceTree = "<group>"; };
 		C97FAADE1921FCFA00144D2C /* PLYProductCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYProductCategory.h; path = PLYEntities/PLYProductCategory.h; sourceTree = "<group>"; };
 		C97FAADF1921FCFA00144D2C /* PLYProductCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYProductCategory.m; path = PLYEntities/PLYProductCategory.m; sourceTree = "<group>"; };
+		C98477C5196E72C90030DE0E /* PLYSidePanelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYSidePanelProtocol.h; sourceTree = "<group>"; };
 		C98CD249190E857C0035647C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C98CD252190F9FB00035647C /* register_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = register_user.png; sourceTree = "<group>"; };
 		C98CD253190F9FB00035647C /* register_user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register_user@2x.png"; sourceTree = "<group>"; };
@@ -611,23 +623,25 @@
 				A7B4420C183F913000E8A170 /* DTFoundation.framework */,
 				A7B4420E183F913000E8A170 /* libDTFoundation.a */,
 				A7B44212183F913000E8A170 /* libDTFoundation_Mac.a */,
+				C982681E196DAA1800A84677 /* libDTAnimatedGIF.a */,
 				A7B44214183F913000E8A170 /* libDTAWS.a */,
 				A7B44216183F913000E8A170 /* libDTASN1.a */,
 				A7B44218183F913000E8A170 /* libDTHTMLParser_iOS.a */,
 				A7B4421A183F913000E8A170 /* libDTHTMLParser_Mac.a */,
-				A7B4421C183F913000E8A170 /* libDTZipArchive_iOS.a */,
-				A7B4421E183F913000E8A170 /* libDTZipArchive_Mac.a */,
-				A7B44220183F913000E8A170 /* libDTUTI_iOS.a */,
-				A7B44222183F913000E8A170 /* libDTUTI_Mac.a */,
+				C97FAAE519221C7E00144D2C /* libDTProgressHUD_iOS.a */,
 				A7B44224183F913000E8A170 /* libDTReachability_iOS.a */,
 				A7B44226183F913000E8A170 /* libDTReachability_Mac.a */,
 				A7B44228183F913000E8A170 /* libDTSQLite_iOS.a */,
 				A7B4422A183F913000E8A170 /* libDTSQLite_Mac.a */,
-				C97FAAE519221C7E00144D2C /* libDTProgressHUD_iOS.a */,
-				A7B4422C183F913000E8A170 /* DTSidePanels Demo.app */,
-				A7B4422E183F913000E8A170 /* DTReachability Demo.app */,
-				A7B44230183F913000E8A170 /* DTZipArchive.app */,
+				A7B44220183F913000E8A170 /* libDTUTI_iOS.a */,
+				A7B44222183F913000E8A170 /* libDTUTI_Mac.a */,
+				A7B4421C183F913000E8A170 /* libDTZipArchive_iOS.a */,
+				A7B4421E183F913000E8A170 /* libDTZipArchive_Mac.a */,
+				C9826820196DAA1800A84677 /* DTAnimatedGIF Demo.app */,
 				C97FAAE719221C7E00144D2C /* DTProgressHUD Demo.app */,
+				A7B4422E183F913000E8A170 /* DTReachability Demo.app */,
+				A7B4422C183F913000E8A170 /* DTSidePanels Demo.app */,
+				A7B44230183F913000E8A170 /* DTZipArchive.app */,
 				A7B44210183F913000E8A170 /* Unit Tests.xctest */,
 			);
 			name = Products;
@@ -717,6 +731,7 @@
 				C97FAA32191D618C00144D2C /* EditableCell.h */,
 				C97FAA33191D618C00144D2C /* EditableCell.m */,
 				C97FAA37191D618C00144D2C /* UIViewTags.h */,
+				C98477C5196E72C90030DE0E /* PLYSidePanelProtocol.h */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -953,8 +968,6 @@
 			children = (
 				C97FAAC0191D62AD00144D2C /* RFQuiltLayout.h */,
 				C97FAAC1191D62AD00144D2C /* RFQuiltLayout.m */,
-				C97FAAC2191D62AD00144D2C /* SWRevealViewController.h */,
-				C97FAAC3191D62AD00144D2C /* SWRevealViewController.m */,
 			);
 			path = ThirdParty;
 			sourceTree = "<group>";
@@ -1282,6 +1295,20 @@
 			remoteRef = C97FAAE619221C7E00144D2C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		C982681E196DAA1800A84677 /* libDTAnimatedGIF.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDTAnimatedGIF.a;
+			remoteRef = C982681D196DAA1800A84677 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C9826820196DAA1800A84677 /* DTAnimatedGIF Demo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "DTAnimatedGIF Demo.app";
+			remoteRef = C982681F196DAA1800A84677 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1391,7 +1418,6 @@
 				C97FAA9C191D618C00144D2C /* EditProductViewController.m in Sources */,
 				C97FAA93191D618C00144D2C /* AppSettings.m in Sources */,
 				C97FAAAA191D618C00144D2C /* ProductLayerViewController.m in Sources */,
-				C97FAAC6191D62AD00144D2C /* SWRevealViewController.m in Sources */,
 				C97FAA95191D618C00144D2C /* DTManagedImage.m in Sources */,
 				C97FAA98191D618C00144D2C /* HomeViewController.m in Sources */,
 				C97FAAA5191D618C00144D2C /* ProductListsViewController.m in Sources */,
@@ -1548,7 +1574,7 @@
 				INFOPLIST_FILE = "Demo/PL-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = PL;
-				PROVISIONING_PROFILE = "E903DAEF-E5F6-4CE8-AB70-050E33C1FA97";
+				PROVISIONING_PROFILE = "B435121B-329B-4BB7-A360-E27928ABC5F3";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				WRAPPER_EXTENSION = app;
@@ -1567,7 +1593,7 @@
 				INFOPLIST_FILE = "Demo/PL-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = PL;
-				PROVISIONING_PROFILE = "E903DAEF-E5F6-4CE8-AB70-050E33C1FA97";
+				PROVISIONING_PROFILE = "B435121B-329B-4BB7-A360-E27928ABC5F3";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				WRAPPER_EXTENSION = app;
@@ -1671,7 +1697,7 @@
 				INFOPLIST_FILE = "Demo/PL-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = PL;
-				PROVISIONING_PROFILE = "569C5D9F-E1B5-4968-81E7-480E22800F93";
+				PROVISIONING_PROFILE = "87AA490D-E1AC-4292-AFB7-4340F0CAA64E";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				WRAPPER_EXTENSION = app;

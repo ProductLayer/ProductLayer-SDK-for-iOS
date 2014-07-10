@@ -9,10 +9,11 @@
 #import "ReviewTableViewController.h"
 
 #import "ReviewTableViewCell.h"
-#import "SWRevealViewController.h"
 #import "UIViewTags.h"
 #import "WriteReviewViewController.h"
 #import "DTBlockFunctions.h"
+#import "DTSidePanelController.h"
+#import "UIViewController+DTSidePanelController.h"
 #import "AppSettings.h"
 
 #import "DTProgressHUD.h"
@@ -97,8 +98,8 @@
     }
     
     // Set the side bar button action. When it's tapped, it'll show up the sidebar.
-    _sidebarButton.target = self.revealViewController;
-    _sidebarButton.action = @selector(revealToggle:);
+    _sidebarButton.target = self.getSidePanelController;
+    _sidebarButton.action = @selector(showLeftPanel:);
     
     if(!_gtin){
         self.navigationItem.rightBarButtonItem = nil;

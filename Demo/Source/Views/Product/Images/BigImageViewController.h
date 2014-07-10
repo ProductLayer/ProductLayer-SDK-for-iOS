@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PLYProductImage.h"
+#import "PLYImage.h"
 
 @interface BigImageViewController : UIViewController
 
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
 @property (nonatomic, weak) IBOutlet UILabel *votingScoreLabel;
 
-- (void) setImageMetadata:(PLYProductImage *)imageMetadata;
+- (void) setImageMetadata:(PLYImage *)imageMetadata;
 
 - (IBAction) upVoteImage:(id)sender;
 - (IBAction) downVoteImage:(id)sender;

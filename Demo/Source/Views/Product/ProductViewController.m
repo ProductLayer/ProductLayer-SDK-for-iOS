@@ -187,7 +187,7 @@
             
             if(images != nil && images.count > 0){
                 
-                PLYProductImage *imageMeta = images[0];
+                PLYImage *imageMeta = images[0];
                 
                 int imageSize = _productImage.frame.size.width*[[UIScreen mainScreen] scale];
                 

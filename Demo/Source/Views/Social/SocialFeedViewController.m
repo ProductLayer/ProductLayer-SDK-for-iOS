@@ -80,10 +80,10 @@ typedef enum : NSUInteger {
     int score = 0;
     CellType type = AllTypesAllowed;
     
-    if([feed isKindOfClass:[PLYProductImage class]]){
-        score = [((PLYProductImage *)feed).votingScore intValue];
+    if([feed isKindOfClass:[PLYImage class]]){
+        score = [((PLYImage *)feed).votingScore intValue];
         
-        if(((PLYProductImage *)feed).width > ((PLYProductImage *)feed).height){
+        if(((PLYImage *)feed).width > ((PLYImage *)feed).height){
             type = SquareOrLandscapeCell;
         } else {
             type = SquareOrPortraitCell;
@@ -165,7 +165,7 @@ typedef enum : NSUInteger {
     id feed = [_socialFeeds objectAtIndex:indexPath.row];
     RFQuiltLayout* layout = (id)[self.collectionView collectionViewLayout];
     
-    if([feed isKindOfClass:[PLYProductImage class]]){
+    if([feed isKindOfClass:[PLYImage class]]){
         ProductImageCollectionViewCell *cell = (ProductImageCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PictureGridView" forIndexPath:indexPath];
         
         CGSize blockSize = [self blockSizeForItemAtIndexPath:indexPath];

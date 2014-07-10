@@ -15,10 +15,11 @@
 #import "ProductLayer.h"
 #import "DTScannedCode.h"
 #import "DTBlockFunctions.h"
+#import "UIViewController+DTSidePanelController.h"
+#import "DTSidePanelController.h"
 #import "SearchProductViewController.h"
 #import "WriteReviewViewController.h"
 #import "ProductViewController.h"
-#import "SWRevealViewController.h"
 
 #import "UIViewTags.h"
 #import "DTAlertView.h"
@@ -44,8 +45,8 @@
 	[super viewDidLoad];
 	
 	// Set the side bar button action. When it's tapped, it'll show up the sidebar.
-	_sidebarButton.target = self.revealViewController;
-	_sidebarButton.action = @selector(revealToggle:);
+	_sidebarButton.target = self.getSidePanelController;
+	_sidebarButton.action = @selector(showLeftPanel:);
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_updateLoginBar) name:PLYNotifyUserStatusChanged object:nil];
 }
