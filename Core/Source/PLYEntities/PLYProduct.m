@@ -8,7 +8,7 @@
 
 #import "PLYProduct.h"
 
-#import "PLYAuditor.h"
+#import "PLYUser.h"
 #import "PLYPackaging.h"
 
 @implementation PLYProduct
@@ -24,7 +24,7 @@
 	{
 		if ([value isKindOfClass:[NSDictionary class]])
 		{
-			self.createdBy = [[PLYAuditor alloc] initWithDictionary:value];
+			self.createdBy = [[PLYUser alloc] initWithDictionary:value];
 		}
 		
 	}
@@ -53,7 +53,7 @@
 	{
 		if ([value isKindOfClass:[NSDictionary class]])
 		{
-			self.updatedBy = [[PLYAuditor alloc] initWithDictionary:value];
+			self.updatedBy = [[PLYUser alloc] initWithDictionary:value];
 		}
 	}
 	else

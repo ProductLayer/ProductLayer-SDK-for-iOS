@@ -8,9 +8,7 @@
 
 #import "PLYUser.h"
 
-#import "DTLog.h"
-
-#import "PLYAuditor.h"
+#import "PLYUser.h"
 
 @implementation PLYUser
 
@@ -25,7 +23,7 @@
 	{
 		if ([value isKindOfClass:[NSDictionary class]])
 		{
-			self.createdBy = [[PLYAuditor alloc] initWithDictionary:value];
+			self.createdBy = [[PLYUser alloc] initWithDictionary:value];
 		}
 	}
 	else if ([key isEqualToString:@"pl-app"] || [key isEqualToString:@"pl-usr-roles"])
@@ -36,7 +34,7 @@
 	{
 		if ([value isKindOfClass:[NSDictionary class]])
 		{
-			self.updatedBy = [[PLYAuditor alloc] initWithDictionary:value];
+			self.updatedBy = [[PLYUser alloc] initWithDictionary:value];
 		}
 	}
 	else

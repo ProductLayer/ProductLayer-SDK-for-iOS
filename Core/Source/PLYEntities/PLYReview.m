@@ -8,9 +8,8 @@
 
 #import "PLYReview.h"
 
-#import "PLYAuditor.h"
+#import "PLYUser.h"
 #import "PLYPackaging.h"
-#import "DTLog.h"
 
 @implementation PLYReview
 
@@ -26,7 +25,7 @@
 		
 		if ([value isKindOfClass:[NSDictionary class]])
 		{
-			self.createdBy = [[PLYAuditor alloc] initWithDictionary:value];
+			self.createdBy = [[PLYUser alloc] initWithDictionary:value];
 		}
 	}
 	else if ([key isEqualToString:@"pl-rev-usr_upvotes"])
@@ -64,7 +63,7 @@
 	{
 		if ([value isKindOfClass:[NSDictionary class]])
 		{
-			self.updatedBy = [[PLYAuditor alloc] initWithDictionary:value];
+			self.updatedBy = [[PLYUser alloc] initWithDictionary:value];
 		}
 	}
 	else

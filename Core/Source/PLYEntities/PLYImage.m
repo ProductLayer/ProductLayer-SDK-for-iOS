@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
-#import "PLYImage.h"
-
-#import "PLYAuditor.h"
 #import "PLYServer.h"
+
+#import "PLYImage.h"
+#import "PLYUser.h"
 
 @interface PLYServer (private)
 +(NSString *)_addQueryParameterToUrl:(NSString *)url parameters:(NSDictionary *)parameters;
@@ -28,14 +28,14 @@
 	{
 		if ([value isKindOfClass:[NSDictionary class]])
 		{
-			self.createdBy = [[PLYAuditor alloc] initWithDictionary:value];
+			self.createdBy = [[PLYUser alloc] initWithDictionary:value];
 		}
 	}
 	else if ([key isEqualToString:@"pl-upd-by"])
 	{
 		if ([value isKindOfClass:[NSDictionary class]])
 		{
-			self.updatedBy = [[PLYAuditor alloc] initWithDictionary:value];
+			self.updatedBy = [[PLYUser alloc] initWithDictionary:value];
 		}
 		
 	}
@@ -47,7 +47,7 @@
 		{
 			for (NSDictionary *user in value)
 			{
-				[self.upVoters addObject:[[PLYAuditor alloc] initWithDictionary:user]];
+				[self.upVoters addObject:[[PLYUser alloc] initWithDictionary:user]];
 			}
 		}
 	}
@@ -59,7 +59,7 @@
 		{
 			for (NSDictionary *user in value)
 			{
-				[self.downVoters addObject:[[PLYAuditor alloc] initWithDictionary:user]];
+				[self.downVoters addObject:[[PLYUser alloc] initWithDictionary:user]];
 			}
 		}
 	}
@@ -148,7 +148,7 @@
 	{
 		NSMutableArray *tmpArray = [NSMutableArray arrayWithCapacity:[self.upVoters count]];
 		
-		for (PLYAuditor *user in self.upVoters)
+		for (PLYUser *user in self.upVoters)
 		{
 			[tmpArray addObject:[user dictionaryRepresentation]];
 		}
@@ -160,7 +160,7 @@
 	{
 		NSMutableArray *tmpArray = [NSMutableArray arrayWithCapacity:[self.downVoters count]];
 		
-		for (PLYAuditor *user in self.downVoters)
+		for (PLYUser *user in self.downVoters)
 		{
 			[tmpArray addObject:[user dictionaryRepresentation]];
 		}

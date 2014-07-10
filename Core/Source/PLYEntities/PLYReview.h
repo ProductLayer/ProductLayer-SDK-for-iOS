@@ -8,7 +8,7 @@
 
 #import "PLYEntity.h"
 
-@class PLYAuditor;
+@class PLYUser;
 
 @interface PLYReview : PLYEntity
 

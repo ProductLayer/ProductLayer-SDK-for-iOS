@@ -11,7 +11,7 @@
 #import "DTLog.h"
 
 #import "PLYListItem.h"
-#import "PLYAuditor.h"
+#import "PLYUser.h"
 
 @implementation PLYList
 
@@ -27,7 +27,7 @@
 		
 		if ([value isKindOfClass:[NSDictionary class]])
 		{
-			self.createdBy = [[PLYAuditor alloc] initWithDictionary:value];
+			self.createdBy = [[PLYUser alloc] initWithDictionary:value];
 		}
 		
 	}
@@ -48,7 +48,7 @@
 	{
 		if ([value isKindOfClass:[NSDictionary class]])
 		{
-			self.updatedBy = [[PLYAuditor alloc] initWithDictionary:value];
+			self.updatedBy = [[PLYUser alloc] initWithDictionary:value];
 		}
 		
 	}

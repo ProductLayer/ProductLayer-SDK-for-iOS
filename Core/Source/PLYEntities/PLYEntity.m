@@ -7,7 +7,7 @@
 //
 
 #import "PLYEntity.h"
-#import "PLYAuditor.h"
+#import "PLYUser.h"
 #import <objc/runtime.h>
 
 // lookup table mapping class strings to objc classes

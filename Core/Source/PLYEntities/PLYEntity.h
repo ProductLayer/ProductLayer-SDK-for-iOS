@@ -10,7 +10,7 @@
  This is the super class of all entities returned by the SDK/API
  */
 
-@class PLYAuditor;
+@class PLYUser;
 
 @interface PLYEntity : NSObject
 
@@ -63,7 +63,7 @@
 /**
  The user who created the object.
  */
-@property (nonatomic, strong) PLYAuditor *createdBy;
+@property (nonatomic, strong) PLYUser *createdBy;
 
 /**
  The timestamp when object was created.
@@ -73,7 +73,7 @@
 /**
  The user who updated the object the last time.
  */
-@property (nonatomic, strong) PLYAuditor *updatedBy;
+@property (nonatomic, strong) PLYUser *updatedBy;
 
 /**
  The timestamp when object was updated the last time.
