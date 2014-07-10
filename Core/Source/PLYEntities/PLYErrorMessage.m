@@ -10,29 +10,20 @@
 
 @implementation PLYErrorMessage
 
-@synthesize message;
-@synthesize code;
-@synthesize throwable;
-
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary {
-    
-    if (![aDictionary isKindOfClass:[NSDictionary class]]) {
-        return;
-    }
-    
-    [self setValuesForKeysWithDictionary:aDictionary];
-    
-}
-
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key {
-    if ([key isEqualToString:@"message"]) {
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+    if ([key isEqualToString:@"message"])
+	 {
         [self setValue:value forKey:@"message"];
-    } else if ([key isEqualToString:@"code"]) {
+    }
+	 else if ([key isEqualToString:@"code"])
+	 {
         [self setValue:value forKey:@"code"];
-    } else if ([key isEqualToString:@"throwable"]) {
+    }
+	 else if ([key isEqualToString:@"throwable"])
+	 {
         [self setValue:value forKey:@"throwable"];
     }
 }
-
 
 @end

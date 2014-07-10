@@ -11,18 +11,25 @@
 /**
  * The error message with all needed information.
  **/
-@interface PLYErrorMessage : PLYEntity {
-    // The error message.
-    NSString *message;
-    // The productlayer error code.
-    NSNumber *code;
-    // The stacktrace will only be available for alpha and beta api's.
-    NSString *throwable;
-}
+@interface PLYErrorMessage : PLYEntity
 
+/**
+ @name Properties
+ */
+
+/**
+ The error message.
+ */
 @property (nonatomic, copy) NSString *message;
-@property (nonatomic, copy) NSNumber *code;
-@property (nonatomic, copy) NSString *throwable;
 
+/**
+ The productlayer error code.
+ */
+@property (nonatomic, copy) NSNumber *code;
+
+/**
+ The stacktrace will only be available for alpha and beta api's.
+ */
+@property (nonatomic, copy) NSString *throwable;
 
 @end
