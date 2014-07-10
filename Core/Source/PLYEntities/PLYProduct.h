@@ -17,23 +17,11 @@
  @name Properties
  */
 
-// The class identifier.
-@property (nonatomic, strong) NSString *Class;
-
-// The object id.
-@property (nonatomic, strong) NSString *Id;
-
 // The name of the brand information.
 @property (nonatomic, strong) NSString *brandName;
 
 // The name of the brand owner information.
 @property (nonatomic, strong) NSString *brandOwner;
-
-// The user who created the object.
-@property (nonatomic, strong) PLYAuditor *createdBy;
-
-// The timestamp when object was created.
-@property (nonatomic, strong) NSNumber *createdTime;
 
 // The language of the product.
 @property (nonatomic, strong) NSString *language;
@@ -64,15 +52,6 @@
 
 // The product rating.
 @property (nonatomic, strong) NSNumber *rating;
-
-// The user who updated the object the last time.
-@property (nonatomic, strong) PLYAuditor *updatedBy;
-
-// The timestamp when object was updated the last time.
-@property (nonatomic, strong) NSNumber *updatedTime;
-
-// The version.
-@property (nonatomic, strong) NSNumber *version;
 
 // The characteristics information.
 @property (nonatomic, strong) NSMutableDictionary *characteristics;

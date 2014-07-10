@@ -11,201 +11,158 @@
 #import "DTLog.h"
 
 #import "PLYListItem.h"
-#import "PLYAuditor.h"
+#import "PLYUser.h"
 
 @implementation PLYList
 
-@synthesize Class;
-@synthesize Id;
-@synthesize version;
-
-@synthesize createdBy;
-@synthesize createdTime;
-@synthesize updatedBy;
-@synthesize updatedTime;
-
-@synthesize title;
-@synthesize description;
-@synthesize listType;
-
-@synthesize shareType;
-@synthesize sharedUsers;
-
-@synthesize listItems;
-
-+ (NSString *) entityTypeIdentifier
++ (NSString *)entityTypeIdentifier
 {
     return @"com.productlayer.List";
 }
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary
+- (void)setValue:(id)value forKey:(NSString *)key
 {
-	self = [super initWithDictionary:dictionary];
-	
-	if (self)
+	if ([key isEqualToString:@"pl-created-by"])
 	{
-		[self setAttributesFromDictionary:dictionary];
+		
+		if ([value isKindOfClass:[NSDictionary class]])
+		{
+			self.createdBy = [[PLYUser alloc] initWithDictionary:value];
+		}
+		
+	}
+	else if ([key isEqualToString:@"pl-list-products"])
+	{
+		
+		if ([value isKindOfClass:[NSArray class]]) {
+			
+			NSMutableArray *myMembers = [NSMutableArray arrayWithCapacity:[(NSArray *)value count]];
+			for (id valueMember in value) {
+				[myMembers addObject:[[PLYListItem alloc] initWithDictionary:valueMember]];
+			}
+			
+			self.listItems = myMembers;
+		}
+	}
+	else if ([key isEqualToString:@"pl-upd-by"])
+	{
+		if ([value isKindOfClass:[NSDictionary class]])
+		{
+			self.updatedBy = [[PLYUser alloc] initWithDictionary:value];
+		}
+		
+	}
+	else
+	{
+		[super setValue:value forKey:key];
+	}
+}
+
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+	if ([key isEqualToString:@"pl-list-title"])
+	{
+		[self setValue:value forKey:@"title"];
+	}
+	else if ([key isEqualToString:@"pl-list-desc"])
+	{
+		[self setValue:value forKey:@"description"];
+	}
+	else if ([key isEqualToString:@"pl-list-type"])
+	{
+		[self setValue:value forKey:@"listType"];
+	}
+	else if ([key isEqualToString:@"pl-list-share"])
+	{
+		[self setValue:value forKey:@"shareType"];
+	}
+	else if ([key isEqualToString:@"pl-list-shared-users"])
+	{
+		[self setValue:value forKey:@"sharedUsers"];
+	}
+	else
+	{
+		[super setValue:value forUndefinedKey:key];
+	}
+}
+
+- (NSDictionary *) dictionaryRepresentation
+{
+	NSMutableDictionary *dict = [[super dictionaryRepresentation] mutableCopy];
+	
+	if (self.title)
+	{
+		[dict setObject:self.title forKey:@"pl-list-title"];
 	}
 	
-	return self;
-}
-
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary {
-    
-    if (![aDictionary isKindOfClass:[NSDictionary class]]) {
-        return;
-    }
-    
-    [self setValuesForKeysWithDictionary:aDictionary];
-    
-}
-
-- (void)setValue:(id)value forKey:(NSString *)key {
-    
-    if ([key isEqualToString:@"pl-created-by"]) {
-        
-        if ([value isKindOfClass:[NSDictionary class]]) {
-            self.createdBy = [[PLYAuditor alloc] initWithDictionary:value];
-        }
-        
-    } else if ([key isEqualToString:@"pl-list-products"]) {
-        
-        if ([value isKindOfClass:[NSArray class]]) {
-            
-            NSMutableArray *myMembers = [NSMutableArray arrayWithCapacity:[(NSArray *)value count]];
-            for (id valueMember in value) {
-                [myMembers addObject:[[PLYListItem alloc] initWithDictionary:valueMember]];
-            }
-            
-            self.listItems = myMembers;
-        }
-        
-    } else if ([key isEqualToString:@"pl-upd-by"]) {
-        
-        if ([value isKindOfClass:[NSDictionary class]]) {
-            self.updatedBy = [[PLYAuditor alloc] initWithDictionary:value];
-        }
-        
-    } else {
-        [super setValue:value forKey:key];
-    }
-    
-}
-
-
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key {
-    
-    if ([key isEqualToString:@"pl-class"]) {
-        [self setValue:value forKey:@"Class"];
-    } else if ([key isEqualToString:@"pl-id"]) {
-        [self setValue:value forKey:@"Id"];
-    }  else if ([key isEqualToString:@"pl-version"]) {
-        [self setValue:value forKey:@"version"];
-    } else if ([key isEqualToString:@"pl-created-by"]) {
-        [self setValue:value forKey:@"createdBy"];
-    } else if ([key isEqualToString:@"pl-created-time"]) {
-        [self setValue:value forKey:@"createdTime"];
-    } else if ([key isEqualToString:@"pl-upd-by"]) {
-        [self setValue:value forKey:@"updatedBy"];
-    } else if ([key isEqualToString:@"pl-upd-time"]) {
-        [self setValue:value forKey:@"updatedTime"];
-    }
-    
-    else if ([key isEqualToString:@"pl-list-title"]) {
-        [self setValue:value forKey:@"title"];
-    } else if ([key isEqualToString:@"pl-list-desc"]) {
-        [self setValue:value forKey:@"description"];
-    }  else if ([key isEqualToString:@"pl-list-type"]) {
-        [self setValue:value forKey:@"listType"];
-    } else if ([key isEqualToString:@"pl-list-share"]) {
-        [self setValue:value forKey:@"shareType"];
-    } else if ([key isEqualToString:@"pl-list-shared-users"]) {
-        [self setValue:value forKey:@"sharedUsers"];
-    }
-}
-
-- (NSDictionary *) dictionaryRepresentation{
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:1];
-    
-    if (Class != nil) {
-        [dict setObject:Class forKey:@"pl-class"];
-    }
-    if (Id != nil) {
-        [dict setObject:Id forKey:@"pl-id"];
-    }
-    if (version != nil) {
-        [dict setObject:version forKey:@"pl-version"];
-    }
-    if (createdBy != nil) {
-        [dict setObject:[createdBy dictionaryRepresentation] forKey:@"pl-created-by"];
-    }
-    if (createdTime != nil) {
-        [dict setObject:createdTime forKey:@"pl-created-time"];
-    }
-    if (updatedBy != nil) {
-        [dict setObject:[updatedBy dictionaryRepresentation] forKey:@"pl-upd-by"];
-    }
-    if (updatedTime != nil) {
-        [dict setObject:updatedTime forKey:@"pl-upd-time"];
-    }
-    
-    if (title != nil) {
-        [dict setObject:title forKey:@"pl-list-title"];
-    }
-    if (description != nil) {
-        [dict setObject:description forKey:@"pl-list-desc"];
-    }
-    if (listType != nil) {
-        [dict setObject:listType forKey:@"pl-list-type"];
-    }
-    if (shareType != nil) {
-        [dict setObject:shareType forKey:@"pl-list-share"];
-    }
-    if (sharedUsers != nil) {
-        [dict setObject:sharedUsers forKey:@"pl-list-shared-users"];
-    }
-    
-    if (listItems != nil) {
-        NSMutableArray *tmpArray = [NSMutableArray arrayWithCapacity:1];
-        
-        for(PLYListItem *item in listItems){
-            [tmpArray addObject:[item dictionaryRepresentation]];
-        }
-        [dict setObject:tmpArray forKey:@"pl-list-products"];
-    }
-    
-    return dict;
+	if (self.description)
+	{
+		[dict setObject:self.description forKey:@"pl-list-desc"];
+	}
+	
+	if (self.listType)
+	{
+		[dict setObject:self.listType forKey:@"pl-list-type"];
+	}
+	
+	if (self.shareType)
+	{
+		[dict setObject:self.shareType forKey:@"pl-list-share"];
+	}
+	
+	if (self.sharedUsers)
+	{
+		[dict setObject:self.sharedUsers forKey:@"pl-list-shared-users"];
+	}
+	
+	if (self.listItems)
+	{
+		NSMutableArray *tmpArray = [NSMutableArray arrayWithCapacity:1];
+		
+		for(PLYListItem *item in self.listItems)
+		{
+			[tmpArray addObject:[item dictionaryRepresentation]];
+		}
+		
+		[dict setObject:tmpArray forKey:@"pl-list-products"];
+	}
+	
+	// return immutable
+	return [dict copy];
 }
 
 /**
  * Simple check if the product list can be send to the server for saving.
  **/
-- (BOOL) isValidForSaving{
-    if([title length] > 5 && [listType length] && [shareType length]){
-        return true;
-    }
-    
-    return false;
+- (BOOL) isValidForSaving
+{
+	if([self.title length] > 5 && [self.listType length] && [self.shareType length])
+	{
+		return true;
+	}
+	
+	return false;
 }
 
-+ (NSArray *) availableListTypes{
-    NSMutableArray *listTypes = [NSMutableArray arrayWithObjects:kLIST_WISHLIST,
-                               kLIST_WISHLIST,
-                               kLIST_BORROWED,
-                               kLIST_OWNED,
-                               kLIST_OTHER, nil];
-    
-    return listTypes;
++ (NSArray *)availableListTypes
+{
+	NSMutableArray *listTypes = [NSMutableArray arrayWithObjects:kLIST_WISHLIST,
+										  kLIST_WISHLIST,
+										  kLIST_BORROWED,
+										  kLIST_OWNED,
+										  kLIST_OTHER, nil];
+	
+	return listTypes;
 }
 
-+ (NSArray *) availableSharingTypes{
-    NSMutableArray *sharingTypes = [NSMutableArray arrayWithObjects:kSHARE_PUBLIC,
-                                 kSHARE_FRIENDS,
-                                 kSHARE_SPECIFIC,
-                                 kSHARE_NONE, nil];
-    
-    return sharingTypes;
++ (NSArray *)availableSharingTypes
+{
+	NSMutableArray *sharingTypes = [NSMutableArray arrayWithObjects:kSHARE_PUBLIC,
+											  kSHARE_FRIENDS,
+											  kSHARE_SPECIFIC,
+											  kSHARE_NONE, nil];
+	
+	return sharingTypes;
 }
-
 
 @end

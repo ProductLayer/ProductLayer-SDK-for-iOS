@@ -8,7 +8,7 @@
 
 #import "PLYProduct.h"
 
-#import "PLYAuditor.h"
+#import "PLYUser.h"
 #import "PLYPackaging.h"
 
 @implementation PLYProduct
@@ -24,7 +24,7 @@
 	{
 		if ([value isKindOfClass:[NSDictionary class]])
 		{
-			self.createdBy = [[PLYAuditor alloc] initWithDictionary:value];
+			self.createdBy = [[PLYUser alloc] initWithDictionary:value];
 		}
 		
 	}
@@ -53,7 +53,7 @@
 	{
 		if ([value isKindOfClass:[NSDictionary class]])
 		{
-			self.updatedBy = [[PLYAuditor alloc] initWithDictionary:value];
+			self.updatedBy = [[PLYUser alloc] initWithDictionary:value];
 		}
 	}
 	else
@@ -65,29 +65,13 @@
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key
 {
-	if ([key isEqualToString:@"pl-class"])
-	{
-		[self setValue:value forKey:@"Class"];
-	}
-	else if ([key isEqualToString:@"pl-id"])
-	{
-		[self setValue:value forKey:@"Id"];
-	}
-	else if ([key isEqualToString:@"pl-brand-name"])
+	if ([key isEqualToString:@"pl-brand-name"])
 	{
 		[self setValue:value forKey:@"brandName"];
 	}
 	else if ([key isEqualToString:@"pl-brand-own-name"])
 	{
 		[self setValue:value forKey:@"brandOwner"];
-	}
-	else if ([key isEqualToString:@"pl-created-by"])
-	{
-		[self setValue:value forKey:@"createdBy"];
-	}
-	else if ([key isEqualToString:@"pl-created-time"])
-	{
-		[self setValue:value forKey:@"createdTime"];
 	}
 	else if ([key isEqualToString:@"pl-lng"])
 	{
@@ -129,14 +113,6 @@
 	{
 		[self setValue:value forKey:@"rating"];
 	}
-	else if ([key isEqualToString:@"pl-upd-by"])
-	{
-		[self setValue:value forKey:@"updatedBy"];
-	}
-	else if ([key isEqualToString:@"pl-upd-time"])
-	{
-		[self setValue:value forKey:@"updatedTime"];
-	}
 	else if ([key isEqualToString:@"pl-prod-char"])
 	{
 		[self setValue:value forKey:@"characteristics"];
@@ -145,124 +121,88 @@
 	{
 		[self setValue:value forKey:@"nutritious"];
 	}
-	else if ([key isEqualToString:@"pl-version"])
+	else
 	{
-		[self setValue:value forKey:@"version"];
+		[super setValue:value forUndefinedKey:key];
 	}
 }
 
-- (NSDictionary *) dictionaryRepresentation
+- (NSDictionary *)dictionaryRepresentation
 {
-	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+	NSMutableDictionary *dict = [[super dictionaryRepresentation] mutableCopy];
 	
-	if (_Class)
+	if (self.brandName)
 	{
-		[dict setObject:_Class forKey:@"pl-class"];
+		[dict setObject:self.brandName forKey:@"pl-brand-name"];
 	}
 	
-	if (_Id)
+	if (self.brandOwner)
 	{
-		[dict setObject:_Id forKey:@"pl-id"];
+		[dict setObject:self.brandOwner forKey:@"pl-brand-own-name"];
 	}
 	
-	if (_brandName)
+	if (self.language)
 	{
-		[dict setObject:_brandName forKey:@"pl-brand-name"];
+		[dict setObject:self.language forKey:@"pl-lng"];
 	}
 	
-	if (_brandOwner)
+	if (self.category)
 	{
-		[dict setObject:_brandOwner forKey:@"pl-brand-own-name"];
+		[dict setObject:self.category forKey:@"pl-prod-cat"];
 	}
 	
-	if (_createdBy)
+	if (self.longDescription)
 	{
-		[dict setObject:[_createdBy dictionaryRepresentation] forKey:@"pl-created-by"];
+		[dict setObject:self.longDescription forKey:@"pl-prod-desc-long"];
 	}
 	
-	if (_createdTime)
+	if (self.shortDescription)
 	{
-		[dict setObject:_createdTime forKey:@"pl-created-time"];
+		[dict setObject:self.shortDescription forKey:@"pl-prod-desc-short"];
 	}
 	
-	if (_language)
+	if (self.gtin)
 	{
-		[dict setObject:_language forKey:@"pl-lng"];
+		[dict setObject:self.gtin forKey:@"pl-prod-gtin"];
 	}
 	
-	if (_category)
+	if (self.homepage)
 	{
-		[dict setObject:_category forKey:@"pl-prod-cat"];
+		[dict setObject:self.homepage forKey:@"pl-prod-homepage"];
 	}
 	
-	if (_longDescription)
+	if (self.links)
 	{
-		[dict setObject:_longDescription forKey:@"pl-prod-desc-long"];
+		[dict setObject:self.links forKey:@"pl-prod-lnks"];
 	}
 	
-	if (_shortDescription)
+	if (self.name)
 	{
-		[dict setObject:_shortDescription forKey:@"pl-prod-desc-short"];
+		[dict setObject:self.name forKey:@"pl-prod-name"];
 	}
 	
-	if (_gtin)
+	if (self.packaging)
 	{
-		[dict setObject:_gtin forKey:@"pl-prod-gtin"];
+		[dict setObject:[self.packaging dictionaryRepresentation] forKey:@"pl-prod-pkg"];
 	}
 	
-	if (_homepage)
+	if (self.rating)
 	{
-		[dict setObject:_homepage forKey:@"pl-prod-homepage"];
+		[dict setObject:self.rating forKey:@"pl-prod-rating"];
 	}
 	
-	if (_links)
+	if (self.characteristics)
 	{
-		[dict setObject:_links forKey:@"pl-prod-lnks"];
+		[dict setObject:self.characteristics forKey:@"pl-prod-char"];
 	}
 	
-	if (_name)
+	if (self.nutritious)
 	{
-		[dict setObject:_name forKey:@"pl-prod-name"];
+		[dict setObject:self.nutritious forKey:@"pl-prod-nutr"];
 	}
 	
-	if (_packaging)
-	{
-		[dict setObject:[_packaging dictionaryRepresentation] forKey:@"pl-prod-pkg"];
-	}
-	
-	if (_rating)
-	{
-		[dict setObject:_rating forKey:@"pl-prod-rating"];
-	}
-	
-	if (_updatedBy)
-	{
-		[dict setObject:[_updatedBy dictionaryRepresentation] forKey:@"pl-upd-by"];
-	}
-	
-	if (_updatedTime)
-	{
-		[dict setObject:_updatedTime forKey:@"pl-upd-time"];
-	}
-	
-	if (_characteristics)
-	{
-		[dict setObject:_characteristics forKey:@"pl-prod-char"];
-	}
-	
-	if (_nutritious)
-	{
-		[dict setObject:_nutritious forKey:@"pl-prod-nutr"];
-	}
-	
-	if (_version)
-	{
-		[dict setObject:_version forKey:@"pl-version"];
-	}
-	
-	return dict;
+	// return immutable
+	return [dict copy];
 }
-
-
 
 @end

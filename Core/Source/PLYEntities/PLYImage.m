@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
-#import "PLYImage.h"
-
-#import "PLYAuditor.h"
 #import "PLYServer.h"
+
+#import "PLYImage.h"
+#import "PLYUser.h"
 
 @interface PLYServer (private)
 +(NSString *)_addQueryParameterToUrl:(NSString *)url parameters:(NSDictionary *)parameters;
@@ -28,18 +28,18 @@
 	{
 		if ([value isKindOfClass:[NSDictionary class]])
 		{
-			self.createdBy = [[PLYAuditor alloc] initWithDictionary:value];
+			self.createdBy = [[PLYUser alloc] initWithDictionary:value];
 		}
 	}
 	else if ([key isEqualToString:@"pl-upd-by"])
 	{
 		if ([value isKindOfClass:[NSDictionary class]])
 		{
-			self.updatedBy = [[PLYAuditor alloc] initWithDictionary:value];
+			self.updatedBy = [[PLYUser alloc] initWithDictionary:value];
 		}
 		
 	}
-	else if ([key isEqualToString:@"pl-img-usr_upvotes"])
+	else if ([key isEqualToString:@"pl-img-usrself.upvotes"])
 	{
 		self.upVoters = [NSMutableArray arrayWithCapacity:1];
 		
@@ -47,11 +47,11 @@
 		{
 			for (NSDictionary *user in value)
 			{
-				[self.upVoters addObject:[[PLYAuditor alloc] initWithDictionary:user]];
+				[self.upVoters addObject:[[PLYUser alloc] initWithDictionary:user]];
 			}
 		}
 	}
-	else if ([key isEqualToString:@"pl-img-usr_downvotes"])
+	else if ([key isEqualToString:@"pl-img-usrself.downvotes"])
 	{
 		self.downVoters = [NSMutableArray arrayWithCapacity:1];
 		
@@ -59,7 +59,7 @@
 		{
 			for (NSDictionary *user in value)
 			{
-				[self.downVoters addObject:[[PLYAuditor alloc] initWithDictionary:user]];
+				[self.downVoters addObject:[[PLYUser alloc] initWithDictionary:user]];
 			}
 		}
 	}
@@ -71,35 +71,7 @@
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key
 {
-	if ([key isEqualToString:@"pl-id"])
-	{
-		[self setValue:value forKey:@"Id"];
-	}
-	else if ([key isEqualToString:@"pl-version"])
-	{
-		[self setValue:value forKey:@"version"];
-	}
-	else if ([key isEqualToString:@"pl-class"])
-	{
-		[self setValue:value forKey:@"Class"];
-	}
-	else if ([key isEqualToString:@"pl-created-by"])
-	{
-		[self setValue:value forKey:@"createdBy"];
-	}
-	else if ([key isEqualToString:@"pl-created-time"])
-	{
-		[self setValue:value forKey:@"createdTime"];
-	}
-	else if ([key isEqualToString:@"pl-upd-by"])
-	{
-		[self setValue:value forKey:@"udpatedBy"];
-	}
-	else if ([key isEqualToString:@"pl-upd-time"])
-	{
-		[self setValue:value forKey:@"updatedTime"];
-	}
-	else if ([key isEqualToString:@"pl-img-file_id"])
+	if ([key isEqualToString:@"pl-img-fileself.id"])
 	{
 		[self setValue:value forKey:@"fileId"];
 	}
@@ -115,7 +87,7 @@
 	{
 		[self setValue:value forKey:@"url"];
 	}
-	else if ([key isEqualToString:@"pl-img-vote_score"])
+	else if ([key isEqualToString:@"pl-img-voteself.score"])
 	{
 		[self setValue:value forKey:@"votingScore"];
 	}
@@ -127,107 +99,77 @@
 	{
 		[self setValue:value forKey:@"gtin"];
 	}
+	else
+	{
+		[super setValue:value forUndefinedKey:key];
+	}
 }
 
 - (NSDictionary *)dictionaryRepresentation
 {
-	NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:1];
+	NSMutableDictionary *dict = [[super dictionaryRepresentation] mutableCopy];
 	
-	if (_Class)
+	if (self.fileId)
 	{
-		[dict setObject:_Class forKey:@"pl-class"];
+		[dict setObject:self.fileId forKey:@"pl-img-fileself.id"];
 	}
 	
-	if (_Id)
+	if (self.height)
 	{
-		[dict setObject:_Id forKey:@"pl-id"];
+		[dict setObject:self.height forKey:@"pl-img-h-px"];
 	}
 	
-	if (_version)
+	if (self.name)
 	{
-		[dict setObject:_version forKey:@"pl-version"];
+		[dict setObject:self.name forKey:@"pl-img-name"];
 	}
 	
-	if (_createdBy)
+	if (self.url)
 	{
-		[dict setObject:[_createdBy dictionaryRepresentation] forKey:@"pl-created-by"];
+		[dict setObject:self.url forKey:@"pl-img-url"];
 	}
 	
-	if (_createdTime)
+	if (self.votingScore)
 	{
-		[dict setObject:_createdTime forKey:@"pl-created-time"];
+		[dict setObject:self.votingScore forKey:@"pl-img-voteself.score"];
 	}
 	
-	if (_updatedBy)
+	if (self.width)
 	{
-		[dict setObject:[_updatedBy dictionaryRepresentation] forKey:@"pl-upd-by"];
+		[dict setObject:self.width forKey:@"pl-img-w-px"];
 	}
 	
-	if (_updatedTime)
+	if (self.gtin)
 	{
-		[dict setObject:_updatedTime forKey:@"pl-upd-time"];
+		[dict setObject:self.gtin forKey:@"pl-prod-gtin"];
 	}
 	
-	if (_fileId)
+	if (self.upVoters && [self.upVoters count] > 0)
 	{
-		[dict setObject:_fileId forKey:@"pl-img-file_id"];
-	}
-	
-	if (_height)
-	{
-		[dict setObject:_height forKey:@"pl-img-h-px"];
-	}
-	
-	if (_name)
-	{
-		[dict setObject:_name forKey:@"pl-img-name"];
-	}
-	
-	if (_url)
-	{
-		[dict setObject:_url forKey:@"pl-img-url"];
-	}
-	
-	if (_votingScore)
-	{
-		[dict setObject:_votingScore forKey:@"pl-img-vote_score"];
-	}
-	
-	if (_width)
-	{
-		[dict setObject:_width forKey:@"pl-img-w-px"];
-	}
-	
-	if (_gtin)
-	{
-		[dict setObject:_gtin forKey:@"pl-prod-gtin"];
-	}
-	
-	if (_upVoters && [_upVoters count] > 0)
-	{
-		NSMutableArray *tmpArray = [NSMutableArray arrayWithCapacity:[_upVoters count]];
+		NSMutableArray *tmpArray = [NSMutableArray arrayWithCapacity:[self.upVoters count]];
 		
-		for (PLYAuditor *user in _upVoters)
+		for (PLYUser *user in self.upVoters)
 		{
 			[tmpArray addObject:[user dictionaryRepresentation]];
 		}
 		
-		[dict setObject:tmpArray forKey:@"pl-img-usr_upvotes"];
+		[dict setObject:tmpArray forKey:@"pl-img-usrself.upvotes"];
 	}
 	
-	if (_downVoters && [_downVoters count] > 0)
+	if (self.downVoters && [self.downVoters count] > 0)
 	{
-		NSMutableArray *tmpArray = [NSMutableArray arrayWithCapacity:[_downVoters count]];
+		NSMutableArray *tmpArray = [NSMutableArray arrayWithCapacity:[self.downVoters count]];
 		
-		for (PLYAuditor *user in _downVoters)
+		for (PLYUser *user in self.downVoters)
 		{
 			[tmpArray addObject:[user dictionaryRepresentation]];
 		}
 		
-		[dict setObject:tmpArray forKey:@"pl-img-usr_downvotes"];
+		[dict setObject:tmpArray forKey:@"pl-img-usrself.downvotes"];
 	}
 	
-	return dict;
+	// return immutable
+	return [dict copy];
 }
 
 - (NSString *)getUrlForWidth:(CGFloat)maxWidth andHeight:(CGFloat)maxHeight crop:(BOOL)crop
@@ -236,12 +178,12 @@
 	
 	if (maxWidth>0)
 	{
-		[parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxWidth] forKey:@"max_width"];
+		[parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxWidth] forKey:@"maxself.width"];
 	}
 	
 	if (maxHeight>0)
 	{
-		[parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxHeight] forKey:@"max_height"];
+		[parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxHeight] forKey:@"maxself.height"];
 	}
 	
 	if (crop)
@@ -249,9 +191,9 @@
 		[parameters setObject:@"true" forKey:@"crop"];
 	}
 	
-	if (_url)
+	if (self.url)
 	{
-		NSString *path = [PLYServer _addQueryParameterToUrl:_url parameters:parameters];
+		NSString *path = [PLYServer _addQueryParameterToUrl:self.url parameters:parameters];
 		return path;
 	}
 	

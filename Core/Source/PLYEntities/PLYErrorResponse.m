@@ -11,24 +11,15 @@
 
 @implementation PLYErrorResponse
 
-@synthesize errors;
-
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary {
-    
-    if (![aDictionary isKindOfClass:[NSDictionary class]]) {
-        return;
-    }
-    
-    [self setValuesForKeysWithDictionary:aDictionary];
-    
-}
-
-- (void)setValue:(id)value forKey:(NSString *)key {
-    if ([key isEqualToString:@"errors"]) {
-        
-        if ([value isKindOfClass:[NSArray class]]) {
+- (void)setValue:(id)value forKey:(NSString *)key
+{
+    if ([key isEqualToString:@"errors"])
+	 {
+        if ([value isKindOfClass:[NSArray class]])
+		  {
             
             NSMutableArray *myMembers = [NSMutableArray arrayWithCapacity:[(NSArray *)value count]];
+			  
             for (id valueMember in value)
 				{
                 [myMembers addObject:[[PLYErrorMessage alloc] initWithDictionary:valueMember]];
@@ -36,7 +27,9 @@
             
             self.errors = myMembers;
         }
-    } else {
+    }
+	 else
+	 {
         [super setValue:value forKey:key];
     }
 }

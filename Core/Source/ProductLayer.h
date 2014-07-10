@@ -6,7 +6,6 @@
 #import "PLYProduct.h"
 #import "PLYImage.h"
 #import "PLYProductCategory.h"
-#import "PLYAuditor.h"
 #import "PLYPackaging.h"
 #import "PLYReview.h"
 #import "PLYList.h"

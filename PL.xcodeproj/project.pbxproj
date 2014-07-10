@@ -93,7 +93,6 @@
 		C98CD255190F9FB00035647C /* register_user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C98CD253190F9FB00035647C /* register_user@2x.png */; };
 		C98CD25C190FA86B0035647C /* no_image.png in Resources */ = {isa = PBXBuildFile; fileRef = C98CD25A190FA86B0035647C /* no_image.png */; };
 		C98CD25D190FA86B0035647C /* no_image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C98CD25B190FA86B0035647C /* no_image@2x.png */; };
-		C98CD2661910E0D70035647C /* PLYAuditor.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D31F6B190A742500C91A08 /* PLYAuditor.m */; };
 		C98CD2671910E0D70035647C /* PLYPackaging.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D31F6D190A742500C91A08 /* PLYPackaging.m */; };
 		C98CD2681910E0D70035647C /* PLYProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D31F6F190A742500C91A08 /* PLYProduct.m */; };
 		C98CD2691910E0D70035647C /* PLYReview.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D31F77190ABE0E00C91A08 /* PLYReview.m */; };
@@ -525,8 +524,6 @@
 		C9BDC08019080CDF0062BB56 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings@2x.png"; sourceTree = "<group>"; };
 		C9BDC08319080DD10062BB56 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		C9BDC08419080DD10062BB56 /* add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@2x.png"; sourceTree = "<group>"; };
-		C9D31F6A190A742500C91A08 /* PLYAuditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYAuditor.h; path = PLYEntities/PLYAuditor.h; sourceTree = "<group>"; };
-		C9D31F6B190A742500C91A08 /* PLYAuditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYAuditor.m; path = PLYEntities/PLYAuditor.m; sourceTree = "<group>"; };
 		C9D31F6C190A742500C91A08 /* PLYPackaging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYPackaging.h; path = PLYEntities/PLYPackaging.h; sourceTree = "<group>"; };
 		C9D31F6D190A742500C91A08 /* PLYPackaging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYPackaging.m; path = PLYEntities/PLYPackaging.m; sourceTree = "<group>"; };
 		C9D31F6E190A742500C91A08 /* PLYProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYProduct.h; path = PLYEntities/PLYProduct.h; sourceTree = "<group>"; };
@@ -998,8 +995,6 @@
 		C9D31F45190A705200C91A08 /* PLYEntities */ = {
 			isa = PBXGroup;
 			children = (
-				C9D31F6A190A742500C91A08 /* PLYAuditor.h */,
-				C9D31F6B190A742500C91A08 /* PLYAuditor.m */,
 				A7548B22196C4C16000B72EB /* PLYImage.h */,
 				A7548B23196C4C16000B72EB /* PLYImage.m */,
 				C9D31F6C190A742500C91A08 /* PLYPackaging.h */,
@@ -1429,7 +1424,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C98CD2661910E0D70035647C /* PLYAuditor.m in Sources */,
 				C98CD2671910E0D70035647C /* PLYPackaging.m in Sources */,
 				C98CD2681910E0D70035647C /* PLYProduct.m in Sources */,
 				A7548B24196C4C16000B72EB /* PLYImage.m in Sources */,

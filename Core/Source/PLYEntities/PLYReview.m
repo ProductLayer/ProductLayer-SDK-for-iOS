@@ -8,9 +8,8 @@
 
 #import "PLYReview.h"
 
-#import "PLYAuditor.h"
+#import "PLYUser.h"
 #import "PLYPackaging.h"
-#import "DTLog.h"
 
 @implementation PLYReview
 
@@ -26,9 +25,8 @@
 		
 		if ([value isKindOfClass:[NSDictionary class]])
 		{
-			self.createdBy = [[PLYAuditor alloc] initWithDictionary:value];
+			self.createdBy = [[PLYUser alloc] initWithDictionary:value];
 		}
-		
 	}
 	else if ([key isEqualToString:@"pl-rev-usr_upvotes"])
 	{
@@ -45,7 +43,6 @@
 			self.upVoter = myMembers;
 			
 		}
-		
 	}
 	else if ([key isEqualToString:@"pl-rev-usr_downvotes"])
 	{
@@ -64,12 +61,10 @@
 	}
 	else if ([key isEqualToString:@"pl-upd-by"])
 	{
-		
 		if ([value isKindOfClass:[NSDictionary class]])
 		{
-			self.updatedBy = [[PLYAuditor alloc] initWithDictionary:value];
+			self.updatedBy = [[PLYUser alloc] initWithDictionary:value];
 		}
-		
 	}
 	else
 	{
@@ -142,42 +137,7 @@
 
 - (NSDictionary *) dictionaryRepresentation
 {
-	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-	
-	if (_Class)
-	{
-		[dict setObject:_Class forKey:@"pl-class"];
-	}
-	
-	if (_Id)
-	{
-		[dict setObject:_Id forKey:@"pl-id"];
-	}
-	
-	if (_version)
-	{
-		[dict setObject:_version forKey:@"pl-version"];
-	}
-	
-	if (_createdBy)
-	{
-		[dict setObject:[_createdBy dictionaryRepresentation] forKey:@"pl-created-by"];
-	}
-	
-	if (_createdTime)
-	{
-		[dict setObject:_createdTime forKey:@"pl-created-time"];
-	}
-	
-	if (_updatedBy)
-	{
-		[dict setObject:[_updatedBy dictionaryRepresentation] forKey:@"pl-upd-by"];
-	}
-	
-	if (_updatedTime)
-	{
-		[dict setObject:_updatedTime forKey:@"pl-upd-time"];
-	}
+	NSMutableDictionary *dict = [[super dictionaryRepresentation] mutableCopy];
 	
 	if (_gtin)
 	{
@@ -219,7 +179,8 @@
 		[dict setObject:_downVoter forKey:@"pl-rev-usr_downvotes"];
 	}
 	
-	return dict;
+	// return immutable
+	return [dict copy];
 }
 
 @end
