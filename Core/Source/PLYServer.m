@@ -665,20 +665,6 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 }
 
 /**
- * Get the metadata of the last uploaded images of all products.
- **/
-- (void)getLastUploadedImagesWithPage:(NSInteger)page andRPP:(NSInteger)rpp completion:(PLYCompletion)completion{
-	NSParameterAssert(completion);
-	
-	NSString *function = [NSString stringWithFormat:@"/images/last?page=%ld&records_per_page=%ld", (long)page, (long)rpp];
-	NSString *path = [self _functionPathForFunction:function];
-	
-	[self _performMethodCallWithPath:path
-								 parameters:nil
-								 completion:completion];
-}
-
-/**
  * Get the localized category keys.
  **/
 - (void) getCategoriesForLocale:(NSString *)language completion:(PLYCompletion)completion{
@@ -817,6 +803,20 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 #pragma mark - Image Handling
 
 /**
+ * Get the metadata of the last uploaded images of all products.
+ **/
+- (void)getLastUploadedImagesWithPage:(NSInteger)page andRPP:(NSInteger)rpp completion:(PLYCompletion)completion{
+	NSParameterAssert(completion);
+	
+	NSString *function = [NSString stringWithFormat:@"/images/last?page=%ld&records_per_page=%ld", (long)page, (long)rpp];
+	NSString *path = [self _functionPathForFunction:function];
+	
+	[self _performMethodCallWithPath:path
+                          parameters:nil
+                          completion:completion];
+}
+
+/**
  * Upload a image for a product.
  * ATTENTION: Login required
  **/
@@ -842,7 +842,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	NSParameterAssert(imageFileId);
 	NSParameterAssert(completion);
 	
-	NSString *function = [NSString stringWithFormat:@"product/%@/image/%@/up_vote", gtin, imageFileId];
+	NSString *function = [NSString stringWithFormat:@"image/%@/up_vote", imageFileId];
 	NSString *path = [self _functionPathForFunction:function];
 	
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:completion];
@@ -858,7 +858,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	NSParameterAssert(imageFileId);
 	NSParameterAssert(completion);
 	
-	NSString *function = [NSString stringWithFormat:@"product/%@/image/%@/down_vote", gtin, imageFileId];
+	NSString *function = [NSString stringWithFormat:@"image/%@/down_vote", imageFileId];
 	NSString *path = [self _functionPathForFunction:function];
 	
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:completion];
