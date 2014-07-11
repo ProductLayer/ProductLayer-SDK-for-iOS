@@ -178,12 +178,12 @@
 	
 	if (maxWidth>0)
 	{
-		[parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxWidth] forKey:@"maxself.width"];
+		[parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxWidth] forKey:@"max_width"];
 	}
 	
 	if (maxHeight>0)
 	{
-		[parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxHeight] forKey:@"maxself.height"];
+		[parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxHeight] forKey:@"max_height"];
 	}
 	
 	if (crop)
