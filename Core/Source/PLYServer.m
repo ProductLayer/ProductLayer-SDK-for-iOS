@@ -30,7 +30,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 #define PLY_ENDPOINT_URL [NSURL URLWithString:@"http://176.9.158.164:28080"]
 
 // this is a prefix added before REST methods, e.g. for a version of the API
-#define PLY_PATH_PREFIX @"v1-alpha"
+#define PLY_PATH_PREFIX @"0.2"
 
 
 @implementation PLYServer
