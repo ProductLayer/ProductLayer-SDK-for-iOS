@@ -13,9 +13,9 @@
 #import "DTImageCache.h"
 #import "DTLog.h"
 
-#import "PLYAuditor.h"
 #import "PLYServer.h"
 #import "PLYImage.h"
+#import "PLYUser.h"
 
 @implementation ReviewTableViewCell
 
@@ -55,7 +55,7 @@
     
     [_subjectLabel setText:_review.subject];
     [_bodyLabel setText:_review.body];
-    [_authorLabel setText:_review.createdBy.userNickname];
+    [_authorLabel setText:_review.createdBy.nickname];
     
     
     [self loadMainImage];
