@@ -488,7 +488,6 @@
 		C97FAAD9192152D900144D2C /* up_vote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "up_vote@2x.png"; sourceTree = "<group>"; };
 		C97FAADE1921FCFA00144D2C /* PLYProductCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYProductCategory.h; path = PLYEntities/PLYProductCategory.h; sourceTree = "<group>"; };
 		C97FAADF1921FCFA00144D2C /* PLYProductCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYProductCategory.m; path = PLYEntities/PLYProductCategory.m; sourceTree = "<group>"; };
-		C98477C5196E72C90030DE0E /* PLYSidePanelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYSidePanelProtocol.h; sourceTree = "<group>"; };
 		C98CD249190E857C0035647C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C98CD252190F9FB00035647C /* register_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = register_user.png; sourceTree = "<group>"; };
 		C98CD253190F9FB00035647C /* register_user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register_user@2x.png"; sourceTree = "<group>"; };
@@ -728,7 +727,6 @@
 				C97FAA32191D618C00144D2C /* EditableCell.h */,
 				C97FAA33191D618C00144D2C /* EditableCell.m */,
 				C97FAA37191D618C00144D2C /* UIViewTags.h */,
-				C98477C5196E72C90030DE0E /* PLYSidePanelProtocol.h */,
 			);
 			path = Helper;
 			sourceTree = "<group>";

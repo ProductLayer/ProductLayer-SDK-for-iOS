@@ -98,8 +98,8 @@
     }
     
     // Set the side bar button action. When it's tapped, it'll show up the sidebar.
-    _sidebarButton.target = self.getSidePanelController;
-    _sidebarButton.action = @selector(showLeftPanel:);
+    _sidebarButton.target = self.sidePanelController;
+    _sidebarButton.action = @selector(toggleLeftPanel:);
     
     if(!_gtin){
         self.navigationItem.rightBarButtonItem = nil;

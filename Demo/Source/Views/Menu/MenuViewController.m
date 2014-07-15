@@ -54,7 +54,7 @@
 #pragma mark - Navigation
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
-    if (( [identifier isEqualToString:@"showMyProductLists"] || [identifier isEqualToString:@"createProduct"]) && ![self checkIfLoggedInAndShowLoginView:YES])
+    if (( [identifier isEqualToString:@"DTSidePanelCenter(ShowMyProductLists)"] || [identifier isEqualToString:@"createProduct"]) && ![self checkIfLoggedInAndShowLoginView:YES])
 	{
         return false;
     }
@@ -65,33 +65,29 @@
 
 -(void) prepareForSegue:(UIStoryboardSegue *) segue sender: (id) sender
 {
-    if ( [segue isKindOfClass: [DTSidePanelControllerSegue class]] ) {
+    if ( [segue isKindOfClass: [DTSidePanelControllerSegue class]] )
+    {
         DTSidePanelControllerSegue *_segue = (DTSidePanelControllerSegue*) segue;
+        _segue.sidePanelController = self.sidePanelController;
         
-        _segue.performBlock = ^(DTSidePanelControllerSegue* _segue, UIViewController* source, id destination) {
-            UINavigationController* navController = (UINavigationController*)self.getSidePanelController.centerPanelController;
-            [navController setViewControllers: @[destination] animated: NO ];
+        if([segue.destinationViewController isKindOfClass:[UINavigationController class]])
+        {
+            UINavigationController* navController = segue.destinationViewController;
+            UIViewController *viewController = navController.viewControllers[0];
             
-            if ([[segue identifier] isEqualToString:@"showMyProductLists"])
+            if ([viewController isKindOfClass:[ProductListsViewController class]])
             {
-                ProductListsViewController *productLists = destination;
+                ProductListsViewController *productLists = (ProductListsViewController *) viewController;
                 productLists.addProductView = false;
                 [productLists loadProductListsForUser:[[PLYServer sharedServer] loggedInUser] andType:nil];
             }
-            
-            [self.getSidePanelController presentPanel:DTSidePanelControllerPanelCenter animated:YES];
-        };
+        }
     }
 }
 
 - (IBAction)unwindToMenu:(UIStoryboardSegue *)unwindSegue
 {
 	
-}
-
-- (IBAction)unwindFromSignUp:(UIStoryboardSegue *)unwindSegue
-{
-    
 }
 
 @end

@@ -27,6 +27,7 @@
 
 #import "PLYProduct.h"
 #import "PLYUser.h"
+#import "DTProgressHUD.h"
 
 
 @interface HomeViewController () <DTCodeScannerViewControllerDelegate, UIImagePickerControllerDelegate>
@@ -45,10 +46,16 @@
 	[super viewDidLoad];
 	
 	// Set the side bar button action. When it's tapped, it'll show up the sidebar.
-	_sidebarButton.target = self.getSidePanelController;
-	_sidebarButton.action = @selector(showLeftPanel:);
+	_sidebarButton.target = self.sidePanelController;
+	_sidebarButton.action = @selector(toggleLeftPanel:);
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_updateLoginBar) name:PLYNotifyUserStatusChanged object:nil];
+}
+
+- (void)dealloc
+{
+    // UISearchBarDelegate is not weak so we need to set it nil via code.
+    self.productSearchBar.delegate = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -66,7 +73,6 @@
 																							  green:190.0/255.0
 																								blue:68.0/255.0
 																							  alpha:1.0];
-	
 	[self _updateLoginBar];
 }
 
@@ -123,15 +129,14 @@
 
 - (void)_updateLoginBar
 {
-	
 	DTBlockPerformSyncIfOnMainThreadElseAsync(^{
 		if ([[PLYServer sharedServer] loggedInUser])
 		{
-			[self.loginButton setTitle:[[[PLYServer sharedServer] loggedInUser] nickname] forState:UIControlStateNormal];
+            [self.loginButton setTitle:[[[PLYServer sharedServer] loggedInUser] nickname]];
 		}
 		else
 		{
-			[self.loginButton setTitle:@"Sign in" forState:UIControlStateNormal];
+            [self.loginButton setTitle:@"Sign in"];
 		}
 	});
 }

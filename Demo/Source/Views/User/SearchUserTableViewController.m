@@ -44,8 +44,14 @@
     }
     
     // Set the side bar button action. When it's tapped, it'll show up the sidebar.
-    _sidebarButton.target = self.getSidePanelController;
-    _sidebarButton.action = @selector(showLeftPanel:);
+    _sidebarButton.target = self.sidePanelController;
+    _sidebarButton.action = @selector(toggleLeftPanel:);
+}
+
+- (void)dealloc
+{
+    // UISearchBarDelegate is not weak so we need to set it nil via code.
+    self.userSearchBar.delegate = nil;
 }
 
 - (void)didReceiveMemoryWarning

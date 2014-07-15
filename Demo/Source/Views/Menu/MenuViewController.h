@@ -12,6 +12,5 @@
 @interface MenuViewController : ProductLayerViewController
 
 - (IBAction)unwindToMenu:(UIStoryboardSegue *)unwindSegue;
-- (IBAction)unwindFromSignUp:(UIStoryboardSegue *)unwindSegue;
 
 @end

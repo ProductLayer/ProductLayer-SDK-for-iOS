@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DTSidePanelController.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, DTSidePanelControllerDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

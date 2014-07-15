@@ -15,6 +15,7 @@
 
 @property (weak, nonatomic)   IBOutlet UIBarButtonItem *sidebarButton;
 @property (nonatomic, strong) NSArray *users;
+@property (weak, nonatomic) IBOutlet UISearchBar *userSearchBar;
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar;
 
