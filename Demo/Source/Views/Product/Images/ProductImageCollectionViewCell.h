@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-#import "PLYProductImage.h"
+#import "PLYImage.h"
 
 @interface ProductImageCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, weak)   IBOutlet UIImageView *imageView;
-@property (nonatomic, strong) PLYProductImage *imageMetadata;
+@property (nonatomic, strong) PLYImage *imageMetadata;
 
-- (void) loadImageForMetadata:(PLYProductImage *)_metadata withSize:(CGSize)_size crop:(BOOL)_crop;
+- (void) loadImageForMetadata:(PLYImage *)_metadata withSize:(CGSize)_size crop:(BOOL)_crop;
 
 @end

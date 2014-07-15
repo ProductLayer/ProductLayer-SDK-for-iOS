@@ -90,4 +90,12 @@
 	}];
 }
 
+- (IBAction) close:(id)sender
+{
+    DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+    });
+}
+
 @end

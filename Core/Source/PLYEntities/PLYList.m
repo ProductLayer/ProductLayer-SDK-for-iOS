@@ -17,7 +17,7 @@
 
 + (NSString *)entityTypeIdentifier
 {
-	return @"com.productlayer.ProductList";
+    return @"com.productlayer.List";
 }
 
 - (void)setValue:(id)value forKey:(NSString *)key

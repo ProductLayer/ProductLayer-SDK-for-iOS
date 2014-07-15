@@ -14,6 +14,10 @@
 
 @property (nonatomic, strong) NSArray *socialFeeds;
 
+/**
+ Currently loads the last uploaded images.
+ TODO: Change to load the global/user timeline.
+ */
 - (void) loadSocialFeed;
 
 @end

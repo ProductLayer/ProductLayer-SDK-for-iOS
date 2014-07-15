@@ -13,6 +13,8 @@
 
 @interface SearchProductViewController : ProductLayerViewController
 
+@property (weak, nonatomic) IBOutlet UISearchBar *productSearchBar;
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar;
 
 @end

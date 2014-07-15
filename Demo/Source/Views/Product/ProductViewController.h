@@ -27,7 +27,12 @@
 
 @property (nonatomic, strong) PLYProduct *product;
 
+/**
+ Loads the product with the specified GTIN.
+ @param _gtin The gtin (barcode) of the product.
+ */
 - (void) loadProductWithGTIN:(NSString *)_gtin;
+
 - (void) setProduct:(PLYProduct *)product;
 
 @end

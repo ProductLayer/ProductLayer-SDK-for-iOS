@@ -7,7 +7,6 @@
 //
 
 #import "ProductListsViewController.h"
-#import "SWRevealViewController.h"
 #import "ProductListTableViewCell.h"
 #import "ProductLayer.h"
 #import "UIViewTags.h"
@@ -15,6 +14,8 @@
 #import "AppSettings.h"
 #import "DTProgressHUD.h"
 #import "DetailedProductListViewControllerTableViewController.h"
+#import "UIViewController+DTSidePanelController.h"
+#import "DTSidePanelController.h"
 
 @interface ProductListsViewController ()
 
@@ -59,8 +60,8 @@
         }
         
         // Set the side bar button action. When it's tapped, it'll show up the sidebar.
-        _sidebarButton.target = self.revealViewController;
-        _sidebarButton.action = @selector(revealToggle:);
+        _sidebarButton.target = self.sidePanelController;
+        _sidebarButton.action = @selector(toggleLeftPanel:);
     }
 }
 
@@ -299,6 +300,5 @@
     
     
 }
-
 
 @end

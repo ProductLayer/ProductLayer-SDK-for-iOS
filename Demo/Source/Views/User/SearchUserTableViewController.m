@@ -7,9 +7,10 @@
 //
 
 #import "SearchUserTableViewController.h"
-#import "SWRevealViewController.h"
 #import "UserTableViewCell.h"
 #import "UserDetailsViewController.h"
+#import "DTSidePanelController.h"
+#import "UIViewController+DTSidePanelController.h"
 
 #import "UIViewTags.h"
 
@@ -43,8 +44,14 @@
     }
     
     // Set the side bar button action. When it's tapped, it'll show up the sidebar.
-    _sidebarButton.target = self.revealViewController;
-    _sidebarButton.action = @selector(revealToggle:);
+    _sidebarButton.target = self.sidePanelController;
+    _sidebarButton.action = @selector(toggleLeftPanel:);
+}
+
+- (void)dealloc
+{
+    // UISearchBarDelegate is not weak so we need to set it nil via code.
+    self.userSearchBar.delegate = nil;
 }
 
 - (void)didReceiveMemoryWarning
