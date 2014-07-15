@@ -16,9 +16,8 @@
 #import "DetailedProductListViewControllerTableViewController.h"
 #import "UIViewController+DTSidePanelController.h"
 #import "DTSidePanelController.h"
-#import "PLYSidePanelProtocol.h"
 
-@interface ProductListsViewController () <PLYSidePanelProtocol>
+@interface ProductListsViewController ()
 
 @end
 
@@ -61,8 +60,8 @@
         }
         
         // Set the side bar button action. When it's tapped, it'll show up the sidebar.
-        _sidebarButton.target = self.getSidePanelController;
-        _sidebarButton.action = @selector(showLeftPanel:);
+        _sidebarButton.target = self.sidePanelController;
+        _sidebarButton.action = @selector(toggleLeftPanel:);
     }
 }
 
@@ -300,13 +299,6 @@
 	}
     
     
-}
-
-#pragma mark - PLYSidePanelProtocol
-
-- (BOOL) allowClosing{
-    // Only allow closing if not editing
-    return !self.tableView.isEditing;
 }
 
 @end
