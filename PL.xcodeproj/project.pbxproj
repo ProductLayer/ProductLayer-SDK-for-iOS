@@ -1920,6 +1920,7 @@
 				A76A57131986937D00751454 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A7B214F1183F842000C38635 /* Build configuration list for PBXProject "PL" */ = {
 			isa = XCConfigurationList;
