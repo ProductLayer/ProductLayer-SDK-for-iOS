@@ -32,6 +32,7 @@
 		A76D3F6B198650770032FE59 /* PLYTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F62198650770032FE59 /* PLYTextField.m */; };
 		A76D3F6C198650770032FE59 /* PLYUserNameValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F64198650770032FE59 /* PLYUserNameValidator.m */; };
 		A76D3F6D198650770032FE59 /* PLYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F66198650770032FE59 /* PLYViewController.m */; };
+		A76D3F9119866E0E0032FE59 /* PLYLostPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F9019866E0E0032FE59 /* PLYLostPasswordViewController.m */; };
 		A7B214FA183F842000C38635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214F9183F842000C38635 /* Foundation.framework */; };
 		A7B214FC183F842000C38635 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FB183F842000C38635 /* CoreGraphics.framework */; };
 		A7B214FE183F842000C38635 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FD183F842000C38635 /* UIKit.framework */; };
@@ -81,7 +82,6 @@
 		C97FAAB4191D618C00144D2C /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA7E191D618C00144D2C /* SettingsViewController.m */; };
 		C97FAAB5191D618C00144D2C /* SocialFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA81191D618C00144D2C /* SocialFeedViewController.m */; };
 		C97FAAB6191D618C00144D2C /* UIViewController+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA83191D618C00144D2C /* UIViewController+Login.m */; };
-		C97FAAB7191D618C00144D2C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA87191D618C00144D2C /* LoginViewController.m */; };
 		C97FAAB8191D618C00144D2C /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA89191D618C00144D2C /* SignUpViewController.m */; };
 		C97FAAB9191D618C00144D2C /* LostPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA8C191D618C00144D2C /* LostPasswordViewController.m */; };
 		C97FAABA191D618C00144D2C /* SearchUserTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA8E191D618C00144D2C /* SearchUserTableViewController.m */; };
@@ -174,6 +174,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = A71902A616A8029400C1EC52;
 			remoteInfo = "DTDownload (iOS)";
+		};
+		A76D3F89198666FE0032FE59 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B4418A183F90B900E8A170 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A7AC21AF196417830009E1B9;
+			remoteInfo = "DTAnimatedGIF (iOS)";
+		};
+		A76D3F8B198666FE0032FE59 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B4418A183F90B900E8A170 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A78381C31963F8D700AF09D3;
+			remoteInfo = "DTAnimatedGIF Demo";
 		};
 		A7B21744183F8A5400C38635 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -378,6 +392,8 @@
 		A76D3F64198650770032FE59 /* PLYUserNameValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYUserNameValidator.m; sourceTree = "<group>"; };
 		A76D3F65198650770032FE59 /* PLYViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYViewController.h; sourceTree = "<group>"; };
 		A76D3F66198650770032FE59 /* PLYViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYViewController.m; sourceTree = "<group>"; };
+		A76D3F8F19866E0E0032FE59 /* PLYLostPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYLostPasswordViewController.h; sourceTree = "<group>"; };
+		A76D3F9019866E0E0032FE59 /* PLYLostPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYLostPasswordViewController.m; sourceTree = "<group>"; };
 		A7B214F6183F842000C38635 /* PL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7B214F9183F842000C38635 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A7B214FB183F842000C38635 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -581,22 +597,40 @@
 		A76D3F58198650770032FE59 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A76D3F8E19866B690032FE59 /* View Controllers */,
+				A76D3F8D19866B4B0032FE59 /* Validation */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		A76D3F8D19866B4B0032FE59 /* Validation */ = {
+			isa = PBXGroup;
+			children = (
 				A76D3F59198650770032FE59 /* PLYFormEmailValidator.h */,
 				A76D3F5A198650770032FE59 /* PLYFormEmailValidator.m */,
 				A76D3F5B198650770032FE59 /* PLYFormValidator.h */,
 				A76D3F5C198650770032FE59 /* PLYFormValidator.m */,
-				A76D3F5D198650770032FE59 /* PLYLoginViewController.h */,
-				A76D3F5E198650770032FE59 /* PLYLoginViewController.m */,
-				A76D3F5F198650770032FE59 /* PLYSignUpViewController.h */,
-				A76D3F60198650770032FE59 /* PLYSignUpViewController.m */,
 				A76D3F61198650770032FE59 /* PLYTextField.h */,
 				A76D3F62198650770032FE59 /* PLYTextField.m */,
 				A76D3F63198650770032FE59 /* PLYUserNameValidator.h */,
 				A76D3F64198650770032FE59 /* PLYUserNameValidator.m */,
+			);
+			name = Validation;
+			sourceTree = "<group>";
+		};
+		A76D3F8E19866B690032FE59 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A76D3F8F19866E0E0032FE59 /* PLYLostPasswordViewController.h */,
+				A76D3F9019866E0E0032FE59 /* PLYLostPasswordViewController.m */,
+				A76D3F5D198650770032FE59 /* PLYLoginViewController.h */,
+				A76D3F5E198650770032FE59 /* PLYLoginViewController.m */,
+				A76D3F5F198650770032FE59 /* PLYSignUpViewController.h */,
+				A76D3F60198650770032FE59 /* PLYSignUpViewController.m */,
 				A76D3F65198650770032FE59 /* PLYViewController.h */,
 				A76D3F66198650770032FE59 /* PLYViewController.m */,
 			);
-			path = UI;
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 		A7B214ED183F842000C38635 = {
@@ -647,23 +681,25 @@
 				A7B4420C183F913000E8A170 /* DTFoundation.framework */,
 				A7B4420E183F913000E8A170 /* libDTFoundation.a */,
 				A7B44212183F913000E8A170 /* libDTFoundation_Mac.a */,
+				A76D3F8A198666FE0032FE59 /* libDTAnimatedGIF.a */,
 				A7B44214183F913000E8A170 /* libDTAWS.a */,
 				A7B44216183F913000E8A170 /* libDTASN1.a */,
 				A7B44218183F913000E8A170 /* libDTHTMLParser_iOS.a */,
 				A7B4421A183F913000E8A170 /* libDTHTMLParser_Mac.a */,
-				A7B4421C183F913000E8A170 /* libDTZipArchive_iOS.a */,
-				A7B4421E183F913000E8A170 /* libDTZipArchive_Mac.a */,
-				A7B44220183F913000E8A170 /* libDTUTI_iOS.a */,
-				A7B44222183F913000E8A170 /* libDTUTI_Mac.a */,
+				C97FAAE519221C7E00144D2C /* libDTProgressHUD_iOS.a */,
 				A7B44224183F913000E8A170 /* libDTReachability_iOS.a */,
 				A7B44226183F913000E8A170 /* libDTReachability_Mac.a */,
 				A7B44228183F913000E8A170 /* libDTSQLite_iOS.a */,
 				A7B4422A183F913000E8A170 /* libDTSQLite_Mac.a */,
-				C97FAAE519221C7E00144D2C /* libDTProgressHUD_iOS.a */,
-				A7B4422C183F913000E8A170 /* DTSidePanels Demo.app */,
-				A7B4422E183F913000E8A170 /* DTReachability Demo.app */,
-				A7B44230183F913000E8A170 /* DTZipArchive.app */,
+				A7B44220183F913000E8A170 /* libDTUTI_iOS.a */,
+				A7B44222183F913000E8A170 /* libDTUTI_Mac.a */,
+				A7B4421C183F913000E8A170 /* libDTZipArchive_iOS.a */,
+				A7B4421E183F913000E8A170 /* libDTZipArchive_Mac.a */,
+				A76D3F8C198666FE0032FE59 /* DTAnimatedGIF Demo.app */,
 				C97FAAE719221C7E00144D2C /* DTProgressHUD Demo.app */,
+				A7B4422E183F913000E8A170 /* DTReachability Demo.app */,
+				A7B4422C183F913000E8A170 /* DTSidePanels Demo.app */,
+				A7B44230183F913000E8A170 /* DTZipArchive.app */,
 				A7B44210183F913000E8A170 /* Unit Tests.xctest */,
 			);
 			name = Products;
@@ -1168,6 +1204,20 @@
 			remoteRef = A71C2BA41843AD8D00B77DB4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		A76D3F8A198666FE0032FE59 /* libDTAnimatedGIF.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDTAnimatedGIF.a;
+			remoteRef = A76D3F89198666FE0032FE59 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A76D3F8C198666FE0032FE59 /* DTAnimatedGIF Demo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "DTAnimatedGIF Demo.app";
+			remoteRef = A76D3F8B198666FE0032FE59 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		A7B4420C183F913000E8A170 /* DTFoundation.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
@@ -1386,7 +1436,6 @@
 			files = (
 				C97FAA97191D618C00144D2C /* LocalePickerView.m in Sources */,
 				C97FAAA3191D618C00144D2C /* ListItemTableCell.m in Sources */,
-				C97FAAB7191D618C00144D2C /* LoginViewController.m in Sources */,
 				C97FAAC5191D62AD00144D2C /* RFQuiltLayout.m in Sources */,
 				C97FAAAF191D618C00144D2C /* DTCodeScannerOverlayView.m in Sources */,
 				C97FAAB4191D618C00144D2C /* SettingsViewController.m in Sources */,
@@ -1447,6 +1496,7 @@
 				C97FAA1C191CCA4D00144D2C /* PLYErrorResponse.m in Sources */,
 				A76D3F68198650770032FE59 /* PLYFormValidator.m in Sources */,
 				C98CD26B1910E0D70035647C /* PLYListItem.m in Sources */,
+				A76D3F9119866E0E0032FE59 /* PLYLostPasswordViewController.m in Sources */,
 				C97FAAE11921FD1900144D2C /* PLYProductCategory.m in Sources */,
 				A7548AEB196C2E7C000B72EB /* PLYEntity.m in Sources */,
 				A76D3F6B198650770032FE59 /* PLYTextField.m in Sources */,
