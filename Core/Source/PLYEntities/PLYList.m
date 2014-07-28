@@ -66,7 +66,7 @@
 	}
 	else if ([key isEqualToString:@"pl-list-desc"])
 	{
-		[self setValue:value forKey:@"description"];
+		[self setValue:value forKey:@"descriptionText"];
 	}
 	else if ([key isEqualToString:@"pl-list-type"])
 	{
@@ -95,9 +95,9 @@
 		[dict setObject:self.title forKey:@"pl-list-title"];
 	}
 	
-	if (self.description)
+	if (self.descriptionText)
 	{
-		[dict setObject:self.description forKey:@"pl-list-desc"];
+		[dict setObject:self.descriptionText forKey:@"pl-list-desc"];
 	}
 	
 	if (self.listType)

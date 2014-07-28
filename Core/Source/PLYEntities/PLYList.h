@@ -38,7 +38,7 @@
 /**
  The description for the list.
  */
-@property (nonatomic, strong) NSString *description;
+@property (nonatomic, strong) NSString *descriptionText;
 
 /**
  The list type for the list.
