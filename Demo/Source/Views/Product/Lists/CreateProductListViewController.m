@@ -102,7 +102,7 @@
     
     NSString *description = self.descriptionTextview.text;
     if([description length]){
-        _list.description = description;
+        _list.descriptionText = description;
     }
     
     NSString *listType = self.listTypePicker.selectedString;

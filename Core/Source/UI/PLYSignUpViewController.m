@@ -21,8 +21,6 @@
 
 @implementation PLYSignUpViewController
 {
-	PLYTextField *_nameField;
-	PLYTextField *_emailField;
 	NSArray *_validators;
 	
 	UIBarButtonItem *_leftButton;
@@ -159,11 +157,17 @@
 
 - (void)cancel:(id)sender
 {
+	// dismiss keyboard
+	[[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+	
 	[self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)done:(id)sender
 {
+	// dismiss keyboard
+	[[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+	
 	UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 	[activity startAnimating];
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:activity];

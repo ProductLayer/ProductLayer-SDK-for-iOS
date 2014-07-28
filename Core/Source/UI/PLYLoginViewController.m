@@ -8,6 +8,7 @@
 
 #import "PLYLoginViewController.h"
 #import "PLYSignUpViewController.h"
+#import "PLYLostPasswordViewController.h"
 
 #import "PLYServer.h"
 #import "PLYTextField.h"
@@ -23,8 +24,6 @@
 
 @implementation PLYLoginViewController
 {
-	PLYTextField *_nameField;
-	PLYTextField *_passwordField;
 	NSArray *_validators;
 	
 	UIBarButtonItem *_leftButton;
@@ -72,8 +71,15 @@
 	[self.view addSubview:_passwordField];
 	
 	
+	UIButton *lostPwButton = [UIButton buttonWithType:UIButtonTypeSystem];
+	[lostPwButton setTitle:@"Lost Password ..." forState:UIControlStateNormal];
+	lostPwButton.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+	[lostPwButton addTarget:self action:@selector(showLostPassword:) forControlEvents:UIControlEventTouchUpInside];
+	lostPwButton.translatesAutoresizingMaskIntoConstraints = NO;
+	[self.view addSubview:lostPwButton];
+	
 	UIButton *signupButton = [UIButton buttonWithType:UIButtonTypeSystem];
-	[signupButton setTitle:@"Create new account..." forState:UIControlStateNormal];
+	[signupButton setTitle:@"Create new account ..." forState:UIControlStateNormal];
 	signupButton.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
 	[signupButton addTarget:self action:@selector(showSignUp:) forControlEvents:UIControlEventTouchUpInside];
 	signupButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -83,9 +89,9 @@
 	
 	
 	id topGuide = [self topLayoutGuide];
-	NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_nameField, _passwordField, topGuide, signupButton, explainLabel);
+	NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_nameField, _passwordField, topGuide, lostPwButton, signupButton, explainLabel);
 	NSArray *constraints1 =
-	[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide]-[explainLabel]-[_nameField]-[_passwordField]-[signupButton]"
+	[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide]-[explainLabel]-[_nameField]-[_passwordField]-[lostPwButton]-[signupButton]"
 														 options:0 metrics:nil views:viewsDictionary];
 	NSArray *constraints2 =
 	[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_nameField(300)]"
@@ -121,6 +127,15 @@
 										  multiplier:1
 											 constant:0]];
 
+	[self.view addConstraint:
+	 [NSLayoutConstraint constraintWithItem:lostPwButton
+											attribute:NSLayoutAttributeRight
+											relatedBy:NSLayoutRelationEqual
+												toItem:_passwordField
+											attribute:NSLayoutAttributeRight
+										  multiplier:1
+											 constant:0]];
+	
 	[self.view addConstraint:
 	 [NSLayoutConstraint constraintWithItem:signupButton
 											attribute:NSLayoutAttributeRight
@@ -173,17 +188,24 @@
 
 - (void)cancel:(id)sender
 {
+	// dismiss keyboard
+	[[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+
 	[self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)done:(id)sender
 {
+	// dismiss keyboard
+	[[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+
 	UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 	[activity startAnimating];
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:activity];
 	
 	[self.server loginWithUser:_nameField.text password:_passwordField.text completion:^(id result, NSError *error) {
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+			// restore right button
 			self.navigationItem.rightBarButtonItem = _rightButton;
 			
 			if (error)
@@ -218,6 +240,14 @@
 	signup.server = self.server;
 	
 	[self.navigationController pushViewController:signup animated:YES];
+}
+
+- (void)showLostPassword:(id)sender
+{
+	PLYLostPasswordViewController *lostPw = [[PLYLostPasswordViewController alloc] init];
+	lostPw.server = self.server;
+	
+	[self.navigationController pushViewController:lostPw animated:YES];
 }
 
 #pragma mark - Form Validation

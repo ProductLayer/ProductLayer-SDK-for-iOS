@@ -177,6 +177,4 @@
 	_rightButton.enabled = YES;
 }
 
-
-
 @end
