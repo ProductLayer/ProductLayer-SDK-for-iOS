@@ -14,8 +14,9 @@
 #import "PLYFormEmailValidator.h"
 
 #import "DTBlockFunctions.h"
+#import "DTAlertView.h"
 
-@interface PLYSignUpViewController () <PLYFormValidationDelegate>
+@interface PLYSignUpViewController () <PLYFormValidationDelegate, UITextFieldDelegate>
 
 @end
 
@@ -50,6 +51,9 @@
 	_nameField.spellCheckingType = UITextSpellCheckingTypeNo;
 	_nameField.placeholder = @"John Appleseed";
 	_nameField.validator = nameValidator;
+	_nameField.returnKeyType = UIReturnKeyNext;
+	_nameField.delegate = self;
+	_nameField.enablesReturnKeyAutomatically = YES;
 	[self.view addSubview:_nameField];
 	
 	PLYFormEmailValidator *emailValidator = [PLYFormEmailValidator validatorWithDelegate:self];
@@ -62,6 +66,9 @@
 	_emailField.keyboardType = UIKeyboardTypeEmailAddress;
 	_emailField.placeholder = @"john@productlayer.com";
 	_emailField.validator = emailValidator;
+	_emailField.returnKeyType = UIReturnKeySend;
+	_emailField.delegate = self;
+	_emailField.enablesReturnKeyAutomatically = YES;
 	[self.view addSubview:_emailField];
 	
 	_validators = [validators copy];
@@ -174,7 +181,6 @@
 	
 	[self.server createUserWithName:_nameField.text email:_emailField.text completion:^(id result, NSError *error) {
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-			self.navigationItem.rightBarButtonItem = _rightButton;
 			
 			if (error)
 			{
@@ -184,22 +190,47 @@
 																  cancelButtonTitle:@"Ok" otherButtonTitles:nil];
 				alert.tintColor = [UIColor redColor];
 				[alert show];
-				
+
+				// restore button
+				self.navigationItem.rightBarButtonItem = _rightButton;
+
 				return;
 			}
+
+			// set thumbs up
+			UIBarButtonItem *check = [[UIBarButtonItem alloc] initWithTitle:@"👍" style:UIBarButtonItemStylePlain target:nil action:NULL];
+			check.tintColor = self.navigationController.view.tintColor;
+			self.navigationItem.rightBarButtonItem = check;
 			
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sign Up Complete"
-																			message:@"Please check your email inbox. You will receive an initial password which you should change. Then you may login in with your user name and password."
-																		  delegate:nil
-															  cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+			DTAlertView *alert = [[DTAlertView alloc] initWithTitle:@"Sign Up Complete"
+																			message:@"Please check your email inbox. You will receive an initial password which you should change. Then you may login in with your user name and password."];
+			
+			[alert addButtonWithTitle:@"Ok" block:^{
+				if ([_delegate respondsToSelector:@selector(signUpViewController:didSignUpNewUser:)])
+				{
+					[_delegate signUpViewController:self didSignUpNewUser:result];
+				}
+			}];
+			
 			[alert show];
-			
-			[self dismissViewControllerAnimated:YES completion:NULL];
 		});
 	}];
 }
 
 #pragma mark - Form Validation
+
+- (BOOL)_allFieldsValid
+{
+	for (PLYFormValidator *oneValidator in _validators)
+	{
+		if (!oneValidator.isValid)
+		{
+			return NO;
+		}
+	}
+	
+	return YES;
+}
 
 - (void)validityDidChange:(PLYFormValidator *)validator
 {
@@ -213,6 +244,24 @@
 	}
 	
 	_rightButton.enabled = YES;
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+	if (textField == _nameField)
+	{
+		[_emailField becomeFirstResponder];
+		return NO;
+	}
+	
+	if ([self _allFieldsValid])
+	{
+		[self done:nil];
+	}
+	
+	return NO;
 }
 
 @end

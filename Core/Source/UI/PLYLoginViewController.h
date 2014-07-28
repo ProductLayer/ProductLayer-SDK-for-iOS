@@ -13,6 +13,10 @@
 @interface PLYLoginViewController : PLYViewController
 
 /**
+ @name Properties
+ */
+
+/**
  Text field for entering the nickname
  */
 @property (nonatomic, strong) PLYTextField *nameField;

@@ -621,10 +621,10 @@
 		A76D3F8E19866B690032FE59 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A76D3F8F19866E0E0032FE59 /* PLYLostPasswordViewController.h */,
-				A76D3F9019866E0E0032FE59 /* PLYLostPasswordViewController.m */,
 				A76D3F5D198650770032FE59 /* PLYLoginViewController.h */,
 				A76D3F5E198650770032FE59 /* PLYLoginViewController.m */,
+				A76D3F8F19866E0E0032FE59 /* PLYLostPasswordViewController.h */,
+				A76D3F9019866E0E0032FE59 /* PLYLostPasswordViewController.m */,
 				A76D3F5F198650770032FE59 /* PLYSignUpViewController.h */,
 				A76D3F60198650770032FE59 /* PLYSignUpViewController.m */,
 				A76D3F65198650770032FE59 /* PLYViewController.h */,

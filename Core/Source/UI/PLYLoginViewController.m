@@ -11,6 +11,7 @@
 #import "PLYLostPasswordViewController.h"
 
 #import "PLYServer.h"
+#import "PLYUser.h"
 #import "PLYTextField.h"
 #import "PLYFormValidator.h"
 #import "PLYUserNameValidator.h"
@@ -18,7 +19,7 @@
 
 #import "DTBlockFunctions.h"
 
-@interface PLYLoginViewController () <PLYFormValidationDelegate>
+@interface PLYLoginViewController () <PLYFormValidationDelegate, PLYLostPasswordViewControllerDelegate, PLYSignUpViewControllerDelegate, UITextFieldDelegate>
 
 @end
 
@@ -56,6 +57,9 @@
 	_nameField.spellCheckingType = UITextSpellCheckingTypeNo;
 	_nameField.placeholder = @"John Appleseed";
 	_nameField.validator = nameValidator;
+	_nameField.returnKeyType = UIReturnKeyNext;
+	_nameField.delegate = self;
+	_nameField.enablesReturnKeyAutomatically = YES;
 	[self.view addSubview:_nameField];
 	
 	PLYUserNameValidator *passwordValidator = [PLYUserNameValidator validatorWithDelegate:self];
@@ -68,8 +72,10 @@
 	_passwordField.secureTextEntry = YES;
 	_passwordField.placeholder = @"secret";
 	_passwordField.validator = passwordValidator;
+	_passwordField.returnKeyType = UIReturnKeySend;
+	_passwordField.delegate = self;
+	_passwordField.enablesReturnKeyAutomatically = YES;
 	[self.view addSubview:_passwordField];
-	
 	
 	UIButton *lostPwButton = [UIButton buttonWithType:UIButtonTypeSystem];
 	[lostPwButton setTitle:@"Lost Password ..." forState:UIControlStateNormal];
@@ -79,7 +85,7 @@
 	[self.view addSubview:lostPwButton];
 	
 	UIButton *signupButton = [UIButton buttonWithType:UIButtonTypeSystem];
-	[signupButton setTitle:@"Create new account ..." forState:UIControlStateNormal];
+	[signupButton setTitle:@"Create New Account ..." forState:UIControlStateNormal];
 	signupButton.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
 	[signupButton addTarget:self action:@selector(showSignUp:) forControlEvents:UIControlEventTouchUpInside];
 	signupButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -238,6 +244,7 @@
 	
 	PLYSignUpViewController *signup = [[PLYSignUpViewController alloc] init];
 	signup.server = self.server;
+	signup.delegate = self;
 	
 	[self.navigationController pushViewController:signup animated:YES];
 }
@@ -246,11 +253,25 @@
 {
 	PLYLostPasswordViewController *lostPw = [[PLYLostPasswordViewController alloc] init];
 	lostPw.server = self.server;
+	lostPw.delegate = self;
 	
 	[self.navigationController pushViewController:lostPw animated:YES];
 }
 
 #pragma mark - Form Validation
+
+- (BOOL)_allFieldsValid
+{
+	for (PLYFormValidator *oneValidator in _validators)
+	{
+		if (!oneValidator.isValid)
+		{
+			return NO;
+		}
+	}
+	
+	return YES;
+}
 
 - (void)validityDidChange:(PLYFormValidator *)validator
 {
@@ -264,6 +285,40 @@
 	}
 	
 	_rightButton.enabled = YES;
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+	if (textField == _nameField)
+	{
+		[_passwordField becomeFirstResponder];
+		return NO;
+	}
+	
+	if ([self _allFieldsValid])
+	{
+		[self done:nil];
+	}
+	
+	return NO;
+}
+
+#pragma mark - PLYLostPasswordViewControllerDelegate
+
+- (void)lostPasswordViewController:(PLYLostPasswordViewController *)lostPasswordViewController didRequestNewPasswordForUser:(PLYUser *)user
+{
+	_nameField.text = user.nickname;
+	[self.navigationController popToViewController:self animated:YES];
+}
+
+#pragma mark - PLYSignUpViewControllerDelegate
+
+- (void)signUpViewController:(PLYSignUpViewController *)lostPasswordViewController didSignUpNewUser:(PLYUser *)user
+{
+	_nameField.text = user.nickname;
+	[self.navigationController popToViewController:self animated:YES];
 }
 
 @end

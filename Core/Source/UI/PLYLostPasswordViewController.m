@@ -49,6 +49,7 @@
 	_emailField.placeholder = @"john@productlayer.com";
 	_emailField.validator = emailValidator;
 	_emailField.returnKeyType = UIReturnKeySend;
+	_emailField.enablesReturnKeyAutomatically = YES;
 	[self.view addSubview:_emailField];
 	
 	_validators = [validators copy];
@@ -144,14 +145,10 @@
 				
 				DTAlertView *alert = [[DTAlertView alloc] initWithTitle:@"New Password Send" message:@"A new password was send to you by email."];
 				
-				__weak UINavigationController *weakNav = self.navigationController; // weakify
-				
 				[alert addButtonWithTitle:@"Ok" block:^{
-					UINavigationController *nav = weakNav; // strongify
-
-					if (nav.topViewController == self)
+					if ([_delegate respondsToSelector:@selector(lostPasswordViewController:didRequestNewPasswordForUser:)])
 					{
-						[nav popViewControllerAnimated:YES];
+						[_delegate lostPasswordViewController:self didRequestNewPasswordForUser:result];
 					}
 				}];
 				

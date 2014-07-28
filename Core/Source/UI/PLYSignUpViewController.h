@@ -8,12 +8,30 @@
 
 #import "PLYViewController.h"
 
-@class PLYTextField;
+@class PLYSignUpViewController, PLYTextField, PLYUser;
+
+
+/**
+ Protocol for informing the delegate about result of user sign up
+ */
+@protocol PLYSignUpViewControllerDelegate <NSObject>
+@optional
+
+/**
+ Called if the server reported that the user account with the entered email address existed and a new password was sent
+ */
+- (void)signUpViewController:(PLYSignUpViewController *)lostPasswordViewController didSignUpNewUser:(PLYUser *)user;
+@end
+
 
 /**
  View Controller for signing up users to ProductLayer
  */
 @interface PLYSignUpViewController : PLYViewController
+
+/**
+ @name Properties
+ */
 
 /**
  Text field for entering the nickname
@@ -24,6 +42,11 @@
  Text field for entering the email address
  */
 @property (nonatomic, strong) PLYTextField *emailField;
+
+/**
+ Delegate to inform about result of the lost password dialog
+ */
+@property (nonatomic, weak) id <PLYSignUpViewControllerDelegate> delegate;
 
 @end
 
