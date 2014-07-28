@@ -8,6 +8,7 @@
 
 #import "KeyValueTableViewController.h"
 #import "KeyValueTableViewCell.h"
+#import "ProductLayer.h"
 
 @interface KeyValueTableViewController ()
 
@@ -86,7 +87,7 @@
     NSDictionary *dict = [((NSArray *)[_groupedElements objectForKey:[[_groupedElements allKeys] objectAtIndex:indexPath.section]]) objectAtIndex:indexPath.row];
     
     [cell.value setText:[dict objectForKey:@"value"]];
-    [cell.key setText:NSLocalizedString([dict objectForKey:@"key"],@"")];
+    [cell.key setText:PLYLocalizedStringFromTable([dict objectForKey:@"key"], @"API", @"")];
     
     return cell;
 }

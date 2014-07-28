@@ -22,5 +22,9 @@
 #import "PLYFormEmailValidator.h"
 
 // Localization
+
+#define PLYResourceBundle() \
+[NSBundle bundleWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"ProductLayer" ofType:@"bundle"]]
+
 #define PLYLocalizedStringFromTable(key, tbl, comment) \
-NSLocalizedStringFromTableInBundle(key, tbl, [NSBundle bundleWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"ProductLayer" ofType:@"bundle"]], comment)
+NSLocalizedStringFromTableInBundle(key, tbl, PLYResourceBundle(), comment)

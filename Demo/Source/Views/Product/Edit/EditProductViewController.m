@@ -300,7 +300,7 @@
 #pragma mark - Localized String Picker Delegate
 
 - (void) localizedStringPicker:(LocalizableStringPicker *)_picker selectedString:(NSString *)_string{
-    NSString *localizedString = NSLocalizedString(_string, @"");
+    NSString *localizedString = PLYLocalizedStringFromTable(_string, @"API", @"");
     if([localizedString length] > 28){
         localizedString = [NSString stringWithFormat:@"...%@",[localizedString substringWithRange:NSMakeRange([localizedString length] - 28, 28)]];
     }

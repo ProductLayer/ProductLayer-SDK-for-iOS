@@ -7,13 +7,19 @@
 //
 
 #import "PLYViewController.h"
-#import "PLYServer.h"
+#import "ProductLayer.h"
 
 @interface PLYViewController ()
 
 @end
 
 @implementation PLYViewController
+
++ (void) initialize
+{
+	// all subclasses require the resource bundle
+	NSAssert(PLYResourceBundle(), @"ProductLayer.bundle cannot be found in app. This is required for the UI to work");
+}
 
 - (void)viewDidLoad
 {

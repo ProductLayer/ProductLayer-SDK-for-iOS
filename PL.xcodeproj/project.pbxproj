@@ -27,7 +27,7 @@
 		A7548B24196C4C16000B72EB /* PLYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548B23196C4C16000B72EB /* PLYImage.m */; };
 		A76A57141986939700751454 /* API.strings in Resources */ = {isa = PBXBuildFile; fileRef = A76A56E81986922300751454 /* API.strings */; };
 		A76A57151986939700751454 /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = A76A56E91986922300751454 /* UI.strings */; };
-		A76A5718198693B000751454 /* ProductLayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A76A570C1986937D00751454 /* ProductLayer.bundle */; };
+		A76A571B1986A6D300751454 /* ProductLayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A76A570C1986937D00751454 /* ProductLayer.bundle */; };
 		A76D3F67198650770032FE59 /* PLYFormEmailValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F5A198650770032FE59 /* PLYFormEmailValidator.m */; };
 		A76D3F68198650770032FE59 /* PLYFormValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F5C198650770032FE59 /* PLYFormValidator.m */; };
 		A76D3F69198650770032FE59 /* PLYLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F5E198650770032FE59 /* PLYLoginViewController.m */; };
@@ -1455,7 +1455,6 @@
 				C9BDC08119080CDF0062BB56 /* settings.png in Resources */,
 				C9BDC05D1901AEF90062BB56 /* productlayer_title@2x.png in Resources */,
 				C9BDC08619080DD10062BB56 /* add@2x.png in Resources */,
-				A76A5718198693B000751454 /* ProductLayer.bundle in Resources */,
 				C9BDC076190809760062BB56 /* home@2x.png in Resources */,
 				C9BDC0681907C48B0062BB56 /* menu.png in Resources */,
 				C97FAADA192152D900144D2C /* down_vote.png in Resources */,
@@ -1465,6 +1464,7 @@
 				C9ADBDE61914F9DD004C81B3 /* lists.png in Resources */,
 				C9ADBE05191A208D004C81B3 /* star_empty.png in Resources */,
 				C9BDC07D19080BED0062BB56 /* barcode.png in Resources */,
+				A76A571B1986A6D300751454 /* ProductLayer.bundle in Resources */,
 				A7B44283183F92D600E8A170 /* Main.storyboard in Resources */,
 				A7B44284183F92D600E8A170 /* Images.xcassets in Resources */,
 				C9BDC07A19080A7C0062BB56 /* review@2x.png in Resources */,
