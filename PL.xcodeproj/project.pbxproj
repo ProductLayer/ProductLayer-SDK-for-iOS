@@ -25,6 +25,13 @@
 		A71C2BBD1843ADA600B77DB4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71C2BBC1843ADA600B77DB4 /* CoreData.framework */; };
 		A7548AEB196C2E7C000B72EB /* PLYEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548AEA196C2E7C000B72EB /* PLYEntity.m */; };
 		A7548B24196C4C16000B72EB /* PLYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548B23196C4C16000B72EB /* PLYImage.m */; };
+		A76D3F67198650770032FE59 /* PLYFormEmailValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F5A198650770032FE59 /* PLYFormEmailValidator.m */; };
+		A76D3F68198650770032FE59 /* PLYFormValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F5C198650770032FE59 /* PLYFormValidator.m */; };
+		A76D3F69198650770032FE59 /* PLYLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F5E198650770032FE59 /* PLYLoginViewController.m */; };
+		A76D3F6A198650770032FE59 /* PLYSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F60198650770032FE59 /* PLYSignUpViewController.m */; };
+		A76D3F6B198650770032FE59 /* PLYTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F62198650770032FE59 /* PLYTextField.m */; };
+		A76D3F6C198650770032FE59 /* PLYUserNameValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F64198650770032FE59 /* PLYUserNameValidator.m */; };
+		A76D3F6D198650770032FE59 /* PLYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F66198650770032FE59 /* PLYViewController.m */; };
 		A7B214FA183F842000C38635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214F9183F842000C38635 /* Foundation.framework */; };
 		A7B214FC183F842000C38635 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FB183F842000C38635 /* CoreGraphics.framework */; };
 		A7B214FE183F842000C38635 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FD183F842000C38635 /* UIKit.framework */; };
@@ -336,20 +343,6 @@
 			remoteGlobalIDString = F88FF6771920A83300120808;
 			remoteInfo = "DTProgressHUD (iOS)";
 		};
-		C982681D196DAA1800A84677 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A7B4418A183F90B900E8A170 /* DTFoundation.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A7AC21AF196417830009E1B9;
-			remoteInfo = "DTAnimatedGIF (iOS)";
-		};
-		C982681F196DAA1800A84677 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A7B4418A183F90B900E8A170 /* DTFoundation.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A78381C31963F8D700AF09D3;
-			remoteInfo = "DTAnimatedGIF Demo";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -371,6 +364,20 @@
 		A7548AEA196C2E7C000B72EB /* PLYEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYEntity.m; path = PLYEntities/PLYEntity.m; sourceTree = "<group>"; };
 		A7548B22196C4C16000B72EB /* PLYImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYImage.h; path = PLYEntities/PLYImage.h; sourceTree = "<group>"; };
 		A7548B23196C4C16000B72EB /* PLYImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYImage.m; path = PLYEntities/PLYImage.m; sourceTree = "<group>"; };
+		A76D3F59198650770032FE59 /* PLYFormEmailValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYFormEmailValidator.h; sourceTree = "<group>"; };
+		A76D3F5A198650770032FE59 /* PLYFormEmailValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYFormEmailValidator.m; sourceTree = "<group>"; };
+		A76D3F5B198650770032FE59 /* PLYFormValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYFormValidator.h; sourceTree = "<group>"; };
+		A76D3F5C198650770032FE59 /* PLYFormValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYFormValidator.m; sourceTree = "<group>"; };
+		A76D3F5D198650770032FE59 /* PLYLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYLoginViewController.h; sourceTree = "<group>"; };
+		A76D3F5E198650770032FE59 /* PLYLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYLoginViewController.m; sourceTree = "<group>"; };
+		A76D3F5F198650770032FE59 /* PLYSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYSignUpViewController.h; sourceTree = "<group>"; };
+		A76D3F60198650770032FE59 /* PLYSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYSignUpViewController.m; sourceTree = "<group>"; };
+		A76D3F61198650770032FE59 /* PLYTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYTextField.h; sourceTree = "<group>"; };
+		A76D3F62198650770032FE59 /* PLYTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYTextField.m; sourceTree = "<group>"; };
+		A76D3F63198650770032FE59 /* PLYUserNameValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYUserNameValidator.h; sourceTree = "<group>"; };
+		A76D3F64198650770032FE59 /* PLYUserNameValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYUserNameValidator.m; sourceTree = "<group>"; };
+		A76D3F65198650770032FE59 /* PLYViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYViewController.h; sourceTree = "<group>"; };
+		A76D3F66198650770032FE59 /* PLYViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYViewController.m; sourceTree = "<group>"; };
 		A7B214F6183F842000C38635 /* PL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7B214F9183F842000C38635 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A7B214FB183F842000C38635 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -571,6 +578,27 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		A76D3F58198650770032FE59 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				A76D3F59198650770032FE59 /* PLYFormEmailValidator.h */,
+				A76D3F5A198650770032FE59 /* PLYFormEmailValidator.m */,
+				A76D3F5B198650770032FE59 /* PLYFormValidator.h */,
+				A76D3F5C198650770032FE59 /* PLYFormValidator.m */,
+				A76D3F5D198650770032FE59 /* PLYLoginViewController.h */,
+				A76D3F5E198650770032FE59 /* PLYLoginViewController.m */,
+				A76D3F5F198650770032FE59 /* PLYSignUpViewController.h */,
+				A76D3F60198650770032FE59 /* PLYSignUpViewController.m */,
+				A76D3F61198650770032FE59 /* PLYTextField.h */,
+				A76D3F62198650770032FE59 /* PLYTextField.m */,
+				A76D3F63198650770032FE59 /* PLYUserNameValidator.h */,
+				A76D3F64198650770032FE59 /* PLYUserNameValidator.m */,
+				A76D3F65198650770032FE59 /* PLYViewController.h */,
+				A76D3F66198650770032FE59 /* PLYViewController.m */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		A7B214ED183F842000C38635 = {
 			isa = PBXGroup;
 			children = (
@@ -619,25 +647,23 @@
 				A7B4420C183F913000E8A170 /* DTFoundation.framework */,
 				A7B4420E183F913000E8A170 /* libDTFoundation.a */,
 				A7B44212183F913000E8A170 /* libDTFoundation_Mac.a */,
-				C982681E196DAA1800A84677 /* libDTAnimatedGIF.a */,
 				A7B44214183F913000E8A170 /* libDTAWS.a */,
 				A7B44216183F913000E8A170 /* libDTASN1.a */,
 				A7B44218183F913000E8A170 /* libDTHTMLParser_iOS.a */,
 				A7B4421A183F913000E8A170 /* libDTHTMLParser_Mac.a */,
-				C97FAAE519221C7E00144D2C /* libDTProgressHUD_iOS.a */,
+				A7B4421C183F913000E8A170 /* libDTZipArchive_iOS.a */,
+				A7B4421E183F913000E8A170 /* libDTZipArchive_Mac.a */,
+				A7B44220183F913000E8A170 /* libDTUTI_iOS.a */,
+				A7B44222183F913000E8A170 /* libDTUTI_Mac.a */,
 				A7B44224183F913000E8A170 /* libDTReachability_iOS.a */,
 				A7B44226183F913000E8A170 /* libDTReachability_Mac.a */,
 				A7B44228183F913000E8A170 /* libDTSQLite_iOS.a */,
 				A7B4422A183F913000E8A170 /* libDTSQLite_Mac.a */,
-				A7B44220183F913000E8A170 /* libDTUTI_iOS.a */,
-				A7B44222183F913000E8A170 /* libDTUTI_Mac.a */,
-				A7B4421C183F913000E8A170 /* libDTZipArchive_iOS.a */,
-				A7B4421E183F913000E8A170 /* libDTZipArchive_Mac.a */,
-				C9826820196DAA1800A84677 /* DTAnimatedGIF Demo.app */,
-				C97FAAE719221C7E00144D2C /* DTProgressHUD Demo.app */,
-				A7B4422E183F913000E8A170 /* DTReachability Demo.app */,
+				C97FAAE519221C7E00144D2C /* libDTProgressHUD_iOS.a */,
 				A7B4422C183F913000E8A170 /* DTSidePanels Demo.app */,
+				A7B4422E183F913000E8A170 /* DTReachability Demo.app */,
 				A7B44230183F913000E8A170 /* DTZipArchive.app */,
+				C97FAAE719221C7E00144D2C /* DTProgressHUD Demo.app */,
 				A7B44210183F913000E8A170 /* Unit Tests.xctest */,
 			);
 			name = Products;
@@ -707,6 +733,7 @@
 		A7B44242183F91E700E8A170 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				A76D3F58198650770032FE59 /* UI */,
 				C9D31F45190A705200C91A08 /* PLYEntities */,
 				A7B44246183F91E700E8A170 /* PLYServer.h */,
 				A7B44247183F91E700E8A170 /* PLYServer.m */,
@@ -1288,20 +1315,6 @@
 			remoteRef = C97FAAE619221C7E00144D2C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C982681E196DAA1800A84677 /* libDTAnimatedGIF.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libDTAnimatedGIF.a;
-			remoteRef = C982681D196DAA1800A84677 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C9826820196DAA1800A84677 /* DTAnimatedGIF Demo.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = "DTAnimatedGIF Demo.app";
-			remoteRef = C982681F196DAA1800A84677 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1422,18 +1435,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A76D3F69198650770032FE59 /* PLYLoginViewController.m in Sources */,
 				C98CD2671910E0D70035647C /* PLYPackaging.m in Sources */,
 				C98CD2681910E0D70035647C /* PLYProduct.m in Sources */,
 				A7548B24196C4C16000B72EB /* PLYImage.m in Sources */,
 				C97FAA18191CCA3400144D2C /* PLYErrorMessage.m in Sources */,
 				C98CD2691910E0D70035647C /* PLYReview.m in Sources */,
+				A76D3F6C198650770032FE59 /* PLYUserNameValidator.m in Sources */,
+				A76D3F67198650770032FE59 /* PLYFormEmailValidator.m in Sources */,
 				C98CD26A1910E0D70035647C /* PLYList.m in Sources */,
 				C97FAA1C191CCA4D00144D2C /* PLYErrorResponse.m in Sources */,
+				A76D3F68198650770032FE59 /* PLYFormValidator.m in Sources */,
 				C98CD26B1910E0D70035647C /* PLYListItem.m in Sources */,
 				C97FAAE11921FD1900144D2C /* PLYProductCategory.m in Sources */,
 				A7548AEB196C2E7C000B72EB /* PLYEntity.m in Sources */,
+				A76D3F6B198650770032FE59 /* PLYTextField.m in Sources */,
 				A7B4428C183F937D00E8A170 /* PLYServer.m in Sources */,
 				C9ADBDD41911502B004C81B3 /* PLYUser.m in Sources */,
+				A76D3F6A198650770032FE59 /* PLYSignUpViewController.m in Sources */,
+				A76D3F6D198650770032FE59 /* PLYViewController.m in Sources */,
 				A7B442A4183F97B800E8A170 /* PLYConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
