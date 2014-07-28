@@ -48,9 +48,9 @@
 		[dict setObject:_name forKey:@"pl-prod-pkg-name"];
 	}
 	
-	if (_description)
+	if (_descriptionText)
 	{
-		[dict setObject:_description forKey:@"pl-prod-pkg-desc"];
+		[dict setObject:_descriptionText forKey:@"pl-prod-pkg-desc"];
 	}
 	
 	if (_unit)

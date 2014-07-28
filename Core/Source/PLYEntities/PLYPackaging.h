@@ -27,7 +27,7 @@
 /** 
  The package description.
  */
-@property (nonatomic, copy) NSString *description;
+@property (nonatomic, copy) NSString *descriptionText;
 
 /**
  The units per package.
