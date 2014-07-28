@@ -10,12 +10,7 @@
 #import "PLYSignUpViewController.h"
 #import "PLYLostPasswordViewController.h"
 
-#import "PLYServer.h"
-#import "PLYUser.h"
-#import "PLYTextField.h"
-#import "PLYFormValidator.h"
-#import "PLYUserNameValidator.h"
-#import "PLYFormEmailValidator.h"
+#import "ProductLayer.h"
 
 #import "DTBlockFunctions.h"
 
@@ -41,7 +36,8 @@
 	NSMutableArray *validators = [NSMutableArray array];
 	
 	UILabel *explainLabel = [[UILabel alloc] init];
-	explainLabel.text = @"Login to ProductLayer to see your friends timeline and post your own opines.";
+	explainLabel.text = PLYLocalizedStringFromTable(@"PLY_LOGIN_EXPLAIN", @"UI", @"Explanation to show on login dialog");
+	
 	explainLabel.translatesAutoresizingMaskIntoConstraints = NO;
 	explainLabel.numberOfLines = 0;
 	explainLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
@@ -55,7 +51,7 @@
 	_nameField.autocorrectionType = UITextAutocorrectionTypeNo;
 	_nameField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 	_nameField.spellCheckingType = UITextSpellCheckingTypeNo;
-	_nameField.placeholder = @"John Appleseed";
+	_nameField.placeholder = PLYLocalizedStringFromTable(@"PLY_NAME_PLACEHOLDER", @"UI", @"User Name Field Placeholder");
 	_nameField.validator = nameValidator;
 	_nameField.returnKeyType = UIReturnKeyNext;
 	_nameField.delegate = self;
@@ -70,7 +66,7 @@
 	_passwordField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 	_passwordField.spellCheckingType = UITextSpellCheckingTypeNo;
 	_passwordField.secureTextEntry = YES;
-	_passwordField.placeholder = @"secret";
+	_passwordField.placeholder = PLYLocalizedStringFromTable(@"PLY_PASSWORD_PLACEHOLDER", @"UI", @"Password Field Placeholder");
 	_passwordField.validator = passwordValidator;
 	_passwordField.returnKeyType = UIReturnKeySend;
 	_passwordField.delegate = self;
@@ -78,14 +74,15 @@
 	[self.view addSubview:_passwordField];
 	
 	UIButton *lostPwButton = [UIButton buttonWithType:UIButtonTypeSystem];
-	[lostPwButton setTitle:@"Lost Password ..." forState:UIControlStateNormal];
+	[lostPwButton setTitle:PLYLocalizedStringFromTable(@"PLY_LOGIN_LOST_PASSWORD", @"UI", @"Link to lost password dialog")
+					  forState:UIControlStateNormal];
 	lostPwButton.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
 	[lostPwButton addTarget:self action:@selector(showLostPassword:) forControlEvents:UIControlEventTouchUpInside];
 	lostPwButton.translatesAutoresizingMaskIntoConstraints = NO;
 	[self.view addSubview:lostPwButton];
 	
 	UIButton *signupButton = [UIButton buttonWithType:UIButtonTypeSystem];
-	[signupButton setTitle:@"Create New Account ..." forState:UIControlStateNormal];
+	[signupButton setTitle:PLYLocalizedStringFromTable(@"PLY_LOGIN_CREATE_ACCOUNT", @"UI", @"Link to create new account dialog") forState:UIControlStateNormal];
 	signupButton.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
 	[signupButton addTarget:self action:@selector(showSignUp:) forControlEvents:UIControlEventTouchUpInside];
 	signupButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -165,11 +162,13 @@
 	_leftButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
 	self.navigationItem.leftBarButtonItem = _leftButton;
 	
-	_rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Login" style:UIBarButtonItemStyleDone target:self action:@selector(done:)];
+	NSString *title = PLYLocalizedStringFromTable(@"PLY_LOGIN_RIGHT_BUTTON_TITLE", @"UI", @"Text for done button in login dialog");
+	_rightButton = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStyleDone target:self action:@selector(done:)];
 	_rightButton.enabled = NO;
 	self.navigationItem.rightBarButtonItem = _rightButton;
 	
-	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Login" style:UIBarButtonItemStyleBordered target:nil action:NULL];
+	NSString *backTitle = PLYLocalizedStringFromTable(@"PLY_LOGIN_SHORT_TITLE", @"UI", @"Short title used as back button from other view controllers going back to login");
+	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:backTitle style:UIBarButtonItemStyleBordered target:nil action:NULL];
 }
 
 - (BOOL)shouldAutorotate
@@ -216,10 +215,11 @@
 			
 			if (error)
 			{
-				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login failed"
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:PLYLocalizedStringFromTable(@"PLY_LOGIN_FAILED_TITLE", @"UI", @"Alert title when login fails")
 																				message:[error localizedDescription]
 																			  delegate:nil
-																  cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+																  cancelButtonTitle:PLYLocalizedStringFromTable(@"PLY_ALERT_OK", @"UI", @"Alert acknowledgement button title")
+																  otherButtonTitles:nil];
 				alert.tintColor = [UIColor redColor];
 				[alert show];
 				

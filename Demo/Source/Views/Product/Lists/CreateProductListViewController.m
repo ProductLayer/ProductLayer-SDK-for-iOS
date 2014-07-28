@@ -184,12 +184,10 @@
 
 - (void) localizedStringPicker:(LocalizableStringPicker *)_picker selectedString:(NSString *)_string{
     if([_picker isEqual:_listTypePicker]){
-        [_listTypeTextfield setText:NSLocalizedString(_string, @"")];
+        [_listTypeTextfield setText:PLYLocalizedStringFromTable(_string, @"API", @"")];
     } else if([_picker isEqual:_sharingTypePicker]){
-        [_sharingTypeTextfield setText:NSLocalizedString(_string, @"")];
+        [_sharingTypeTextfield setText:PLYLocalizedStringFromTable(_string, @"API", @"")];
     }
-    
-    
 }
 
 #pragma mark - Hide & Show List Type Picker

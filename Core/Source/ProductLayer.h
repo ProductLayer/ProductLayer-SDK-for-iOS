@@ -16,3 +16,15 @@
 
 // User Interface
 #import "PLYLoginViewController.h"
+#import "PLYTextField.h"
+#import "PLYFormValidator.h"
+#import "PLYUserNameValidator.h"
+#import "PLYFormEmailValidator.h"
+
+// Localization
+
+#define PLYResourceBundle() \
+[NSBundle bundleWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"ProductLayer" ofType:@"bundle"]]
+
+#define PLYLocalizedStringFromTable(key, tbl, comment) \
+NSLocalizedStringFromTableInBundle(key, tbl, PLYResourceBundle(), comment)

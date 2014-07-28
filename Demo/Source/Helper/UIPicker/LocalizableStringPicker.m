@@ -7,6 +7,7 @@
 //
 
 #import "LocalizableStringPicker.h"
+#import "ProductLayer.h"
 
 @implementation LocalizableStringPicker
 
@@ -27,34 +28,27 @@
     [__delegate localizedStringPicker:self selectedString:_selectedString];
 }
 
-- (void) setStringListAndSort:(NSArray *)stringList sortByLocalizedString:(BOOL)localizedSort{
-    BOOL reverseSort = NO;
-    
-    if(localizedSort){
-        self.stringList = [stringList sortedArrayUsingFunction:sortByLocalizedString
-                                                   context:&reverseSort];
-    } else {
-        self.stringList = [stringList sortedArrayUsingFunction:sortByString
-                                                       context:&reverseSort];
+- (void) setStringListAndSort:(NSArray *)stringList sortByLocalizedString:(BOOL)localizedSort
+{
+    if(localizedSort)
+	 {
+		 self.stringList = [stringList sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
+			 
+			 NSString *localizedObj1 = PLYLocalizedStringFromTable(obj1, @"API", @"");
+			 NSString *localizedObj2 = PLYLocalizedStringFromTable(obj2, @"API", @"");
+			 
+			 return [localizedObj1 localizedCaseInsensitiveCompare:localizedObj2];
+		 }];
+    }
+	 else
+	 {
+		 self.stringList = [stringList sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }
 }
 
 NSInteger sortByString(NSString *firstString, NSString *secondString, void *reverse)
 {
     NSComparisonResult comparison = [firstString localizedCaseInsensitiveCompare:secondString];
-    
-    if (*(BOOL *)reverse == YES) {
-        return 0 - comparison;
-    }
-    return comparison;
-}
-
-NSInteger sortByLocalizedString(NSString *firstString, NSString *secondString, void *reverse)
-{
-    NSString *firstLocalizedString = NSLocalizedString(firstString, @"");
-    NSString *secondLocalizedString = NSLocalizedString(secondString, @"");
-    
-    NSComparisonResult comparison = [firstLocalizedString localizedCaseInsensitiveCompare:secondLocalizedString];
     
     if (*(BOOL *)reverse == YES) {
         return 0 - comparison;
@@ -90,7 +84,7 @@ numberOfRowsInComponent:(NSInteger)component
              titleForRow:(NSInteger)row
             forComponent:(NSInteger)component
 {
-    return NSLocalizedString([_stringList objectAtIndex:row], @"");
+    return PLYLocalizedStringFromTable([_stringList objectAtIndex:row], @"API", @"");
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{

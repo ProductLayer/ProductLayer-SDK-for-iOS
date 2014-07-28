@@ -53,11 +53,11 @@
     }
     
     if(_list.listType){
-        _listTypeLabel.text = NSLocalizedString(_list.listType, @"");
+        _listTypeLabel.text = PLYLocalizedStringFromTable(_list.listType, @"API", @"");
     }
     
     if(_list.shareType){
-        _sharingTypeLabel.text = NSLocalizedString(_list.shareType, @"");
+        _sharingTypeLabel.text = PLYLocalizedStringFromTable(_list.shareType, @"API", @"");
     }
 }
 

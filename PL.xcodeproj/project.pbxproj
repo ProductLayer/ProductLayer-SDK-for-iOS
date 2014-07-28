@@ -25,6 +25,9 @@
 		A71C2BBD1843ADA600B77DB4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71C2BBC1843ADA600B77DB4 /* CoreData.framework */; };
 		A7548AEB196C2E7C000B72EB /* PLYEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548AEA196C2E7C000B72EB /* PLYEntity.m */; };
 		A7548B24196C4C16000B72EB /* PLYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548B23196C4C16000B72EB /* PLYImage.m */; };
+		A76A57141986939700751454 /* API.strings in Resources */ = {isa = PBXBuildFile; fileRef = A76A56E81986922300751454 /* API.strings */; };
+		A76A57151986939700751454 /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = A76A56E91986922300751454 /* UI.strings */; };
+		A76A571B1986A6D300751454 /* ProductLayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A76A570C1986937D00751454 /* ProductLayer.bundle */; };
 		A76D3F67198650770032FE59 /* PLYFormEmailValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F5A198650770032FE59 /* PLYFormEmailValidator.m */; };
 		A76D3F68198650770032FE59 /* PLYFormValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F5C198650770032FE59 /* PLYFormValidator.m */; };
 		A76D3F69198650770032FE59 /* PLYLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F5E198650770032FE59 /* PLYLoginViewController.m */; };
@@ -95,7 +98,6 @@
 		C97FAADD192152D900144D2C /* up_vote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C97FAAD9192152D900144D2C /* up_vote@2x.png */; };
 		C97FAAE11921FD1900144D2C /* PLYProductCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAADF1921FCFA00144D2C /* PLYProductCategory.m */; };
 		C97FAAE819221CD800144D2C /* libDTProgressHUD_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C97FAAE519221C7E00144D2C /* libDTProgressHUD_iOS.a */; };
-		C98CD248190E857C0035647C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C98CD24A190E857C0035647C /* Localizable.strings */; };
 		C98CD254190F9FB00035647C /* register_user.png in Resources */ = {isa = PBXBuildFile; fileRef = C98CD252190F9FB00035647C /* register_user.png */; };
 		C98CD255190F9FB00035647C /* register_user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C98CD253190F9FB00035647C /* register_user@2x.png */; };
 		C98CD25C190FA86B0035647C /* no_image.png in Resources */ = {isa = PBXBuildFile; fileRef = C98CD25A190FA86B0035647C /* no_image.png */; };
@@ -174,6 +176,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = A71902A616A8029400C1EC52;
 			remoteInfo = "DTDownload (iOS)";
+		};
+		A76A5716198693A400751454 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B214EE183F842000C38635 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A76A570B1986937D00751454;
+			remoteInfo = "Resource Bundle";
 		};
 		A76D3F89198666FE0032FE59 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -378,6 +387,10 @@
 		A7548AEA196C2E7C000B72EB /* PLYEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYEntity.m; path = PLYEntities/PLYEntity.m; sourceTree = "<group>"; };
 		A7548B22196C4C16000B72EB /* PLYImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYImage.h; path = PLYEntities/PLYImage.h; sourceTree = "<group>"; };
 		A7548B23196C4C16000B72EB /* PLYImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYImage.m; path = PLYEntities/PLYImage.m; sourceTree = "<group>"; };
+		A76A56E81986922300751454 /* API.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = API.strings; sourceTree = "<group>"; };
+		A76A56E91986922300751454 /* UI.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = UI.strings; sourceTree = "<group>"; };
+		A76A570C1986937D00751454 /* ProductLayer.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProductLayer.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		A76A5719198693ED00751454 /* Bundle-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bundle-Info.plist"; sourceTree = "<group>"; };
 		A76D3F59198650770032FE59 /* PLYFormEmailValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYFormEmailValidator.h; sourceTree = "<group>"; };
 		A76D3F5A198650770032FE59 /* PLYFormEmailValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYFormEmailValidator.m; sourceTree = "<group>"; };
 		A76D3F5B198650770032FE59 /* PLYFormValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYFormValidator.h; sourceTree = "<group>"; };
@@ -555,6 +568,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A76A57091986937D00751454 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A7B214F3183F842000C38635 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -592,6 +612,16 @@
 				A71C2BA51843AD8D00B77DB4 /* ImageDownload.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A76A56E71986922300751454 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A76A5719198693ED00751454 /* Bundle-Info.plist */,
+				A76A56E81986922300751454 /* API.strings */,
+				A76A56E91986922300751454 /* UI.strings */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		A76D3F58198650770032FE59 /* UI */ = {
@@ -649,6 +679,7 @@
 			children = (
 				A7B214F6183F842000C38635 /* PL.app */,
 				A7B21721183F8A3800C38635 /* libProductLayer.a */,
+				A76A570C1986937D00751454 /* ProductLayer.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -762,6 +793,7 @@
 			children = (
 				A7B4428D183F939F00E8A170 /* ProductLayer-Prefix.pch */,
 				A7B44242183F91E700E8A170 /* Source */,
+				A76A56E71986922300751454 /* Resources */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1085,6 +1117,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A76A570B1986937D00751454 /* Resource Bundle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A76A57101986937D00751454 /* Build configuration list for PBXNativeTarget "Resource Bundle" */;
+			buildPhases = (
+				A76A57081986937D00751454 /* Sources */,
+				A76A57091986937D00751454 /* Frameworks */,
+				A76A570A1986937D00751454 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Resource Bundle";
+			productName = "Resource Bundle";
+			productReference = A76A570C1986937D00751454 /* ProductLayer.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		A7B214F5183F842000C38635 /* Demo App */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A7B21528183F842000C38635 /* Build configuration list for PBXNativeTarget "Demo App" */;
@@ -1096,6 +1145,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A76A5717198693A400751454 /* PBXTargetDependency */,
 				C97FAAEA19221CE800144D2C /* PBXTargetDependency */,
 				A71C2BBA1843AD9600B77DB4 /* PBXTargetDependency */,
 				A7B44289183F935200E8A170 /* PBXTargetDependency */,
@@ -1132,6 +1182,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Cocoanetics;
 				TargetAttributes = {
+					A76A570B1986937D00751454 = {
+						CreatedOnToolsVersion = 6.0;
+					};
 					A7B214F5183F842000C38635 = {
 						DevelopmentTeam = W2S2NPRZSQ;
 					};
@@ -1164,6 +1217,7 @@
 				A7B214F5183F842000C38635 /* Demo App */,
 				A7B21720183F8A3800C38635 /* Static Library */,
 				A7D2A0A819224754003C256C /* Documentation */,
+				A76A570B1986937D00751454 /* Resource Bundle */,
 			);
 		};
 /* End PBXProject section */
@@ -1368,6 +1422,15 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A76A570A1986937D00751454 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A76A57151986939700751454 /* UI.strings in Resources */,
+				A76A57141986939700751454 /* API.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A7B214F4183F842000C38635 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1390,7 +1453,6 @@
 				C9ADBE07191A208D004C81B3 /* star_full.png in Resources */,
 				C98CD25D190FA86B0035647C /* no_image@2x.png in Resources */,
 				C9BDC08119080CDF0062BB56 /* settings.png in Resources */,
-				C98CD248190E857C0035647C /* Localizable.strings in Resources */,
 				C9BDC05D1901AEF90062BB56 /* productlayer_title@2x.png in Resources */,
 				C9BDC08619080DD10062BB56 /* add@2x.png in Resources */,
 				C9BDC076190809760062BB56 /* home@2x.png in Resources */,
@@ -1402,6 +1464,7 @@
 				C9ADBDE61914F9DD004C81B3 /* lists.png in Resources */,
 				C9ADBE05191A208D004C81B3 /* star_empty.png in Resources */,
 				C9BDC07D19080BED0062BB56 /* barcode.png in Resources */,
+				A76A571B1986A6D300751454 /* ProductLayer.bundle in Resources */,
 				A7B44283183F92D600E8A170 /* Main.storyboard in Resources */,
 				A7B44284183F92D600E8A170 /* Images.xcassets in Resources */,
 				C9BDC07A19080A7C0062BB56 /* review@2x.png in Resources */,
@@ -1430,6 +1493,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A76A57081986937D00751454 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A7B214F2183F842000C38635 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1516,6 +1586,11 @@
 			name = "DTDownload (iOS)";
 			targetProxy = A71C2BB91843AD9600B77DB4 /* PBXContainerItemProxy */;
 		};
+		A76A5717198693A400751454 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A76A570B1986937D00751454 /* Resource Bundle */;
+			targetProxy = A76A5716198693A400751454 /* PBXContainerItemProxy */;
+		};
 		A7B21745183F8A5400C38635 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A7B21720183F8A3800C38635 /* Static Library */;
@@ -1554,6 +1629,60 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		A76A57111986937D00751454 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "Core/Resources/Bundle-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = ProductLayer;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		A76A57121986937D00751454 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "Core/Resources/Bundle-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = ProductLayer;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		A76A57131986937D00751454 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "Core/Resources/Bundle-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = ProductLayer;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = AdHoc;
+		};
 		A7B21526183F842000C38635 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1783,6 +1912,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A76A57101986937D00751454 /* Build configuration list for PBXNativeTarget "Resource Bundle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A76A57111986937D00751454 /* Debug */,
+				A76A57121986937D00751454 /* Release */,
+				A76A57131986937D00751454 /* AdHoc */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		A7B214F1183F842000C38635 /* Build configuration list for PBXProject "PL" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
