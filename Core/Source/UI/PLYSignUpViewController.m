@@ -6,12 +6,8 @@
 //  Copyright (c) 2014 ProductLayer. All rights reserved.
 //
 
-#import "PLYServer.h"
 #import "PLYSignUpViewController.h"
-#import "PLYTextField.h"
-#import "PLYFormValidator.h"
-#import "PLYUserNameValidator.h"
-#import "PLYFormEmailValidator.h"
+#import "ProductLayer.h"
 
 #import "DTBlockFunctions.h"
 #import "DTAlertView.h"
@@ -33,7 +29,7 @@
 	[super viewDidLoad];
 	
 	UILabel *explainLabel = [[UILabel alloc] init];
-	explainLabel.text = @"Pick a nickname and enter your email address so that we can send you the initial password.";
+	explainLabel.text = PLYLocalizedStringFromTable(@"PLY_SIGNUP_EXPLAIN", @"UI", @"Explanation to show on sign up dialog");
 	explainLabel.translatesAutoresizingMaskIntoConstraints = NO;
 	explainLabel.numberOfLines = 0;
 	explainLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
@@ -49,7 +45,7 @@
 	_nameField.autocorrectionType = UITextAutocorrectionTypeNo;
 	_nameField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 	_nameField.spellCheckingType = UITextSpellCheckingTypeNo;
-	_nameField.placeholder = @"John Appleseed";
+	_nameField.placeholder = PLYLocalizedStringFromTable(@"PLY_NAME_PLACEHOLDER", @"UI", @"User Name Field Placeholder");
 	_nameField.validator = nameValidator;
 	_nameField.returnKeyType = UIReturnKeyNext;
 	_nameField.delegate = self;
@@ -64,7 +60,7 @@
 	_emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 	_emailField.spellCheckingType = UITextSpellCheckingTypeNo;
 	_emailField.keyboardType = UIKeyboardTypeEmailAddress;
-	_emailField.placeholder = @"john@productlayer.com";
+	_emailField.placeholder = PLYLocalizedStringFromTable(@"PLY_EMAIL_PLACEHOLDER", @"UI", @"Placeholder for email text field");
 	_emailField.validator = emailValidator;
 	_emailField.returnKeyType = UIReturnKeySend;
 	_emailField.delegate = self;
@@ -126,7 +122,8 @@
 	UIColor *plGreen = [UIColor colorWithRed:110.0/256.0 green:190.0/256.0 blue:68.0/256.0 alpha:1];
 	[self.navigationController.view setTintColor:plGreen];
 	
-	_rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Sign Up" style:UIBarButtonItemStyleDone target:self action:@selector(done:)];
+	NSString *title = PLYLocalizedStringFromTable(@"PLY_SIGNUP_RIGHT_BUTTON_TITLE", @"UI", @"Text for done button in sign up dialog");
+	_rightButton = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStyleDone target:self action:@selector(done:)];
 	_rightButton.enabled = NO;
 	self.navigationItem.rightBarButtonItem = _rightButton;
 }
@@ -184,10 +181,11 @@
 			
 			if (error)
 			{
-				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sign Up Failed"
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:PLYLocalizedStringFromTable(@"PLY_SIGNUP_ERROR_ALERT", @"UI", @"Title of alert in signup dialog")
 																				message:[error localizedDescription]
 																			  delegate:nil
-																  cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+																  cancelButtonTitle:PLYLocalizedStringFromTable(@"PLY_ALERT_OK", @"UI", @"Alert acknowledgement button title")
+																  otherButtonTitles:nil];
 				alert.tintColor = [UIColor redColor];
 				[alert show];
 
@@ -202,15 +200,18 @@
 			check.tintColor = self.navigationController.view.tintColor;
 			self.navigationItem.rightBarButtonItem = check;
 			
-			DTAlertView *alert = [[DTAlertView alloc] initWithTitle:@"Sign Up Complete"
-																			message:@"Please check your email inbox. You will receive an initial password which you should change. Then you may login in with your user name and password."];
+			NSString *title = PLYLocalizedStringFromTable(@"PLY_SIGNUP_SUCCESS_ALERT_TITLE", @"UI", @"Title for successful sign up");
+			NSString *msg = PLYLocalizedStringFromTable(@"PLY_SIGNUP_SUCCESS_ALERT_MSG", @"UI", @"Message for successful sign up");
+			DTAlertView *alert = [[DTAlertView alloc] initWithTitle:title
+																			message:msg];
 			
-			[alert addButtonWithTitle:@"Ok" block:^{
-				if ([_delegate respondsToSelector:@selector(signUpViewController:didSignUpNewUser:)])
-				{
-					[_delegate signUpViewController:self didSignUpNewUser:result];
-				}
-			}];
+			[alert addButtonWithTitle:PLYLocalizedStringFromTable(@"PLY_ALERT_OK", @"UI", @"Alert acknowledgement button title")
+									  block:^{
+										  if ([_delegate respondsToSelector:@selector(signUpViewController:didSignUpNewUser:)])
+										  {
+											  [_delegate signUpViewController:self didSignUpNewUser:result];
+										  }
+									  }];
 			
 			[alert show];
 		});

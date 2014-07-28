@@ -7,9 +7,8 @@
 //
 
 #import "PLYLostPasswordViewController.h"
-#import "PLYFormEmailValidator.h"
-#import "PLYTextField.h"
-#import "PLYServer.h"
+
+#import "ProductLayer.h"
 
 #import "DTBlockFunctions.h"
 #import "DTAlertView.h"
@@ -29,7 +28,7 @@
 	[super viewDidLoad];
 	
 	UILabel *explainLabel = [[UILabel alloc] init];
-	explainLabel.text = @"Enter your email address to have ProductLayer set a new random password and email it to you.";
+	explainLabel.text = PLYLocalizedStringFromTable(@"PLY_LOSTPW_EXPLAIN", @"UI", @"Explanation to show on lost password dialog");
 	explainLabel.translatesAutoresizingMaskIntoConstraints = NO;
 	explainLabel.numberOfLines = 0;
 	explainLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
@@ -46,7 +45,7 @@
 	_emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 	_emailField.spellCheckingType = UITextSpellCheckingTypeNo;
 	_emailField.keyboardType = UIKeyboardTypeEmailAddress;
-	_emailField.placeholder = @"john@productlayer.com";
+	_emailField.placeholder = PLYLocalizedStringFromTable(@"PLY_EMAIL_PLACEHOLDER", @"UI", @"Placeholder for email text field");
 	_emailField.validator = emailValidator;
 	_emailField.returnKeyType = UIReturnKeySend;
 	_emailField.enablesReturnKeyAutomatically = YES;
@@ -93,7 +92,8 @@
 	UIColor *plGreen = [UIColor colorWithRed:110.0/256.0 green:190.0/256.0 blue:68.0/256.0 alpha:1];
 	[self.navigationController.view setTintColor:plGreen];
 	
-	_rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Send" style:UIBarButtonItemStyleDone target:self action:@selector(done:)];
+	NSString *title = PLYLocalizedStringFromTable(@"PLY_LOSTPW_RIGHT_BUTTON_TITLE", @"UI", @"Text for done button in lost password dialog");
+	_rightButton = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStyleDone target:self action:@selector(done:)];
 	_rightButton.enabled = NO;
 	self.navigationItem.rightBarButtonItem = _rightButton;
 }
@@ -131,10 +131,12 @@
 				
 				if (error.code == 404)
 				{
-					msg = @"There is no user with this email address.";
+					msg = PLYLocalizedStringFromTable(@"PLY_LOSTPW_NO_USER", @"UI", @"Alert when user is not found");
 				}
 
-				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Lost Password Error" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+				NSString *title = PLYLocalizedStringFromTable(@"PLY_LOSTPW_ERROR_ALERT", @"UI", @"Title of alert in lost password dialog");
+				NSString *cancelTitle = PLYLocalizedStringFromTable(@"PLY_ALERT_OK", @"UI", @"Alert acknowledgement button title");
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:msg delegate:nil cancelButtonTitle:cancelTitle otherButtonTitles:nil];
 				[alert show];
 			}
 			else
@@ -143,14 +145,17 @@
 				check.tintColor = self.navigationController.view.tintColor;
 				self.navigationItem.rightBarButtonItem = check;
 				
-				DTAlertView *alert = [[DTAlertView alloc] initWithTitle:@"New Password Send" message:@"A new password was send to you by email."];
+				NSString *title = PLYLocalizedStringFromTable(@"PLY_LOSTPW_SUCCESS_ALERT_TITLE", @"UI", @"Title for successful password reset");
+				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOSTPW_SUCCESS_ALERT_MSG", @"UI", @"Message for successful password reset");
+				DTAlertView *alert = [[DTAlertView alloc] initWithTitle:title message:msg];
 				
-				[alert addButtonWithTitle:@"Ok" block:^{
-					if ([_delegate respondsToSelector:@selector(lostPasswordViewController:didRequestNewPasswordForUser:)])
-					{
-						[_delegate lostPasswordViewController:self didRequestNewPasswordForUser:result];
-					}
-				}];
+				[alert addButtonWithTitle:PLYLocalizedStringFromTable(@"PLY_ALERT_OK", @"UI", @"Alert acknowledgement button title")
+										  block:^{
+											  if ([_delegate respondsToSelector:@selector(lostPasswordViewController:didRequestNewPasswordForUser:)])
+											  {
+												  [_delegate lostPasswordViewController:self didRequestNewPasswordForUser:result];
+											  }
+										  }];
 				
 				[alert show];
 			}
