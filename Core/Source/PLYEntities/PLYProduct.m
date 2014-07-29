@@ -41,16 +41,11 @@
 			self.packaging = [[PLYPackaging alloc] initWithDictionary:value];
 		}
 	}
-	else
+	else if ([key isEqualToString:@"pl-prod-src"])
 	{
-		[super setValue:value forKey:key];
+		self.sourceURL = [NSURL URLWithString:value];
 	}
-}
-
-
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key
-{
-	if ([key isEqualToString:@"pl-brand-name"])
+	else if ([key isEqualToString:@"pl-brand-name"])
 	{
 		[self setValue:value forKey:@"brandName"];
 	}
@@ -108,7 +103,7 @@
 	}
 	else
 	{
-		[super setValue:value forUndefinedKey:key];
+		[super setValue:value forKey:key];
 	}
 }
 
@@ -184,6 +179,11 @@
 	if (self.nutritious)
 	{
 		[dict setObject:self.nutritious forKey:@"pl-prod-nutr"];
+	}
+	
+	if (self.sourceURL)
+	{
+		[dict setObject:[self.sourceURL absoluteString] forKey:@"pl-prod-src"];
 	}
 	
 	// return immutable

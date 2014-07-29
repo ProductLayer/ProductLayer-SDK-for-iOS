@@ -22,5 +22,14 @@
  */
 @property (nonatomic, strong) NSString *text;
 
+/**
+ The parent entity that the receiver is about, can be any PLYEntity or even another PLYOpine
+ */
+@property (nonatomic, copy) PLYEntity *parent;
+
+/**
+ The barcode (GTIN) of the product that this opine refers to
+ */
+@property (nonatomic, copy) NSString *GTIN;
 
 @end

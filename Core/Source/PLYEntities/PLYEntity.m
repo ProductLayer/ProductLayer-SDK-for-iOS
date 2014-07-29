@@ -112,7 +112,7 @@ NSArray *PLYAllEntityClasses()
 #pragma mark - Value Getting/Setting
 
 // setting common values from dictionary
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+- (void)setValue:(id)value forKey:(NSString *)key
 {
 	if ([key isEqualToString:@"pl-class"])
 	{
@@ -148,6 +148,15 @@ NSArray *PLYAllEntityClasses()
 	{
 		[self setValue:value forKey:@"version"];
 	}
+	else
+	{
+		[super setValue:value forKey:key];
+	}
+}
+
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+	NSLog(@"Unknown key '%@'", key);
 }
 
 // create dict representation with basic common values
@@ -192,6 +201,13 @@ NSArray *PLYAllEntityClasses()
 	
 	// return immutable
 	return [dict copy];
+}
+
+#pragma mark - NSCopying
+
+- (id)copyWithZone:(NSZone *)zone
+{
+	return [[[self class] allocWithZone:zone] initWithDictionary:[self dictionaryRepresentation]];
 }
 
 @end

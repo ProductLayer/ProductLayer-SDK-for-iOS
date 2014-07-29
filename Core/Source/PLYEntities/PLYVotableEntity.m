@@ -42,15 +42,7 @@
 			_downVoter = myMembers;
 		}
 	}
-	else
-	{
-		[super setValue:value forKey:key];
-	}
-}
-
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key
-{
-	if ([key isEqualToString:@"pl-vote-score"])
+	else if ([key isEqualToString:@"pl-vote-score"])
 	{
 		[self setValue:value forKey:@"votingScore"];
 	}
@@ -64,11 +56,11 @@
 	}
 	else
 	{
-		[super setValue:value forUndefinedKey:key];
+		[super setValue:value forKey:key];
 	}
 }
 
-- (NSDictionary *) dictionaryRepresentation
+- (NSDictionary *)dictionaryRepresentation
 {
 	NSMutableDictionary *dict = [[super dictionaryRepresentation] mutableCopy];
 	

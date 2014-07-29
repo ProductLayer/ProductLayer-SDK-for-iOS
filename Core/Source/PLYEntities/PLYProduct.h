@@ -59,4 +59,9 @@
 // The nutrition information.
 @property (nonatomic, strong) NSMutableDictionary *nutritious;
 
+/**
+ The source URL of the product information
+ */
+@property (nonatomic, copy) NSURL *sourceURL;
+
 @end

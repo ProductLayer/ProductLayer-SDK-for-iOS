@@ -16,16 +16,23 @@
 	return @"com.productlayer.Opine";
 }
 
-
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+- (void)setValue:(id)value forKey:(NSString *)key
 {
 	if ([key isEqualToString:@"pl-opine-text"])
 	{
-		[self setValue:value forKey:@"text"];
+		self.text = value;
+	}
+	else if ([key isEqualToString:@"pl-parent"])
+	{
+		self.parent = [PLYEntity entityFromDictionary:value];
+	}
+	else if ([key isEqualToString:@"pl-prod-gtin"])
+	{
+		self.GTIN = value;
 	}
 	else
 	{
-		[super setValue:value forUndefinedKey:key];
+		[super setValue:value forKey:key];
 	}
 }
 
@@ -35,7 +42,17 @@
 	
 	if (_text)
 	{
-		[dict setObject:_text forKey:@"pl-opine-text"];
+		dict[@"pl-opine-text"] = _text;
+	}
+	
+	if (_parent)
+	{
+		dict[@"pl-parent"] = [_parent dictionaryRepresentation];
+	}
+	
+	if (_GTIN)
+	{
+		dict[@"pl-prod-gtin"] = _GTIN;
 	}
 	
 	// return immutable
