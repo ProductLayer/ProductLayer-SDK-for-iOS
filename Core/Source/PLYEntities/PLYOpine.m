@@ -34,6 +34,13 @@
 	{
 		self.language = value;
 	}
+	else if ([key isEqualToString:@"pl-opine-location"])
+	{
+		PLYLocationCoordinate2D location;
+		location.latitude = [value[@"latitude"] doubleValue];
+		location.longitude = [value[@"longitude"] doubleValue];
+		self.location = location;
+	}
 	else
 	{
 		[super setValue:value forKey:key];
@@ -62,6 +69,12 @@
 	if (_language)
 	{
 		dict[@"pl-lng"] = _language;
+	}
+	
+	if (_location.longitude && _location.latitude)
+	{
+		dict[@"pl-opine-location"] = @{@"latitude" : @(_location.latitude),
+												 @"longitude" : @(_location.longitude)};
 	}
 	
 	// return immutable

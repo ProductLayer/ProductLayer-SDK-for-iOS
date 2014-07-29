@@ -33,7 +33,7 @@
 
 /**
  The language of the product.
- *
+ */
 @property (nonatomic, strong) NSString *language;
 
 /**

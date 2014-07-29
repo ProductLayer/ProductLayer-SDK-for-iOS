@@ -7,6 +7,10 @@
 //
 
 #import "PLYVotableEntity.h"
+#import "ProductLayer.h"
+
+typedef struct { double latitude; double longitude; } PLYLocationCoordinate2D;
+
 
 /**
  Model object representing a user's opine
@@ -36,5 +40,10 @@
  The language of the review.
  */
 @property (nonatomic, copy) NSString *language;
+
+/**
+ The geocoordinate of the receiver
+ */
+@property (nonatomic, assign) PLYLocationCoordinate2D location;
 
 @end
