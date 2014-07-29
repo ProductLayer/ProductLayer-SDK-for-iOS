@@ -21,7 +21,8 @@
 			NSMutableArray *myMembers = [NSMutableArray arrayWithCapacity:[value count]];
 			for (id valueMember in value)
 			{
-				[myMembers addObject:valueMember];
+				PLYUser *user = [[PLYUser alloc] initWithDictionary:valueMember];
+				[myMembers addObject:user];
 			}
 			
 			_upVoter = myMembers;
@@ -31,11 +32,11 @@
 	{
 		if ([value isKindOfClass:[NSArray class]])
 		{
-			
 			NSMutableArray *myMembers = [NSMutableArray arrayWithCapacity:[value count]];
 			for (id valueMember in value)
 			{
-				[myMembers addObject:valueMember];
+				PLYUser *user = [[PLYUser alloc] initWithDictionary:valueMember];
+				[myMembers addObject:user];
 			}
 			
 			_downVoter = myMembers;

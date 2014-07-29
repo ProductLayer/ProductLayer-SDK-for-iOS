@@ -46,7 +46,7 @@
 	}
 }
 
-- (NSDictionary *) dictionaryRepresentation
+- (NSDictionary *)dictionaryRepresentation
 {
 	NSMutableDictionary *dict = [[super dictionaryRepresentation] mutableCopy];
 	
