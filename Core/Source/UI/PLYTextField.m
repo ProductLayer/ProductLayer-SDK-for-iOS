@@ -70,6 +70,12 @@
 
 #pragma mark - Properties
 
+- (void)setText:(NSString *)text{
+    [super setText:text];
+    
+    [_validator validate];
+}
+
 - (void)setValidator:(PLYFormValidator *)validator
 {
 	if (_validator != validator)
