@@ -93,7 +93,7 @@
 
 
 - (void) loadLastImages{
-    [[PLYServer sharedServer] getLastUploadedImagesWithPage:0 andRPP:8 completion:^(id result, NSError *error) {
+    [[PLYServer sharedServer] getLastUploadedImagesWithPage:0 andRPP:30 completion:^(id result, NSError *error) {
 		
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
             
@@ -139,7 +139,7 @@
 
 - (IBAction)addImageToProduct:(id)sender
 {
-    if(![self checkIfLoggedInAndShowLoginView:YES]){
+    if (![self checkIfLoggedInAndShowLoginView:YES]){
         return;
     }
     
@@ -150,13 +150,39 @@
 		
 		return;
 	}
-	
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
-    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    imagePickerController.delegate = (id)self;
-	
-	[self presentViewController:imagePickerController animated:YES completion:nil];
+    
+    DTAlertView *alertView = [[DTAlertView alloc] initWithTitle:@"Choose image source!" message:nil];
+    
+        [alertView addButtonWithTitle:@"Take New Photo" block:^() {
+            [[PLYServer sharedServer] logoutUserWithCompletion:^(id result, NSError *error) {
+                DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+                    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+                    imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+                    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+                    imagePickerController.delegate = (id)self;
+                    
+                    [self presentViewController:imagePickerController animated:YES completion:nil];
+                });
+            }];
+        }];
+    
+    [alertView addButtonWithTitle:@"Choose Existing Photo" block:^() {
+        DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+            UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+            imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+            imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            imagePickerController.delegate = (id)self;
+            
+            [self presentViewController:imagePickerController animated:YES completion:nil];
+        });
+    }];
+    
+    [alertView addCancelButtonWithTitle:@"Cancel" block:^() {
+        // Don't log out.
+    }];
+    
+    
+    [alertView show];
 }
 
 #pragma mark - UIImagePickerControllerDelegate
