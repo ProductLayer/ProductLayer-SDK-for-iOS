@@ -984,11 +984,11 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
                  toListWithId:(NSString *)listId
                    completion:(PLYCompletion)completion{
 	NSParameterAssert(listItem);
-	NSParameterAssert(listItem.gtin);
+	NSParameterAssert(listItem.GTIN);
 	NSParameterAssert(listId);
 	NSParameterAssert(completion);
 	
-	NSString *function = [NSString stringWithFormat:@"list/%@/product/%@", listId,listItem.gtin];
+	NSString *function = [NSString stringWithFormat:@"list/%@/product/%@", listId,listItem.GTIN];
 	NSString *path = [self _functionPathForFunction:function];
 	
 	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:[listItem dictionaryRepresentation] completion:completion];
@@ -1079,9 +1079,9 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	
 	NSURL *url = nil;
 	
-	if(user.avatarUrl)
+	if (user.avatarURL)
 	{
-		url = [NSURL URLWithString:user.avatarUrl];
+		url = user.avatarURL;
 	}
 	else if(user.nickname)
 	{
