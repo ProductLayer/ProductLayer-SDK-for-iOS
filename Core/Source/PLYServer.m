@@ -29,6 +29,8 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 // TODO: test server, set back to live on release
 #define PLY_ENDPOINT_URL [NSURL URLWithString:@"http://176.9.158.164:28080"]
 
+//#define PLY_ENDPOINT_URL [NSURL URLWithString:@"http://10.211.55.7:8080"]
+
 // this is a prefix added before REST methods, e.g. for a version of the API
 #define PLY_PATH_PREFIX @"0.2"
 
@@ -37,8 +39,6 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 {
 	NSURL *_hostURL;
 	NSString *_APIKey;
-	
-	NSString *_accessToken;
 	
 	NSURLSession *_session;
 	NSURLSessionConfiguration *_configuration;
@@ -187,11 +187,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	{
 		request.HTTPMethod = HTTPMethod;
 	}
-	
-	// Set default basic authorization if authentication is not set by default.
-	if (!basicAuth){
-		basicAuth = [self getAuthenticationIfAvailable];
-	}
+
 	// Set basic authorization if available
 	if (basicAuth){
 		[request setValue:basicAuth forHTTPHeaderField:@"Authorization"];
@@ -298,15 +294,6 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	
 	[self startDataTaskForRequest:request completion:completion];
 	
-}
-
-- (NSString *) getAuthenticationIfAvailable{
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	if([defaults objectForKey:@"PLYBasicAuth"]){
-		return [defaults objectForKey:@"PLYBasicAuth"];
-	}
-	
-	return nil;
 }
 
 - (void) startDataTaskForRequest:(NSMutableURLRequest *)request completion:(PLYCompletion)completion{
@@ -522,13 +509,6 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	_accessToken = [defaults objectForKey:@"PLYServerAccessTokenKey"];
-	
-	if (!_accessToken)
-	{
-		return;
-	}
-	
 	NSString *nickname = [defaults objectForKey:@"PLYServerLoggedInUserNickname"];
 	
 	// Load User from Server
@@ -562,15 +542,6 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if (_accessToken)
-	{
-		[defaults setObject:_accessToken forKey:@"PLYServerAccessTokenKey"];
-	}
-	else
-	{
-		[defaults removeObjectForKey:@"PLYServerAccessTokenKey"];
-	}
-	
 	if (_loggedInUser)
 	{
 		[defaults setObject:_loggedInUser.nickname forKey:@"PLYServerLoggedInUserNickname"];
@@ -580,7 +551,6 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	{
 		[defaults removeObjectForKey:@"PLYServerLoggedInUserNickname"];
 		[defaults removeObjectForKey:@"PLYServerLoggedInUserId"];
-		[defaults removeObjectForKey:@"PLYBasicAuth"];
 	}
 	
 	[defaults synchronize];
@@ -706,7 +676,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	NSParameterAssert(password);
 	NSParameterAssert(completion);
 	
-	NSString *path = [self _functionPathForFunction:@"user/login"];
+	NSString *path = [self _functionPathForFunction:@"login"];
 	
 	// Basic Authentication
 	NSString *authStr = [NSString stringWithFormat:@"%@:%@", user, password];
@@ -719,9 +689,6 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 		
 		if (!error && [result isKindOfClass:PLYUser.class])
 		{
-			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-			[defaults setObject:authValue forKey:@"PLYBasicAuth"];
-			
 			[self setLoggedInUser:result];
 			
 			[self _storeState];
@@ -743,11 +710,10 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 {
 	NSParameterAssert(completion);
 	
-	NSString *path = [self _functionPathForFunction:@"user/logout"];
+	NSString *path = [self _functionPathForFunction:@"logout"];
 	
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:completion];
 	
-	_accessToken = nil;
 	[self setLoggedInUser:nil];
 	
 	[self _storeState];
@@ -1240,6 +1206,9 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 // lazy initializer for URL session
 - (NSURLSession *)session {
 	if (!_session) {
+        // Set save cookies policy
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
+        
 		_session = [NSURLSession sessionWithConfiguration:_configuration];
 	}
 	
