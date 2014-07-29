@@ -46,4 +46,9 @@ typedef struct { double latitude; double longitude; } PLYLocationCoordinate2D;
  */
 @property (nonatomic, assign) PLYLocationCoordinate2D location;
 
+/**
+ Images associated with the receiver
+ */
+@property (nonatomic, copy) NSArray *images;
+
 @end

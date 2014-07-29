@@ -41,6 +41,22 @@
 		location.longitude = [value[@"longitude"] doubleValue];
 		self.location = location;
 	}
+	else if ([key isEqualToString:@"pl-opine-img"])
+	{
+		if ([value isKindOfClass:[NSArray class]])
+		{
+			NSDictionary *dict = (NSDictionary *)value;
+			NSMutableArray *tmpArray = [NSMutableArray array];
+			
+			for (NSDictionary *oneValue in dict)
+			{
+				PLYImage *image = [[PLYImage alloc] initWithDictionary:oneValue];
+				[tmpArray addObject:image];
+			}
+			
+			self.images = tmpArray;
+		}
+	}
 	else
 	{
 		[super setValue:value forKey:key];
@@ -75,6 +91,18 @@
 	{
 		dict[@"pl-opine-location"] = @{@"latitude" : @(_location.latitude),
 												 @"longitude" : @(_location.longitude)};
+	}
+	
+	if ([_images count])
+	{
+		NSMutableArray *tmpArray = [NSMutableArray array];
+		
+		for (PLYImage *image in _images)
+		{
+			[tmpArray addObject:[image dictionaryRepresentation]];
+		}
+		
+		dict[@"pl-opine-img"] = tmpArray;
 	}
 	
 	// return immutable

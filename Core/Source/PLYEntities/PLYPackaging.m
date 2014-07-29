@@ -10,23 +10,23 @@
 
 @implementation PLYPackaging
 
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+- (void)setValue:(id)value forKey:(NSString *)key
 {
 	if ([key isEqualToString:@"pl-prod-pkg-cont"])
 	{
-		[self setValue:value forKey:@"contains"];
+		self.contains = value;
 	}
 	else if ([key isEqualToString:@"pl-prod-pkg-name"])
 	{
-		[self setValue:value forKey:@"name"];
+		self.name = value;
 	}
 	else if ([key isEqualToString:@"pl-prod-pkg-desc"])
 	{
-		[self setValue:value forKey:@"description"];
+		self.descriptionText = value;
 	}
 	else if ([key isEqualToString:@"pl-prod-pkg-units"])
 	{
-		[self setValue:value forKey:@"unit"];
+		self.unit = value;
 	}
 	else
 	{

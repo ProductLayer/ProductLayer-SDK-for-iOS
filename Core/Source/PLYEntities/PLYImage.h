@@ -35,7 +35,7 @@
 @property (nonatomic, strong) NSString *name;
 
 /**
- The url of the image.
+ The URL of the image.
  */
 @property (nonatomic, strong) NSString *url;
 
@@ -47,7 +47,7 @@
 /**
  The gtin (barcode) of the product.
  */
-@property (nonatomic, strong) NSString *gtin;
+@property (nonatomic, copy) NSString *GTIN;
 
 
 /**
