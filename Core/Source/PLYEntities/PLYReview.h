@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
-#import "PLYEntity.h"
+#import "PLYVotableEntity.h"
 
 @class PLYUser;
 
 /**
  Model class representing a product review.
  */
-@interface PLYReview : PLYEntity
+@interface PLYReview : PLYVotableEntity
 
 /**
  @name Properties
@@ -43,20 +43,5 @@
  The language of the review.
  */
 @property (nonatomic, strong) NSString *language;
-
-/**
- The sum of all votes (up +1, down -1).
- */
-@property (nonatomic, strong) NSNumber *votingScore;
-
-/**
- The list of user id's who up-voted the review.
- */
-@property (nonatomic, strong) NSArray *upVoter;
-
-/**
- The list of user id's who down-voted the review.
- */
-@property (nonatomic, strong) NSArray *downVoter;
 
 @end

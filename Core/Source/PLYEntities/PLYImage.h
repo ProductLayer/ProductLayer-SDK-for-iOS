@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
-#import "PLYEntity.h"
+#import "PLYVotableEntity.h"
 
 @class PLYAuditor;
 
 /**
  * The metadata of the product images.
  **/
-@interface PLYImage : PLYEntity
+@interface PLYImage : PLYVotableEntity
 
 /**
  @name Properties
@@ -40,11 +40,6 @@
 @property (nonatomic, strong) NSString *url;
 
 /**
- The voting score of the image. (+1 for a up vote, -1 for a down vote)
- */
-@property (nonatomic, strong) NSNumber *votingScore;
-
-/**
  The width in pixel of the image.
  */
 @property (nonatomic, strong) NSNumber *width;
@@ -54,20 +49,11 @@
  */
 @property (nonatomic, strong) NSString *gtin;
 
-/**
- The users who up voted image.
- */
-@property (nonatomic, strong) NSMutableArray *upVoters;
-
-/**
- The users who down voted image.
- */
-@property (nonatomic, strong) NSMutableArray *downVoters;
-
 
 /**
  @name Working with Images
  */
+
 - (NSString *)getUrlForWidth:(CGFloat)maxWidth andHeight:(CGFloat)maxHeight crop:(BOOL)crop;
 
 @end

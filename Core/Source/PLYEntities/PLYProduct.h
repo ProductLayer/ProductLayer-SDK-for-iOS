@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
-#import "PLYEntity.h"
+#import "PLYVotableEntity.h"
 
 @class PLYAuditor;
 @class PLYPackaging;
 
-@interface PLYProduct : PLYEntity
+@interface PLYProduct : PLYVotableEntity
 
 /**
  @name Properties

@@ -394,12 +394,14 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 													if([jsonObject isKindOfClass:[NSArray class]] && [jsonObject count] != 0){
 														NSMutableArray *objectArray = [NSMutableArray arrayWithCapacity:1];
 														
-														for(NSDictionary *dictObject in jsonObject)
+														for (NSDictionary *dictObject in jsonObject)
 														{
 															id object = [PLYEntity entityFromDictionary:dictObject];
 															
-															if(object == nil)
-																break;
+															if (!object)
+															{
+																continue;
+															}
 															
 															[objectArray addObject:object];
 														}

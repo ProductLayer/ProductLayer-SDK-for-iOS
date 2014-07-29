@@ -18,90 +18,9 @@
 	return @"com.productlayer.Review";
 }
 
-- (void)setValue:(id)value forKey:(NSString *)key
-{
-	if ([key isEqualToString:@"pl-created-by"])
-	{
-		
-		if ([value isKindOfClass:[NSDictionary class]])
-		{
-			self.createdBy = [[PLYUser alloc] initWithDictionary:value];
-		}
-	}
-	else if ([key isEqualToString:@"pl-vote-usr_upvotes"])
-	{
-		
-		if ([value isKindOfClass:[NSArray class]])
-		{
-			
-			NSMutableArray *myMembers = [NSMutableArray arrayWithCapacity:[value count]];
-			for (id valueMember in value)
-			{
-				[myMembers addObject:valueMember];
-			}
-			
-			self.upVoter = myMembers;
-			
-		}
-	}
-	else if ([key isEqualToString:@"pl-vote-usr_downvotes"])
-	{
-		
-		if ([value isKindOfClass:[NSArray class]])
-		{
-			
-			NSMutableArray *myMembers = [NSMutableArray arrayWithCapacity:[value count]];
-			for (id valueMember in value)
-			{
-				[myMembers addObject:valueMember];
-			}
-			
-			self.downVoter = myMembers;
-		}
-	}
-	else if ([key isEqualToString:@"pl-upd-by"])
-	{
-		if ([value isKindOfClass:[NSDictionary class]])
-		{
-			self.updatedBy = [[PLYUser alloc] initWithDictionary:value];
-		}
-	}
-	else
-	{
-		[super setValue:value forKey:key];
-	}
-}
-
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key
 {
-	if ([key isEqualToString:@"pl-class"])
-	{
-		[self setValue:value forKey:@"Class"];
-	}
-	else if ([key isEqualToString:@"pl-id"])
-	{
-		[self setValue:value forKey:@"Id"];
-	}  else if ([key isEqualToString:@"pl-version"])
-	{
-		[self setValue:value forKey:@"version"];
-	}
-	else if ([key isEqualToString:@"pl-created-by"])
-	{
-		[self setValue:value forKey:@"createdBy"];
-	}
-	else if ([key isEqualToString:@"pl-created-time"])
-	{
-		[self setValue:value forKey:@"createdTime"];
-	}
-	else if ([key isEqualToString:@"pl-upd-by"])
-	{
-		[self setValue:value forKey:@"updatedBy"];
-	}
-	else if ([key isEqualToString:@"pl-upd-time"])
-	{
-		[self setValue:value forKey:@"updatedTime"];
-	}
-	else if ([key isEqualToString:@"pl-prod-gtin"])
+	if ([key isEqualToString:@"pl-prod-gtin"])
 	{
 		[self setValue:value forKey:@"gtin"];
 	}
@@ -121,17 +40,9 @@
 	{
 		[self setValue:value forKey:@"language"];
 	}
-	else if ([key isEqualToString:@"pl-vote-score"])
+	else
 	{
-		[self setValue:value forKey:@"votingScore"];
-	}
-	else if ([key isEqualToString:@"pl-vote-usr_upvotes"])
-	{
-		[self setValue:value forKey:@"upVoter"];
-	}
-	else if ([key isEqualToString:@"pl-vote-usr_downvotes"])
-	{
-		[self setValue:value forKey:@"downVoter"];
+		[super setValue:value forUndefinedKey:key];
 	}
 }
 
@@ -162,21 +73,6 @@
 	if (_language)
 	{
 		[dict setObject:_language forKey:@"pl-lng"];
-	}
-	
-	if (_votingScore)
-	{
-		[dict setObject:_votingScore forKey:@"pl-vote-score"];
-	}
-	
-	if (_upVoter)
-	{
-		[dict setObject:_upVoter forKey:@"pl-vote-usr_upvotes"];
-	}
-	
-	if (_downVoter)
-	{
-		[dict setObject:_downVoter forKey:@"pl-vote-usr_downvotes"];
 	}
 	
 	// return immutable

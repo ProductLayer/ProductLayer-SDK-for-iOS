@@ -20,15 +20,7 @@
 
 - (void)setValue:(id)value forKey:(NSString *)key
 {
-	if ([key isEqualToString:@"pl-created-by"])
-	{
-		if ([value isKindOfClass:[NSDictionary class]])
-		{
-			self.createdBy = [[PLYUser alloc] initWithDictionary:value];
-		}
-		
-	}
-	else if ([key isEqualToString:@"pl-prod-lnks"])
+	if ([key isEqualToString:@"pl-prod-lnks"])
 	{
 		if ([value isKindOfClass:[NSArray class]])
 		{
@@ -47,13 +39,6 @@
 		if ([value isKindOfClass:[NSDictionary class]])
 		{
 			self.packaging = [[PLYPackaging alloc] initWithDictionary:value];
-		}
-	}
-	else if ([key isEqualToString:@"pl-upd-by"])
-	{
-		if ([value isKindOfClass:[NSDictionary class]])
-		{
-			self.updatedBy = [[PLYUser alloc] initWithDictionary:value];
 		}
 	}
 	else

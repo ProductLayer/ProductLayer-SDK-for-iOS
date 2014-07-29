@@ -124,7 +124,10 @@ NSArray *PLYAllEntityClasses()
 	}
 	else if ([key isEqualToString:@"pl-created-by"])
 	{
-		[self setValue:value forKey:@"createdBy"];
+		if ([value isKindOfClass:[NSDictionary class]])
+		{
+			self.createdBy = [[PLYUser alloc] initWithDictionary:value];
+		}
 	}
 	else if ([key isEqualToString:@"pl-created-time"])
 	{
@@ -132,7 +135,10 @@ NSArray *PLYAllEntityClasses()
 	}
 	else if ([key isEqualToString:@"pl-upd-by"])
 	{
-		[self setValue:value forKey:@"updatedBy"];
+		if ([value isKindOfClass:[NSDictionary class]])
+		{
+			self.updatedBy = [[PLYUser alloc] initWithDictionary:value];
+		}
 	}
 	else if ([key isEqualToString:@"pl-upd-time"])
 	{
