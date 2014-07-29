@@ -11,7 +11,7 @@ install:
 
 script: 
  - xctool -project PL.xcodeproj -scheme "Demo App" build -sdk iphonesimulator -arch i386 ONLY_ACTIVE_ARCH=NO
- - appledoc -o /tmp .
+# - appledoc -o /tmp .
 
 after_success:
 #  - ./coveralls.rb --extension m --exclude-folder Demo --exclude-folder Test --exclude-folder Externals
