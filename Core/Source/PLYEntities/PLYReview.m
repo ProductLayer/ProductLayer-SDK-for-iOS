@@ -18,27 +18,27 @@
 	return @"com.productlayer.Review";
 }
 
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+- (void)setValue:(id)value forKey:(NSString *)key
 {
 	if ([key isEqualToString:@"pl-prod-gtin"])
 	{
-		[self setValue:value forKey:@"gtin"];
+		self.GTIN = value;
 	}
 	else if ([key isEqualToString:@"pl-rev-subj"])
 	{
-		[self setValue:value forKey:@"subject"];
+		self.subject = value;
 	}
 	else if ([key isEqualToString:@"pl-rev-body"])
 	{
-		[self setValue:value forKey:@"body"];
+		self.body = value;
 	}
 	else if ([key isEqualToString:@"pl-rev-rating"])
 	{
-		[self setValue:value forKey:@"rating"];
+		self.rating = value;
 	}
 	else if ([key isEqualToString:@"pl-lng"])
 	{
-		[self setValue:value forKey:@"language"];
+		self.language = value;
 	}
 	else
 	{
@@ -50,29 +50,29 @@
 {
 	NSMutableDictionary *dict = [[super dictionaryRepresentation] mutableCopy];
 	
-	if (_gtin)
+	if (_GTIN)
 	{
-		[dict setObject:_gtin forKey:@"pl-prod-gtin"];
+		dict[@"pl-prod-gtin"] = _GTIN;
 	}
 	
 	if (_subject)
 	{
-		[dict setObject:_subject forKey:@"pl-rev-subj"];
+		dict[@"pl-rev-subj"] = _subject;
 	}
 	
 	if (_body)
 	{
-		[dict setObject:_body forKey:@"pl-rev-body"];
+		dict[@"pl-rev-body"] = _body;
 	}
 	
 	if (_rating)
 	{
-		[dict setObject:_rating forKey:@"pl-rev-rating"];
+		dict[@"pl-rev-rating"] = _rating;
 	}
 	
 	if (_language)
 	{
-		[dict setObject:_language forKey:@"pl-lng"];
+		dict[@"pl-lng"] = _language;
 	}
 	
 	// return immutable

@@ -25,7 +25,7 @@
 				[myMembers addObject:user];
 			}
 			
-			_upVoter = myMembers;
+			self.upVoter = myMembers;
 		}
 	}
 	else if ([key isEqualToString:@"pl-vote-usr_downvotes"])
@@ -39,20 +39,12 @@
 				[myMembers addObject:user];
 			}
 			
-			_downVoter = myMembers;
+			self.downVoter = myMembers;
 		}
 	}
 	else if ([key isEqualToString:@"pl-vote-score"])
 	{
-		[self setValue:value forKey:@"votingScore"];
-	}
-	else if ([key isEqualToString:@"pl-vote-usr_upvotes"])
-	{
-		[self setValue:value forKey:@"upVoter"];
-	}
-	else if ([key isEqualToString:@"pl-vote-usr_downvotes"])
-	{
-		[self setValue:value forKey:@"downVoter"];
+		self.votingScore = value;
 	}
 	else
 	{
@@ -66,7 +58,7 @@
 	
 	if (_votingScore)
 	{
-		[dict setObject:_votingScore forKey:@"pl-vote-score"];
+		dict[@"pl-vote-score"] = _votingScore;
 	}
 	
 	if ([_upVoter count])
@@ -78,7 +70,7 @@
 			[tmpArray addObject:[user dictionaryRepresentation]];
 		}
 		
-		[dict setObject:tmpArray forKey:@"pl-vote-usr_upvotes"];
+		dict[@"pl-vote-usr_upvotes"] = tmpArray;
 	}
 	
 	if ([_downVoter count] > 0)
@@ -90,7 +82,7 @@
 			[tmpArray addObject:[user dictionaryRepresentation]];
 		}
 		
-		[dict setObject:tmpArray forKey:@"pl-vote-usr_downvotes"];
+		dict[@"pl-vote-usr_downvotes"] = tmpArray;
 	}
 	
 	// return immutable

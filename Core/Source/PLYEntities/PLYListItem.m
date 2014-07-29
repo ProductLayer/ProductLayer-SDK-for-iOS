@@ -12,38 +12,32 @@
 
 @implementation PLYListItem
 
-@synthesize Id;
-@synthesize gtin;
-@synthesize note;
-@synthesize qty;
-@synthesize prio;
-
 + (NSString *)entityTypeIdentifier
 {
 	return @"com.productlayer.ProductListItem";
 }
 
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+- (void)setValue:(id)value forKey:(NSString *)key
 {
 	if ([key isEqualToString:@"pl-prod-gtin"])
 	{
-		[self setValue:value forKey:@"gtin"];
+		self.GTIN = value;
 	}
 	else if ([key isEqualToString:@"pl-list-prod-note"])
 	{
-		[self setValue:value forKey:@"note"];
+		self.note = value;
 	}
 	else if ([key isEqualToString:@"pl-list-prod-cnt"])
 	{
-		[self setValue:value forKey:@"qty"];
+		self.qty = value;
 	}
 	else if ([key isEqualToString:@"pl-list-prod-prio"])
 	{
-		[self setValue:value forKey:@"prio"];
+		self.prio = value;
 	}
 	else
 	{
-		[super setValue:value forUndefinedKey:key];
+		[super setValue:value forKey:key];
 	}
 }
 
@@ -51,24 +45,24 @@
 {
 	NSMutableDictionary *dict = [[super dictionaryRepresentation] mutableCopy];
 	
-	if (gtin)
+	if (_GTIN)
 	{
-		[dict setObject:gtin forKey:@"pl-prod-gtin"];
+		dict[@"pl-prod-gtin"] = _GTIN;
 	}
 	
-	if (note)
+	if (_note)
 	{
-		[dict setObject:note forKey:@"pl-list-prod-note"];
+		dict[@"pl-list-prod-note"] = _note;
 	}
 	
-	if (qty)
+	if (_qty)
 	{
-		[dict setObject:qty forKey:@"pl-list-prod-cnt"];
+		dict[@"pl-list-prod-cnt"] = _qty;
 	}
 	
-	if (prio)
- {
-		[dict setObject:prio forKey:@"pl-list-prod-prio"];
+	if (_prio)
+	{
+		dict[@"pl-list-prod-prio"] = _prio;
 	}
 	
 	// return immutable

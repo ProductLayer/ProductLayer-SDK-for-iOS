@@ -25,11 +25,11 @@
 /**
  The list of user id's who up-voted the review.
  */
-@property (nonatomic, strong) NSArray *upVoter;
+@property (nonatomic, copy) NSArray *upVoter;
 
 /**
  The list of user id's who down-voted the review.
  */
-@property (nonatomic, strong) NSArray *downVoter;
+@property (nonatomic, copy) NSArray *downVoter;
 
 @end

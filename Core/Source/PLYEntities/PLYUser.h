@@ -68,7 +68,7 @@
 /**
  The url of the users avatar image. If no image is defined productlayer returns a gravatar image url.
  */
-@property (nonatomic, strong) NSString *avatarUrl;
+@property (nonatomic, strong) NSURL *avatarURL;
 
 /**
  Is this user following the logged in user.
