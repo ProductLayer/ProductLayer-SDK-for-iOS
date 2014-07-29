@@ -13,7 +13,7 @@
 #import "DTBlockFunctions.h"
 #import "DTAlertView.h"
 
-@interface PLYLostPasswordViewController () <PLYFormValidationDelegate>
+@interface PLYLostPasswordViewController () <PLYFormValidationDelegate, UITextFieldDelegate>
 
 @end
 
@@ -48,6 +48,7 @@
 	_emailField.placeholder = PLYLocalizedStringFromTable(@"PLY_EMAIL_PLACEHOLDER", @"UI", @"Placeholder for email text field");
 	_emailField.validator = emailValidator;
 	_emailField.returnKeyType = UIReturnKeySend;
+    _emailField.delegate = self;
 	_emailField.enablesReturnKeyAutomatically = YES;
 	[self.view addSubview:_emailField];
 	
@@ -165,6 +166,19 @@
 
 #pragma mark - Form Validation
 
+- (BOOL)_allFieldsValid
+{
+	for (PLYFormValidator *oneValidator in _validators)
+	{
+		if (!oneValidator.isValid)
+		{
+			return NO;
+		}
+	}
+	
+	return YES;
+}
+
 - (void)validityDidChange:(PLYFormValidator *)validator
 {
 	for (PLYFormValidator *oneValidator in _validators)
@@ -177,6 +191,18 @@
 	}
 	
 	_rightButton.enabled = YES;
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if ([self _allFieldsValid])
+	{
+		[self done:nil];
+	}
+	
+	return NO;
 }
 
 @end
