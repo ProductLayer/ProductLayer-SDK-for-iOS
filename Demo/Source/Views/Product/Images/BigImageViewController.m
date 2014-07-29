@@ -58,7 +58,7 @@
 }
 
 - (void)updateView{
-    [_votingScoreLabel setText:[NSString stringWithFormat:@"%d (up=%lu, down=%lu)",[metadata.votingScore intValue], (unsigned long)[metadata.upVoters count], (unsigned long)[metadata.downVoters count]]];
+    [_votingScoreLabel setText:[NSString stringWithFormat:@"%d (up=%lu, down=%lu)",[metadata.votingScore intValue], (unsigned long)[metadata.upVoter count], (unsigned long)[metadata.downVoter count]]];
 }
 
 - (void) setImageMetadata:(PLYImage *)imageMetadata{
