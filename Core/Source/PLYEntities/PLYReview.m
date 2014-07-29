@@ -28,7 +28,7 @@
 			self.createdBy = [[PLYUser alloc] initWithDictionary:value];
 		}
 	}
-	else if ([key isEqualToString:@"pl-rev-usr_upvotes"])
+	else if ([key isEqualToString:@"pl-vote-usr_upvotes"])
 	{
 		
 		if ([value isKindOfClass:[NSArray class]])
@@ -44,7 +44,7 @@
 			
 		}
 	}
-	else if ([key isEqualToString:@"pl-rev-usr_downvotes"])
+	else if ([key isEqualToString:@"pl-vote-usr_downvotes"])
 	{
 		
 		if ([value isKindOfClass:[NSArray class]])
@@ -121,15 +121,15 @@
 	{
 		[self setValue:value forKey:@"language"];
 	}
-	else if ([key isEqualToString:@"pl-rev-votes"])
+	else if ([key isEqualToString:@"pl-vote-score"])
 	{
 		[self setValue:value forKey:@"votingScore"];
 	}
-	else if ([key isEqualToString:@"pl-rev-usr_upvotes"])
+	else if ([key isEqualToString:@"pl-vote-usr_upvotes"])
 	{
 		[self setValue:value forKey:@"upVoter"];
 	}
-	else if ([key isEqualToString:@"pl-rev-usr_downvotes"])
+	else if ([key isEqualToString:@"pl-vote-usr_downvotes"])
 	{
 		[self setValue:value forKey:@"downVoter"];
 	}
@@ -166,17 +166,17 @@
 	
 	if (_votingScore)
 	{
-		[dict setObject:_votingScore forKey:@"pl-rev-votes"];
+		[dict setObject:_votingScore forKey:@"pl-vote-score"];
 	}
 	
 	if (_upVoter)
 	{
-		[dict setObject:_upVoter forKey:@"pl-rev-usr_upvotes"];
+		[dict setObject:_upVoter forKey:@"pl-vote-usr_upvotes"];
 	}
 	
 	if (_downVoter)
 	{
-		[dict setObject:_downVoter forKey:@"pl-rev-usr_downvotes"];
+		[dict setObject:_downVoter forKey:@"pl-vote-usr_downvotes"];
 	}
 	
 	// return immutable

@@ -73,15 +73,15 @@
 	{
 		[self setValue:value forKey:@"points"];
 	}
-	else if ([key isEqualToString:@"pl-usr-achvself.unlocked"])
+	else if ([key isEqualToString:@"pl-usr-achv_unlocked"])
 	{
 		[self setValue:value forKey:@"unlockedAchievements"];
 	}
-	else if ([key isEqualToString:@"pl-usr-followerself.cnt"])
+	else if ([key isEqualToString:@"pl-usr-follower_cnt"])
 	{
 		[self setValue:value forKey:@"followerCount"];
 	}
-	else if ([key isEqualToString:@"pl-usr-followingself.cnt"])
+	else if ([key isEqualToString:@"pl-usr-following_cnt"])
 	{
 		[self setValue:value forKey:@"followingCount"];
 	}
@@ -144,17 +144,17 @@
 	
 	if (self.unlockedAchievements)
 	{
-		[dict setObject:self.unlockedAchievements forKey:@"pl-usr-achvself.unlocked"];
+		[dict setObject:self.unlockedAchievements forKey:@"pl-usr-achv_unlocked"];
 	}
 	
 	if (self.followerCount)
 	{
-		[dict setObject:self.followerCount forKey:@"pl-usr-followerself.cnt"];
+		[dict setObject:self.followerCount forKey:@"pl-usr-follower_cnt"];
 	}
 	
 	if (self.followingCount)
 	{
-		[dict setObject:self.followingCount forKey:@"pl-usr-followingself.cnt"];
+		[dict setObject:self.followingCount forKey:@"pl-usr-following_cnt"];
 	}
 	
 	if (self.avatarUrl)

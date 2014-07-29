@@ -39,7 +39,7 @@
 		}
 		
 	}
-	else if ([key isEqualToString:@"pl-img-usrself.upvotes"])
+	else if ([key isEqualToString:@"pl-vote-usr_upvotes"])
 	{
 		self.upVoters = [NSMutableArray arrayWithCapacity:1];
 		
@@ -51,7 +51,7 @@
 			}
 		}
 	}
-	else if ([key isEqualToString:@"pl-img-usrself.downvotes"])
+	else if ([key isEqualToString:@"pl-vote-usr_downvotes"])
 	{
 		self.downVoters = [NSMutableArray arrayWithCapacity:1];
 		
@@ -71,7 +71,7 @@
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key
 {
-	if ([key isEqualToString:@"pl-img-fileself.id"])
+	if ([key isEqualToString:@"pl-img-file_id"])
 	{
 		[self setValue:value forKey:@"fileId"];
 	}
@@ -87,7 +87,7 @@
 	{
 		[self setValue:value forKey:@"url"];
 	}
-	else if ([key isEqualToString:@"pl-img-voteself.score"])
+	else if ([key isEqualToString:@"pl-vote-score"])
 	{
 		[self setValue:value forKey:@"votingScore"];
 	}
@@ -111,7 +111,7 @@
 	
 	if (self.fileId)
 	{
-		[dict setObject:self.fileId forKey:@"pl-img-fileself.id"];
+		[dict setObject:self.fileId forKey:@"pl-img-file_id"];
 	}
 	
 	if (self.height)
@@ -131,7 +131,7 @@
 	
 	if (self.votingScore)
 	{
-		[dict setObject:self.votingScore forKey:@"pl-img-voteself.score"];
+		[dict setObject:self.votingScore forKey:@"pl-vote-score"];
 	}
 	
 	if (self.width)
@@ -153,7 +153,7 @@
 			[tmpArray addObject:[user dictionaryRepresentation]];
 		}
 		
-		[dict setObject:tmpArray forKey:@"pl-img-usrself.upvotes"];
+		[dict setObject:tmpArray forKey:@"pl-vote-usr_upvotes"];
 	}
 	
 	if (self.downVoters && [self.downVoters count] > 0)
@@ -165,7 +165,7 @@
 			[tmpArray addObject:[user dictionaryRepresentation]];
 		}
 		
-		[dict setObject:tmpArray forKey:@"pl-img-usrself.downvotes"];
+		[dict setObject:tmpArray forKey:@"pl-vote-usr_downvotes"];
 	}
 	
 	// return immutable
