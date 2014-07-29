@@ -30,7 +30,7 @@
 	}
 	else
 	{
-		[super setValue:value forUndefinedKey:key];
+		[super setValue:value forKey:key];
 	}
 }
 
