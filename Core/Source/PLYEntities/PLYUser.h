@@ -10,6 +10,9 @@
 
 @class PLYAuditor;
 
+/**
+ Model class representing a ProductLayer user
+ */
 @interface PLYUser : PLYEntity
 
 /**

@@ -8,6 +8,9 @@
 
 #import "PLYEntity.h"
 
+/**
+ Model class representing a product's packaging
+ */
 @interface PLYPackaging : PLYEntity
 
 /**

@@ -24,6 +24,7 @@
 
 /**
  Convenience constructor
+ @param delegate The delegate to inform about changes in validity
  */
 + (instancetype)validatorWithDelegate:(id<PLYFormValidationDelegate>)delegate;
 

@@ -10,6 +10,9 @@
 
 @class PLYUser;
 
+/**
+ Model class representing a product review.
+ */
 @interface PLYReview : PLYEntity
 
 /**

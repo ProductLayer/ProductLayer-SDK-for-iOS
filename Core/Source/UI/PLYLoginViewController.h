@@ -10,6 +10,10 @@
 
 @class PLYTextField;
 
+/**
+ View Controller for logging in users to Product Layer. Wrap into a `UINavigationController` for presenting it modally
+ */
+
 @interface PLYLoginViewController : PLYViewController
 
 /**

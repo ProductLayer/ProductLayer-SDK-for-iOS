@@ -10,11 +10,16 @@
 
 @class PLYLostPasswordViewController, PLYTextField, PLYUser;
 
+/**
+ Protocol for informing a delegate about the result of a user requesting for his password to be reset.
+ */
 @protocol PLYLostPasswordViewControllerDelegate <NSObject>
 @optional
 
 /**
  Called if the server reported that the user account with the entered email address existed and a new password was sent
+ @param lostPasswordViewController The view controller sending the message
+ @param user The `PLYUser` for which a new password was requested
  */
 - (void)lostPasswordViewController:(PLYLostPasswordViewController *)lostPasswordViewController didRequestNewPasswordForUser:(PLYUser *)user;
 @end

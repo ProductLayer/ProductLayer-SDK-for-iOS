@@ -28,6 +28,7 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 
 /**
  Sets the API Key to be used for authenticating the app for using Product Layer.
+ @param APIKey The API key (generated on Product Layer app configuration panel)
  */
 - (void)setAPIKey:(NSString *)APIKey;
 
@@ -289,7 +290,7 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @name Timelines
  */
 
-/**
+/*
  The the latest timeline entries
  */
 - (void)timelineForAllUsersWithCount:(NSUInteger)count completion:(PLYCompletion)completion;

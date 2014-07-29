@@ -19,6 +19,8 @@
 
 /**
  Called if the server reported that the user account with the entered email address existed and a new password was sent
+ @param lostPasswordViewController The view controller sending the message
+ @param user The PLYUser object for which a sign up was performed
  */
 - (void)signUpViewController:(PLYSignUpViewController *)lostPasswordViewController didSignUpNewUser:(PLYUser *)user;
 @end

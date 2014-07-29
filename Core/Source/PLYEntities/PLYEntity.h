@@ -27,6 +27,7 @@
 
 /**
  Designated initializer to overwrite for subclasses
+ @param dictionary A dictionary (decoded from JSON)
  */
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

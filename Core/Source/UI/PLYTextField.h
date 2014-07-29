@@ -9,6 +9,9 @@
 @class PLYFormValidator;
 
 
+/**
+ A text field that has a PLYFormValidator attached for validating contents
+ */
 @interface PLYTextField : UITextField
 
 /**
