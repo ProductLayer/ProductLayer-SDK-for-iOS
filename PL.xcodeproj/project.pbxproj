@@ -605,10 +605,10 @@
 			isa = PBXGroup;
 			children = (
 				A71C2B9D1843AD8D00B77DB4 /* libDTDownload_iOS.a */,
-				A71C2B9F1843AD8D00B77DB4 /* libDTDownload (Mac).a */,
-				A71C2BA11843AD8D00B77DB4 /* UnitTests.octest */,
-				A71C2BA31843AD8D00B77DB4 /* Unit Tests copy.octest */,
+				A71C2B9F1843AD8D00B77DB4 /* libDTDownload_Mac.a */,
 				A71C2BA51843AD8D00B77DB4 /* ImageDownload.app */,
+				A71C2BA11843AD8D00B77DB4 /* DTDownload.xctest */,
+				A71C2BA31843AD8D00B77DB4 /* DTDownload.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1228,24 +1228,24 @@
 			remoteRef = A71C2B9C1843AD8D00B77DB4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A71C2B9F1843AD8D00B77DB4 /* libDTDownload (Mac).a */ = {
+		A71C2B9F1843AD8D00B77DB4 /* libDTDownload_Mac.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libDTDownload (Mac).a";
+			path = libDTDownload_Mac.a;
 			remoteRef = A71C2B9E1843AD8D00B77DB4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A71C2BA11843AD8D00B77DB4 /* UnitTests.octest */ = {
+		A71C2BA11843AD8D00B77DB4 /* DTDownload.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = UnitTests.octest;
+			path = DTDownload.xctest;
 			remoteRef = A71C2BA01843AD8D00B77DB4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A71C2BA31843AD8D00B77DB4 /* Unit Tests copy.octest */ = {
+		A71C2BA31843AD8D00B77DB4 /* DTDownload.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "Unit Tests copy.octest";
+			path = DTDownload.xctest;
 			remoteRef = A71C2BA21843AD8D00B77DB4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -1792,7 +1792,6 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ProductLayer;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "${PROJECT_DIR}/Externals/DTFoundation/**";
@@ -1806,7 +1805,6 @@
 				DSTROOT = /tmp/ProductLayer.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ProductLayer;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "${PROJECT_DIR}/Externals/DTFoundation/**";
@@ -1892,7 +1890,6 @@
 				DSTROOT = /tmp/ProductLayer.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ProductLayer;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "${PROJECT_DIR}/Externals/DTFoundation/**";
