@@ -32,4 +32,9 @@
  */
 @property (nonatomic, copy) NSString *GTIN;
 
+/**
+ The language of the review.
+ */
+@property (nonatomic, copy) NSString *language;
+
 @end

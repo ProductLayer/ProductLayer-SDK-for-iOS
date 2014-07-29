@@ -42,6 +42,6 @@
 /**
  The language of the review.
  */
-@property (nonatomic, strong) NSString *language;
+@property (nonatomic, copy) NSString *language;
 
 @end

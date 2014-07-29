@@ -30,6 +30,10 @@
 	{
 		self.GTIN = value;
 	}
+	else if ([key isEqualToString:@"pl-lng"])
+	{
+		self.language = value;
+	}
 	else
 	{
 		[super setValue:value forKey:key];
@@ -53,6 +57,11 @@
 	if (_GTIN)
 	{
 		dict[@"pl-prod-gtin"] = _GTIN;
+	}
+	
+	if (_language)
+	{
+		dict[@"pl-lng"] = _language;
 	}
 	
 	// return immutable
