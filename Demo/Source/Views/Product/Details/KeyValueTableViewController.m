@@ -93,7 +93,7 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return [_groupedElements allKeys][section];
+    return PLYLocalizedStringFromTable([_groupedElements allKeys][section],@"API",@"");
 }
 
 @end
