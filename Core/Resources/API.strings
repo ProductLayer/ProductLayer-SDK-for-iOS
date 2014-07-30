@@ -8,6 +8,8 @@
 "_id" = "Object ID";
 "changes" = "Changes";
 "created" = "Created";
+"cropScaledImage" = "Crop Scaled Image";
+"enabled" = "Enabled";
 "object_class" = "Object Class";
 "object_id" = "Object ID";
 "object_version_id" = "Object Version";
@@ -19,6 +21,7 @@
 "pl-app-name" = "Name";
 "pl-app-type" = "Type";
 "pl-app-url" = "URL";
+"pl-app-valid-ips" = "Valid IP's";
 "pl-brand-name" = "Brand";
 "pl-brand-own-name" = "Brand Owner";
 "pl-created-by" = "Creator";
@@ -26,9 +29,7 @@
 "pl-img-file_id" = "Image File ID";
 "pl-img-h-px" = "Height (pixel)";
 "pl-img-name" = "Name";
-"pl-img-usr_downvotes" = "Down-Votes";
-"pl-img-usr_upvotes" = "Up-Votes";
-"pl-img-vote_score" = "Voting Score";
+"pl-img-parent-file_id" = "Origin Image ID";
 "pl-img-w-px" = "Width (pixel)";
 "pl-lic" = "License";
 "pl-lic-desc" = "Description";
@@ -282,9 +283,6 @@
 "pl-rev-body" = "Body";
 "pl-rev-rating" = "Rating";
 "pl-rev-subj" = "Subject";
-"pl-rev-usr_downvotes" = "Down-Votes";
-"pl-rev-usr_upvotes" = "Up-Votes";
-"pl-rev-votes" = "Votes";
 "pl-upd-by" = "Updater";
 "pl-upd-time" = "Updating Time";
 "pl-usr-email" = "Email";
@@ -295,5 +293,9 @@
 "pl-usr-img" = "Image";
 "pl-usr-lname" = "Last Name";
 "pl-usr-nickname" = "Nickname";
+"pl-usr-points" = "Points";
 "pl-usr-roles" = "Roles";
+"pl-vote-score" = "Voting Score";
+"pl-vote-usr_downvotes" = "Downvoters";
+"pl-vote-usr_upvotes" = "Upvoters";
 "versionId" = "Version ID";
