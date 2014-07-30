@@ -11,52 +11,89 @@
 @class PLYAuditor;
 @class PLYPackaging;
 
+/**
+ API model class representing a product
+ */
+
 @interface PLYProduct : PLYVotableEntity
 
 /**
  @name Properties
  */
 
-// The name of the brand information.
+/**
+ The name of the brand information.
+ */
 @property (nonatomic, strong) NSString *brandName;
 
-// The name of the brand owner information.
+/**
+ The name of the brand owner information.
+ */
 @property (nonatomic, strong) NSString *brandOwner;
 
-// The language of the product.
+/**
+ The language of the product.
+ */
 @property (nonatomic, strong) NSString *language;
 
-// The product category
+/**
+ The product category
+ */
 @property (nonatomic, strong) NSString *category;
 
-// The detailed description of the product.
+/**
+ The detailed description of the product.
+ */
 @property (nonatomic, strong) NSString *longDescription;
 
-// The short description of the product.
+/**
+ The short description of the product.
+ */
 @property (nonatomic, strong) NSString *shortDescription;
 
-// The gtin (barcode) of the product.
-@property (nonatomic, strong) NSString *gtin;
+/**
+ The GTIN (barcode) of the product.
+ */
+@property (nonatomic, strong) NSString *GTIN;
 
-// The homepage or landingpage of the product.
+/**
+ The homepage or landingpage of the product.
+ */
 @property (nonatomic, strong) NSString *homepage;
 
-// Additional links for the product. e.g.: Support Forum, FAQ's, ...
+/**
+ Additional links for the product. e.g.: Support Forum, FAQ's, ...
+ */
 @property (nonatomic, strong) NSArray *links;
 
-// The name of the product.
+/**
+ The name of the product.
+ */
 @property (nonatomic, strong) NSString *name;
 
-// The packaging information.
-@property (nonatomic, strong) PLYPackaging *packaging;
+/** 
+ The packaging information.
+ */
+@property (nonatomic, copy) PLYPackaging *packaging;
 
-// The product rating.
+/**
+ The product rating.
+ */
 @property (nonatomic, strong) NSNumber *rating;
 
-// The characteristics information.
+/**
+ The characteristics information.
+ */
 @property (nonatomic, strong) NSMutableDictionary *characteristics;
 
-// The nutrition information.
+/**
+ The nutrition information.
+ */
 @property (nonatomic, strong) NSMutableDictionary *nutritious;
+
+/**
+ The source URL of the product information
+ */
+@property (nonatomic, copy) NSURL *sourceURL;
 
 @end

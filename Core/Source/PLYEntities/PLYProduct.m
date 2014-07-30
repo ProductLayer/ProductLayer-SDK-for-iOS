@@ -41,16 +41,11 @@
 			self.packaging = [[PLYPackaging alloc] initWithDictionary:value];
 		}
 	}
-	else
+	else if ([key isEqualToString:@"pl-prod-src"])
 	{
-		[super setValue:value forKey:key];
+		self.sourceURL = [NSURL URLWithString:value];
 	}
-}
-
-
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key
-{
-	if ([key isEqualToString:@"pl-brand-name"])
+	else if ([key isEqualToString:@"pl-brand-name"])
 	{
 		[self setValue:value forKey:@"brandName"];
 	}
@@ -108,7 +103,7 @@
 	}
 	else
 	{
-		[super setValue:value forUndefinedKey:key];
+		[super setValue:value forKey:key];
 	}
 }
 
@@ -116,74 +111,79 @@
 {
 	NSMutableDictionary *dict = [[super dictionaryRepresentation] mutableCopy];
 	
-	if (self.brandName)
+	if (_brandName)
 	{
-		[dict setObject:self.brandName forKey:@"pl-brand-name"];
+		dict[@"pl-brand-name"] = _brandName;
 	}
 	
-	if (self.brandOwner)
+	if (_brandOwner)
 	{
-		[dict setObject:self.brandOwner forKey:@"pl-brand-own-name"];
+		dict[@"pl-brand-own-name"] = _brandOwner;
 	}
 	
-	if (self.language)
+	if (_language)
 	{
-		[dict setObject:self.language forKey:@"pl-lng"];
+		dict[@"pl-lng"] = _language;
 	}
 	
-	if (self.category)
+	if (_category)
 	{
-		[dict setObject:self.category forKey:@"pl-prod-cat"];
+		dict[@"pl-prod-cat"] = _category;
 	}
 	
-	if (self.longDescription)
+	if (_longDescription)
 	{
-		[dict setObject:self.longDescription forKey:@"pl-prod-desc-long"];
+		dict[@"pl-prod-desc-lon"] = _longDescription;
 	}
 	
-	if (self.shortDescription)
+	if (_shortDescription)
 	{
-		[dict setObject:self.shortDescription forKey:@"pl-prod-desc-short"];
+		dict[@"pl-prod-desc-short"] = _shortDescription;
 	}
 	
-	if (self.gtin)
+	if (_GTIN)
 	{
-		[dict setObject:self.gtin forKey:@"pl-prod-gtin"];
+		dict[@"pl-prod-gtin"] = _GTIN;
 	}
 	
-	if (self.homepage)
+	if (_homepage)
 	{
-		[dict setObject:self.homepage forKey:@"pl-prod-homepage"];
+		dict[@"pl-prod-homepage"] = _homepage;
 	}
 	
-	if (self.links)
+	if (_links)
 	{
-		[dict setObject:self.links forKey:@"pl-prod-lnks"];
+		dict[@"pl-prod-lnks"] = _links;
 	}
 	
-	if (self.name)
+	if (_name)
 	{
-		[dict setObject:self.name forKey:@"pl-prod-name"];
+		dict[@"pl-prod-name"] = _name;
 	}
 	
-	if (self.packaging)
+	if (_packaging)
 	{
-		[dict setObject:[self.packaging dictionaryRepresentation] forKey:@"pl-prod-pkg"];
+		dict[@"pl-prod-pkg"] = [_packaging dictionaryRepresentation];
 	}
 	
-	if (self.rating)
+	if (_rating)
 	{
-		[dict setObject:self.rating forKey:@"pl-prod-rating"];
+		dict[@"pl-prod-rating"] = _rating;
 	}
 	
-	if (self.characteristics)
+	if (_characteristics)
 	{
-		[dict setObject:self.characteristics forKey:@"pl-prod-char"];
+		dict[@"pl-prod-char"] = _characteristics;
 	}
 	
-	if (self.nutritious)
+	if (_nutritious)
 	{
-		[dict setObject:self.nutritious forKey:@"pl-prod-nutr"];
+		dict[@"pl-prod-nutr"] = _nutritious;
+	}
+	
+	if (_sourceURL)
+	{
+		dict[@"pl-prod-src"] = [self.sourceURL absoluteString];
 	}
 	
 	// return immutable

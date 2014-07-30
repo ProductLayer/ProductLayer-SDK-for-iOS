@@ -112,7 +112,7 @@ NSArray *PLYAllEntityClasses()
 #pragma mark - Value Getting/Setting
 
 // setting common values from dictionary
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+- (void)setValue:(id)value forKey:(NSString *)key
 {
 	if ([key isEqualToString:@"pl-class"])
 	{
@@ -131,7 +131,8 @@ NSArray *PLYAllEntityClasses()
 	}
 	else if ([key isEqualToString:@"pl-created-time"])
 	{
-		[self setValue:value forKey:@"createdTime"];
+		NSTimeInterval interval = [value doubleValue];
+		self.createdTime = [NSDate dateWithTimeIntervalSince1970:interval];
 	}
 	else if ([key isEqualToString:@"pl-upd-by"])
 	{
@@ -142,12 +143,22 @@ NSArray *PLYAllEntityClasses()
 	}
 	else if ([key isEqualToString:@"pl-upd-time"])
 	{
-		[self setValue:value forKey:@"updatedTime"];
+		NSTimeInterval interval = [value doubleValue];
+		self.updatedTime = [NSDate dateWithTimeIntervalSince1970:interval];
 	}
 	else if ([key isEqualToString:@"pl-version"])
 	{
 		[self setValue:value forKey:@"version"];
 	}
+	else
+	{
+		[super setValue:value forKey:key];
+	}
+}
+
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+	NSLog(@"Unknown key '%@'", key);
 }
 
 // create dict representation with basic common values
@@ -155,43 +166,50 @@ NSArray *PLYAllEntityClasses()
 {
 	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 	
-	if (self.Class)
+	if (_Class)
 	{
-		[dict setObject:self.Class forKey:@"pl-class"];
+		dict[@"pl-class"] = _Class;
 	}
 	
-	if (self.Id)
+	if (_Id)
 	{
-		[dict setObject:self.Id forKey:@"pl-id"];
+		dict[@"pl-id"] = _Id;
 	}
 	
-	if (self.createdBy)
+	if (_createdBy)
 	{
-		[dict setObject:[self.createdBy dictionaryRepresentation] forKey:@"pl-created-by"];
+		dict[@"pl-created-by"] = [_createdBy dictionaryRepresentation];
 	}
 	
-	if (self.createdTime)
+	if (_createdTime)
 	{
-		[dict setObject:self.createdTime forKey:@"pl-created-time"];
+		dict[@"pl-created-time"] = @([_createdTime timeIntervalSince1970]);
 	}
 	
-	if (self.updatedBy)
+	if (_updatedBy)
 	{
-		[dict setObject:[self.updatedBy dictionaryRepresentation] forKey:@"pl-upd-by"];
+		dict[@"pl-upd-by"] = [_updatedBy dictionaryRepresentation];
 	}
 	
-	if (self.updatedTime)
+	if (_updatedTime)
 	{
-		[dict setObject:self.updatedTime forKey:@"pl-upd-time"];
+		dict[@"pl-upd-time"] = @([_updatedTime timeIntervalSince1970]);
 	}
 	
-	if (self.version)
+	if (_version)
 	{
-		[dict setObject:self.version forKey:@"pl-version"];
+		dict[@"pl-version"] = _version;
 	}
 	
 	// return immutable
 	return [dict copy];
+}
+
+#pragma mark - NSCopying
+
+- (id)copyWithZone:(NSZone *)zone
+{
+	return [[[self class] allocWithZone:zone] initWithDictionary:[self dictionaryRepresentation]];
 }
 
 @end

@@ -20,9 +20,9 @@
  */
 
 /**
- The gtin (barcode) of the product.
+ The GTIN (barcode) of the product.
  */
-@property (nonatomic, strong) NSString *gtin;
+@property (nonatomic, strong) NSString *GTIN;
 
 /**
  The subject of the review.
@@ -42,6 +42,6 @@
 /**
  The language of the review.
  */
-@property (nonatomic, strong) NSString *language;
+@property (nonatomic, copy) NSString *language;
 
 @end

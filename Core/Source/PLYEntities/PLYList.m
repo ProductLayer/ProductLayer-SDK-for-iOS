@@ -22,16 +22,7 @@
 
 - (void)setValue:(id)value forKey:(NSString *)key
 {
-	if ([key isEqualToString:@"pl-created-by"])
-	{
-		
-		if ([value isKindOfClass:[NSDictionary class]])
-		{
-			self.createdBy = [[PLYUser alloc] initWithDictionary:value];
-		}
-		
-	}
-	else if ([key isEqualToString:@"pl-list-products"])
+	if ([key isEqualToString:@"pl-list-products"])
 	{
 		
 		if ([value isKindOfClass:[NSArray class]]) {
@@ -44,13 +35,25 @@
 			self.listItems = myMembers;
 		}
 	}
-	else if ([key isEqualToString:@"pl-upd-by"])
+	else if ([key isEqualToString:@"pl-list-title"])
 	{
-		if ([value isKindOfClass:[NSDictionary class]])
-		{
-			self.updatedBy = [[PLYUser alloc] initWithDictionary:value];
-		}
-		
+		self.title = value;
+	}
+	else if ([key isEqualToString:@"pl-list-desc"])
+	{
+		self.descriptionText = value;
+	}
+	else if ([key isEqualToString:@"pl-list-type"])
+	{
+		self.listType = value;
+	}
+	else if ([key isEqualToString:@"pl-list-share"])
+	{
+		self.shareType = value;
+	}
+	else if ([key isEqualToString:@"pl-list-shared-users"])
+	{
+		self.sharedUsers = value;
 	}
 	else
 	{
@@ -58,64 +61,36 @@
 	}
 }
 
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key
-{
-	if ([key isEqualToString:@"pl-list-title"])
-	{
-		[self setValue:value forKey:@"title"];
-	}
-	else if ([key isEqualToString:@"pl-list-desc"])
-	{
-		[self setValue:value forKey:@"descriptionText"];
-	}
-	else if ([key isEqualToString:@"pl-list-type"])
-	{
-		[self setValue:value forKey:@"listType"];
-	}
-	else if ([key isEqualToString:@"pl-list-share"])
-	{
-		[self setValue:value forKey:@"shareType"];
-	}
-	else if ([key isEqualToString:@"pl-list-shared-users"])
-	{
-		[self setValue:value forKey:@"sharedUsers"];
-	}
-	else
-	{
-		[super setValue:value forUndefinedKey:key];
-	}
-}
-
-- (NSDictionary *) dictionaryRepresentation
+- (NSDictionary *)dictionaryRepresentation
 {
 	NSMutableDictionary *dict = [[super dictionaryRepresentation] mutableCopy];
 	
-	if (self.title)
+	if (_title)
 	{
-		[dict setObject:self.title forKey:@"pl-list-title"];
+		dict[@"pl-list-title"] = _title;
 	}
 	
-	if (self.descriptionText)
+	if (_descriptionText)
 	{
-		[dict setObject:self.descriptionText forKey:@"pl-list-desc"];
+		dict[@"pl-list-desc"] = _descriptionText;
 	}
 	
-	if (self.listType)
+	if (_listType)
 	{
-		[dict setObject:self.listType forKey:@"pl-list-type"];
+		dict[@"pl-list-type"] = _listType;
 	}
 	
-	if (self.shareType)
+	if (_shareType)
 	{
-		[dict setObject:self.shareType forKey:@"pl-list-share"];
+		dict[@"pl-list-share"] = _shareType;
 	}
 	
-	if (self.sharedUsers)
+	if (_sharedUsers)
 	{
-		[dict setObject:self.sharedUsers forKey:@"pl-list-shared-users"];
+		dict[@"pl-list-shared-users"] = _sharedUsers;
 	}
 	
-	if (self.listItems)
+	if ([_listItems count])
 	{
 		NSMutableArray *tmpArray = [NSMutableArray arrayWithCapacity:1];
 		
@@ -124,7 +99,7 @@
 			[tmpArray addObject:[item dictionaryRepresentation]];
 		}
 		
-		[dict setObject:tmpArray forKey:@"pl-list-products"];
+		dict[@"pl-list-products"] = tmpArray;
 	}
 	
 	// return immutable
@@ -134,7 +109,7 @@
 /**
  * Simple check if the product list can be send to the server for saving.
  **/
-- (BOOL) isValidForSaving
+- (BOOL)isValidForSaving
 {
 	if([self.title length] > 5 && [self.listType length] && [self.shareType length])
 	{

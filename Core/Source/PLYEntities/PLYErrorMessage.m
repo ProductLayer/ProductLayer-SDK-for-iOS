@@ -10,23 +10,23 @@
 
 @implementation PLYErrorMessage
 
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+- (void)setValue:(id)value forKey:(NSString *)key
 {
 	if ([key isEqualToString:@"message"])
 	{
-		[self setValue:value forKey:@"message"];
+		self.message = value;
 	}
 	else if ([key isEqualToString:@"code"])
 	{
-		[self setValue:value forKey:@"code"];
+		self.code = value;
 	}
 	else if ([key isEqualToString:@"throwable"])
 	{
-		[self setValue:value forKey:@"throwable"];
+		self.throwable = value;
 	}
 	else
 	{
-		[super setValue:value forUndefinedKey:key];
+		[super setValue:value forKey:key];
 	}
 }
 

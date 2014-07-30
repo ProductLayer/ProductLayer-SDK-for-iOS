@@ -42,14 +42,14 @@
 }
 
 - (void) setListItem:(PLYListItem *)listItem{
-    if(![_listItem.gtin isEqualToString:listItem.gtin]){
+    if(![_listItem.GTIN isEqualToString:listItem.GTIN]){
         // Load product data
         
-        [[PLYServer sharedServer] performSearchForGTIN:listItem.gtin language:nil completion:^(id result, NSError *error) {
+        [[PLYServer sharedServer] performSearchForGTIN:listItem.GTIN language:nil completion:^(id result, NSError *error) {
                 if (error)
                 {
                     DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-                        _productNameLabel.text = listItem.gtin;
+                        _productNameLabel.text = listItem.GTIN;
                     });
                 }
                 else
@@ -98,12 +98,12 @@
         _productNameLabel.text = _product.name;
     } else {
         // Couldn't load the product for the list item. Show gtin
-        _productNameLabel.text = _listItem.gtin;
+        _productNameLabel.text = _listItem.GTIN;
     }
 }
 
 - (void) loadMainImage{
-    NSString *gtin = _product.gtin;
+    NSString *gtin = _product.GTIN;
     
     if (!gtin)
 	{
@@ -132,7 +132,7 @@
                 UIImage *thumbnail = [imageCache imageForUniqueIdentifier:imageIdentifier variantIdentifier:@"thumbnail"];
                 
                 // Check if _product has changed since request
-                if(![_product.gtin isEqualToString:imageMeta.gtin])
+                if(![_product.GTIN isEqualToString:imageMeta.GTIN])
                     return;
                 
                 if (thumbnail)
@@ -158,7 +158,7 @@
                             [imageCache addImage:image forUniqueIdentifier:imageIdentifier variantIdentifier:nil];
                             
                             // Check if _product has changed since request
-                            if(![_product.gtin isEqualToString:imageMeta.gtin])
+                            if(![_product.GTIN isEqualToString:imageMeta.GTIN])
                                 return;
                             
                             [_productImage setImage:image];

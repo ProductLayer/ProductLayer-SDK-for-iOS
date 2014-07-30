@@ -21,25 +21,30 @@
 			NSMutableArray *myMembers = [NSMutableArray arrayWithCapacity:[value count]];
 			for (id valueMember in value)
 			{
-				[myMembers addObject:valueMember];
+				PLYUser *user = [[PLYUser alloc] initWithDictionary:valueMember];
+				[myMembers addObject:user];
 			}
 			
-			_upVoter = myMembers;
+			self.upVoter = myMembers;
 		}
 	}
 	else if ([key isEqualToString:@"pl-vote-usr_downvotes"])
 	{
 		if ([value isKindOfClass:[NSArray class]])
 		{
-			
 			NSMutableArray *myMembers = [NSMutableArray arrayWithCapacity:[value count]];
 			for (id valueMember in value)
 			{
-				[myMembers addObject:valueMember];
+				PLYUser *user = [[PLYUser alloc] initWithDictionary:valueMember];
+				[myMembers addObject:user];
 			}
 			
-			_downVoter = myMembers;
+			self.downVoter = myMembers;
 		}
+	}
+	else if ([key isEqualToString:@"pl-vote-score"])
+	{
+		self.votingScore = value;
 	}
 	else
 	{
@@ -47,33 +52,13 @@
 	}
 }
 
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key
-{
-	if ([key isEqualToString:@"pl-vote-score"])
-	{
-		[self setValue:value forKey:@"votingScore"];
-	}
-	else if ([key isEqualToString:@"pl-vote-usr_upvotes"])
-	{
-		[self setValue:value forKey:@"upVoter"];
-	}
-	else if ([key isEqualToString:@"pl-vote-usr_downvotes"])
-	{
-		[self setValue:value forKey:@"downVoter"];
-	}
-	else
-	{
-		[super setValue:value forUndefinedKey:key];
-	}
-}
-
-- (NSDictionary *) dictionaryRepresentation
+- (NSDictionary *)dictionaryRepresentation
 {
 	NSMutableDictionary *dict = [[super dictionaryRepresentation] mutableCopy];
 	
 	if (_votingScore)
 	{
-		[dict setObject:_votingScore forKey:@"pl-vote-score"];
+		dict[@"pl-vote-score"] = _votingScore;
 	}
 	
 	if ([_upVoter count])
@@ -85,7 +70,7 @@
 			[tmpArray addObject:[user dictionaryRepresentation]];
 		}
 		
-		[dict setObject:tmpArray forKey:@"pl-vote-usr_upvotes"];
+		dict[@"pl-vote-usr_upvotes"] = tmpArray;
 	}
 	
 	if ([_downVoter count] > 0)
@@ -97,7 +82,7 @@
 			[tmpArray addObject:[user dictionaryRepresentation]];
 		}
 		
-		[dict setObject:tmpArray forKey:@"pl-vote-usr_downvotes"];
+		dict[@"pl-vote-usr_downvotes"] = tmpArray;
 	}
 	
 	// return immutable

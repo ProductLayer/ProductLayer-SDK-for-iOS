@@ -64,21 +64,21 @@
 /**
  The user who created the object.
  */
-@property (nonatomic, strong) PLYUser *createdBy;
+@property (nonatomic, copy) PLYUser *createdBy;
 
 /**
  The timestamp when object was created.
  */
-@property (nonatomic, strong) NSNumber *createdTime;
+@property (nonatomic, strong) NSDate *createdTime;
 
 /**
  The user who updated the object the last time.
  */
-@property (nonatomic, strong) PLYUser *updatedBy;
+@property (nonatomic, copy) PLYUser *updatedBy;
 
 /**
  The timestamp when object was updated the last time.
  */
-@property (nonatomic, strong) NSNumber *updatedTime;
+@property (nonatomic, strong) NSDate *updatedTime;
 
 @end

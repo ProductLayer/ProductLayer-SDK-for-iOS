@@ -22,35 +22,35 @@
 	return @"com.productlayer.Image";
 }
 
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+- (void)setValue:(id)value forKey:(NSString *)key
 {
 	if ([key isEqualToString:@"pl-img-file_id"])
 	{
-		[self setValue:value forKey:@"fileId"];
+		self.fileId = value;
 	}
 	else if ([key isEqualToString:@"pl-img-h-px"])
 	{
-		[self setValue:value forKey:@"height"];
+		self.height = value;
 	}
 	else if ([key isEqualToString:@"pl-img-name"])
 	{
-		[self setValue:value forKey:@"name"];
+		self.name = value;
 	}
 	else if ([key isEqualToString:@"pl-img-url"])
 	{
-		[self setValue:value forKey:@"url"];
+		self.url = value;
 	}
 	else if ([key isEqualToString:@"pl-img-w-px"])
 	{
-		[self setValue:value forKey:@"width"];
+		self.width = value;
 	}
 	else if ([key isEqualToString:@"pl-prod-gtin"])
 	{
-		[self setValue:value forKey:@"gtin"];
+		self.GTIN = value;
 	}
 	else
 	{
-		[super setValue:value forUndefinedKey:key];
+		[super setValue:value forKey:key];
 	}
 }
 
@@ -58,34 +58,34 @@
 {
 	NSMutableDictionary *dict = [[super dictionaryRepresentation] mutableCopy];
 	
-	if (self.fileId)
+	if (_fileId)
 	{
-		[dict setObject:self.fileId forKey:@"pl-img-file_id"];
+		dict[@"pl-img-file_id"] = _fileId;
 	}
 	
-	if (self.height)
+	if (_height)
 	{
-		[dict setObject:self.height forKey:@"pl-img-h-px"];
+		dict[@"pl-img-h-px"] = _height;
 	}
 	
-	if (self.name)
+	if (_name)
 	{
-		[dict setObject:self.name forKey:@"pl-img-name"];
+		dict[@"pl-img-name"] = _name;
 	}
 	
-	if (self.url)
+	if (_url)
 	{
-		[dict setObject:self.url forKey:@"pl-img-url"];
+		dict[@"pl-img-url"] = _url;
 	}
 	
-	if (self.width)
+	if (_width)
 	{
-		[dict setObject:self.width forKey:@"pl-img-w-px"];
+		dict[@"pl-img-w-px"] = _width;
 	}
 	
-	if (self.gtin)
+	if (_GTIN)
 	{
-		[dict setObject:self.gtin forKey:@"pl-prod-gtin"];
+		dict[@"pl-prod-gtin"] = _GTIN;
 	}
 	
 	// return immutable

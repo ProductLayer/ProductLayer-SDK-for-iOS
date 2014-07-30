@@ -3,6 +3,7 @@
 #import "PLYConstants.h"
 #import "PLYServer.h"
 
+#import "PLYOpine.h"
 #import "PLYProduct.h"
 #import "PLYImage.h"
 #import "PLYProductCategory.h"
