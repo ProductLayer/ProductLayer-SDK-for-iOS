@@ -62,7 +62,7 @@
 }
 
 - (void) loadMainImage{
-    NSString *gtin = _review.gtin;
+    NSString *gtin = _review.GTIN;
     
     if (!gtin)
 	{

@@ -149,7 +149,7 @@ typedef enum : NSUInteger {
     if ([[segue identifier] isEqualToString:@"showProductDetails"])
 	{
         ProductViewController *PVC = (ProductViewController *)segue.destinationViewController;
-        [PVC loadProductWithGTIN:((ProductImageCollectionViewCell *)sender).imageMetadata.gtin];
+        [PVC loadProductWithGTIN:((ProductImageCollectionViewCell *)sender).imageMetadata.GTIN];
 	}
 }
 

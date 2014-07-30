@@ -108,7 +108,7 @@
 		vc.navigationItem.title = @"Add New Product";
 		
 		PLYProduct *newProduct = [[PLYProduct alloc] init];
-		[newProduct setGtin:_gtinForEditingProduct];
+		newProduct.GTIN = _gtinForEditingProduct;
 		[vc setProduct:newProduct];
 	}
 	else if ([[segue identifier] isEqualToString:@"ProductImages"])

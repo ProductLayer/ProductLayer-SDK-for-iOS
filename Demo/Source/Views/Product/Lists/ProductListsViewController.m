@@ -185,7 +185,7 @@
         
         if(list.listItems){
             for(PLYListItem *item in list.listItems){
-                if([item.gtin isEqualToString:_product.gtin]){
+                if([item.GTIN isEqualToString:_product.GTIN]){
                     [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
                     break;
                 }
@@ -252,7 +252,7 @@
         PLYList *list = [_productLists objectAtIndex:indexPath.row];
         
         PLYListItem *listItem = [[PLYListItem alloc] init];
-        listItem.gtin = _product.gtin;
+        listItem.GTIN = _product.GTIN;
         listItem.qty = [NSNumber numberWithInt:1];
         
         if(!list.listItems){
@@ -272,7 +272,7 @@
         
         
         for(PLYListItem *item in list.listItems){
-            if([item.gtin isEqualToString:_product.gtin]){
+            if([item.GTIN isEqualToString:_product.GTIN]){
                 [list.listItems removeObject:item];
                 break;
             }

@@ -47,7 +47,7 @@
     
     [self updateView];
     
-    if(_product && _product.gtin && !_productImage.image){
+    if(_product && _product.GTIN && !_productImage.image){
         [self loadMainImage];
     }
 }
@@ -106,7 +106,7 @@
                         DTBlockPerformSyncIfOnMainThreadElseAsync(^{
                             
                             PLYProduct *newProduct = [[PLYProduct alloc] init];
-                            [newProduct setGtin:_gtin];
+                            [newProduct setGTIN:_gtin];
                             
                             [self setProduct:newProduct];
                             
@@ -133,7 +133,7 @@
 - (void) setProduct:(PLYProduct *)product{
     // Prevent unnecessary image requests
     bool loadImage = true;
-    if([product.gtin isEqualToString:_product.gtin]){
+    if([product.GTIN isEqualToString:_product.GTIN]){
         loadImage = false;
     }
     
@@ -150,7 +150,7 @@
     if(_product.name){
         [_productName setText:_product.name];
     } else {
-        [_productName setText:_product.gtin];
+        [_productName setText:_product.GTIN];
     }
     
     if(_product.brandName){
@@ -173,7 +173,7 @@
 }
 
 - (void) loadMainImage{
-    NSString *gtin = _product.gtin;
+    NSString *gtin = _product.GTIN;
     
     if (!gtin)
 	{
@@ -268,13 +268,13 @@
 	{
 		ReviewTableViewController *reviewVC = (ReviewTableViewController *)segue.destinationViewController;
         reviewVC.navigationItem.title = _product.name;
-		reviewVC.gtin = _product.gtin;
+		reviewVC.gtin = _product.GTIN;
 	}
 	else if ([[segue identifier] isEqualToString:@"showProductImages"])
 	{
         ProductImageViewController *imageVC = (ProductImageViewController *)segue.destinationViewController;
 		imageVC.navigationItem.title = _product.name;
-		[imageVC loadImagesFromGtin:_product.gtin];
+		[imageVC loadImagesFromGtin:_product.GTIN];
 	} else if ([[segue identifier] isEqualToString:@"showProductCharacteristics"])
 	{
         KeyValueTableViewController *charVC = (KeyValueTableViewController *)segue.destinationViewController;

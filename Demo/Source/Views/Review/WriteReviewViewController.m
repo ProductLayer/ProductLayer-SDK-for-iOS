@@ -76,7 +76,7 @@
     
     PLYReview *newReview = [[PLYReview alloc] init];
     
-	newReview.gtin = self.gtinTextField.text;
+	newReview.GTIN = self.gtinTextField.text;
     
 	NSString *subject = self.subjectTextField.text;
 	if ([subject length])
@@ -100,7 +100,7 @@
 	
 	newReview.language = [_localePicker.selectedLocale localeIdentifier];
     
-	[[PLYServer sharedServer] createReviewForGTIN:newReview.gtin dictionary:[newReview dictionaryRepresentation] completion:^(id result, NSError *error) {
+	[[PLYServer sharedServer] createReviewForGTIN:newReview.GTIN dictionary:[newReview dictionaryRepresentation] completion:^(id result, NSError *error) {
 		
 		if (error)
 		{
