@@ -9,6 +9,10 @@
 
 #import "GenericAccount.h"
 
+/**
+ This is for managing the user accounts in the keychain.
+ */
+
 @interface AccountManager : NSObject {
 }
 
@@ -40,6 +44,7 @@
 
 /**
  Delete an account from the keychain.
+ @param account The account which will be deleted.
  */
 - (void) deleteGenericAccount:(GenericAccount *)account;
 
@@ -64,6 +69,7 @@
 
 /**
  Get all accounts for a service from the account manager
+ @param service The name of the service.
  */
 - (NSArray *)accountsForService:(NSString *)service;
 
