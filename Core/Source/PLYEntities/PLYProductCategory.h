@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Cocoanetics. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "PLYEntity.h"
 
-@interface PLYProductCategory : NSObject
+@interface PLYProductCategory : PLYEntity
 
 + (NSArray *) getAvailableMainCategories;
 + (NSArray *) getSubCategoriesForCategory:(NSString *)mainCategory;

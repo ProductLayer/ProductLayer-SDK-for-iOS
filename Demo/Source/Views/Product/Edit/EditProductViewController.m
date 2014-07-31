@@ -62,7 +62,7 @@
 
 - (void) updateView{
     if(_product){
-        self.gtinTextField.text = _product.gtin;
+        self.gtinTextField.text = _product.GTIN;
         self.gtinTextField.enabled = false;
     
         self.productNameTextfield.text = _product.name;
@@ -111,7 +111,7 @@
         _product = [[PLYProduct alloc] init];;
     }
         
-	_product.gtin = self.gtinTextField.text;
+	_product.GTIN = self.gtinTextField.text;
 
 	NSString *name = self.productNameTextfield.text;
 	if ([name length])
@@ -139,7 +139,7 @@
     
     // Insert Product
     if(_product.Id == nil) {
-        [[PLYServer sharedServer] createProductWithGTIN:_product.gtin dictionary:[_product getDictionary] completion:^(id result, NSError *error) {
+        [[PLYServer sharedServer] createProductWithGTIN:_product.GTIN dictionary:[_product dictionaryRepresentation] completion:^(id result, NSError *error) {
 		
             if (error)
             {
@@ -166,7 +166,7 @@
     }
     // Update product
     else {
-        [[PLYServer sharedServer] updateProductWithGTIN:_product.gtin dictionary:[_product getDictionary] completion:^(id result, NSError *error) {
+        [[PLYServer sharedServer] updateProductWithGTIN:_product.GTIN dictionary:[_product dictionaryRepresentation] completion:^(id result, NSError *error) {
             
             if (error)
             {
@@ -300,7 +300,7 @@
 #pragma mark - Localized String Picker Delegate
 
 - (void) localizedStringPicker:(LocalizableStringPicker *)_picker selectedString:(NSString *)_string{
-    NSString *localizedString = NSLocalizedString(_string, @"");
+    NSString *localizedString = PLYLocalizedStringFromTable(_string, @"API", @"");
     if([localizedString length] > 28){
         localizedString = [NSString stringWithFormat:@"...%@",[localizedString substringWithRange:NSMakeRange([localizedString length] - 28, 28)]];
     }

@@ -12,68 +12,61 @@
 
 @implementation PLYListItem
 
-@synthesize Id;
-@synthesize gtin;
-@synthesize note;
-@synthesize qty;
-@synthesize prio;
-
-+ (NSString *) classIdentifier{
-    return @"com.productlayer.core.domain.beans.lists.ProductListItem";
++ (NSString *)entityTypeIdentifier
+{
+	return @"com.productlayer.ProductListItem";
 }
 
-+ (PLYListItem *)instanceFromDictionary:(NSDictionary *)aDictionary {
-    PLYListItem *instance = [[PLYListItem alloc] init];
-    [instance setAttributesFromDictionary:aDictionary];
-    return instance;
+- (void)setValue:(id)value forKey:(NSString *)key
+{
+	if ([key isEqualToString:@"pl-prod-gtin"])
+	{
+		self.GTIN = value;
+	}
+	else if ([key isEqualToString:@"pl-list-prod-note"])
+	{
+		self.note = value;
+	}
+	else if ([key isEqualToString:@"pl-list-prod-cnt"])
+	{
+		self.qty = value;
+	}
+	else if ([key isEqualToString:@"pl-list-prod-prio"])
+	{
+		self.prio = value;
+	}
+	else
+	{
+		[super setValue:value forKey:key];
+	}
 }
 
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary {
-    
-    if (![aDictionary isKindOfClass:[NSDictionary class]]) {
-        return;
-    }
-    
-    [self setValuesForKeysWithDictionary:aDictionary];
-    
-}
-
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key {
-    
-    if ([key isEqualToString:@"pl-id"]) {
-        [self setValue:value forKey:@"Id"];
-    } else if ([key isEqualToString:@"pl-prod-gtin"]) {
-        [self setValue:value forKey:@"gtin"];
-    } else if ([key isEqualToString:@"pl-list-prod-note"]) {
-        [self setValue:value forKey:@"note"];
-    }  else if ([key isEqualToString:@"pl-list-prod-cnt"]) {
-        [self setValue:value forKey:@"qty"];
-    } else if ([key isEqualToString:@"pl-list-prod-prio"]) {
-        [self setValue:value forKey:@"prio"];
-    }
-}
-
-- (NSDictionary *) getDictionary{
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:1];
-    
-    if(Id){
-        [dict setObject:Id forKey:@"pl-id"];
-    }
-    
-    if (gtin != nil) {
-        [dict setObject:gtin forKey:@"pl-prod-gtin"];
-    }
-    if (note != nil) {
-        [dict setObject:note forKey:@"pl-list-prod-note"];
-    }
-    if (qty != nil) {
-        [dict setObject:qty forKey:@"pl-list-prod-cnt"];
-    }
-    if (prio != nil) {
-        [dict setObject:prio forKey:@"pl-list-prod-prio"];
-    }
-    
-    return dict;
+- (NSDictionary *)dictionaryRepresentation
+{
+	NSMutableDictionary *dict = [[super dictionaryRepresentation] mutableCopy];
+	
+	if (_GTIN)
+	{
+		dict[@"pl-prod-gtin"] = _GTIN;
+	}
+	
+	if (_note)
+	{
+		dict[@"pl-list-prod-note"] = _note;
+	}
+	
+	if (_qty)
+	{
+		dict[@"pl-list-prod-cnt"] = _qty;
+	}
+	
+	if (_prio)
+	{
+		dict[@"pl-list-prod-prio"] = _prio;
+	}
+	
+	// return immutable
+	return [dict copy];
 }
 
 @end

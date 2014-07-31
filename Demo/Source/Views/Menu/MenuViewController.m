@@ -8,13 +8,14 @@
 
 #import "MenuViewController.h"
 #import "HomeViewController.h"
-#import "SWRevealViewController.h"
 #import "ProductLayerConfig.h"
 
 #import "PLYServer.h"
 
 #import "DTAlertView.h"
 #import "DTBlockFunctions.h"
+#import "DTSidePanelController.h"
+#import "DTSidePanelControllerSegue.h"
 
 #import "HomeViewController.h"
 #import "ProductListsViewController.h"
@@ -53,7 +54,7 @@
 #pragma mark - Navigation
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
-    if (( [identifier isEqualToString:@"showMyProductLists"] || [identifier isEqualToString:@"createProduct"]) && ![self checkIfLoggedInAndShowLoginView:YES])
+    if (( [identifier isEqualToString:@"DTSidePanelCenter(ShowMyProductLists)"] || [identifier isEqualToString:@"createProduct"]) && ![self checkIfLoggedInAndShowLoginView:YES])
 	{
         return false;
     }
@@ -64,33 +65,29 @@
 
 -(void) prepareForSegue:(UIStoryboardSegue *) segue sender: (id) sender
 {
-    if ( [segue isKindOfClass: [SWRevealViewControllerSegue class]] ) {
-        SWRevealViewControllerSegue *swSegue = (SWRevealViewControllerSegue*) segue;
+    if ( [segue isKindOfClass: [DTSidePanelControllerSegue class]] )
+    {
+        DTSidePanelControllerSegue *_segue = (DTSidePanelControllerSegue*) segue;
+        _segue.sidePanelController = self.sidePanelController;
         
-        swSegue.performBlock = ^(SWRevealViewControllerSegue* rvc_segue, UIViewController* svc, id dvc) {
-            UINavigationController* navController = (UINavigationController*)self.revealViewController.frontViewController;
-            [navController setViewControllers: @[dvc] animated: NO ];
+        if([segue.destinationViewController isKindOfClass:[UINavigationController class]])
+        {
+            UINavigationController* navController = segue.destinationViewController;
+            UIViewController *viewController = navController.viewControllers[0];
             
-            if ([[segue identifier] isEqualToString:@"showMyProductLists"])
+            if ([viewController isKindOfClass:[ProductListsViewController class]])
             {
-                ProductListsViewController *productLists = dvc;
+                ProductListsViewController *productLists = (ProductListsViewController *) viewController;
                 productLists.addProductView = false;
                 [productLists loadProductListsForUser:[[PLYServer sharedServer] loggedInUser] andType:nil];
             }
-            
-            [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
-        };
+        }
     }
 }
 
 - (IBAction)unwindToMenu:(UIStoryboardSegue *)unwindSegue
 {
 	
-}
-
-- (IBAction)unwindFromSignUp:(UIStoryboardSegue *)unwindSegue
-{
-    
 }
 
 @end

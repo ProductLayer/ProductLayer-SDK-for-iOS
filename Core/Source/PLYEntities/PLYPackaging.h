@@ -6,28 +6,35 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
-@interface PLYPackaging : NSObject
-{
-    // All what's packed into.
-    NSString *contains;
-    
-    // The name of the package.
-    NSString *name;
-    
-    // The package description.
-    NSString *description;
-    
-    // The units per package.
-    NSNumber *unit;
+#import "PLYEntity.h"
 
-}
+/**
+ Model class representing a product's packaging
+ */
+@interface PLYPackaging : PLYEntity
 
+/**
+ @name Properties
+ */
+
+/**
+ All what's packed into.
+ */
 @property (nonatomic, copy) NSString *contains;
+
+/**
+ The name of the package.
+ */
 @property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *description;
+
+/** 
+ The package description.
+ */
+@property (nonatomic, copy) NSString *descriptionText;
+
+/**
+ The units per package.
+ */
 @property (nonatomic, copy) NSNumber *unit;
 
-+ (PLYPackaging *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *) getDictionary;
 @end

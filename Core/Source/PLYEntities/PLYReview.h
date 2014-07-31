@@ -6,70 +6,42 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
-@class PLYAuditor;
+#import "PLYVotableEntity.h"
 
-@interface PLYReview : NSObject
-{
-    // The class identifier.
-    NSString *Class;
-    // The object id.
-    NSString *Id;
-    // The version.
-    NSNumber *version;
-    
-    // The user who created the object.
-    PLYAuditor *createdBy;
-    // The timestamp when object was created.
-    NSNumber *createdTime;
-    
-    // The user who updated the object the last time.
-    PLYAuditor *updatedBy;
-    // The timestamp when object was updated the last time.
-    NSNumber *updatedTime;
-    
-    // The gtin (barcode) of the product.
-    NSString *gtin;
-    // The subject of the review.
-    NSString *subject;
-    // The detailed review text.
-    NSString *body;
-    // The rating for the product.
-    NSNumber *rating;
-    // The language of the review.
-    NSString *language;
-    
-    // The sum of all votes (up +1, down -1).
-    NSNumber *votingScore;
-    // The list of user id's who up-voted the review.
-    NSArray *upVoter;
-    // The list of user id's who down-voted the review.
-    NSArray *downVoter;
-}
+@class PLYUser;
 
-@property (nonatomic, strong) NSString *Class;
-@property (nonatomic, strong) NSString *Id;
-@property (nonatomic, strong) NSNumber *version;
+/**
+ Model class representing a product review.
+ */
+@interface PLYReview : PLYVotableEntity
 
-@property (nonatomic, strong) PLYAuditor *createdBy;
-@property (nonatomic, strong) NSNumber *createdTime;
-@property (nonatomic, strong) PLYAuditor *updatedBy;
-@property (nonatomic, strong) NSNumber *updatedTime;
+/**
+ @name Properties
+ */
 
-@property (nonatomic, strong) NSString *gtin;
+/**
+ The GTIN (barcode) of the product.
+ */
+@property (nonatomic, strong) NSString *GTIN;
+
+/**
+ The subject of the review.
+ */
 @property (nonatomic, strong) NSString *subject;
+
+/**
+ The detailed review text.
+ */
 @property (nonatomic, strong) NSString *body;
+
+/**
+ The rating for the product.
+ */
 @property (nonatomic, strong) NSNumber *rating;
-@property (nonatomic, strong) NSString *language;
 
-@property (nonatomic, strong) NSNumber *votingScore;
-@property (nonatomic, strong) NSArray *upVoter;
-@property (nonatomic, strong) NSArray *downVoter;
-
-
-
-+ (NSString *) classIdentifier;
-+ (PLYReview *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *) getDictionary;
+/**
+ The language of the review.
+ */
+@property (nonatomic, copy) NSString *language;
 
 @end

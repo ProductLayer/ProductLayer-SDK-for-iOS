@@ -8,7 +8,7 @@
 
 #import "ProductTableViewCell.h"
 #import "PLYServer.h"
-#import "PLYProductImage.h"
+#import "PLYImage.h"
 
 #import "DTImageCache.h"
 #import "DTDownloadCache.h"
@@ -63,7 +63,7 @@
 }
 
 - (void) loadMainImage{
-    NSString *gtin = _product.gtin;
+    NSString *gtin = _product.GTIN;
     
     if (!gtin)
 	{
@@ -77,10 +77,10 @@
             
             if(images != nil && images.count > 0){
                 
-                PLYProductImage *imageMeta = images[0];
+                PLYImage *imageMeta = images[0];
                 
                 // Check if _product has changed since request
-                if(![_product.gtin isEqualToString:imageMeta.gtin])
+                if(![_product.GTIN isEqualToString:imageMeta.GTIN])
                     return;
                 
                 int imageSize = _productImage.frame.size.width*[[UIScreen mainScreen] scale];
@@ -96,7 +96,7 @@
                 UIImage *thumbnail = [imageCache imageForUniqueIdentifier:imageIdentifier variantIdentifier:@"thumbnail"];
                 
                 // Check if _product has changed since request
-                if(![_product.gtin isEqualToString:imageMeta.gtin])
+                if(![_product.GTIN isEqualToString:imageMeta.GTIN])
                     return;
                 
                 if (thumbnail)
@@ -119,7 +119,7 @@
                             [imageCache addImage:image forUniqueIdentifier:imageIdentifier variantIdentifier:nil];
                             
                             // Check if _product has changed since request
-                            if(![_product.gtin isEqualToString:imageMeta.gtin])
+                            if(![_product.GTIN isEqualToString:imageMeta.GTIN])
                                 return;
                             
                             [_productImage setImage:image];

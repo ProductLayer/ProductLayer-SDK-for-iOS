@@ -13,9 +13,9 @@
 #import "DTImageCache.h"
 #import "DTLog.h"
 
-#import "PLYAuditor.h"
 #import "PLYServer.h"
-#import "PLYProductImage.h"
+#import "PLYImage.h"
+#import "PLYUser.h"
 
 @implementation ReviewTableViewCell
 
@@ -55,14 +55,14 @@
     
     [_subjectLabel setText:_review.subject];
     [_bodyLabel setText:_review.body];
-    [_authorLabel setText:_review.createdBy.userNickname];
+    [_authorLabel setText:_review.createdBy.nickname];
     
     
     [self loadMainImage];
 }
 
 - (void) loadMainImage{
-    NSString *gtin = _review.gtin;
+    NSString *gtin = _review.GTIN;
     
     if (!gtin)
 	{
@@ -76,7 +76,7 @@
             
             if(images != nil && images.count > 0){
                 
-                PLYProductImage *imageMeta = images[0];
+                PLYImage *imageMeta = images[0];
                 
                 int imageSize = _productImage.frame.size.width*[[UIScreen mainScreen] scale];
                 

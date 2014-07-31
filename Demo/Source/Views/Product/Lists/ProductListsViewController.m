@@ -7,7 +7,6 @@
 //
 
 #import "ProductListsViewController.h"
-#import "SWRevealViewController.h"
 #import "ProductListTableViewCell.h"
 #import "ProductLayer.h"
 #import "UIViewTags.h"
@@ -15,6 +14,8 @@
 #import "AppSettings.h"
 #import "DTProgressHUD.h"
 #import "DetailedProductListViewControllerTableViewController.h"
+#import "UIViewController+DTSidePanelController.h"
+#import "DTSidePanelController.h"
 
 @interface ProductListsViewController ()
 
@@ -59,8 +60,8 @@
         }
         
         // Set the side bar button action. When it's tapped, it'll show up the sidebar.
-        _sidebarButton.target = self.revealViewController;
-        _sidebarButton.action = @selector(revealToggle:);
+        _sidebarButton.target = self.sidePanelController;
+        _sidebarButton.action = @selector(toggleLeftPanel:);
     }
 }
 
@@ -132,7 +133,7 @@
                     successfullOperations ++;
                     
                     [self dismissIfAllOperationFinished];
-                    [list setValuesForKeysWithDictionary:[result getDictionary]];
+                    [list setValuesForKeysWithDictionary:[result dictionaryRepresentation]];
                 });
             }
         }];
@@ -184,7 +185,7 @@
         
         if(list.listItems){
             for(PLYListItem *item in list.listItems){
-                if([item.gtin isEqualToString:_product.gtin]){
+                if([item.GTIN isEqualToString:_product.GTIN]){
                     [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
                     break;
                 }
@@ -251,7 +252,7 @@
         PLYList *list = [_productLists objectAtIndex:indexPath.row];
         
         PLYListItem *listItem = [[PLYListItem alloc] init];
-        listItem.gtin = _product.gtin;
+        listItem.GTIN = _product.GTIN;
         listItem.qty = [NSNumber numberWithInt:1];
         
         if(!list.listItems){
@@ -271,7 +272,7 @@
         
         
         for(PLYListItem *item in list.listItems){
-            if([item.gtin isEqualToString:_product.gtin]){
+            if([item.GTIN isEqualToString:_product.GTIN]){
                 [list.listItems removeObject:item];
                 break;
             }
@@ -299,6 +300,5 @@
     
     
 }
-
 
 @end

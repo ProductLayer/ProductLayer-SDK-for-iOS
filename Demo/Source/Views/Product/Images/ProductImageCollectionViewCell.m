@@ -22,7 +22,7 @@
 	NSURL *_imageURL;
 }
 
-- (void)_setImage:(UIImage *)image  forMetadata:(PLYProductImage *)_metadata
+- (void)_setImage:(UIImage *)image  forMetadata:(PLYImage *)_metadata
 {
     /* Only set image if the image for the metadata is the valid one.
      * Needed because the Cell is re-used and it can happen, that the
@@ -35,7 +35,7 @@
     }
 }
 
-- (void) loadImageForMetadata:(PLYProductImage *)_metadata withSize:(CGSize)_size crop:(BOOL)_crop{
+- (void) loadImageForMetadata:(PLYImage *)_metadata withSize:(CGSize)_size crop:(BOOL)_crop{
     NSString *imageURLString = [_metadata getUrlForWidth:_size.width andHeight:_size.height crop:_crop];
     
     NSURL *imageURL = [NSURL URLWithString:imageURLString];

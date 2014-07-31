@@ -61,7 +61,7 @@ typedef enum : NSUInteger {
                                                                         green:190.0/255.0
                                                                          blue:68.0/255.0
                                                                         alpha:1.0];
-    
+
     [self loadSocialFeed];
 }
 
@@ -80,10 +80,10 @@ typedef enum : NSUInteger {
     int score = 0;
     CellType type = AllTypesAllowed;
     
-    if([feed isKindOfClass:[PLYProductImage class]]){
-        score = [((PLYProductImage *)feed).votingScore intValue];
+    if([feed isKindOfClass:[PLYImage class]]){
+        score = [((PLYImage *)feed).votingScore intValue];
         
-        if(((PLYProductImage *)feed).width > ((PLYProductImage *)feed).height){
+        if(((PLYImage *)feed).width > ((PLYImage *)feed).height){
             type = SquareOrLandscapeCell;
         } else {
             type = SquareOrPortraitCell;
@@ -149,7 +149,7 @@ typedef enum : NSUInteger {
     if ([[segue identifier] isEqualToString:@"showProductDetails"])
 	{
         ProductViewController *PVC = (ProductViewController *)segue.destinationViewController;
-        [PVC loadProductWithGTIN:((ProductImageCollectionViewCell *)sender).imageMetadata.gtin];
+        [PVC loadProductWithGTIN:((ProductImageCollectionViewCell *)sender).imageMetadata.GTIN];
 	}
 }
 
@@ -165,7 +165,7 @@ typedef enum : NSUInteger {
     id feed = [_socialFeeds objectAtIndex:indexPath.row];
     RFQuiltLayout* layout = (id)[self.collectionView collectionViewLayout];
     
-    if([feed isKindOfClass:[PLYProductImage class]]){
+    if([feed isKindOfClass:[PLYImage class]]){
         ProductImageCollectionViewCell *cell = (ProductImageCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PictureGridView" forIndexPath:indexPath];
         
         CGSize blockSize = [self blockSizeForItemAtIndexPath:indexPath];
@@ -178,6 +178,9 @@ typedef enum : NSUInteger {
 }
 
 - (void) loadSocialFeed{
+    
+    // Loading the DTProgressHUD on application launch causing the following debug message:
+    // Application windows are expected to have a root view controller at the end of application launch
     DTProgressHUD *_hud = [[DTProgressHUD alloc] init];
     _hud.showAnimationType = HUDProgressAnimationTypeFade;
     _hud.hideAnimationType = HUDProgressAnimationTypeFade;
@@ -185,7 +188,7 @@ typedef enum : NSUInteger {
     [_hud showWithText:@"loading" progressType:HUDProgressTypeInfinite];
     
     // TODO: Load all social Feeds (Images, Reviews, Opinions, ...)
-    [[PLYServer sharedServer] getLastUploadedImagesWithPage:0 andRPP:20 completion:^(id result, NSError *error) {
+    [[PLYServer sharedServer] getLastUploadedImagesWithPage:0 andRPP:30 completion:^(id result, NSError *error) {
         
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
             [_hud hide];

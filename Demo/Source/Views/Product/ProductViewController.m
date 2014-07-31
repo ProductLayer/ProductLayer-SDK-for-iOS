@@ -16,6 +16,7 @@
 #import "DTAlertView.h"
 
 #import "ReviewTableViewController.h"
+#import "OpineTableViewController.h"
 #import "ProductImageViewController.h"
 #import "KeyValueTableViewController.h"
 #import "ProductListsViewController.h"
@@ -47,7 +48,7 @@
     
     [self updateView];
     
-    if(_product && _product.gtin && !_productImage.image){
+    if(_product && _product.GTIN && !_productImage.image){
         [self loadMainImage];
     }
 }
@@ -59,6 +60,8 @@
     _hud.showAnimationType = HUDProgressAnimationTypeFade;
     _hud.hideAnimationType = HUDProgressAnimationTypeFade;
     [_hud showWithText:@"loading" progressType:HUDProgressTypeInfinite];
+    
+    __weak ProductViewController *weakSelf = self;
     
     [[PLYServer sharedServer] performSearchForGTIN:_gtin language:nil completion:^(id result, NSError *error) {
         if (error)
@@ -78,9 +81,8 @@
                 for(PLYProduct *product in result){
                     // Search for current locale
                     if([product.language isEqualToString:[AppSettings currentAppLocale].localeIdentifier]){
-                        DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-                            [self setProduct:product];
-                        });
+                        [self setProduct:product];
+
                         break;
                     } else if([product.language isEqualToString:@"en"] || [product.language rangeOfString:@"en_"].location != NSNotFound){
                         defaultLocaleProduct = product;
@@ -88,15 +90,16 @@
                 }
                 
                 if(!_product){
+
                     
                     DTAlertView *alertView = [[DTAlertView alloc] initWithTitle:@"Product not found!" message:@"The product have not been found for your locale."];
+                    alertView.delegate = self;
                     
                     if(defaultLocaleProduct) {
-                        
                         [alertView addButtonWithTitle:[NSString stringWithFormat:@"Show locale %@", defaultLocaleProduct.language] block:^() {
                             [[PLYServer sharedServer] logoutUserWithCompletion:^(id result, NSError *error) {
                                 DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-                                    [self setProduct:defaultLocaleProduct];
+                                    [weakSelf setProduct:defaultLocaleProduct];
                                 });
                             }];
                         }];
@@ -106,17 +109,19 @@
                         DTBlockPerformSyncIfOnMainThreadElseAsync(^{
                             
                             PLYProduct *newProduct = [[PLYProduct alloc] init];
-                            [newProduct setGtin:_gtin];
+                            [newProduct setGTIN:_gtin];
                             
-                            [self setProduct:newProduct];
+                            [weakSelf setProduct:newProduct];
                             
-                            [self performSegueWithIdentifier:@"editProduct" sender:nil];
+                            [weakSelf performSegueWithIdentifier:@"editProduct" sender:nil];
                         });
                     }];
                     
                     [alertView addCancelButtonWithTitle:@"Cancel" block:^() {
-                        // Don't log out.
+                        // Do nothing here. UIAlertViewDelegate is used.
+                        [weakSelf.navigationController popViewControllerAnimated:YES];
                     }];
+                    
                     
                     
                     [alertView show];
@@ -133,7 +138,7 @@
 - (void) setProduct:(PLYProduct *)product{
     // Prevent unnecessary image requests
     bool loadImage = true;
-    if([product.gtin isEqualToString:_product.gtin]){
+    if([product.GTIN isEqualToString:_product.GTIN]){
         loadImage = false;
     }
     
@@ -150,7 +155,7 @@
     if(_product.name){
         [_productName setText:_product.name];
     } else {
-        [_productName setText:_product.gtin];
+        [_productName setText:_product.GTIN];
     }
     
     if(_product.brandName){
@@ -173,7 +178,7 @@
 }
 
 - (void) loadMainImage{
-    NSString *gtin = _product.gtin;
+    NSString *gtin = _product.GTIN;
     
     if (!gtin)
 	{
@@ -187,7 +192,7 @@
             
             if(images != nil && images.count > 0){
                 
-                PLYProductImage *imageMeta = images[0];
+                PLYImage *imageMeta = images[0];
                 
                 int imageSize = _productImage.frame.size.width*[[UIScreen mainScreen] scale];
                 
@@ -268,13 +273,19 @@
 	{
 		ReviewTableViewController *reviewVC = (ReviewTableViewController *)segue.destinationViewController;
         reviewVC.navigationItem.title = _product.name;
-		reviewVC.gtin = _product.gtin;
+		reviewVC.gtin = _product.GTIN;
+	}
+    else if ([[segue identifier] isEqualToString:@"showProductOpines"])
+	{
+		OpineTableViewController *opineVC = (OpineTableViewController *)segue.destinationViewController;
+        opineVC.navigationItem.title = _product.name;
+		opineVC.parent = _product;
 	}
 	else if ([[segue identifier] isEqualToString:@"showProductImages"])
 	{
         ProductImageViewController *imageVC = (ProductImageViewController *)segue.destinationViewController;
 		imageVC.navigationItem.title = _product.name;
-		[imageVC loadImagesFromGtin:_product.gtin];
+		[imageVC loadImagesFromGtin:_product.GTIN];
 	} else if ([[segue identifier] isEqualToString:@"showProductCharacteristics"])
 	{
         KeyValueTableViewController *charVC = (KeyValueTableViewController *)segue.destinationViewController;
@@ -308,6 +319,5 @@
 - (void) productUpdated:(PLYProduct *)product{
     [self setProduct:product];
 }
-
 
 @end

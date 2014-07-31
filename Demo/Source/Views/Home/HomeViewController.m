@@ -15,10 +15,11 @@
 #import "ProductLayer.h"
 #import "DTScannedCode.h"
 #import "DTBlockFunctions.h"
+#import "UIViewController+DTSidePanelController.h"
+#import "DTSidePanelController.h"
 #import "SearchProductViewController.h"
 #import "WriteReviewViewController.h"
 #import "ProductViewController.h"
-#import "SWRevealViewController.h"
 
 #import "UIViewTags.h"
 #import "DTAlertView.h"
@@ -26,6 +27,7 @@
 
 #import "PLYProduct.h"
 #import "PLYUser.h"
+#import "DTProgressHUD.h"
 
 
 @interface HomeViewController () <DTCodeScannerViewControllerDelegate, UIImagePickerControllerDelegate>
@@ -44,10 +46,16 @@
 	[super viewDidLoad];
 	
 	// Set the side bar button action. When it's tapped, it'll show up the sidebar.
-	_sidebarButton.target = self.revealViewController;
-	_sidebarButton.action = @selector(revealToggle:);
+	_sidebarButton.target = self.sidePanelController;
+	_sidebarButton.action = @selector(toggleLeftPanel:);
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_updateLoginBar) name:PLYNotifyUserStatusChanged object:nil];
+}
+
+- (void)dealloc
+{
+    // UISearchBarDelegate is not weak so we need to set it nil via code.
+    self.productSearchBar.delegate = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -65,7 +73,6 @@
 																							  green:190.0/255.0
 																								blue:68.0/255.0
 																							  alpha:1.0];
-	
 	[self _updateLoginBar];
 }
 
@@ -101,7 +108,7 @@
 		vc.navigationItem.title = @"Add New Product";
 		
 		PLYProduct *newProduct = [[PLYProduct alloc] init];
-		[newProduct setGtin:_gtinForEditingProduct];
+		newProduct.GTIN = _gtinForEditingProduct;
 		[vc setProduct:newProduct];
 	}
 	else if ([[segue identifier] isEqualToString:@"ProductImages"])
@@ -122,15 +129,22 @@
 
 - (void)_updateLoginBar
 {
-	
 	DTBlockPerformSyncIfOnMainThreadElseAsync(^{
 		if ([[PLYServer sharedServer] loggedInUser])
 		{
-			[self.loginButton setTitle:[[[PLYServer sharedServer] loggedInUser] nickname] forState:UIControlStateNormal];
+            [self.loginButton setTitle:[[[PLYServer sharedServer] loggedInUser] nickname]];
+            [self.loginButton setEnabled:true];
 		}
 		else
 		{
-			[self.loginButton setTitle:@"Sign in" forState:UIControlStateNormal];
+            if([[PLYServer sharedServer] performingLogin])
+            {
+                [self.loginButton setTitle:@"loading ..."];
+                [self.loginButton setEnabled:false];
+            } else {
+                [self.loginButton setTitle:@"Sign in"];
+                [self.loginButton setEnabled:true];
+            }
 		}
 	});
 }
@@ -157,6 +171,8 @@
 {
 	if ([[PLYServer sharedServer] loggedInUser])
 	{
+        __weak HomeViewController *weakSelf = self;
+        
 		DTAlertView *alertView = [[DTAlertView alloc] initWithTitle:@"Logout?" message:@"Do you realy want to logout?"];
 		
 		[alertView addButtonWithTitle:@"yes" block:^() {
@@ -164,7 +180,7 @@
 				
 				DTBlockPerformSyncIfOnMainThreadElseAsync(^{
 					
-					[self _updateLoginBar];
+					[weakSelf _updateLoginBar];
 					
 					if (error)
 					{
@@ -200,8 +216,8 @@
 			
 			UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 			ProductViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"ProductViewController"];
-			[viewController loadProductWithGTIN:code.content];
 			[self.navigationController pushViewController:viewController animated:YES];
+            [viewController loadProductWithGTIN:code.content];
 		});
 	}
 }

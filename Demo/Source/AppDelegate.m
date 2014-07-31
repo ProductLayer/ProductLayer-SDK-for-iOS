@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "DTLog.h"
 #import "ProductLayer.h"
+#import "ProductLayerConfig.h"
 
 @implementation AppDelegate
 

@@ -9,10 +9,11 @@
 #import "ReviewTableViewController.h"
 
 #import "ReviewTableViewCell.h"
-#import "SWRevealViewController.h"
 #import "UIViewTags.h"
 #import "WriteReviewViewController.h"
 #import "DTBlockFunctions.h"
+#import "DTSidePanelController.h"
+#import "UIViewController+DTSidePanelController.h"
 #import "AppSettings.h"
 
 #import "DTProgressHUD.h"
@@ -36,6 +37,16 @@
 
 - (void) reloadReviews{
     if(_isLoading) return;
+    
+    if(!_gtin){
+        self.navigationItem.rightBarButtonItem = nil;
+    } else {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(writeReview)];
+    }
+    
+    if(_gtin || _userNickname){
+        self.navigationItem.leftBarButtonItem = nil;
+    }
     
     DTProgressHUD *_hud = [[DTProgressHUD alloc] init];
     _hud.showAnimationType = HUDProgressAnimationTypeFade;
@@ -97,16 +108,12 @@
     }
     
     // Set the side bar button action. When it's tapped, it'll show up the sidebar.
-    _sidebarButton.target = self.revealViewController;
-    _sidebarButton.action = @selector(revealToggle:);
-    
-    if(!_gtin){
-        self.navigationItem.rightBarButtonItem = nil;
-    }
-    
-    if(_gtin || _userNickname){
-        self.navigationItem.leftBarButtonItem = nil;
-    }
+    _sidebarButton.target = self.sidePanelController;
+    _sidebarButton.action = @selector(toggleLeftPanel:);
+}
+
+- (void) writeReview{
+    [self performSegueWithIdentifier:@"writeReview" sender:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -152,9 +159,9 @@
     return cell;
 }
 
-    - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-        return 70;
-    }
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 70;
+}
 
 
 #pragma mark - Navigation

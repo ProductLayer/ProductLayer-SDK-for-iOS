@@ -10,7 +10,6 @@
 #import "ProductLayer.h"
 #import "DTBlockFunctions.h"
 #import "DTAlertView.h"
-#import "LoginViewController.h"
 
 @implementation UIViewController (UIViewControllerLogin)
 
@@ -18,18 +17,20 @@
     if (![[PLYServer sharedServer] loggedInUser])
     {
         if(showLogin){
+            
+            __weak UIViewController *weakSelf = self;
+            
             DTAlertView *alertView = [[DTAlertView alloc] initWithTitle:@"Login required" message:@"Do you want to login?"];
             
             [alertView addButtonWithTitle:@"Login" block:^() {
-                DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-                    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                                  bundle:nil];
-                    LoginViewController* loginVC = [sb instantiateViewControllerWithIdentifier:@"LoginViewController"];
-                    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginVC];
-                    [self presentViewController:navController animated:YES completion:nil];
-                });
+					DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+						PLYLoginViewController *loginVC = [[PLYLoginViewController alloc] init];
+						UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginVC];
+						
+						[weakSelf presentViewController:navController animated:YES completion:nil];
+					});
             }];
-            
+			  
             [alertView addCancelButtonWithTitle:@"Cancel" block:^() {
                 // Don't log out.
             }];

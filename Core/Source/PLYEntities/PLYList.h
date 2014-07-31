@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
+#import "PLYEntity.h"
+
 @class PLYAuditor;
 
 #define kLIST_WISHLIST  @"pl-list-type-wish"
@@ -20,65 +22,47 @@
 #define kSHARE_NONE     @"pl-list-share-none"
 
 /**
- * With the product list you can group products which are important to you. Like a wishlist for your birthday.
+ With the product list you can group products which are important to you. Like a wishlist for your birthday.
  **/
-@interface PLYList : NSObject {
-    // The class identifier.
-    NSString *Class;
-    // The object id.
-    NSString *Id;
-    // The version.
-    NSNumber *version;
-    
-    // The user who created the object.
-    PLYAuditor *createdBy;
-    // The timestamp when object was created.
-    NSNumber *createdTime;
-    
-    // The user who updated the object the last time.
-    PLYAuditor *updatedBy;
-    // The timestamp when object was updated the last time.
-    NSNumber *updatedTime;
+@interface PLYList : PLYEntity
 
-    // The title of the list.
-    NSString *title;
-    // The description for the list.
-    NSString *description;
-    // The list type for the list.
-    NSString *listType;
-    
-    // The sharing type for the list.
-    NSString *shareType;
-    // A list of user id's the product list is shared.
-    NSArray *sharedUsers;
-    
-    // The list of products.
-    NSMutableArray  *listItems;
-}
+/**
+ @name Properties
+ */
 
-@property (nonatomic, strong) NSString *Class;
-@property (nonatomic, strong) NSString *Id;
-@property (nonatomic, strong) NSNumber *version;
-
-@property (nonatomic, strong) PLYAuditor *createdBy;
-@property (nonatomic, strong) NSNumber *createdTime;
-@property (nonatomic, strong) PLYAuditor *updatedBy;
-@property (nonatomic, strong) NSNumber *updatedTime;
-
+/**
+ The title of the list.
+ */
 @property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *description;
+
+/**
+ The description for the list.
+ */
+@property (nonatomic, strong) NSString *descriptionText;
+
+/**
+ The list type for the list.
+ */
 @property (nonatomic, strong) NSString *listType;
 
+/**
+ The sharing type for the list.
+ */
 @property (nonatomic, strong) NSString *shareType;
+
+/**
+ A list of user id's the product list is shared.
+ */
 @property (nonatomic, strong) NSArray *sharedUsers;
 
+/**
+ The list of products.
+ */
 @property (nonatomic, strong) NSMutableArray *listItems;
 
-
-+ (NSString *) classIdentifier;
-+ (PLYList *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *) getDictionary;
+/**
+ @name Managing Lists
+ */
 
 - (BOOL) isValidForSaving;
 

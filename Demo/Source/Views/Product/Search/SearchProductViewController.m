@@ -34,6 +34,12 @@
     }
 }
 
+- (void)dealloc
+{
+    // UISearchBarDelegate is not weak so we need to set it nil via code.
+    self.productSearchBar.delegate = nil;
+}
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if(section == 0){
         return [NSString stringWithFormat:@"With your locale: %@", [AppSettings currentAppLocale].localeIdentifier];

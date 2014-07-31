@@ -6,31 +6,35 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
+#import "PLYEntity.h"
+
 /**
- * This object identifies a product in a product list.
+ This object identifies a product in a product list.
  **/
-@interface PLYListItem : NSObject {
-    NSString *Id;
-    // The gtin (barcode) of the product.
-    NSString *gtin;
-    // A simple note for people you share the list.
-    NSString *note;
-    // The amount for the list.
-    NSNumber *qty;
-    // The priority to sort the list. e.g.: Which present i prefer for my birthday.
-    NSNumber *prio;
-}
+@interface PLYListItem : PLYEntity
 
-@property (nonatomic, strong) NSString *Id;
-@property (nonatomic, strong) NSString *gtin;
-@property (nonatomic, strong) NSString *note;
+/**
+ @name Properties
+ */
+
+/**
+ The GTIN (barcode) of the product.
+ */
+@property (nonatomic, copy) NSString *GTIN;
+
+/**
+ A simple note for people you share the list.
+ */
+@property (nonatomic, copy) NSString *note;
+
+/**
+ The amount for the list.
+ */
 @property (nonatomic, strong) NSNumber *qty;
+
+/**
+ The priority to sort the list. e.g.: Which present i prefer for my birthday.
+*/
 @property (nonatomic, strong) NSNumber *prio;
-
-
-+ (NSString *) classIdentifier;
-+ (PLYListItem *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *) getDictionary;
 
 @end

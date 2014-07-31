@@ -6,23 +6,30 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
+#import "PLYEntity.h"
+
 /**
  * The error message with all needed information.
  **/
-@interface PLYErrorMessage : NSObject {
-    // The error message.
-    NSString *message;
-    // The productlayer error code.
-    NSNumber *code;
-    // The stacktrace will only be available for alpha and beta api's.
-    NSString *throwable;
-}
+@interface PLYErrorMessage : PLYEntity
 
+/**
+ @name Properties
+ */
+
+/**
+ The error message.
+ */
 @property (nonatomic, copy) NSString *message;
-@property (nonatomic, copy) NSNumber *code;
-@property (nonatomic, copy) NSString *throwable;
 
-+ (PLYErrorMessage *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
+/**
+ The productlayer error code.
+ */
+@property (nonatomic, copy) NSNumber *code;
+
+/**
+ The stacktrace will only be available for alpha and beta api's.
+ */
+@property (nonatomic, copy) NSString *throwable;
 
 @end

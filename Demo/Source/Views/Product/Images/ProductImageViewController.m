@@ -53,7 +53,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-	PLYProductImage *imageData = _images[indexPath.item];
+	PLYImage *imageData = _images[indexPath.item];
 	
 	ProductImageCollectionViewCell *cell = (ProductImageCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"ProductImage" forIndexPath:indexPath];
 	
@@ -93,7 +93,7 @@
 
 
 - (void) loadLastImages{
-    [[PLYServer sharedServer] getLastUploadedImagesWithPage:0 andRPP:8 completion:^(id result, NSError *error) {
+    [[PLYServer sharedServer] getLastUploadedImagesWithPage:0 andRPP:30 completion:^(id result, NSError *error) {
 		
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
             
@@ -139,7 +139,7 @@
 
 - (IBAction)addImageToProduct:(id)sender
 {
-    if(![self checkIfLoggedInAndShowLoginView:YES]){
+    if (![self checkIfLoggedInAndShowLoginView:YES]){
         return;
     }
     
@@ -150,13 +150,39 @@
 		
 		return;
 	}
-	
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
-    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    imagePickerController.delegate = (id)self;
-	
-	[self presentViewController:imagePickerController animated:YES completion:nil];
+    
+    __weak ProductImageViewController *weakSelf = self;
+    
+    DTAlertView *alertView = [[DTAlertView alloc] initWithTitle:@"Choose image source!" message:nil];
+    
+        [alertView addButtonWithTitle:@"Take New Photo" block:^() {
+            DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+                UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+                imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+                imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+                imagePickerController.delegate = (id)self;
+                
+                [weakSelf presentViewController:imagePickerController animated:YES completion:nil];
+            });
+        }];
+    
+    [alertView addButtonWithTitle:@"Choose Existing Photo" block:^() {
+        DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+            UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+            imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+            imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            imagePickerController.delegate = (id)self;
+            
+            [weakSelf presentViewController:imagePickerController animated:YES completion:nil];
+        });
+    }];
+    
+    [alertView addCancelButtonWithTitle:@"Cancel" block:^() {
+        // Nothing to do here;
+    }];
+    
+    
+    [alertView show];
 }
 
 #pragma mark - UIImagePickerControllerDelegate
@@ -174,7 +200,7 @@
 	UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
 	
 	[[PLYServer sharedServer] uploadImageData:image forGTIN:self.gtin completion:^(id result, NSError *error) {
-		if(!error && [result isKindOfClass:[PLYProductImage class]]){
+		if(!error && [result isKindOfClass:[PLYImage class]]){
             if(!_images){
                 _images = [NSMutableArray arrayWithCapacity:1];
             }

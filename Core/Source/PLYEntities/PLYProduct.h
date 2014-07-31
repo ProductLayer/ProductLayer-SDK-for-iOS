@@ -6,88 +6,94 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
+#import "PLYVotableEntity.h"
+
 @class PLYAuditor;
 @class PLYPackaging;
 
-@interface PLYProduct : NSObject
-{
-    // The class identifier.
-    NSString *Class;
-    // The object id.
-    NSString *Id;
-    // The version.
-    NSNumber *version;
-    
-    // The user who created the object.
-    PLYAuditor *createdBy;
-    // The timestamp when object was created.
-    NSNumber *createdTime;
-    
-    // The user who updated the object the last time.
-    PLYAuditor *updatedBy;
-    // The timestamp when object was updated the last time.
-    NSNumber *updatedTime;
-    
-    // The gtin (barcode) of the product.
-    NSString *gtin;
-    // The name of the product.
-    NSString *name;
-    // The product category
-    NSString *category;
-    // The language of the product.
-    NSString *language;
-    
-    // The short description of the product.
-    NSString *shortDescription;
-    // The detailed description of the product.
-    NSString *longDescription;
-    
-    // The name of the brand information.
-    NSString *brandName;
-    // The name of the brand owner information.
-    NSString *brandOwner;
-    
-    // The homepage or landingpage of the product.
-    NSString *homepage;
-    // Additional links for the product. e.g.: Support Forum, FAQ's, ...
-    NSArray *links;
-    
-    // The packaging information.
-    PLYPackaging *packaging;
-    // The product rating.
-    NSNumber *rating;
-    
-    // The characteristics information.
-    NSMutableDictionary *characteristics;
-    // The nutrition information.
-    NSMutableDictionary *nutritious;
-}
+/**
+ API model class representing a product
+ */
 
-@property (nonatomic, strong) NSString *Class;
-@property (nonatomic, strong) NSString *Id;
+@interface PLYProduct : PLYVotableEntity
+
+/**
+ @name Properties
+ */
+
+/**
+ The name of the brand information.
+ */
 @property (nonatomic, strong) NSString *brandName;
+
+/**
+ The name of the brand owner information.
+ */
 @property (nonatomic, strong) NSString *brandOwner;
-@property (nonatomic, strong) PLYAuditor *createdBy;
-@property (nonatomic, strong) NSNumber *createdTime;
+
+/**
+ The language of the product.
+ */
 @property (nonatomic, strong) NSString *language;
+
+/**
+ The product category
+ */
 @property (nonatomic, strong) NSString *category;
+
+/**
+ The detailed description of the product.
+ */
 @property (nonatomic, strong) NSString *longDescription;
+
+/**
+ The short description of the product.
+ */
 @property (nonatomic, strong) NSString *shortDescription;
-@property (nonatomic, strong) NSString *gtin;
+
+/**
+ The GTIN (barcode) of the product.
+ */
+@property (nonatomic, strong) NSString *GTIN;
+
+/**
+ The homepage or landingpage of the product.
+ */
 @property (nonatomic, strong) NSString *homepage;
+
+/**
+ Additional links for the product. e.g.: Support Forum, FAQ's, ...
+ */
 @property (nonatomic, strong) NSArray *links;
+
+/**
+ The name of the product.
+ */
 @property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) PLYPackaging *packaging;
+
+/** 
+ The packaging information.
+ */
+@property (nonatomic, copy) PLYPackaging *packaging;
+
+/**
+ The product rating.
+ */
 @property (nonatomic, strong) NSNumber *rating;
-@property (nonatomic, strong) PLYAuditor *updatedBy;
-@property (nonatomic, strong) NSNumber *updatedTime;
-@property (nonatomic, strong) NSNumber *version;
+
+/**
+ The characteristics information.
+ */
 @property (nonatomic, strong) NSMutableDictionary *characteristics;
+
+/**
+ The nutrition information.
+ */
 @property (nonatomic, strong) NSMutableDictionary *nutritious;
 
-+ (NSString *) classIdentifier;
+/**
+ The source URL of the product information
+ */
+@property (nonatomic, copy) NSURL *sourceURL;
 
-+ (PLYProduct *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *) getDictionary;
 @end

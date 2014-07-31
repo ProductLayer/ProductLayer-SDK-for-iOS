@@ -21,7 +21,7 @@
 
 - (IBAction)login:(id)sender;
 
-@property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *loginButton;
 @property (weak, nonatomic) IBOutlet UISearchBar *productSearchBar;
 @property (weak, nonatomic) IBOutlet UIButton *scanBarcodeButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;

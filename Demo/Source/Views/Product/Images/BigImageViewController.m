@@ -17,7 +17,7 @@
 #import "PLYServer.h"
 
 @interface BigImageViewController () {
-    PLYProductImage *metadata;
+    PLYImage *metadata;
 }
 
 @end
@@ -58,10 +58,10 @@
 }
 
 - (void)updateView{
-    [_votingScoreLabel setText:[NSString stringWithFormat:@"%d (up=%lu, down=%lu)",[metadata.votingScore intValue], (unsigned long)[metadata.upVoters count], (unsigned long)[metadata.downVoters count]]];
+    [_votingScoreLabel setText:[NSString stringWithFormat:@"%d (up=%lu, down=%lu)",[metadata.votingScore intValue], (unsigned long)[metadata.upVoter count], (unsigned long)[metadata.downVoter count]]];
 }
 
-- (void) setImageMetadata:(PLYProductImage *)imageMetadata{
+- (void) setImageMetadata:(PLYImage *)imageMetadata{
     if(metadata != nil && [metadata.Id isEqualToString:imageMetadata.Id]){
         return;
     }
@@ -126,7 +126,7 @@
     
     [_hud showWithText:@"saving" progressType:HUDProgressTypeInfinite];
     
-    [[PLYServer sharedServer] upVoteImageWithId:metadata.fileId andGTIN:metadata.gtin completion:^(id result, NSError *error) {
+    [[PLYServer sharedServer] upVote:metadata completion:^(id result, NSError *error) {
         
 		if (error)
 		{
@@ -157,7 +157,7 @@
     
     [_hud showWithText:@"saving" progressType:HUDProgressTypeInfinite];
     
-    [[PLYServer sharedServer] downVoteImageWithId:metadata.fileId andGTIN:metadata.gtin completion:^(id result, NSError *error) {
+    [[PLYServer sharedServer] downVote:metadata completion:^(id result, NSError *error) {
 		
 		if (error)
 		{
