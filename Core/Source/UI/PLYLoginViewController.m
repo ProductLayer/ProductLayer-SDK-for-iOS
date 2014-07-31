@@ -310,6 +310,7 @@
 - (void)lostPasswordViewController:(PLYLostPasswordViewController *)lostPasswordViewController didRequestNewPasswordForUser:(PLYUser *)user
 {
 	_nameField.text = user.nickname;
+    
 	[self.navigationController popToViewController:self animated:YES];
 }
 

@@ -142,6 +142,8 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  */
 @property (nonatomic, readonly) PLYUser *loggedInUser;
 
+@property (nonatomic) BOOL performingLogin;
+
 
 /**
  @name Managing Products

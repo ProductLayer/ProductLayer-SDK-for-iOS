@@ -13,7 +13,7 @@
 #import "DTLog.h"
 #import "NSString+DTURLEncoding.h"
 #import "DTBlockFunctions.h"
-
+#import "AccountManager.h"
 
 #if TARGET_OS_IPHONE
 #import "UIApplication+DTNetworkActivity.h"
@@ -34,6 +34,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 // this is a prefix added before REST methods, e.g. for a version of the API
 #define PLY_PATH_PREFIX @"0.2"
 
+#define PLY_SERVICE [PLY_ENDPOINT_URL absoluteString]
 
 @implementation PLYServer
 {
@@ -60,8 +61,11 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 // designated initializer
 - (instancetype)init
 {
+    _performingLogin = false;
+    
 	// use default config, we need credential & caching
 	NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    
 	return [self initWithSessionConfiguration:config];
 }
 
@@ -509,54 +513,48 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 
 - (void)_loadState
 {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
-	NSString *nickname = [defaults objectForKey:@"PLYServerLoggedInUserNickname"];
-	
-	// Load User from Server
-	if(nickname && ![nickname isEqualToString:@""]){
-		[self getUserByNickname:nickname completion:^(id result, NSError *error) {
-			
-			if (error)
-			{
-				DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-					UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Request you user data failed." message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-					[alert show];
-				});
-			}
-			else
-			{
-				DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-					[self setLoggedInUser:result];
-				});
-			}
-		}];
-	}
+    // Load login data from keychain
+    NSArray *accounts = [[AccountManager sharedAccountManager] accountsForService:PLY_SERVICE];
+    
+    if(accounts && [accounts count] == 1){
+        
+        GenericAccount *account = [accounts objectAtIndex:0];
+        
+        if(account) {
+            [self loginWithUser:account.account password:account.password completion:^(id result, NSError *error) {
+                
+                if (error)
+                {
+                    DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login failed." message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                        [alert show];
+                        
+                        // Delete account from the keychain if login failed.
+                        [[AccountManager sharedAccountManager] deleteGenericAccount:account];
+                    });
+                }
+                else
+                {
+                    DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+                        [self setLoggedInUser:result];
+                    });
+                }
+            }];
+        }
+    } else if(accounts && [accounts count] > 1){
+        // There should be only one account for productlayer for security reasons delete all accounts
+        for(GenericAccount *account in accounts){
+            [[AccountManager sharedAccountManager] delete:account];
+        }
+    }
 }
 
 - (void) setLoggedInUser:(PLYUser *)loggedInUser{
-	_loggedInUser = loggedInUser;
-	
+    _loggedInUser = loggedInUser;
+    
 	[[NSNotificationCenter defaultCenter] postNotificationName:PLYNotifyUserStatusChanged object:nil];
 }
 
-- (void)_storeState
-{
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
-	if (_loggedInUser)
-	{
-		[defaults setObject:_loggedInUser.nickname forKey:@"PLYServerLoggedInUserNickname"];
-		[defaults setObject:_loggedInUser.Id forKey:@"PLYServerLoggedInUserId"];
-	}
-	else
-	{
-		[defaults removeObjectForKey:@"PLYServerLoggedInUserNickname"];
-		[defaults removeObjectForKey:@"PLYServerLoggedInUserId"];
-	}
-	
-	[defaults synchronize];
-}
 
 #pragma mark - Search
 
@@ -677,13 +675,12 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	NSParameterAssert(user);
 	NSParameterAssert(password);
 	NSParameterAssert(completion);
+    
+    _performingLogin = true;
 	
 	NSString *path = [self _functionPathForFunction:@"login"];
 	
-	// Basic Authentication
-	NSString *authStr = [NSString stringWithFormat:@"%@:%@", user, password];
-	NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
-	NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodedStringWithOptions:0]];
+    NSString *authValue = [self basicAuthenticationForUser:user andPassword:password];
 	
 	PLYCompletion wrappedCompletion = [completion copy];
 	
@@ -692,17 +689,36 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 		if (!error && [result isKindOfClass:PLYUser.class])
 		{
 			[self setLoggedInUser:result];
-			
-			[self _storeState];
+            
+            // Search for account in keychain.
+            GenericAccount *account = [[AccountManager sharedAccountManager] loadGenericAccountForService:PLY_SERVICE forAccount:user];
+            
+            if(!account) {
+                // Create new account if no existing account have been found.
+                account = [[AccountManager sharedAccountManager] createGenericAccountForService:PLY_SERVICE forAccount:user];
+            }
+            [account setPassword:password];
+            
+            // Save account into keychain
+            [[AccountManager sharedAccountManager] saveGenericAccount:account];
 		}
 		
 		if (wrappedCompletion)
 		{
 			wrappedCompletion(result, error);
 		}
+        
+        _performingLogin = false;
 	};
 	
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil basicAuth:authValue completion:ownCompletion];
+}
+
+- (NSString *) basicAuthenticationForUser:(NSString *)user andPassword:(NSString *)password{
+	// Basic Authentication
+	NSString *authStr = [NSString stringWithFormat:@"%@:%@", user, password];
+	NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
+	return [NSString stringWithFormat:@"Basic %@", [authData base64EncodedStringWithOptions:0]];
 }
 
 /**
@@ -711,14 +727,18 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 - (void)logoutUserWithCompletion:(PLYCompletion)completion
 {
 	NSParameterAssert(completion);
+    
+    // Remove account from keychain.
+    if(_loggedInUser)
+    {
+        [[AccountManager sharedAccountManager] deleteGenericAccount:_loggedInUser.nickname andService:PLY_SERVICE];
+    }
 	
 	NSString *path = [self _functionPathForFunction:@"logout"];
 	
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:completion];
-	
+    
 	[self setLoggedInUser:nil];
-	
-	[self _storeState];
 }
 
 /**

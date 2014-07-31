@@ -51,6 +51,9 @@
 		A7B442B8183F9D0300E8A170 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B442B7183F9D0300E8A170 /* AVFoundation.framework */; };
 		A7B4873B1987CA7800FA8F83 /* PLYOpine.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B4873A1987CA7800FA8F83 /* PLYOpine.m */; };
 		A7B4877F1987CFB200FA8F83 /* PLYVotableEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B4877E1987CFB200FA8F83 /* PLYVotableEntity.m */; };
+		C92A6256198A1B3900997DDC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C92A6255198A1B3900997DDC /* Security.framework */; };
+		C92A6283198A7D0F00997DDC /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A6280198A7D0F00997DDC /* AccountManager.m */; };
+		C92A6284198A7D0F00997DDC /* GenericAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A6282198A7D0F00997DDC /* GenericAccount.m */; };
 		C97FAA18191CCA3400144D2C /* PLYErrorMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA17191CCA3400144D2C /* PLYErrorMessage.m */; };
 		C97FAA1C191CCA4D00144D2C /* PLYErrorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA1B191CCA4D00144D2C /* PLYErrorResponse.m */; };
 		C97FAA93191D618C00144D2C /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA2C191D618C00144D2C /* AppSettings.m */; };
@@ -440,6 +443,11 @@
 		A7B4873A1987CA7800FA8F83 /* PLYOpine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYOpine.m; path = PLYEntities/PLYOpine.m; sourceTree = "<group>"; };
 		A7B4877D1987CFB200FA8F83 /* PLYVotableEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYVotableEntity.h; path = PLYEntities/PLYVotableEntity.h; sourceTree = "<group>"; };
 		A7B4877E1987CFB200FA8F83 /* PLYVotableEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYVotableEntity.m; path = PLYEntities/PLYVotableEntity.m; sourceTree = "<group>"; };
+		C92A6255198A1B3900997DDC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		C92A627F198A7D0F00997DDC /* AccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountManager.h; sourceTree = "<group>"; };
+		C92A6280198A7D0F00997DDC /* AccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountManager.m; sourceTree = "<group>"; };
+		C92A6281198A7D0F00997DDC /* GenericAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericAccount.h; sourceTree = "<group>"; };
+		C92A6282198A7D0F00997DDC /* GenericAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericAccount.m; sourceTree = "<group>"; };
 		C97FAA16191CCA3400144D2C /* PLYErrorMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYErrorMessage.h; path = PLYEntities/PLYErrorMessage.h; sourceTree = "<group>"; };
 		C97FAA17191CCA3400144D2C /* PLYErrorMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYErrorMessage.m; path = PLYEntities/PLYErrorMessage.m; sourceTree = "<group>"; };
 		C97FAA1A191CCA4D00144D2C /* PLYErrorResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYErrorResponse.h; path = PLYEntities/PLYErrorResponse.h; sourceTree = "<group>"; };
@@ -613,6 +621,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C92A6256198A1B3900997DDC /* Security.framework in Frameworks */,
 				A7B21722183F8A3800C38635 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -705,6 +714,7 @@
 		A7B214F8183F842000C38635 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C92A6255198A1B3900997DDC /* Security.framework */,
 				A71C2BBC1843ADA600B77DB4 /* CoreData.framework */,
 				A7B442B7183F9D0300E8A170 /* AVFoundation.framework */,
 				A7B214F9183F842000C38635 /* Foundation.framework */,
@@ -818,6 +828,7 @@
 		A7B44242183F91E700E8A170 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				C92A627E198A7D0F00997DDC /* Account */,
 				A76D3F58198650770032FE59 /* UI */,
 				C9D31F45190A705200C91A08 /* PLYEntities */,
 				A7B44246183F91E700E8A170 /* PLYServer.h */,
@@ -827,6 +838,17 @@
 				A7B442A3183F97B800E8A170 /* PLYConstants.m */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		C92A627E198A7D0F00997DDC /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				C92A627F198A7D0F00997DDC /* AccountManager.h */,
+				C92A6280198A7D0F00997DDC /* AccountManager.m */,
+				C92A6281198A7D0F00997DDC /* GenericAccount.h */,
+				C92A6282198A7D0F00997DDC /* GenericAccount.m */,
+			);
+			path = Account;
 			sourceTree = "<group>";
 		};
 		C97FAA2A191D618C00144D2C /* Helper */ = {
@@ -1607,8 +1629,10 @@
 				A7B4877F1987CFB200FA8F83 /* PLYVotableEntity.m in Sources */,
 				A76D3F67198650770032FE59 /* PLYFormEmailValidator.m in Sources */,
 				C98CD26A1910E0D70035647C /* PLYList.m in Sources */,
+				C92A6283198A7D0F00997DDC /* AccountManager.m in Sources */,
 				C97FAA1C191CCA4D00144D2C /* PLYErrorResponse.m in Sources */,
 				A76D3F68198650770032FE59 /* PLYFormValidator.m in Sources */,
+				C92A6284198A7D0F00997DDC /* GenericAccount.m in Sources */,
 				C98CD26B1910E0D70035647C /* PLYListItem.m in Sources */,
 				A76D3F9119866E0E0032FE59 /* PLYLostPasswordViewController.m in Sources */,
 				C97FAAE11921FD1900144D2C /* PLYProductCategory.m in Sources */,
