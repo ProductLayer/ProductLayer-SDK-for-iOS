@@ -17,6 +17,9 @@
     if (![[PLYServer sharedServer] loggedInUser])
     {
         if(showLogin){
+            
+            __weak UIViewController *weakSelf = self;
+            
             DTAlertView *alertView = [[DTAlertView alloc] initWithTitle:@"Login required" message:@"Do you want to login?"];
             
             [alertView addButtonWithTitle:@"Login" block:^() {
@@ -24,7 +27,7 @@
 						PLYLoginViewController *loginVC = [[PLYLoginViewController alloc] init];
 						UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginVC];
 						
-						[self presentViewController:navController animated:YES completion:nil];
+						[weakSelf presentViewController:navController animated:YES completion:nil];
 					});
             }];
 			  

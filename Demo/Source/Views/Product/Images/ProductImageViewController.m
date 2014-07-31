@@ -151,6 +151,8 @@
 		return;
 	}
     
+    __weak ProductImageViewController *weakSelf = self;
+    
     DTAlertView *alertView = [[DTAlertView alloc] initWithTitle:@"Choose image source!" message:nil];
     
         [alertView addButtonWithTitle:@"Take New Photo" block:^() {
@@ -161,7 +163,7 @@
                     imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
                     imagePickerController.delegate = (id)self;
                     
-                    [self presentViewController:imagePickerController animated:YES completion:nil];
+                    [weakSelf presentViewController:imagePickerController animated:YES completion:nil];
                 });
             }];
         }];
@@ -173,12 +175,12 @@
             imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
             imagePickerController.delegate = (id)self;
             
-            [self presentViewController:imagePickerController animated:YES completion:nil];
+            [weakSelf presentViewController:imagePickerController animated:YES completion:nil];
         });
     }];
     
     [alertView addCancelButtonWithTitle:@"Cancel" block:^() {
-        // Don't log out.
+        // Nothing to do here;
     }];
     
     

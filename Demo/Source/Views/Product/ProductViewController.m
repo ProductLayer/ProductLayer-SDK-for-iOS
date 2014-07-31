@@ -61,6 +61,8 @@
     _hud.hideAnimationType = HUDProgressAnimationTypeFade;
     [_hud showWithText:@"loading" progressType:HUDProgressTypeInfinite];
     
+    __weak ProductViewController *weakSelf = self;
+    
     [[PLYServer sharedServer] performSearchForGTIN:_gtin language:nil completion:^(id result, NSError *error) {
         if (error)
         {
@@ -79,9 +81,8 @@
                 for(PLYProduct *product in result){
                     // Search for current locale
                     if([product.language isEqualToString:[AppSettings currentAppLocale].localeIdentifier]){
-                        DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-                            [self setProduct:product];
-                        });
+                        [self setProduct:product];
+
                         break;
                     } else if([product.language isEqualToString:@"en"] || [product.language rangeOfString:@"en_"].location != NSNotFound){
                         defaultLocaleProduct = product;
@@ -89,15 +90,16 @@
                 }
                 
                 if(!_product){
+
                     
                     DTAlertView *alertView = [[DTAlertView alloc] initWithTitle:@"Product not found!" message:@"The product have not been found for your locale."];
+                    alertView.delegate = self;
                     
                     if(defaultLocaleProduct) {
-                        
                         [alertView addButtonWithTitle:[NSString stringWithFormat:@"Show locale %@", defaultLocaleProduct.language] block:^() {
                             [[PLYServer sharedServer] logoutUserWithCompletion:^(id result, NSError *error) {
                                 DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-                                    [self setProduct:defaultLocaleProduct];
+                                    [weakSelf setProduct:defaultLocaleProduct];
                                 });
                             }];
                         }];
@@ -109,15 +111,17 @@
                             PLYProduct *newProduct = [[PLYProduct alloc] init];
                             [newProduct setGTIN:_gtin];
                             
-                            [self setProduct:newProduct];
+                            [weakSelf setProduct:newProduct];
                             
-                            [self performSegueWithIdentifier:@"editProduct" sender:nil];
+                            [weakSelf performSegueWithIdentifier:@"editProduct" sender:nil];
                         });
                     }];
                     
                     [alertView addCancelButtonWithTitle:@"Cancel" block:^() {
-                        // Don't log out.
+                        // Do nothing here. UIAlertViewDelegate is used.
+                        [weakSelf.navigationController popViewControllerAnimated:YES];
                     }];
+                    
                     
                     
                     [alertView show];
@@ -315,6 +319,5 @@
 - (void) productUpdated:(PLYProduct *)product{
     [self setProduct:product];
 }
-
 
 @end

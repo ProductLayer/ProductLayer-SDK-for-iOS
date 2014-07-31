@@ -133,10 +133,18 @@
 		if ([[PLYServer sharedServer] loggedInUser])
 		{
             [self.loginButton setTitle:[[[PLYServer sharedServer] loggedInUser] nickname]];
+            [self.loginButton setEnabled:true];
 		}
 		else
 		{
-            [self.loginButton setTitle:@"Sign in"];
+            if([[PLYServer sharedServer] performingLogin])
+            {
+                [self.loginButton setTitle:@"loading ..."];
+                [self.loginButton setEnabled:false];
+            } else {
+                [self.loginButton setTitle:@"Sign in"];
+                [self.loginButton setEnabled:true];
+            }
 		}
 	});
 }
@@ -163,6 +171,8 @@
 {
 	if ([[PLYServer sharedServer] loggedInUser])
 	{
+        __weak HomeViewController *weakSelf = self;
+        
 		DTAlertView *alertView = [[DTAlertView alloc] initWithTitle:@"Logout?" message:@"Do you realy want to logout?"];
 		
 		[alertView addButtonWithTitle:@"yes" block:^() {
@@ -170,7 +180,7 @@
 				
 				DTBlockPerformSyncIfOnMainThreadElseAsync(^{
 					
-					[self _updateLoginBar];
+					[weakSelf _updateLoginBar];
 					
 					if (error)
 					{
@@ -206,8 +216,8 @@
 			
 			UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 			ProductViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"ProductViewController"];
-			[viewController loadProductWithGTIN:code.content];
 			[self.navigationController pushViewController:viewController animated:YES];
+            [viewController loadProductWithGTIN:code.content];
 		});
 	}
 }

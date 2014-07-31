@@ -188,7 +188,7 @@ typedef enum : NSUInteger {
     [_hud showWithText:@"loading" progressType:HUDProgressTypeInfinite];
     
     // TODO: Load all social Feeds (Images, Reviews, Opinions, ...)
-    [[PLYServer sharedServer] getLastUploadedImagesWithPage:0 andRPP:20 completion:^(id result, NSError *error) {
+    [[PLYServer sharedServer] getLastUploadedImagesWithPage:0 andRPP:30 completion:^(id result, NSError *error) {
         
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
             [_hud hide];
