@@ -156,16 +156,14 @@
     DTAlertView *alertView = [[DTAlertView alloc] initWithTitle:@"Choose image source!" message:nil];
     
         [alertView addButtonWithTitle:@"Take New Photo" block:^() {
-            [[PLYServer sharedServer] logoutUserWithCompletion:^(id result, NSError *error) {
-                DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-                    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-                    imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
-                    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-                    imagePickerController.delegate = (id)self;
-                    
-                    [weakSelf presentViewController:imagePickerController animated:YES completion:nil];
-                });
-            }];
+            DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+                UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+                imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+                imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+                imagePickerController.delegate = (id)self;
+                
+                [weakSelf presentViewController:imagePickerController animated:YES completion:nil];
+            });
         }];
     
     [alertView addButtonWithTitle:@"Choose Existing Photo" block:^() {
