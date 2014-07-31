@@ -298,6 +298,12 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  */
 - (void)addOrReplaceListItem:(PLYListItem *)listItem toListWithId:(NSString *)listId completion:(PLYCompletion)completion;
 
+/**
+ Delete product with GTIN from list.
+ @param gtin The GTIN (barcode) of the product
+ @param listId The list identifier
+ @param completion The completion handler
+ */
 - (void)deleteProductWithGTIN:(NSString *)gtin fromListWithId:(NSString *)listId completion:(PLYCompletion)completion;
 
 /**
@@ -410,7 +416,7 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @param showProducts If true products will be included otherwise not
  @param completion The completion handler
  */
-- (void)timelineForProduct:(NSString *)GTIN
+- (void)timelineForProduct:(NSString *)gtin
                    sinceID:(NSString *)sinceID
                    untilID:(NSString *)untilID
                      count:(NSNumber *)count

@@ -7,6 +7,10 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ The generic account for storing into the keychain.
+ */
+
 @interface GenericAccount : NSObject 
 {
 }
