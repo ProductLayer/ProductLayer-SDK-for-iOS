@@ -16,6 +16,7 @@
 #import "DTAlertView.h"
 
 #import "ReviewTableViewController.h"
+#import "OpineTableViewController.h"
 #import "ProductImageViewController.h"
 #import "KeyValueTableViewController.h"
 #import "ProductListsViewController.h"
@@ -269,6 +270,12 @@
 		ReviewTableViewController *reviewVC = (ReviewTableViewController *)segue.destinationViewController;
         reviewVC.navigationItem.title = _product.name;
 		reviewVC.gtin = _product.GTIN;
+	}
+    else if ([[segue identifier] isEqualToString:@"showProductOpines"])
+	{
+		OpineTableViewController *opineVC = (OpineTableViewController *)segue.destinationViewController;
+        opineVC.navigationItem.title = _product.name;
+		opineVC.parent = _product;
 	}
 	else if ([[segue identifier] isEqualToString:@"showProductImages"])
 	{

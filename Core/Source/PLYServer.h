@@ -15,6 +15,9 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 @class PLYUser;
 @class PLYList;
 @class PLYListItem;
+@class PLYReview;
+@class PLYOpine;
+@class PLYVotableEntity;
 
 /**
  Wrapper for the ProductLayer API
@@ -167,6 +170,28 @@ typedef void (^PLYCompletion)(id result, NSError *error);
                    completion:(PLYCompletion)completion;
 
 /**
+ @name Vote Handling
+ */
+
+/*
+ Upvote an votable entity.
+ 
+ @param voteableEntity The entity which should be upvoted.
+ @param completion The completion handler for the request
+ */
+- (void)upVote:(PLYVotableEntity *)voteableEntity
+    completion:(PLYCompletion)completion;
+
+/*
+ Downvote an votable entity.
+ 
+ @param voteableEntity The entity which should be downvoted.
+ @param completion The completion handler for the request
+ */
+- (void)downVote:(PLYVotableEntity *)voteableEntity
+      completion:(PLYCompletion)completion;
+
+/**
  @name Image Handling
  */
 
@@ -182,26 +207,38 @@ typedef void (^PLYCompletion)(id result, NSError *error);
              completion:(PLYCompletion)completion;
 
 /**
- Adds a 'thumbs up' vote to a specific product image. An authenticated user can only vote once.
- 
- @param imageFileId The image file identifier
- @param gtin The GTIN (barcode) of the product
- @param completion The completion handler for the request
+ @name Opines
  */
-- (void)upVoteImageWithId:(NSString *)imageFileId
-                  andGTIN:(NSString *)gtin
-               completion:(PLYCompletion)completion;
 
 /**
- Adds a 'thumbs down' vote to a specific product image. An authenticated user can only vote once.
+ Searches for opines
  
- @param imageFileId The image file identifier
  @param gtin The GTIN (barcode) of the product
+ @param language The language code to return results in
+ @param nickname The user to restrict the results to. Pass `nil` to return all user's reviews.
+ @param showFiendsOnly If true shows only opines from friends.
+ @param orderBy The key to order results by, e.g. "pl-created-time_desc"
+ @param page The page number
+ @param rpp The number of results per returned page
  @param completion The completion handler for the request
  */
-- (void)downVoteImageWithId:(NSString *)imageFileId
-                    andGTIN:(NSString *)gtin
-                 completion:(PLYCompletion)completion;
+- (void) performSearchForOpineWithGTIN:(NSString *)gtin
+                          withLanguage:(NSString *)language
+                  fromUserWithNickname:(NSString *)nickname
+                        showFiendsOnly:(BOOL *)showFiendsOnly
+                               orderBy:(NSString *)orderBy
+                                  page:(NSNumber *)page
+                        recordsPerPage:(NSNumber *)rpp
+                            completion:(PLYCompletion)completion;
+
+/*
+ Create an opine.
+ 
+ @param opine The opine
+ @param completion The completion handler for the request
+ */
+- (void)createOpine:(PLYOpine *)opine
+         completion:(PLYCompletion)completion;
 
 /**
  @name Reviews
@@ -212,7 +249,6 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  
  @param gtin The GTIN (barcode) of the product
  @param language The language code to return results in
- @param completion The completion handler for the request
  @param nickname The user to restrict the results to. Pass `nil` to return all user's reviews.
  @param rating The rating to restrict results to. Pass `nil` to return all reviews regardless of rating.
  @param orderBy The key to order results by, e.g. "pl-created-time_desc"
@@ -290,9 +326,97 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @name Timelines
  */
 
-/*
+/**
  The the latest timeline entries
+ @param count The maximum number of objects returned
+ @param completion The completion handler
  */
-- (void)timelineForAllUsersWithCount:(NSUInteger)count completion:(PLYCompletion)completion;
+
+- (void)timelineForAllUsersWithCount:(NSNumber *)count completion:(PLYCompletion)completion;
+
+/**
+ The the latest timeline entries
+ @param count The maximum number of objects returned
+ @param sinceID Returns results with an ID greater than (that is, more recent than) the specified ID
+ @param untilID Returns results with an ID greater than (that is, more recent than) the specified ID
+ @param showOpines If true opines will be included otherwise not
+ @param showReviews If true reviews will be included otherwise not
+ @param showImages If true images will be included otherwise not
+ @param showProducts If true products will be included otherwise not
+ @param completion The completion handler
+ */
+- (void)timelineForAllUsersWithCount:(NSNumber *)count
+                             sinceID:(NSString *)sinceID
+                             untilID:(NSString *)untilID
+                          showOpines:(BOOL)showOpines
+                         showReviews:(BOOL)showReviews
+                          showImages:(BOOL)showImages
+                        showProducts:(BOOL)showProducts
+                          completion:(PLYCompletion)completion;
+
+/**
+ The the latest timeline entries for the logged in user (me)
+ @param count The maximum number of objects returned
+ @param sinceID Returns results with an ID greater than (that is, more recent than) the specified ID
+ @param untilID Returns results with an ID greater than (that is, more recent than) the specified ID
+ @param showOpines If true opines will be included otherwise not
+ @param showReviews If true reviews will be included otherwise not
+ @param showImages If true images will be included otherwise not
+ @param showProducts If true products will be included otherwise not
+ @param completion The completion handler
+ */
+- (void)timelineForMeWithCount:(NSNumber *)count
+                       sinceID:(NSString *)sinceID
+                       untilID:(NSString *)untilID
+                    showOpines:(BOOL)showOpines
+                   showReviews:(BOOL)showReviews
+                    showImages:(BOOL)showImages
+                  showProducts:(BOOL)showProducts
+                    completion:(PLYCompletion)completion;
+
+/**
+ The the latest timeline entries for a specific user
+ @param nickname The nickname of the user
+ @param sinceID Returns results with an ID greater than (that is, more recent than) the specified ID
+ @param untilID Returns results with an ID greater than (that is, more recent than) the specified ID
+ @param count The maximum number of objects returned
+ @param showOpines If true opines will be included otherwise not
+ @param showReviews If true reviews will be included otherwise not
+ @param showImages If true images will be included otherwise not
+ @param showProducts If true products will be included otherwise not
+ @param completion The completion handler
+ */
+- (void)timelineForUser:(NSString *)nickname
+                sinceID:(NSString *)sinceID
+                untilID:(NSString *)untilID
+                  count:(NSNumber *)count
+             showOpines:(BOOL)showOpines
+            showReviews:(BOOL)showReviews
+             showImages:(BOOL)showImages
+           showProducts:(BOOL)showProducts
+             completion:(PLYCompletion)completion;
+
+/**
+ The the latest timeline entries for a specific product
+ @param gtin The GTIN (barcode) of the product
+ @param sinceID Returns results with an ID greater than (that is, more recent than) the specified ID
+ @param untilID Returns results with an ID greater than (that is, more recent than) the specified ID
+ @param count The maximum number of objects returned
+ @param showOpines If true opines will be included otherwise not
+ @param showReviews If true reviews will be included otherwise not
+ @param showImages If true images will be included otherwise not
+ @param showProducts If true products will be included otherwise not
+ @param completion The completion handler
+ */
+- (void)timelineForProduct:(NSString *)GTIN
+                   sinceID:(NSString *)sinceID
+                   untilID:(NSString *)untilID
+                     count:(NSNumber *)count
+                showOpines:(BOOL)showOpines
+               showReviews:(BOOL)showReviews
+                showImages:(BOOL)showImages
+              showProducts:(BOOL)showProducts
+                completion:(PLYCompletion)completion;
+
 
 @end

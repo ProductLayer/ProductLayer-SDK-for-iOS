@@ -800,36 +800,58 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:data completion:completion];
 }
 
-/**
- * Upvote a specific product image.
- * ATTENTION: Login required
- **/
-- (void) upVoteImageWithId:(NSString *)imageFileId andGTIN:(NSString *)gtin completion:(PLYCompletion)completion
+#pragma mark - Opines
+
+- (void) performSearchForOpineWithGTIN:(NSString *)gtin
+                          withLanguage:(NSString *)language
+                  fromUserWithNickname:(NSString *)nickname
+                        showFiendsOnly:(BOOL *)showFiendsOnly
+                               orderBy:(NSString *)orderBy
+                                  page:(NSNumber *)page
+                        recordsPerPage:(NSNumber *)rpp
+                            completion:(PLYCompletion)completion
 {
-	NSParameterAssert(gtin);
-	NSParameterAssert(imageFileId);
 	NSParameterAssert(completion);
 	
-	NSString *function = [NSString stringWithFormat:@"image/%@/up_vote", imageFileId];
+	NSString *function = @"opines";
 	NSString *path = [self _functionPathForFunction:function];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:completion];
+	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
+	
+	if (gtin)           [parameters setObject:gtin     forKey:@"gtin"];
+	if (language)       [parameters setObject:language forKey:@"language"];
+	if (nickname)       [parameters setObject:nickname forKey:@"nickname"];
+	
+    if (showFiendsOnly) [parameters setObject:@"true"   forKey:@"show_fiends_only"];
+    else                [parameters setObject:@"false"   forKey:@"show_fiends_only"];
+	
+    if (orderBy)        [parameters setObject:orderBy  forKey:@"order_by"];
+	if (page)           [parameters setObject:page     forKey:@"page"];
+	if (rpp)            [parameters setObject:rpp      forKey:@"records_per_page"];
+	
+	[self _performMethodCallWithPath:path parameters:parameters completion:completion];
 }
 
-/**
- * Downvote a specific product image.
- * ATTENTION: Login required
- **/
-- (void) downVoteImageWithId:(NSString *)imageFileId andGTIN:(NSString *)gtin completion:(PLYCompletion)completion
-{
-	NSParameterAssert(gtin);
-	NSParameterAssert(imageFileId);
+- (void)createOpine:(PLYOpine *)opine
+         completion:(PLYCompletion)completion{
+
+	NSParameterAssert(opine);
+    NSParameterAssert(opine.parent);
+    NSParameterAssert(opine.text);
+    NSParameterAssert(opine.GTIN);
+    NSParameterAssert(opine.language);
 	NSParameterAssert(completion);
+    
+    // only the reference to the entity is needed, so we reduce it.
+    PLYVotableEntity *reducedParent = [[PLYVotableEntity alloc] init];
+    reducedParent.Class = opine.parent.Class;
+    reducedParent.Id = opine.parent.Id;
+    [opine setParent:reducedParent];
 	
-	NSString *function = [NSString stringWithFormat:@"image/%@/down_vote", imageFileId];
+	NSString *function = @"opines";
 	NSString *path = [self _functionPathForFunction:function];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:completion];
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:[opine dictionaryRepresentation] completion:completion];
 }
 
 #pragma mark - Reviews
@@ -1192,14 +1214,194 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 
 #pragma mark - Timelines
 
-- (void)timelineForAllUsersWithCount:(NSUInteger)count completion:(PLYCompletion)completion
+- (void)timelineForAllUsersWithCount:(NSNumber *)count completion:(PLYCompletion)completion
+{
+	NSParameterAssert(completion);
+	
+	[self timelineForAllUsersWithCount:count
+                               sinceID:nil
+                               untilID:nil
+                            showOpines:true
+                           showReviews:true
+                            showImages:true
+                          showProducts:true
+                            completion:completion];
+}
+
+- (void)timelineForAllUsersWithCount:(NSNumber *)count
+                             sinceID:(NSString *)sinceID
+                             untilID:(NSString *)untilID
+                          showOpines:(BOOL)showOpines
+                         showReviews:(BOOL)showReviews
+                          showImages:(BOOL)showImages
+                        showProducts:(BOOL)showProducts
+                          completion:(PLYCompletion)completion
 {
 	NSParameterAssert(completion);
 	
 	NSString *function = @"/timeline";
 	NSString *path = [self _functionPathForFunction:function];
+    
+    NSMutableDictionary *params = [self createTimelineParameterWithSinceID:sinceID
+                                                                   untilID:untilID
+                                                                     count:count
+                                                                showOpines:showOpines
+                                                               showReviews:showReviews
+                                                                showImages:showImages
+                                                              showProducts:showProducts];
 	
-	[self _performMethodCallWithPath:path parameters:nil completion:completion];
+	[self _performMethodCallWithPath:path parameters:params completion:completion];
+}
+
+- (void)timelineForMeWithCount:(NSNumber *)count
+                             sinceID:(NSString *)sinceID
+                             untilID:(NSString *)untilID
+                          showOpines:(BOOL)showOpines
+                         showReviews:(BOOL)showReviews
+                          showImages:(BOOL)showImages
+                        showProducts:(BOOL)showProducts
+                          completion:(PLYCompletion)completion
+{
+	NSParameterAssert(completion);
+	
+	NSString *function = @"/timeline/me";
+	NSString *path = [self _functionPathForFunction:function];
+    
+    NSMutableDictionary *params = [self createTimelineParameterWithSinceID:sinceID
+                                                                   untilID:untilID
+                                                                     count:count
+                                                                showOpines:showOpines
+                                                               showReviews:showReviews
+                                                                showImages:showImages
+                                                              showProducts:showProducts];
+	
+	[self _performMethodCallWithPath:path parameters:params completion:completion];
+}
+
+- (void)timelineForUser:(NSString *)nickname
+                sinceID:(NSString *)sinceID
+                untilID:(NSString *)untilID
+                  count:(NSNumber *)count
+             showOpines:(BOOL)showOpines
+            showReviews:(BOOL)showReviews
+             showImages:(BOOL)showImages
+           showProducts:(BOOL)showProducts
+             completion:(PLYCompletion)completion
+{
+    NSParameterAssert(nickname);
+	NSParameterAssert(completion);
+	
+	NSString *function = [NSString stringWithFormat:@"/timeline/user/%@", nickname];
+	NSString *path = [self _functionPathForFunction:function];
+    
+    NSMutableDictionary *params = [self createTimelineParameterWithSinceID:sinceID
+                                                                   untilID:untilID
+                                                                     count:count
+                                                                showOpines:showOpines
+                                                               showReviews:showReviews
+                                                                showImages:showImages
+                                                              showProducts:showProducts];
+	
+	[self _performMethodCallWithPath:path parameters:params completion:completion];
+}
+
+- (void)timelineForProduct:(NSString *)GTIN
+                   sinceID:(NSString *)sinceID
+                   untilID:(NSString *)untilID
+                     count:(NSNumber *)count
+                showOpines:(BOOL)showOpines
+               showReviews:(BOOL)showReviews
+                showImages:(BOOL)showImages
+              showProducts:(BOOL)showProducts
+                completion:(PLYCompletion)completion
+{
+    NSParameterAssert(GTIN);
+	NSParameterAssert(completion);
+	
+	NSString *function = [NSString stringWithFormat:@"/timeline/product/%@", GTIN];
+	NSString *path = [self _functionPathForFunction:function];
+    
+    NSMutableDictionary *params = [self createTimelineParameterWithSinceID:sinceID
+                                                                   untilID:untilID
+                                                                     count:count
+                                                                showOpines:showOpines
+                                                               showReviews:showReviews
+                                                                showImages:showImages
+                                                              showProducts:showProducts];
+	
+	[self _performMethodCallWithPath:path parameters:params completion:completion];
+}
+
+- (NSMutableDictionary *) createTimelineParameterWithSinceID:(NSString *)sinceID
+                                                     untilID:(NSString *)untilID
+                                                       count:(NSNumber *)count
+                                                  showOpines:(BOOL)showOpines
+                                                 showReviews:(BOOL)showReviews
+                                                  showImages:(BOOL)showImages
+                                                showProducts:(BOOL)showProducts
+{
+    NSMutableDictionary *tmp = [[NSMutableDictionary alloc] init];
+    
+    if (sinceID)            [tmp setObject:sinceID forKey:@"since_id"];
+    if (untilID)            [tmp setObject:untilID forKey:@"until_id"];
+    if (count && count > 0) [tmp setObject:count forKey:@"count"];
+    
+    [tmp setObject:((showOpines)   ? @"true" : @"false") forKey:@"opines"];
+    [tmp setObject:((showReviews)  ? @"true" : @"false") forKey:@"reviews"];
+    [tmp setObject:((showImages)   ? @"true" : @"false") forKey:@"images"];
+    [tmp setObject:((showProducts) ? @"true" : @"false") forKey:@"products"];
+    
+    return tmp;
+}
+
+#pragma mark - Votings
+
+- (void)upVote:(PLYVotableEntity *)voteableEntity
+    completion:(PLYCompletion)completion{
+    
+	NSParameterAssert(voteableEntity);
+	NSParameterAssert(completion);
+    
+    NSString *function;
+    if([voteableEntity isKindOfClass:[PLYImage class]]){
+        function = [NSString stringWithFormat:@"image/%@/up_vote", [(PLYImage *)voteableEntity fileId]];
+    } else if ([voteableEntity isKindOfClass:[PLYProduct class]]){
+        function = [NSString stringWithFormat:@"product/%@/up_vote", [voteableEntity Id]];
+    } else if ([voteableEntity isKindOfClass:[PLYOpine class]]){
+        function = [NSString stringWithFormat:@"opine/%@/up_vote", [voteableEntity Id]];
+    } else if ([voteableEntity isKindOfClass:[PLYReview class]]){
+        function = [NSString stringWithFormat:@"review/%@/up_vote", [voteableEntity Id]];
+    } else {
+        NSAssert(false, @"Can't vote this entity.");
+    }
+    
+    NSString *path = [self _functionPathForFunction:function];
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:completion];
+}
+
+- (void)downVote:(PLYVotableEntity *)voteableEntity
+      completion:(PLYCompletion)completion{
+    
+    NSParameterAssert(voteableEntity);
+	NSParameterAssert(completion);
+    
+    NSString *function;
+    if([voteableEntity isKindOfClass:[PLYImage class]]){
+        function = [NSString stringWithFormat:@"image/%@/down_vote", [(PLYImage *)voteableEntity fileId]];
+    } else if ([voteableEntity isKindOfClass:[PLYProduct class]]){
+        function = [NSString stringWithFormat:@"product/%@/down_vote", [voteableEntity Id]];
+    } else if ([voteableEntity isKindOfClass:[PLYOpine class]]){
+        function = [NSString stringWithFormat:@"opine/%@/down_vote", [voteableEntity Id]];
+    } else if ([voteableEntity isKindOfClass:[PLYReview class]]){
+        function = [NSString stringWithFormat:@"review/%@/down_vote", [voteableEntity Id]];
+    } else {
+        NSAssert(false, @"Can't vote this entity.");
+    }
+    
+    NSString *path = [self _functionPathForFunction:function];
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:completion];
 }
 
 

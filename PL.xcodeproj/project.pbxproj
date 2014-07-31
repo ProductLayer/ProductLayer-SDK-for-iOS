@@ -100,6 +100,11 @@
 		C97FAADD192152D900144D2C /* up_vote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C97FAAD9192152D900144D2C /* up_vote@2x.png */; };
 		C97FAAE11921FD1900144D2C /* PLYProductCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAADF1921FCFA00144D2C /* PLYProductCategory.m */; };
 		C97FAAE819221CD800144D2C /* libDTProgressHUD_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C97FAAE519221C7E00144D2C /* libDTProgressHUD_iOS.a */; };
+		C980DED11988DD4E009C5395 /* opine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C980DECF1988DD4E009C5395 /* opine@2x.png */; };
+		C980DED21988DD4E009C5395 /* opine.png in Resources */ = {isa = PBXBuildFile; fileRef = C980DED01988DD4E009C5395 /* opine.png */; };
+		C980DEF11988DDD3009C5395 /* OpineTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C980DEF01988DDD3009C5395 /* OpineTableViewController.m */; };
+		C980DEF41988F9DE009C5395 /* OpineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C980DEF31988F9DE009C5395 /* OpineTableViewCell.m */; };
+		C980DEF71988FBEE009C5395 /* WriteOpineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C980DEF61988FBEE009C5395 /* WriteOpineViewController.m */; };
 		C98CD254190F9FB00035647C /* register_user.png in Resources */ = {isa = PBXBuildFile; fileRef = C98CD252190F9FB00035647C /* register_user.png */; };
 		C98CD255190F9FB00035647C /* register_user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C98CD253190F9FB00035647C /* register_user@2x.png */; };
 		C98CD25C190FA86B0035647C /* no_image.png in Resources */ = {isa = PBXBuildFile; fileRef = C98CD25A190FA86B0035647C /* no_image.png */; };
@@ -530,6 +535,14 @@
 		C97FAAD9192152D900144D2C /* up_vote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "up_vote@2x.png"; sourceTree = "<group>"; };
 		C97FAADE1921FCFA00144D2C /* PLYProductCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYProductCategory.h; path = PLYEntities/PLYProductCategory.h; sourceTree = "<group>"; };
 		C97FAADF1921FCFA00144D2C /* PLYProductCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYProductCategory.m; path = PLYEntities/PLYProductCategory.m; sourceTree = "<group>"; };
+		C980DECF1988DD4E009C5395 /* opine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "opine@2x.png"; sourceTree = "<group>"; };
+		C980DED01988DD4E009C5395 /* opine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opine.png; sourceTree = "<group>"; };
+		C980DEEF1988DDD3009C5395 /* OpineTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpineTableViewController.h; path = Opine/OpineTableViewController.h; sourceTree = "<group>"; };
+		C980DEF01988DDD3009C5395 /* OpineTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpineTableViewController.m; path = Opine/OpineTableViewController.m; sourceTree = "<group>"; };
+		C980DEF21988F9DE009C5395 /* OpineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpineTableViewCell.h; path = Opine/OpineTableViewCell.h; sourceTree = "<group>"; };
+		C980DEF31988F9DE009C5395 /* OpineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpineTableViewCell.m; path = Opine/OpineTableViewCell.m; sourceTree = "<group>"; };
+		C980DEF51988FBEE009C5395 /* WriteOpineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WriteOpineViewController.h; path = Opine/WriteOpineViewController.h; sourceTree = "<group>"; };
+		C980DEF61988FBEE009C5395 /* WriteOpineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WriteOpineViewController.m; path = Opine/WriteOpineViewController.m; sourceTree = "<group>"; };
 		C98CD252190F9FB00035647C /* register_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = register_user.png; sourceTree = "<group>"; };
 		C98CD253190F9FB00035647C /* register_user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register_user@2x.png"; sourceTree = "<group>"; };
 		C98CD25A190FA86B0035647C /* no_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_image.png; sourceTree = "<group>"; };
@@ -859,6 +872,7 @@
 				C97FAA3C191D618C00144D2C /* Menu */,
 				C97FAA3F191D618C00144D2C /* Product */,
 				C97FAA84191D618C00144D2C /* User */,
+				C980DEEE1988DD96009C5395 /* Opine */,
 				C97FAA68191D618C00144D2C /* Review */,
 				C97FAA71191D618C00144D2C /* Scanner */,
 				C97FAA7C191D618C00144D2C /* Settings */,
@@ -1066,9 +1080,24 @@
 			path = ThirdParty;
 			sourceTree = "<group>";
 		};
+		C980DEEE1988DD96009C5395 /* Opine */ = {
+			isa = PBXGroup;
+			children = (
+				C980DEEF1988DDD3009C5395 /* OpineTableViewController.h */,
+				C980DEF01988DDD3009C5395 /* OpineTableViewController.m */,
+				C980DEF21988F9DE009C5395 /* OpineTableViewCell.h */,
+				C980DEF31988F9DE009C5395 /* OpineTableViewCell.m */,
+				C980DEF51988FBEE009C5395 /* WriteOpineViewController.h */,
+				C980DEF61988FBEE009C5395 /* WriteOpineViewController.m */,
+			);
+			name = Opine;
+			sourceTree = "<group>";
+		};
 		C9BDC06A1908059D0062BB56 /* menu */ = {
 			isa = PBXGroup;
 			children = (
+				C980DECF1988DD4E009C5395 /* opine@2x.png */,
+				C980DED01988DD4E009C5395 /* opine.png */,
 				C9ADBDE41914F9DD004C81B3 /* lists.png */,
 				C9ADBDE51914F9DD004C81B3 /* lists@2x.png */,
 				C98CD252190F9FB00035647C /* register_user.png */,
@@ -1455,6 +1484,7 @@
 				C9ADBE06191A208D004C81B3 /* star_empty@2x.png in Resources */,
 				C9BDC06119027BC10062BB56 /* scan_barcode@2x.png in Resources */,
 				C9BDC08219080CDF0062BB56 /* settings@2x.png in Resources */,
+				C980DED21988DD4E009C5395 /* opine.png in Resources */,
 				C97FAADB192152D900144D2C /* down_vote@2x.png in Resources */,
 				C98CD254190F9FB00035647C /* register_user.png in Resources */,
 				C9BDC07919080A7C0062BB56 /* review.png in Resources */,
@@ -1463,6 +1493,7 @@
 				C9BDC08119080CDF0062BB56 /* settings.png in Resources */,
 				C9BDC05D1901AEF90062BB56 /* productlayer_title@2x.png in Resources */,
 				C9BDC08619080DD10062BB56 /* add@2x.png in Resources */,
+				C980DED11988DD4E009C5395 /* opine@2x.png in Resources */,
 				C9BDC076190809760062BB56 /* home@2x.png in Resources */,
 				C9BDC0681907C48B0062BB56 /* menu.png in Resources */,
 				C97FAADA192152D900144D2C /* down_vote.png in Resources */,
@@ -1535,6 +1566,8 @@
 				C97FAAB6191D618C00144D2C /* UIViewController+Login.m in Sources */,
 				C97FAA9D191D618C00144D2C /* BigImageViewController.m in Sources */,
 				C97FAABB191D618C00144D2C /* UserDetailsViewController.m in Sources */,
+				C980DEF11988DDD3009C5395 /* OpineTableViewController.m in Sources */,
+				C980DEF41988F9DE009C5395 /* OpineTableViewCell.m in Sources */,
 				C97FAAD5192145F800144D2C /* LocalizableStringPicker.m in Sources */,
 				C97FAAB2191D618C00144D2C /* DTScannedCode.m in Sources */,
 				C97FAAAB191D618C00144D2C /* RatingTableCell.m in Sources */,
@@ -1550,6 +1583,7 @@
 				C97FAABC191D618C00144D2C /* UserTableViewCell.m in Sources */,
 				C97FAA9C191D618C00144D2C /* EditProductViewController.m in Sources */,
 				C97FAA93191D618C00144D2C /* AppSettings.m in Sources */,
+				C980DEF71988FBEE009C5395 /* WriteOpineViewController.m in Sources */,
 				C97FAAAA191D618C00144D2C /* ProductLayerViewController.m in Sources */,
 				C97FAA95191D618C00144D2C /* DTManagedImage.m in Sources */,
 				C97FAA98191D618C00144D2C /* HomeViewController.m in Sources */,

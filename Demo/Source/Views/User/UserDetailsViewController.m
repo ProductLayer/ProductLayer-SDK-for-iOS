@@ -12,6 +12,7 @@
 #import "PLYUser.h"
 
 #import "ReviewTableViewController.h"
+#import "OpineTableViewController.h"
 #import "SearchUserTableViewController.h"
 
 @interface UserDetailsViewController ()
@@ -73,11 +74,19 @@
 		ReviewTableViewController *reviewVC = (ReviewTableViewController *)segue.destinationViewController;
 		reviewVC.userNickname = _user.nickname;
         [reviewVC reloadReviews];
-	} else if ([[segue identifier] isEqualToString:@"showFollowerFromUser"])
+	}
+    else if ([[segue identifier] isEqualToString:@"showOpinesFromUser"])
+	{
+		OpineTableViewController *opineVC = (OpineTableViewController *)segue.destinationViewController;
+		opineVC.userNickname = _user.nickname;
+        [opineVC reloadOpines];
+	}
+    else if ([[segue identifier] isEqualToString:@"showFollowerFromUser"])
 	{
 		SearchUserTableViewController *searchVC = (SearchUserTableViewController *)segue.destinationViewController;
 		[searchVC loadFollowerFromUser:_user];
-	} else if ([[segue identifier] isEqualToString:@"showFollowingFromUser"])
+	}
+    else if ([[segue identifier] isEqualToString:@"showFollowingFromUser"])
 	{
 		SearchUserTableViewController *searchVC = (SearchUserTableViewController *)segue.destinationViewController;
 		[searchVC loadFollowingFromUser:_user];
