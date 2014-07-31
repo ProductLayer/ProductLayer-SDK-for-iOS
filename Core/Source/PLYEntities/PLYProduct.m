@@ -71,7 +71,7 @@
 	}
 	else if ([key isEqualToString:@"pl-prod-gtin"])
 	{
-		[self setValue:value forKey:@"gtin"];
+		[self setValue:value forKey:@"GTIN"];
 	}
 	else if ([key isEqualToString:@"pl-prod-homepage"])
 	{
