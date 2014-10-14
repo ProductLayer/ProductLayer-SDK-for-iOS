@@ -1,5 +1,8 @@
 // all-inclusive header for Product Layer API
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 #import "PLYConstants.h"
 #import "PLYServer.h"
 
@@ -53,3 +56,9 @@ static inline NSBundle *PLYResourceBundle()
 
 #define PLYLocalizedStringFromTable(key, tbl, comment) \
 NSLocalizedStringFromTableInBundle(key, tbl, PLYResourceBundle(), comment)
+
+//! Project version number for ProductLayer.
+FOUNDATION_EXPORT double ProductLayerVersionNumber;
+
+//! Project version string for ProductLayer.
+FOUNDATION_EXPORT const unsigned char ProductLayerVersionString[];
