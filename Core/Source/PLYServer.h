@@ -6,7 +6,6 @@
 //  Copyright (c) 2013 Cocoanetics. All rights reserved.
 //
 
-
 /*
  Completion handler for Discogs API calls
  */
