@@ -7,7 +7,6 @@
 //
 
 #import "AppSettings.h"
-
 #import "ProductLayer.h"
 
 #import "DTLog.h"
