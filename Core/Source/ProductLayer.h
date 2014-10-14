@@ -24,8 +24,32 @@
 
 // Localization
 
-#define PLYResourceBundle() \
-[NSBundle bundleWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"ProductLayer" ofType:@"bundle"]]
+// helper function to return the NSBundle that contains the localized strings
+static inline NSBundle *PLYResourceBundle()
+{
+	// bundle reference only retrieved once
+	static NSBundle *_resourceBundle = nil;
+	
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		NSBundle *bundle = [NSBundle bundleForClass:[PLYServer class]];
+		NSString *extension = [[bundle bundlePath] pathExtension];
+		
+		if ([extension isEqualToString:@"app"])
+		{
+			// inside .app we need to get the resource bundle
+			NSString *resourceBundlePath = [bundle pathForResource:@"ProductLayer" ofType:@"bundle"];
+			_resourceBundle = [NSBundle bundleWithPath:resourceBundlePath];
+		}
+		else 	if ([extension isEqualToString:@"framework"])
+		{
+			// inside .framework the framework is the resource bundle
+			_resourceBundle = bundle;
+		}
+	});
+	
+	return _resourceBundle;
+}
 
 #define PLYLocalizedStringFromTable(key, tbl, comment) \
 NSLocalizedStringFromTableInBundle(key, tbl, PLYResourceBundle(), comment)
