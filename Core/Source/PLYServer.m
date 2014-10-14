@@ -24,12 +24,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 [NSCharacterSet URLQueryAllowedCharacterSet]];
 
 // this is the URL for the endpoint server
-//#define PLY_ENDPOINT_URL [NSURL URLWithString:@"http://api.productlayer.com"]
-
-// TODO: test server, set back to live on release
-#define PLY_ENDPOINT_URL [NSURL URLWithString:@"http://176.9.158.164:28080"]
-
-//#define PLY_ENDPOINT_URL [NSURL URLWithString:@"http://10.211.55.7:8080"]
+#define PLY_ENDPOINT_URL [NSURL URLWithString:@"http://api.productlayer.com"]
 
 // this is a prefix added before REST methods, e.g. for a version of the API
 #define PLY_PATH_PREFIX @"0.2"
