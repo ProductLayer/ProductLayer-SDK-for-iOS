@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 Cocoanetics. All rights reserved.
 //
 
-#import "ProductLayer.h"
-
 extern NSString * const PLYErrorDomain;
 
 extern NSString * const PLYCodeTypeEAN13;
