@@ -168,7 +168,7 @@
 	self.navigationItem.rightBarButtonItem = _rightButton;
 	
 	NSString *backTitle = PLYLocalizedStringFromTable(@"PLY_LOGIN_SHORT_TITLE", @"UI", @"Short title used as back button from other view controllers going back to login");
-	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:backTitle style:UIBarButtonItemStyleBordered target:nil action:NULL];
+	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:backTitle style:UIBarButtonItemStylePlain target:nil action:NULL];
 }
 
 - (BOOL)shouldAutorotate
