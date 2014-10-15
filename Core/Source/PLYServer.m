@@ -543,10 +543,10 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
     }
 }
 
-- (void) setLoggedInUser:(PLYUser *)loggedInUser{
-    _loggedInUser = loggedInUser;
-    
-	[[NSNotificationCenter defaultCenter] postNotificationName:PLYNotifyUserStatusChanged object:nil];
+- (void)setLoggedInUser:(PLYUser *)loggedInUser
+{
+	_loggedInUser = loggedInUser;
+	[[NSNotificationCenter defaultCenter] postNotificationName:PLYNotifyUserStatusChanged object:self];
 }
 
 
