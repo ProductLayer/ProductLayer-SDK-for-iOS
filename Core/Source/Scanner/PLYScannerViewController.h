@@ -8,9 +8,17 @@
 
 @class PLYScannerViewController;
 
+/**
+ Protocol for informing a delegate about events in a PLYScannerViewController
+ */
 @protocol PLYScannerViewControllerDelegate <NSObject>
 
 @optional
+/**
+ Delegate method that gets informed about scanned GTINs
+ @param scanner The scanner view controller sending the message
+ @param GTIN The scanned GTIN
+ */
 - (void)scanner:(PLYScannerViewController *)scanner didScanGTIN:(NSString *)GTIN;
 
 @end
@@ -21,6 +29,10 @@
  Barcode Scanner optimized for scanning GTIN barcodes.
  **/
 @interface PLYScannerViewController : UIViewController
+
+/**
+ @name Properties
+ */
 
 /**
  Delegate that gets informed about scanned barcodes
