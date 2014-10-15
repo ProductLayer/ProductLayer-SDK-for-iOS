@@ -436,6 +436,47 @@
 	}
 }
 
+#pragma mark - Public Methods
+
+- (void)captureStillImageAsynchronously:(void (^)(UIImage *image))completion
+{
+	NSParameterAssert(completion);
+	
+	if (!_camera)
+	{
+		return;
+	}
+	
+	// find correct connection
+	AVCaptureConnection *videoConnection = [self _captureConnection];
+	
+	if (!videoConnection)
+	{
+		DTLogError(@"Error: No Video connection found on still image output");
+		return;
+	}
+	
+	[_imageOutput
+	 captureStillImageAsynchronouslyFromConnection:videoConnection
+	 completionHandler:^(CMSampleBufferRef imageSampleBuffer,
+								NSError *error) {
+		 
+		 if (error)
+		 {
+			 DTLogError(@"Error capturing still image: %@",
+					 [error localizedDescription]);
+			 return;
+		 }
+		 
+		 NSData *imageData = [AVCaptureStillImageOutput
+									 jpegStillImageNSDataRepresentation:
+									 imageSampleBuffer];
+		 UIImage *image = [UIImage imageWithData:imageData];
+		 
+		 completion(image);
+	 }];
+}
+
 
 #pragma mark - View Appearance
 

@@ -39,5 +39,14 @@
  */
 @property (nonatomic, weak) IBOutlet id <PLYScannerViewControllerDelegate> delegate;
 
+/**
+ @name Taking Pictures
+ */
+
+/**
+ Captures a still image from the scanner view
+ @param completion A block that gets called asynchronously with the captured `UIImage`
+ */
+- (void)captureStillImageAsynchronously:(void (^)(UIImage *image))completion;
 
 @end
