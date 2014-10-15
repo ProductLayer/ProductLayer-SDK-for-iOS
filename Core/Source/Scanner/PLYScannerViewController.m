@@ -10,6 +10,7 @@
 #import "PLYVideoPreviewView.h"
 #import "PLYVideoPreviewInterestBox.h"
 #import "PLYAVFoundationFunctions.h"
+#import "DTLog.h"
 
 #import <AVFoundation/AVFoundation.h>
 
@@ -89,7 +90,7 @@
 	
 	// Connect metadata output only if possible
 	if (![_captureSession canAddOutput:_metaDataOutput]) {
-		NSLog(@"Unable to add metadata output to capture session");
+		DTLogError(@"Unable to add metadata output to capture session");
 		return;
 	}
 	
@@ -105,7 +106,7 @@
 										availableMetadataObjectTypes];
 	
 	if (![availableTypes count]) {
-		NSLog(@"Unable to get any available metadata types, "\
+		DTLogError(@"Unable to get any available metadata types, "\
 				@"did you forget the addOutput: on the capture session?");
 		return;
 	}
@@ -118,7 +119,7 @@
 			[tmpArray addObject:oneCodeType];
 		}
 		else {
-			NSLog(@"Weird: Code type '%@' is not reported as supported "\
+			DTLogError(@"Weird: Code type '%@' is not reported as supported "\
 					@"on this device", oneCodeType);
 		}
 	}
@@ -150,7 +151,7 @@
 	
 	if (!_videoInput)
 	{
-		NSLog(@"Error connecting video input: %@",
+		DTLogError(@"Error connecting video input: %@",
 				[error localizedDescription]);
 		return;
 	}
@@ -160,7 +161,7 @@
 	
 	if (![_captureSession canAddInput:_videoInput])
 	{
-		NSLog(@"Unable to add video input to capture session");
+		DTLogError(@"Unable to add video input to capture session");
 		return;
 	}
 	
@@ -174,7 +175,7 @@
 	
 	if (![_captureSession canAddOutput:_imageOutput])
 	{
-		NSLog(@"Unable to add still image output to capture session");
+		DTLogError(@"Unable to add still image output to capture session");
 		return;
 	}
 	
@@ -256,7 +257,7 @@
 	NSError *error;
 	if (![_camera lockForConfiguration:&error])
 	{
-		NSLog(@"Unable to lock current camera for config: %@",
+		DTLogError(@"Unable to lock current camera for config: %@",
 				[error localizedDescription]);
 		return;
 	}
@@ -619,7 +620,7 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
 			// if it was not previously visible it is new
 			if (![_visibleCodes containsObject:numberedCode])
 			{
-				NSLog(@"code appeared: %@", numberedCode);
+				DTLogDebug(@"code appeared: %@", numberedCode);
 				
 				if ([_delegate respondsToSelector:
 					  @selector(scanner:didScanGTIN:)])
@@ -665,7 +666,7 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
 		else if ([object isKindOfClass:
 					 [AVMetadataFaceObject class]])
 		{
-			NSLog(@"Face detection marking not implemented");
+			DTLogError(@"Face detection marking not implemented");
 		}
 	}
 	
@@ -674,7 +675,7 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
 	{
 		if (![reportedCodes containsObject:oneCode])
 		{
-			NSLog(@"code disappeared: %@", oneCode);
+			DTLogDebug(@"code disappeared: %@", oneCode);
 			
 			CAShapeLayer *shape = _visibleShapes[oneCode];
 			
@@ -688,43 +689,6 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
 
 
 #pragma mark - Actions
-
-- (IBAction)snap:(UIButton *)sender
-{
-	if (!_camera)
-	{
-		return;
-	}
-	
-	// find correct connection
-	AVCaptureConnection *videoConnection = [self _captureConnection];
-	
-	if (!videoConnection)
-	{
-		NSLog(@"Error: No Video connection found on still image output");
-		return;
-	}
-	
-	[_imageOutput
-	 captureStillImageAsynchronouslyFromConnection:videoConnection
-	 completionHandler:^(CMSampleBufferRef imageSampleBuffer,
-								NSError *error) {
-		 
-		 if (error)
-		 {
-			 NSLog(@"Error capturing still image: %@",
-					 [error localizedDescription]);
-			 return;
-		 }
-		 
-		 NSData *imageData = [AVCaptureStillImageOutput
-									 jpegStillImageNSDataRepresentation:
-									 imageSampleBuffer];
-		 UIImage *image = [UIImage imageWithData:imageData];
-		 
-		 UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-	 }];
-}
 
 - (IBAction)switchCam:(UIButton *)sender
 {
@@ -796,7 +760,7 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
 		if (![_camera isFocusPointOfInterestSupported] ||
 			 ![_camera isFocusModeSupported:AVCaptureFocusModeAutoFocus])
 		{
-			NSLog(@"Focus Point Not Supported by current camera");
+			DTLogInfo(@"Focus Point Not Supported by current camera");
 			
 			return;
 		}
@@ -813,7 +777,7 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
 			// this focusses once and then changes to locked
 			[_camera setFocusMode:AVCaptureFocusModeAutoFocus];
 			
-			NSLog(@"Focus Mode: Locked to Focus Point");
+			DTLogInfo(@"Focus Mode: Locked to Focus Point");
 			
 			[_camera unlockForConfiguration];
 		}
@@ -842,7 +806,7 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
 				 setFocusMode:AVCaptureFocusModeContinuousAutoFocus];
 			}
 			
-			NSLog(@"Focus Mode: Continuous");
+			DTLogInfo(@"Focus Mode: Continuous");
 		}
 	}
 }
