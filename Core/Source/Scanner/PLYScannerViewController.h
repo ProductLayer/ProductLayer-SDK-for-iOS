@@ -7,6 +7,7 @@
 //
 
 @class PLYScannerViewController;
+@class PLYVideoPreviewInterestBox;
 
 /**
  Protocol for informing a delegate about events in a PLYScannerViewController
@@ -33,6 +34,17 @@
 /**
  @name Properties
  */
+
+/**
+ If the barcode scan function is active
+*/
+@property (nonatomic, assign, getter=isScannerActive) BOOL scannerActive;
+
+
+/**
+ The scan focus box in which barcodes are recognized.
+*/
+@property (nonatomic, readonly) PLYVideoPreviewInterestBox *scannerInterestBox;
 
 /**
  Delegate that gets informed about scanned barcodes

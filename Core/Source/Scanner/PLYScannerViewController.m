@@ -129,6 +129,9 @@
 	}
 	
 	_metaDataOutput.rectOfInterest = CGRectMake(0.25, 0.25, 0.5, 0.5);
+	
+	// default is to have the scanner be active
+	self.scannerActive = YES;
 }
 
 - (void)_setupCamera
@@ -638,7 +641,7 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
 		 fromConnection:(AVCaptureConnection *)connection
 {
 	// ignore metadata events if VC is being dismissed
-	if (_isDisappearing)
+	if (_isDisappearing || !self.isScannerActive)
 	{
 		return;
 	}
@@ -731,6 +734,25 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
 	}
 	
 	_visibleCodes = reportedCodes;
+}
+
+#pragma mark - Properties
+
+- (void)setScannerActive:(BOOL)scannerActive
+{
+	if (!_scannerActive == scannerActive)
+	{
+		_scannerActive = scannerActive;
+		
+		// always remove all scan shapes
+		for (NSString *oneCode in _visibleCodes)
+		{
+			CAShapeLayer *shape = _visibleShapes[oneCode];
+			
+			[shape removeFromSuperlayer];
+			[_visibleShapes removeObjectForKey:oneCode];
+		}
+	}
 }
 
 
