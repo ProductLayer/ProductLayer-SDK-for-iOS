@@ -1,8 +1,11 @@
 // all-inclusive header for Product Layer API
 
+// system headers used throughout
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
+// PLY Headers
 #import "PLYConstants.h"
 #import "PLYServer.h"
 
@@ -24,6 +27,9 @@
 #import "PLYFormValidator.h"
 #import "PLYUserNameValidator.h"
 #import "PLYFormEmailValidator.h"
+
+// Scanner
+#import "PLYScannerViewController.h"
 
 // Localization
 

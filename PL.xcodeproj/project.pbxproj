@@ -21,6 +21,18 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		A70CFE4919EE5D8100CBF533 /* PLYScannerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A70CFE4719EE5D8100CBF533 /* PLYScannerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A70CFE4A19EE5D8100CBF533 /* PLYScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70CFE4819EE5D8100CBF533 /* PLYScannerViewController.m */; };
+		A70CFE4B19EE5D8100CBF533 /* PLYScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70CFE4819EE5D8100CBF533 /* PLYScannerViewController.m */; };
+		A70CFE6A19EE5E7900CBF533 /* PLYVideoPreviewView.h in Headers */ = {isa = PBXBuildFile; fileRef = A70CFE6819EE5E7900CBF533 /* PLYVideoPreviewView.h */; };
+		A70CFE6B19EE5E7900CBF533 /* PLYVideoPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70CFE6919EE5E7900CBF533 /* PLYVideoPreviewView.m */; };
+		A70CFE6C19EE5E7900CBF533 /* PLYVideoPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70CFE6919EE5E7900CBF533 /* PLYVideoPreviewView.m */; };
+		A70CFE6F19EE604100CBF533 /* PLYVideoPreviewInterestBox.h in Headers */ = {isa = PBXBuildFile; fileRef = A70CFE6D19EE604100CBF533 /* PLYVideoPreviewInterestBox.h */; };
+		A70CFE7019EE604100CBF533 /* PLYVideoPreviewInterestBox.m in Sources */ = {isa = PBXBuildFile; fileRef = A70CFE6E19EE604100CBF533 /* PLYVideoPreviewInterestBox.m */; };
+		A70CFE7119EE604100CBF533 /* PLYVideoPreviewInterestBox.m in Sources */ = {isa = PBXBuildFile; fileRef = A70CFE6E19EE604100CBF533 /* PLYVideoPreviewInterestBox.m */; };
+		A70CFE7419EE626500CBF533 /* PLYAVFoundationFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A70CFE7219EE626500CBF533 /* PLYAVFoundationFunctions.h */; };
+		A70CFE7519EE626500CBF533 /* PLYAVFoundationFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A70CFE7319EE626500CBF533 /* PLYAVFoundationFunctions.m */; };
+		A70CFE7619EE626500CBF533 /* PLYAVFoundationFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A70CFE7319EE626500CBF533 /* PLYAVFoundationFunctions.m */; };
 		A71C2BBB1843AD9B00B77DB4 /* libDTDownload_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A71C2B9D1843AD8D00B77DB4 /* libDTDownload_iOS.a */; };
 		A71C2BBD1843ADA600B77DB4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71C2BBC1843ADA600B77DB4 /* CoreData.framework */; };
 		A7548AEB196C2E7C000B72EB /* PLYEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548AEA196C2E7C000B72EB /* PLYEntity.m */; };
@@ -200,6 +212,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A70CFE3E19EE5C9D00CBF533 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B4418A183F90B900E8A170 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FAC284E619B84B5F0010C385;
+			remoteInfo = "DTActionSheet Demo";
+		};
 		A71C2B9C1843AD8D00B77DB4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A71C2B921843AD8C00B77DB4 /* DTDownload.xcodeproj */;
@@ -477,6 +496,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A70CFE4719EE5D8100CBF533 /* PLYScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYScannerViewController.h; path = Scanner/PLYScannerViewController.h; sourceTree = "<group>"; };
+		A70CFE4819EE5D8100CBF533 /* PLYScannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYScannerViewController.m; path = Scanner/PLYScannerViewController.m; sourceTree = "<group>"; };
+		A70CFE6819EE5E7900CBF533 /* PLYVideoPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYVideoPreviewView.h; sourceTree = "<group>"; };
+		A70CFE6919EE5E7900CBF533 /* PLYVideoPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYVideoPreviewView.m; sourceTree = "<group>"; };
+		A70CFE6D19EE604100CBF533 /* PLYVideoPreviewInterestBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYVideoPreviewInterestBox.h; sourceTree = "<group>"; };
+		A70CFE6E19EE604100CBF533 /* PLYVideoPreviewInterestBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYVideoPreviewInterestBox.m; sourceTree = "<group>"; };
+		A70CFE7219EE626500CBF533 /* PLYAVFoundationFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYAVFoundationFunctions.h; sourceTree = "<group>"; };
+		A70CFE7319EE626500CBF533 /* PLYAVFoundationFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYAVFoundationFunctions.m; sourceTree = "<group>"; };
 		A71C2B921843AD8C00B77DB4 /* DTDownload.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTDownload.xcodeproj; path = DTDownload/DTDownload.xcodeproj; sourceTree = "<group>"; };
 		A71C2BBC1843ADA600B77DB4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A7548AE9196C2E7C000B72EB /* PLYEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYEntity.h; path = PLYEntities/PLYEntity.h; sourceTree = "<group>"; };
@@ -727,6 +754,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A70CFE2119EE5C9D00CBF533 /* Scanner */ = {
+			isa = PBXGroup;
+			children = (
+				A70CFE7219EE626500CBF533 /* PLYAVFoundationFunctions.h */,
+				A70CFE7319EE626500CBF533 /* PLYAVFoundationFunctions.m */,
+				A70CFE6D19EE604100CBF533 /* PLYVideoPreviewInterestBox.h */,
+				A70CFE6E19EE604100CBF533 /* PLYVideoPreviewInterestBox.m */,
+				A70CFE6819EE5E7900CBF533 /* PLYVideoPreviewView.h */,
+				A70CFE6919EE5E7900CBF533 /* PLYVideoPreviewView.m */,
+				A70CFE4719EE5D8100CBF533 /* PLYScannerViewController.h */,
+				A70CFE4819EE5D8100CBF533 /* PLYScannerViewController.m */,
+			);
+			name = Scanner;
+			sourceTree = "<group>";
+		};
 		A71C2B931843AD8C00B77DB4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -859,6 +901,7 @@
 				A7B4422E183F913000E8A170 /* DTReachability Demo.app */,
 				A7B4422C183F913000E8A170 /* DTSidePanels Demo.app */,
 				A7B44230183F913000E8A170 /* DTZipArchive.app */,
+				A70CFE3F19EE5C9D00CBF533 /* DTActionSheet Demo.app */,
 				A7B44210183F913000E8A170 /* Unit Tests.xctest */,
 			);
 			name = Products;
@@ -929,6 +972,7 @@
 		A7B44242183F91E700E8A170 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				A70CFE2119EE5C9D00CBF533 /* Scanner */,
 				C92A627E198A7D0F00997DDC /* Account */,
 				A76D3F58198650770032FE59 /* UI */,
 				C9D31F45190A705200C91A08 /* PLYEntities */,
@@ -1292,6 +1336,7 @@
 				A7590B1F19ED77B80084EBCA /* PLYProduct.h in Headers */,
 				A7590B1119ED77B80084EBCA /* PLYErrorMessage.h in Headers */,
 				A7590B2519ED77B80084EBCA /* PLYProductCategory.h in Headers */,
+				A70CFE6F19EE604100CBF533 /* PLYVideoPreviewInterestBox.h in Headers */,
 				A7590B1519ED77B80084EBCA /* PLYImage.h in Headers */,
 				A7590B0719ED77B40084EBCA /* PLYFormEmailValidator.h in Headers */,
 				A7590B2719ED77B80084EBCA /* PLYVotableEntity.h in Headers */,
@@ -1299,11 +1344,14 @@
 				A7590B1319ED77B80084EBCA /* PLYErrorResponse.h in Headers */,
 				A7590B2319ED77B80084EBCA /* PLYUser.h in Headers */,
 				A7590AFF19ED77B40084EBCA /* PLYLoginViewController.h in Headers */,
+				A70CFE6A19EE5E7900CBF533 /* PLYVideoPreviewView.h in Headers */,
+				A70CFE7419EE626500CBF533 /* PLYAVFoundationFunctions.h in Headers */,
 				A7590B1919ED77B80084EBCA /* PLYListItem.h in Headers */,
 				A7590B2C19ED77BD0084EBCA /* PLYConstants.h in Headers */,
 				A7590B2119ED77B80084EBCA /* PLYReview.h in Headers */,
 				A7590B1D19ED77B80084EBCA /* PLYPackaging.h in Headers */,
 				A7590B0119ED77B40084EBCA /* PLYLostPasswordViewController.h in Headers */,
+				A70CFE4919EE5D8100CBF533 /* PLYScannerViewController.h in Headers */,
 				A7590B0319ED77B40084EBCA /* PLYSignUpViewController.h in Headers */,
 				A7590AFB19ED77B40084EBCA /* AccountManager.h in Headers */,
 				A7590AFD19ED77B40084EBCA /* GenericAccount.h in Headers */,
@@ -1397,7 +1445,7 @@
 		A7B214EE183F842000C38635 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = Cocoanetics;
 				TargetAttributes = {
 					A7590AD919ED77710084EBCA = {
@@ -1446,6 +1494,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		A70CFE3F19EE5C9D00CBF533 /* DTActionSheet Demo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "DTActionSheet Demo.app";
+			remoteRef = A70CFE3E19EE5C9D00CBF533 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		A71C2B9D1843AD8D00B77DB4 /* libDTDownload_iOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1731,17 +1786,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A70CFE6C19EE5E7900CBF533 /* PLYVideoPreviewView.m in Sources */,
 				A7590B0E19ED77B40084EBCA /* PLYUserNameValidator.m in Sources */,
 				A7590B2219ED77B80084EBCA /* PLYReview.m in Sources */,
 				A7590B1C19ED77B80084EBCA /* PLYOpine.m in Sources */,
 				A7590B2D19ED77BD0084EBCA /* PLYConstants.m in Sources */,
 				A7590B0019ED77B40084EBCA /* PLYLoginViewController.m in Sources */,
+				A70CFE7119EE604100CBF533 /* PLYVideoPreviewInterestBox.m in Sources */,
+				A70CFE7619EE626500CBF533 /* PLYAVFoundationFunctions.m in Sources */,
 				A7590AFC19ED77B40084EBCA /* AccountManager.m in Sources */,
 				A7590B1619ED77B80084EBCA /* PLYImage.m in Sources */,
 				A7590B0619ED77B40084EBCA /* PLYViewController.m in Sources */,
 				A7590B1219ED77B80084EBCA /* PLYErrorMessage.m in Sources */,
 				A7590B2819ED77B80084EBCA /* PLYVotableEntity.m in Sources */,
 				A7590B2019ED77B80084EBCA /* PLYProduct.m in Sources */,
+				A70CFE4B19EE5D8100CBF533 /* PLYScannerViewController.m in Sources */,
 				A7590B2A19ED77BD0084EBCA /* PLYServer.m in Sources */,
 				A7590B1E19ED77B80084EBCA /* PLYPackaging.m in Sources */,
 				A7590AFE19ED77B40084EBCA /* GenericAccount.m in Sources */,
@@ -1823,17 +1882,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A70CFE6B19EE5E7900CBF533 /* PLYVideoPreviewView.m in Sources */,
 				A76D3F69198650770032FE59 /* PLYLoginViewController.m in Sources */,
 				C98CD2671910E0D70035647C /* PLYPackaging.m in Sources */,
 				C98CD2681910E0D70035647C /* PLYProduct.m in Sources */,
 				A7548B24196C4C16000B72EB /* PLYImage.m in Sources */,
 				C97FAA18191CCA3400144D2C /* PLYErrorMessage.m in Sources */,
+				A70CFE7019EE604100CBF533 /* PLYVideoPreviewInterestBox.m in Sources */,
+				A70CFE7519EE626500CBF533 /* PLYAVFoundationFunctions.m in Sources */,
 				A7B4873B1987CA7800FA8F83 /* PLYOpine.m in Sources */,
 				C98CD2691910E0D70035647C /* PLYReview.m in Sources */,
 				A76D3F6C198650770032FE59 /* PLYUserNameValidator.m in Sources */,
 				A7B4877F1987CFB200FA8F83 /* PLYVotableEntity.m in Sources */,
 				A76D3F67198650770032FE59 /* PLYFormEmailValidator.m in Sources */,
 				C98CD26A1910E0D70035647C /* PLYList.m in Sources */,
+				A70CFE4A19EE5D8100CBF533 /* PLYScannerViewController.m in Sources */,
 				C92A6283198A7D0F00997DDC /* AccountManager.m in Sources */,
 				C97FAA1C191CCA4D00144D2C /* PLYErrorResponse.m in Sources */,
 				A76D3F68198650770032FE59 /* PLYFormValidator.m in Sources */,
