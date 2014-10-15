@@ -442,6 +442,60 @@
 	}
 }
 
+- (void)_updateMetadataRectOfInterestIfChanged:(CGRect)rectOfInterest
+{
+	if (CGRectEqualToRect(rectOfInterest, _metaDataOutput.rectOfInterest))
+	{
+		_metaDataOutput.rectOfInterest = rectOfInterest;
+	}
+}
+
+- (void)_setupInterestBox
+{
+	_scannerInterestBox = [[PLYVideoPreviewInterestBox alloc] initWithFrame:CGRectZero];
+	[_videoPreview addSubview:_scannerInterestBox];
+	
+	// subview's left is x points from superview's left
+	NSMutableArray *tmpArray = [NSMutableArray array];
+	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:_scannerInterestBox attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_videoPreview attribute:NSLayoutAttributeLeft multiplier:1.0 constant:20];
+	constraint.priority = UILayoutPriorityDefaultLow;
+	[tmpArray addObject:constraint];
+	
+	constraint = [NSLayoutConstraint constraintWithItem:_scannerInterestBox attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:_videoPreview attribute:NSLayoutAttributeRight multiplier:1.0 constant:-20];
+	constraint.priority = UILayoutPriorityDefaultLow;
+	[tmpArray addObject:constraint];
+	
+	constraint = [NSLayoutConstraint constraintWithItem:_scannerInterestBox
+															attribute:NSLayoutAttributeTop
+															relatedBy:NSLayoutRelationEqual
+																toItem:self.topLayoutGuide
+															attribute:NSLayoutAttributeBottom
+														  multiplier:1.0
+															 constant:30.0];
+	constraint.priority = UILayoutPriorityDefaultLow;
+	[tmpArray addObject:constraint];
+	
+	constraint = [NSLayoutConstraint constraintWithItem:_scannerInterestBox attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_videoPreview attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-30];
+	constraint.priority = UILayoutPriorityDefaultLow;
+	[tmpArray addObject:constraint];
+	
+	constraint = [NSLayoutConstraint constraintWithItem:_scannerInterestBox attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationLessThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:200];
+	[tmpArray addObject:constraint];
+	
+	constraint = [NSLayoutConstraint constraintWithItem:_scannerInterestBox attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_videoPreview attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
+	constraint.priority = UILayoutPriorityDefaultLow;
+	[tmpArray addObject:constraint];
+	
+	constraint = [NSLayoutConstraint constraintWithItem:_scannerInterestBox attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_videoPreview attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
+	[tmpArray addObject:constraint];
+	
+	constraint = [NSLayoutConstraint constraintWithItem:_scannerInterestBox attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:_scannerInterestBox attribute:NSLayoutAttributeHeight multiplier:2.0 constant:0];
+	[tmpArray addObject:constraint];
+	
+	_scannerInterestBox.translatesAutoresizingMaskIntoConstraints = NO;
+	[self.view addConstraints:tmpArray];
+}
+
 #pragma mark - Public Methods
 
 - (void)captureStillImageAsynchronously:(void (^)(UIImage *image))completion
@@ -485,54 +539,6 @@
 
 
 #pragma mark - View Appearance
-
-- (void)_setupInterestBox
-{
-	_scannerInterestBox = [[PLYVideoPreviewInterestBox alloc] initWithFrame:CGRectZero];
-	[_videoPreview addSubview:_scannerInterestBox];
-	
-	// subview's left is x points from superview's left
-	NSMutableArray *tmpArray = [NSMutableArray array];
-	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:_scannerInterestBox attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_videoPreview attribute:NSLayoutAttributeLeft multiplier:1.0 constant:20];
-	constraint.priority = UILayoutPriorityDefaultLow;
-	[tmpArray addObject:constraint];
-
-	constraint = [NSLayoutConstraint constraintWithItem:_scannerInterestBox attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:_videoPreview attribute:NSLayoutAttributeRight multiplier:1.0 constant:-20];
-	constraint.priority = UILayoutPriorityDefaultLow;
-	[tmpArray addObject:constraint];
-
-	constraint = [NSLayoutConstraint constraintWithItem:_scannerInterestBox
-															attribute:NSLayoutAttributeTop
-															relatedBy:NSLayoutRelationEqual
-																toItem:self.topLayoutGuide
-															attribute:NSLayoutAttributeBottom
-														  multiplier:1.0
-															 constant:30.0];
-	constraint.priority = UILayoutPriorityDefaultLow;
-	[tmpArray addObject:constraint];
-
-	constraint = [NSLayoutConstraint constraintWithItem:_scannerInterestBox attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_videoPreview attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-30];
-	constraint.priority = UILayoutPriorityDefaultLow;
-	[tmpArray addObject:constraint];
-	
-	constraint = [NSLayoutConstraint constraintWithItem:_scannerInterestBox attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationLessThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:200];
-	[tmpArray addObject:constraint];
-
-	constraint = [NSLayoutConstraint constraintWithItem:_scannerInterestBox attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_videoPreview attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
-	constraint.priority = UILayoutPriorityDefaultLow;
-	[tmpArray addObject:constraint];
-
-	constraint = [NSLayoutConstraint constraintWithItem:_scannerInterestBox attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_videoPreview attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
-	[tmpArray addObject:constraint];
-
-	constraint = [NSLayoutConstraint constraintWithItem:_scannerInterestBox attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:_scannerInterestBox attribute:NSLayoutAttributeHeight multiplier:2.0 constant:0];
-	[tmpArray addObject:constraint];
-	
-	_scannerInterestBox.translatesAutoresizingMaskIntoConstraints = NO;
-	[self.view addConstraints:tmpArray];
-}
-
-
 
 - (void)viewDidLoad
 {
