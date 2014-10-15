@@ -49,7 +49,7 @@
 }
 
 -(void) updateCell{
-    _productImage.hidden = true;
+    _productImage.hidden = YES;
     
     [_bodyLabel setText:_opine.text];
     [_authorLabel setText:_opine.createdBy.nickname];
@@ -120,7 +120,7 @@
                 [_productImage setImage:[UIImage imageNamed:@"no_image.png"]];
             }
             
-            _productImage.hidden = false;
+            _productImage.hidden = NO;
 		});
 	}];
 }

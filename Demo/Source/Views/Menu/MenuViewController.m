@@ -78,7 +78,7 @@
             if ([viewController isKindOfClass:[ProductListsViewController class]])
             {
                 ProductListsViewController *productLists = (ProductListsViewController *) viewController;
-                productLists.addProductView = false;
+                productLists.addProductView = NO;
                 [productLists loadProductListsForUser:[[PLYServer sharedServer] loggedInUser] andType:nil];
             }
         }

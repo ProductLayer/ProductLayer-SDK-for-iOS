@@ -139,7 +139,7 @@
                 {
                     DTBlockPerformSyncIfOnMainThreadElseAsync(^{
                         [_productImage setImage:thumbnail];
-                        _productImage.hidden = false;
+                        _productImage.hidden = NO;
                     });
 
                     return;
@@ -162,7 +162,7 @@
                                 return;
                             
                             [_productImage setImage:image];
-                            _productImage.hidden = false;
+                            _productImage.hidden = NO;
                         }
                     });
                 }];
@@ -171,14 +171,14 @@
                 {
                     DTBlockPerformSyncIfOnMainThreadElseAsync(^{
                         [_productImage setImage:image];
-                        _productImage.hidden = false;
+                        _productImage.hidden = NO;
                     });
                 }
                 
             } else {
                 DTBlockPerformSyncIfOnMainThreadElseAsync(^{
                     [_productImage setImage:[UIImage imageNamed:@"no_image.png"]];
-                    _productImage.hidden = false;
+                    _productImage.hidden = NO;
                 });
             }
             

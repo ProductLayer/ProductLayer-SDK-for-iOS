@@ -29,7 +29,7 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        _isLoading = false;
+        _isLoading = NO;
     }
     return self;
 }
@@ -58,7 +58,7 @@
         GTIN = [(PLYProduct *)_parent GTIN];
     }
     
-    _isLoading = true;
+    _isLoading = YES;
     _locale = [AppSettings currentAppLocale];
     [[PLYServer sharedServer] performSearchForOpineWithGTIN:GTIN
                                                 withLanguage:_locale.localeIdentifier
@@ -94,7 +94,7 @@
                                                               
                                                               [self.tableView reloadData];
                                                               
-                                                              _isLoading = false;
+                                                              _isLoading = NO;
                                                           });
                                                       }
                                                       
@@ -187,7 +187,7 @@
 	{
 		WriteOpineViewController *writeOpine = (WriteOpineViewController *)segue.destinationViewController;
 		writeOpine.parent = _parent;
-        writeOpine.gtinTextField.enabled = false;
+        writeOpine.gtinTextField.enabled = NO;
 	}
 }
 

@@ -56,7 +56,7 @@
                 [alert show];
             } else {
                 _user.followerCount = [NSNumber numberWithInt:([_user.followerCount intValue] +1)];
-                _user.followed = true;
+                _user.followed = YES;
                 
                  [self updateCell];
             }
@@ -71,7 +71,7 @@
                     [alert show];
                 } else {
                     _user.followerCount = [NSNumber numberWithInt:([_user.followerCount intValue] -1)];
-                    _user.followed = false;
+                    _user.followed = NO;
                     
                     [self updateCell];
                 }
@@ -109,9 +109,9 @@
     
     // Check if the user is the current logged in user
     if([_user.nickname isEqualToString:[[PLYServer sharedServer] loggedInUser].nickname]){
-        _followUnFollowButton.hidden = true;
+        _followUnFollowButton.hidden = YES;
     } else {
-        _followUnFollowButton.hidden = false;
+        _followUnFollowButton.hidden = NO;
         
         // Check if the user is followed by the currentl logged in user
         if(_user.followed){
@@ -125,7 +125,7 @@
 }
 
 - (void) loadUserImage{
-    _userImageView.hidden = true;
+    _userImageView.hidden = YES;
     
     [[PLYServer sharedServer] getAvatarImageUrlFromUser:_user completion:^(id result, NSError *error) {
 		
@@ -168,7 +168,7 @@
                 [_userImageView setImage:[UIImage imageNamed:@"no_image.png"]];
             }
             
-            _userImageView.hidden = false;
+            _userImageView.hidden = NO;
 		});
 	}];
 }

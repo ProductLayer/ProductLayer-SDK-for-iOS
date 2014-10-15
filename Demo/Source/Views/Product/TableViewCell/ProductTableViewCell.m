@@ -49,7 +49,7 @@
 }
 
 -(void) updateCell{
-    _productImage.hidden = true;
+    _productImage.hidden = YES;
     
     [_productName setText:_product.name];
     
@@ -136,7 +136,7 @@
                 [_productImage setImage:[UIImage imageNamed:@"no_image.png"]];
             }
             
-            _productImage.hidden = false;
+            _productImage.hidden = NO;
 		});
 	}];
 }

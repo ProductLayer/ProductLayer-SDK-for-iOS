@@ -55,7 +55,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 // designated initializer
 - (instancetype)init
 {
-    _performingLogin = false;
+    _performingLogin = NO;
     
 	// use default config, we need credential & caching
 	NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -670,7 +670,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	NSParameterAssert(password);
 	NSParameterAssert(completion);
     
-    _performingLogin = true;
+    _performingLogin = YES;
 	
 	NSString *path = [self _functionPathForFunction:@"login"];
 	
@@ -702,7 +702,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 			wrappedCompletion(result, error);
 		}
         
-        _performingLogin = false;
+        _performingLogin = NO;
 	};
 	
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil basicAuth:authValue completion:ownCompletion];

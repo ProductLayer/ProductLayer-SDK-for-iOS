@@ -51,7 +51,7 @@
 }
 
 -(void) updateCell{
-    _productImage.hidden = true;
+    _productImage.hidden = YES;
     
     [_subjectLabel setText:_review.subject];
     [_bodyLabel setText:_review.body];
@@ -123,7 +123,7 @@
                 [_productImage setImage:[UIImage imageNamed:@"no_image.png"]];
             }
             
-            _productImage.hidden = false;
+            _productImage.hidden = NO;
 		});
 	}];
 }

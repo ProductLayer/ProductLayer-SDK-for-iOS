@@ -137,9 +137,9 @@
 
 - (void) setProduct:(PLYProduct *)product{
     // Prevent unnecessary image requests
-    bool loadImage = true;
+    bool loadImage = YES;
     if([product.GTIN isEqualToString:_product.GTIN]){
-        loadImage = false;
+        loadImage = NO;
     }
     
     _product = product;
@@ -309,7 +309,7 @@
 		ProductListsViewController *listVC = (ProductListsViewController *)[navController topViewController];
         listVC.navigationItem.title = @"Add to List";
         listVC.product = _product;
-        listVC.addProductView = true;
+        listVC.addProductView = YES;
 		[listVC loadProductListsForUser:[[PLYServer sharedServer] loggedInUser] andType:nil];
 	}
 }
