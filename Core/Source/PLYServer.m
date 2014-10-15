@@ -802,7 +802,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
  * Upload a image for a product.
  * ATTENTION: Login required
  **/
-- (void)uploadImageData:(UIImage *)data forGTIN:(NSString *)gtin completion:(PLYCompletion)completion
+- (void)uploadImageData:(NSData *)data forGTIN:(NSString *)gtin completion:(PLYCompletion)completion
 {
 	NSParameterAssert(gtin);
 	NSParameterAssert(data);

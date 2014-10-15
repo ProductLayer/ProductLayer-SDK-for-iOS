@@ -203,7 +203,7 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @param gtin The GTIN (barcode) of the new product
  @param completion The completion handler for the request
  */
-- (void)uploadImageData:(UIImage *)data
+- (void)uploadImageData:(NSData *)data
                 forGTIN:(NSString *)gtin
              completion:(PLYCompletion)completion;
 
