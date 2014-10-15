@@ -213,7 +213,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 			[request addValue:headerBoundary forHTTPHeaderField:@"Content-Type"];
 			
 			//NSData *imageData = (NSData *)_payload;
-			NSData *tmpPayload = UIImageJPEGRepresentation(payload, 0.5);
+			NSData *tmpPayload = UIImageJPEGRepresentation(payload, 0.8);
 			//NSData *base64Data = [tmpPayload base64EncodedDataWithOptions:NSDataBase64Encoding64CharacterLineLength | NSDataBase64EncodingEndLineWithCarriageReturn];
 			
 			NSMutableData *postBody = [NSMutableData data];
@@ -802,7 +802,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
  * Upload a image for a product.
  * ATTENTION: Login required
  **/
-- (void)uploadImageData:(NSData *)data forGTIN:(NSString *)gtin completion:(PLYCompletion)completion
+- (void)uploadImageData:(UIImage *)data forGTIN:(NSString *)gtin completion:(PLYCompletion)completion
 {
 	NSParameterAssert(gtin);
 	NSParameterAssert(data);
