@@ -361,6 +361,9 @@
 // updates the rect of interest for barcode scanning for the current interest box frame
 - (void)_updateMetadataRectOfInterest
 {
+	// force layout if interest box, might be delayed because of constraints
+	[_scannerInterestBox layoutIfNeeded];
+	
 	if (!_captureSession.isRunning)
 	{
 		return;
@@ -480,11 +483,8 @@
 
 #pragma mark - View Appearance
 
-- (void)loadView
+- (void)_setupInterestBox
 {
-	_videoPreview = [[PLYVideoPreviewView alloc] initWithFrame:CGRectZero];
-	self.view = _videoPreview;
-	
 	_scannerInterestBox = [[PLYVideoPreviewInterestBox alloc] initWithFrame:CGRectZero];
 	[_videoPreview addSubview:_scannerInterestBox];
 	
@@ -526,7 +526,7 @@
 	[tmpArray addObject:constraint];
 	
 	_scannerInterestBox.translatesAutoresizingMaskIntoConstraints = NO;
-	[_videoPreview addConstraints:tmpArray];
+	[self.view addConstraints:tmpArray];
 }
 
 
@@ -535,12 +535,17 @@
 {
 	[super viewDidLoad];
 	
-	NSAssert([self.view isKindOfClass:[PLYVideoPreviewView class]],
-				@"Wrong root view class %@ in %@",
-				NSStringFromClass([self.view class]),
-				NSStringFromClass([self class]));
-	
 	_videoPreview = (PLYVideoPreviewView *)self.view;
+	
+	if (![_videoPreview isKindOfClass:[PLYVideoPreviewView class]])
+	{
+		// need to add on on top of root view
+		_videoPreview = [[PLYVideoPreviewView alloc] initWithFrame:self.view.bounds];
+		_videoPreview.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		[self.view insertSubview:_videoPreview atIndex:0];
+	}
+	
+	[self _setupInterestBox];
 	
 	[self _setupCameraAfterCheckingAuthorization];
 	
