@@ -128,8 +128,6 @@
 		_metaDataOutput.metadataObjectTypes = tmpArray;
 	}
 	
-	_metaDataOutput.rectOfInterest = CGRectMake(0.25, 0.25, 0.5, 0.5);
-	
 	// default is to have the scanner be active
 	self.scannerActive = YES;
 }
@@ -375,15 +373,13 @@
 	// only set interest box, if there is a marked area
 	if (_scannerInterestBox.superview == _videoPreview)
 	{
-		CGRect rectOfInterest = [_videoPreview.previewLayer
-										 metadataOutputRectOfInterestForRect:
-										 _scannerInterestBox.frame];
-		_metaDataOutput.rectOfInterest = rectOfInterest;
+		CGRect rectOfInterest = [_videoPreview.previewLayer metadataOutputRectOfInterestForRect:_scannerInterestBox.frame];
+		[self _updateMetadataRectOfInterestIfChanged:rectOfInterest];
 	}
 	else
 	{
 		// no interest box defined
-		_metaDataOutput.rectOfInterest = CGRectMake(0, 0, 1, 1);
+		[self _updateMetadataRectOfInterestIfChanged:CGRectMake(0, 0, 1, 1)];
 	}
 	
 }
