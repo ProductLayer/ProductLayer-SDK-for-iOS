@@ -440,7 +440,7 @@
 
 - (void)_updateMetadataRectOfInterestIfChanged:(CGRect)rectOfInterest
 {
-	if (CGRectEqualToRect(rectOfInterest, _metaDataOutput.rectOfInterest))
+	if (!CGRectEqualToRect(rectOfInterest, _metaDataOutput.rectOfInterest))
 	{
 		_metaDataOutput.rectOfInterest = rectOfInterest;
 	}
