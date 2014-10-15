@@ -119,8 +119,7 @@
 										  multiplier:1
 											 constant:0]];
 	
-	UIColor *plGreen = [UIColor colorWithRed:110.0/256.0 green:190.0/256.0 blue:68.0/256.0 alpha:1];
-	[self.navigationController.view setTintColor:plGreen];
+	[self.navigationController.view setTintColor:PLYBrandColor()];
 	
 	NSString *title = PLYLocalizedStringFromTable(@"PLY_SIGNUP_RIGHT_BUTTON_TITLE", @"UI", @"Text for done button in sign up dialog");
 	_rightButton = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStyleDone target:self action:@selector(done:)];

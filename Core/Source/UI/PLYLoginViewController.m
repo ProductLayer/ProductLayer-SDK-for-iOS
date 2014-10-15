@@ -30,11 +30,7 @@
 {
 	[super viewDidLoad];
 	
-	UIColor *plGreen = [UIColor colorWithRed:110.0/256.0 green:190.0/256.0 blue:68.0/256.0 alpha:1];
-
-	
 	NSMutableArray *validators = [NSMutableArray array];
-	
 	UILabel *explainLabel = [[UILabel alloc] init];
 	explainLabel.text = PLYLocalizedStringFromTable(@"PLY_LOGIN_EXPLAIN", @"UI", @"Explanation to show on login dialog");
 	
@@ -157,7 +153,7 @@
 										  multiplier:1
 											 constant:0]];
 	
-	[self.navigationController.view setTintColor:plGreen];
+	[self.navigationController.view setTintColor:PLYBrandColor()];
 	
 	_leftButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
 	self.navigationItem.leftBarButtonItem = _leftButton;

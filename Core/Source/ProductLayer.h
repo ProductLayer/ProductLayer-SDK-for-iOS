@@ -63,6 +63,12 @@ static inline NSBundle *PLYResourceBundle()
 #define PLYLocalizedStringFromTable(key, tbl, comment) \
 NSLocalizedStringFromTableInBundle(key, tbl, PLYResourceBundle(), comment)
 
+// standard ProductLayer color
+static inline UIColor *PLYBrandColor()
+{
+	return [UIColor colorWithRed:110.0/256.0 green:190.0/256.0 blue:68.0/256.0 alpha:1];
+}
+
 //! Project version number for ProductLayer.
 FOUNDATION_EXPORT double ProductLayerVersionNumber;
 
