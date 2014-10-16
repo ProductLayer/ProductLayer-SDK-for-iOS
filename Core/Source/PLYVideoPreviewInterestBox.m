@@ -18,7 +18,7 @@
 	
 	if (self)
 	{
-		self.backgroundColor = [UIColor clearColor];
+		self.backgroundColor = [UIColor colorWithWhite:1 alpha:0.05];
 		self.contentMode = UIViewContentModeRedraw;
 	}
 	
