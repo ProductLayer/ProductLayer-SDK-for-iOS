@@ -381,7 +381,6 @@
 		// no interest box defined
 		[self _updateMetadataRectOfInterestIfChanged:CGRectMake(0, 0, 1, 1)];
 	}
-	
 }
 
 // configures cam switch button
