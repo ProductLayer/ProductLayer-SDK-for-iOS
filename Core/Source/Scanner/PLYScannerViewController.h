@@ -51,6 +51,12 @@
  */
 @property (nonatomic, weak) IBOutlet id <PLYScannerViewControllerDelegate> delegate;
 
+
+/**
+ A button for toggling the torch so that the receiver can show/hide the button based on the capability of the selected camera
+ */
+@property (weak, nonatomic) IBOutlet UIButton *toggleTorchButton;
+
 /**
  @name Taking Pictures
  */
@@ -60,5 +66,14 @@
  @param completion A block that gets called asynchronously with the captured `UIImage`
  */
 - (void)captureStillImageAsynchronously:(void (^)(UIImage *image))completion;
+
+/**
+ @name Actions
+ */
+
+/**
+ Action to connect to a flash light button
+ */
+- (IBAction)toggleTorch:(UIButton *)sender;
 
 @end
