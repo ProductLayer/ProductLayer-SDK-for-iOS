@@ -7,6 +7,7 @@
 //
 
 @class PLYScannerViewController;
+@class PLYVideoPreviewView;
 @class PLYVideoPreviewInterestBox;
 
 /**
@@ -40,6 +41,10 @@
 */
 @property (nonatomic, assign, getter=isScannerActive) BOOL scannerActive;
 
+/**
+ The preview for the live video
+ */
+@property (nonatomic, readonly) PLYVideoPreviewView *videoPreview;
 
 /**
  The scan focus box in which barcodes are recognized.

@@ -24,10 +24,10 @@
 		A70CFE4919EE5D8100CBF533 /* PLYScannerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A70CFE4719EE5D8100CBF533 /* PLYScannerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A70CFE4A19EE5D8100CBF533 /* PLYScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70CFE4819EE5D8100CBF533 /* PLYScannerViewController.m */; };
 		A70CFE4B19EE5D8100CBF533 /* PLYScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70CFE4819EE5D8100CBF533 /* PLYScannerViewController.m */; };
-		A70CFE6A19EE5E7900CBF533 /* PLYVideoPreviewView.h in Headers */ = {isa = PBXBuildFile; fileRef = A70CFE6819EE5E7900CBF533 /* PLYVideoPreviewView.h */; };
+		A70CFE6A19EE5E7900CBF533 /* PLYVideoPreviewView.h in Headers */ = {isa = PBXBuildFile; fileRef = A70CFE6819EE5E7900CBF533 /* PLYVideoPreviewView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A70CFE6B19EE5E7900CBF533 /* PLYVideoPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70CFE6919EE5E7900CBF533 /* PLYVideoPreviewView.m */; };
 		A70CFE6C19EE5E7900CBF533 /* PLYVideoPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70CFE6919EE5E7900CBF533 /* PLYVideoPreviewView.m */; };
-		A70CFE6F19EE604100CBF533 /* PLYVideoPreviewInterestBox.h in Headers */ = {isa = PBXBuildFile; fileRef = A70CFE6D19EE604100CBF533 /* PLYVideoPreviewInterestBox.h */; };
+		A70CFE6F19EE604100CBF533 /* PLYVideoPreviewInterestBox.h in Headers */ = {isa = PBXBuildFile; fileRef = A70CFE6D19EE604100CBF533 /* PLYVideoPreviewInterestBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A70CFE7019EE604100CBF533 /* PLYVideoPreviewInterestBox.m in Sources */ = {isa = PBXBuildFile; fileRef = A70CFE6E19EE604100CBF533 /* PLYVideoPreviewInterestBox.m */; };
 		A70CFE7119EE604100CBF533 /* PLYVideoPreviewInterestBox.m in Sources */ = {isa = PBXBuildFile; fileRef = A70CFE6E19EE604100CBF533 /* PLYVideoPreviewInterestBox.m */; };
 		A70CFE7419EE626500CBF533 /* PLYAVFoundationFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A70CFE7219EE626500CBF533 /* PLYAVFoundationFunctions.h */; };

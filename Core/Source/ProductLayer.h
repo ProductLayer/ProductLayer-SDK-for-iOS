@@ -30,6 +30,8 @@
 
 // Scanner
 #import "PLYScannerViewController.h"
+#import "PLYVideoPreviewInterestBox.h"
+#import "PLYVideoPreviewView.h"
 
 // Localization
 
