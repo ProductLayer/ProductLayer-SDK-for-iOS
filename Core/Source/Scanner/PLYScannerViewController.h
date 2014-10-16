@@ -78,6 +78,7 @@
 
 /**
  Action to connect to a flash light button
+ @param sender The sender of the action
  */
 - (IBAction)toggleTorch:(UIButton *)sender;
 
