@@ -11,6 +11,9 @@
 #define EDGE_LENGTH 20.0
 
 @implementation PLYVideoPreviewInterestBox
+{
+	UIImageView *_imageView;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -18,21 +21,36 @@
 	
 	if (self)
 	{
-		self.backgroundColor = [UIColor colorWithWhite:1 alpha:0.05];
-		self.contentMode = UIViewContentModeRedraw;
+		_imageView = [[UIImageView alloc] initWithFrame:self.bounds];
+		_imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		_imageView.image = [self _stretchableImage];
+		
+		[self addSubview:_imageView];
 	}
 	
 	return self;
 }
 
-- (void)drawRect:(CGRect)rect
+// creates a stretchable image of the finder view
+- (UIImage *)_stretchableImage
 {
+	CGRect box = CGRectMake(0, 0, 100, 100);
+	
+	UIGraphicsBeginImageContextWithOptions(box.size, NO, 0);
+	
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
 	
-	[[UIColor redColor] setStroke];
+	CGContextSaveGState(ctx);
 	
-	CGFloat lineWidth=3;
-	CGRect box = CGRectInset(self.bounds, lineWidth/2.0, lineWidth/2.0);
+	CGContextSetGrayFillColor(ctx, 1, 0.05);
+	CGContextFillRect(ctx, box);
+	
+	CGContextRestoreGState(ctx);
+	
+	CGContextSetRGBStrokeColor(ctx, 1, 0, 0, 0.5);
+	
+	CGFloat lineWidth=2;
+	box = CGRectInset(box, lineWidth/2.0, lineWidth/2.0);
 	
 	CGContextSetLineWidth(ctx, lineWidth);
 	
@@ -46,7 +64,7 @@
 	CGContextMoveToPoint(ctx, minX, minY + EDGE_LENGTH);
 	CGContextAddLineToPoint(ctx, minX, minY);
 	CGContextAddLineToPoint(ctx, minX +  EDGE_LENGTH, minY);
-
+	
 	// bottom left
 	CGContextMoveToPoint(ctx, minX, maxY - EDGE_LENGTH);
 	CGContextAddLineToPoint(ctx, minX, maxY);
@@ -61,8 +79,17 @@
 	CGContextMoveToPoint(ctx, maxX - EDGE_LENGTH, maxY);
 	CGContextAddLineToPoint(ctx, maxX, maxY);
 	CGContextAddLineToPoint(ctx, maxX, maxY -  EDGE_LENGTH);
-
+	
 	CGContextStrokePath(ctx);
+	
+	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+	
+	
+	UIGraphicsEndImageContext();
+	
+	// make stretchable image caps wide enough so that only the inside is stretched
+	CGFloat cap = EDGE_LENGTH+lineWidth;
+	return [image stretchableImageWithLeftCapWidth:cap topCapHeight:cap];
 }
 
 @end
