@@ -11,9 +11,6 @@
 #define EDGE_LENGTH 20.0
 
 @implementation PLYVideoPreviewInterestBox
-{
-	UIImageView *_imageView;
-}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -21,14 +18,16 @@
 	
 	if (self)
 	{
-		_imageView = [[UIImageView alloc] initWithFrame:self.bounds];
-		_imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-		_imageView.image = [self _stretchableImage];
-		
-		[self addSubview:_imageView];
+		self.image = [self _stretchableImage];
 	}
 	
 	return self;
+}
+
+// allow resizing via auto layout
+- (CGSize)intrinsicContentSize
+{
+	return CGSizeMake(UIViewNoIntrinsicMetric, UIViewNoIntrinsicMetric);
 }
 
 // creates a stretchable image of the finder view
@@ -83,7 +82,6 @@
 	CGContextStrokePath(ctx);
 	
 	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-	
 	
 	UIGraphicsEndImageContext();
 	

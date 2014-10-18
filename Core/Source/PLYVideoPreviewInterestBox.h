@@ -9,6 +9,6 @@
 /**
  Box representing the "finder" on a barcode scanner
  */
-@interface PLYVideoPreviewInterestBox : UIView
+@interface PLYVideoPreviewInterestBox : UIImageView
 
 @end
