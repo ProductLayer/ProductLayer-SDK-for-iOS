@@ -362,6 +362,8 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 															DTLogDebug(@"%@", plainText);
 															
 															ignoreContent = YES;
+                                                            
+                                                            result = plainText;
 														}
 														else
 														{
@@ -370,6 +372,8 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 															
 															NSDictionary *userInfo = @{NSLocalizedDescriptionKey:  errorMessage};
 															error = [NSError errorWithDomain:PLYErrorDomain code:0 userInfo:userInfo];
+                                                            
+                                                            result = plainText;
 														}
 													} else if ([contentType hasPrefix:@"text/html"])
 													{
@@ -540,6 +544,32 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
         for(GenericAccount *account in accounts){
             [[AccountManager sharedAccountManager] delete:account];
         }
+    }
+}
+
+- (void) renewSessionIfNecessary
+{
+    // Only if the user is logged in check if the session is still valid.
+    if(self.loggedInUser){
+        [self isSignedInWithCompletion:^(id result, NSError *error) {
+            
+            if (error)
+            {
+                DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Check session state failed" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                    [alert show];
+                });
+            }
+            else
+            {
+                if([result isEqualToString:@"true"]){
+                    // Nothing to do the session is valid.
+                } else {
+                    // Renew the session.
+                    [self _loadState];
+                }
+            }
+        }];
     }
 }
 
@@ -733,6 +763,19 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:completion];
     
 	[self setLoggedInUser:nil];
+}
+
+/**
+ * Check if user is signed in
+ **/
+- (void)isSignedInWithCompletion:(PLYCompletion)completion
+{
+    NSString *path = [self _functionPathForFunction:@"signedin"];
+    
+    
+    [self _performMethodCallWithPath:path
+                          parameters:nil
+                          completion:completion];
 }
 
 /**

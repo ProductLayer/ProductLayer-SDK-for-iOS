@@ -128,6 +128,18 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 - (void)logoutUserWithCompletion:(PLYCompletion)completion;
 
 /**
+ Renew the user session if the user was logged in but the session timed out.
+ */
+- (void) renewSessionIfNecessary;
+
+/**
+ Checks if user is signed in.
+ 
+ @param completion The completion handler for the request
+ */
+- (void)isSignedInWithCompletion:(PLYCompletion)completion;
+
+/**
  Request new password
  
  @param email The user's e-mail address
