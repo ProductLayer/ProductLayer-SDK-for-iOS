@@ -25,6 +25,7 @@
 #import "PLYLoginViewController.h"
 #import "PLYTextField.h"
 #import "PLYFormValidator.h"
+#import "PLYOpineComposeViewController.h"
 #import "PLYUserNameValidator.h"
 #import "PLYFormEmailValidator.h"
 
