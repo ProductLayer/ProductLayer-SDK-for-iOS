@@ -547,30 +547,32 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
     }
 }
 
-- (void) renewSessionIfNecessary
+- (void)renewSessionIfNecessary
 {
     // Only if the user is logged in check if the session is still valid.
-    if(self.loggedInUser){
-        [self isSignedInWithCompletion:^(id result, NSError *error) {
-            
-            if (error)
-            {
-                DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Check session state failed" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-                    [alert show];
-                });
-            }
-            else
-            {
-                if([result isEqualToString:@"true"]){
-                    // Nothing to do the session is valid.
-                } else {
-                    // Renew the session.
-                    [self _loadState];
-                }
-            }
-        }];
-    }
+    if (!self.loggedInUser)
+	 {
+		 return;
+	 }
+	 
+	[self isSignedInWithCompletion:^(id result, NSError *error) {
+		if (error)
+		{
+			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Check session state failed" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+				[alert show];
+			});
+		}
+		else
+		{
+			if([result isEqualToString:@"true"]){
+				// Nothing to do the session is valid.
+			} else {
+				// Renew the session.
+				[self _loadState];
+			}
+		}
+	}];
 }
 
 - (void)setLoggedInUser:(PLYUser *)loggedInUser
@@ -802,7 +804,6 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 - (void)createProductWithGTIN:(NSString *)gtin dictionary:(NSDictionary *)dictionary completion:(PLYCompletion)completion
 {
 	NSParameterAssert(gtin);
-	NSParameterAssert(dictionary);
 	NSParameterAssert(completion);
 	
 	NSString *path = [self _functionPathForFunction:@"products"];
@@ -890,24 +891,29 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 }
 
 - (void)createOpine:(PLYOpine *)opine
-         completion:(PLYCompletion)completion{
-
+			completion:(PLYCompletion)completion
+{
 	NSParameterAssert(opine);
-    NSParameterAssert(opine.text);
-    NSParameterAssert(opine.GTIN);
-    NSParameterAssert(opine.language);
+	NSParameterAssert(opine.text);
+	NSParameterAssert(opine.GTIN);
+	NSParameterAssert(opine.language);
 	NSParameterAssert(completion);
-    
-    // only the reference to the entity is needed, so we reduce it.
-    PLYVotableEntity *reducedParent = [[PLYVotableEntity alloc] init];
-    reducedParent.Class = opine.parent.Class;
-    reducedParent.Id = opine.parent.Id;
-    [opine setParent:reducedParent];
+	
+	PLYOpine *sendingOpine = [opine copy];
+	
+	// only the reference to the entity is needed, so we reduce it
+	if (sendingOpine.parent)
+	{
+		PLYVotableEntity *reducedParent = [[PLYVotableEntity alloc] init];
+		reducedParent.Class = opine.parent.Class;
+		reducedParent.Id = opine.parent.Id;
+		[sendingOpine setParent:reducedParent];
+	}
 	
 	NSString *function = @"opines";
 	NSString *path = [self _functionPathForFunction:function];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:[opine dictionaryRepresentation] completion:completion];
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:[sendingOpine dictionaryRepresentation] completion:completion];
 }
 
 #pragma mark - Reviews
