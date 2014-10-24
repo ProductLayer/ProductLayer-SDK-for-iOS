@@ -41,7 +41,6 @@
 		A740BB7B19F23F8500DA3943 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214F9183F842000C38635 /* Foundation.framework */; };
 		A740BB7C19F23F9200DA3943 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FB183F842000C38635 /* CoreGraphics.framework */; };
 		A740BB7D19F23FA100DA3943 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7590B4019ED7CDF0084EBCA /* QuartzCore.framework */; };
-		A740BB7F19F23FF100DA3943 /* DTShapeView.h in Headers */ = {isa = PBXBuildFile; fileRef = A740BB7E19F23FF100DA3943 /* DTShapeView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7548AEB196C2E7C000B72EB /* PLYEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548AEA196C2E7C000B72EB /* PLYEntity.m */; };
 		A7548B24196C4C16000B72EB /* PLYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548B23196C4C16000B72EB /* PLYImage.m */; };
 		A7590AEE19ED77710084EBCA /* ProductLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7590ADA19ED77710084EBCA /* ProductLayer.framework */; };
@@ -513,7 +512,6 @@
 		A70CFE7319EE626500CBF533 /* PLYAVFoundationFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYAVFoundationFunctions.m; sourceTree = "<group>"; };
 		A71C2B921843AD8C00B77DB4 /* DTDownload.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTDownload.xcodeproj; path = DTDownload/DTDownload.xcodeproj; sourceTree = "<group>"; };
 		A71C2BBC1843ADA600B77DB4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		A740BB7E19F23FF100DA3943 /* DTShapeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTShapeView.h; path = Externals/DTFoundation/Core/Source/iOS/DTShapeView.h; sourceTree = "<group>"; };
 		A7548AE9196C2E7C000B72EB /* PLYEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYEntity.h; path = PLYEntities/PLYEntity.h; sourceTree = "<group>"; };
 		A7548AEA196C2E7C000B72EB /* PLYEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYEntity.m; path = PLYEntities/PLYEntity.m; sourceTree = "<group>"; };
 		A7548B22196C4C16000B72EB /* PLYImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYImage.h; path = PLYEntities/PLYImage.h; sourceTree = "<group>"; };
@@ -847,7 +845,6 @@
 		A7B214ED183F842000C38635 = {
 			isa = PBXGroup;
 			children = (
-				A740BB7E19F23FF100DA3943 /* DTShapeView.h */,
 				A7B44241183F91E700E8A170 /* Core */,
 				A7B44234183F91E700E8A170 /* Demo */,
 				A7B440A0183F90B800E8A170 /* Externals */,
@@ -1340,7 +1337,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A740BB7F19F23FF100DA3943 /* DTShapeView.h in Headers */,
 				A7590B2B19ED77BD0084EBCA /* ProductLayer.h in Headers */,
 				A7590B1719ED77B80084EBCA /* PLYList.h in Headers */,
 				A7590B0B19ED77B40084EBCA /* PLYTextField.h in Headers */,

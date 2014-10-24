@@ -23,7 +23,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 [NSCharacterSet URLQueryAllowedCharacterSet]];
 
 // this is the URL for the endpoint server
-#define PLY_ENDPOINT_URL [NSURL URLWithString:@"http://api.productlayer.com"]
+#define PLY_ENDPOINT_URL [NSURL URLWithString:@"https://api.productlayer.com"]
 
 // this is a prefix added before REST methods, e.g. for a version of the API
 #define PLY_PATH_PREFIX @"0.3"
@@ -893,7 +893,6 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
          completion:(PLYCompletion)completion{
 
 	NSParameterAssert(opine);
-    NSParameterAssert(opine.parent);
     NSParameterAssert(opine.text);
     NSParameterAssert(opine.GTIN);
     NSParameterAssert(opine.language);
