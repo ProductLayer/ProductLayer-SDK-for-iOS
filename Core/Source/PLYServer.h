@@ -130,7 +130,7 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 /**
  Renew the user session if the user was logged in but the session timed out.
  */
-- (void) renewSessionIfNecessary;
+- (void)renewSessionIfNecessary;
 
 /**
  Checks if user is signed in.

@@ -13,6 +13,7 @@
 #import "NSString+DTURLEncoding.h"
 #import "DTBlockFunctions.h"
 #import "AccountManager.h"
+#import "UIApplication+DTNetworkActivity.h"
 
 #if TARGET_OS_IPHONE
 #import "UIApplication+DTNetworkActivity.h"
@@ -187,12 +188,12 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	}
 
 	// Set basic authorization if available
-	if (basicAuth){
+	if (basicAuth)
+	{
 		[request setValue:basicAuth forHTTPHeaderField:@"Authorization"];
 	}
-   
 	
-	// Add the api key to each request.
+	// Add the API key to each request.
    NSAssert(_APIKey, @"Setting an API Key is required to perform requests. Use [[PLYServer sharedServer] setAPIKey:]");
 	[request setValue:_APIKey forHTTPHeaderField:@"API-KEY"];
 	
@@ -294,13 +295,20 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	
 }
 
-- (void) startDataTaskForRequest:(NSMutableURLRequest *)request completion:(PLYCompletion)completion{
+
+- (void)startDataTaskForRequest:(NSMutableURLRequest *)request completion:(PLYCompletion)completion
+{
+	// increment active requests
+	[[UIApplication sharedApplication] pushActiveNetworkOperation];
 	
 	NSURLSessionDataTask *task = [[self session]
 											dataTaskWithRequest:request
 											completionHandler:^(NSData *data,
 																	  NSURLResponse *response,
 																	  NSError *error) {
+												// decrement active requests
+												[[UIApplication sharedApplication] popActiveNetworkOperation];
+												
 												NSError *retError = error;
 												id result = nil;
 												
