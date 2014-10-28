@@ -130,6 +130,8 @@
 		C92A6256198A1B3900997DDC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C92A6255198A1B3900997DDC /* Security.framework */; };
 		C92A6283198A7D0F00997DDC /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A6280198A7D0F00997DDC /* AccountManager.m */; };
 		C92A6284198A7D0F00997DDC /* GenericAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A6282198A7D0F00997DDC /* GenericAccount.m */; };
+		C97D2D071A0037D3003885A1 /* ProductLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7590ADA19ED77710084EBCA /* ProductLayer.framework */; };
+		C97D2D081A0037D3003885A1 /* ProductLayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A7590ADA19ED77710084EBCA /* ProductLayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C97FAA18191CCA3400144D2C /* PLYErrorMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA17191CCA3400144D2C /* PLYErrorMessage.m */; };
 		C97FAA1C191CCA4D00144D2C /* PLYErrorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA1B191CCA4D00144D2C /* PLYErrorResponse.m */; };
 		C97FAA93191D618C00144D2C /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA2C191D618C00144D2C /* AppSettings.m */; };
@@ -269,13 +271,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = A71902A616A8029400C1EC52;
 			remoteInfo = "DTDownload (iOS)";
-		};
-		A7590AEC19ED77710084EBCA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A7B214EE183F842000C38635 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A7590AD919ED77710084EBCA;
-			remoteInfo = ProductLayer;
 		};
 		A7590AF119ED77710084EBCA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -483,16 +478,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		A7590AEF19ED77710084EBCA /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		A7B2171F183F8A3800C38635 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -500,6 +485,17 @@
 			dstSubfolderSpec = 16;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C97D2D091A0037D4003885A1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C97D2D081A0037D3003885A1 /* ProductLayer.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -755,6 +751,7 @@
 				A7B214FC183F842000C38635 /* CoreGraphics.framework in Frameworks */,
 				A7B214FE183F842000C38635 /* UIKit.framework in Frameworks */,
 				A7590AEE19ED77710084EBCA /* ProductLayer.framework in Frameworks */,
+				C97D2D071A0037D3003885A1 /* ProductLayer.framework in Frameworks */,
 				A7B214FA183F842000C38635 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1424,7 +1421,7 @@
 				A7B214F2183F842000C38635 /* Sources */,
 				A7B214F3183F842000C38635 /* Frameworks */,
 				A7B214F4183F842000C38635 /* Resources */,
-				A7590AEF19ED77710084EBCA /* Embed Frameworks */,
+				C97D2D091A0037D4003885A1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1434,7 +1431,6 @@
 				A71C2BBA1843AD9600B77DB4 /* PBXTargetDependency */,
 				A7B44289183F935200E8A170 /* PBXTargetDependency */,
 				A7B21745183F8A5400C38635 /* PBXTargetDependency */,
-				A7590AED19ED77710084EBCA /* PBXTargetDependency */,
 				A7590AF219ED77710084EBCA /* PBXTargetDependency */,
 			);
 			name = "Demo App";
@@ -1470,7 +1466,7 @@
 				TargetAttributes = {
 					A7590AD919ED77710084EBCA = {
 						CreatedOnToolsVersion = 6.0.1;
-						DevelopmentTeam = Z7L2YCUH45;
+						DevelopmentTeam = W2S2NPRZSQ;
 					};
 					A76A570B1986937D00751454 = {
 						CreatedOnToolsVersion = 6.0;
@@ -1944,11 +1940,6 @@
 			name = "DTDownload (iOS)";
 			targetProxy = A71C2BB91843AD9600B77DB4 /* PBXContainerItemProxy */;
 		};
-		A7590AED19ED77710084EBCA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A7590AD919ED77710084EBCA /* ProductLayer */;
-			targetProxy = A7590AEC19ED77710084EBCA /* PBXContainerItemProxy */;
-		};
 		A7590AF219ED77710084EBCA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A7590AD919ED77710084EBCA /* ProductLayer */;
@@ -2076,6 +2067,7 @@
 				CLANG_ENABLE_MODULES = NO;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2233,10 +2225,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Demo/PL-Prefix.pch";
 				INFOPLIST_FILE = "Demo/PL-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = PL;
-				PROVISIONING_PROFILE = "B435121B-329B-4BB7-A360-E27928ABC5F3";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				WRAPPER_EXTENSION = app;
@@ -2253,10 +2246,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Demo/PL-Prefix.pch";
 				INFOPLIST_FILE = "Demo/PL-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = PL;
-				PROVISIONING_PROFILE = "B435121B-329B-4BB7-A360-E27928ABC5F3";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				WRAPPER_EXTENSION = app;
@@ -2359,15 +2353,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Rene Swoboda (W2S2NPRZSQ)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rene Swoboda (W2S2NPRZSQ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Demo/PL-Prefix.pch";
 				INFOPLIST_FILE = "Demo/PL-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = PL;
-				PROVISIONING_PROFILE = "87AA490D-E1AC-4292-AFB7-4340F0CAA64E";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				WRAPPER_EXTENSION = app;
