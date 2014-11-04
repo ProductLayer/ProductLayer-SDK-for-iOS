@@ -265,6 +265,7 @@
 	// Get notified if subject area changes, for disabling focus lock
 	_camera.subjectAreaChangeMonitoringEnabled = YES;
 	
+/*
 	// Prevent focus bobbing
 	if ([_camera isSmoothAutoFocusSupported])
 	{
@@ -282,6 +283,7 @@
 	_camera.videoZoomFactor =
 	MIN(_camera.activeFormat.videoZoomFactorUpscaleThreshold,
 		 1.25);
+ */
 	
 	// Activate low light boost if necessary
 	if ([_camera isLowLightBoostSupported])
