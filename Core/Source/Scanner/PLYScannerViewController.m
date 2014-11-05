@@ -363,8 +363,6 @@
 // updates the rect of interest for barcode scanning for the current interest box frame
 - (void)_updateMetadataRectOfInterest
 {
-	[self _updateMetadataRectOfInterestIfChanged:CGRectMake(0, 0.25, 1, 0.5)];
-
 	// NOTE: disabled because it causes a performance hit on rotation,
 	//       instead we are checking reported metadata objects bounds
 
@@ -486,7 +484,7 @@
 	[tmpArray addObject:constraint];
 	
 	constraint = [NSLayoutConstraint constraintWithItem:_scannerInterestBox attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_videoPreview attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
-	constraint.priority = UILayoutPriorityDefaultHigh;
+	constraint.priority = UILayoutPriorityDefaultLow;
 	[tmpArray addObject:constraint];
 	
 	constraint = [NSLayoutConstraint constraintWithItem:_scannerInterestBox attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_videoPreview attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
