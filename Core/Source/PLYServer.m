@@ -288,6 +288,8 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 			
 			NSString *payloadString = [[NSString alloc] initWithData:payloadData encoding:NSUTF8StringEncoding];
 			[debugMessage appendString:payloadString];
+			
+			request.timeoutInterval = 10;
 		}
 	}
 	
