@@ -528,30 +528,39 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
         
         GenericAccount *account = [accounts objectAtIndex:0];
         
-        if(account) {
+        if (account)
+		  {
             [self loginWithUser:account.account password:account.password completion:^(id result, NSError *error) {
-                
-                if (error)
-                {
-                    DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login failed." message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-                        [alert show];
-                        
-                        // Delete account from the keychain if login failed.
-                        [[AccountManager sharedAccountManager] deleteGenericAccount:account];
-                    });
-                }
-                else
-                {
-                    DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-                        [self setLoggedInUser:result];
-                    });
-                }
+					if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == kCFURLErrorNotConnectedToInternet)
+					{
+						// no Internet
+						return;
+					}
+					
+					if (error)
+					{
+						DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+							UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login failed." message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+							[alert show];
+							
+							// Delete account from the keychain if login failed.
+							[[AccountManager sharedAccountManager] deleteGenericAccount:account];
+						});
+					}
+					else
+					{
+						DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+							[self setLoggedInUser:result];
+						});
+					}
             }];
         }
-    } else if(accounts && [accounts count] > 1){
+    }
+	 else if(accounts && [accounts count] > 1)
+	 {
         // There should be only one account for productlayer for security reasons delete all accounts
-        for(GenericAccount *account in accounts){
+        for(GenericAccount *account in accounts)
+		  {
             [[AccountManager sharedAccountManager] delete:account];
         }
     }
@@ -568,6 +577,12 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	[self isSignedInWithCompletion:^(id result, NSError *error) {
 		if (error)
 		{
+			if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == kCFURLErrorNotConnectedToInternet)
+			{
+				// no Internet
+				return;
+			}
+			
 			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
 				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Check session state failed" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
 				[alert show];

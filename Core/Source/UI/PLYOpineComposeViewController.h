@@ -45,6 +45,13 @@
  */
 - (instancetype)initWithOpine:(PLYOpine *)opine;
 
+
+/**
+ Sets up the VC with the contents of an opine
+ @param opine The opine to set up from
+ */
+- (void)setOpine:(PLYOpine *)opine;
+
 /**
  The delegate for the compose view controller
  */

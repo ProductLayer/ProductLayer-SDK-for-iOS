@@ -66,6 +66,11 @@
 	
 	_textView.text = _text;
 	[self _updateButtonState];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
 	
 	[_textView becomeFirstResponder];
 }
@@ -159,6 +164,12 @@
 	}
 	
 	_textView.text = opineText;
+}
+
+- (void)setOpine:(PLYOpine *)opine
+{
+	_text = opine.text;
+	_language = opine.language;
 }
 
 @end

@@ -265,6 +265,7 @@
 	// Get notified if subject area changes, for disabling focus lock
 	_camera.subjectAreaChangeMonitoringEnabled = YES;
 	
+/*
 	// Prevent focus bobbing
 	if ([_camera isSmoothAutoFocusSupported])
 	{
@@ -282,6 +283,7 @@
 	_camera.videoZoomFactor =
 	MIN(_camera.activeFormat.videoZoomFactorUpscaleThreshold,
 		 1.25);
+ */
 	
 	// Activate low light boost if necessary
 	if ([_camera isLowLightBoostSupported])
@@ -361,6 +363,10 @@
 // updates the rect of interest for barcode scanning for the current interest box frame
 - (void)_updateMetadataRectOfInterest
 {
+	// NOTE: disabled because it causes a performance hit on rotation,
+	//       instead we are checking reported metadata objects bounds
+
+	/*
 	// force layout if interest box, might be delayed because of constraints
 	[_scannerInterestBox layoutIfNeeded];
 	
@@ -380,6 +386,7 @@
 		// no interest box defined
 		[self _updateMetadataRectOfInterestIfChanged:CGRectMake(0, 0, 1, 1)];
 	}
+	 */
 }
 
 // configures cam switch button
@@ -485,7 +492,10 @@
 	
 	constraint = [NSLayoutConstraint constraintWithItem:_scannerInterestBox attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:_scannerInterestBox attribute:NSLayoutAttributeHeight multiplier:2.0 constant:0];
 	[tmpArray addObject:constraint];
-	
+
+	constraint = [NSLayoutConstraint constraintWithItem:_scannerInterestBox attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationLessThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:500];
+	[tmpArray addObject:constraint];
+
 	_scannerInterestBox.translatesAutoresizingMaskIntoConstraints = NO;
 	[self.view addConstraints:tmpArray];
 }
@@ -651,9 +661,20 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
 	
 	// dictionary to count the number of occurences of a type+stringValue
 	NSMutableDictionary *repCount = [NSMutableDictionary dictionary];
+
+	// get current rect of interest
+	CGRect rectOfInterest = [_videoPreview.previewLayer metadataOutputRectOfInterestForRect:_scannerInterestBox.frame];
 	
 	for (AVMetadataMachineReadableCodeObject *object in metadataObjects)
 	{
+		CGRect intersection = CGRectIntersection(object.bounds, rectOfInterest);
+		if (intersection.size.width < object.bounds.size.width ||
+			 intersection.size.height < object.bounds.size.height)
+		{
+			// ignore metadata objects outside of scanner box
+			continue;
+		}
+		
 		if ([object isKindOfClass:[AVMetadataMachineReadableCodeObject class]] && object.stringValue)
 		{
 			NSString *code = [NSString stringWithFormat:@"%@:%@",
