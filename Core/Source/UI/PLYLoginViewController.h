@@ -6,15 +6,13 @@
 //  Copyright (c) 2014 ProductLayer. All rights reserved.
 //
 
-#import "PLYViewController.h"
-
 @class PLYTextField;
 
 /**
  View Controller for logging in users to Product Layer. Wrap into a `UINavigationController` for presenting it modally
  */
 
-@interface PLYLoginViewController : PLYViewController
+@interface PLYLoginViewController : UIViewController
 
 /**
  @name Properties

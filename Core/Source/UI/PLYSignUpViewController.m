@@ -175,7 +175,7 @@
 	[activity startAnimating];
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:activity];
 	
-	[self.server createUserWithName:_nameField.text email:_emailField.text completion:^(id result, NSError *error) {
+	[self.productLayerServer createUserWithName:_nameField.text email:_emailField.text completion:^(id result, NSError *error) {
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
 			
 			if (error)

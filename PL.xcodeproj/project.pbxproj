@@ -54,8 +54,8 @@
 		A7590B0219ED77B40084EBCA /* PLYLostPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F9019866E0E0032FE59 /* PLYLostPasswordViewController.m */; };
 		A7590B0319ED77B40084EBCA /* PLYSignUpViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76D3F5F198650770032FE59 /* PLYSignUpViewController.h */; };
 		A7590B0419ED77B40084EBCA /* PLYSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F60198650770032FE59 /* PLYSignUpViewController.m */; };
-		A7590B0519ED77B40084EBCA /* PLYViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76D3F65198650770032FE59 /* PLYViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A7590B0619ED77B40084EBCA /* PLYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F66198650770032FE59 /* PLYViewController.m */; };
+		A7590B0519ED77B40084EBCA /* UIViewController+ProductLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A76D3F65198650770032FE59 /* UIViewController+ProductLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7590B0619ED77B40084EBCA /* UIViewController+ProductLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F66198650770032FE59 /* UIViewController+ProductLayer.m */; };
 		A7590B0719ED77B40084EBCA /* PLYFormEmailValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = A76D3F59198650770032FE59 /* PLYFormEmailValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7590B0819ED77B40084EBCA /* PLYFormEmailValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F5A198650770032FE59 /* PLYFormEmailValidator.m */; };
 		A7590B0919ED77B40084EBCA /* PLYFormValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = A76D3F5B198650770032FE59 /* PLYFormValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -107,7 +107,7 @@
 		A76D3F6A198650770032FE59 /* PLYSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F60198650770032FE59 /* PLYSignUpViewController.m */; };
 		A76D3F6B198650770032FE59 /* PLYTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F62198650770032FE59 /* PLYTextField.m */; };
 		A76D3F6C198650770032FE59 /* PLYUserNameValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F64198650770032FE59 /* PLYUserNameValidator.m */; };
-		A76D3F6D198650770032FE59 /* PLYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F66198650770032FE59 /* PLYViewController.m */; };
+		A76D3F6D198650770032FE59 /* UIViewController+ProductLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F66198650770032FE59 /* UIViewController+ProductLayer.m */; };
 		A76D3F9119866E0E0032FE59 /* PLYLostPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F9019866E0E0032FE59 /* PLYLostPasswordViewController.m */; };
 		A7B214FA183F842000C38635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214F9183F842000C38635 /* Foundation.framework */; };
 		A7B214FC183F842000C38635 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FB183F842000C38635 /* CoreGraphics.framework */; };
@@ -130,9 +130,6 @@
 		A7EE55A21A121C8300DD55FE /* PLYCategoryPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EE55A01A121C8300DD55FE /* PLYCategoryPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7EE55A31A121C8300DD55FE /* PLYCategoryPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE55A11A121C8300DD55FE /* PLYCategoryPickerViewController.m */; };
 		A7EE55A41A121C8300DD55FE /* PLYCategoryPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE55A11A121C8300DD55FE /* PLYCategoryPickerViewController.m */; };
-		A7EE55A71A12211E00DD55FE /* PLYTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EE55A51A12211E00DD55FE /* PLYTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A7EE55A81A12211E00DD55FE /* PLYTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE55A61A12211E00DD55FE /* PLYTableViewController.m */; };
-		A7EE55A91A12211E00DD55FE /* PLYTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE55A61A12211E00DD55FE /* PLYTableViewController.m */; };
 		C92A6256198A1B3900997DDC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C92A6255198A1B3900997DDC /* Security.framework */; };
 		C92A6283198A7D0F00997DDC /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A6280198A7D0F00997DDC /* AccountManager.m */; };
 		C92A6284198A7D0F00997DDC /* GenericAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A6282198A7D0F00997DDC /* GenericAccount.m */; };
@@ -540,8 +537,8 @@
 		A76D3F62198650770032FE59 /* PLYTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYTextField.m; sourceTree = "<group>"; };
 		A76D3F63198650770032FE59 /* PLYUserNameValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYUserNameValidator.h; sourceTree = "<group>"; };
 		A76D3F64198650770032FE59 /* PLYUserNameValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYUserNameValidator.m; sourceTree = "<group>"; };
-		A76D3F65198650770032FE59 /* PLYViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYViewController.h; sourceTree = "<group>"; };
-		A76D3F66198650770032FE59 /* PLYViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYViewController.m; sourceTree = "<group>"; };
+		A76D3F65198650770032FE59 /* UIViewController+ProductLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ProductLayer.h"; sourceTree = "<group>"; };
+		A76D3F66198650770032FE59 /* UIViewController+ProductLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ProductLayer.m"; sourceTree = "<group>"; };
 		A76D3F8F19866E0E0032FE59 /* PLYLostPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYLostPasswordViewController.h; sourceTree = "<group>"; };
 		A76D3F9019866E0E0032FE59 /* PLYLostPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYLostPasswordViewController.m; sourceTree = "<group>"; };
 		A7B214F6183F842000C38635 /* PL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PL.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -574,8 +571,6 @@
 		A7CD959119FA821E008E3A41 /* PLYOpineComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYOpineComposeViewController.m; sourceTree = "<group>"; };
 		A7EE55A01A121C8300DD55FE /* PLYCategoryPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYCategoryPickerViewController.h; sourceTree = "<group>"; };
 		A7EE55A11A121C8300DD55FE /* PLYCategoryPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYCategoryPickerViewController.m; sourceTree = "<group>"; };
-		A7EE55A51A12211E00DD55FE /* PLYTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYTableViewController.h; sourceTree = "<group>"; };
-		A7EE55A61A12211E00DD55FE /* PLYTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYTableViewController.m; sourceTree = "<group>"; };
 		C92A6255198A1B3900997DDC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		C92A627F198A7D0F00997DDC /* AccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountManager.h; sourceTree = "<group>"; };
 		C92A6280198A7D0F00997DDC /* AccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountManager.m; sourceTree = "<group>"; };
@@ -818,10 +813,8 @@
 		A76D3F58198650770032FE59 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				A76D3F65198650770032FE59 /* PLYViewController.h */,
-				A76D3F66198650770032FE59 /* PLYViewController.m */,
-				A7EE55A51A12211E00DD55FE /* PLYTableViewController.h */,
-				A7EE55A61A12211E00DD55FE /* PLYTableViewController.m */,
+				A76D3F65198650770032FE59 /* UIViewController+ProductLayer.h */,
+				A76D3F66198650770032FE59 /* UIViewController+ProductLayer.m */,
 				A7EE559F1A121C5C00DD55FE /* Opines */,
 				A7EE559E1A121C3300DD55FE /* Categories */,
 				A76D3F8E19866B690032FE59 /* Login/Signup */,
@@ -1386,7 +1379,7 @@
 				A7590B1519ED77B80084EBCA /* PLYImage.h in Headers */,
 				A7590B0719ED77B40084EBCA /* PLYFormEmailValidator.h in Headers */,
 				A7590B2719ED77B80084EBCA /* PLYVotableEntity.h in Headers */,
-				A7590B0519ED77B40084EBCA /* PLYViewController.h in Headers */,
+				A7590B0519ED77B40084EBCA /* UIViewController+ProductLayer.h in Headers */,
 				A7590B1319ED77B80084EBCA /* PLYErrorResponse.h in Headers */,
 				A7590B2319ED77B80084EBCA /* PLYUser.h in Headers */,
 				A7590AFF19ED77B40084EBCA /* PLYLoginViewController.h in Headers */,
@@ -1395,7 +1388,6 @@
 				A7EE55A21A121C8300DD55FE /* PLYCategoryPickerViewController.h in Headers */,
 				A7590B1919ED77B80084EBCA /* PLYListItem.h in Headers */,
 				A7590B2C19ED77BD0084EBCA /* PLYConstants.h in Headers */,
-				A7EE55A71A12211E00DD55FE /* PLYTableViewController.h in Headers */,
 				A7590B2119ED77B80084EBCA /* PLYReview.h in Headers */,
 				A7590B1D19ED77B80084EBCA /* PLYPackaging.h in Headers */,
 				A7590B0119ED77B40084EBCA /* PLYLostPasswordViewController.h in Headers */,
@@ -1844,12 +1836,11 @@
 				A70CFE7619EE626500CBF533 /* PLYAVFoundationFunctions.m in Sources */,
 				A7590AFC19ED77B40084EBCA /* AccountManager.m in Sources */,
 				A7590B1619ED77B80084EBCA /* PLYImage.m in Sources */,
-				A7590B0619ED77B40084EBCA /* PLYViewController.m in Sources */,
+				A7590B0619ED77B40084EBCA /* UIViewController+ProductLayer.m in Sources */,
 				A7590B1219ED77B80084EBCA /* PLYErrorMessage.m in Sources */,
 				A7590B2819ED77B80084EBCA /* PLYVotableEntity.m in Sources */,
 				A7590B2019ED77B80084EBCA /* PLYProduct.m in Sources */,
 				A70CFE4B19EE5D8100CBF533 /* PLYScannerViewController.m in Sources */,
-				A7EE55A91A12211E00DD55FE /* PLYTableViewController.m in Sources */,
 				A7590B2A19ED77BD0084EBCA /* PLYServer.m in Sources */,
 				A7590B1E19ED77B80084EBCA /* PLYPackaging.m in Sources */,
 				A7590AFE19ED77B40084EBCA /* GenericAccount.m in Sources */,
@@ -1948,7 +1939,6 @@
 				A76D3F67198650770032FE59 /* PLYFormEmailValidator.m in Sources */,
 				C98CD26A1910E0D70035647C /* PLYList.m in Sources */,
 				A70CFE4A19EE5D8100CBF533 /* PLYScannerViewController.m in Sources */,
-				A7EE55A81A12211E00DD55FE /* PLYTableViewController.m in Sources */,
 				C92A6283198A7D0F00997DDC /* AccountManager.m in Sources */,
 				C97FAA1C191CCA4D00144D2C /* PLYErrorResponse.m in Sources */,
 				A76D3F68198650770032FE59 /* PLYFormValidator.m in Sources */,
@@ -1963,7 +1953,7 @@
 				A7B4428C183F937D00E8A170 /* PLYServer.m in Sources */,
 				C9ADBDD41911502B004C81B3 /* PLYUser.m in Sources */,
 				A76D3F6A198650770032FE59 /* PLYSignUpViewController.m in Sources */,
-				A76D3F6D198650770032FE59 /* PLYViewController.m in Sources */,
+				A76D3F6D198650770032FE59 /* UIViewController+ProductLayer.m in Sources */,
 				A7B442A4183F97B800E8A170 /* PLYConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

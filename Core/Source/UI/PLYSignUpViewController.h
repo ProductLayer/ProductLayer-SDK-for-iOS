@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 ProductLayer. All rights reserved.
 //
 
-#import "PLYViewController.h"
-
 @class PLYSignUpViewController, PLYTextField, PLYUser;
 
 
@@ -29,7 +27,7 @@
 /**
  View Controller for signing up users to ProductLayer
  */
-@interface PLYSignUpViewController : PLYViewController
+@interface PLYSignUpViewController : UIViewController
 
 /**
  @name Properties

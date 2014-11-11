@@ -119,7 +119,7 @@
 	[activity startAnimating];
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:activity];
 
-	[self.server requestNewPasswordForUserWithEmail:_emailField.text completion:^(id result, NSError *error) {
+	[self.productLayerServer requestNewPasswordForUserWithEmail:_emailField.text completion:^(id result, NSError *error) {
 		
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
 			if (error)

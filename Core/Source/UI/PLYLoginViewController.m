@@ -204,7 +204,7 @@
 	[activity startAnimating];
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:activity];
 	
-	[self.server loginWithUser:_nameField.text password:_passwordField.text completion:^(id result, NSError *error) {
+	[self.productLayerServer loginWithUser:_nameField.text password:_passwordField.text completion:^(id result, NSError *error) {
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
 			// restore right button
 			self.navigationItem.rightBarButtonItem = _rightButton;
@@ -239,7 +239,7 @@
 	_passwordField.text = nil;
 	
 	PLYSignUpViewController *signup = [[PLYSignUpViewController alloc] init];
-	signup.server = self.server;
+	signup.productLayerServer = self.productLayerServer;
 	signup.delegate = self;
 	
 	[self.navigationController pushViewController:signup animated:YES];
@@ -248,7 +248,7 @@
 - (void)showLostPassword:(id)sender
 {
 	PLYLostPasswordViewController *lostPw = [[PLYLostPasswordViewController alloc] init];
-	lostPw.server = self.server;
+	lostPw.productLayerServer = self.productLayerServer;
 	lostPw.delegate = self;
 	
 	[self.navigationController pushViewController:lostPw animated:YES];

@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Cocoanetics. All rights reserved.
 //
 
-#import "PLYViewController.h"
-
 @class PLYLostPasswordViewController, PLYTextField, PLYUser;
 
 /**
@@ -28,7 +26,7 @@
 /**
  View Controller for requesting a new password to be sent to a ProductLayer user
  */
-@interface PLYLostPasswordViewController : PLYViewController
+@interface PLYLostPasswordViewController : UIViewController
 
 /**
  @name Properties

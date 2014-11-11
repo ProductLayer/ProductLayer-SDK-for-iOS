@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Cocoanetics. All rights reserved.
 //
 
-#import "PLYTableViewController.h"
-
 @class PLYCategoryPickerViewController;
 
 @protocol PLYCategoryPickerViewControllerDelegate <NSObject>
@@ -18,7 +16,7 @@
 @end
 
 
-@interface PLYCategoryPickerViewController : PLYTableViewController
+@interface PLYCategoryPickerViewController : UITableViewController
 
 @property (nonatomic, weak) id <PLYCategoryPickerViewControllerDelegate> delegate;
 

@@ -29,13 +29,10 @@ NSArray *_sortedKeys = nil;
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-	
-	NSAssert(self.server, @"No PLYServer set");
+	[super viewDidLoad];
 	
 	NSString *language = [[NSLocale currentLocale] localeIdentifier];
-	[self.server getCategoriesForLocale:language completion:^(id result, NSError *error) {
-		
+	[self.productLayerServer getCategoriesForLocale:language completion:^(id result, NSError *error) {
 		if (!result)
 		{
 			DTLogError(@"Error loading categories from server: %@", error);
@@ -70,11 +67,12 @@ NSArray *_sortedKeys = nil;
 		{
 			UITraitCollection *collection = [UITraitCollection traitCollectionWithHorizontalSizeClass:UIUserInterfaceSizeClassRegular];
 			[self _setupForTraitCollection:collection];
-			return;
+		}
+		else
+		{
+			[self _setupForTraitCollection:self.traitCollection];
 		}
 	}
-	
-	[self _setupForTraitCollection:self.traitCollection];
 	
 	[self _selectRowForCategoryKey:_selectedCategoryKey animated:NO];
 }
@@ -272,7 +270,7 @@ NSArray *_sortedKeys = nil;
 	cell.textLabel.minimumScaleFactor = 0.5;
  
 	return cell;
- }
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
