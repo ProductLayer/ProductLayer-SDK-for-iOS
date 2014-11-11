@@ -28,6 +28,7 @@
 #import "PLYOpineComposeViewController.h"
 #import "PLYUserNameValidator.h"
 #import "PLYFormEmailValidator.h"
+#import "PLYCategoryPickerViewController.h"
 
 // Scanner
 #import "PLYScannerViewController.h"
