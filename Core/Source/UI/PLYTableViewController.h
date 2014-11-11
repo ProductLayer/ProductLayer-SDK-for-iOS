@@ -8,6 +8,9 @@
 
 @class PLYServer;
 
+/**
+ Base view controller with common features for subclasses used by ProductLayer
+ */
 @interface PLYTableViewController : UITableViewController
 
 /**
