@@ -124,7 +124,7 @@ NSArray *_sortedKeys = nil;
 		else
 		{
 			NSString *language = [[NSLocale currentLocale] localeIdentifier];
-			NSLog(@"Category '%@' has invalid value in language '%@'!", oneKey, language);
+			DTLogError(@"Category '%@' has invalid value in language '%@'! Ignoring it.", oneKey, language);
 		}
 	}
 	
