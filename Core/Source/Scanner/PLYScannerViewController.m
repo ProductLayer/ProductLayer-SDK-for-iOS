@@ -500,6 +500,17 @@
 	[self.view addConstraints:tmpArray];
 }
 
+- (void)_removeAllMarkedCodes
+{
+	for (NSString *oneCode in _visibleCodes)
+	{
+		CAShapeLayer *shape = _visibleShapes[oneCode];
+		
+		[shape removeFromSuperlayer];
+		[_visibleShapes removeObjectForKey:oneCode];
+	}
+}
+
 #pragma mark - Public Methods
 
 - (void)captureStillImageAsynchronously:(void (^)(UIImage *image))completion
@@ -606,6 +617,12 @@
 	[super viewWillDisappear:animated];
 	
 	_isDisappearing = YES;
+	
+	// otherwise a code might get stuck
+	[self _removeAllMarkedCodes];
+	
+	// unlock focus
+	[self subjectChanged:nil];
 }
 
 - (BOOL)shouldAutorotate
