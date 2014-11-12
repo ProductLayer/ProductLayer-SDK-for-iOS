@@ -112,12 +112,28 @@ NSArray *_sortedKeys = nil;
 		return;
 	}
 	
-	_sortedKeys = [categories keysSortedByValueWithOptions:0 usingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
+	// remove NULL values from dictionary
+	NSMutableDictionary *cleanDictionary = [NSMutableDictionary dictionary];
+	
+	for (NSString *oneKey in [categories allKeys])
+	{
+		if ([categories[oneKey] isKindOfClass:[NSString class]])
+		{
+			cleanDictionary[oneKey] = categories[oneKey];
+		}
+		else
+		{
+			NSString *language = [[NSLocale currentLocale] localeIdentifier];
+			NSLog(@"Category '%@' has invalid value in language '%@'!", oneKey, language);
+		}
+	}
+	
+	_sortedKeys = [cleanDictionary keysSortedByValueWithOptions:0 usingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
 		
 		return [obj1 localizedStandardCompare:obj2];
 	}];
 	
-	_categoryDictionary = [categories copy];
+	_categoryDictionary = [cleanDictionary copy];
 	
 	[self.tableView reloadData];
 	
