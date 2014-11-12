@@ -77,9 +77,14 @@
 @property (nonatomic, copy) PLYPackaging *packaging;
 
 /**
- The product rating.
+ The average product review rating.
  */
-@property (nonatomic, strong) NSNumber *rating;
+@property (nonatomic, assign) float averageReviewRating;
+
+/**
+ The number of user reviews for this product
+ */
+@property (nonatomic, assign) NSUInteger numberOfReviews;
 
 /**
  The characteristics information.
