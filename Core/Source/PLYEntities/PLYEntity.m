@@ -207,7 +207,7 @@ NSArray *PLYAllEntityClasses()
 
 - (NSDictionary *)objectReference
 {
-	if (!_Class || _Id)
+	if (!_Class || !_Id)
 	{
 		return nil;
 	}
