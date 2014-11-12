@@ -74,7 +74,7 @@
 	
 	if (_parent)
 	{
-		dict[@"pl-parent"] = [_parent dictionaryRepresentation];
+		dict[@"pl-parent"] = [_parent objectReference];
 	}
 	
 	if (_GTIN)

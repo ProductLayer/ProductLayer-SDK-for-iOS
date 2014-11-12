@@ -41,6 +41,11 @@
  */
 - (NSDictionary *)dictionaryRepresentation;
 
+/**
+ Creates an object reference (id + type) for the receiver
+ @returns A dictionary to serve as objectReference for the receiver or `nil` if it cannot be constructed due to missing information.
+ */
+- (NSDictionary *)objectReference;
 
 /**
  @name Common Properties

@@ -205,6 +205,21 @@ NSArray *PLYAllEntityClasses()
 	return [dict copy];
 }
 
+- (NSDictionary *)objectReference
+{
+	if (!_Class || _Id)
+	{
+		return nil;
+	}
+	
+	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+	
+	dict[@"pl-class"] = _Class;
+	dict[@"pl-id"] = _Id;
+	
+	return dict;
+}
+
 #pragma mark - NSCopying
 
 - (id)copyWithZone:(NSZone *)zone

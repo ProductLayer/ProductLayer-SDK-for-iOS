@@ -924,21 +924,10 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	NSParameterAssert(opine.language);
 	NSParameterAssert(completion);
 	
-	PLYOpine *sendingOpine = [opine copy];
-	
-	// only the reference to the entity is needed, so we reduce it
-	if (sendingOpine.parent)
-	{
-		PLYVotableEntity *reducedParent = [[PLYVotableEntity alloc] init];
-		reducedParent.Class = opine.parent.Class;
-		reducedParent.Id = opine.parent.Id;
-		[sendingOpine setParent:reducedParent];
-	}
-	
 	NSString *function = @"opines";
 	NSString *path = [self _functionPathForFunction:function];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:[sendingOpine dictionaryRepresentation] completion:completion];
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:[opine dictionaryRepresentation] completion:completion];
 }
 
 #pragma mark - Reviews
