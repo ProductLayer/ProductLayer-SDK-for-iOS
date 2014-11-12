@@ -30,6 +30,8 @@
 {
 	[super viewDidLoad];
 	
+	self.view.backgroundColor = [UIColor whiteColor];
+	
 	NSMutableArray *validators = [NSMutableArray array];
 	UILabel *explainLabel = [[UILabel alloc] init];
 	explainLabel.text = PLYLocalizedStringFromTable(@"PLY_LOGIN_EXPLAIN", @"UI", @"Explanation to show on login dialog");

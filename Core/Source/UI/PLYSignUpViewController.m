@@ -28,6 +28,8 @@
 {
 	[super viewDidLoad];
 	
+	self.view.backgroundColor = [UIColor whiteColor];
+	
 	UILabel *explainLabel = [[UILabel alloc] init];
 	explainLabel.text = PLYLocalizedStringFromTable(@"PLY_SIGNUP_EXPLAIN", @"UI", @"Explanation to show on sign up dialog");
 	explainLabel.translatesAutoresizingMaskIntoConstraints = NO;

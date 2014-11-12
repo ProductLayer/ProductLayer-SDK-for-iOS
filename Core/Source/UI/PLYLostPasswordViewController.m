@@ -27,6 +27,8 @@
 {
 	[super viewDidLoad];
 	
+	self.view.backgroundColor = [UIColor whiteColor];
+	
 	UILabel *explainLabel = [[UILabel alloc] init];
 	explainLabel.text = PLYLocalizedStringFromTable(@"PLY_LOSTPW_EXPLAIN", @"UI", @"Explanation to show on lost password dialog");
 	explainLabel.translatesAutoresizingMaskIntoConstraints = NO;
