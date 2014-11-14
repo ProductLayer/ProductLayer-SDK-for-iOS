@@ -48,7 +48,7 @@
 /**
  The gamification points of the user.
  */
-@property (nonatomic, strong) NSNumber *points;
+@property (nonatomic, assign) NSInteger points;
 
 /**
  A list of unlocked achievements.

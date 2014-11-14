@@ -49,7 +49,7 @@
 	}
 	else if ([key isEqualToString:@"pl-usr-points"])
 	{
-		self.points = value;
+		[self setValue:value forKey:@"points"];
 	}
 	else if ([key isEqualToString:@"pl-usr-achv_unlocked"])
 	{
@@ -117,7 +117,7 @@
 	
 	if (_points)
 	{
-		dict[@"pl-usr-points"] = _points;
+		dict[@"pl-usr-points"] = @(_points);
 	}
 	
 	if (_unlockedAchievements)
