@@ -114,6 +114,7 @@ NSArray *_sortedKeys = nil;
 	
 	// remove NULL values from dictionary
 	NSMutableDictionary *cleanDictionary = [NSMutableDictionary dictionary];
+	NSString *language = [self _currentLanguage];
 	
 	for (NSString *oneKey in [categories allKeys])
 	{
@@ -123,7 +124,6 @@ NSArray *_sortedKeys = nil;
 		}
 		else
 		{
-			NSString *language = [[NSLocale currentLocale] localeIdentifier];
 			DTLogError(@"Category '%@' has invalid value in language '%@'! Ignoring it.", oneKey, language);
 		}
 	}
@@ -242,7 +242,8 @@ NSArray *_sortedKeys = nil;
 
 - (void)_updateCategoriesFromServer
 {
-	NSString *language = [[NSLocale currentLocale] localeIdentifier];
+	NSString *language = [self _currentLanguage];
+
 	[self.productLayerServer getCategoriesForLocale:language completion:^(id result, NSError *error) {
 		if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == kCFURLErrorNotConnectedToInternet)
 		{
@@ -252,7 +253,7 @@ NSArray *_sortedKeys = nil;
 		
 		if (!result)
 		{
-			DTLogError(@"Error loading categories from server: %@", error);
+			DTLogError(@"Error loading categories from server for language '%@': %@", error, language);
 			return;
 		}
 		
@@ -360,6 +361,11 @@ NSArray *_sortedKeys = nil;
 			*stop = YES;
 		}
 	}];
+}
+
+- (NSString *)_currentLanguage
+{
+	return [[NSLocale preferredLanguages] firstObject];
 }
 
 #pragma mark - UITableView
