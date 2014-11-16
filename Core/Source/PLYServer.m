@@ -851,6 +851,21 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:dictionary completion:completion];
 }
 
+
+#pragma mark - Working with Brands and Brand Owners
+
+- (void)getRecommendedBrandOwnersForGTIN:(NSString *)GTIN
+										completion:(PLYCompletion)completion
+{
+	NSParameterAssert(GTIN);
+	NSParameterAssert(completion);
+	
+	NSString *path = [self _functionPathForFunction:[NSString stringWithFormat:@"/product/%@/recommended_brand_owners", GTIN]];
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:nil completion:completion];
+}
+
+
 #pragma mark - Image Handling
 
 /**

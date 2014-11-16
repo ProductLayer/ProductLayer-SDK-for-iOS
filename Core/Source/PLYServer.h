@@ -182,6 +182,19 @@ typedef void (^PLYCompletion)(id result, NSError *error);
                    dictionary:(NSDictionary *)dictionary
                    completion:(PLYCompletion)completion;
 
+
+/**
+ @name Working with Brands and Brand Owners
+ */
+
+/**
+ Retrieves the recommended brand owners based on GTIN
+ @param GTIN The GTIN of the product
+ @param completion The completion handler for the request
+ */
+- (void)getRecommendedBrandOwnersForGTIN:(NSString *)GTIN
+										completion:(PLYCompletion)completion;
+
 /**
  @name Vote Handling
  */
