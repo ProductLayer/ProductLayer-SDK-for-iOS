@@ -25,7 +25,6 @@ NSArray *_sortedKeys = nil;
 @implementation PLYCategoryPickerViewController
 {
 	NSArray *_filteredKeys;
-	UISearchController *_searchController;
 }
 
 - (void)viewDidLoad
@@ -34,17 +33,11 @@ NSArray *_sortedKeys = nil;
 	
 	// use normal cells
 	[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CELL_IDENTIFIER];
-	
-	// setup search controller
-	_searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-	_searchController.searchResultsUpdater = self;
-	_searchController.searchBar.frame = CGRectMake(0.0, 0.0, CGRectGetWidth(self.tableView.frame), 44.0); // need frame or else it is invisible
-	_searchController.dimsBackgroundDuringPresentation = NO;
-	
-	self.tableView.tableHeaderView = _searchController.searchBar;
-	
+		
 	// load last category list we had
 	[self _loadCategoriesFromCache];
+	
+	self.navigationItem.title = PLYLocalizedStringFromTable(@"PLY_CATEGORIES_TITLE", @"UI", @"Title of the view controller showing brands");
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -308,7 +301,7 @@ NSArray *_sortedKeys = nil;
 
 - (NSArray *)_currentSearchTerms
 {
-	NSString *searchText = _searchController.searchBar.text;
+	NSString *searchText = self.searchController.searchBar.text;
 	return [searchText componentsSeparatedByCharactersInSet:[[NSCharacterSet alphanumericCharacterSet] invertedSet]];
 }
 
@@ -377,7 +370,7 @@ NSArray *_sortedKeys = nil;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	if (_searchController.isActive)
+	if (self.searchController.isActive)
 	{
 		return [_filteredKeys count];
 	}
@@ -399,7 +392,7 @@ NSArray *_sortedKeys = nil;
 	bgColorView.backgroundColor = PLYBrandColor();
 	[cell setSelectedBackgroundView:bgColorView];
  
-	if (_searchController.isActive)
+	if (self.searchController.isActive)
 	{
 		NSString *key = _filteredKeys[indexPath.row];
 		NSString *categoryName = _categoryDictionary[key];
@@ -420,7 +413,7 @@ NSArray *_sortedKeys = nil;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if (_searchController.isActive)
+	if (self.searchController.isActive)
 	{
 		self.selectedCategoryKey = _filteredKeys[indexPath.row];
 	}

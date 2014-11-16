@@ -41,6 +41,9 @@
 		A740BB7B19F23F8500DA3943 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214F9183F842000C38635 /* Foundation.framework */; };
 		A740BB7C19F23F9200DA3943 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FB183F842000C38635 /* CoreGraphics.framework */; };
 		A740BB7D19F23FA100DA3943 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7590B4019ED7CDF0084EBCA /* QuartzCore.framework */; };
+		A74DF4041A18B18000CA39D9 /* PLYBrandOwnerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76478941A18A80A0000500C /* PLYBrandOwnerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A74DF4211A18B22D00CA39D9 /* PLYBrandOwnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76478951A18A80A0000500C /* PLYBrandOwnerViewController.m */; };
+		A74DF4221A18B22E00CA39D9 /* PLYBrandOwnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76478951A18A80A0000500C /* PLYBrandOwnerViewController.m */; };
 		A7548AEB196C2E7C000B72EB /* PLYEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548AEA196C2E7C000B72EB /* PLYEntity.m */; };
 		A7548B24196C4C16000B72EB /* PLYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548B23196C4C16000B72EB /* PLYImage.m */; };
 		A7590AEE19ED77710084EBCA /* ProductLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7590ADA19ED77710084EBCA /* ProductLayer.framework */; };
@@ -98,6 +101,9 @@
 		A7590B2E19ED77C40084EBCA /* API.strings in Resources */ = {isa = PBXBuildFile; fileRef = A76A56E81986922300751454 /* API.strings */; };
 		A7590B2F19ED77C40084EBCA /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = A76A56E91986922300751454 /* UI.strings */; };
 		A7590B3319ED78B90084EBCA /* libDTFoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B4420E183F913000E8A170 /* libDTFoundation.a */; };
+		A76478991A18A8830000500C /* PLYSearchableTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76478971A18A8830000500C /* PLYSearchableTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A764789A1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76478981A18A8830000500C /* PLYSearchableTableViewController.m */; };
+		A764789B1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76478981A18A8830000500C /* PLYSearchableTableViewController.m */; };
 		A76A57141986939700751454 /* API.strings in Resources */ = {isa = PBXBuildFile; fileRef = A76A56E81986922300751454 /* API.strings */; };
 		A76A57151986939700751454 /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = A76A56E91986922300751454 /* UI.strings */; };
 		A76A571B1986A6D300751454 /* ProductLayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A76A570C1986937D00751454 /* ProductLayer.bundle */; };
@@ -526,6 +532,10 @@
 		A7548B23196C4C16000B72EB /* PLYImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYImage.m; path = PLYEntities/PLYImage.m; sourceTree = "<group>"; };
 		A7590ADA19ED77710084EBCA /* ProductLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ProductLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7590B4019ED7CDF0084EBCA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A76478941A18A80A0000500C /* PLYBrandOwnerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYBrandOwnerViewController.h; sourceTree = "<group>"; };
+		A76478951A18A80A0000500C /* PLYBrandOwnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYBrandOwnerViewController.m; sourceTree = "<group>"; };
+		A76478971A18A8830000500C /* PLYSearchableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYSearchableTableViewController.h; sourceTree = "<group>"; };
+		A76478981A18A8830000500C /* PLYSearchableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYSearchableTableViewController.m; sourceTree = "<group>"; };
 		A7696B4B19ED91E000C1D3C4 /* Framework-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Framework-Info.plist"; sourceTree = "<group>"; };
 		A76A56E81986922300751454 /* API.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = API.strings; sourceTree = "<group>"; };
 		A76A56E91986922300751454 /* UI.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = UI.strings; sourceTree = "<group>"; };
@@ -810,6 +820,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		A76478771A18A6E50000500C /* Brands */ = {
+			isa = PBXGroup;
+			children = (
+				A76478941A18A80A0000500C /* PLYBrandOwnerViewController.h */,
+				A76478951A18A80A0000500C /* PLYBrandOwnerViewController.m */,
+			);
+			name = Brands;
+			sourceTree = "<group>";
+		};
 		A76A56E71986922300751454 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -823,6 +842,9 @@
 		A76D3F58198650770032FE59 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A76478971A18A8830000500C /* PLYSearchableTableViewController.h */,
+				A76478981A18A8830000500C /* PLYSearchableTableViewController.m */,
+				A76478771A18A6E50000500C /* Brands */,
 				A76D3F65198650770032FE59 /* UIViewController+ProductLayer.h */,
 				A76D3F66198650770032FE59 /* UIViewController+ProductLayer.m */,
 				A7EE559F1A121C5C00DD55FE /* Opines */,
@@ -1382,6 +1404,7 @@
 				A7590B1719ED77B80084EBCA /* PLYList.h in Headers */,
 				A7590B0B19ED77B40084EBCA /* PLYTextField.h in Headers */,
 				A7590B0919ED77B40084EBCA /* PLYFormValidator.h in Headers */,
+				A76478991A18A8830000500C /* PLYSearchableTableViewController.h in Headers */,
 				A7590B1B19ED77B80084EBCA /* PLYOpine.h in Headers */,
 				A7590B0F19ED77B80084EBCA /* PLYEntity.h in Headers */,
 				A7590B2919ED77BD0084EBCA /* PLYServer.h in Headers */,
@@ -1410,6 +1433,7 @@
 				A7CD959219FA821E008E3A41 /* PLYOpineComposeViewController.h in Headers */,
 				A70CFE4919EE5D8100CBF533 /* PLYScannerViewController.h in Headers */,
 				A7590B0319ED77B40084EBCA /* PLYSignUpViewController.h in Headers */,
+				A74DF4041A18B18000CA39D9 /* PLYBrandOwnerViewController.h in Headers */,
 				A7590AFB19ED77B40084EBCA /* AccountManager.h in Headers */,
 				A7590AFD19ED77B40084EBCA /* GenericAccount.h in Headers */,
 			);
@@ -1845,6 +1869,7 @@
 				A70CFE6C19EE5E7900CBF533 /* PLYVideoPreviewView.m in Sources */,
 				A7590B0E19ED77B40084EBCA /* PLYUserNameValidator.m in Sources */,
 				A7590B2219ED77B80084EBCA /* PLYReview.m in Sources */,
+				A764789B1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */,
 				A7590B1C19ED77B80084EBCA /* PLYOpine.m in Sources */,
 				A770B2D71A188FAA001465A7 /* PLYBrand.m in Sources */,
 				A7590B2D19ED77BD0084EBCA /* PLYConstants.m in Sources */,
@@ -1873,6 +1898,7 @@
 				A7590B0819ED77B40084EBCA /* PLYFormEmailValidator.m in Sources */,
 				A7590B1019ED77B80084EBCA /* PLYEntity.m in Sources */,
 				A7590B2419ED77B80084EBCA /* PLYUser.m in Sources */,
+				A74DF4211A18B22D00CA39D9 /* PLYBrandOwnerViewController.m in Sources */,
 				A7590B0419ED77B40084EBCA /* PLYSignUpViewController.m in Sources */,
 				A7590B2619ED77B80084EBCA /* PLYProductCategory.m in Sources */,
 			);
@@ -1945,6 +1971,7 @@
 				A70CFE6B19EE5E7900CBF533 /* PLYVideoPreviewView.m in Sources */,
 				A76D3F69198650770032FE59 /* PLYLoginViewController.m in Sources */,
 				C98CD2671910E0D70035647C /* PLYPackaging.m in Sources */,
+				A764789A1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */,
 				C98CD2681910E0D70035647C /* PLYProduct.m in Sources */,
 				A770B2D61A188FAA001465A7 /* PLYBrand.m in Sources */,
 				A7548B24196C4C16000B72EB /* PLYImage.m in Sources */,
@@ -1973,6 +2000,7 @@
 				A7B4428C183F937D00E8A170 /* PLYServer.m in Sources */,
 				C9ADBDD41911502B004C81B3 /* PLYUser.m in Sources */,
 				A76D3F6A198650770032FE59 /* PLYSignUpViewController.m in Sources */,
+				A74DF4221A18B22E00CA39D9 /* PLYBrandOwnerViewController.m in Sources */,
 				A76D3F6D198650770032FE59 /* UIViewController+ProductLayer.m in Sources */,
 				A7B442A4183F97B800E8A170 /* PLYConstants.m in Sources */,
 			);

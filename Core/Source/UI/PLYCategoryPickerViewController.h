@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Cocoanetics. All rights reserved.
 //
 
+#import "PLYSearchableTableViewController.h"
+
 @class PLYCategoryPickerViewController;
 
 @protocol PLYCategoryPickerViewControllerDelegate <NSObject>
@@ -16,7 +18,7 @@
 @end
 
 
-@interface PLYCategoryPickerViewController : UITableViewController
+@interface PLYCategoryPickerViewController : PLYSearchableTableViewController
 
 @property (nonatomic, weak) id <PLYCategoryPickerViewControllerDelegate> delegate;
 

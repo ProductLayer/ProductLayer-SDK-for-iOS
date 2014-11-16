@@ -77,3 +77,14 @@
 
 /* Message for successful sign up */
 "PLY_SIGNUP_SUCCESS_ALERT_MSG" = "Please check your email inbox. You will receive an initial password which you should change. Then you may login in with your user name and password.";
+
+
+// ------- PLYCategoryPickerViewController
+
+/* Title of the view controller showing categories */
+"PLY_CATEGORIES_TITLE" = "Categories";
+
+// ------- PLYBrandOwnerViewController
+
+/* Title of the view controller showing brands */
+"PLY_BRANDS_TITLE" = "Brands";
