@@ -9,9 +9,11 @@
 #import "PLYConstants.h"
 #import "PLYServer.h"
 
+#import "PLYBrand.h"
+#import "PLYBrandOwner.h"
+#import "PLYImage.h"
 #import "PLYOpine.h"
 #import "PLYProduct.h"
-#import "PLYImage.h"
 #import "PLYProductCategory.h"
 #import "PLYPackaging.h"
 #import "PLYReview.h"

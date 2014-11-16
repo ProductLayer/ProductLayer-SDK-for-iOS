@@ -6,7 +6,9 @@
 //  Copyright (c) 2014 Cocoanetics. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+/**
+ A table view controller with an additional search bar
+ */
 
 @interface PLYSearchableTableViewController : UITableViewController <UISearchResultsUpdating>
 
@@ -15,4 +17,17 @@
  */
 @property (nonatomic, readonly) UISearchController *searchController;
 
+
+/**
+ The array of search terms currently in the search text field
+ */
+- (NSArray *)currentSearchTerms;
+
+@end
+
+
+// private interface for subclasses
+@interface PLYSearchableTableViewController ()
+- (BOOL)_text:(NSString *)text containsAllTerms:(NSArray *)terms;
+- (NSAttributedString *)_attributedStringForText:(NSString *)text withSearchTermsMarked:(NSArray *)terms;
 @end

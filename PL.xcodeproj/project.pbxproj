@@ -115,10 +115,10 @@
 		A76D3F6C198650770032FE59 /* PLYUserNameValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F64198650770032FE59 /* PLYUserNameValidator.m */; };
 		A76D3F6D198650770032FE59 /* UIViewController+ProductLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F66198650770032FE59 /* UIViewController+ProductLayer.m */; };
 		A76D3F9119866E0E0032FE59 /* PLYLostPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F9019866E0E0032FE59 /* PLYLostPasswordViewController.m */; };
-		A770B2B41A188F78001465A7 /* PLYBrandOwner.h in Headers */ = {isa = PBXBuildFile; fileRef = A770B2B21A188F78001465A7 /* PLYBrandOwner.h */; };
+		A770B2B41A188F78001465A7 /* PLYBrandOwner.h in Headers */ = {isa = PBXBuildFile; fileRef = A770B2B21A188F78001465A7 /* PLYBrandOwner.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A770B2B51A188F78001465A7 /* PLYBrandOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = A770B2B31A188F78001465A7 /* PLYBrandOwner.m */; };
 		A770B2B61A188F78001465A7 /* PLYBrandOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = A770B2B31A188F78001465A7 /* PLYBrandOwner.m */; };
-		A770B2D51A188FAA001465A7 /* PLYBrand.h in Headers */ = {isa = PBXBuildFile; fileRef = A770B2D31A188FAA001465A7 /* PLYBrand.h */; };
+		A770B2D51A188FAA001465A7 /* PLYBrand.h in Headers */ = {isa = PBXBuildFile; fileRef = A770B2D31A188FAA001465A7 /* PLYBrand.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A770B2D61A188FAA001465A7 /* PLYBrand.m in Sources */ = {isa = PBXBuildFile; fileRef = A770B2D41A188FAA001465A7 /* PLYBrand.m */; };
 		A770B2D71A188FAA001465A7 /* PLYBrand.m in Sources */ = {isa = PBXBuildFile; fileRef = A770B2D41A188FAA001465A7 /* PLYBrand.m */; };
 		A7B214FA183F842000C38635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214F9183F842000C38635 /* Foundation.framework */; };
