@@ -303,6 +303,9 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	// increment active requests
 	[[UIApplication sharedApplication] pushActiveNetworkOperation];
 	
+	// remember user that was logged in when task was started
+	PLYUser *user = _loggedInUser;
+	
 	NSURLSessionDataTask *task = [[self session]
 											dataTaskWithRequest:request
 											completionHandler:^(NSData *data,
@@ -395,6 +398,16 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 														
 														NSDictionary *userInfo = @{NSLocalizedDescriptionKey:  errorMessage};
 														error = [NSError errorWithDomain:PLYErrorDomain code:0 userInfo:userInfo];
+													}
+												}
+												
+												if (user)
+												{
+													NSNumber *pointsNum = headers[@"X-ProductLayer-User-Points"];
+													
+													if (pointsNum)
+													{
+														[user setValue:pointsNum forKey:@"points"];
 													}
 												}
 												
