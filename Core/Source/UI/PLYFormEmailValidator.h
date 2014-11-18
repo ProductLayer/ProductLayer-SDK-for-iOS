@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 ProductLayer. All rights reserved.
 //
 
-#import "PLYFormValidator.h"
+#import "PLYNonEmptyValidator.h"
 
-@interface PLYFormEmailValidator : PLYFormValidator
+@interface PLYFormEmailValidator : PLYNonEmptyValidator
 
 @end

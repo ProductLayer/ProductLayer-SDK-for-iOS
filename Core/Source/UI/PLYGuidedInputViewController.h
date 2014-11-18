@@ -8,7 +8,8 @@
 
 @interface PLYGuidedInputViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UILabel *textLabel;
-@property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (nonatomic, copy) NSString *label;
+@property (nonatomic, copy) NSString *text;
+@property (nonatomic, copy) NSString *placeholder;
 
 @end

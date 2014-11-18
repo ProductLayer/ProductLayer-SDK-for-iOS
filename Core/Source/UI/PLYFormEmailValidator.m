@@ -64,6 +64,14 @@
 
 - (void)validate
 {
+	[super validate];
+	
+	if (!self.valid)
+	{
+		// no further checking necessary
+		return;
+	}
+	
 	UITextField *field = (UITextField *)self.control;
 	self.valid = [self _isValidEmail:field.text];
 }

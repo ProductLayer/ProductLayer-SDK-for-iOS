@@ -22,7 +22,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your text below" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nE7-Pb-qkp">
-                    <rect key="frame" x="20" y="259" width="560" height="21"/>
+                    <rect key="frame" x="30" y="259" width="540" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -33,9 +33,9 @@
                 <constraint firstItem="1Bz-gv-Zca" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="7y2-TG-fta"/>
                 <constraint firstAttribute="centerY" secondItem="1Bz-gv-Zca" secondAttribute="centerY" id="FhU-Ty-MHV"/>
                 <constraint firstItem="1Bz-gv-Zca" firstAttribute="top" secondItem="nE7-Pb-qkp" secondAttribute="bottom" constant="8" id="JaP-FM-OVg"/>
-                <constraint firstItem="1Bz-gv-Zca" firstAttribute="leading" secondItem="nE7-Pb-qkp" secondAttribute="leading" id="PR9-k7-Us8"/>
+                <constraint firstItem="1Bz-gv-Zca" firstAttribute="leading" secondItem="nE7-Pb-qkp" secondAttribute="leading" constant="-10" id="PR9-k7-Us8"/>
                 <constraint firstAttribute="trailing" secondItem="1Bz-gv-Zca" secondAttribute="trailing" constant="20" id="dD3-w8-eNO"/>
-                <constraint firstItem="nE7-Pb-qkp" firstAttribute="trailing" secondItem="1Bz-gv-Zca" secondAttribute="trailing" priority="900" id="se7-qD-vXu"/>
+                <constraint firstItem="nE7-Pb-qkp" firstAttribute="trailing" secondItem="1Bz-gv-Zca" secondAttribute="trailing" priority="900" constant="-10" id="se7-qD-vXu"/>
             </constraints>
         </view>
     </objects>

@@ -29,10 +29,13 @@
 #import "PLYTextField.h"
 #import "PLYFormValidator.h"
 #import "PLYOpineComposeViewController.h"
+#import "PLYNonEmptyValidator.h"
+#import "PLYContentsDidChangeValidator.h"
 #import "PLYUserNameValidator.h"
 #import "PLYFormEmailValidator.h"
 #import "PLYCategoryPickerViewController.h"
 #import "PLYBrandOwnerViewController.h"
+#import "PLYGuidedInputViewController.h"
 
 // Scanner
 #import "PLYScannerViewController.h"

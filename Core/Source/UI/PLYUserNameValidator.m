@@ -12,16 +12,15 @@
 
 - (void)validate
 {
+	[super validate];
+	
+	if (!self.valid)
+	{
+		return;
+	}
+	
    UITextField *field = (UITextField *)self.control;
-
    NSString *user = field.text;
-   
-   if (![user length])
-   {
-      self.valid = NO;
-      return;
-   }
-   
    NSRange rangeOfWhitespace = [user rangeOfCharacterFromSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
    
    if (rangeOfWhitespace.location != NSNotFound)

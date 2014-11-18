@@ -18,6 +18,7 @@
    if (self)
    {
       _delegate = delegate;
+		_valid = YES;
    }
    
    return self;
@@ -32,7 +33,7 @@
 - (void)validate
 {
    // subclasses define their own criteria what makes the control contents valid
-   self.valid = NO;
+	self.valid = YES;
 }
 
 
