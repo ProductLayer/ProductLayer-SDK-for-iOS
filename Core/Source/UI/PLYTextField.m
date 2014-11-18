@@ -32,8 +32,9 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
+	
+    if (self)
+	 {
 		 [self _commonSetup];
     }
     return self;
