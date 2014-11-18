@@ -15,6 +15,9 @@
 @end
 
 @implementation PLYGuidedInputViewController
+{
+	NSString *_latestUsedLanguage;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,13 +53,52 @@
 	[nib instantiateWithOwner:self options:nil];
 }
 
-- (IBAction)cancel:(id)sender {
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(PLYTextField *)textField
+{
+	if (textField.validator.isValid)
+	{
+		[self save:nil];
+	}
+	
+	return NO;
+}
+
+#pragma mark - Actions
+
+- (IBAction)cancel:(id)sender
+{
+	[self performSegueWithIdentifier:@"cancel" sender:sender];
+}
+
+- (IBAction)save:(id)sender
+{
+	_text = _textField.text;
+	_language = _latestUsedLanguage;
 	[self performSegueWithIdentifier:@"unwind" sender:sender];
 }
 
-- (IBAction)save:(id)sender {
-	_text = _textField.text;
-	[self performSegueWithIdentifier:@"unwind" sender:sender];
+#pragma mark - Helpers
+
+- (void)_updateLanguage
+{
+	UITextInputMode *inputMode = [_textField textInputMode];
+	NSString *lang = inputMode.primaryLanguage;
+	
+	if (!lang)
+	{
+		return;
+	}
+	
+	NSRange range = [lang rangeOfString:@"-"];
+	
+	if (range.location != NSNotFound)
+	{
+		lang = [lang substringToIndex:range.location];
+	}
+	
+	_latestUsedLanguage = lang;
 }
 
 #pragma mark - Form Validation
@@ -64,6 +106,8 @@
 - (void)validityDidChange:(PLYFormValidator *)validator
 {
 	self.navigationItem.rightBarButtonItem.enabled = [validator isValid];
+	
+	[self _updateLanguage];
 }
 
 @end

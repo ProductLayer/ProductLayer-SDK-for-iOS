@@ -12,4 +12,7 @@
 @property (nonatomic, copy) NSString *text;
 @property (nonatomic, copy) NSString *placeholder;
 
+// the language last used if text was entered
+@property (nonatomic, copy) NSString *language;
+
 @end

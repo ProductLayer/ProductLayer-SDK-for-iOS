@@ -19,7 +19,10 @@
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Placeholder" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Bz-gv-Zca" customClass="PLYTextField">
                     <rect key="frame" x="20" y="288" width="560" height="24"/>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="yes" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="ytX-3z-o4r"/>
+                    </connections>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your text below" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nE7-Pb-qkp">
                     <rect key="frame" x="30" y="259" width="540" height="21"/>
