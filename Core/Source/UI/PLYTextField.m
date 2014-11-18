@@ -14,9 +14,11 @@
 
 - (void)_commonSetup
 {
+	// rounded green border done with layer border instead of build in
 	CALayer *layer = self.layer;
 	layer.borderWidth = 1;
 	layer.cornerRadius = 7;
+	self.borderStyle = UITextBorderStyleNone;
 	
 	self.autocorrectionType = UITextAutocorrectionTypeNo;
 	self.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody]; //[UIFont fontWithName:@"HelveticaNeue" size:22.0f];
