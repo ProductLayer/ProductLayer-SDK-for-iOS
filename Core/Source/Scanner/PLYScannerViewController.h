@@ -49,7 +49,7 @@
 /**
  The scan focus box in which barcodes are recognized.
 */
-@property (nonatomic, readonly) PLYVideoPreviewInterestBox *scannerInterestBox;
+@property (nonatomic, strong) IBOutlet PLYVideoPreviewInterestBox *scannerInterestBox;
 
 /**
  Delegate that gets informed about scanned barcodes

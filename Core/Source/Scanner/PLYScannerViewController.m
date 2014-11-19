@@ -510,6 +510,16 @@
 	}
 }
 
+- (CGRect)_activeScanRectOfInterest
+{
+	if (_scannerInterestBox)
+	{
+		return [_videoPreview.previewLayer metadataOutputRectOfInterestForRect:_scannerInterestBox.frame];
+	}
+	
+	return CGRectMake(0, 0, 1, 1);
+}
+
 #pragma mark - Public Methods
 
 - (void)captureStillImageAsynchronously:(void (^)(UIImage *image))completion
@@ -568,7 +578,10 @@
 		[self.view insertSubview:_videoPreview atIndex:0];
 	}
 	
-	[self _setupInterestBox];
+	if (!_scannerInterestBox)
+	{
+		[self _setupInterestBox];
+	}
 	
 	[self _setupCameraAfterCheckingAuthorization];
 	
@@ -683,7 +696,7 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
 	NSMutableDictionary *repCount = [NSMutableDictionary dictionary];
 
 	// get current rect of interest
-	CGRect rectOfInterest = [_videoPreview.previewLayer metadataOutputRectOfInterestForRect:_scannerInterestBox.frame];
+	CGRect rectOfInterest = [self _activeScanRectOfInterest];
 	
 	for (AVMetadataMachineReadableCodeObject *object in metadataObjects)
 	{
