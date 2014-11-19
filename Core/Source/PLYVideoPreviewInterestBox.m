@@ -12,16 +12,14 @@
 
 @implementation PLYVideoPreviewInterestBox
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (void)layoutSubviews
 {
-	self = [super initWithFrame:frame];
+	[super layoutSubviews];
 	
-	if (self)
+	if (!self.image)
 	{
 		self.image = [self _stretchableImage];
 	}
-	
-	return self;
 }
 
 // allow resizing via auto layout
