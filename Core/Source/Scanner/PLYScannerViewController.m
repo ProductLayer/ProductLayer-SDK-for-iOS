@@ -18,7 +18,6 @@
 @interface PLYScannerViewController () <AVCaptureMetadataOutputObjectsDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *switchCamButton;
-@property (weak, nonatomic) IBOutlet UIButton *snapButton;
 
 @end
 
@@ -453,6 +452,7 @@
 
 - (void)_setupInterestBox
 {
+	return;
 	_scannerInterestBox = [[PLYVideoPreviewInterestBox alloc] initWithFrame:CGRectZero];
 	[_videoPreview addSubview:_scannerInterestBox];
 	
