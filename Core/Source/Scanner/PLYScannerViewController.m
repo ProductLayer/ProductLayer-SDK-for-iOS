@@ -172,6 +172,12 @@
 	// add still image output
 	_imageOutput = [AVCaptureStillImageOutput new];
 	
+	// get highest res images for still images
+	if ([_imageOutput respondsToSelector:@selector(isHighResolutionStillImageOutputEnabled)])
+	{
+		_imageOutput.highResolutionStillImageOutputEnabled = YES;
+	}
+	
 	if (![_captureSession canAddOutput:_imageOutput])
 	{
 		DTLogError(@"Unable to add still image output to capture session");
