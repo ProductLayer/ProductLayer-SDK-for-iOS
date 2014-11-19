@@ -60,6 +60,10 @@ NSArray *_sortedKeys = nil;
 			[self _setupForTraitCollection:self.traitCollection];
 		}
 	}
+	else
+	{
+		[self _setupForTraitCollection:self.traitCollection];
+	}
 	
 	[self _selectRowForCategoryKey:_selectedCategoryKey animated:NO];
 }

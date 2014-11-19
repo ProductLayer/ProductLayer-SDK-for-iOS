@@ -57,6 +57,10 @@
 			[self _setupForTraitCollection:self.traitCollection];
 		}
 	}
+	else
+	{
+		[self _setupForTraitCollection:self.traitCollection];
+	}
 	
 	[self _selectRowForBrandOwnerName:_selectedBrandOwnerName brandName:_selectedBrandName animated:NO];
 }
@@ -89,7 +93,6 @@
 {
 	[self _setupForTraitCollection:newCollection];
 }
-
 
 #pragma mark - Helpers
 
