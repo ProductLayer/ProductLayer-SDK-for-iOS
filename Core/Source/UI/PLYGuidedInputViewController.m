@@ -70,6 +70,11 @@
 - (IBAction)cancel:(id)sender
 {
 	[self performSegueWithIdentifier:@"cancel" sender:sender];
+	
+	if (self.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiomPad)
+	{
+		[self dismissViewControllerAnimated:YES completion:NULL];
+	}
 }
 
 - (IBAction)save:(id)sender
@@ -77,6 +82,11 @@
 	_text = _textField.text;
 	_language = _latestUsedLanguage;
 	[self performSegueWithIdentifier:@"unwind" sender:sender];
+	
+	if (self.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiomPad)
+	{
+		[self dismissViewControllerAnimated:YES completion:NULL];
+	}
 }
 
 #pragma mark - Helpers
