@@ -656,8 +656,12 @@
 - (void)viewDidLayoutSubviews
 {
 	[super viewDidLayoutSubviews];
-	
+
 	[self _updateMetadataRectOfInterest];
+	
+	// using size classes does not send the willRotate... any more, so we need to updated here
+	UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+	[self _updateConnectionsForInterfaceOrientation:orientation];
 }
 
 #pragma mark - AVCaptureMetadataOutputObjectsDelegate
