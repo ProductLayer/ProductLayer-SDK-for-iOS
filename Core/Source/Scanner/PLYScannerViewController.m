@@ -452,7 +452,6 @@
 
 - (void)_setupInterestBox
 {
-	return;
 	_scannerInterestBox = [[PLYVideoPreviewInterestBox alloc] initWithFrame:CGRectZero];
 	[_videoPreview addSubview:_scannerInterestBox];
 	
