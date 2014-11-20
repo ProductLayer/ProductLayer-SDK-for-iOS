@@ -11,6 +11,9 @@
 #import "PLYUser.h"
 
 @implementation PLYUser
+{
+	NSString *_avatarImageIdentifier;
+}
 
 + (NSString *)entityTypeIdentifier
 {
@@ -74,6 +77,10 @@
 	else if ([key isEqualToString:@"pl-usr-following"])
 	{
 		self.following = [(NSNumber *)value boolValue];
+	}
+	else if ([key isEqualToString:@"pl-usr-img_id"])
+	{
+		_avatarImageIdentifier = value;
 	}
 	else
 	{
