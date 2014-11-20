@@ -48,36 +48,36 @@
 /**
  The gamification points of the user.
  */
-@property (nonatomic, assign) NSInteger points;
+@property (nonatomic, readonly) NSInteger points;
 
 /**
  A list of unlocked achievements.
  */
-@property (nonatomic, strong) NSArray *unlockedAchievements;
+@property (nonatomic, readonly) NSArray *unlockedAchievements;
 
 /**
  The counter for all user which are follower of this user.
  */
-@property (nonatomic, strong) NSNumber *followerCount;
+@property (nonatomic, readonly) NSNumber *followerCount;
 
 /**
  The counter for all user this user is following.
  */
-@property (nonatomic, strong) NSNumber *followingCount;
+@property (nonatomic, readonly) NSNumber *followingCount;
 
 /**
  The url of the users avatar image. If no image is defined productlayer returns a gravatar image url.
  */
-@property (nonatomic, strong) NSURL *avatarURL;
+@property (nonatomic, readonly) NSURL *avatarURL;
 
 /**
  Is this user following the logged in user.
  */
-@property (nonatomic) BOOL following;
+@property (nonatomic, readonly) BOOL following;
 
 /**
  Is this user followed the logged in user.
  */
-@property (nonatomic) BOOL followed;
+@property (nonatomic, readonly) BOOL followed;
 
 @end

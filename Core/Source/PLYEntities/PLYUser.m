@@ -56,31 +56,31 @@
 	}
 	else if ([key isEqualToString:@"pl-usr-achv_unlocked"])
 	{
-		self.unlockedAchievements = value;
+		[self setValue:value forKey:@"unlockedAchievements"];
 	}
 	else if ([key isEqualToString:@"pl-usr-follower_cnt"])
 	{
-		self.followerCount = value;
+		[self setValue:value forKey:@"followerCount"];
 	}
 	else if ([key isEqualToString:@"pl-usr-following_cnt"])
 	{
-		self.followingCount = value;
+		[self setValue:value forKey:@"followingCount"];
 	}
 	else if ([key isEqualToString:@"pl-usr-img"])
 	{
-		self.avatarURL = [NSURL URLWithString:value];
+		_avatarURL = [NSURL URLWithString:value];
 	}
 	else if ([key isEqualToString:@"pl-usr-followed"])
 	{
-		self.followed = [(NSNumber *)value boolValue];
+		[self setValue:value forKey:@"followed"];
 	}
 	else if ([key isEqualToString:@"pl-usr-following"])
 	{
-		self.following = [(NSNumber *)value boolValue];
+		[self setValue:value forKey:@"following"];
 	}
 	else if ([key isEqualToString:@"pl-usr-img_id"])
 	{
-		_avatarImageIdentifier = value;
+		// ignored
 	}
 	else
 	{
