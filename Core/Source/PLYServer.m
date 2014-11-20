@@ -833,6 +833,20 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:completion];
 }
 
+/**
+ Determines an image URL for the given PLYUser
+  */
+- (NSURL *)avatarImageURLForUser:(PLYUser *)user
+{
+	NSParameterAssert(user);
+	NSAssert(user.Id, @"User needs to have an identifier to retrieve an avator URL");
+	
+	NSString *function = [NSString stringWithFormat:@"/user/%@/avatar", user.Id];
+	NSString *path = [self _functionPathForFunction:function];
+
+	return [self _methodURLForPath:path parameters:nil];
+}
+
 #pragma mark - Managing Products
 
 /**
@@ -1192,32 +1206,6 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	if (searchText)       [parameters setObject:searchText     forKey:@"query"];
 	
 	[self _performMethodCallWithPath:path parameters:parameters completion:completion];
-}
-
-/**
- * Get the avatar of an specific user with nickname.
- **/
-- (void) getAvatarImageUrlFromUser:(PLYUser *)user
-								completion:(PLYCompletion)completion
-{
-	NSParameterAssert(user);
-	NSParameterAssert(completion);
-	
-	NSURL *url = nil;
-	
-	if (user.avatarURL)
-	{
-		url = user.avatarURL;
-	}
-	else if(user.nickname)
-	{
-		NSString *function = [NSString stringWithFormat:@"user/%@/avatar", user.nickname];
-		NSString *path = [self _functionPathForFunction:function];
-		
-		url = [NSURL URLWithString:path relativeToURL:_hostURL];
-	}
-	
-	completion(url, nil);
 }
 
 /**

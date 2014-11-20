@@ -149,6 +149,13 @@ typedef void (^PLYCompletion)(id result, NSError *error);
                                 completion:(PLYCompletion)completion;
 
 /**
+ Determines an image URL for the given PLYUser
+ @param user The PLYUser to retrieve the avatar image URL for
+ @returns An NSURL that shows the user's avatar
+ */
+- (NSURL *)avatarImageURLForUser:(PLYUser *)user;
+
+/**
  Nickname of the currently logged in user or `nil` if not logged in
  */
 @property (nonatomic, readonly) PLYUser *loggedInUser;
@@ -343,8 +350,6 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 - (void)performUserSearch:(NSString *)searchText completion:(PLYCompletion)completion;
 
 - (void)getUserByNickname:(NSString *)nickname completion:(PLYCompletion)completion;
-
-- (void)getAvatarImageUrlFromUser:(PLYUser *)user completion:(PLYCompletion)completion;
 
 - (void)getFollowerFromUser:(NSString *)nickname page:(NSNumber *)page recordsPerPage:(NSNumber *)rpp completion:(PLYCompletion)completion;
 
