@@ -14,6 +14,9 @@
 
 #import "DTBlockFunctions.h"
 
+// user default remembering last successful nickname
+NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
+
 @interface PLYLoginViewController () <PLYFormValidationDelegate, PLYLostPasswordViewControllerDelegate, PLYSignUpViewControllerDelegate, UITextFieldDelegate>
 
 @end
@@ -187,6 +190,16 @@
 	[[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	
+	if (![_nameField.text length])
+	{
+		_nameField.text = [[NSUserDefaults standardUserDefaults] objectForKey:LastLoggedInUserDefault];
+	}
+}
+
 #pragma mark - Actions
 
 - (void)cancel:(id)sender
@@ -227,6 +240,11 @@
 			UIBarButtonItem *check = [[UIBarButtonItem alloc] initWithTitle:@"👍" style:UIBarButtonItemStylePlain target:nil action:NULL];
 			check.tintColor = self.navigationController.view.tintColor;
 			self.navigationItem.rightBarButtonItem = check;
+			
+			
+			// remember successful login for next time
+			PLYUser *user = result;
+			[[NSUserDefaults standardUserDefaults] setObject:user.nickname forKey:LastLoggedInUserDefault];
 			
 			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 				[self dismissViewControllerAnimated:YES completion:NULL];
