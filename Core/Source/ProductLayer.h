@@ -34,7 +34,7 @@
 #import "PLYUserNameValidator.h"
 #import "PLYFormEmailValidator.h"
 #import "PLYCategoryPickerViewController.h"
-#import "PLYBrandOwnerViewController.h"
+#import "PLYBrandPickerViewController.h"
 #import "PLYGuidedInputViewController.h"
 
 // Scanner

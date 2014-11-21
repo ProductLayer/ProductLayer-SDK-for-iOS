@@ -416,11 +416,17 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 													id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
 													
 													// Try to parse the json object
-													if([jsonObject isKindOfClass:[NSArray class]] && [jsonObject count] != 0){
+													if ([jsonObject isKindOfClass:[NSArray class]] && [jsonObject count])
+													{
 														NSMutableArray *objectArray = [NSMutableArray arrayWithCapacity:1];
 														
 														for (NSDictionary *dictObject in jsonObject)
 														{
+															if (![dictObject isKindOfClass:[NSDictionary class]])
+															{
+																break;
+															}
+															
 															id object = [PLYEntity entityFromDictionary:dictObject];
 															
 															if (!object)
@@ -888,6 +894,14 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	NSParameterAssert(completion);
 	
 	NSString *path = [self _functionPathForFunction:[NSString stringWithFormat:@"/product/%@/recommended_brand_owners", GTIN]];
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:nil completion:completion];
+}
+
+
+- (void)getBrandsWithCompletion:(PLYCompletion)completion
+{
+	NSString *path = [self _functionPathForFunction:[NSString stringWithFormat:@"/products/brands"]];
 	
 	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:nil completion:completion];
 }

@@ -21,6 +21,12 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		A701C4FA1A1F55580013CB8D /* PLYBrandPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A701C4F71A1F55580013CB8D /* PLYBrandPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A701C4FB1A1F55580013CB8D /* PLYBrandPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A701C4F81A1F55580013CB8D /* PLYBrandPickerViewController.m */; };
+		A701C4FC1A1F55580013CB8D /* PLYBrandPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A701C4F81A1F55580013CB8D /* PLYBrandPickerViewController.m */; };
+		A701C4FD1A1F55580013CB8D /* PLYBrandPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A701C4F81A1F55580013CB8D /* PLYBrandPickerViewController.m */; };
+		A701C4FE1A1F55580013CB8D /* PLYBrandPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A701C4F91A1F55580013CB8D /* PLYBrandPickerViewController.xib */; };
+		A701C4FF1A1F55580013CB8D /* PLYBrandPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A701C4F91A1F55580013CB8D /* PLYBrandPickerViewController.xib */; };
 		A70CFE4919EE5D8100CBF533 /* PLYScannerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A70CFE4719EE5D8100CBF533 /* PLYScannerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A70CFE4A19EE5D8100CBF533 /* PLYScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70CFE4819EE5D8100CBF533 /* PLYScannerViewController.m */; };
 		A70CFE4B19EE5D8100CBF533 /* PLYScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70CFE4819EE5D8100CBF533 /* PLYScannerViewController.m */; };
@@ -44,9 +50,6 @@
 		A740BB7B19F23F8500DA3943 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214F9183F842000C38635 /* Foundation.framework */; };
 		A740BB7C19F23F9200DA3943 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FB183F842000C38635 /* CoreGraphics.framework */; };
 		A740BB7D19F23FA100DA3943 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7590B4019ED7CDF0084EBCA /* QuartzCore.framework */; };
-		A74DF4041A18B18000CA39D9 /* PLYBrandOwnerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76478941A18A80A0000500C /* PLYBrandOwnerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A74DF4211A18B22D00CA39D9 /* PLYBrandOwnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76478951A18A80A0000500C /* PLYBrandOwnerViewController.m */; };
-		A74DF4221A18B22E00CA39D9 /* PLYBrandOwnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76478951A18A80A0000500C /* PLYBrandOwnerViewController.m */; };
 		A7548AEB196C2E7C000B72EB /* PLYEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548AEA196C2E7C000B72EB /* PLYEntity.m */; };
 		A7548B24196C4C16000B72EB /* PLYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548B23196C4C16000B72EB /* PLYImage.m */; };
 		A7590AEE19ED77710084EBCA /* ProductLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7590ADA19ED77710084EBCA /* ProductLayer.framework */; };
@@ -528,6 +531,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A701C4F71A1F55580013CB8D /* PLYBrandPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYBrandPickerViewController.h; sourceTree = "<group>"; };
+		A701C4F81A1F55580013CB8D /* PLYBrandPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYBrandPickerViewController.m; sourceTree = "<group>"; };
+		A701C4F91A1F55580013CB8D /* PLYBrandPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PLYBrandPickerViewController.xib; sourceTree = "<group>"; };
 		A70CFE4719EE5D8100CBF533 /* PLYScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYScannerViewController.h; path = Scanner/PLYScannerViewController.h; sourceTree = "<group>"; };
 		A70CFE4819EE5D8100CBF533 /* PLYScannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYScannerViewController.m; path = Scanner/PLYScannerViewController.m; sourceTree = "<group>"; };
 		A70CFE6819EE5E7900CBF533 /* PLYVideoPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYVideoPreviewView.h; sourceTree = "<group>"; };
@@ -844,6 +850,9 @@
 			children = (
 				A76478941A18A80A0000500C /* PLYBrandOwnerViewController.h */,
 				A76478951A18A80A0000500C /* PLYBrandOwnerViewController.m */,
+				A701C4F71A1F55580013CB8D /* PLYBrandPickerViewController.h */,
+				A701C4F81A1F55580013CB8D /* PLYBrandPickerViewController.m */,
+				A701C4F91A1F55580013CB8D /* PLYBrandPickerViewController.xib */,
 			);
 			name = Brands;
 			sourceTree = "<group>";
@@ -1470,7 +1479,7 @@
 				A7CD959219FA821E008E3A41 /* PLYOpineComposeViewController.h in Headers */,
 				A70CFE4919EE5D8100CBF533 /* PLYScannerViewController.h in Headers */,
 				A7590B0319ED77B40084EBCA /* PLYSignUpViewController.h in Headers */,
-				A74DF4041A18B18000CA39D9 /* PLYBrandOwnerViewController.h in Headers */,
+				A701C4FA1A1F55580013CB8D /* PLYBrandPickerViewController.h in Headers */,
 				A7590AFB19ED77B40084EBCA /* AccountManager.h in Headers */,
 				A7590AFD19ED77B40084EBCA /* GenericAccount.h in Headers */,
 			);
@@ -1821,6 +1830,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A701C4FF1A1F55580013CB8D /* PLYBrandPickerViewController.xib in Resources */,
 				A776659B1A1B369A008AB88C /* PLYGuidedInputViewController.xib in Resources */,
 				A7590B2F19ED77C40084EBCA /* UI.strings in Resources */,
 				A7590B2E19ED77C40084EBCA /* API.strings in Resources */,
@@ -1831,6 +1841,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A701C4FE1A1F55580013CB8D /* PLYBrandPickerViewController.xib in Resources */,
 				A776659A1A1B369A008AB88C /* PLYGuidedInputViewController.xib in Resources */,
 				A76A57151986939700751454 /* UI.strings in Resources */,
 				A76A57141986939700751454 /* API.strings in Resources */,
@@ -1937,10 +1948,10 @@
 				A7590B1819ED77B80084EBCA /* PLYList.m in Sources */,
 				A7590B0219ED77B40084EBCA /* PLYLostPasswordViewController.m in Sources */,
 				A7590B0819ED77B40084EBCA /* PLYFormEmailValidator.m in Sources */,
+				A701C4FD1A1F55580013CB8D /* PLYBrandPickerViewController.m in Sources */,
 				A77665A01A1B547B008AB88C /* PLYNonEmptyValidator.m in Sources */,
 				A7590B1019ED77B80084EBCA /* PLYEntity.m in Sources */,
 				A7590B2419ED77B80084EBCA /* PLYUser.m in Sources */,
-				A74DF4211A18B22D00CA39D9 /* PLYBrandOwnerViewController.m in Sources */,
 				A7590B0419ED77B40084EBCA /* PLYSignUpViewController.m in Sources */,
 				A7590B2619ED77B80084EBCA /* PLYProductCategory.m in Sources */,
 			);
@@ -1950,6 +1961,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A701C4FC1A1F55580013CB8D /* PLYBrandPickerViewController.m in Sources */,
 				A77665981A1B369A008AB88C /* PLYGuidedInputViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2043,10 +2055,10 @@
 				A7548AEB196C2E7C000B72EB /* PLYEntity.m in Sources */,
 				A76D3F6B198650770032FE59 /* PLYTextField.m in Sources */,
 				A7B4428C183F937D00E8A170 /* PLYServer.m in Sources */,
+				A701C4FB1A1F55580013CB8D /* PLYBrandPickerViewController.m in Sources */,
 				A776659F1A1B547B008AB88C /* PLYNonEmptyValidator.m in Sources */,
 				C9ADBDD41911502B004C81B3 /* PLYUser.m in Sources */,
 				A76D3F6A198650770032FE59 /* PLYSignUpViewController.m in Sources */,
-				A74DF4221A18B22E00CA39D9 /* PLYBrandOwnerViewController.m in Sources */,
 				A76D3F6D198650770032FE59 /* UIViewController+ProductLayer.m in Sources */,
 				A7B442A4183F97B800E8A170 /* PLYConstants.m in Sources */,
 			);

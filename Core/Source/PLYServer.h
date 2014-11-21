@@ -202,6 +202,9 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 - (void)getRecommendedBrandOwnersForGTIN:(NSString *)GTIN
 										completion:(PLYCompletion)completion;
 
+
+- (void)getBrandsWithCompletion:(PLYCompletion)completion;
+
 /**
  @name Vote Handling
  */
