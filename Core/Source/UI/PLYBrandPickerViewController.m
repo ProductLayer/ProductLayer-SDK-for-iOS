@@ -467,12 +467,17 @@
 
 #pragma mark - UISearchBarDelegate
 
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+- (void)_delayedUpdate
 {
-	_creatingBrandName = searchText;
-	
+	_creatingBrandName = self.searchBar.text;
 	[self _updateFilter];
 	[self.tableView reloadData];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(_delayedUpdate) object:nil];
+	[self performSelector:@selector(_delayedUpdate) withObject:nil afterDelay:0.25];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
