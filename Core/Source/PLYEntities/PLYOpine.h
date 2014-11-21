@@ -51,4 +51,25 @@ typedef struct { double latitude; double longitude; } PLYLocationCoordinate2D;
  */
 @property (nonatomic, copy) NSArray *images;
 
+/**
+ Whether the receiver should be shared on Twitter
+ */
+@property (nonatomic, assign) BOOL shareOnTwitter;
+
+/**
+ Whether the receiver should be shared on Facebook
+ */
+@property (nonatomic, assign) BOOL shareOnFacebook;
+
+
+/**
+ If the opine was cross-posted to Twitter, this is the identifier
+ */
+@property (nonatomic, readonly) NSString *twitterPostIdentifier;
+
+/**
+ If the opine was cross-posted to Facebook, this is the identifier
+ */
+@property (nonatomic, readonly) NSString *facebookPostIdentifier;
+
 @end
