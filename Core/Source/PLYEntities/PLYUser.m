@@ -82,6 +82,10 @@
 	{
 		// ignored
 	}
+	else if ([key isEqualToString:@"pl-usr-social-connections"])
+	{
+		[self setValue:value forKey:@"socialConnections"];
+	}
 	else
 	{
 		[super setValue:value forKey:key];
@@ -155,6 +159,11 @@
 	if (_followed)
 	{
 		dict[@"pl-usr-followed"] = [NSNumber numberWithBool:_followed];
+	}
+	
+	if (_socialConnections)
+	{
+		dict[@"pl-usr-social-connections"] = _socialConnections;
 	}
 	
 	// return immutable

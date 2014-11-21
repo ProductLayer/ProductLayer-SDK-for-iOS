@@ -80,4 +80,10 @@
  */
 @property (nonatomic, readonly) BOOL followed;
 
+
+/**
+ The social connections of the user
+ */
+@property (nonatomic, readonly) NSDictionary *socialConnections;
+
 @end
