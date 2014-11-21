@@ -37,13 +37,22 @@
 	return self;
 }
 
-
 - (void)loadView
 {
-	_textView = [[UITextView alloc] initWithFrame:CGRectZero];
+	UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+	view.backgroundColor = [UIColor whiteColor];
+	
+	_textView = [[UITextView alloc] initWithFrame:CGRectInset(view.bounds, 20, 20)];
+	_textView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	_textView.delegate = self;
 	_textView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-	self.view = _textView;
+	_textView.layer.borderColor = PLYBrandColor().CGColor;
+	_textView.layer.borderWidth = 1;
+	_textView.layer.cornerRadius = 10;
+	
+	[view addSubview:_textView];
+	
+	self.view = view;
 	
 	self.navigationItem.title = @"Your Opinion";
 	
@@ -58,6 +67,18 @@
 	{
 		_language = [[NSLocale preferredLanguages] objectAtIndex:0];
 	}
+	
+	self.automaticallyAdjustsScrollViewInsets = NO;
+}
+
+- (void)viewWillLayoutSubviews
+{
+	[super viewWillLayoutSubviews];
+	
+	id<UILayoutSupport>top = [self topLayoutGuide];
+	id<UILayoutSupport>bottom = [self bottomLayoutGuide];
+	
+	_textView.frame = CGRectMake(10, [top length]+10, self.view.bounds.size.width-20, self.view.bounds.size.height - [top length] - [bottom length] - 20 );
 }
 
 - (void)viewWillAppear:(BOOL)animated
