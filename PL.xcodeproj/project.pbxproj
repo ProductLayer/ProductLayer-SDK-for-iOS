@@ -27,6 +27,18 @@
 		A701C4FD1A1F55580013CB8D /* PLYBrandPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A701C4F81A1F55580013CB8D /* PLYBrandPickerViewController.m */; };
 		A701C4FE1A1F55580013CB8D /* PLYBrandPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A701C4F91A1F55580013CB8D /* PLYBrandPickerViewController.xib */; };
 		A701C4FF1A1F55580013CB8D /* PLYBrandPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A701C4F91A1F55580013CB8D /* PLYBrandPickerViewController.xib */; };
+		A701C5061A1FC89A0013CB8D /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = A701C5001A1FC89A0013CB8D /* twitter.png */; };
+		A701C5071A1FC89A0013CB8D /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = A701C5001A1FC89A0013CB8D /* twitter.png */; };
+		A701C5081A1FC89A0013CB8D /* twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A701C5011A1FC89A0013CB8D /* twitter@2x.png */; };
+		A701C5091A1FC89A0013CB8D /* twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A701C5011A1FC89A0013CB8D /* twitter@2x.png */; };
+		A701C50A1A1FC89A0013CB8D /* twitter@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A701C5021A1FC89A0013CB8D /* twitter@3x.png */; };
+		A701C50B1A1FC89A0013CB8D /* twitter@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A701C5021A1FC89A0013CB8D /* twitter@3x.png */; };
+		A701C50C1A1FC89A0013CB8D /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = A701C5031A1FC89A0013CB8D /* facebook.png */; };
+		A701C50D1A1FC89A0013CB8D /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = A701C5031A1FC89A0013CB8D /* facebook.png */; };
+		A701C50E1A1FC89A0013CB8D /* facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A701C5041A1FC89A0013CB8D /* facebook@2x.png */; };
+		A701C50F1A1FC89A0013CB8D /* facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A701C5041A1FC89A0013CB8D /* facebook@2x.png */; };
+		A701C5101A1FC89A0013CB8D /* facebook@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A701C5051A1FC89A0013CB8D /* facebook@3x.png */; };
+		A701C5111A1FC89A0013CB8D /* facebook@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A701C5051A1FC89A0013CB8D /* facebook@3x.png */; };
 		A70CFE4919EE5D8100CBF533 /* PLYScannerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A70CFE4719EE5D8100CBF533 /* PLYScannerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A70CFE4A19EE5D8100CBF533 /* PLYScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70CFE4819EE5D8100CBF533 /* PLYScannerViewController.m */; };
 		A70CFE4B19EE5D8100CBF533 /* PLYScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70CFE4819EE5D8100CBF533 /* PLYScannerViewController.m */; };
@@ -534,6 +546,12 @@
 		A701C4F71A1F55580013CB8D /* PLYBrandPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYBrandPickerViewController.h; sourceTree = "<group>"; };
 		A701C4F81A1F55580013CB8D /* PLYBrandPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYBrandPickerViewController.m; sourceTree = "<group>"; };
 		A701C4F91A1F55580013CB8D /* PLYBrandPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PLYBrandPickerViewController.xib; sourceTree = "<group>"; };
+		A701C5001A1FC89A0013CB8D /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
+		A701C5011A1FC89A0013CB8D /* twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter@2x.png"; sourceTree = "<group>"; };
+		A701C5021A1FC89A0013CB8D /* twitter@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter@3x.png"; sourceTree = "<group>"; };
+		A701C5031A1FC89A0013CB8D /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
+		A701C5041A1FC89A0013CB8D /* facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook@2x.png"; sourceTree = "<group>"; };
+		A701C5051A1FC89A0013CB8D /* facebook@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook@3x.png"; sourceTree = "<group>"; };
 		A70CFE4719EE5D8100CBF533 /* PLYScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYScannerViewController.h; path = Scanner/PLYScannerViewController.h; sourceTree = "<group>"; };
 		A70CFE4819EE5D8100CBF533 /* PLYScannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYScannerViewController.m; path = Scanner/PLYScannerViewController.m; sourceTree = "<group>"; };
 		A70CFE6819EE5E7900CBF533 /* PLYVideoPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYVideoPreviewView.h; sourceTree = "<group>"; };
@@ -860,6 +878,12 @@
 		A76A56E71986922300751454 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A701C5001A1FC89A0013CB8D /* twitter.png */,
+				A701C5011A1FC89A0013CB8D /* twitter@2x.png */,
+				A701C5021A1FC89A0013CB8D /* twitter@3x.png */,
+				A701C5031A1FC89A0013CB8D /* facebook.png */,
+				A701C5041A1FC89A0013CB8D /* facebook@2x.png */,
+				A701C5051A1FC89A0013CB8D /* facebook@3x.png */,
 				A76A5719198693ED00751454 /* Bundle-Info.plist */,
 				A76A56E81986922300751454 /* API.strings */,
 				A76A56E91986922300751454 /* UI.strings */,
@@ -1830,8 +1854,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A701C50B1A1FC89A0013CB8D /* twitter@3x.png in Resources */,
+				A701C50D1A1FC89A0013CB8D /* facebook.png in Resources */,
 				A701C4FF1A1F55580013CB8D /* PLYBrandPickerViewController.xib in Resources */,
+				A701C5111A1FC89A0013CB8D /* facebook@3x.png in Resources */,
 				A776659B1A1B369A008AB88C /* PLYGuidedInputViewController.xib in Resources */,
+				A701C50F1A1FC89A0013CB8D /* facebook@2x.png in Resources */,
+				A701C5091A1FC89A0013CB8D /* twitter@2x.png in Resources */,
+				A701C5071A1FC89A0013CB8D /* twitter.png in Resources */,
 				A7590B2F19ED77C40084EBCA /* UI.strings in Resources */,
 				A7590B2E19ED77C40084EBCA /* API.strings in Resources */,
 			);
@@ -1841,8 +1871,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A701C50A1A1FC89A0013CB8D /* twitter@3x.png in Resources */,
+				A701C50C1A1FC89A0013CB8D /* facebook.png in Resources */,
 				A701C4FE1A1F55580013CB8D /* PLYBrandPickerViewController.xib in Resources */,
+				A701C5101A1FC89A0013CB8D /* facebook@3x.png in Resources */,
 				A776659A1A1B369A008AB88C /* PLYGuidedInputViewController.xib in Resources */,
+				A701C50E1A1FC89A0013CB8D /* facebook@2x.png in Resources */,
+				A701C5081A1FC89A0013CB8D /* twitter@2x.png in Resources */,
+				A701C5061A1FC89A0013CB8D /* twitter.png in Resources */,
 				A76A57151986939700751454 /* UI.strings in Resources */,
 				A76A57141986939700751454 /* API.strings in Resources */,
 			);
