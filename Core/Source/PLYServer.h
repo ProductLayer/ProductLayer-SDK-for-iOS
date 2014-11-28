@@ -122,7 +122,6 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 
 /**
  Invalidates a user's authentication.
- 
  @param completion The completion handler for the request
  */
 - (void)logoutUserWithCompletion:(PLYCompletion)completion;
@@ -134,20 +133,17 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 
 /**
  Checks if user is signed in.
- 
  @param completion The completion handler for the request
  */
 - (void)isSignedInWithCompletion:(PLYCompletion)completion;
 
 /**
  Request new password
- 
  @param email The user's e-mail address
  @param completion The completion handler for the request
  */
 - (void)requestNewPasswordForUserWithEmail:(NSString *)email
                                 completion:(PLYCompletion)completion;
-
 
 /**
  Determines an image URL for the given PLYUser
@@ -156,7 +152,6 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  */
 - (NSURL *)avatarImageURLForUser:(PLYUser *)user;
 
-
 /**
  Uploads a new avatar image for currently logged in user
  @param image The new avatar image
@@ -164,20 +159,21 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  */
 - (void)uploadAvatarImage:(UIImage *)image forUser:(PLYUser *)user completion:(PLYCompletion)completion;
 
-
 /**
  Resets the avatar image for currently logged in user
  @param completion The completion handler for the request
  */
 - (void)resetAvatarForUser:(PLYUser *)user completion:(PLYCompletion)completion;
 
-
 /**
  Nickname of the currently logged in user or `nil` if not logged in
  */
 @property (nonatomic, readonly) PLYUser *loggedInUser;
 
-@property (nonatomic) BOOL performingLogin;
+/**
+ Property that states if a login action is currently happening
+ */
+@property (nonatomic, readonly) BOOL performingLogin;
 
 
 /**
@@ -219,8 +215,12 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 - (void)getRecommendedBrandOwnersForGTIN:(NSString *)GTIN
 										completion:(PLYCompletion)completion;
 
-
+/**
+ Retrieves a list of all known brands
+ @param completion The completion handler for the request
+ */
 - (void)getBrandsWithCompletion:(PLYCompletion)completion;
+
 
 /**
  @name Vote Handling

@@ -621,8 +621,9 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 
 - (void)setLoggedInUser:(PLYUser *)loggedInUser
 {
+	[self willChangeValueForKey:@"loggedInUser"];
 	_loggedInUser = loggedInUser;
-	[[NSNotificationCenter defaultCenter] postNotificationName:PLYNotifyUserStatusChanged object:self];
+	[self didChangeValueForKey:@"loggedInUser"];
 }
 
 
