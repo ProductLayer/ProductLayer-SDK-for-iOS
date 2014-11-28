@@ -59,6 +59,9 @@
 		A73803091A28800200011D9C /* PLYUserAvatar.h in Headers */ = {isa = PBXBuildFile; fileRef = A73803071A28800200011D9C /* PLYUserAvatar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A738030A1A28800200011D9C /* PLYUserAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = A73803081A28800200011D9C /* PLYUserAvatar.m */; };
 		A738030B1A28800200011D9C /* PLYUserAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = A73803081A28800200011D9C /* PLYUserAvatar.m */; };
+		A73803341A28E91800011D9C /* PLYTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = A73803321A28E91800011D9C /* PLYTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A73803351A28E91800011D9C /* PLYTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A73803331A28E91800011D9C /* PLYTextView.m */; };
+		A73803361A28E91800011D9C /* PLYTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A73803331A28E91800011D9C /* PLYTextView.m */; };
 		A740BB7819F23F6D00DA3943 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C92A6255198A1B3900997DDC /* Security.framework */; };
 		A740BB7919F23F7100DA3943 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B442B7183F9D0300E8A170 /* AVFoundation.framework */; };
 		A740BB7A19F23F7E00DA3943 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FD183F842000C38635 /* UIKit.framework */; };
@@ -569,6 +572,8 @@
 		A71C2BBC1843ADA600B77DB4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A73803071A28800200011D9C /* PLYUserAvatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYUserAvatar.h; sourceTree = "<group>"; };
 		A73803081A28800200011D9C /* PLYUserAvatar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYUserAvatar.m; sourceTree = "<group>"; };
+		A73803321A28E91800011D9C /* PLYTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYTextView.h; sourceTree = "<group>"; };
+		A73803331A28E91800011D9C /* PLYTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYTextView.m; sourceTree = "<group>"; };
 		A7548AE9196C2E7C000B72EB /* PLYEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYEntity.h; path = PLYEntities/PLYEntity.h; sourceTree = "<group>"; };
 		A7548AEA196C2E7C000B72EB /* PLYEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYEntity.m; path = PLYEntities/PLYEntity.m; sourceTree = "<group>"; };
 		A7548B22196C4C16000B72EB /* PLYImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYImage.h; path = PLYEntities/PLYImage.h; sourceTree = "<group>"; };
@@ -920,6 +925,8 @@
 				A76D3F5C198650770032FE59 /* PLYFormValidator.m */,
 				A76D3F61198650770032FE59 /* PLYTextField.h */,
 				A76D3F62198650770032FE59 /* PLYTextField.m */,
+				A73803321A28E91800011D9C /* PLYTextView.h */,
+				A73803331A28E91800011D9C /* PLYTextView.m */,
 				A76D3F63198650770032FE59 /* PLYUserNameValidator.h */,
 				A76D3F64198650770032FE59 /* PLYUserNameValidator.m */,
 				A776659C1A1B547B008AB88C /* PLYNonEmptyValidator.h */,
@@ -1506,6 +1513,7 @@
 				A7590B1919ED77B80084EBCA /* PLYListItem.h in Headers */,
 				A7590B2C19ED77BD0084EBCA /* PLYConstants.h in Headers */,
 				A7590B2119ED77B80084EBCA /* PLYReview.h in Headers */,
+				A73803341A28E91800011D9C /* PLYTextView.h in Headers */,
 				A7590B1D19ED77B80084EBCA /* PLYPackaging.h in Headers */,
 				A7590B0119ED77B40084EBCA /* PLYLostPasswordViewController.h in Headers */,
 				A7CD959219FA821E008E3A41 /* PLYOpineComposeViewController.h in Headers */,
@@ -1965,6 +1973,7 @@
 				A7590B2219ED77B80084EBCA /* PLYReview.m in Sources */,
 				A764789B1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */,
 				A7590B1C19ED77B80084EBCA /* PLYOpine.m in Sources */,
+				A73803361A28E91800011D9C /* PLYTextView.m in Sources */,
 				A770B2D71A188FAA001465A7 /* PLYBrand.m in Sources */,
 				A7590B2D19ED77BD0084EBCA /* PLYConstants.m in Sources */,
 				A77665991A1B369A008AB88C /* PLYGuidedInputViewController.m in Sources */,
@@ -2073,6 +2082,7 @@
 				C98CD2671910E0D70035647C /* PLYPackaging.m in Sources */,
 				A764789A1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */,
 				C98CD2681910E0D70035647C /* PLYProduct.m in Sources */,
+				A73803351A28E91800011D9C /* PLYTextView.m in Sources */,
 				A770B2D61A188FAA001465A7 /* PLYBrand.m in Sources */,
 				A7548B24196C4C16000B72EB /* PLYImage.m in Sources */,
 				A77665971A1B369A008AB88C /* PLYGuidedInputViewController.m in Sources */,

@@ -10,7 +10,9 @@
 #import "PLYFormValidator.h"
 
 @implementation PLYTextField
-
+{
+	NSString *_lastKeyboardLanguage;
+}
 
 - (void)_commonSetup
 {
@@ -26,6 +28,12 @@
 	self.translatesAutoresizingMaskIntoConstraints = NO;
 	
 	[self addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
+	
+	// keep track of the keyboard language
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inputModeDidChange:) name:@"UITextInputCurrentInputModeDidChangeNotification" object:nil];
+	
+	// default language is current system language
+	_lastKeyboardLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
 }
 
 
@@ -44,6 +52,11 @@
 {
 	[super awakeFromNib];
 	[self _commonSetup];
+}
+
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)tintColorDidChange
@@ -68,12 +81,37 @@
 - (void)textChanged:(PLYTextField *)sender
 {
 	[_validator validate];
+	
+	_usedInputLanguage = _lastKeyboardLanguage;
+}
+
+#pragma mark - Notifications
+
+- (void)inputModeDidChange:(NSNotification *)notification
+{
+	UITextInputMode *inputMode = [self textInputMode];
+	NSString *lang = inputMode.primaryLanguage;
+	
+	if (!lang || [lang isEqualToString:@"dictation"])
+	{
+		return;
+	}
+	
+	NSRange range = [lang rangeOfString:@"-"];
+	
+	if (range.location != NSNotFound)
+	{
+		lang = [lang substringToIndex:range.location];
+	}
+	
+	_lastKeyboardLanguage = lang;
 }
 
 
 #pragma mark - Properties
 
-- (void)setText:(NSString *)text{
+- (void)setText:(NSString *)text
+{
     [super setText:text];
     
     [_validator validate];

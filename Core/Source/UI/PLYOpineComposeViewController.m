@@ -15,7 +15,7 @@
 
 @implementation PLYOpineComposeViewController
 {
-	UITextView *_textView;
+	PLYTextView *_textView;
 	
 	UIBarButtonItem *_saveButtonItem;
 	UIBarButtonItem *_cancelButtonItem;
@@ -101,7 +101,7 @@
 	UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
 	view.backgroundColor = [UIColor whiteColor];
 	
-	_textView = [[UITextView alloc] initWithFrame:CGRectInset(view.bounds, 20, 20)];
+	_textView = [[PLYTextView alloc] initWithFrame:CGRectInset(view.bounds, 20, 20)];
 	_textView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	_textView.delegate = self;
 	_textView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
@@ -199,26 +199,6 @@
 - (void)_updateButtonState
 {
 	_saveButtonItem.enabled = [_textView.text length]>0;
-}
-
-- (void)_updateLanguage
-{
-	UITextInputMode *inputMode = [_textView textInputMode];
-	NSString *lang = inputMode.primaryLanguage;
-	
-	if (!lang)
-	{
-		return;
-	}
-	
-	NSRange range = [lang rangeOfString:@"-"];
-	
-	if (range.location != NSNotFound)
-	{
-		lang = [lang substringToIndex:range.location];
-	}
-	
-	_language = lang;
 }
 
 #pragma mark - Actions
@@ -327,7 +307,7 @@
 - (void)textViewDidChange:(UITextView *)textView
 {
 	[self _updateButtonState];
-	[self _updateLanguage];
+	_language = _textView.usedInputLanguage;
 }
 
 #pragma mark - Public Interface

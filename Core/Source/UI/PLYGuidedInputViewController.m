@@ -15,9 +15,6 @@
 @end
 
 @implementation PLYGuidedInputViewController
-{
-	NSString *_latestUsedLanguage;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,11 +37,6 @@
 	[_textField resignFirstResponder];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 // load view from the PL resource bundle
 - (void)loadView
 {
@@ -61,17 +53,23 @@
 	{
 		[self save:nil];
 	}
+	else
+	{
+		[self cancel:nil];
+	}
 	
-	return NO;
+	return YES;
 }
 
 #pragma mark - Actions
 
 - (IBAction)cancel:(id)sender
 {
-	[self performSegueWithIdentifier:@"cancel" sender:sender];
-	
-	if (self.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiomPad)
+	if ([_delegate respondsToSelector:@selector(guidedInputViewControllerDidCancel:)])
+	{
+		[_delegate guidedInputViewControllerDidCancel:self];
+	}
+	else
 	{
 		[self dismissViewControllerAnimated:YES completion:NULL];
 	}
@@ -80,44 +78,23 @@
 - (IBAction)save:(id)sender
 {
 	_text = _textField.text;
-	_language = _latestUsedLanguage;
-	[self performSegueWithIdentifier:@"unwind" sender:sender];
+	_language = _textField.usedInputLanguage;
 	
-	if (self.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiomPad)
+	if ([_delegate respondsToSelector:@selector(guidedInputViewControllerDidSave:)])
+	{
+		[_delegate guidedInputViewControllerDidSave:self];
+	}
+	else
 	{
 		[self dismissViewControllerAnimated:YES completion:NULL];
 	}
 }
-
-#pragma mark - Helpers
-
-- (void)_updateLanguage
-{
-	UITextInputMode *inputMode = [_textField textInputMode];
-	NSString *lang = inputMode.primaryLanguage;
-	
-	if (!lang)
-	{
-		return;
-	}
-	
-	NSRange range = [lang rangeOfString:@"-"];
-	
-	if (range.location != NSNotFound)
-	{
-		lang = [lang substringToIndex:range.location];
-	}
-	
-	_latestUsedLanguage = lang;
-}
-
+	 
 #pragma mark - Form Validation
 
 - (void)validityDidChange:(PLYFormValidator *)validator
 {
 	self.navigationItem.rightBarButtonItem.enabled = [validator isValid];
-	
-	[self _updateLanguage];
 }
 
 @end

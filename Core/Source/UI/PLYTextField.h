@@ -19,4 +19,9 @@
  */
 @property (nonatomic, strong) PLYFormValidator *validator;
 
+/**
+ The language last used for input
+ */
+@property (nonatomic, readonly) NSString *usedInputLanguage;
+
 @end

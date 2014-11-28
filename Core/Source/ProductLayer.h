@@ -28,6 +28,7 @@
 #import "UIViewController+ProductLayer.h"
 #import "PLYLoginViewController.h"
 #import "PLYTextField.h"
+#import "PLYTextView.h"
 #import "PLYFormValidator.h"
 #import "PLYOpineComposeViewController.h"
 #import "PLYNonEmptyValidator.h"
