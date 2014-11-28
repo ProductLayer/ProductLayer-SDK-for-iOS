@@ -30,7 +30,7 @@
 	}
 	else if ([key isEqualToString:@"pl-img-h-px"])
 	{
-		self.height = value;
+		[self setValue:value forKey:@"height"];
 	}
 	else if ([key isEqualToString:@"pl-img-name"])
 	{
@@ -38,11 +38,11 @@
 	}
 	else if ([key isEqualToString:@"pl-img-url"])
 	{
-		self.url = value;
+		self.imageURL = [NSURL URLWithString:value];
 	}
 	else if ([key isEqualToString:@"pl-img-w-px"])
 	{
-		self.width = value;
+		[self setValue:value forKey:@"width"];
 	}
 	else if ([key isEqualToString:@"pl-prod-gtin"])
 	{
@@ -65,7 +65,7 @@
 	
 	if (_height)
 	{
-		dict[@"pl-img-h-px"] = _height;
+		dict[@"pl-img-h-px"] = @(_height);
 	}
 	
 	if (_name)
@@ -73,14 +73,14 @@
 		dict[@"pl-img-name"] = _name;
 	}
 	
-	if (_url)
+	if (_imageURL)
 	{
-		dict[@"pl-img-url"] = _url;
+		dict[@"pl-img-url"] = [_imageURL absoluteString];
 	}
 	
 	if (_width)
 	{
-		dict[@"pl-img-w-px"] = _width;
+		dict[@"pl-img-w-px"] = @(_width);
 	}
 	
 	if (_GTIN)
@@ -111,9 +111,10 @@
 		[parameters setObject:@"true" forKey:@"crop"];
 	}
 	
-	if (self.url)
+	if (_imageURL)
 	{
-		NSString *path = [PLYServer _addQueryParameterToUrl:self.url parameters:parameters];
+		NSString *urlString = [_imageURL absoluteString];
+		NSString *path = [PLYServer _addQueryParameterToUrl:urlString parameters:parameters];
 		return path;
 	}
 	

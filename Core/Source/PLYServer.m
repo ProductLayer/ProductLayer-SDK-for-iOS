@@ -853,6 +853,58 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	return [self _methodURLForPath:path parameters:nil];
 }
 
+- (void)uploadAvatarImage:(UIImage *)image forUser:(PLYUser *)user completion:(PLYCompletion)completion
+{
+	NSParameterAssert(image);
+	NSParameterAssert(completion);
+	
+	NSString *function = [NSString stringWithFormat:@"/user/%@/avatar", user.Id];
+	NSString *path = [self _functionPathForFunction:function];
+	
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		// reset logged in user avatar URL
+		if ([user.Id isEqualToString:self.loggedInUser.Id])
+		{
+			PLYUserAvatar *avatar = (PLYUserAvatar *)result;
+			
+			// update ID
+			[self.loggedInUser setValue:avatar.Id forKey:@"avatarImageIdentifier"];
+			
+			// reset image URL, this triggers reloading of the image
+			[self.loggedInUser setValue:[self avatarImageURLForUser:user] forKey:@"avatarURL"];
+		}
+		
+		completion(result, error);
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:image completion:wrappedCompletion];
+}
+
+- (void)resetAvatarForUser:(PLYUser *)user completion:(PLYCompletion)completion
+{
+	NSString *function = [NSString stringWithFormat:@"/user/%@/avatar", user.Id];
+	NSString *path = [self _functionPathForFunction:function];
+	
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		// reset logged in user avatar URL
+		if ([user.Id isEqualToString:self.loggedInUser.Id])
+		{
+			// remove the image ID to disable the delete option
+			[self.loggedInUser setValue:nil forKey:@"avatarImageIdentifier"];
+			
+			// reset image URL, this triggers reloading of the image
+			[self.loggedInUser setValue:[self avatarImageURLForUser:user] forKey:@"avatarURL"];
+		}
+		
+		if (completion)
+		{
+			completion(result, error);
+		}
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil payload:nil completion:wrappedCompletion];
+}
+
 #pragma mark - Managing Products
 
 /**

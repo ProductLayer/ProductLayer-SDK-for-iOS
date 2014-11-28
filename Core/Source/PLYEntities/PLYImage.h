@@ -27,7 +27,7 @@
 /**
  The height in pixel of the image.
  */
-@property (nonatomic, strong) NSNumber *height;
+@property (nonatomic, assign) NSUInteger height;
 
 /**
  The name of the image.
@@ -37,12 +37,12 @@
 /**
  The URL of the image.
  */
-@property (nonatomic, strong) NSString *url;
+@property (nonatomic, strong) NSURL *imageURL;
 
 /**
  The width in pixel of the image.
  */
-@property (nonatomic, strong) NSNumber *width;
+@property (nonatomic, assign) NSUInteger width;
 
 /**
  The gtin (barcode) of the product.

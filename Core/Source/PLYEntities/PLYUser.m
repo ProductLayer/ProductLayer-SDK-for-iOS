@@ -8,12 +8,15 @@
 
 #import "PLYUser.h"
 
-#import "PLYUser.h"
+
+@interface PLYUser ()
+
+// private property, set if user has an avatar
+@property (nonatomic, copy) NSString *avatarImageIdentifier;
+
+@end
 
 @implementation PLYUser
-{
-	NSString *_avatarImageIdentifier;
-}
 
 + (NSString *)entityTypeIdentifier
 {
@@ -80,7 +83,7 @@
 	}
 	else if ([key isEqualToString:@"pl-usr-img_id"])
 	{
-		// ignored
+		[self setValue:value forKey:@"avatarImageIdentifier"];
 	}
 	else if ([key isEqualToString:@"pl-usr-social-connections"])
 	{

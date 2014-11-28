@@ -56,6 +56,9 @@
 		A71918101A1B5B1B002C2D76 /* PLYContentsDidChangeValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A719180D1A1B5B1B002C2D76 /* PLYContentsDidChangeValidator.m */; };
 		A71C2BBB1843AD9B00B77DB4 /* libDTDownload_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A71C2B9D1843AD8D00B77DB4 /* libDTDownload_iOS.a */; };
 		A71C2BBD1843ADA600B77DB4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71C2BBC1843ADA600B77DB4 /* CoreData.framework */; };
+		A73803091A28800200011D9C /* PLYUserAvatar.h in Headers */ = {isa = PBXBuildFile; fileRef = A73803071A28800200011D9C /* PLYUserAvatar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A738030A1A28800200011D9C /* PLYUserAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = A73803081A28800200011D9C /* PLYUserAvatar.m */; };
+		A738030B1A28800200011D9C /* PLYUserAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = A73803081A28800200011D9C /* PLYUserAvatar.m */; };
 		A740BB7819F23F6D00DA3943 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C92A6255198A1B3900997DDC /* Security.framework */; };
 		A740BB7919F23F7100DA3943 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B442B7183F9D0300E8A170 /* AVFoundation.framework */; };
 		A740BB7A19F23F7E00DA3943 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FD183F842000C38635 /* UIKit.framework */; };
@@ -564,6 +567,8 @@
 		A719180D1A1B5B1B002C2D76 /* PLYContentsDidChangeValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYContentsDidChangeValidator.m; sourceTree = "<group>"; };
 		A71C2B921843AD8C00B77DB4 /* DTDownload.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTDownload.xcodeproj; path = DTDownload/DTDownload.xcodeproj; sourceTree = "<group>"; };
 		A71C2BBC1843ADA600B77DB4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		A73803071A28800200011D9C /* PLYUserAvatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYUserAvatar.h; sourceTree = "<group>"; };
+		A73803081A28800200011D9C /* PLYUserAvatar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYUserAvatar.m; sourceTree = "<group>"; };
 		A7548AE9196C2E7C000B72EB /* PLYEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYEntity.h; path = PLYEntities/PLYEntity.h; sourceTree = "<group>"; };
 		A7548AEA196C2E7C000B72EB /* PLYEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYEntity.m; path = PLYEntities/PLYEntity.m; sourceTree = "<group>"; };
 		A7548B22196C4C16000B72EB /* PLYImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYImage.h; path = PLYEntities/PLYImage.h; sourceTree = "<group>"; };
@@ -1452,6 +1457,8 @@
 				C9D31F77190ABE0E00C91A08 /* PLYReview.m */,
 				C9ADBDD21911502B004C81B3 /* PLYUser.h */,
 				C9ADBDD31911502B004C81B3 /* PLYUser.m */,
+				A73803071A28800200011D9C /* PLYUserAvatar.h */,
+				A73803081A28800200011D9C /* PLYUserAvatar.m */,
 				C97FAADE1921FCFA00144D2C /* PLYProductCategory.h */,
 				C97FAADF1921FCFA00144D2C /* PLYProductCategory.m */,
 				A7B4877D1987CFB200FA8F83 /* PLYVotableEntity.h */,
@@ -1475,6 +1482,7 @@
 				A77665961A1B369A008AB88C /* PLYGuidedInputViewController.h in Headers */,
 				A7590B1B19ED77B80084EBCA /* PLYOpine.h in Headers */,
 				A7590B0F19ED77B80084EBCA /* PLYEntity.h in Headers */,
+				A73803091A28800200011D9C /* PLYUserAvatar.h in Headers */,
 				A7590B2919ED77BD0084EBCA /* PLYServer.h in Headers */,
 				A776659E1A1B547B008AB88C /* PLYNonEmptyValidator.h in Headers */,
 				A7590B0D19ED77B40084EBCA /* PLYUserNameValidator.h in Headers */,
@@ -1961,6 +1969,7 @@
 				A7590B2D19ED77BD0084EBCA /* PLYConstants.m in Sources */,
 				A77665991A1B369A008AB88C /* PLYGuidedInputViewController.m in Sources */,
 				A7590B0019ED77B40084EBCA /* PLYLoginViewController.m in Sources */,
+				A738030B1A28800200011D9C /* PLYUserAvatar.m in Sources */,
 				A70CFE7119EE604100CBF533 /* PLYVideoPreviewInterestBox.m in Sources */,
 				A70CFE7619EE626500CBF533 /* PLYAVFoundationFunctions.m in Sources */,
 				A7590AFC19ED77B40084EBCA /* AccountManager.m in Sources */,
@@ -2068,6 +2077,7 @@
 				A7548B24196C4C16000B72EB /* PLYImage.m in Sources */,
 				A77665971A1B369A008AB88C /* PLYGuidedInputViewController.m in Sources */,
 				C97FAA18191CCA3400144D2C /* PLYErrorMessage.m in Sources */,
+				A738030A1A28800200011D9C /* PLYUserAvatar.m in Sources */,
 				A70CFE7019EE604100CBF533 /* PLYVideoPreviewInterestBox.m in Sources */,
 				A70CFE7519EE626500CBF533 /* PLYAVFoundationFunctions.m in Sources */,
 				A7B4873B1987CA7800FA8F83 /* PLYOpine.m in Sources */,

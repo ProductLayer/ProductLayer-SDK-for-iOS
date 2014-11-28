@@ -148,12 +148,29 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 - (void)requestNewPasswordForUserWithEmail:(NSString *)email
                                 completion:(PLYCompletion)completion;
 
+
 /**
  Determines an image URL for the given PLYUser
  @param user The PLYUser to retrieve the avatar image URL for
  @returns An NSURL that shows the user's avatar
  */
 - (NSURL *)avatarImageURLForUser:(PLYUser *)user;
+
+
+/**
+ Uploads a new avatar image for currently logged in user
+ @param image The new avatar image
+ @param completion The completion handler for the request
+ */
+- (void)uploadAvatarImage:(UIImage *)image forUser:(PLYUser *)user completion:(PLYCompletion)completion;
+
+
+/**
+ Resets the avatar image for currently logged in user
+ @param completion The completion handler for the request
+ */
+- (void)resetAvatarForUser:(PLYUser *)user completion:(PLYCompletion)completion;
+
 
 /**
  Nickname of the currently logged in user or `nil` if not logged in

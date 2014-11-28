@@ -20,6 +20,7 @@
 #import "PLYList.h"
 #import "PLYListItem.h"
 #import "PLYUser.h"
+#import "PLYUserAvatar.h"
 #import "PLYErrorMessage.h"
 #import "PLYErrorResponse.h"
 
