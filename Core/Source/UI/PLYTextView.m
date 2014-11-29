@@ -37,29 +37,38 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)insertText:(NSString *)text
+{
+	// update language first, other observers might need it
+	_usedInputLanguage = _lastKeyboardLanguage;
+	
+	[super insertText:text];
+}
+
+- (void)replaceRange:(UITextRange *)range withText:(NSString *)text
+{
+	// update language first, other observers might need it
+	_usedInputLanguage = _lastKeyboardLanguage;
+	
+	[super replaceRange:range withText:text];
+}
+
+- (BOOL)becomeFirstResponder
+{
+	[self _updateUsedLanguage];
+	
+	return [super becomeFirstResponder];
+}
+
+#pragma mark - Helpers
+
 - (void)_commonSetup
 {
 	// keep track of the keyboard language
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inputModeDidChange:) name:@"UITextInputCurrentInputModeDidChangeNotification" object:nil];
 }
 
-- (void)insertText:(NSString *)text
-{
-	[super insertText:text];
-	
-	_usedInputLanguage = _lastKeyboardLanguage;
-}
-
-- (void)replaceRange:(UITextRange *)range withText:(NSString *)text
-{
-	[super replaceRange:range withText:text];
-	
-	_usedInputLanguage = _lastKeyboardLanguage;
-}
-
-#pragma mark - Notifications
-
-- (void)inputModeDidChange:(NSNotification *)notification
+- (void)_updateUsedLanguage
 {
 	UITextInputMode *inputMode = [self textInputMode];
 	NSString *lang = inputMode.primaryLanguage;
@@ -77,6 +86,13 @@
 	}
 	
 	_lastKeyboardLanguage = lang;
+}
+
+#pragma mark - Notifications
+
+- (void)inputModeDidChange:(NSNotification *)notification
+{
+	[self _updateUsedLanguage];
 }
 
 @end
