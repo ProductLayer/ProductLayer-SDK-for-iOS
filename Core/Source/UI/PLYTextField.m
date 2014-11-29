@@ -14,29 +14,6 @@
 	NSString *_lastKeyboardLanguage;
 }
 
-- (void)_commonSetup
-{
-	// rounded green border done with layer border instead of build in
-	CALayer *layer = self.layer;
-	layer.borderWidth = 1;
-	layer.cornerRadius = 7;
-	self.borderStyle = UITextBorderStyleNone;
-	
-	self.autocorrectionType = UITextAutocorrectionTypeNo;
-	self.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody]; //[UIFont fontWithName:@"HelveticaNeue" size:22.0f];
-	
-	self.translatesAutoresizingMaskIntoConstraints = NO;
-	
-	[self addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
-	
-	// keep track of the keyboard language
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inputModeDidChange:) name:@"UITextInputCurrentInputModeDidChangeNotification" object:nil];
-	
-	// default language is current system language
-	_lastKeyboardLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
-}
-
-
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -59,6 +36,13 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (BOOL)becomeFirstResponder
+{
+	[self _updateUsedLanguage];
+	
+	return [super becomeFirstResponder];
+}
+
 - (void)tintColorDidChange
 {
 	[super tintColorDidChange];
@@ -76,18 +60,31 @@
 	return [self textRectForBounds:bounds];
 }
 
-#pragma mark - Actions
+#pragma mark - Helpers
 
-- (void)textChanged:(PLYTextField *)sender
+- (void)_commonSetup
 {
-	[_validator validate];
+	// rounded green border done with layer border instead of build in
+	CALayer *layer = self.layer;
+	layer.borderWidth = 1;
+	layer.cornerRadius = 7;
+	self.borderStyle = UITextBorderStyleNone;
 	
-	_usedInputLanguage = _lastKeyboardLanguage;
+	self.autocorrectionType = UITextAutocorrectionTypeNo;
+	self.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody]; //[UIFont fontWithName:@"HelveticaNeue" size:22.0f];
+	
+	self.translatesAutoresizingMaskIntoConstraints = NO;
+	
+	[self addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
+	
+	// keep track of the keyboard language
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inputModeDidChange:) name:@"UITextInputCurrentInputModeDidChangeNotification" object:nil];
+	
+	// default language is current system language
+	_lastKeyboardLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
 }
 
-#pragma mark - Notifications
-
-- (void)inputModeDidChange:(NSNotification *)notification
+- (void)_updateUsedLanguage
 {
 	UITextInputMode *inputMode = [self textInputMode];
 	NSString *lang = inputMode.primaryLanguage;
@@ -105,6 +102,22 @@
 	}
 	
 	_lastKeyboardLanguage = lang;
+}
+
+#pragma mark - Actions
+
+- (void)textChanged:(PLYTextField *)sender
+{
+	_usedInputLanguage = _lastKeyboardLanguage;
+	
+	[_validator validate];
+}
+
+#pragma mark - Notifications
+
+- (void)inputModeDidChange:(NSNotification *)notification
+{
+	[self _updateUsedLanguage];
 }
 
 

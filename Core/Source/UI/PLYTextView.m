@@ -66,6 +66,9 @@
 {
 	// keep track of the keyboard language
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inputModeDidChange:) name:@"UITextInputCurrentInputModeDidChangeNotification" object:nil];
+	
+	// default language is current system language
+	_lastKeyboardLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
 }
 
 - (void)_updateUsedLanguage
