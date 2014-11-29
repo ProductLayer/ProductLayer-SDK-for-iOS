@@ -11,8 +11,8 @@
 @class PLYAuditor;
 
 /**
- * The metadata of the product images.
- **/
+ The metadata of the product images.
+ */
 @interface PLYImage : PLYVotableEntity
 
 /**

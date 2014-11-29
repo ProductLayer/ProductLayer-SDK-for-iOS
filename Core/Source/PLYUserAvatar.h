@@ -8,8 +8,14 @@
 
 #import <ProductLayer/ProductLayer.h>
 
+/**
+ PLYEntity object for metadata related to a users custom avatar image.
+ */
 @interface PLYUserAvatar : PLYImage
 
+/**
+ @name Properties
+ */
 
 /**
  The user ID of the user that the receiver belongs to

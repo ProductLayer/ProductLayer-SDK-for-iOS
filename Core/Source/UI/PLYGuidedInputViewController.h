@@ -8,22 +8,29 @@
 
 @class PLYGuidedInputViewController;
 
+/**
+ Protocol for delegates of PLYGuidedInputViewController
+ */
 @protocol PLYGuidedInputViewControllerDelegate <NSObject>
 
 @optional
 /**
  The input should be saved
+ @param guidedInputViewController The sender of the message
  */
 - (void)guidedInputViewControllerDidSave:(PLYGuidedInputViewController *)guidedInputViewController;
 
 /**
  The input should be cancelled
+ @param guidedInputViewController The sender of the message
  */
 - (void)guidedInputViewControllerDidCancel:(PLYGuidedInputViewController *)guidedInputViewController;
 
 @end
 
-
+/**
+ View controller for allowing guided text input
+ */
 @interface PLYGuidedInputViewController : UIViewController
 
 /**

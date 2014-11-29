@@ -8,12 +8,18 @@
 
 @class PLYBrandPickerViewController;
 
+/**
+ Protocol for delegates of PLYBrandPickerViewController
+ */
 @protocol PLYBrandPickerViewControllerDelegate <NSObject>
 
 @optional
 - (void)brandPickerDidSelect:(PLYBrandPickerViewController *)brandPicker;
 @end
 
+/**
+ View controller for selecting a brand, optinally containing suggestions by GTIN.
+ */
 @interface PLYBrandPickerViewController : UITableViewController
 
 /**

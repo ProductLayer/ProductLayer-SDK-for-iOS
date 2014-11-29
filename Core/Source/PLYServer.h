@@ -155,12 +155,14 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 /**
  Uploads a new avatar image for currently logged in user
  @param image The new avatar image
+ @param user The user to upload an image for
  @param completion The completion handler for the request
  */
 - (void)uploadAvatarImage:(UIImage *)image forUser:(PLYUser *)user completion:(PLYCompletion)completion;
 
 /**
  Resets the avatar image for currently logged in user
+ @param user The user to delete the avatar image for
  @param completion The completion handler for the request
  */
 - (void)resetAvatarForUser:(PLYUser *)user completion:(PLYCompletion)completion;
