@@ -7,9 +7,6 @@
 //
 
 #import "PLYList.h"
-
-#import "DTLog.h"
-
 #import "PLYListItem.h"
 #import "PLYUser.h"
 

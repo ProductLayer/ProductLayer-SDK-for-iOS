@@ -13,15 +13,11 @@
 #import "NSString+DTURLEncoding.h"
 #import "DTBlockFunctions.h"
 #import "AccountManager.h"
-#import "UIApplication+DTNetworkActivity.h"
 
 #if TARGET_OS_IPHONE
 #import "UIApplication+DTNetworkActivity.h"
 #endif
 
-#define URLENC(string) [string \
-stringByAddingPercentEncodingWithAllowedCharacters:\
-[NSCharacterSet URLQueryAllowedCharacterSet]];
 
 // this is the URL for the endpoint server
 #define PLY_ENDPOINT_URL [NSURL URLWithString:@"https://api.productlayer.com"]
@@ -30,6 +26,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 #define PLY_PATH_PREFIX @"0.3"
 
 #define PLY_SERVICE [PLY_ENDPOINT_URL absoluteString]
+
 
 @implementation PLYServer
 {
@@ -116,13 +113,15 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 		// construct query string
 		NSMutableArray *tmpArray = [NSMutableArray array];
 		
-		for (NSString *key in sortedKeys) {
+		for (NSString *key in sortedKeys)
+		{
 			NSString *value = parameters[key];
 			
 			// URL-encode
-			NSString *encKey = URLENC(key);
-			if([value isKindOfClass:[NSString class]]){
-				value = URLENC(value);
+			NSString *encKey = [key stringByURLEncoding];
+			if([value isKindOfClass:[NSString class]])
+			{
+				value = [value stringByURLEncoding];
 			}
 			
 			// combine into pairs
@@ -205,9 +204,9 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	{
 		NSData *payloadData;
 		
-		if ([payload isKindOfClass:[UIImage class]])
+		if ([payload isKindOfClass:[DTImage class]])
 		{
-			payloadData = UIImageJPEGRepresentation(payload, 0.8);
+			payloadData = DTImageJPEGRepresentation(payload, 0.8);
 			[request setValue:@"image/jpeg" forHTTPHeaderField:@"Content-Type"];
 			request.timeoutInterval = 60;
 		}
@@ -238,8 +237,10 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 
 - (void)startDataTaskForRequest:(NSMutableURLRequest *)request completion:(PLYCompletion)completion
 {
+#if TARGET_OS_IPHONE
 	// increment active requests
 	[[UIApplication sharedApplication] pushActiveNetworkOperation];
+#endif
 	
 	// remember user that was logged in when task was started
 	PLYUser *user = _loggedInUser;
@@ -249,8 +250,10 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 											completionHandler:^(NSData *data,
 																	  NSURLResponse *response,
 																	  NSError *error) {
+#if TARGET_OS_IPHONE
 												// decrement active requests
 												[[UIApplication sharedApplication] popActiveNetworkOperation];
+#endif
 												
 												NSError *retError = error;
 												id result = nil;
@@ -481,8 +484,8 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
     // Load login data from keychain
     NSArray *accounts = [[AccountManager sharedAccountManager] accountsForService:PLY_SERVICE];
     
-    if(accounts && [accounts count] == 1){
-        
+    if(accounts && [accounts count] == 1)
+	 {
         GenericAccount *account = [accounts objectAtIndex:0];
         
         if (account)
@@ -497,9 +500,11 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 					if (error)
 					{
 						DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-							UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login failed." message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-							[alert show];
-							
+							NSDictionary *userInfo = @{@"Error": error};
+							[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerLoginErrorNotification
+																								 object:self
+																							  userInfo:userInfo];
+
 							// Delete account from the keychain if login failed.
 							[[AccountManager sharedAccountManager] deleteGenericAccount:account];
 						});
@@ -516,9 +521,9 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	 else if(accounts && [accounts count] > 1)
 	 {
         // There should be only one account for productlayer for security reasons delete all accounts
-        for(GenericAccount *account in accounts)
+        for (GenericAccount *account in accounts)
 		  {
-            [[AccountManager sharedAccountManager] delete:account];
+            [[AccountManager sharedAccountManager] deleteGenericAccount:account];
         }
     }
 }
@@ -541,8 +546,10 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 			}
 			
 			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Check session state failed" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-				[alert show];
+				NSDictionary *userInfo = @{@"Error": error};
+				[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerLoginErrorNotification
+																					 object:self
+																				  userInfo:userInfo];
 			});
 		}
 		else
@@ -792,7 +799,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	return [self _methodURLForPath:path parameters:nil];
 }
 
-- (void)uploadAvatarImage:(UIImage *)image forUser:(PLYUser *)user completion:(PLYCompletion)completion
+- (void)uploadAvatarImage:(DTImage *)image forUser:(PLYUser *)user completion:(PLYCompletion)completion
 {
 	NSParameterAssert(image);
 	NSParameterAssert(completion);
@@ -918,7 +925,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
  * Upload a image for a product.
  * ATTENTION: Login required
  **/
-- (void)uploadImageData:(UIImage *)data forGTIN:(NSString *)gtin completion:(PLYCompletion)completion
+- (void)uploadImageData:(DTImage *)data forGTIN:(NSString *)gtin completion:(PLYCompletion)completion
 {
 	NSParameterAssert(gtin);
 	NSParameterAssert(data);

@@ -6,10 +6,14 @@
 //  Copyright (c) 2013 Cocoanetics. All rights reserved.
 //
 
+#import "PLYCompatibility.h"
+
 /*
  Completion handler for Discogs API calls
  */
 typedef void (^PLYCompletion)(id result, NSError *error);
+
+// String Constants
 
 @class PLYUser;
 @class PLYList;
@@ -158,7 +162,7 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @param user The user to upload an image for
  @param completion The completion handler for the request
  */
-- (void)uploadAvatarImage:(UIImage *)image forUser:(PLYUser *)user completion:(PLYCompletion)completion;
+- (void)uploadAvatarImage:(DTImage *)image forUser:(PLYUser *)user completion:(PLYCompletion)completion;
 
 /**
  Resets the avatar image for currently logged in user
@@ -257,7 +261,7 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @param gtin The GTIN (barcode) of the new product
  @param completion The completion handler for the request
  */
-- (void)uploadImageData:(UIImage *)data
+- (void)uploadImageData:(DTImage *)data
                 forGTIN:(NSString *)gtin
              completion:(PLYCompletion)completion;
 

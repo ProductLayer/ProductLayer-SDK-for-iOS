@@ -172,13 +172,56 @@
 		A7CD959219FA821E008E3A41 /* PLYOpineComposeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A7CD959019FA821E008E3A41 /* PLYOpineComposeViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7CD959319FA821E008E3A41 /* PLYOpineComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CD959119FA821E008E3A41 /* PLYOpineComposeViewController.m */; };
 		A7CD959419FA821E008E3A41 /* PLYOpineComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CD959119FA821E008E3A41 /* PLYOpineComposeViewController.m */; };
+		A7D997F01A2B11A800C80C2B /* ProductLayer_Mac.h in Headers */ = {isa = PBXBuildFile; fileRef = A7D997EF1A2B11A800C80C2B /* ProductLayer_Mac.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7EA07011A2B12E900B61CCE /* ProductLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B44248183F91E700E8A170 /* ProductLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7EA07021A2B139C00B61CCE /* PLYBrand.h in Headers */ = {isa = PBXBuildFile; fileRef = A770B2D31A188FAA001465A7 /* PLYBrand.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7EA07031A2B139C00B61CCE /* PLYBrand.m in Sources */ = {isa = PBXBuildFile; fileRef = A770B2D41A188FAA001465A7 /* PLYBrand.m */; };
+		A7EA07041A2B139C00B61CCE /* PLYBrandOwner.h in Headers */ = {isa = PBXBuildFile; fileRef = A770B2B21A188F78001465A7 /* PLYBrandOwner.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7EA07051A2B139C00B61CCE /* PLYBrandOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = A770B2B31A188F78001465A7 /* PLYBrandOwner.m */; };
+		A7EA07061A2B139C00B61CCE /* PLYEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = A7548AE9196C2E7C000B72EB /* PLYEntity.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7EA07071A2B139C00B61CCE /* PLYEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548AEA196C2E7C000B72EB /* PLYEntity.m */; };
+		A7EA07081A2B139C00B61CCE /* PLYErrorMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = C97FAA16191CCA3400144D2C /* PLYErrorMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7EA07091A2B139C00B61CCE /* PLYErrorMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA17191CCA3400144D2C /* PLYErrorMessage.m */; };
+		A7EA070A1A2B139C00B61CCE /* PLYErrorResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = C97FAA1A191CCA4D00144D2C /* PLYErrorResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7EA070B1A2B139C00B61CCE /* PLYErrorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA1B191CCA4D00144D2C /* PLYErrorResponse.m */; };
+		A7EA070C1A2B139C00B61CCE /* PLYImage.h in Headers */ = {isa = PBXBuildFile; fileRef = A7548B22196C4C16000B72EB /* PLYImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7EA070D1A2B139C00B61CCE /* PLYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548B23196C4C16000B72EB /* PLYImage.m */; };
+		A7EA070E1A2B139C00B61CCE /* PLYList.h in Headers */ = {isa = PBXBuildFile; fileRef = C98CD25F190FC4E60035647C /* PLYList.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7EA070F1A2B139C00B61CCE /* PLYList.m in Sources */ = {isa = PBXBuildFile; fileRef = C98CD260190FC4E60035647C /* PLYList.m */; };
+		A7EA07101A2B139C00B61CCE /* PLYListItem.h in Headers */ = {isa = PBXBuildFile; fileRef = C98CD262190FC7D50035647C /* PLYListItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7EA07111A2B139C00B61CCE /* PLYListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C98CD263190FC7D50035647C /* PLYListItem.m */; };
+		A7EA07121A2B139C00B61CCE /* PLYOpine.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B487391987CA7800FA8F83 /* PLYOpine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7EA07131A2B139C00B61CCE /* PLYOpine.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B4873A1987CA7800FA8F83 /* PLYOpine.m */; };
+		A7EA07141A2B139C00B61CCE /* PLYPackaging.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D31F6C190A742500C91A08 /* PLYPackaging.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7EA07151A2B139C00B61CCE /* PLYPackaging.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D31F6D190A742500C91A08 /* PLYPackaging.m */; };
+		A7EA07161A2B139C00B61CCE /* PLYProduct.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D31F6E190A742500C91A08 /* PLYProduct.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7EA07171A2B139C00B61CCE /* PLYProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D31F6F190A742500C91A08 /* PLYProduct.m */; };
+		A7EA07181A2B139C00B61CCE /* PLYReview.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D31F76190ABE0E00C91A08 /* PLYReview.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7EA07191A2B139C00B61CCE /* PLYReview.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D31F77190ABE0E00C91A08 /* PLYReview.m */; };
+		A7EA071A1A2B139C00B61CCE /* PLYUser.h in Headers */ = {isa = PBXBuildFile; fileRef = C9ADBDD21911502B004C81B3 /* PLYUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7EA071B1A2B139C00B61CCE /* PLYUser.m in Sources */ = {isa = PBXBuildFile; fileRef = C9ADBDD31911502B004C81B3 /* PLYUser.m */; };
+		A7EA071C1A2B139C00B61CCE /* PLYUserAvatar.h in Headers */ = {isa = PBXBuildFile; fileRef = A73803071A28800200011D9C /* PLYUserAvatar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7EA071D1A2B139C00B61CCE /* PLYUserAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = A73803081A28800200011D9C /* PLYUserAvatar.m */; };
+		A7EA071E1A2B139C00B61CCE /* PLYProductCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = C97FAADE1921FCFA00144D2C /* PLYProductCategory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7EA071F1A2B139C00B61CCE /* PLYProductCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAADF1921FCFA00144D2C /* PLYProductCategory.m */; };
+		A7EA07201A2B139C00B61CCE /* PLYVotableEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B4877D1987CFB200FA8F83 /* PLYVotableEntity.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7EA07211A2B139C00B61CCE /* PLYVotableEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B4877E1987CFB200FA8F83 /* PLYVotableEntity.m */; };
+		A7EA07241A2B14A800B61CCE /* PLYCompatibility.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EA07231A2B14A800B61CCE /* PLYCompatibility.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7EA07251A2B14A800B61CCE /* PLYCompatibility.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EA07231A2B14A800B61CCE /* PLYCompatibility.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7EA07271A2B160900B61CCE /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7EA07261A2B160900B61CCE /* Cocoa.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		A7EA07291A2B161400B61CCE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7EA07281A2B161400B61CCE /* Foundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		A7EA072B1A2B164E00B61CCE /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7EA072A1A2B164E00B61CCE /* AppKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		A7EA072C1A2B176D00B61CCE /* PLYServer.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B44247183F91E700E8A170 /* PLYServer.m */; };
+		A7EA072D1A2B177800B61CCE /* PLYConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B442A3183F97B800E8A170 /* PLYConstants.m */; };
+		A7EA072F1A2B197300B61CCE /* libDTFoundation_Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7EA072E1A2B197300B61CCE /* libDTFoundation_Mac.a */; };
+		A7EA07321A2B1E5100B61CCE /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A6280198A7D0F00997DDC /* AccountManager.m */; };
+		A7EA07331A2B1E5300B61CCE /* GenericAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A6282198A7D0F00997DDC /* GenericAccount.m */; };
 		A7EE55A21A121C8300DD55FE /* PLYCategoryPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EE55A01A121C8300DD55FE /* PLYCategoryPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7EE55A31A121C8300DD55FE /* PLYCategoryPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE55A11A121C8300DD55FE /* PLYCategoryPickerViewController.m */; };
 		A7EE55A41A121C8300DD55FE /* PLYCategoryPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE55A11A121C8300DD55FE /* PLYCategoryPickerViewController.m */; };
 		C92A6256198A1B3900997DDC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C92A6255198A1B3900997DDC /* Security.framework */; };
 		C92A6283198A7D0F00997DDC /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A6280198A7D0F00997DDC /* AccountManager.m */; };
 		C92A6284198A7D0F00997DDC /* GenericAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A6282198A7D0F00997DDC /* GenericAccount.m */; };
-		C97D2D071A0037D3003885A1 /* ProductLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7590ADA19ED77710084EBCA /* ProductLayer.framework */; };
 		C97D2D081A0037D3003885A1 /* ProductLayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A7590ADA19ED77710084EBCA /* ProductLayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C97FAA18191CCA3400144D2C /* PLYErrorMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA17191CCA3400144D2C /* PLYErrorMessage.m */; };
 		C97FAA1C191CCA4D00144D2C /* PLYErrorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA1B191CCA4D00144D2C /* PLYErrorResponse.m */; };
@@ -502,6 +545,13 @@
 			remoteGlobalIDString = A70B4CE61486637E00873A4A;
 			remoteInfo = "Static Library";
 		};
+		A7EA07301A2B197C00B61CCE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B4418A183F90B900E8A170 /* DTFoundation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A710A4FF1607556000437D36;
+			remoteInfo = "Static Library (Mac)";
+		};
 		C97FAAE419221C7E00144D2C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A7B4418A183F90B900E8A170 /* DTFoundation.xcodeproj */;
@@ -642,6 +692,16 @@
 		A7B4877E1987CFB200FA8F83 /* PLYVotableEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYVotableEntity.m; path = PLYEntities/PLYVotableEntity.m; sourceTree = "<group>"; };
 		A7CD959019FA821E008E3A41 /* PLYOpineComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYOpineComposeViewController.h; sourceTree = "<group>"; };
 		A7CD959119FA821E008E3A41 /* PLYOpineComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYOpineComposeViewController.m; sourceTree = "<group>"; };
+		A7D997EB1A2B11A800C80C2B /* ProductLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ProductLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7D997EE1A2B11A800C80C2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7D997EF1A2B11A800C80C2B /* ProductLayer_Mac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductLayer_Mac.h; sourceTree = "<group>"; };
+		A7D997FB1A2B11A800C80C2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7D997FC1A2B11A800C80C2B /* ProductLayer_MacTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProductLayer_MacTests.m; sourceTree = "<group>"; };
+		A7EA07231A2B14A800B61CCE /* PLYCompatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYCompatibility.h; sourceTree = "<group>"; };
+		A7EA07261A2B160900B61CCE /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		A7EA07281A2B161400B61CCE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		A7EA072A1A2B164E00B61CCE /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
+		A7EA072E1A2B197300B61CCE /* libDTFoundation_Mac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libDTFoundation_Mac.a; path = Externals/DTDownload/Externals/DTFoundation/build/Debug/libDTFoundation_Mac.a; sourceTree = "<group>"; };
 		A7EE55A01A121C8300DD55FE /* PLYCategoryPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYCategoryPickerViewController.h; sourceTree = "<group>"; };
 		A7EE55A11A121C8300DD55FE /* PLYCategoryPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYCategoryPickerViewController.m; sourceTree = "<group>"; };
 		C92A6255198A1B3900997DDC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -829,7 +889,6 @@
 				A7B214FC183F842000C38635 /* CoreGraphics.framework in Frameworks */,
 				A7B214FE183F842000C38635 /* UIKit.framework in Frameworks */,
 				A7590AEE19ED77710084EBCA /* ProductLayer.framework in Frameworks */,
-				C97D2D071A0037D3003885A1 /* ProductLayer.framework in Frameworks */,
 				A7B214FA183F842000C38635 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -840,6 +899,17 @@
 			files = (
 				C92A6256198A1B3900997DDC /* Security.framework in Frameworks */,
 				A7B21722183F8A3800C38635 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7D997E71A2B11A800C80C2B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7EA072F1A2B197300B61CCE /* libDTFoundation_Mac.a in Frameworks */,
+				A7EA072B1A2B164E00B61CCE /* AppKit.framework in Frameworks */,
+				A7EA07291A2B161400B61CCE /* Foundation.framework in Frameworks */,
+				A7EA07271A2B160900B61CCE /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -968,6 +1038,8 @@
 				A7B44241183F91E700E8A170 /* Core */,
 				A7B44234183F91E700E8A170 /* Demo */,
 				A7B440A0183F90B800E8A170 /* Externals */,
+				A7D997EC1A2B11A800C80C2B /* ProductLayer_Mac */,
+				A7D997F91A2B11A800C80C2B /* ProductLayer_MacTests */,
 				A7B214F8183F842000C38635 /* Frameworks */,
 				A7B214F7183F842000C38635 /* Products */,
 			);
@@ -980,6 +1052,7 @@
 				A7B21721183F8A3800C38635 /* libProductLayer.a */,
 				A76A570C1986937D00751454 /* ProductLayer.bundle */,
 				A7590ADA19ED77710084EBCA /* ProductLayer.framework */,
+				A7D997EB1A2B11A800C80C2B /* ProductLayer.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -987,6 +1060,10 @@
 		A7B214F8183F842000C38635 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A7EA072E1A2B197300B61CCE /* libDTFoundation_Mac.a */,
+				A7EA072A1A2B164E00B61CCE /* AppKit.framework */,
+				A7EA07281A2B161400B61CCE /* Foundation.framework */,
+				A7EA07261A2B160900B61CCE /* Cocoa.framework */,
 				A7590B4019ED7CDF0084EBCA /* QuartzCore.framework */,
 				C92A6255198A1B3900997DDC /* Security.framework */,
 				A71C2BBC1843ADA600B77DB4 /* CoreData.framework */,
@@ -1104,17 +1181,52 @@
 		A7B44242183F91E700E8A170 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				A7B44248183F91E700E8A170 /* ProductLayer.h */,
 				A70CFE2119EE5C9D00CBF533 /* Scanner */,
 				C92A627E198A7D0F00997DDC /* Account */,
 				A76D3F58198650770032FE59 /* iOS */,
 				C9D31F45190A705200C91A08 /* PLYEntities */,
-				A7B44246183F91E700E8A170 /* PLYServer.h */,
-				A7B44247183F91E700E8A170 /* PLYServer.m */,
-				A7B44248183F91E700E8A170 /* ProductLayer.h */,
+				A7EA07231A2B14A800B61CCE /* PLYCompatibility.h */,
 				A7B442A2183F97B800E8A170 /* PLYConstants.h */,
 				A7B442A3183F97B800E8A170 /* PLYConstants.m */,
+				A7B44246183F91E700E8A170 /* PLYServer.h */,
+				A7B44247183F91E700E8A170 /* PLYServer.m */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		A7D997EC1A2B11A800C80C2B /* ProductLayer_Mac */ = {
+			isa = PBXGroup;
+			children = (
+				A7D997EF1A2B11A800C80C2B /* ProductLayer_Mac.h */,
+				A7D997ED1A2B11A800C80C2B /* Supporting Files */,
+			);
+			path = ProductLayer_Mac;
+			sourceTree = "<group>";
+		};
+		A7D997ED1A2B11A800C80C2B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A7D997EE1A2B11A800C80C2B /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A7D997F91A2B11A800C80C2B /* ProductLayer_MacTests */ = {
+			isa = PBXGroup;
+			children = (
+				A7D997FC1A2B11A800C80C2B /* ProductLayer_MacTests.m */,
+				A7D997FA1A2B11A800C80C2B /* Supporting Files */,
+			);
+			path = ProductLayer_MacTests;
+			sourceTree = "<group>";
+		};
+		A7D997FA1A2B11A800C80C2B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A7D997FB1A2B11A800C80C2B /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		A7EE559E1A121C3300DD55FE /* Categories */ = {
@@ -1496,6 +1608,7 @@
 				A7590B1F19ED77B80084EBCA /* PLYProduct.h in Headers */,
 				A719180E1A1B5B1B002C2D76 /* PLYContentsDidChangeValidator.h in Headers */,
 				A7590B1119ED77B80084EBCA /* PLYErrorMessage.h in Headers */,
+				A7EA07241A2B14A800B61CCE /* PLYCompatibility.h in Headers */,
 				A770B2B41A188F78001465A7 /* PLYBrandOwner.h in Headers */,
 				A7590B2519ED77B80084EBCA /* PLYProductCategory.h in Headers */,
 				A70CFE6F19EE604100CBF533 /* PLYVideoPreviewInterestBox.h in Headers */,
@@ -1525,12 +1638,38 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A7D997E81A2B11A800C80C2B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7EA070C1A2B139C00B61CCE /* PLYImage.h in Headers */,
+				A7EA071E1A2B139C00B61CCE /* PLYProductCategory.h in Headers */,
+				A7EA070E1A2B139C00B61CCE /* PLYList.h in Headers */,
+				A7EA07041A2B139C00B61CCE /* PLYBrandOwner.h in Headers */,
+				A7EA07101A2B139C00B61CCE /* PLYListItem.h in Headers */,
+				A7EA07081A2B139C00B61CCE /* PLYErrorMessage.h in Headers */,
+				A7EA07021A2B139C00B61CCE /* PLYBrand.h in Headers */,
+				A7EA07141A2B139C00B61CCE /* PLYPackaging.h in Headers */,
+				A7EA07161A2B139C00B61CCE /* PLYProduct.h in Headers */,
+				A7EA071C1A2B139C00B61CCE /* PLYUserAvatar.h in Headers */,
+				A7EA07121A2B139C00B61CCE /* PLYOpine.h in Headers */,
+				A7EA07011A2B12E900B61CCE /* ProductLayer.h in Headers */,
+				A7EA071A1A2B139C00B61CCE /* PLYUser.h in Headers */,
+				A7EA07061A2B139C00B61CCE /* PLYEntity.h in Headers */,
+				A7EA070A1A2B139C00B61CCE /* PLYErrorResponse.h in Headers */,
+				A7EA07201A2B139C00B61CCE /* PLYVotableEntity.h in Headers */,
+				A7EA07251A2B14A800B61CCE /* PLYCompatibility.h in Headers */,
+				A7EA07181A2B139C00B61CCE /* PLYReview.h in Headers */,
+				A7D997F01A2B11A800C80C2B /* ProductLayer_Mac.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		A7590AD919ED77710084EBCA /* ProductLayer */ = {
+		A7590AD919ED77710084EBCA /* ProductLayer (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A7590AF319ED77710084EBCA /* Build configuration list for PBXNativeTarget "ProductLayer" */;
+			buildConfigurationList = A7590AF319ED77710084EBCA /* Build configuration list for PBXNativeTarget "ProductLayer (iOS)" */;
 			buildPhases = (
 				A7590AD519ED77710084EBCA /* Sources */,
 				A7590AD619ED77710084EBCA /* Frameworks */,
@@ -1542,7 +1681,7 @@
 			dependencies = (
 				A7590B3119ED78AA0084EBCA /* PBXTargetDependency */,
 			);
-			name = ProductLayer;
+			name = "ProductLayer (iOS)";
 			productName = ProductLayer;
 			productReference = A7590ADA19ED77710084EBCA /* ProductLayer.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1605,13 +1744,32 @@
 			productReference = A7B21721183F8A3800C38635 /* libProductLayer.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		A7D997EA1A2B11A800C80C2B /* ProductLayer (Mac) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7D997FE1A2B11A800C80C2B /* Build configuration list for PBXNativeTarget "ProductLayer (Mac)" */;
+			buildPhases = (
+				A7D997E61A2B11A800C80C2B /* Sources */,
+				A7D997E71A2B11A800C80C2B /* Frameworks */,
+				A7D997E81A2B11A800C80C2B /* Headers */,
+				A7D997E91A2B11A800C80C2B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A7EA07311A2B197C00B61CCE /* PBXTargetDependency */,
+			);
+			name = "ProductLayer (Mac)";
+			productName = ProductLayer_Mac;
+			productReference = A7D997EB1A2B11A800C80C2B /* ProductLayer.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		A7B214EE183F842000C38635 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Cocoanetics;
 				TargetAttributes = {
 					A7590AD919ED77710084EBCA = {
@@ -1623,6 +1781,9 @@
 					};
 					A7B214F5183F842000C38635 = {
 						DevelopmentTeam = W2S2NPRZSQ;
+					};
+					A7D997EA1A2B11A800C80C2B = {
+						CreatedOnToolsVersion = 6.1;
 					};
 				};
 			};
@@ -1654,7 +1815,8 @@
 				A7B21720183F8A3800C38635 /* Static Library */,
 				A7D2A0A819224754003C256C /* Documentation */,
 				A76A570B1986937D00751454 /* Resource Bundle */,
-				A7590AD919ED77710084EBCA /* ProductLayer */,
+				A7590AD919ED77710084EBCA /* ProductLayer (iOS) */,
+				A7D997EA1A2B11A800C80C2B /* ProductLayer (Mac) */,
 			);
 		};
 /* End PBXProject section */
@@ -1944,6 +2106,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A7D997E91A2B11A800C80C2B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -2120,6 +2289,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A7D997E61A2B11A800C80C2B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7EA07111A2B139C00B61CCE /* PLYListItem.m in Sources */,
+				A7EA07191A2B139C00B61CCE /* PLYReview.m in Sources */,
+				A7EA070F1A2B139C00B61CCE /* PLYList.m in Sources */,
+				A7EA071D1A2B139C00B61CCE /* PLYUserAvatar.m in Sources */,
+				A7EA07091A2B139C00B61CCE /* PLYErrorMessage.m in Sources */,
+				A7EA071F1A2B139C00B61CCE /* PLYProductCategory.m in Sources */,
+				A7EA07321A2B1E5100B61CCE /* AccountManager.m in Sources */,
+				A7EA07071A2B139C00B61CCE /* PLYEntity.m in Sources */,
+				A7EA072C1A2B176D00B61CCE /* PLYServer.m in Sources */,
+				A7EA07331A2B1E5300B61CCE /* GenericAccount.m in Sources */,
+				A7EA07031A2B139C00B61CCE /* PLYBrand.m in Sources */,
+				A7EA07151A2B139C00B61CCE /* PLYPackaging.m in Sources */,
+				A7EA070D1A2B139C00B61CCE /* PLYImage.m in Sources */,
+				A7EA070B1A2B139C00B61CCE /* PLYErrorResponse.m in Sources */,
+				A7EA07051A2B139C00B61CCE /* PLYBrandOwner.m in Sources */,
+				A7EA072D1A2B177800B61CCE /* PLYConstants.m in Sources */,
+				A7EA07211A2B139C00B61CCE /* PLYVotableEntity.m in Sources */,
+				A7EA071B1A2B139C00B61CCE /* PLYUser.m in Sources */,
+				A7EA07131A2B139C00B61CCE /* PLYOpine.m in Sources */,
+				A7EA07171A2B139C00B61CCE /* PLYProduct.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2130,7 +2326,7 @@
 		};
 		A7590AF219ED77710084EBCA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A7590AD919ED77710084EBCA /* ProductLayer */;
+			target = A7590AD919ED77710084EBCA /* ProductLayer (iOS) */;
 			targetProxy = A7590AF119ED77710084EBCA /* PBXContainerItemProxy */;
 		};
 		A7590B3119ED78AA0084EBCA /* PBXTargetDependency */ = {
@@ -2152,6 +2348,11 @@
 			isa = PBXTargetDependency;
 			name = "Static Library";
 			targetProxy = A7B44288183F935200E8A170 /* PBXContainerItemProxy */;
+		};
+		A7EA07311A2B197C00B61CCE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Static Library (Mac)";
+			targetProxy = A7EA07301A2B197C00B61CCE /* PBXContainerItemProxy */;
 		};
 		C97FAAEA19221CE800144D2C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2176,10 +2377,6 @@
 		A7590AF419ED77710084EBCA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					armv7s,
-				);
 				CLANG_ENABLE_MODULES = NO;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2202,7 +2399,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ProductLayer;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/**";
@@ -2214,10 +2411,6 @@
 		A7590AF519ED77710084EBCA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					armv7s,
-				);
 				CLANG_ENABLE_MODULES = NO;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2236,7 +2429,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ProductLayer;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/**";
@@ -2248,10 +2441,6 @@
 		A7590AF619ED77710084EBCA /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					armv7s,
-				);
 				CLANG_ENABLE_MODULES = NO;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2270,7 +2459,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ProductLayer;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/**";
@@ -2449,10 +2638,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					armv7s,
-				);
 				DSTROOT = /tmp/ProductLayer.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
@@ -2470,10 +2655,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					armv7s,
-				);
 				DSTROOT = /tmp/ProductLayer.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
@@ -2501,6 +2682,111 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = AdHoc;
+		};
+		A7D997FF1A2B11A800C80C2B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "Core/Framework-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Externals/DTDownload/Externals/DTFoundation/build/Debug",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = ProductLayer;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/**";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A7D998001A2B11A800C80C2B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "Core/Framework-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Externals/DTDownload/Externals/DTFoundation/build/Debug",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = ProductLayer;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/**";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A7D998011A2B11A800C80C2B /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "Core/Framework-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Externals/DTDownload/Externals/DTFoundation/build/Debug",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = ProductLayer;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/**";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = AdHoc;
 		};
@@ -2561,10 +2847,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					armv7s,
-				);
 				DSTROOT = /tmp/ProductLayer.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
@@ -2577,7 +2859,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A7590AF319ED77710084EBCA /* Build configuration list for PBXNativeTarget "ProductLayer" */ = {
+		A7590AF319ED77710084EBCA /* Build configuration list for PBXNativeTarget "ProductLayer (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A7590AF419ED77710084EBCA /* Debug */,
@@ -2633,6 +2915,16 @@
 				A7D2A0A919224754003C256C /* Debug */,
 				A7D2A0AA19224754003C256C /* Release */,
 				A7D2A0AB19224754003C256C /* AdHoc */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A7D997FE1A2B11A800C80C2B /* Build configuration list for PBXNativeTarget "ProductLayer (Mac)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7D997FF1A2B11A800C80C2B /* Debug */,
+				A7D998001A2B11A800C80C2B /* Release */,
+				A7D998011A2B11A800C80C2B /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

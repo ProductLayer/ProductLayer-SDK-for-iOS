@@ -18,3 +18,8 @@ NSString * const PLYServerUserDidLogInNotification = @"PLYServerUserDidLogInNoti
 NSString * const PLYServerUserDidLogOutNotification = @"PLYServerUserDidLogOutNotification";
 
 NSString * const PLYNotifyUserStatusChanged = @"PLYNotifyUserStatusChanged";
+
+NSString * const PLYServerLoginErrorNotification = @"PLYServerLoginErrorNotification";
+
+
+

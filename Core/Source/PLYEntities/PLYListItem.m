@@ -8,8 +8,6 @@
 
 #import "PLYListItem.h"
 
-#import "DTLog.h"
-
 @implementation PLYListItem
 
 + (NSString *)entityTypeIdentifier

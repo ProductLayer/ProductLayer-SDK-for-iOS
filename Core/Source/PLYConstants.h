@@ -16,3 +16,8 @@ extern NSString * const PLYServerUserDidLogInNotification;
 extern NSString * const PLYServerUserDidLogOutNotification;
 
 extern NSString * const PLYNotifyUserStatusChanged;
+
+/*
+ Notification that gets sent if there is a problem logging in or refreshing the session
+ */
+extern NSString * const PLYServerLoginErrorNotification;

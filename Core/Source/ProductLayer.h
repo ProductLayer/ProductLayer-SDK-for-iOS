@@ -2,8 +2,15 @@
 
 // system headers used throughout
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
+
+#if TARGET_OS_IPHONE
+#import <UIKit/UIKit.h>
+#else
+#import <Cocoa/Cocoa.h>
+#endif
+
+#import "PLYCompatibility.h"
 
 // PLY Headers
 #import "PLYConstants.h"
@@ -24,25 +31,30 @@
 #import "PLYErrorMessage.h"
 #import "PLYErrorResponse.h"
 
-// User Interface
-#import "UIViewController+ProductLayer.h"
-#import "PLYLoginViewController.h"
-#import "PLYTextField.h"
-#import "PLYTextView.h"
-#import "PLYFormValidator.h"
-#import "PLYOpineComposeViewController.h"
-#import "PLYNonEmptyValidator.h"
-#import "PLYContentsDidChangeValidator.h"
-#import "PLYUserNameValidator.h"
-#import "PLYFormEmailValidator.h"
-#import "PLYCategoryPickerViewController.h"
-#import "PLYBrandPickerViewController.h"
-#import "PLYGuidedInputViewController.h"
 
-// Scanner
-#import "PLYScannerViewController.h"
-#import "PLYVideoPreviewInterestBox.h"
-#import "PLYVideoPreviewView.h"
+#if TARGET_OS_IPHONE
+
+	// iOS User Interface
+	#import "UIViewController+ProductLayer.h"
+	#import "PLYLoginViewController.h"
+	#import "PLYTextField.h"
+	#import "PLYTextView.h"
+	#import "PLYFormValidator.h"
+	#import "PLYOpineComposeViewController.h"
+	#import "PLYNonEmptyValidator.h"
+	#import "PLYContentsDidChangeValidator.h"
+	#import "PLYUserNameValidator.h"
+	#import "PLYFormEmailValidator.h"
+	#import "PLYCategoryPickerViewController.h"
+	#import "PLYBrandPickerViewController.h"
+	#import "PLYGuidedInputViewController.h"
+
+	// Scanner
+	#import "PLYScannerViewController.h"
+	#import "PLYVideoPreviewInterestBox.h"
+	#import "PLYVideoPreviewView.h"
+
+#endif
 
 // Localization
 
@@ -77,9 +89,9 @@ static inline NSBundle *PLYResourceBundle()
 NSLocalizedStringFromTableInBundle(key, tbl, PLYResourceBundle(), comment)
 
 // standard ProductLayer color
-static inline UIColor *PLYBrandColor()
+static inline DTColor *PLYBrandColor()
 {
-	return [UIColor colorWithRed:110.0/256.0 green:190.0/256.0 blue:68.0/256.0 alpha:1];
+	return [DTColor colorWithRed:110.0/256.0 green:190.0/256.0 blue:68.0/256.0 alpha:1];
 }
 
 //! Project version number for ProductLayer.
