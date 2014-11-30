@@ -901,7 +901,7 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		A76D3F58198650770032FE59 /* UI */ = {
+		A76D3F58198650770032FE59 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
 				A77665921A1B3673008AB88C /* Input */,
@@ -915,7 +915,7 @@
 				A76D3F8E19866B690032FE59 /* Login/Signup */,
 				A76D3F8D19866B4B0032FE59 /* Validation */,
 			);
-			path = UI;
+			path = iOS;
 			sourceTree = "<group>";
 		};
 		A76D3F8D19866B4B0032FE59 /* Validation */ = {
@@ -1106,7 +1106,7 @@
 			children = (
 				A70CFE2119EE5C9D00CBF533 /* Scanner */,
 				C92A627E198A7D0F00997DDC /* Account */,
-				A76D3F58198650770032FE59 /* UI */,
+				A76D3F58198650770032FE59 /* iOS */,
 				C9D31F45190A705200C91A08 /* PLYEntities */,
 				A7B44246183F91E700E8A170 /* PLYServer.h */,
 				A7B44247183F91E700E8A170 /* PLYServer.m */,
