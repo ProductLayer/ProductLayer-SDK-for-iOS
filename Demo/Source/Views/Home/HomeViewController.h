@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#import "DTCodeScannerViewController.h"
 #import "SocialFeedViewController.h"
 
 @interface HomeViewController : UIViewController <UISearchBarDelegate, UIAlertViewDelegate>

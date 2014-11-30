@@ -6,18 +6,12 @@
 //  Copyright (c) 2013 Cocoanetics. All rights reserved.
 //
 
+/**
+ Domain of all errors that have ProductLayer as source
+ */
 extern NSString * const PLYErrorDomain;
 
-extern NSString * const PLYCodeTypeEAN13;
-extern NSString * const PLYCodeTypeEAN8;
-
-
-extern NSString * const PLYServerUserDidLogInNotification;
-extern NSString * const PLYServerUserDidLogOutNotification;
-
-extern NSString * const PLYNotifyUserStatusChanged;
-
-/*
+/**
  Notification that gets sent if there is a problem logging in or refreshing the session
  */
 extern NSString * const PLYServerLoginErrorNotification;

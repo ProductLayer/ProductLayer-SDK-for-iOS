@@ -141,12 +141,12 @@
 	
 	if (_followerCount)
 	{
-		dict[@"pl-usr-follower_cnt"] = _followerCount;
+		dict[@"pl-usr-follower_cnt"] = @(_followerCount);
 	}
 	
 	if (_followingCount)
 	{
-		dict[@"pl-usr-following_cnt"] = _followingCount;
+		dict[@"pl-usr-following_cnt"] = @(_followingCount);
 	}
 	
 	if (_avatarURL)
@@ -156,12 +156,12 @@
 	
 	if (_following)
 	{
-		dict[@"pl-usr-following"] = [NSNumber numberWithBool:_following];
+		dict[@"pl-usr-following"] = @(_following);
 	}
 	
 	if (_followed)
 	{
-		dict[@"pl-usr-followed"] = [NSNumber numberWithBool:_followed];
+		dict[@"pl-usr-followed"] = @(_followed);
 	}
 	
 	if (_socialConnections)

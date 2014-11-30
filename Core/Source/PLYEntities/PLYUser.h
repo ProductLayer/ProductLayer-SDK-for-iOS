@@ -58,12 +58,12 @@
 /**
  The counter for all user which are follower of this user.
  */
-@property (nonatomic, readonly) NSNumber *followerCount;
+@property (nonatomic, readonly) NSUInteger followerCount;
 
 /**
  The counter for all user this user is following.
  */
-@property (nonatomic, readonly) NSNumber *followingCount;
+@property (nonatomic, readonly) NSUInteger followingCount;
 
 /**
  The url of the users avatar image. If no image is defined productlayer returns a gravatar image url.

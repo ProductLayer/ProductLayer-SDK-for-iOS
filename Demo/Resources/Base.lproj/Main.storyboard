@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="i6n-8m-VGd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14C68m" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="i6n-8m-VGd">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--Home View Controller-->
@@ -119,7 +118,7 @@
             </objects>
             <point key="canvasLocation" x="-838" y="2363"/>
         </scene>
-        <!--Opine Table View Controller - Opines-->
+        <!--Opines-->
         <scene sceneID="FdA-CX-EJX">
             <objects>
                 <tableViewController id="xt5-Ls-YWn" customClass="OpineTableViewController" sceneMemberID="viewController">
@@ -128,7 +127,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell appearanceType="aqua" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OpineTableViewCell" rowHeight="70" id="uXJ-5c-e8y" customClass="OpineTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OpineTableViewCell" rowHeight="70" id="uXJ-5c-e8y" customClass="OpineTableViewCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uXJ-5c-e8y" id="SCn-Od-ORt">
@@ -143,9 +142,8 @@
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="12"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="209" translatesAutoresizingMaskIntoConstraints="NO" id="QNz-CF-eDd">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="209" translatesAutoresizingMaskIntoConstraints="NO" id="QNz-CF-eDd">
                                             <rect key="frame" x="78" y="5" width="209" height="44"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="15"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -182,7 +180,7 @@
             </objects>
             <point key="canvasLocation" x="9" y="3888"/>
         </scene>
-        <!--Write Opine View Controller - Write Opine-->
+        <!--Write Opine-->
         <scene sceneID="nAn-aB-l7U">
             <objects>
                 <tableViewController id="JmH-j7-F7v" customClass="WriteOpineViewController" sceneMemberID="viewController">
@@ -193,7 +191,7 @@
                         <sections>
                             <tableViewSection headerTitle="Opine" footerTitle="Create a new opine for a product." id="Ibs-RN-xyB">
                                 <cells>
-                                    <tableViewCell appearanceType="aqua" contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="44" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="5yO-jY-uHa" customClass="EditableCell">
+                                    <tableViewCell contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="44" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="5yO-jY-uHa" customClass="EditableCell">
                                         <rect key="frame" x="0.0" y="119" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5yO-jY-uHa" id="Vtp-XH-KQ3">
@@ -227,7 +225,7 @@
                                             <outlet property="textField" destination="SnK-vf-hrm" id="GYk-dy-HNF"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell appearanceType="aqua" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="200" id="D3Y-5T-IXo" customClass="EditableCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="200" id="D3Y-5T-IXo" customClass="EditableCell">
                                         <rect key="frame" x="0.0" y="163" width="320" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D3Y-5T-IXo" id="5OM-Ky-Ec2">
@@ -262,7 +260,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell appearanceType="aqua" contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="44" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="sJ0-20-5B8" customClass="EditableCell">
+                                    <tableViewCell contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="44" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="sJ0-20-5B8" customClass="EditableCell">
                                         <rect key="frame" x="0.0" y="363" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sJ0-20-5B8" id="d5H-aW-hg7">
@@ -296,8 +294,7 @@
                                             <outlet property="textField" destination="VqR-kW-y36" id="rDj-oB-xQU"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell appearanceType="aqua" contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="120" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="0.0" id="rwi-b5-7eG">
-                                        <rect key="frame" x="0.0" y="407" width="320" height="0.0"/>
+                                    <tableViewCell contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="120" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="0.0" id="rwi-b5-7eG">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rwi-b5-7eG" id="kfh-Ln-mnl">
                                             <rect key="frame" x="0.0" y="-1" width="320" height="1"/>
@@ -357,7 +354,7 @@
             </objects>
             <point key="canvasLocation" x="-564" y="3888"/>
         </scene>
-        <!--Product Lists View Controller - My Product Lists-->
+        <!--My Product Lists-->
         <scene sceneID="Ems-rj-bnY">
             <objects>
                 <tableViewController id="5O7-yt-lbL" customClass="ProductListsViewController" sceneMemberID="viewController">
@@ -527,7 +524,7 @@
             </objects>
             <point key="canvasLocation" x="346" y="1725"/>
         </scene>
-        <!--Detailed Product List View Controller Table View Controller - ProductListTitle-->
+        <!--ProductListTitle-->
         <scene sceneID="Uxy-KW-XAd">
             <objects>
                 <tableViewController id="ydp-2I-6rc" customClass="DetailedProductListViewControllerTableViewController" sceneMemberID="viewController">
@@ -649,7 +646,7 @@
             </objects>
             <point key="canvasLocation" x="273" y="3069"/>
         </scene>
-        <!--Create Product List View Controller - New List-->
+        <!--New List-->
         <scene sceneID="vKH-Up-Y7j">
             <objects>
                 <tableViewController id="gsW-Po-lzA" customClass="CreateProductListViewController" sceneMemberID="viewController">
@@ -764,7 +761,6 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="120" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="0.0" id="ayn-iM-NjQ">
-                                        <rect key="frame" x="0.0" y="410" width="320" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ayn-iM-NjQ" id="cd1-R8-REm">
                                             <rect key="frame" x="0.0" y="-1" width="320" height="1"/>
@@ -814,7 +810,6 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="120" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="0.0" id="wtH-3m-AIU">
-                                        <rect key="frame" x="0.0" y="454" width="320" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wtH-3m-AIU" id="h17-sh-TaM">
                                             <rect key="frame" x="0.0" y="-1" width="320" height="1"/>
@@ -934,7 +929,7 @@
             </objects>
             <point key="canvasLocation" x="2463" y="-1310"/>
         </scene>
-        <!--Big Image View Controller - Do you like it?-->
+        <!--Do you like it?-->
         <scene sceneID="Yck-yV-Biu">
             <objects>
                 <viewController id="ybm-9G-qrX" customClass="BigImageViewController" sceneMemberID="viewController">
@@ -1046,7 +1041,7 @@
             </objects>
             <point key="canvasLocation" x="-2577" y="210"/>
         </scene>
-        <!--Menu View Controller - Menu-->
+        <!--Menu-->
         <scene sceneID="yYR-EN-nJb">
             <objects>
                 <tableViewController id="kha-QJ-efA" customClass="MenuViewController" sceneMemberID="viewController">
@@ -1258,7 +1253,7 @@
             </objects>
             <point key="canvasLocation" x="-2023" y="210"/>
         </scene>
-        <!--Search Product View Controller - Find Product-->
+        <!--Find Product-->
         <scene sceneID="cgt-fY-JYS">
             <objects>
                 <tableViewController storyboardIdentifier="SearchProductViewController" id="SCh-33-ROw" customClass="SearchProductViewController" sceneMemberID="viewController">
@@ -1329,7 +1324,7 @@
             </objects>
             <point key="canvasLocation" x="-1466" y="-1329"/>
         </scene>
-        <!--Product View Controller - Product View-->
+        <!--Product View-->
         <scene sceneID="0MY-HB-7ff">
             <objects>
                 <tableViewController storyboardIdentifier="ProductViewController" id="2hU-sC-mTd" customClass="ProductViewController" sceneMemberID="viewController">
@@ -1517,7 +1512,7 @@
             </objects>
             <point key="canvasLocation" x="-974" y="-1323"/>
         </scene>
-        <!--Key Value Table View Controller - Characteristics-->
+        <!--Characteristics-->
         <scene sceneID="o5m-r8-kDC">
             <objects>
                 <tableViewController id="PqS-IY-OtR" customClass="KeyValueTableViewController" sceneMemberID="viewController">
@@ -1578,7 +1573,7 @@
             </objects>
             <point key="canvasLocation" x="849" y="2363"/>
         </scene>
-        <!--Search User Table View Controller - Follower / Following-->
+        <!--Follower / Following-->
         <scene sceneID="IuD-Fx-hj0">
             <objects>
                 <tableViewController id="38g-qz-g5J" customClass="SearchUserTableViewController" sceneMemberID="viewController">
@@ -1670,7 +1665,7 @@
             </objects>
             <point key="canvasLocation" x="-564" y="-543"/>
         </scene>
-        <!--Search User Table View Controller - Find friends-->
+        <!--Find friends-->
         <scene sceneID="mbX-N2-MXo">
             <objects>
                 <tableViewController id="QMI-0T-04D" customClass="SearchUserTableViewController" sceneMemberID="viewController">
@@ -1764,7 +1759,7 @@
             </objects>
             <point key="canvasLocation" x="9" y="210"/>
         </scene>
-        <!--User Details View Controller - User Details-->
+        <!--User Details-->
         <scene sceneID="iaS-Hk-wxh">
             <objects>
                 <tableViewController id="76D-vC-A2x" customClass="UserDetailsViewController" sceneMemberID="viewController">
@@ -1924,7 +1919,7 @@
             </objects>
             <point key="canvasLocation" x="849" y="215"/>
         </scene>
-        <!--Edit Product View Controller - Edit Product-->
+        <!--Edit Product-->
         <scene sceneID="crx-W8-YZQ">
             <objects>
                 <tableViewController id="8Jy-az-zSF" customClass="EditProductViewController" sceneMemberID="viewController">
@@ -2076,7 +2071,6 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="120" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="0.0" id="zE5-DP-RkL">
-                                        <rect key="frame" x="0.0" y="295" width="320" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zE5-DP-RkL" id="KxY-eO-mnj">
                                             <rect key="frame" x="0.0" y="-1" width="320" height="1"/>
@@ -2129,7 +2123,6 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="120" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="0.0" id="luR-mR-sTs">
-                                        <rect key="frame" x="0.0" y="339" width="320" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="luR-mR-sTs" id="Skb-N7-UB5">
                                             <rect key="frame" x="0.0" y="-1" width="320" height="1"/>
@@ -2180,7 +2173,7 @@
             </objects>
             <point key="canvasLocation" x="1383" y="-1729"/>
         </scene>
-        <!--Settings View Controller - Settings-->
+        <!--Settings-->
         <scene sceneID="JcW-8f-ma3">
             <objects>
                 <tableViewController id="vK2-ss-M3u" customClass="SettingsViewController" sceneMemberID="viewController">
@@ -2226,7 +2219,6 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="120" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="0.0" id="I6B-lJ-eUE">
-                                        <rect key="frame" x="0.0" y="143" width="320" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I6B-lJ-eUE" id="VMX-9L-nmr">
                                             <rect key="frame" x="0.0" y="-1" width="320" height="1"/>
@@ -2268,7 +2260,7 @@
             </objects>
             <point key="canvasLocation" x="9" y="929"/>
         </scene>
-        <!--Review Table View Controller - Latest Reviews-->
+        <!--Latest Reviews-->
         <scene sceneID="2fu-Gv-lOW">
             <objects>
                 <tableViewController title="Latest Reviews" id="lcX-W4-nQh" customClass="ReviewTableViewController" sceneMemberID="viewController">
@@ -2336,7 +2328,7 @@
             </objects>
             <point key="canvasLocation" x="9" y="-543"/>
         </scene>
-        <!--Navigation Controller - EditProductWithNavigationController-->
+        <!--EditProductWithNavigationController-->
         <scene sceneID="83d-gw-JcY">
             <objects>
                 <navigationController storyboardIdentifier="EditProductWithNavigationController" title="EditProductWithNavigationController" definesPresentationContext="YES" id="Fbz-py-Oi5" sceneMemberID="viewController">
@@ -2351,10 +2343,10 @@
             </objects>
             <point key="canvasLocation" x="921" y="-1729"/>
         </scene>
-        <!--Code Scanner View Controller - Scan Barcode-->
+        <!--Scan Barcode-->
         <scene sceneID="MsZ-8w-rDy">
             <objects>
-                <viewController id="gu0-Vz-Eio" customClass="DTCodeScannerViewController" sceneMemberID="viewController">
+                <viewController id="gu0-Vz-Eio" customClass="PLYScannerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="S3P-9N-aDG"/>
                         <viewControllerLayoutGuide type="bottom" id="1nG-ug-p5o"/>
@@ -2371,16 +2363,13 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="codeScannerPreviewView" destination="FqI-aq-rVa" id="uYS-oo-WGe"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZsV-0k-K0l" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="mgE-a6-rzG" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1383" y="2363"/>
         </scene>
-        <!--Write Review View Controller - Write Review-->
+        <!--Write Review-->
         <scene sceneID="9ap-85-2df">
             <objects>
                 <tableViewController id="iUM-BH-wdf" customClass="WriteReviewViewController" sceneMemberID="viewController">
@@ -2597,7 +2586,6 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="120" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="0.0" id="SoF-gt-z3E">
-                                        <rect key="frame" x="0.0" y="495" width="320" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SoF-gt-z3E" id="jbr-nj-LNc">
                                             <rect key="frame" x="0.0" y="-1" width="320" height="1"/>
