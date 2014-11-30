@@ -25,7 +25,7 @@
 /**
  The productlayer error code.
  */
-@property (nonatomic, copy) NSNumber *code;
+@property (nonatomic, assign) NSUInteger code;
 
 /**
  The stacktrace will only be available for alpha and beta api's.

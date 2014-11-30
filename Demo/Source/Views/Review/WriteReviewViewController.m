@@ -90,16 +90,12 @@
 		newReview.body = body;
 	}
     
-    NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
-    [f setNumberStyle:NSNumberFormatterDecimalStyle];
-	NSNumber *rating = [NSNumber numberWithInt:_ratingCell.rating];
-	if (rating != nil)
-	{
-        newReview.rating = rating;
-	}
+	NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+	[f setNumberStyle:NSNumberFormatterDecimalStyle];
+	newReview.rating = _ratingCell.rating;
 	
 	newReview.language = [_localePicker.selectedLocale localeIdentifier];
-    
+	
 	[[PLYServer sharedServer] createReviewForGTIN:newReview.GTIN dictionary:[newReview dictionaryRepresentation] completion:^(id result, NSError *error) {
 		
 		if (error)

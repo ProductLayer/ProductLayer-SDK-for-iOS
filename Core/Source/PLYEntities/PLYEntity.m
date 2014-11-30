@@ -199,7 +199,7 @@ NSArray *PLYAllEntityClasses()
 	
 	if (_version)
 	{
-		dict[@"pl-version"] = _version;
+		dict[@"pl-version"] = @(_version);
 	}
 	
 	// return immutable

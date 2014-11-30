@@ -27,11 +27,11 @@
 	}
 	else if ([key isEqualToString:@"pl-list-prod-cnt"])
 	{
-		self.qty = value;
+		[self setValue:value forKey:@"quantity"];
 	}
 	else if ([key isEqualToString:@"pl-list-prod-prio"])
 	{
-		self.prio = value;
+		[self setValue:value forKey:@"priority"];
 	}
 	else
 	{
@@ -53,14 +53,14 @@
 		dict[@"pl-list-prod-note"] = _note;
 	}
 	
-	if (_qty)
+	if (_quantity)
 	{
-		dict[@"pl-list-prod-cnt"] = _qty;
+		dict[@"pl-list-prod-cnt"] = @(_quantity);
 	}
 	
-	if (_prio)
+	if (_priority)
 	{
-		dict[@"pl-list-prod-prio"] = _prio;
+		dict[@"pl-list-prod-prio"] = @(_priority);
 	}
 	
 	// return immutable

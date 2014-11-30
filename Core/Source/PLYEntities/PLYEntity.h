@@ -64,7 +64,7 @@
 /**
  The version.
  */
-@property (nonatomic, strong) NSNumber *version;
+@property (nonatomic, assign) NSUInteger version;
 
 /**
  The user who created the object.

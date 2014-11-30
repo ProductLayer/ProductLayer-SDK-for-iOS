@@ -20,7 +20,7 @@
 /**
  The sum of all votes (up +1, down -1).
  */
-@property (nonatomic, strong) NSNumber *votingScore;
+@property (nonatomic, assign) NSUInteger votingScore;
 
 /**
  The list of user id's who up-voted the review.

@@ -253,7 +253,7 @@
         
         PLYListItem *listItem = [[PLYListItem alloc] init];
         listItem.GTIN = _product.GTIN;
-        listItem.qty = [NSNumber numberWithInt:1];
+        listItem.quantity = 1;
         
         if(!list.listItems){
             list.listItems = [NSMutableArray arrayWithCapacity:1];

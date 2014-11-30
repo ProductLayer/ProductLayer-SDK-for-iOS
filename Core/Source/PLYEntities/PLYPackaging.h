@@ -35,6 +35,6 @@
 /**
  The units per package.
  */
-@property (nonatomic, copy) NSNumber *unit;
+@property (nonatomic, assign) NSUInteger units;
 
 @end

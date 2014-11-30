@@ -26,7 +26,7 @@
 	}
 	else if ([key isEqualToString:@"pl-prod-pkg-units"])
 	{
-		self.unit = value;
+		[self setValue:value forKey:@"units"];
 	}
 	else
 	{
@@ -40,22 +40,22 @@
 	
 	if (_contains)
 	{
-		[dict setObject:_contains forKey:@"pl-prod-pkg-cont"];
+		dict[@"pl-prod-pkg-cont"] = _contains;
 	}
 	
 	if (_name)
 	{
-		[dict setObject:_name forKey:@"pl-prod-pkg-name"];
+		dict[@"pl-prod-pkg-name"] = _name;
 	}
 	
 	if (_descriptionText)
 	{
-		[dict setObject:_descriptionText forKey:@"pl-prod-pkg-desc"];
+		dict[@"pl-prod-pkg-desc"] = _descriptionText;
 	}
 	
-	if (_unit)
+	if (_units)
 	{
-		[dict setObject:_unit forKey:@"pl-prod-pkg-units"];
+		dict[@"pl-prod-pkg-units"] = @(_units);
 	}
 	
 	// return immutable

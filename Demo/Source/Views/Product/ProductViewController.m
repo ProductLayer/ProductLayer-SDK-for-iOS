@@ -60,6 +60,8 @@
     _hud.showAnimationType = HUDProgressAnimationTypeFade;
     _hud.hideAnimationType = HUDProgressAnimationTypeFade;
     [_hud showWithText:@"loading" progressType:HUDProgressTypeInfinite];
+	
+	NSString *language = [[NSLocale preferredLanguages] firstObject];
     
     __weak ProductViewController *weakSelf = self;
     
@@ -74,38 +76,14 @@
         else
         {
             DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-                PLYProduct *defaultLocaleProduct;
-                
-                _product = nil;
-                
-                for(PLYProduct *product in result){
-                    // Search for current locale
-                    if([product.language isEqualToString:[AppSettings currentAppLocale].localeIdentifier]){
-                        [self setProduct:product];
-
-                        break;
-                    } else if([product.language isEqualToString:@"en"] || [product.language rangeOfString:@"en_"].location != NSNotFound){
-                        defaultLocaleProduct = product;
-                    }
-                }
+					_product = PLYProductBestMatchingUserPreferredLanguages(result);
+					[self setProduct:_product];
                 
                 if(!_product){
-
-                    
                     DTAlertView *alertView = [[DTAlertView alloc] initWithTitle:@"Product not found!" message:@"The product have not been found for your locale."];
                     alertView.delegate = self;
                     
-                    if(defaultLocaleProduct) {
-                        [alertView addButtonWithTitle:[NSString stringWithFormat:@"Show locale %@", defaultLocaleProduct.language] block:^() {
-                            [[PLYServer sharedServer] logoutUserWithCompletion:^(id result, NSError *error) {
-                                DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-                                    [weakSelf setProduct:defaultLocaleProduct];
-                                });
-                            }];
-                        }];
-                    }
-                    
-                    [alertView addButtonWithTitle:[NSString stringWithFormat:@"Add locale %@", [AppSettings currentAppLocale].localeIdentifier] block:^() {
+                    [alertView addButtonWithTitle:[NSString stringWithFormat:@"Add locale %@", language] block:^() {
                         DTBlockPerformSyncIfOnMainThreadElseAsync(^{
                             
                             PLYProduct *newProduct = [[PLYProduct alloc] init];
@@ -138,7 +116,8 @@
 - (void) setProduct:(PLYProduct *)product{
     // Prevent unnecessary image requests
     bool loadImage = YES;
-    if([product.GTIN isEqualToString:_product.GTIN]){
+    if([product.GTIN isEqualToString:_product.GTIN] && _productImage.image)
+	 {
         loadImage = NO;
     }
     

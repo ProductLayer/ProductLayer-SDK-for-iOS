@@ -37,7 +37,7 @@
 /**
  The rating for the product.
  */
-@property (nonatomic, strong) NSNumber *rating;
+@property (nonatomic, assign) float rating;
 
 /**
  The language of the review.
