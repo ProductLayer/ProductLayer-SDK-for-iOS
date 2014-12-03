@@ -69,10 +69,6 @@
 		A740BB7D19F23FA100DA3943 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7590B4019ED7CDF0084EBCA /* QuartzCore.framework */; };
 		A7548AEB196C2E7C000B72EB /* PLYEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548AEA196C2E7C000B72EB /* PLYEntity.m */; };
 		A7548B24196C4C16000B72EB /* PLYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548B23196C4C16000B72EB /* PLYImage.m */; };
-		A7590AFB19ED77B40084EBCA /* AccountManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C92A627F198A7D0F00997DDC /* AccountManager.h */; };
-		A7590AFC19ED77B40084EBCA /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A6280198A7D0F00997DDC /* AccountManager.m */; };
-		A7590AFD19ED77B40084EBCA /* GenericAccount.h in Headers */ = {isa = PBXBuildFile; fileRef = C92A6281198A7D0F00997DDC /* GenericAccount.h */; };
-		A7590AFE19ED77B40084EBCA /* GenericAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A6282198A7D0F00997DDC /* GenericAccount.m */; };
 		A7590AFF19ED77B40084EBCA /* PLYLoginViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76D3F5D198650770032FE59 /* PLYLoginViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7590B0019ED77B40084EBCA /* PLYLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F5E198650770032FE59 /* PLYLoginViewController.m */; };
 		A7590B0119ED77B40084EBCA /* PLYLostPasswordViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76D3F8F19866E0E0032FE59 /* PLYLostPasswordViewController.h */; };
@@ -211,8 +207,6 @@
 		A7EA072B1A2B164E00B61CCE /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7EA072A1A2B164E00B61CCE /* AppKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A7EA072C1A2B176D00B61CCE /* PLYServer.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B44247183F91E700E8A170 /* PLYServer.m */; };
 		A7EA072D1A2B177800B61CCE /* PLYConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B442A3183F97B800E8A170 /* PLYConstants.m */; };
-		A7EA07321A2B1E5100B61CCE /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A6280198A7D0F00997DDC /* AccountManager.m */; };
-		A7EA07331A2B1E5300B61CCE /* GenericAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A6282198A7D0F00997DDC /* GenericAccount.m */; };
 		A7EA07A81A2B24F600B61CCE /* DTFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7EA07561A2B21A300B61CCE /* DTFoundation.framework */; };
 		A7EA08411A2B341300B61CCE /* DTFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7EA08351A2B31B500B61CCE /* DTFoundation.framework */; };
 		A7EA08441A2B377300B61CCE /* DTFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7EA08351A2B31B500B61CCE /* DTFoundation.framework */; };
@@ -221,8 +215,6 @@
 		A7EE55A31A121C8300DD55FE /* PLYCategoryPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE55A11A121C8300DD55FE /* PLYCategoryPickerViewController.m */; };
 		A7EE55A41A121C8300DD55FE /* PLYCategoryPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE55A11A121C8300DD55FE /* PLYCategoryPickerViewController.m */; };
 		C92A6256198A1B3900997DDC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C92A6255198A1B3900997DDC /* Security.framework */; };
-		C92A6283198A7D0F00997DDC /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A6280198A7D0F00997DDC /* AccountManager.m */; };
-		C92A6284198A7D0F00997DDC /* GenericAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A6282198A7D0F00997DDC /* GenericAccount.m */; };
 		C97D2D081A0037D3003885A1 /* ProductLayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A7590ADA19ED77710084EBCA /* ProductLayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C97FAA18191CCA3400144D2C /* PLYErrorMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA17191CCA3400144D2C /* PLYErrorMessage.m */; };
 		C97FAA1C191CCA4D00144D2C /* PLYErrorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA1B191CCA4D00144D2C /* PLYErrorResponse.m */; };
@@ -698,10 +690,6 @@
 		A7EE55A01A121C8300DD55FE /* PLYCategoryPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYCategoryPickerViewController.h; sourceTree = "<group>"; };
 		A7EE55A11A121C8300DD55FE /* PLYCategoryPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYCategoryPickerViewController.m; sourceTree = "<group>"; };
 		C92A6255198A1B3900997DDC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		C92A627F198A7D0F00997DDC /* AccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountManager.h; sourceTree = "<group>"; };
-		C92A6280198A7D0F00997DDC /* AccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountManager.m; sourceTree = "<group>"; };
-		C92A6281198A7D0F00997DDC /* GenericAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericAccount.h; sourceTree = "<group>"; };
-		C92A6282198A7D0F00997DDC /* GenericAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericAccount.m; sourceTree = "<group>"; };
 		C97FAA16191CCA3400144D2C /* PLYErrorMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYErrorMessage.h; path = PLYEntities/PLYErrorMessage.h; sourceTree = "<group>"; };
 		C97FAA17191CCA3400144D2C /* PLYErrorMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYErrorMessage.m; path = PLYEntities/PLYErrorMessage.m; sourceTree = "<group>"; };
 		C97FAA1A191CCA4D00144D2C /* PLYErrorResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYErrorResponse.h; path = PLYEntities/PLYErrorResponse.h; sourceTree = "<group>"; };
@@ -1157,7 +1145,6 @@
 			children = (
 				A7B44248183F91E700E8A170 /* ProductLayer.h */,
 				A70CFE2119EE5C9D00CBF533 /* Scanner */,
-				C92A627E198A7D0F00997DDC /* Account */,
 				A76D3F58198650770032FE59 /* iOS */,
 				C9D31F45190A705200C91A08 /* PLYEntities */,
 				A7EA07231A2B14A800B61CCE /* PLYCompatibility.h */,
@@ -1187,17 +1174,6 @@
 				A7CD959119FA821E008E3A41 /* PLYOpineComposeViewController.m */,
 			);
 			name = Opines;
-			sourceTree = "<group>";
-		};
-		C92A627E198A7D0F00997DDC /* Account */ = {
-			isa = PBXGroup;
-			children = (
-				C92A627F198A7D0F00997DDC /* AccountManager.h */,
-				C92A6280198A7D0F00997DDC /* AccountManager.m */,
-				C92A6281198A7D0F00997DDC /* GenericAccount.h */,
-				C92A6282198A7D0F00997DDC /* GenericAccount.m */,
-			);
-			path = Account;
 			sourceTree = "<group>";
 		};
 		C97FAA2A191D618C00144D2C /* Helper */ = {
@@ -1536,8 +1512,6 @@
 				A70CFE4919EE5D8100CBF533 /* PLYScannerViewController.h in Headers */,
 				A7590B0319ED77B40084EBCA /* PLYSignUpViewController.h in Headers */,
 				A701C4FA1A1F55580013CB8D /* PLYBrandPickerViewController.h in Headers */,
-				A7590AFB19ED77B40084EBCA /* AccountManager.h in Headers */,
-				A7590AFD19ED77B40084EBCA /* GenericAccount.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2060,7 +2034,6 @@
 				A7A38CD51A2B4FFD005D8395 /* PLYFunctions.m in Sources */,
 				A70CFE7119EE604100CBF533 /* PLYVideoPreviewInterestBox.m in Sources */,
 				A70CFE7619EE626500CBF533 /* PLYAVFoundationFunctions.m in Sources */,
-				A7590AFC19ED77B40084EBCA /* AccountManager.m in Sources */,
 				A7590B1619ED77B80084EBCA /* PLYImage.m in Sources */,
 				A7590B0619ED77B40084EBCA /* UIViewController+ProductLayer.m in Sources */,
 				A7590B1219ED77B80084EBCA /* PLYErrorMessage.m in Sources */,
@@ -2071,7 +2044,6 @@
 				A7590B2A19ED77BD0084EBCA /* PLYServer.m in Sources */,
 				A7590B1E19ED77B80084EBCA /* PLYPackaging.m in Sources */,
 				A770B2B61A188F78001465A7 /* PLYBrandOwner.m in Sources */,
-				A7590AFE19ED77B40084EBCA /* GenericAccount.m in Sources */,
 				A7590B0C19ED77B40084EBCA /* PLYTextField.m in Sources */,
 				A7CD959419FA821E008E3A41 /* PLYOpineComposeViewController.m in Sources */,
 				A7590B1A19ED77B80084EBCA /* PLYListItem.m in Sources */,
@@ -2169,11 +2141,9 @@
 				A719180F1A1B5B1B002C2D76 /* PLYContentsDidChangeValidator.m in Sources */,
 				C98CD26A1910E0D70035647C /* PLYList.m in Sources */,
 				A70CFE4A19EE5D8100CBF533 /* PLYScannerViewController.m in Sources */,
-				C92A6283198A7D0F00997DDC /* AccountManager.m in Sources */,
 				C97FAA1C191CCA4D00144D2C /* PLYErrorResponse.m in Sources */,
 				A770B2B51A188F78001465A7 /* PLYBrandOwner.m in Sources */,
 				A76D3F68198650770032FE59 /* PLYFormValidator.m in Sources */,
-				C92A6284198A7D0F00997DDC /* GenericAccount.m in Sources */,
 				A7CD959319FA821E008E3A41 /* PLYOpineComposeViewController.m in Sources */,
 				C98CD26B1910E0D70035647C /* PLYListItem.m in Sources */,
 				A7EE55A31A121C8300DD55FE /* PLYCategoryPickerViewController.m in Sources */,
@@ -2202,10 +2172,8 @@
 				A7EA071D1A2B139C00B61CCE /* PLYUserAvatar.m in Sources */,
 				A7EA07091A2B139C00B61CCE /* PLYErrorMessage.m in Sources */,
 				A7EA071F1A2B139C00B61CCE /* PLYProductCategory.m in Sources */,
-				A7EA07321A2B1E5100B61CCE /* AccountManager.m in Sources */,
 				A7EA07071A2B139C00B61CCE /* PLYEntity.m in Sources */,
 				A7EA072C1A2B176D00B61CCE /* PLYServer.m in Sources */,
-				A7EA07331A2B1E5300B61CCE /* GenericAccount.m in Sources */,
 				A7EA07031A2B139C00B61CCE /* PLYBrand.m in Sources */,
 				A7EA07151A2B139C00B61CCE /* PLYPackaging.m in Sources */,
 				A7EA070D1A2B139C00B61CCE /* PLYImage.m in Sources */,

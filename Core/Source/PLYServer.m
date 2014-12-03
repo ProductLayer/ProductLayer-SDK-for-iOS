@@ -12,7 +12,8 @@
 #import "DTLog.h"
 #import "NSString+DTURLEncoding.h"
 #import "DTBlockFunctions.h"
-#import "AccountManager.h"
+#import "DTKeychain.h"
+#import "DTKeychainGenericPassword.h"
 
 #if TARGET_OS_IPHONE
 #import "UIApplication+DTNetworkActivity.h"
@@ -481,51 +482,56 @@
 
 - (void)_loadState
 {
-    // Load login data from keychain
-    NSArray *accounts = [[AccountManager sharedAccountManager] accountsForService:PLY_SERVICE];
-    
-    if(accounts && [accounts count] == 1)
-	 {
-        GenericAccount *account = [accounts objectAtIndex:0];
-        
-        if (account)
-		  {
-            [self loginWithUser:account.account password:account.password completion:^(id result, NSError *error) {
-					if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == kCFURLErrorNotConnectedToInternet)
-					{
-						// no Internet
-						return;
-					}
+	DTKeychain *keychain = [DTKeychain sharedInstance];
+	NSArray *serviceAccounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:nil] error:NULL];
+	
+	if ([serviceAccounts count]>1)
+	{
+		// There should be only one account for productlayer for security reasons delete all accounts
+		
+		for (DTKeychainItem *item in serviceAccounts)
+		{
+			[keychain removeKeychainItem:item error:NULL];
+		}
+		
+		DTLogError(@"Found %d keychain items for service '%@', where maximum one was expected. Deleted all items.", [serviceAccounts count], PLY_SERVICE);
+		
+		return;
+	}
+	
+	DTKeychainGenericPassword *account = [serviceAccounts firstObject];
+	
+	if (account)
+	{
+		DTLogInfo(@"Logging in user '%@'", account.account);
+		
+		[self loginWithUser:account.account password:account.password completion:^(id result, NSError *error) {
+			if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == kCFURLErrorNotConnectedToInternet)
+			{
+				// no Internet
+				return;
+			}
+			
+			if (error)
+			{
+				DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+					NSDictionary *userInfo = @{@"Error": error};
+					[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerLoginErrorNotification
+																						 object:self
+																					  userInfo:userInfo];
 					
-					if (error)
-					{
-						DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-							NSDictionary *userInfo = @{@"Error": error};
-							[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerLoginErrorNotification
-																								 object:self
-																							  userInfo:userInfo];
-
-							// Delete account from the keychain if login failed.
-							[[AccountManager sharedAccountManager] deleteGenericAccount:account];
-						});
-					}
-					else
-					{
-						DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-							[self setLoggedInUser:result];
-						});
-					}
-            }];
-        }
-    }
-	 else if(accounts && [accounts count] > 1)
-	 {
-        // There should be only one account for productlayer for security reasons delete all accounts
-        for (GenericAccount *account in accounts)
-		  {
-            [[AccountManager sharedAccountManager] deleteGenericAccount:account];
-        }
-    }
+					// Delete account from the keychain if login failed.
+					[keychain removeKeychainItem:account error:NULL];
+				});
+			}
+			else
+			{
+				DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+					[self setLoggedInUser:result];
+				});
+			}
+		}];
+	}
 }
 
 - (void)renewSessionIfNecessary
@@ -705,18 +711,24 @@
 		if (!error && [result isKindOfClass:PLYUser.class])
 		{
 			[self setLoggedInUser:result];
-            
-            // Search for account in keychain.
-            GenericAccount *account = [[AccountManager sharedAccountManager] loadGenericAccountForService:PLY_SERVICE forAccount:user];
-            
-            if(!account) {
-                // Create new account if no existing account have been found.
-                account = [[AccountManager sharedAccountManager] createGenericAccountForService:PLY_SERVICE forAccount:user];
-            }
-            [account setPassword:password];
-            
-            // Save account into keychain
-            [[AccountManager sharedAccountManager] saveGenericAccount:account];
+			
+			// Search for account in keychain.
+			DTKeychain *keychain = [DTKeychain sharedInstance];
+			DTKeychainGenericPassword *serviceAccount = [[keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:user] error:NULL] lastObject];
+			
+			// create new account
+			if (!serviceAccount)
+			{
+				serviceAccount = [DTKeychainGenericPassword new];
+				serviceAccount.service = PLY_SERVICE;
+				serviceAccount.account = user;
+			}
+			
+			// always update password
+			serviceAccount.password = password;
+			
+			// persist
+			[keychain writeKeychainItem:serviceAccount error:NULL];
 		}
 		
 		if (wrappedCompletion)
@@ -745,9 +757,12 @@
 	NSParameterAssert(completion);
     
     // Remove account from keychain.
-    if(_loggedInUser)
+    if (_loggedInUser)
     {
-        [[AccountManager sharedAccountManager] deleteGenericAccount:_loggedInUser.nickname andService:PLY_SERVICE];
+		 DTKeychain *keychain = [DTKeychain sharedInstance];
+		 
+		 NSArray *accounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:_loggedInUser.nickname] error:NULL];
+		 [keychain removeKeychainItems:accounts error:NULL];
     }
 	
 	NSString *path = [self _functionPathForFunction:@"logout"];

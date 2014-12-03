@@ -106,7 +106,7 @@
 	
 	if (_firstName)
 	{
-		dict[@"pl-usr-fname"] = _nickname;
+		dict[@"pl-usr-fname"] = _firstName;
 	}
 	
 	if (_lastName)
