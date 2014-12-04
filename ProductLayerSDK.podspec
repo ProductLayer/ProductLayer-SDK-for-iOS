@@ -16,6 +16,7 @@ Pod::Spec.new do |spec|
     ss.osx.deployment_target = '10.7'
     ss.dependency 'DTFoundation/Core', '~>1.7.4'
     ss.dependency 'DTKeychain', '~>1.0.0'
+    ss.dependency 'ProductLayerSDK/PLYEntities'
     ss.source_files = 'Core/Source/*.{h,m}'
   end
 
