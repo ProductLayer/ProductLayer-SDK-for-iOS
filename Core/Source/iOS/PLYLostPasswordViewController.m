@@ -7,6 +7,7 @@
 //
 
 #import "PLYLostPasswordViewController.h"
+#import "UIViewController+ProductLayer.h"
 
 #import "ProductLayer.h"
 

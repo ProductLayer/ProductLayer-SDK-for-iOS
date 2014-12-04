@@ -7,6 +7,8 @@
 //
 
 #import "PLYSignUpViewController.h"
+#import "UIViewController+ProductLayer.h"
+
 #import "ProductLayer.h"
 
 #import "DTBlockFunctions.h"

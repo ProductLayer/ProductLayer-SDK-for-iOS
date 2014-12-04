@@ -7,6 +7,8 @@
 //
 
 #import "PLYOpineComposeViewController.h"
+#import "UIViewController+ProductLayer.h"
+
 #import "ProductLayer.h"
 
 @interface PLYOpineComposeViewController () <UITextViewDelegate>

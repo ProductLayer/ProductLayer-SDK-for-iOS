@@ -7,6 +7,8 @@
 //
 
 #import "PLYCategoryPickerViewController.h"
+#import "UIViewController+ProductLayer.h"
+
 #import "ProductLayer.h"
 
 #import "DTLog.h"

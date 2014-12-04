@@ -9,6 +9,7 @@
 #import "PLYLoginViewController.h"
 #import "PLYSignUpViewController.h"
 #import "PLYLostPasswordViewController.h"
+#import "UIViewController+ProductLayer.h"
 
 #import "ProductLayer.h"
 

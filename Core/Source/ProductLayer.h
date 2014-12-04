@@ -36,7 +36,6 @@
 #if TARGET_OS_IPHONE
 
 	// iOS User Interface
-	#import "UIViewController+ProductLayer.h"
 	#import "PLYLoginViewController.h"
 	#import "PLYTextField.h"
 	#import "PLYTextView.h"
