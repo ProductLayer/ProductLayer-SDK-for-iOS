@@ -4,3 +4,6 @@
 [submodule "Externals/DTDownload"]
 	path = Externals/DTDownload
 	url = https://github.com/Cocoanetics/DTDownload.git
+[submodule "Externals/DTKeychain"]
+	path = Externals/DTKeychain
+	url = https://github.com/Cocoanetics/DTKeychain.git
