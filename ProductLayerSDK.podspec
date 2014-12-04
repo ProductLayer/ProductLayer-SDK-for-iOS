@@ -1,5 +1,5 @@
 Pod::Spec.new do |spec|
-  spec.name         = 'ProductLayer SDK'
+  spec.name         = 'ProductLayerSDK'
   spec.version      = '0.3.0'
   spec.summary      = "The ultimate product information API, enabling a new breed of product-centric apps."
   spec.homepage     = "https://github.com/ProductLayer/ProductLayer-SDK-for-iOS"
@@ -25,9 +25,9 @@ Pod::Spec.new do |spec|
 
   spec.subspec 'iOS' do |ss|
     ss.platform = :ios, '8.0'
-    ss.dependency 'AVFoundation'
 	ss.dependency 'ProductLayerSDK/Core'
     ss.ios.source_files = 'Core/Source/iOS/*.{h,m}'
+    ss.ios.frameworks = 'AVFoundation'
   end
 
 end

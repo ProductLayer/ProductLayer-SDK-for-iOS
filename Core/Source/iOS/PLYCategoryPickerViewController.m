@@ -7,11 +7,10 @@
 //
 
 #import "PLYCategoryPickerViewController.h"
-#import "PLYServer.h"
+#import "ProductLayer.h"
+
 #import "DTLog.h"
 #import "NSString+DTPaths.h"
-
-#import <ProductLayer/ProductLayer.h>
 
 #define CELL_IDENTIFIER @"Identifier"
 
