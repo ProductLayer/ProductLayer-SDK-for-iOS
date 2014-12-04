@@ -15,11 +15,12 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 
 // String Constants
 
-@class PLYUser;
+@class PLYImage;
 @class PLYList;
 @class PLYListItem;
-@class PLYReview;
 @class PLYOpine;
+@class PLYReview;
+@class PLYUser;
 @class PLYVotableEntity;
 
 /**
@@ -264,6 +265,16 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 - (void)uploadImageData:(DTImage *)data
                 forGTIN:(NSString *)gtin
              completion:(PLYCompletion)completion;
+
+/**
+ Determins the image URL for the given image with a maximum size and optional crop
+ @param image The image to retrieve the URL for
+ @param maxWidth The maximum width of the image
+ @param maxHeight The maximum height of the image
+ @param crop If the image should be cropped
+ @returns The URL for the image
+ */
+- (NSURL *)URLForImage:(PLYImage *)image maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop;
 
 /**
  @name Opines

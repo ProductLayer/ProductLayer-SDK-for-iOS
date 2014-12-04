@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A7D2A0A819224754003C256C"
-               BuildableName = "Documentation"
-               BlueprintName = "Documentation"
-               ReferencedContainer = "container:PL.xcodeproj">
+               BlueprintIdentifier = "A7B21720183F8A3800C38635"
+               BuildableName = "libProductLayer.a"
+               BlueprintName = "Static Library"
+               ReferencedContainer = "container:ProductLayerSDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -42,10 +42,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A7D2A0A819224754003C256C"
-            BuildableName = "Documentation"
-            BlueprintName = "Documentation"
-            ReferencedContainer = "container:PL.xcodeproj">
+            BlueprintIdentifier = "A7B21720183F8A3800C38635"
+            BuildableName = "libProductLayer.a"
+            BlueprintName = "Static Library"
+            ReferencedContainer = "container:ProductLayerSDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>

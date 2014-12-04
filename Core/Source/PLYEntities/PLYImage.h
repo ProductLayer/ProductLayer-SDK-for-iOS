@@ -50,10 +50,4 @@
 @property (nonatomic, copy) NSString *GTIN;
 
 
-/**
- @name Working with Images
- */
-
-- (NSString *)getUrlForWidth:(CGFloat)maxWidth andHeight:(CGFloat)maxHeight crop:(BOOL)crop;
-
 @end

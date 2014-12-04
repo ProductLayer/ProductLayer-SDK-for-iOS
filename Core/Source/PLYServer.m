@@ -951,6 +951,35 @@
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:data completion:completion];
 }
 
+- (NSURL *)URLForImage:(PLYImage *)image maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop;{
+	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:3];
+	
+	if (maxWidth>0)
+	{
+		[parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxWidth] forKey:@"max_width"];
+	}
+	
+	if (maxHeight>0)
+	{
+		[parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxHeight] forKey:@"max_height"];
+	}
+	
+	if (crop)
+	{
+		[parameters setObject:@"true" forKey:@"crop"];
+	}
+	
+	if (image.imageURL)
+	{
+		NSString *urlString = [image.imageURL absoluteString];
+		NSString *path = [PLYServer _addQueryParameterToUrl:urlString parameters:parameters];
+		
+		return [NSURL URLWithString:path];
+	}
+	
+	return nil;
+}
+
 #pragma mark - Opines
 
 - (void) performSearchForOpineWithGTIN:(NSString *)gtin

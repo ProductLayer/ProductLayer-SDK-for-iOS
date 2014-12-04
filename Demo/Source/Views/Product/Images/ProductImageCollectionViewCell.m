@@ -16,6 +16,7 @@
 #import "NSString+DTPaths.h"
 
 #import "DTImageCache.h"
+#import "ProductLayer.h"
 
 @implementation ProductImageCollectionViewCell
 {
@@ -36,10 +37,8 @@
 }
 
 - (void) loadImageForMetadata:(PLYImage *)_metadata withSize:(CGSize)_size crop:(BOOL)_crop{
-    NSString *imageURLString = [_metadata getUrlForWidth:_size.width andHeight:_size.height crop:_crop];
-    
-    NSURL *imageURL = [NSURL URLWithString:imageURLString];
-    
+	NSURL *imageURL = [[PLYServer sharedServer] URLForImage:_metadata maxWidth:_size.width maxHeight:_size.height crop:_crop];
+	
     if ([_imageURL isEqualToURL:imageURL])
 	{
 		return;

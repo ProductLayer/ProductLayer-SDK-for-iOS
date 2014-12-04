@@ -79,9 +79,10 @@
     }
     
     CGSize imageSize = CGSizeMake(_imageView.frame.size.width*[[UIScreen mainScreen] scale], _imageView.frame.size.height*[[UIScreen mainScreen] scale]);
-    NSURL *imageUrl = [NSURL URLWithString:[metadata getUrlForWidth:imageSize.width andHeight:imageSize.height crop:false]];
-    
-	NSString *imageIdentifier = [imageUrl lastPathComponent];
+
+	NSURL *imageURL = [[PLYServer sharedServer] URLForImage:metadata maxWidth:imageSize.width maxHeight:imageSize.height crop:NO];
+	
+	NSString *imageIdentifier = [imageURL lastPathComponent];
 	
 	// check if we have a thumbnail
 	
@@ -99,7 +100,7 @@
 	}
 	
 	// need to load it
-	image = [[DTDownloadCache sharedInstance] cachedImageForURL:imageUrl option:DTDownloadCacheOptionLoadIfNotCached completion:^(NSURL *URL, UIImage *image, NSError *error) {
+	image = [[DTDownloadCache sharedInstance] cachedImageForURL:imageURL option:DTDownloadCacheOptionLoadIfNotCached completion:^(NSURL *URL, UIImage *image, NSError *error) {
 		
 		if (error)
 		{

@@ -17,7 +17,7 @@
                BlueprintIdentifier = "A7B214F5183F842000C38635"
                BuildableName = "PL.app"
                BlueprintName = "Demo App"
-               ReferencedContainer = "container:PL.xcodeproj">
+               ReferencedContainer = "container:ProductLayerSDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "A7B21516183F842000C38635"
                BuildableName = "PLTests.xctest"
                BlueprintName = "PLTests"
-               ReferencedContainer = "container:PL.xcodeproj">
+               ReferencedContainer = "container:ProductLayerSDK.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -45,7 +45,7 @@
                BlueprintIdentifier = "A7B2172D183F8A3800C38635"
                BuildableName = "ProductLayerTests.xctest"
                BlueprintName = "ProductLayerTests"
-               ReferencedContainer = "container:PL.xcodeproj">
+               ReferencedContainer = "container:ProductLayerSDK.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -55,7 +55,7 @@
                BlueprintIdentifier = "A7B4426A183F92B800E8A170"
                BuildableName = "PL1Tests.xctest"
                BlueprintName = "PL1Tests"
-               ReferencedContainer = "container:PL.xcodeproj">
+               ReferencedContainer = "container:ProductLayerSDK.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -65,7 +65,7 @@
             BlueprintIdentifier = "A7B214F5183F842000C38635"
             BuildableName = "PL.app"
             BlueprintName = "Demo App"
-            ReferencedContainer = "container:PL.xcodeproj">
+            ReferencedContainer = "container:ProductLayerSDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -84,7 +84,7 @@
             BlueprintIdentifier = "A7B214F5183F842000C38635"
             BuildableName = "PL.app"
             BlueprintName = "Demo App"
-            ReferencedContainer = "container:PL.xcodeproj">
+            ReferencedContainer = "container:ProductLayerSDK.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -112,7 +112,7 @@
             BlueprintIdentifier = "A7B214F5183F842000C38635"
             BuildableName = "PL.app"
             BlueprintName = "Demo App"
-            ReferencedContainer = "container:PL.xcodeproj">
+            ReferencedContainer = "container:ProductLayerSDK.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

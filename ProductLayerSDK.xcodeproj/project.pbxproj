@@ -721,7 +721,7 @@
 		A776659D1A1B547B008AB88C /* PLYNonEmptyValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYNonEmptyValidator.m; sourceTree = "<group>"; };
 		A7A38CD01A2B4FFD005D8395 /* PLYFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYFunctions.h; sourceTree = "<group>"; };
 		A7A38CD11A2B4FFD005D8395 /* PLYFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYFunctions.m; sourceTree = "<group>"; };
-		A7B214F6183F842000C38635 /* PL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PL.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7B214F6183F842000C38635 /* ProductLayerSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductLayerSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7B214F9183F842000C38635 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A7B214FB183F842000C38635 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A7B214FD183F842000C38635 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -735,8 +735,8 @@
 		A7B44246183F91E700E8A170 /* PLYServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLYServer.h; sourceTree = "<group>"; };
 		A7B44247183F91E700E8A170 /* PLYServer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLYServer.m; sourceTree = "<group>"; };
 		A7B44248183F91E700E8A170 /* ProductLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductLayer.h; sourceTree = "<group>"; };
-		A7B44249183F921200E8A170 /* PL-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "PL-Info.plist"; path = "../PL-Info.plist"; sourceTree = "<group>"; };
-		A7B4424A183F921200E8A170 /* PL-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PL-Prefix.pch"; sourceTree = "<group>"; };
+		A7B44249183F921200E8A170 /* ProductLayerSDK-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ProductLayerSDK-Info.plist"; path = "../ProductLayerSDK-Info.plist"; sourceTree = "<group>"; };
+		A7B4424A183F921200E8A170 /* ProductLayerSDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ProductLayerSDK-Prefix.pch"; sourceTree = "<group>"; };
 		A7B44281183F92D600E8A170 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		A7B44282183F92D600E8A170 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A7B4428D183F939F00E8A170 /* ProductLayer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ProductLayer-Prefix.pch"; sourceTree = "<group>"; };
@@ -1094,7 +1094,7 @@
 		A7B214F7183F842000C38635 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A7B214F6183F842000C38635 /* PL.app */,
+				A7B214F6183F842000C38635 /* ProductLayerSDK.app */,
 				A7B21721183F8A3800C38635 /* libProductLayer.a */,
 				A76A570C1986937D00751454 /* ProductLayer.bundle */,
 				A7590ADA19ED77710084EBCA /* ProductLayer.framework */,
@@ -1167,7 +1167,7 @@
 		A7B44234183F91E700E8A170 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
-				A7B4424A183F921200E8A170 /* PL-Prefix.pch */,
+				A7B4424A183F921200E8A170 /* ProductLayerSDK-Prefix.pch */,
 				A7B44237183F91E700E8A170 /* Resources */,
 				A7B4423B183F91E700E8A170 /* Source */,
 			);
@@ -1186,7 +1186,7 @@
 				C9ADBE03191A208D004C81B3 /* star_full.png */,
 				C9ADBE04191A208D004C81B3 /* star_full@2x.png */,
 				C98CD25A190FA86B0035647C /* no_image.png */,
-				A7B44249183F921200E8A170 /* PL-Info.plist */,
+				A7B44249183F921200E8A170 /* ProductLayerSDK-Info.plist */,
 				C98CD25B190FA86B0035647C /* no_image@2x.png */,
 				C9BDC06A1908059D0062BB56 /* menu */,
 				C9BDC0661907C48B0062BB56 /* menu.png */,
@@ -1687,7 +1687,7 @@
 			);
 			name = "Demo App";
 			productName = PL;
-			productReference = A7B214F6183F842000C38635 /* PL.app */;
+			productReference = A7B214F6183F842000C38635 /* ProductLayerSDK.app */;
 			productType = "com.apple.product-type.application";
 		};
 		A7B21720183F8A3800C38635 /* Static Library */ = {
@@ -1752,7 +1752,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A7B214F1183F842000C38635 /* Build configuration list for PBXProject "PL" */;
+			buildConfigurationList = A7B214F1183F842000C38635 /* Build configuration list for PBXProject "ProductLayerSDK" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -2614,12 +2614,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Demo/PL-Prefix.pch";
-				INFOPLIST_FILE = "Demo/PL-Info.plist";
+				GCC_PREFIX_HEADER = "Demo/ProductLayerSDK-Prefix.pch";
+				INFOPLIST_FILE = "Demo/ProductLayerSDK-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = PL;
+				PRODUCT_NAME = ProductLayerSDK;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
@@ -2635,12 +2635,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Demo/PL-Prefix.pch";
-				INFOPLIST_FILE = "Demo/PL-Info.plist";
+				GCC_PREFIX_HEADER = "Demo/ProductLayerSDK-Prefix.pch";
+				INFOPLIST_FILE = "Demo/ProductLayerSDK-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = PL;
+				PRODUCT_NAME = ProductLayerSDK;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
@@ -2844,12 +2844,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Demo/PL-Prefix.pch";
-				INFOPLIST_FILE = "Demo/PL-Info.plist";
+				GCC_PREFIX_HEADER = "Demo/ProductLayerSDK-Prefix.pch";
+				INFOPLIST_FILE = "Demo/ProductLayerSDK-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = PL;
+				PRODUCT_NAME = ProductLayerSDK;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
@@ -2893,7 +2893,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A7B214F1183F842000C38635 /* Build configuration list for PBXProject "PL" */ = {
+		A7B214F1183F842000C38635 /* Build configuration list for PBXProject "ProductLayerSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A7B21526183F842000C38635 /* Debug */,

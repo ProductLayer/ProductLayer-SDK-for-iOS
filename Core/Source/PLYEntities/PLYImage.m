@@ -6,14 +6,8 @@
 //  Copyright (c) 2014 productlayer. All rights reserved.
 //
 
-#import "PLYServer.h"
-
 #import "PLYImage.h"
 #import "PLYUser.h"
-
-@interface PLYServer (private)
-+(NSString *)_addQueryParameterToUrl:(NSString *)url parameters:(NSDictionary *)parameters;
-@end
 
 @implementation PLYImage
 
@@ -90,35 +84,6 @@
 	
 	// return immutable
 	return [dict copy];
-}
-
-- (NSString *)getUrlForWidth:(CGFloat)maxWidth andHeight:(CGFloat)maxHeight crop:(BOOL)crop
-{
-	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:3];
-	
-	if (maxWidth>0)
-	{
-		[parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxWidth] forKey:@"max_width"];
-	}
-	
-	if (maxHeight>0)
-	{
-		[parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxHeight] forKey:@"max_height"];
-	}
-	
-	if (crop)
-	{
-		[parameters setObject:@"true" forKey:@"crop"];
-	}
-	
-	if (_imageURL)
-	{
-		NSString *urlString = [_imageURL absoluteString];
-		NSString *path = [PLYServer _addQueryParameterToUrl:urlString parameters:parameters];
-		return path;
-	}
-	
-	return nil;
 }
 
 @end
