@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
     ss.dependency 'DTKeychain', '~>1.0.0'
     ss.dependency 'ProductLayerSDK/PLYEntities'
     ss.source_files = 'Core/Source/*.{h,m}'
-  	ss.resource_bundles = { 'ProductLayer' => ['Core/Resources/*.*'] }
+  	ss.resource_bundles = { 'ProductLayer' => ['Core/Resources/*.strings', 'Core/Resources/*.png', 'Core/Resources/*.xib] }
   end
 
   spec.subspec 'PLYEntities' do |ss|
@@ -28,6 +28,7 @@ Pod::Spec.new do |spec|
     ss.source_files = 'Core/Source/iOS/*.{h,m}'
 	ss.frameworks = 'AVFoundation'
     ss.ios.dependency 'ProductLayerSDK/Core'
+    ss.ios.dependency 'DTFoundation/UIKit_BlocksAdditions'
   end
 
 end
