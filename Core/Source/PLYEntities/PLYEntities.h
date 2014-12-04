@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Cocoanetics. All rights reserved.
 //
 
+// Collection of headers for PLYEntity subclasses
+
 #import "PLYBrand.h"
 #import "PLYBrandOwner.h"
 #import "PLYImage.h"
