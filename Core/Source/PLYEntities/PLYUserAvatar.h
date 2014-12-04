@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Cocoanetics. All rights reserved.
 //
 
-#import <ProductLayer/ProductLayer.h>
+#import "PLYImage.h"
 
 /**
  PLYEntity object for metadata related to a users custom avatar image.
