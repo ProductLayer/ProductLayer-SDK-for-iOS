@@ -21,7 +21,7 @@ Pod::Spec.new do |spec|
   end
 
   spec.subspec 'PLYEntities' do |ss|
-    ss.source_files = 'Core/Source/PLYEntites/*.{h,m}'
+    ss.source_files = 'Core/Source/PLYEntities/*.{h,m}'
   end
 
   spec.subspec 'iOS' do |ss|

@@ -35,9 +35,6 @@
 
 #if TARGET_OS_IPHONE
 
-	// Utility Functions
-	#import "PLYAVFoundationFunctions.h"
-
 	// iOS User Interface
 	#import "UIViewController+ProductLayer.h"
 	#import "PLYLoginViewController.h"
