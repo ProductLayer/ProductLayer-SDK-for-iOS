@@ -130,6 +130,8 @@
 		A75CF75A1A30B4BD007E30FC /* PLYUserAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = A75CF74D1A30B4BD007E30FC /* PLYUserAvatar.m */; };
 		A75CF75B1A30B4BD007E30FC /* PLYUserAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = A75CF74D1A30B4BD007E30FC /* PLYUserAvatar.m */; };
 		A75CF75C1A30B4BD007E30FC /* PLYUserAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = A75CF74D1A30B4BD007E30FC /* PLYUserAvatar.m */; };
+		A75CF7811A30DF4E007E30FC /* PLYEntities.h in Headers */ = {isa = PBXBuildFile; fileRef = A75CF7801A30DF4E007E30FC /* PLYEntities.h */; };
+		A75CF7821A30DF4E007E30FC /* PLYEntities.h in Headers */ = {isa = PBXBuildFile; fileRef = A75CF7801A30DF4E007E30FC /* PLYEntities.h */; };
 		A76478991A18A8830000500C /* PLYSearchableTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76478971A18A8830000500C /* PLYSearchableTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A764789A1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76478981A18A8830000500C /* PLYSearchableTableViewController.m */; };
 		A764789B1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76478981A18A8830000500C /* PLYSearchableTableViewController.m */; };
@@ -688,6 +690,7 @@
 		A75CF74B1A30B4BD007E30FC /* PLYBrandOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYBrandOwner.m; path = PLYEntities/PLYBrandOwner.m; sourceTree = "<group>"; };
 		A75CF74C1A30B4BD007E30FC /* PLYUserAvatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYUserAvatar.h; path = PLYEntities/PLYUserAvatar.h; sourceTree = "<group>"; };
 		A75CF74D1A30B4BD007E30FC /* PLYUserAvatar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYUserAvatar.m; path = PLYEntities/PLYUserAvatar.m; sourceTree = "<group>"; };
+		A75CF7801A30DF4E007E30FC /* PLYEntities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYEntities.h; path = PLYEntities/PLYEntities.h; sourceTree = "<group>"; };
 		A76478941A18A80A0000500C /* PLYBrandOwnerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYBrandOwnerViewController.h; sourceTree = "<group>"; };
 		A76478951A18A80A0000500C /* PLYBrandOwnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYBrandOwnerViewController.m; sourceTree = "<group>"; };
 		A76478971A18A8830000500C /* PLYSearchableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYSearchableTableViewController.h; sourceTree = "<group>"; };
@@ -1513,6 +1516,7 @@
 		C9D31F45190A705200C91A08 /* PLYEntities */ = {
 			isa = PBXGroup;
 			children = (
+				A75CF7801A30DF4E007E30FC /* PLYEntities.h */,
 				A75CF7481A30B4BD007E30FC /* PLYBrand.h */,
 				A75CF7491A30B4BD007E30FC /* PLYBrand.m */,
 				A75CF74A1A30B4BD007E30FC /* PLYBrandOwner.h */,
@@ -1593,6 +1597,7 @@
 				A73803341A28E91800011D9C /* PLYTextView.h in Headers */,
 				A7590B1D19ED77B80084EBCA /* PLYPackaging.h in Headers */,
 				A7590B0119ED77B40084EBCA /* PLYLostPasswordViewController.h in Headers */,
+				A75CF7811A30DF4E007E30FC /* PLYEntities.h in Headers */,
 				A7CD959219FA821E008E3A41 /* PLYOpineComposeViewController.h in Headers */,
 				A7590B0319ED77B40084EBCA /* PLYSignUpViewController.h in Headers */,
 				A701C4FA1A1F55580013CB8D /* PLYBrandPickerViewController.h in Headers */,
@@ -1613,6 +1618,7 @@
 				A7EA07141A2B139C00B61CCE /* PLYPackaging.h in Headers */,
 				A7EA07161A2B139C00B61CCE /* PLYProduct.h in Headers */,
 				A7EA07121A2B139C00B61CCE /* PLYOpine.h in Headers */,
+				A75CF7821A30DF4E007E30FC /* PLYEntities.h in Headers */,
 				A7EA07011A2B12E900B61CCE /* ProductLayer.h in Headers */,
 				A7EA071A1A2B139C00B61CCE /* PLYUser.h in Headers */,
 				A7EA07061A2B139C00B61CCE /* PLYEntity.h in Headers */,
