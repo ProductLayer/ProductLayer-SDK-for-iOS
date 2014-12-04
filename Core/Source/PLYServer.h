@@ -8,8 +8,8 @@
 
 #import "PLYCompatibility.h"
 
-/*
- Completion handler for Discogs API calls
+/**
+ Completion handler for ProductLayer API calls
  */
 typedef void (^PLYCompletion)(id result, NSError *error);
 
@@ -337,14 +337,43 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 /**
  @name Lists
  */
+
+/**
+ Creates a new product list for the logged in user
+ @param list The list to create
+ @param completion The completion handler for the request
+ */
 - (void)createProductList:(PLYList *)list completion:(PLYCompletion)completion;
 
+/**
+ Finds a user's lists
+ @param user The user for which to search the list for
+ @param listType The list type to search for
+ @param page The page number to retrieve of the search results
+ @param rpp The records per page to retrieve
+ @param completion The completion handler for the request
+ */
 - (void)performSearchForProductListFromUser:(PLYUser *)user andListType:(NSString *)listType page:(NSNumber *)page recordsPerPage:(NSNumber *)rpp completion:(PLYCompletion)completion;
 
+/**
+ Retrieves a product list by ID
+ @param listId The identifier of the list to retrieve
+ @param completion The completion handler for the request
+ */
 - (void)getProductListWithId:(NSString *)listId completion:(PLYCompletion)completion;
 
+/**
+ Updates a product list for the logged in user
+ @param list The list to create
+ @param completion The completion handler for the request
+ */
 - (void)updateProductList:(PLYList *)list completion:(PLYCompletion)completion;
 
+/**
+ Deletes a product list by ID
+ @param listId The identifier of the list to retrieve
+ @param completion The completion handler for the request
+ */
 - (void)deleteProductListWithId:(NSString *)listId completion:(PLYCompletion)completion;
 
 /**
@@ -366,23 +395,71 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 /**
  @name List sharing
  */
+
+/**
+ Shares a product list with another user
+ @param listId The identifier of the list to share
+ @param userId The identifier of the user to give access to the list
+ @param completion The completion handler for the request
+ */
 - (void)shareProductListWithId:(NSString *)listId withUserId:(NSString *)userId completion:(PLYCompletion)completion;
 
+/**
+ Removes list access from another user
+ @param listId The identifier of the list to share
+ @param userId The identifier of the user to give access to the list
+ @param completion The completion handler for the request
+ */
 - (void)unshareProductListWithId:(NSString *)listId withUserId:(NSString *)userId completion:(PLYCompletion)completion;
 
 /*
  @name Managing User Relationships
  */
+
+/**
+ Search for a user by name
+ @param searchText The text to search for
+ @param completion The completion handler for the request
+ */
 - (void)performUserSearch:(NSString *)searchText completion:(PLYCompletion)completion;
 
+/**
+ Retrieves a user by nickname
+ @param nickname The nickname to search for
+ @param completion The completion handler for the request
+ */
 - (void)getUserByNickname:(NSString *)nickname completion:(PLYCompletion)completion;
 
+/**
+ Retrieves a user's followers
+ @param nickname The nickname to search for
+ @param page The page number to retrieve of the search results
+ @param rpp The records per page to retrieve
+ @param completion The completion handler for the request
+ */
 - (void)getFollowerFromUser:(NSString *)nickname page:(NSNumber *)page recordsPerPage:(NSNumber *)rpp completion:(PLYCompletion)completion;
 
+/**
+ Retrieves the friends a user is following
+ @param nickname The nickname to search for
+ @param page The page number to retrieve of the search results
+ @param rpp The records per page to retrieve
+ @param completion The completion handler for the request
+ */
 - (void)getFollowingFromUser:(NSString *)nickname page:(NSNumber *)page recordsPerPage:(NSNumber *)rpp completion:(PLYCompletion)completion;
 
+/**
+ Follows a user by nickname
+ @param nickname The nickname of the user to follow
+ @param completion The completion handler for the request
+ */
 - (void)followUserWithNickname:(NSString *)nickname completion:(PLYCompletion)completion;
 
+/**
+ Unfollows a user by nickname
+ @param nickname The nickname of the user to unfollow
+ @param completion The completion handler for the request
+ */
 - (void)unfollowUserWithNickname:(NSString *)nickname completion:(PLYCompletion)completion;
 
 /**
