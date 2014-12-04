@@ -130,8 +130,8 @@
 		A75CF75A1A30B4BD007E30FC /* PLYUserAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = A75CF74D1A30B4BD007E30FC /* PLYUserAvatar.m */; };
 		A75CF75B1A30B4BD007E30FC /* PLYUserAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = A75CF74D1A30B4BD007E30FC /* PLYUserAvatar.m */; };
 		A75CF75C1A30B4BD007E30FC /* PLYUserAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = A75CF74D1A30B4BD007E30FC /* PLYUserAvatar.m */; };
-		A75CF7811A30DF4E007E30FC /* PLYEntities.h in Headers */ = {isa = PBXBuildFile; fileRef = A75CF7801A30DF4E007E30FC /* PLYEntities.h */; };
-		A75CF7821A30DF4E007E30FC /* PLYEntities.h in Headers */ = {isa = PBXBuildFile; fileRef = A75CF7801A30DF4E007E30FC /* PLYEntities.h */; };
+		A75CF7811A30DF4E007E30FC /* PLYEntities.h in Headers */ = {isa = PBXBuildFile; fileRef = A75CF7801A30DF4E007E30FC /* PLYEntities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A75CF7821A30DF4E007E30FC /* PLYEntities.h in Headers */ = {isa = PBXBuildFile; fileRef = A75CF7801A30DF4E007E30FC /* PLYEntities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A76478991A18A8830000500C /* PLYSearchableTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76478971A18A8830000500C /* PLYSearchableTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A764789A1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76478981A18A8830000500C /* PLYSearchableTableViewController.m */; };
 		A764789B1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76478981A18A8830000500C /* PLYSearchableTableViewController.m */; };

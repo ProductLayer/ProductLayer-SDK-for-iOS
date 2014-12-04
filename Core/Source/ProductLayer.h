@@ -22,6 +22,9 @@
 
 #if TARGET_OS_IPHONE
 
+	#import "PLYAVFoundationFunctions.h"
+	#import "UIViewController+ProductLayer.h"
+
 	// iOS User Interface
 	#import "PLYLoginViewController.h"
 	#import "PLYTextField.h"

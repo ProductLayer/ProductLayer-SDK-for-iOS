@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 ProductLayer. All rights reserved.
 //
 
-#import "ProductLayer.h"
+#import <AVFoundation/AVFoundation.h>
 
 // helper function to convert interface orienation to correct video capture orientation
 AVCaptureVideoOrientation
