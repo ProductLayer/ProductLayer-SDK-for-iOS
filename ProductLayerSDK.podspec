@@ -5,7 +5,7 @@ Pod::Spec.new do |spec|
   spec.homepage     = "https://github.com/ProductLayer/ProductLayer-SDK-for-iOS"
   spec.author       = { "Oliver Drobnik" => "oliver@ProductLayer.com" }
   spec.social_media_url = 'https://twitter.com/ProductLayer'
-  spec.source       = { :git => "https://github.com/ProductLayer/ProductLayer-SDK-for-iOS.git", :tag => spec.version.to_s }
+  spec.source       = { :git => "https://github.com/ProductLayer/ProductLayer-SDK-for-iOS.git" }
   spec.ios.deployment_target = '8.0'
   spec.osx.deployment_target = '10.7'
   spec.license      = 'BSD'
