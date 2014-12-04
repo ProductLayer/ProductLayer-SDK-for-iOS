@@ -92,7 +92,7 @@
 
 - (void) updateCell{
     _listNoteLabel.text = _listItem.note;
-    _qtyLabel.text = [NSString stringWithFormat:@"%ld", _listItem.quantity];
+    _qtyLabel.text = [NSString stringWithFormat:@"%ld", (unsigned long)_listItem.quantity];
     
     if(_product){
         _productNameLabel.text = _product.name;

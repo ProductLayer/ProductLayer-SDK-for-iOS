@@ -97,14 +97,14 @@
     
     // Set follower count
     if(_user.followerCount) {
-        [_followerCountLabel setText:[NSString stringWithFormat:@"%ld", _user.followerCount]];
+        [_followerCountLabel setText:[NSString stringWithFormat:@"%ld", (unsigned long)_user.followerCount]];
     } else {
         [_followerCountLabel setText:@"0"];
     }
     
     // Set following count
     if(_user.followingCount) {
-		 [_followingCountLabel setText:[NSString stringWithFormat:@"%ld", _user.followingCount]];
+		 [_followingCountLabel setText:[NSString stringWithFormat:@"%ld", (unsigned long)_user.followingCount]];
     } else {
         [_followingCountLabel setText:@"0"];
     }

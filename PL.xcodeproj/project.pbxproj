@@ -138,6 +138,7 @@
 		A770B2D51A188FAA001465A7 /* PLYBrand.h in Headers */ = {isa = PBXBuildFile; fileRef = A770B2D31A188FAA001465A7 /* PLYBrand.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A770B2D61A188FAA001465A7 /* PLYBrand.m in Sources */ = {isa = PBXBuildFile; fileRef = A770B2D41A188FAA001465A7 /* PLYBrand.m */; };
 		A770B2D71A188FAA001465A7 /* PLYBrand.m in Sources */ = {isa = PBXBuildFile; fileRef = A770B2D41A188FAA001465A7 /* PLYBrand.m */; };
+		A7730FC61A30790900CCBB7C /* libDTKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7730FBD1A3078D600CCBB7C /* libDTKeychain.a */; };
 		A77665961A1B369A008AB88C /* PLYGuidedInputViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A77665931A1B369A008AB88C /* PLYGuidedInputViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A77665971A1B369A008AB88C /* PLYGuidedInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A77665941A1B369A008AB88C /* PLYGuidedInputViewController.m */; };
 		A77665991A1B369A008AB88C /* PLYGuidedInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A77665941A1B369A008AB88C /* PLYGuidedInputViewController.m */; };
@@ -151,6 +152,9 @@
 		A7A38CD41A2B4FFD005D8395 /* PLYFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A38CD11A2B4FFD005D8395 /* PLYFunctions.m */; };
 		A7A38CD51A2B4FFD005D8395 /* PLYFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A38CD11A2B4FFD005D8395 /* PLYFunctions.m */; };
 		A7A38CD61A2B4FFD005D8395 /* PLYFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A38CD11A2B4FFD005D8395 /* PLYFunctions.m */; };
+		A7ACC99D1A307ABC004EE5BD /* libDTKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7730FBD1A3078D600CCBB7C /* libDTKeychain.a */; };
+		A7ACC9A51A307B57004EE5BD /* libDTKeychain.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A7730FBF1A3078D600CCBB7C /* libDTKeychain.dylib */; };
+		A7ACC9A81A307B86004EE5BD /* libDTKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7730FBD1A3078D600CCBB7C /* libDTKeychain.a */; };
 		A7B214FA183F842000C38635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214F9183F842000C38635 /* Foundation.framework */; };
 		A7B214FC183F842000C38635 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FB183F842000C38635 /* CoreGraphics.framework */; };
 		A7B214FE183F842000C38635 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FD183F842000C38635 /* UIKit.framework */; };
@@ -376,6 +380,69 @@
 			proxyType = 2;
 			remoteGlobalIDString = A78381C31963F8D700AF09D3;
 			remoteInfo = "DTAnimatedGIF Demo";
+		};
+		A7730FBA1A3078D600CCBB7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7730F931A3078D600CCBB7C /* DTKeychain.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A7858ADF1A30321500DAF6D0;
+			remoteInfo = "Demo App";
+		};
+		A7730FBC1A3078D600CCBB7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7730F931A3078D600CCBB7C /* DTKeychain.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A7858B1C1A3033BE00DAF6D0;
+			remoteInfo = "Static Library (iOS)";
+		};
+		A7730FBE1A3078D600CCBB7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7730F931A3078D600CCBB7C /* DTKeychain.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A7858B5D1A3038F100DAF6D0;
+			remoteInfo = "Static Library (OSX)";
+		};
+		A7730FC01A3078D600CCBB7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7730F931A3078D600CCBB7C /* DTKeychain.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A7858AF81A30321600DAF6D0;
+			remoteInfo = "Unit Tests (iOS)";
+		};
+		A7730FC21A3078D600CCBB7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7730F931A3078D600CCBB7C /* DTKeychain.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A7858B671A3038F200DAF6D0;
+			remoteInfo = "Unit Tests (OSX)";
+		};
+		A7730FC41A3078EB00CCBB7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7730F931A3078D600CCBB7C /* DTKeychain.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A7858B1B1A3033BE00DAF6D0;
+			remoteInfo = "Static Library (iOS)";
+		};
+		A7ACC99E1A307AC5004EE5BD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7730F931A3078D600CCBB7C /* DTKeychain.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A7858B1B1A3033BE00DAF6D0;
+			remoteInfo = "Static Library (iOS)";
+		};
+		A7ACC9A01A307ACD004EE5BD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7730F931A3078D600CCBB7C /* DTKeychain.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A7858B5C1A3038F100DAF6D0;
+			remoteInfo = "Static Library (OSX)";
+		};
+		A7ACC9A61A307B80004EE5BD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7730F931A3078D600CCBB7C /* DTKeychain.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A7858B1B1A3033BE00DAF6D0;
+			remoteInfo = "Static Library (iOS)";
 		};
 		A7B4420D183F913000E8A170 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -646,6 +713,7 @@
 		A770B2B31A188F78001465A7 /* PLYBrandOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYBrandOwner.m; sourceTree = "<group>"; };
 		A770B2D31A188FAA001465A7 /* PLYBrand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYBrand.h; sourceTree = "<group>"; };
 		A770B2D41A188FAA001465A7 /* PLYBrand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYBrand.m; sourceTree = "<group>"; };
+		A7730F931A3078D600CCBB7C /* DTKeychain.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTKeychain.xcodeproj; path = DTKeychain/DTKeychain.xcodeproj; sourceTree = "<group>"; };
 		A77665931A1B369A008AB88C /* PLYGuidedInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYGuidedInputViewController.h; sourceTree = "<group>"; };
 		A77665941A1B369A008AB88C /* PLYGuidedInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYGuidedInputViewController.m; sourceTree = "<group>"; };
 		A77665951A1B369A008AB88C /* PLYGuidedInputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PLYGuidedInputViewController.xib; sourceTree = "<group>"; };
@@ -824,6 +892,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7ACC99D1A307ABC004EE5BD /* libDTKeychain.a in Frameworks */,
 				A7EA08411A2B341300B61CCE /* DTFoundation.framework in Frameworks */,
 				A740BB7D19F23FA100DA3943 /* QuartzCore.framework in Frameworks */,
 				A740BB7C19F23F9200DA3943 /* CoreGraphics.framework in Frameworks */,
@@ -845,6 +914,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7730FC61A30790900CCBB7C /* libDTKeychain.a in Frameworks */,
 				A7EA08441A2B377300B61CCE /* DTFoundation.framework in Frameworks */,
 				C97FAAE819221CD800144D2C /* libDTProgressHUD_iOS.a in Frameworks */,
 				A71C2BBD1843ADA600B77DB4 /* CoreData.framework in Frameworks */,
@@ -860,6 +930,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7ACC9A81A307B86004EE5BD /* libDTKeychain.a in Frameworks */,
 				C92A6256198A1B3900997DDC /* Security.framework in Frameworks */,
 				A7B21722183F8A3800C38635 /* Foundation.framework in Frameworks */,
 			);
@@ -869,6 +940,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7ACC9A51A307B57004EE5BD /* libDTKeychain.dylib in Frameworks */,
 				A7EA07A81A2B24F600B61CCE /* DTFoundation.framework in Frameworks */,
 				A7EA072B1A2B164E00B61CCE /* AppKit.framework in Frameworks */,
 				A7EA07291A2B161400B61CCE /* Foundation.framework in Frameworks */,
@@ -985,6 +1057,18 @@
 			name = Login/Signup;
 			sourceTree = "<group>";
 		};
+		A7730F941A3078D600CCBB7C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A7730FBB1A3078D600CCBB7C /* Demo App.app */,
+				A7730FBD1A3078D600CCBB7C /* libDTKeychain.a */,
+				A7730FBF1A3078D600CCBB7C /* libDTKeychain.dylib */,
+				A7730FC11A3078D600CCBB7C /* Unit Tests (iOS).xctest */,
+				A7730FC31A3078D600CCBB7C /* Unit Tests (OSX).xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		A77665921A1B3673008AB88C /* Input */ = {
 			isa = PBXGroup;
 			children = (
@@ -1040,6 +1124,7 @@
 		A7B440A0183F90B800E8A170 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				A7730F931A3078D600CCBB7C /* DTKeychain.xcodeproj */,
 				A71C2B921843AD8C00B77DB4 /* DTDownload.xcodeproj */,
 				A7B4418A183F90B900E8A170 /* DTFoundation.xcodeproj */,
 			);
@@ -1556,6 +1641,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A7ACC99F1A307AC5004EE5BD /* PBXTargetDependency */,
 				A7EA083F1A2B33F400B61CCE /* PBXTargetDependency */,
 			);
 			name = "ProductLayer (iOS)";
@@ -1592,6 +1678,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A7730FC51A3078EB00CCBB7C /* PBXTargetDependency */,
 				A7EA08431A2B376E00B61CCE /* PBXTargetDependency */,
 				A76A5717198693A400751454 /* PBXTargetDependency */,
 				C97FAAEA19221CE800144D2C /* PBXTargetDependency */,
@@ -1614,6 +1701,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A7ACC9A71A307B80004EE5BD /* PBXTargetDependency */,
 			);
 			name = "Static Library";
 			productName = ProductLayer;
@@ -1632,6 +1720,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A7ACC9A11A307ACD004EE5BD /* PBXTargetDependency */,
 				A7EA07AA1A2B250200B61CCE /* PBXTargetDependency */,
 			);
 			name = "ProductLayer (Mac)";
@@ -1683,6 +1772,10 @@
 				{
 					ProductGroup = A7B441F5183F913000E8A170 /* Products */;
 					ProjectRef = A7B4418A183F90B900E8A170 /* DTFoundation.xcodeproj */;
+				},
+				{
+					ProductGroup = A7730F941A3078D600CCBB7C /* Products */;
+					ProjectRef = A7730F931A3078D600CCBB7C /* DTKeychain.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1752,6 +1845,41 @@
 			fileType = wrapper.application;
 			path = "DTAnimatedGIF Demo.app";
 			remoteRef = A76D3F8B198666FE0032FE59 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7730FBB1A3078D600CCBB7C /* Demo App.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Demo App.app";
+			remoteRef = A7730FBA1A3078D600CCBB7C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7730FBD1A3078D600CCBB7C /* libDTKeychain.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDTKeychain.a;
+			remoteRef = A7730FBC1A3078D600CCBB7C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7730FBF1A3078D600CCBB7C /* libDTKeychain.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libDTKeychain.dylib;
+			remoteRef = A7730FBE1A3078D600CCBB7C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7730FC11A3078D600CCBB7C /* Unit Tests (iOS).xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Unit Tests (iOS).xctest";
+			remoteRef = A7730FC01A3078D600CCBB7C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7730FC31A3078D600CCBB7C /* Unit Tests (OSX).xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Unit Tests (OSX).xctest";
+			remoteRef = A7730FC21A3078D600CCBB7C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		A7B4420E183F913000E8A170 /* libDTFoundation.a */ = {
@@ -2205,6 +2333,26 @@
 			target = A76A570B1986937D00751454 /* Resource Bundle */;
 			targetProxy = A76A5716198693A400751454 /* PBXContainerItemProxy */;
 		};
+		A7730FC51A3078EB00CCBB7C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Static Library (iOS)";
+			targetProxy = A7730FC41A3078EB00CCBB7C /* PBXContainerItemProxy */;
+		};
+		A7ACC99F1A307AC5004EE5BD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Static Library (iOS)";
+			targetProxy = A7ACC99E1A307AC5004EE5BD /* PBXContainerItemProxy */;
+		};
+		A7ACC9A11A307ACD004EE5BD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Static Library (OSX)";
+			targetProxy = A7ACC9A01A307ACD004EE5BD /* PBXContainerItemProxy */;
+		};
+		A7ACC9A71A307B80004EE5BD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Static Library (iOS)";
+			targetProxy = A7ACC9A61A307B80004EE5BD /* PBXContainerItemProxy */;
+		};
 		A7EA07AA1A2B250200B61CCE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "DTFoundation (Mac)";
@@ -2268,7 +2416,7 @@
 				PRODUCT_NAME = ProductLayer;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/**";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2298,7 +2446,7 @@
 				PRODUCT_NAME = ProductLayer;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/**";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2328,7 +2476,7 @@
 				PRODUCT_NAME = ProductLayer;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/**";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2513,7 +2661,7 @@
 				);
 				PRODUCT_NAME = ProductLayer;
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTFoundation/\"**";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTFoundation/\"/** \"${PROJECT_DIR}/Externals/DTKeychain/\"/**";
 			};
 			name = Debug;
 		};
@@ -2526,7 +2674,7 @@
 				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
 				PRODUCT_NAME = ProductLayer;
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTFoundation/\"**";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTFoundation/\"/** \"${PROJECT_DIR}/Externals/DTKeychain/\"/**";
 			};
 			name = Release;
 		};
@@ -2582,7 +2730,7 @@
 				PRODUCT_NAME = ProductLayer;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/**";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2616,7 +2764,7 @@
 				PRODUCT_NAME = ProductLayer;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/**";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2650,7 +2798,7 @@
 				PRODUCT_NAME = ProductLayer;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "Externals/DTFoundation/**";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2718,7 +2866,7 @@
 				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
 				PRODUCT_NAME = ProductLayer;
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTFoundation/\"**";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTFoundation/\"/** \"${PROJECT_DIR}/Externals/DTKeychain/\"/**";
 			};
 			name = AdHoc;
 		};
