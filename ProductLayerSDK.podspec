@@ -24,4 +24,10 @@ Pod::Spec.new do |spec|
     ss.source_files = 'Core/Source/PLYEntities/*.{h,m}'
   end
 
+  spec.subspec 'iOS' do |ss|
+    ss.source_files = 'Core/Source/iOS/*.{h,m}'
+	ss.frameworks = 'AVFoundation'
+    ss.ios.dependency 'ProductLayerSDK/Core'
+  end
+
 end

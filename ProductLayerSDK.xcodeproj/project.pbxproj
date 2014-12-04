@@ -691,8 +691,6 @@
 		A75CF74C1A30B4BD007E30FC /* PLYUserAvatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYUserAvatar.h; path = PLYEntities/PLYUserAvatar.h; sourceTree = "<group>"; };
 		A75CF74D1A30B4BD007E30FC /* PLYUserAvatar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYUserAvatar.m; path = PLYEntities/PLYUserAvatar.m; sourceTree = "<group>"; };
 		A75CF7801A30DF4E007E30FC /* PLYEntities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYEntities.h; path = PLYEntities/PLYEntities.h; sourceTree = "<group>"; };
-		A76478941A18A80A0000500C /* PLYBrandOwnerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYBrandOwnerViewController.h; sourceTree = "<group>"; };
-		A76478951A18A80A0000500C /* PLYBrandOwnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYBrandOwnerViewController.m; sourceTree = "<group>"; };
 		A76478971A18A8830000500C /* PLYSearchableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYSearchableTableViewController.h; sourceTree = "<group>"; };
 		A76478981A18A8830000500C /* PLYSearchableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYSearchableTableViewController.m; sourceTree = "<group>"; };
 		A7696B4B19ED91E000C1D3C4 /* Framework-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Framework-Info.plist"; sourceTree = "<group>"; };
@@ -984,8 +982,6 @@
 		A76478771A18A6E50000500C /* Brands */ = {
 			isa = PBXGroup;
 			children = (
-				A76478941A18A80A0000500C /* PLYBrandOwnerViewController.h */,
-				A76478951A18A80A0000500C /* PLYBrandOwnerViewController.m */,
 				A701C4F71A1F55580013CB8D /* PLYBrandPickerViewController.h */,
 				A701C4F81A1F55580013CB8D /* PLYBrandPickerViewController.m */,
 				A701C4F91A1F55580013CB8D /* PLYBrandPickerViewController.xib */,
