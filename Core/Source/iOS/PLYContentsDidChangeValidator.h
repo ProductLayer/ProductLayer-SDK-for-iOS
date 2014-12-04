@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Cocoanetics. All rights reserved.
 //
 
-#import <ProductLayer/ProductLayer.h>
+#import "PLYNonEmptyValidator.h"
 
 @interface PLYContentsDidChangeValidator : PLYNonEmptyValidator
 
