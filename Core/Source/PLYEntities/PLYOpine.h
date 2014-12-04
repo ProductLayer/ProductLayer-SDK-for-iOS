@@ -7,10 +7,8 @@
 //
 
 #import "PLYVotableEntity.h"
-#import "ProductLayer.h"
 
 typedef struct { double latitude; double longitude; } PLYLocationCoordinate2D;
-
 
 /**
  Model object representing a user's opine

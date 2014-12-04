@@ -7,6 +7,7 @@
 //
 
 #import "PLYOpine.h"
+#import "PLYImage.h"
 
 @implementation PLYOpine
 
