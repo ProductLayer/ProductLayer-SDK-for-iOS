@@ -30,3 +30,37 @@ PLYProduct *PLYProductBestMatchingUserPreferredLanguages(NSArray *products)
 	
 	return [sorted firstObject];
 }
+
+
+#pragma mark - Localization and Resources
+
+NSBundle *PLYResourceBundle()
+{
+	// bundle reference only retrieved once
+	static NSBundle *_resourceBundle = nil;
+	
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		NSBundle *bundle = [NSBundle bundleForClass:[PLYImage class]];
+		NSString *extension = [[bundle bundlePath] pathExtension];
+		
+		if ([extension isEqualToString:@"app"])
+		{
+			// inside .app we need to get the resource bundle
+			NSString *resourceBundlePath = [bundle pathForResource:@"ProductLayer" ofType:@"bundle"];
+			_resourceBundle = [NSBundle bundleWithPath:resourceBundlePath];
+		}
+		else 	if ([extension isEqualToString:@"framework"])
+		{
+			// inside .framework the framework is the resource bundle
+			_resourceBundle = bundle;
+		}
+	});
+	
+	return _resourceBundle;
+}
+
+DTColor *PLYBrandColor()
+{
+	return [DTColor colorWithRed:110.0/256.0 green:190.0/256.0 blue:68.0/256.0 alpha:1];
+}
