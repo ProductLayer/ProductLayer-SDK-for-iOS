@@ -8,6 +8,9 @@
 
 #import "PLYNonEmptyValidator.h"
 
+/**
+ Specialized PLYFormValidator that verifies that the text contents are an email address
+ */
 @interface PLYFormEmailValidator : PLYNonEmptyValidator
 
 @end

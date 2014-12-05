@@ -8,6 +8,9 @@
 
 #import "PLYNonEmptyValidator.h"
 
+/**
+ Specialized PLYFormValidator that verifies that the text contents are a valid user name for ProductLayer
+ */
 @interface PLYUserNameValidator : PLYNonEmptyValidator
 
 @end

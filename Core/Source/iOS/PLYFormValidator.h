@@ -9,12 +9,18 @@
 
 @class PLYFormValidator;
 
+/**
+ Protocol to inform delegate of a PLYFormValidator about changes in the text content validity
+ */
 @protocol PLYFormValidationDelegate <NSObject>
 
+/**
+ The validity of the text contents have changed
+ @param validator The sender of the message
+ */
 - (void)validityDidChange:(PLYFormValidator *)validator;
 
 @end
-
 
 
 /**

@@ -18,22 +18,22 @@
 /**
  The nickname of the user.
  */
-@property (nonatomic, strong) NSString *nickname;
+@property (nonatomic, copy) NSString *nickname;
 
 /**
  The first name of the user.
  */
-@property (nonatomic, strong) NSString *firstName;
+@property (nonatomic, copy) NSString *firstName;
 
 /**
  The last name of the user.
  */
-@property (nonatomic, strong) NSString *lastName;
+@property (nonatomic, copy) NSString *lastName;
 
 /**
  The email of the user.
  */
-@property (nonatomic, strong) NSString *email;
+@property (nonatomic, copy) NSString *email;
 
 /**
  The birthday of the user.
@@ -43,7 +43,7 @@
 /**
  The gender of the user.
  */
-@property (nonatomic, strong) NSString *gender;
+@property (nonatomic, copy) NSString *gender;
 
 /**
  The gamification points of the user.

@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 Cocoanetics. All rights reserved.
 //
 
-/**
- This is the super class of all entities returned by the SDK/API
- */
 
 @class PLYUser;
 
+/**
+ This is the super class of all entities returned by the SDK/API
+ */
 @interface PLYEntity : NSObject
 
 /**

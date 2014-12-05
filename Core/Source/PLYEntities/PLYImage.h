@@ -32,7 +32,7 @@
 /**
  The name of the image.
  */
-@property (nonatomic, strong) NSString *name;
+@property (nonatomic, copy) NSString *name;
 
 /**
  The URL of the image.
