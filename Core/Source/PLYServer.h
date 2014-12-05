@@ -286,7 +286,7 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @param gtin The GTIN (barcode) of the product
  @param language The language code to return results in
  @param nickname The user to restrict the results to. Pass `nil` to return all user's reviews.
- @param showFiendsOnly If true shows only opines from friends.
+ @param showFriendsOnly If true shows only opines from friends.
  @param orderBy The key to order results by, e.g. "pl-created-time_desc"
  @param page The page number
  @param rpp The number of results per returned page
@@ -295,7 +295,7 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 - (void) performSearchForOpineWithGTIN:(NSString *)gtin
                           withLanguage:(NSString *)language
                   fromUserWithNickname:(NSString *)nickname
-                        showFiendsOnly:(BOOL *)showFiendsOnly
+                        showFriendsOnly:(BOOL *)showFriendsOnly
                                orderBy:(NSString *)orderBy
                                   page:(NSUInteger)page
                         recordsPerPage:(NSUInteger)rpp

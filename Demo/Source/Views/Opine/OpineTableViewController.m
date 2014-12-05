@@ -63,7 +63,7 @@
     [[PLYServer sharedServer] performSearchForOpineWithGTIN:GTIN
                                                 withLanguage:_locale.localeIdentifier
                                         fromUserWithNickname:_userNickname
-                                                  showFiendsOnly:false
+                                                  showFriendsOnly:false
                                                      orderBy:@"pl-id_asc"
                                                         page:0
                                               recordsPerPage:20

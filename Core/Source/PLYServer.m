@@ -988,7 +988,7 @@
 - (void) performSearchForOpineWithGTIN:(NSString *)gtin
                           withLanguage:(NSString *)language
                   fromUserWithNickname:(NSString *)nickname
-                        showFiendsOnly:(BOOL *)showFiendsOnly
+                        showFriendsOnly:(BOOL *)showFriendsOnly
                                orderBy:(NSString *)orderBy
                                   page:(NSUInteger)page
                         recordsPerPage:(NSUInteger)rpp
@@ -1005,8 +1005,8 @@
 	if (language)       [parameters setObject:language forKey:@"language"];
 	if (nickname)       [parameters setObject:nickname forKey:@"nickname"];
 	
-    if (showFiendsOnly) [parameters setObject:@"true"   forKey:@"show_fiends_only"];
-    else                [parameters setObject:@"false"   forKey:@"show_fiends_only"];
+    if (showFriendsOnly) [parameters setObject:@"true"   forKey:@"show_friends_only"];
+    else                [parameters setObject:@"false"   forKey:@"show_friends_only"];
 	
     if (orderBy)        [parameters setObject:orderBy  forKey:@"order_by"];
 	if (page)           [parameters setObject:@(page)     forKey:@"page"];
