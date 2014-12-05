@@ -22,7 +22,7 @@
 /**
  The image file id.
  */
-@property (nonatomic, strong) NSString *fileId;
+@property (nonatomic, copy) NSString *fileId;
 
 /**
  The height in pixel of the image.

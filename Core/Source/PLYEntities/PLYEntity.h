@@ -54,12 +54,12 @@
 /**
  The class identifier.
  */
-@property (nonatomic, strong) NSString *Class;
+@property (nonatomic, copy) NSString *Class;
 
 /**
  The object id.
  */
-@property (nonatomic, strong) NSString *Id;
+@property (nonatomic, copy) NSString *Id;
 
 /**
  The version.

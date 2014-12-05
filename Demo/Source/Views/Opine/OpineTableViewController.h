@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addOpineButton;
 
 @property (nonatomic, strong) PLYEntity *parent;
-@property (nonatomic, strong) NSString *userNickname;
+@property (nonatomic, copy) NSString *userNickname;
 @property (nonatomic, strong) NSLocale *locale;
 @property (nonatomic, strong) NSMutableArray *opines;
 

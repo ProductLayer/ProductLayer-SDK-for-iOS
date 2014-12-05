@@ -22,7 +22,7 @@ typedef struct { double latitude; double longitude; } PLYLocationCoordinate2D;
 /**
  The text of the receiver.
  */
-@property (nonatomic, strong) NSString *text;
+@property (nonatomic, copy) NSString *text;
 
 /**
  The parent entity that the receiver is about, can be any PLYEntity or even another PLYOpine
