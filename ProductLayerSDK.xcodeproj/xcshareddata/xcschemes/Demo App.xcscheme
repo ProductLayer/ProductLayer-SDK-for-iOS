@@ -20,6 +20,20 @@
                ReferencedContainer = "container:ProductLayerSDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A75CF7AF1A31965E007E30FC"
+               BuildableName = "Unit Tests (iOS).xctest"
+               BlueprintName = "Unit Tests (iOS)"
+               ReferencedContainer = "container:ProductLayerSDK.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -32,29 +46,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A7B21516183F842000C38635"
-               BuildableName = "PLTests.xctest"
-               BlueprintName = "PLTests"
-               ReferencedContainer = "container:ProductLayerSDK.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A7B2172D183F8A3800C38635"
-               BuildableName = "ProductLayerTests.xctest"
-               BlueprintName = "ProductLayerTests"
-               ReferencedContainer = "container:ProductLayerSDK.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A7B4426A183F92B800E8A170"
-               BuildableName = "PL1Tests.xctest"
-               BlueprintName = "PL1Tests"
+               BlueprintIdentifier = "A75CF7AF1A31965E007E30FC"
+               BuildableName = "Unit Tests (iOS).xctest"
+               BlueprintName = "Unit Tests (iOS)"
                ReferencedContainer = "container:ProductLayerSDK.xcodeproj">
             </BuildableReference>
          </TestableReference>

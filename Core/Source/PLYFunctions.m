@@ -41,18 +41,19 @@ NSBundle *PLYResourceBundle()
 	
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
+		// get the same bundle where one of the core entities classes are located in
 		NSBundle *bundle = [NSBundle bundleForClass:[PLYImage class]];
 		NSString *extension = [[bundle bundlePath] pathExtension];
 		
 		if ([extension isEqualToString:@"app"])
 		{
 			// inside .app we need to get the resource bundle
-			NSString *resourceBundlePath = [bundle pathForResource:@"ProductLayer" ofType:@"bundle"];
+			NSString *resourceBundlePath = [bundle pathForResource:@"ProductLayerSDK" ofType:@"bundle"];
 			_resourceBundle = [NSBundle bundleWithPath:resourceBundlePath];
 		}
 		else 	if ([extension isEqualToString:@"framework"])
 		{
-			// inside .framework the framework is the resource bundle
+			// inside .framework: the framework IS the resource bundle
 			_resourceBundle = bundle;
 		}
 	});
