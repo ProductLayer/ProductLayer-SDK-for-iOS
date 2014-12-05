@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>--project-name</key>
-	<string>ProductLayer SDK</string>
+	<string>ProductLayerSDK</string>
 	<key>--project-company</key>
 	<string>ProductLayer</string>
 	<key>--project-version</key>
