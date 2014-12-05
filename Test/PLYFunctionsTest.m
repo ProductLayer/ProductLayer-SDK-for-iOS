@@ -38,4 +38,18 @@
 	XCTAssertNotNil(color, @"Should have gotten the brand tint color");
 }
 
+#pragma mark - iOS Only
+
+#if TARGET_OS_IPHONE
+
+- (void)testGettingXIB
+{
+	NSBundle *resourceBundle = PLYResourceBundle();
+	
+	NSString *path = [resourceBundle pathForResource:@"PLYBrandPickerViewController" ofType:@"nib"];
+	XCTAssertNotNil(path, @"There should be a compiled nib in the resource bundle");
+}
+
+#endif
+
 @end
