@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A7B214F5183F842000C38635"
-               BuildableName = "PL.app"
+               BuildableName = "ProductLayerSDK.app"
                BlueprintName = "Demo App"
                ReferencedContainer = "container:ProductLayerSDK.xcodeproj">
             </BuildableReference>
@@ -63,7 +63,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A7B214F5183F842000C38635"
-            BuildableName = "PL.app"
+            BuildableName = "ProductLayerSDK.app"
             BlueprintName = "Demo App"
             ReferencedContainer = "container:ProductLayerSDK.xcodeproj">
          </BuildableReference>
@@ -82,7 +82,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A7B214F5183F842000C38635"
-            BuildableName = "PL.app"
+            BuildableName = "ProductLayerSDK.app"
             BlueprintName = "Demo App"
             ReferencedContainer = "container:ProductLayerSDK.xcodeproj">
          </BuildableReference>
@@ -110,7 +110,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A7B214F5183F842000C38635"
-            BuildableName = "PL.app"
+            BuildableName = "ProductLayerSDK.app"
             BlueprintName = "Demo App"
             ReferencedContainer = "container:ProductLayerSDK.xcodeproj">
          </BuildableReference>

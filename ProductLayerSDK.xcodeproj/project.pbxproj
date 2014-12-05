@@ -148,7 +148,6 @@
 		A76D3F6C198650770032FE59 /* PLYUserNameValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F64198650770032FE59 /* PLYUserNameValidator.m */; };
 		A76D3F6D198650770032FE59 /* UIViewController+ProductLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F66198650770032FE59 /* UIViewController+ProductLayer.m */; };
 		A76D3F9119866E0E0032FE59 /* PLYLostPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F9019866E0E0032FE59 /* PLYLostPasswordViewController.m */; };
-		A7730FC61A30790900CCBB7C /* libDTKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7730FBD1A3078D600CCBB7C /* libDTKeychain.a */; };
 		A77665961A1B369A008AB88C /* PLYGuidedInputViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A77665931A1B369A008AB88C /* PLYGuidedInputViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A77665971A1B369A008AB88C /* PLYGuidedInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A77665941A1B369A008AB88C /* PLYGuidedInputViewController.m */; };
 		A77665991A1B369A008AB88C /* PLYGuidedInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A77665941A1B369A008AB88C /* PLYGuidedInputViewController.m */; };
@@ -417,13 +416,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = A7858B671A3038F200DAF6D0;
 			remoteInfo = "Unit Tests (OSX)";
-		};
-		A7730FC41A3078EB00CCBB7C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A7730F931A3078D600CCBB7C /* DTKeychain.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = A7858B1B1A3033BE00DAF6D0;
-			remoteInfo = "Static Library (iOS)";
 		};
 		A7ACC99E1A307AC5004EE5BD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -915,7 +907,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7730FC61A30790900CCBB7C /* libDTKeychain.a in Frameworks */,
 				A7EA08441A2B377300B61CCE /* DTFoundation.framework in Frameworks */,
 				C97FAAE819221CD800144D2C /* libDTProgressHUD_iOS.a in Frameworks */,
 				A71C2BBD1843ADA600B77DB4 /* CoreData.framework in Frameworks */,
@@ -1680,7 +1671,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				A7730FC51A3078EB00CCBB7C /* PBXTargetDependency */,
 				A7EA08431A2B376E00B61CCE /* PBXTargetDependency */,
 				A76A5717198693A400751454 /* PBXTargetDependency */,
 				C97FAAEA19221CE800144D2C /* PBXTargetDependency */,
@@ -2334,11 +2324,6 @@
 			isa = PBXTargetDependency;
 			target = A76A570B1986937D00751454 /* Resource Bundle */;
 			targetProxy = A76A5716198693A400751454 /* PBXContainerItemProxy */;
-		};
-		A7730FC51A3078EB00CCBB7C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Static Library (iOS)";
-			targetProxy = A7730FC41A3078EB00CCBB7C /* PBXContainerItemProxy */;
 		};
 		A7ACC99F1A307AC5004EE5BD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
