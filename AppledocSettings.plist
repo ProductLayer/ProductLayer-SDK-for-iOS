@@ -11,7 +11,7 @@
 	<key>--company-id</key>
 	<string>com.productlayer</string>
 	<key>--docset-atom-filename</key>
-	<string>ProductLayer.atom</string>
+	<string>ProductLayerSDK.atom</string>
 	<key>--docset-feed-url</key>
 	<string>https://developer.productlayer.com/documentation/sdk/%DOCSETATOMFILENAME</string>
 	<key>--docset-package-url</key>
