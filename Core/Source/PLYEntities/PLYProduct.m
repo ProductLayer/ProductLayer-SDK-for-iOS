@@ -89,9 +89,13 @@
 	{
 		[self setValue:value forKey:@"packaging"];
 	}
-	else if ([key isEqualToString:@"pl-prod-rating"])
+	else if ([key isEqualToString:@"pl-prod-review-rating"])
 	{
-		[self setValue:value forKey:@"rating"];
+		[self setValue:value forKey:@"averageReviewRating"];
+	}
+	else if ([key isEqualToString:@"pl-prod-review-count"])
+	{
+		[self setValue:value forKey:@"numberOfReviews"];
 	}
 	else if ([key isEqualToString:@"pl-prod-char"])
 	{
@@ -133,7 +137,7 @@
 	
 	if (_longDescription)
 	{
-		dict[@"pl-prod-desc-lon"] = _longDescription;
+		dict[@"pl-prod-desc-long"] = _longDescription;
 	}
 	
 	if (_shortDescription)
@@ -166,10 +170,8 @@
 		dict[@"pl-prod-pkg"] = [_packaging dictionaryRepresentation];
 	}
 	
-	if (_rating)
-	{
-		dict[@"pl-prod-rating"] = _rating;
-	}
+	dict[@"pl-prod-review-rating"] = @(_averageReviewRating);
+	dict[@"pl-prod-review-count"] = @(_numberOfReviews);
 	
 	if (_characteristics)
 	{

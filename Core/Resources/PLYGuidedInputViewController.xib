@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14C68m" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment version="2048" identifier="iOS"/>
+        <development version="6000" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PLYGuidedInputViewController">
+            <connections>
+                <outlet property="textField" destination="1Bz-gv-Zca" id="6rK-vO-cPx"/>
+                <outlet property="textLabel" destination="nE7-Pb-qkp" id="hsB-tt-nsE"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Placeholder" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Bz-gv-Zca" customClass="PLYTextField">
+                    <rect key="frame" x="20" y="288" width="560" height="24"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="yes" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="ytX-3z-o4r"/>
+                    </connections>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your text below" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nE7-Pb-qkp">
+                    <rect key="frame" x="30" y="259" width="540" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="1Bz-gv-Zca" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="7y2-TG-fta"/>
+                <constraint firstAttribute="centerY" secondItem="1Bz-gv-Zca" secondAttribute="centerY" id="FhU-Ty-MHV"/>
+                <constraint firstItem="1Bz-gv-Zca" firstAttribute="top" secondItem="nE7-Pb-qkp" secondAttribute="bottom" constant="8" id="JaP-FM-OVg"/>
+                <constraint firstItem="1Bz-gv-Zca" firstAttribute="leading" secondItem="nE7-Pb-qkp" secondAttribute="leading" constant="-10" id="PR9-k7-Us8"/>
+                <constraint firstAttribute="trailing" secondItem="1Bz-gv-Zca" secondAttribute="trailing" constant="20" id="dD3-w8-eNO"/>
+                <constraint firstItem="nE7-Pb-qkp" firstAttribute="trailing" secondItem="1Bz-gv-Zca" secondAttribute="trailing" priority="900" constant="-10" id="se7-qD-vXu"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

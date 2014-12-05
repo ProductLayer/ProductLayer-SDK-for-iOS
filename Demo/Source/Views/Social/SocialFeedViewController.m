@@ -77,11 +77,11 @@ typedef enum : NSUInteger {
 
 - (CGSize) blockSizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     id feed = [_socialFeeds objectAtIndex:indexPath.row];
-    int score = 0;
+    NSUInteger score = 0;
     CellType type = AllTypesAllowed;
     
     if([feed isKindOfClass:[PLYImage class]]){
-        score = [((PLYImage *)feed).votingScore intValue];
+        score = [feed votingScore];
         
         if(((PLYImage *)feed).width > ((PLYImage *)feed).height){
             type = SquareOrLandscapeCell;
@@ -89,7 +89,7 @@ typedef enum : NSUInteger {
             type = SquareOrPortraitCell;
         }
     } else if([feed isKindOfClass:[PLYReview class]]){
-        score = [((PLYReview *)feed).votingScore intValue];
+        score = [feed votingScore];
         type = LandscapeCell;
     }
     

@@ -55,10 +55,11 @@
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Couldn't follow user!" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
                 [alert show];
             } else {
-                _user.followerCount = [NSNumber numberWithInt:([_user.followerCount intValue] +1)];
-                _user.followed = true;
-                
-                 [self updateCell];
+					// workaround for read-only property
+					[_user setValue:@(_user.followerCount+1) forKey:@"followerCount"];
+					[_user setValue:@(YES) forKey:@"followed"];
+					
+					[self updateCell];
             }
 		});
 	}];
@@ -70,9 +71,10 @@
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Couldn't un-follow user!" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
                     [alert show];
                 } else {
-                    _user.followerCount = [NSNumber numberWithInt:([_user.followerCount intValue] -1)];
-                    _user.followed = false;
-                    
+						 // workaround for read-only property
+						 [_user setValue:@(_user.followerCount-1) forKey:@"followerCount"];
+						 [_user setValue:@(NO) forKey:@"followed"];
+						 
                     [self updateCell];
                 }
             });
@@ -95,23 +97,23 @@
     
     // Set follower count
     if(_user.followerCount) {
-        [_followerCountLabel setText:[_user.followerCount stringValue]];
+        [_followerCountLabel setText:[NSString stringWithFormat:@"%ld", (unsigned long)_user.followerCount]];
     } else {
         [_followerCountLabel setText:@"0"];
     }
     
     // Set following count
     if(_user.followingCount) {
-        [_followingCountLabel setText:[_user.followingCount stringValue]];
+		 [_followingCountLabel setText:[NSString stringWithFormat:@"%ld", (unsigned long)_user.followingCount]];
     } else {
         [_followingCountLabel setText:@"0"];
     }
     
     // Check if the user is the current logged in user
     if([_user.nickname isEqualToString:[[PLYServer sharedServer] loggedInUser].nickname]){
-        _followUnFollowButton.hidden = true;
+        _followUnFollowButton.hidden = YES;
     } else {
-        _followUnFollowButton.hidden = false;
+        _followUnFollowButton.hidden = NO;
         
         // Check if the user is followed by the currentl logged in user
         if(_user.followed){
@@ -124,53 +126,42 @@
     [self loadUserImage];
 }
 
-- (void) loadUserImage{
-    _userImageView.hidden = true;
-    
-    [[PLYServer sharedServer] getAvatarImageUrlFromUser:_user completion:^(id result, NSError *error) {
+- (void) loadUserImage
+{
+    _userImageView.hidden = YES;
+	
+	DTImageCache *imageCache = [DTImageCache sharedCache];
+	
+	NSString *imageIdentifier = [_user.Id copy];
+	
+	// need to load it
+	UIImage *image = [[DTDownloadCache sharedInstance] cachedImageForURL:_user.avatarURL option:DTDownloadCacheOptionLoadIfNotCached completion:^(NSURL *URL, UIImage *image, NSError *error) {
 		
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-            NSURL *avatarImageUrl = result;
-            
-            if(avatarImageUrl != nil ){
-                
-                DTImageCache *imageCache = [DTImageCache sharedCache];
-                
-                NSString *imageIdentifier = [_user.Id copy];
-                
-                // need to load it
-                UIImage *image = [[DTDownloadCache sharedInstance] cachedImageForURL:avatarImageUrl option:DTDownloadCacheOptionLoadIfNotCached completion:^(NSURL *URL, UIImage *image, NSError *error) {
-                    
-                    DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-                        if (error)
-                        {
-                            DTLogError(@"Error loading image %@", [error localizedDescription]);
-                        }
-                        else
-                        {
-                            [imageCache addImage:image forUniqueIdentifier:imageIdentifier variantIdentifier:nil];
-                            
-                            // Check if user has changed since request
-                            if(![_user.Id isEqualToString:imageIdentifier])
-                                return;
-                            
-                            [_userImageView setImage:image];
-                        }
-                    });
-                }];
-                
-                if (image)
-                {
-                    [_userImageView setImage:image];
-                }
-                
-            } else {
-                [_userImageView setImage:[UIImage imageNamed:@"no_image.png"]];
-            }
-            
-            _userImageView.hidden = false;
+			if (error)
+			{
+				DTLogError(@"Error loading image %@", [error localizedDescription]);
+			}
+			else
+			{
+				[imageCache addImage:image forUniqueIdentifier:imageIdentifier variantIdentifier:nil];
+				
+				// Check if user has changed since request
+				if(![_user.Id isEqualToString:imageIdentifier])
+					return;
+				
+				[_userImageView setImage:image];
+			}
 		});
 	}];
+	
+	if (image)
+	{
+		[_userImageView setImage:image];
+	}
+	
+	
+	_userImageView.hidden = NO;
 }
 
 @end

@@ -12,10 +12,7 @@
 
 #import "PLYServer.h"
 
-#import "DTAlertView.h"
-#import "DTBlockFunctions.h"
-#import "DTSidePanelController.h"
-#import "DTSidePanelControllerSegue.h"
+#import "DTFoundation.h"
 
 #import "HomeViewController.h"
 #import "ProductListsViewController.h"
@@ -78,7 +75,7 @@
             if ([viewController isKindOfClass:[ProductListsViewController class]])
             {
                 ProductListsViewController *productLists = (ProductListsViewController *) viewController;
-                productLists.addProductView = false;
+                productLists.addProductView = NO;
                 [productLists loadProductListsForUser:[[PLYServer sharedServer] loggedInUser] andType:nil];
             }
         }

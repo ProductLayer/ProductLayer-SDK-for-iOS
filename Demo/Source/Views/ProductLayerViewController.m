@@ -8,11 +8,6 @@
 
 #import "ProductLayerViewController.h"
 
-#import "ProductLayer.h"
-#import "DTAlertView.h"
-#import "DTBlockFunctions.h"
-#import "LoginViewController.h"
-
 @interface ProductLayerViewController ()
 
 @end

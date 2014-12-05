@@ -8,7 +8,7 @@
 
 @interface ProductImageViewController : UICollectionViewController
 
-@property (nonatomic, strong) NSString *gtin;
+@property (nonatomic, copy) NSString *gtin;
 @property (nonatomic, strong) NSMutableArray *images;
 
 - (void) loadLastImages;

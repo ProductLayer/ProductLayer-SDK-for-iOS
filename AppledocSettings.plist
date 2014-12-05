@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>--project-name</key>
-	<string>ProductLayer SDK</string>
+	<string>ProductLayerSDK</string>
 	<key>--project-company</key>
 	<string>ProductLayer</string>
 	<key>--project-version</key>
-	<string>0.1</string>
+	<string>0.3</string>
 	<key>--company-id</key>
 	<string>com.productlayer</string>
 	<key>--docset-atom-filename</key>
-	<string>ProductLayer.atom</string>
+	<string>ProductLayerSDK.atom</string>
 	<key>--docset-feed-url</key>
-	<string>http://www.productlayer.com/docs/iOS/%DOCSETATOMFILENAME</string>
+	<string>https://developer.productlayer.com/documentation/sdk/%DOCSETATOMFILENAME</string>
 	<key>--docset-package-url</key>
-	<string>http://www.productlayer.com/docs/iOS/%DOCSETPACKAGEFILENAME</string>
+	<string>https://developer.productlayer.com/documentation/sdk/%DOCSETPACKAGEFILENAME</string>
 	<key>--docset-fallback-url</key>
-	<string>http://www.productlayer.com/docs/iOS/</string>
+	<string>https://developer.productlayer.com/documentation/sdk/</string>
 	<key>--create-docset</key>
 	<true/>
 	<key>--publish-docset</key>

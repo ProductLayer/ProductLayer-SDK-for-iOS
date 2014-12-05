@@ -63,7 +63,7 @@
 - (void) updateView{
     if(_product){
         self.gtinTextField.text = _product.GTIN;
-        self.gtinTextField.enabled = false;
+        self.gtinTextField.enabled = NO;
     
         self.productNameTextfield.text = _product.name;
         self.vendorTextField.text = _product.brandName;

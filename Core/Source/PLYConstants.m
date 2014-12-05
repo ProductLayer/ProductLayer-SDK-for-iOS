@@ -9,12 +9,7 @@
 #import "PLYConstants.h"
 
 NSString * const PLYErrorDomain = @"Product Layer API";
-
-NSString * const PLYCodeTypeEAN13 = @"org.gs1.EAN-13";
-NSString * const PLYCodeTypeEAN8 = @"org.gs1.EAN-8";
+NSString * const PLYServerLoginErrorNotification = @"PLYServerLoginErrorNotification";
 
 
-NSString * const PLYServerUserDidLogInNotification = @"PLYServerUserDidLogInNotification";
-NSString * const PLYServerUserDidLogOutNotification = @"PLYServerUserDidLogOutNotification";
 
-NSString * const PLYNotifyUserStatusChanged = @"PLYNotifyUserStatusChanged";

@@ -33,22 +33,22 @@
 /**
  The title of the list.
  */
-@property (nonatomic, strong) NSString *title;
+@property (nonatomic, copy) NSString *title;
 
 /**
  The description for the list.
  */
-@property (nonatomic, strong) NSString *descriptionText;
+@property (nonatomic, copy) NSString *descriptionText;
 
 /**
  The list type for the list.
  */
-@property (nonatomic, strong) NSString *listType;
+@property (nonatomic, copy) NSString *listType;
 
 /**
  The sharing type for the list.
  */
-@property (nonatomic, strong) NSString *shareType;
+@property (nonatomic, copy) NSString *shareType;
 
 /**
  A list of user id's the product list is shared.

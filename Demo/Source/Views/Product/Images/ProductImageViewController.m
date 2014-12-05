@@ -8,15 +8,12 @@
 
 #import "ProductImageViewController.h"
 #import "ProductImageCollectionViewCell.h"
-#import "LoginViewController.h"
 #import "BigImageViewController.h"
 #import "UIViewController+Login.h"
 
 #import "ProductLayer.h"
-
+#import "DTFoundation.h"
 #import "DTProgressHUD.h"
-#import "DTAlertView.h"
-#import "DTBlockFunctions.h"
 
 @interface ProductImageViewController () <UICollectionViewDataSource>
 @end

@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 Cocoanetics. All rights reserved.
 //
 
-/**
- This is the super class of all entities returned by the SDK/API
- */
 
 @class PLYUser;
 
+/**
+ This is the super class of all entities returned by the SDK/API
+ */
 @interface PLYEntity : NSObject
 
 /**
@@ -41,6 +41,11 @@
  */
 - (NSDictionary *)dictionaryRepresentation;
 
+/**
+ Creates an object reference (id + type) for the receiver
+ @returns A dictionary to serve as objectReference for the receiver or `nil` if it cannot be constructed due to missing information.
+ */
+- (NSDictionary *)objectReference;
 
 /**
  @name Common Properties
@@ -49,17 +54,17 @@
 /**
  The class identifier.
  */
-@property (nonatomic, strong) NSString *Class;
+@property (nonatomic, copy) NSString *Class;
 
 /**
  The object id.
  */
-@property (nonatomic, strong) NSString *Id;
+@property (nonatomic, copy) NSString *Id;
 
 /**
  The version.
  */
-@property (nonatomic, strong) NSNumber *version;
+@property (nonatomic, assign) NSUInteger version;
 
 /**
  The user who created the object.

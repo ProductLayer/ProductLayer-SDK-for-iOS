@@ -30,11 +30,11 @@
 /**
  The amount for the list.
  */
-@property (nonatomic, strong) NSNumber *qty;
+@property (nonatomic, assign) NSUInteger quantity;
 
 /**
  The priority to sort the list. e.g.: Which present i prefer for my birthday.
 */
-@property (nonatomic, strong) NSNumber *prio;
+@property (nonatomic, assign) NSUInteger priority;
 
 @end

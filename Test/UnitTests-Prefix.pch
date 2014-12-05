@@ -1,0 +1,17 @@
+//
+// Prefix header for all source files of the 'UnitTests' target in the 'UnitTests' project
+//
+
+#ifdef __OBJC__
+
+#import <Foundation/Foundation.h>
+
+#if TARGET_OS_IPHONE
+   #import <UIKit/UIKit.h>
+	#import <XCTest/XCTest.h>
+#else
+	#import <Cocoa/Cocoa.h>
+	#import <AppKit/AppKit.h>
+#endif
+
+#endif

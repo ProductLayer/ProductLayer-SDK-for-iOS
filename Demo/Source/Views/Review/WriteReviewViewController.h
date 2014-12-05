@@ -28,6 +28,6 @@
 
 - (IBAction)save:(id)sender;
 
-@property (nonatomic, strong) NSString *gtin;
+@property (nonatomic, copy) NSString *gtin;
 
 @end

@@ -22,22 +22,22 @@
 /**
  The GTIN (barcode) of the product.
  */
-@property (nonatomic, strong) NSString *GTIN;
+@property (nonatomic, copy) NSString *GTIN;
 
 /**
  The subject of the review.
  */
-@property (nonatomic, strong) NSString *subject;
+@property (nonatomic, copy) NSString *subject;
 
 /**
  The detailed review text.
  */
-@property (nonatomic, strong) NSString *body;
+@property (nonatomic, copy) NSString *body;
 
 /**
  The rating for the product.
  */
-@property (nonatomic, strong) NSNumber *rating;
+@property (nonatomic, assign) float rating;
 
 /**
  The language of the review.

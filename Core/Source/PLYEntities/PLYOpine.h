@@ -7,10 +7,8 @@
 //
 
 #import "PLYVotableEntity.h"
-#import "ProductLayer.h"
 
 typedef struct { double latitude; double longitude; } PLYLocationCoordinate2D;
-
 
 /**
  Model object representing a user's opine
@@ -24,7 +22,7 @@ typedef struct { double latitude; double longitude; } PLYLocationCoordinate2D;
 /**
  The text of the receiver.
  */
-@property (nonatomic, strong) NSString *text;
+@property (nonatomic, copy) NSString *text;
 
 /**
  The parent entity that the receiver is about, can be any PLYEntity or even another PLYOpine
@@ -50,5 +48,26 @@ typedef struct { double latitude; double longitude; } PLYLocationCoordinate2D;
  Images associated with the receiver
  */
 @property (nonatomic, copy) NSArray *images;
+
+/**
+ Whether the receiver should be shared on Twitter
+ */
+@property (nonatomic, assign) BOOL shareOnTwitter;
+
+/**
+ Whether the receiver should be shared on Facebook
+ */
+@property (nonatomic, assign) BOOL shareOnFacebook;
+
+
+/**
+ If the opine was cross-posted to Twitter, this is the identifier
+ */
+@property (nonatomic, readonly) NSString *twitterPostIdentifier;
+
+/**
+ If the opine was cross-posted to Facebook, this is the identifier
+ */
+@property (nonatomic, readonly) NSString *facebookPostIdentifier;
 
 @end

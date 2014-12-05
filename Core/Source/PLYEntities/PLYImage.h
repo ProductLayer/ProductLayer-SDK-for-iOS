@@ -11,8 +11,8 @@
 @class PLYAuditor;
 
 /**
- * The metadata of the product images.
- **/
+ The metadata of the product images.
+ */
 @interface PLYImage : PLYVotableEntity
 
 /**
@@ -22,38 +22,32 @@
 /**
  The image file id.
  */
-@property (nonatomic, strong) NSString *fileId;
+@property (nonatomic, copy) NSString *fileId;
 
 /**
  The height in pixel of the image.
  */
-@property (nonatomic, strong) NSNumber *height;
+@property (nonatomic, assign) NSUInteger height;
 
 /**
  The name of the image.
  */
-@property (nonatomic, strong) NSString *name;
+@property (nonatomic, copy) NSString *name;
 
 /**
  The URL of the image.
  */
-@property (nonatomic, strong) NSString *url;
+@property (nonatomic, strong) NSURL *imageURL;
 
 /**
  The width in pixel of the image.
  */
-@property (nonatomic, strong) NSNumber *width;
+@property (nonatomic, assign) NSUInteger width;
 
 /**
  The gtin (barcode) of the product.
  */
 @property (nonatomic, copy) NSString *GTIN;
 
-
-/**
- @name Working with Images
- */
-
-- (NSString *)getUrlForWidth:(CGFloat)maxWidth andHeight:(CGFloat)maxHeight crop:(BOOL)crop;
 
 @end

@@ -7,16 +7,12 @@
 //
 
 #import "HomeViewController.h"
-#import "SignUpViewController.h"
 #import "EditProductViewController.h"
-#import "LoginViewController.h"
 #import "ProductImageViewController.h"
 
 #import "ProductLayer.h"
-#import "DTScannedCode.h"
-#import "DTBlockFunctions.h"
-#import "UIViewController+DTSidePanelController.h"
-#import "DTSidePanelController.h"
+#import "DTFoundation.h"
+
 #import "SearchProductViewController.h"
 #import "WriteReviewViewController.h"
 #import "ProductViewController.h"
@@ -25,19 +21,16 @@
 #import "DTAlertView.h"
 #import "AppSettings.h"
 
-#import "PLYProduct.h"
-#import "PLYUser.h"
 #import "DTProgressHUD.h"
 
 
-@interface HomeViewController () <DTCodeScannerViewControllerDelegate, UIImagePickerControllerDelegate>
+@interface HomeViewController () <PLYScannerViewControllerDelegate, UIImagePickerControllerDelegate>
 
 @end
 
 @implementation HomeViewController
 {
 	NSString *_gtinForEditingProduct;
-	
 	NSString *_previousScannedGTIN;
 }
 
@@ -49,13 +42,25 @@
 	_sidebarButton.target = self.sidePanelController;
 	_sidebarButton.action = @selector(toggleLeftPanel:);
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_updateLoginBar) name:PLYNotifyUserStatusChanged object:nil];
+	// observe logged in user so that we can update login button
+	[[PLYServer sharedServer] addObserver:self forKeyPath:@"loggedInUser" options:NSKeyValueObservingOptionNew context:NULL];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+	if ([keyPath isEqualToString:@"loggedInUser"])
+	{
+		[self _updateLoginBar];
+	}
 }
 
 - (void)dealloc
 {
     // UISearchBarDelegate is not weak so we need to set it nil via code.
     self.productSearchBar.delegate = nil;
+	
+	// clean up observings
+	[[PLYServer sharedServer] removeObserver:self forKeyPath:@"loggedInUser"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -98,8 +103,8 @@
 	if ([[segue identifier] isEqualToString:@"ScanBarcode"])
 	{
 		UINavigationController *navController = segue.destinationViewController;
-		DTCodeScannerViewController *scannerVC = (DTCodeScannerViewController *)[navController topViewController];
-		scannerVC.scanDelegate = self;
+		PLYScannerViewController *scannerVC = (PLYScannerViewController *)[navController topViewController];
+		scannerVC.delegate = self;
 	}
 	else if ([[segue identifier] isEqualToString:@"EditProduct"])
 	{
@@ -204,22 +209,18 @@
 	}
 }
 
-#pragma mark - DTCodeScannerViewControllerDelegate
+#pragma mark - PLYScannerViewControllerDelegate
 
-
-- (void)codeScanner:(DTCodeScannerViewController *)codeScanner didScanCode:(DTScannedCode *)code
+- (void)scanner:(PLYScannerViewController *)scanner didScanGTIN:(NSString *)GTIN
 {
-	if ([code.type isEqualToString:PLYCodeTypeEAN13] || [code.type isEqualToString:PLYCodeTypeEAN8])
-	{
-		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-			[codeScanner performSegueWithIdentifier:@"UnwindFromScanner" sender:self];
-			
-			UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-			ProductViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"ProductViewController"];
-			[self.navigationController pushViewController:viewController animated:YES];
-            [viewController loadProductWithGTIN:code.content];
-		});
-	}
+	DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+		[scanner performSegueWithIdentifier:@"UnwindFromScanner" sender:self];
+		
+		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+		ProductViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"ProductViewController"];
+		[self.navigationController pushViewController:viewController animated:YES];
+		[viewController loadProductWithGTIN:GTIN];
+	});
 }
 
 #pragma mark - UISearchBarDelegate

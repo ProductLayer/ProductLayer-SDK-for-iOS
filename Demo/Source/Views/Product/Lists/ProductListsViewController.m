@@ -84,7 +84,7 @@
     _user = user;
     _type = type;
     
-    [[PLYServer sharedServer] performSearchForProductListFromUser:user andListType:type page:nil recordsPerPage:nil completion:^(id result, NSError *error) {
+    [[PLYServer sharedServer] performSearchForProductListFromUser:user andListType:type page:0 recordsPerPage:0 completion:^(id result, NSError *error) {
 		if (error)
 		{
 			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
@@ -253,7 +253,7 @@
         
         PLYListItem *listItem = [[PLYListItem alloc] init];
         listItem.GTIN = _product.GTIN;
-        listItem.qty = [NSNumber numberWithInt:1];
+        listItem.quantity = 1;
         
         if(!list.listItems){
             list.listItems = [NSMutableArray arrayWithCapacity:1];

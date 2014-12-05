@@ -10,24 +10,4 @@
 
 @implementation PLYErrorMessage
 
-- (void)setValue:(id)value forKey:(NSString *)key
-{
-	if ([key isEqualToString:@"message"])
-	{
-		self.message = value;
-	}
-	else if ([key isEqualToString:@"code"])
-	{
-		self.code = value;
-	}
-	else if ([key isEqualToString:@"throwable"])
-	{
-		self.throwable = value;
-	}
-	else
-	{
-		[super setValue:value forKey:key];
-	}
-}
-
 @end

@@ -18,8 +18,8 @@
 
 @interface LocalizableStringPicker : UIPickerView <UIPickerViewDataSource, UIPickerViewDelegate>
 
-@property (nonatomic, strong) NSArray *stringList;
-@property (nonatomic, strong) NSString *selectedString;
+@property (nonatomic, copy) NSArray *stringList;
+@property (nonatomic, copy) NSString *selectedString;
 
 @property (nonatomic, weak) id<LocalizableStringPickerDelegate> _delegate;
 

@@ -30,7 +30,7 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        _isLoading = false;
+        _isLoading = NO;
     }
     return self;
 }
@@ -53,15 +53,15 @@
     _hud.hideAnimationType = HUDProgressAnimationTypeFade;
     [_hud showWithText:@"loading" progressType:HUDProgressTypeInfinite];
     
-    _isLoading = true;
+    _isLoading = YES;
     _locale = [AppSettings currentAppLocale];
     [[PLYServer sharedServer] performSearchForReviewWithGTIN:_gtin
                                    withLanguage:_locale.localeIdentifier
                            fromUserWithNickname:_userNickname
-                                     withRating:nil
+                                     withRating:0
                                         orderBy:@"pl-id_asc"
-                                           page:[NSNumber numberWithInt:0]
-                                 recordsPerPage:[NSNumber numberWithInt:20]
+                                           page:0
+                                 recordsPerPage:20
                                      completion:^(id result, NSError *error) {
                                          if(error) {
                                              DTBlockPerformSyncIfOnMainThreadElseAsync(^{
@@ -89,7 +89,7 @@
                                                  
                                                  [self.tableView reloadData];
                                                  
-                                                 _isLoading = false;
+                                                 _isLoading = NO;
                                              });
                                          }
                                          
@@ -182,7 +182,7 @@
 	{
 		WriteReviewViewController *writeReview = (WriteReviewViewController *)segue.destinationViewController;
 		writeReview.gtin = _gtin;
-        writeReview.gtinTextField.enabled = false;
+        writeReview.gtinTextField.enabled = NO;
 	}
 }
 

@@ -24,42 +24,42 @@
 /**
  The name of the brand information.
  */
-@property (nonatomic, strong) NSString *brandName;
+@property (nonatomic, copy) NSString *brandName;
 
 /**
  The name of the brand owner information.
  */
-@property (nonatomic, strong) NSString *brandOwner;
+@property (nonatomic, copy) NSString *brandOwner;
 
 /**
  The language of the product.
  */
-@property (nonatomic, strong) NSString *language;
+@property (nonatomic, copy) NSString *language;
 
 /**
  The product category
  */
-@property (nonatomic, strong) NSString *category;
+@property (nonatomic, copy) NSString *category;
 
 /**
  The detailed description of the product.
  */
-@property (nonatomic, strong) NSString *longDescription;
+@property (nonatomic, copy) NSString *longDescription;
 
 /**
  The short description of the product.
  */
-@property (nonatomic, strong) NSString *shortDescription;
+@property (nonatomic, copy) NSString *shortDescription;
 
 /**
  The GTIN (barcode) of the product.
  */
-@property (nonatomic, strong) NSString *GTIN;
+@property (nonatomic, copy) NSString *GTIN;
 
 /**
  The homepage or landingpage of the product.
  */
-@property (nonatomic, strong) NSString *homepage;
+@property (nonatomic, copy) NSString *homepage;
 
 /**
  Additional links for the product. e.g.: Support Forum, FAQ's, ...
@@ -69,7 +69,7 @@
 /**
  The name of the product.
  */
-@property (nonatomic, strong) NSString *name;
+@property (nonatomic, copy) NSString *name;
 
 /** 
  The packaging information.
@@ -77,9 +77,14 @@
 @property (nonatomic, copy) PLYPackaging *packaging;
 
 /**
- The product rating.
+ The average product review rating.
  */
-@property (nonatomic, strong) NSNumber *rating;
+@property (nonatomic, assign) float averageReviewRating;
+
+/**
+ The number of user reviews for this product
+ */
+@property (nonatomic, assign) NSUInteger numberOfReviews;
 
 /**
  The characteristics information.

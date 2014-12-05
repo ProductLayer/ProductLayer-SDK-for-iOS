@@ -18,22 +18,22 @@
 /**
  The nickname of the user.
  */
-@property (nonatomic, strong) NSString *nickname;
+@property (nonatomic, copy) NSString *nickname;
 
 /**
  The first name of the user.
  */
-@property (nonatomic, strong) NSString *firstName;
+@property (nonatomic, copy) NSString *firstName;
 
 /**
  The last name of the user.
  */
-@property (nonatomic, strong) NSString *lastName;
+@property (nonatomic, copy) NSString *lastName;
 
 /**
  The email of the user.
  */
-@property (nonatomic, strong) NSString *email;
+@property (nonatomic, copy) NSString *email;
 
 /**
  The birthday of the user.
@@ -43,41 +43,47 @@
 /**
  The gender of the user.
  */
-@property (nonatomic, strong) NSString *gender;
+@property (nonatomic, copy) NSString *gender;
 
 /**
  The gamification points of the user.
  */
-@property (nonatomic, strong) NSNumber *points;
+@property (nonatomic, readonly) NSInteger points;
 
 /**
  A list of unlocked achievements.
  */
-@property (nonatomic, strong) NSArray *unlockedAchievements;
+@property (nonatomic, readonly) NSArray *unlockedAchievements;
 
 /**
  The counter for all user which are follower of this user.
  */
-@property (nonatomic, strong) NSNumber *followerCount;
+@property (nonatomic, readonly) NSUInteger followerCount;
 
 /**
  The counter for all user this user is following.
  */
-@property (nonatomic, strong) NSNumber *followingCount;
+@property (nonatomic, readonly) NSUInteger followingCount;
 
 /**
  The url of the users avatar image. If no image is defined productlayer returns a gravatar image url.
  */
-@property (nonatomic, strong) NSURL *avatarURL;
+@property (nonatomic, readonly) NSURL *avatarURL;
 
 /**
  Is this user following the logged in user.
  */
-@property (nonatomic) BOOL following;
+@property (nonatomic, readonly) BOOL following;
 
 /**
  Is this user followed the logged in user.
  */
-@property (nonatomic) BOOL followed;
+@property (nonatomic, readonly) BOOL followed;
+
+
+/**
+ The social connections of the user
+ */
+@property (nonatomic, readonly) NSDictionary *socialConnections;
 
 @end

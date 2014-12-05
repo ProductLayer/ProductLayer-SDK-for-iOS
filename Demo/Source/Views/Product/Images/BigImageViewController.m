@@ -58,7 +58,7 @@
 }
 
 - (void)updateView{
-    [_votingScoreLabel setText:[NSString stringWithFormat:@"%d (up=%lu, down=%lu)",[metadata.votingScore intValue], (unsigned long)[metadata.upVoter count], (unsigned long)[metadata.downVoter count]]];
+    [_votingScoreLabel setText:[NSString stringWithFormat:@"%lu (up=%lu, down=%lu)",(unsigned long)metadata.votingScore, (unsigned long)[metadata.upVoter count], (unsigned long)[metadata.downVoter count]]];
 }
 
 - (void) setImageMetadata:(PLYImage *)imageMetadata{
@@ -79,9 +79,10 @@
     }
     
     CGSize imageSize = CGSizeMake(_imageView.frame.size.width*[[UIScreen mainScreen] scale], _imageView.frame.size.height*[[UIScreen mainScreen] scale]);
-    NSURL *imageUrl = [NSURL URLWithString:[metadata getUrlForWidth:imageSize.width andHeight:imageSize.height crop:false]];
-    
-	NSString *imageIdentifier = [imageUrl lastPathComponent];
+
+	NSURL *imageURL = [[PLYServer sharedServer] URLForImage:metadata maxWidth:imageSize.width maxHeight:imageSize.height crop:NO];
+	
+	NSString *imageIdentifier = [imageURL lastPathComponent];
 	
 	// check if we have a thumbnail
 	
@@ -99,7 +100,7 @@
 	}
 	
 	// need to load it
-	image = [[DTDownloadCache sharedInstance] cachedImageForURL:imageUrl option:DTDownloadCacheOptionLoadIfNotCached completion:^(NSURL *URL, UIImage *image, NSError *error) {
+	image = [[DTDownloadCache sharedInstance] cachedImageForURL:imageURL option:DTDownloadCacheOptionLoadIfNotCached completion:^(NSURL *URL, UIImage *image, NSError *error) {
 		
 		if (error)
 		{
@@ -143,7 +144,7 @@
                 metadata = result;
                 [self updateView];
 
-                [_hud showWithText:[NSString stringWithFormat:@"Voting score: %d", [metadata.votingScore intValue]] image:[UIImage imageNamed:@"up_vote.png"]];
+                [_hud showWithText:[NSString stringWithFormat:@"Voting score: %lu", (unsigned long)metadata.votingScore] image:[UIImage imageNamed:@"up_vote.png"]];
                 [_hud hideAfterDelay:2.0f];
 			});
 		}
@@ -174,7 +175,7 @@
                 metadata = result;
                 [self updateView];
                 
-                [_hud showWithText:[NSString stringWithFormat:@"Voting score: %d", [metadata.votingScore intValue]] image:[UIImage imageNamed:@"down_vote.png"]];
+                [_hud showWithText:[NSString stringWithFormat:@"Voting score: %lu", (unsigned long)metadata.votingScore] image:[UIImage imageNamed:@"down_vote.png"]];
                 [_hud hideAfterDelay:2.0f];
 			});
 		}

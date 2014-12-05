@@ -6,35 +6,30 @@
 //  Copyright (c) 2013 Cocoanetics. All rights reserved.
 //
 
-#import "AppSettings.h"
+#import "PLYServer.h"
 
-#import "ProductLayer.h"
+#import "PLYConstants.h"
+#import "PLYEntities.h"
 
 #import "DTLog.h"
 #import "NSString+DTURLEncoding.h"
 #import "DTBlockFunctions.h"
-#import "AccountManager.h"
+#import "DTKeychain.h"
+#import "DTKeychainGenericPassword.h"
 
 #if TARGET_OS_IPHONE
 #import "UIApplication+DTNetworkActivity.h"
 #endif
 
-#define URLENC(string) [string \
-stringByAddingPercentEncodingWithAllowedCharacters:\
-[NSCharacterSet URLQueryAllowedCharacterSet]];
 
 // this is the URL for the endpoint server
-//#define PLY_ENDPOINT_URL [NSURL URLWithString:@"http://api.productlayer.com"]
-
-// TODO: test server, set back to live on release
-#define PLY_ENDPOINT_URL [NSURL URLWithString:@"http://176.9.158.164:28080"]
-
-//#define PLY_ENDPOINT_URL [NSURL URLWithString:@"http://10.211.55.7:8080"]
+#define PLY_ENDPOINT_URL [NSURL URLWithString:@"https://api.productlayer.com"]
 
 // this is a prefix added before REST methods, e.g. for a version of the API
-#define PLY_PATH_PREFIX @"0.2"
+#define PLY_PATH_PREFIX @"0.3"
 
 #define PLY_SERVICE [PLY_ENDPOINT_URL absoluteString]
+
 
 @implementation PLYServer
 {
@@ -61,7 +56,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 // designated initializer
 - (instancetype)init
 {
-    _performingLogin = false;
+    _performingLogin = NO;
     
 	// use default config, we need credential & caching
 	NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -121,13 +116,15 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 		// construct query string
 		NSMutableArray *tmpArray = [NSMutableArray array];
 		
-		for (NSString *key in sortedKeys) {
+		for (NSString *key in sortedKeys)
+		{
 			NSString *value = parameters[key];
 			
 			// URL-encode
-			NSString *encKey = URLENC(key);
-			if([value isKindOfClass:[NSString class]]){
-				value = URLENC(value);
+			NSString *encKey = [key stringByURLEncoding];
+			if([value isKindOfClass:[NSString class]])
+			{
+				value = [value stringByURLEncoding];
 			}
 			
 			// combine into pairs
@@ -193,12 +190,12 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	}
 
 	// Set basic authorization if available
-	if (basicAuth){
+	if (basicAuth)
+	{
 		[request setValue:basicAuth forHTTPHeaderField:@"Authorization"];
 	}
-   
 	
-	// Add the api key to each request.
+	// Add the API key to each request.
    NSAssert(_APIKey, @"Setting an API Key is required to perform requests. Use [[PLYServer sharedServer] setAPIKey:]");
 	[request setValue:_APIKey forHTTPHeaderField:@"API-KEY"];
 	
@@ -208,105 +205,59 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	// add body if set
 	if (payload)
 	{
-		if ([payload isKindOfClass:[UIImage class]])
+		NSData *payloadData;
+		
+		if ([payload isKindOfClass:[DTImage class]])
 		{
-			NSString *stringBoundary = @"0xKhTmLbOuNdArY---This_Is_ThE_BoUnDaRyy---pqo";
-			
-			// header value
-			NSString *headerBoundary = [NSString stringWithFormat:@"multipart/form-data; boundary=\"%@\"", stringBoundary];
-			
-			// set header
-			[request addValue:headerBoundary forHTTPHeaderField:@"Content-Type"];
-			
-			//NSData *imageData = (NSData *)_payload;
-			NSData *tmpPayload = UIImageJPEGRepresentation(payload, 0.5);
-			//NSData *base64Data = [tmpPayload base64EncodedDataWithOptions:NSDataBase64Encoding64CharacterLineLength | NSDataBase64EncodingEndLineWithCarriageReturn];
-			
-			NSMutableData *postBody = [NSMutableData data];
-			
-			// media part
-			[postBody appendData:[[NSString stringWithFormat:@"--%@\r\n", stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
-			[postBody appendData:[@"Content-Disposition: form-data; name=\"file\"; filename=\"dummy.jpg\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-			[postBody appendData:[@"Content-Type: image/jpeg; name=dummy.jpg\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-			[postBody appendData:[@"Content-ID: file\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-			[postBody appendData:[@"Content-Transfer-Encoding: binary\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-			
-			[postBody appendData:[NSData dataWithData:tmpPayload]];
-			[postBody appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-			
-			// final boundary
-			[postBody appendData:[[NSString stringWithFormat:@"--%@--\r\n", stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
-			
-			request.HTTPBody = postBody;
-			
-			// set the content-length
-			NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postBody length]];
-			[request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-			
+			payloadData = DTImageJPEGRepresentation(payload, 0.8);
+			[request setValue:@"image/jpeg" forHTTPHeaderField:@"Content-Type"];
 			request.timeoutInterval = 60;
 		}
 		else if ([payload isKindOfClass:[NSData class]])
 		{
-			NSString *stringBoundary = @"----=_Part_15_1001769400.1389805800711";
-			
-			// header value
-			NSString *headerBoundary = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", stringBoundary];
-			
-			// set header
-			[request addValue:headerBoundary forHTTPHeaderField:@"Content-Type"];
-			
-			//NSData *imageData = (NSData *)_payload;
-			NSData *base64Data = [payload base64EncodedDataWithOptions:NSDataBase64Encoding64CharacterLineLength | NSDataBase64EncodingEndLineWithCarriageReturn];
-			
-			//NSData *base64Data = UIImageJPEGRepresentation(_payload, 1.0);
-			
-			NSMutableData *postBody = [NSMutableData data];
-			
-			// media part
-			[postBody appendData:[[NSString stringWithFormat:@"--%@\r\n", stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
-			[postBody appendData:[@"Content-Disposition: form-data; name=\"file\"; filename=\"dummy.jpg\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-			[postBody appendData:[@"Content-Type: image/jpeg\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-			[postBody appendData:[@"Content-ID: attachment\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-			[postBody appendData:[@"Content-Transfer-Encoding: base64\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-			
-			[postBody appendData:base64Data];
-			[postBody appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-			
-			
-			// final boundary
-			[postBody appendData:[[NSString stringWithFormat:@"--%@--\r\n", stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
-			
-			request.HTTPBody = postBody;
-			
-			// set the content-length
-			NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postBody length]];
-			[request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+			payloadData = [payload copy];
+			[request setValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
 			
 			request.timeoutInterval = 60;
 		}
 		else if ([NSJSONSerialization isValidJSONObject:payload])
 		{
+			payloadData = [NSJSONSerialization dataWithJSONObject:payload options:0 error:NULL];
 			[request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-			
-			NSData *payloadData = [NSJSONSerialization dataWithJSONObject:payload options:0 error:NULL];
-			[request setHTTPBody:payloadData];
-			
-			NSString *payloadString = [[NSString alloc] initWithData:payloadData encoding:NSUTF8StringEncoding];
-			[debugMessage appendString:payloadString];
+			request.timeoutInterval = 10;
 		}
+		
+		// set header fields
+		NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[payloadData length]];
+		[request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+		
+		// set the body
+		request.HTTPBody = payloadData;
 	}
 	
 	[self startDataTaskForRequest:request completion:completion];
-	
 }
 
-- (void) startDataTaskForRequest:(NSMutableURLRequest *)request completion:(PLYCompletion)completion{
+- (void)startDataTaskForRequest:(NSMutableURLRequest *)request completion:(PLYCompletion)completion
+{
+#if TARGET_OS_IPHONE
+	// increment active requests
+	[[UIApplication sharedApplication] pushActiveNetworkOperation];
+#endif
+	
+	// remember user that was logged in when task was started
+	PLYUser *user = _loggedInUser;
 	
 	NSURLSessionDataTask *task = [[self session]
 											dataTaskWithRequest:request
 											completionHandler:^(NSData *data,
 																	  NSURLResponse *response,
 																	  NSError *error) {
+#if TARGET_OS_IPHONE
+												// decrement active requests
+												[[UIApplication sharedApplication] popActiveNetworkOperation];
+#endif
+												
 												NSError *retError = error;
 												id result = nil;
 												
@@ -368,6 +319,8 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 															DTLogDebug(@"%@", plainText);
 															
 															ignoreContent = YES;
+                                                            
+                                                            result = plainText;
 														}
 														else
 														{
@@ -376,6 +329,8 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 															
 															NSDictionary *userInfo = @{NSLocalizedDescriptionKey:  errorMessage};
 															error = [NSError errorWithDomain:PLYErrorDomain code:0 userInfo:userInfo];
+                                                            
+                                                            result = plainText;
 														}
 													} else if ([contentType hasPrefix:@"text/html"])
 													{
@@ -390,16 +345,32 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 													}
 												}
 												
+												if (user)
+												{
+													NSNumber *pointsNum = headers[@"X-ProductLayer-User-Points"];
+													
+													if (pointsNum)
+													{
+														[user setValue:pointsNum forKey:@"points"];
+													}
+												}
+												
 												if (!error && !ignoreContent)
 												{
 													id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
 													
 													// Try to parse the json object
-													if([jsonObject isKindOfClass:[NSArray class]] && [jsonObject count] != 0){
+													if ([jsonObject isKindOfClass:[NSArray class]] && [jsonObject count])
+													{
 														NSMutableArray *objectArray = [NSMutableArray arrayWithCapacity:1];
 														
 														for (NSDictionary *dictObject in jsonObject)
 														{
+															if (![dictObject isKindOfClass:[NSDictionary class]])
+															{
+																break;
+															}
+															
 															id object = [PLYEntity entityFromDictionary:dictObject];
 															
 															if (!object)
@@ -513,46 +484,99 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 
 - (void)_loadState
 {
-    // Load login data from keychain
-    NSArray *accounts = [[AccountManager sharedAccountManager] accountsForService:PLY_SERVICE];
-    
-    if(accounts && [accounts count] == 1){
-        
-        GenericAccount *account = [accounts objectAtIndex:0];
-        
-        if(account) {
-            [self loginWithUser:account.account password:account.password completion:^(id result, NSError *error) {
-                
-                if (error)
-                {
-                    DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login failed." message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-                        [alert show];
-                        
-                        // Delete account from the keychain if login failed.
-                        [[AccountManager sharedAccountManager] deleteGenericAccount:account];
-                    });
-                }
-                else
-                {
-                    DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-                        [self setLoggedInUser:result];
-                    });
-                }
-            }];
-        }
-    } else if(accounts && [accounts count] > 1){
-        // There should be only one account for productlayer for security reasons delete all accounts
-        for(GenericAccount *account in accounts){
-            [[AccountManager sharedAccountManager] delete:account];
-        }
-    }
+	DTKeychain *keychain = [DTKeychain sharedInstance];
+	NSArray *serviceAccounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:nil] error:NULL];
+	
+	if ([serviceAccounts count]>1)
+	{
+		// There should be only one account for productlayer for security reasons delete all accounts
+		
+		for (DTKeychainItem *item in serviceAccounts)
+		{
+			[keychain removeKeychainItem:item error:NULL];
+		}
+		
+		DTLogError(@"Found %d keychain items for service '%@', where maximum one was expected. Deleted all items.", [serviceAccounts count], PLY_SERVICE);
+		
+		return;
+	}
+	
+	DTKeychainGenericPassword *account = [serviceAccounts firstObject];
+	
+	if (account)
+	{
+		DTLogInfo(@"Logging in user '%@'", account.account);
+		
+		[self loginWithUser:account.account password:account.password completion:^(id result, NSError *error) {
+			if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == kCFURLErrorNotConnectedToInternet)
+			{
+				// no Internet
+				return;
+			}
+			
+			if (error)
+			{
+				DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+					NSDictionary *userInfo = @{@"Error": error};
+					[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerLoginErrorNotification
+																						 object:self
+																					  userInfo:userInfo];
+					
+					// Delete account from the keychain if login failed.
+					[keychain removeKeychainItem:account error:NULL];
+				});
+			}
+			else
+			{
+				DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+					[self setLoggedInUser:result];
+				});
+			}
+		}];
+	}
 }
 
-- (void) setLoggedInUser:(PLYUser *)loggedInUser{
-    _loggedInUser = loggedInUser;
-    
-	[[NSNotificationCenter defaultCenter] postNotificationName:PLYNotifyUserStatusChanged object:nil];
+- (void)renewSessionIfNecessary
+{
+    // Only if the user is logged in check if the session is still valid.
+    if (!self.loggedInUser)
+	 {
+		 return;
+	 }
+	 
+	[self isSignedInWithCompletion:^(id result, NSError *error) {
+		if (error)
+		{
+			if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == kCFURLErrorNotConnectedToInternet)
+			{
+				// no Internet
+				return;
+			}
+			
+			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+				NSDictionary *userInfo = @{@"Error": error};
+				[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerLoginErrorNotification
+																					 object:self
+																				  userInfo:userInfo];
+			});
+		}
+		else
+		{
+			if([result isEqualToString:@"true"]){
+				// Nothing to do the session is valid.
+			} else {
+				// Renew the session.
+				[self _loadState];
+			}
+		}
+	}];
+}
+
+- (void)setLoggedInUser:(PLYUser *)loggedInUser
+{
+	[self willChangeValueForKey:@"loggedInUser"];
+	_loggedInUser = loggedInUser;
+	[self didChangeValueForKey:@"loggedInUser"];
 }
 
 
@@ -569,8 +593,8 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 									 name:nil
 								language:language
 								 orderBy:@"pl-lng_asc"
-									 page:nil
-						recordsPerPage:nil
+									 page:0
+						recordsPerPage:0
 							 completion:completion];
 }
 
@@ -584,8 +608,8 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 									 name:name
 								language:language
 								 orderBy:@"pl-prod-name_asc"
-									 page:nil
-						recordsPerPage:nil
+									 page:0
+						recordsPerPage:0
 							 completion:completion];
 }
 
@@ -596,8 +620,8 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
                            name:(NSString *)name
                        language:(NSString *)language
                         orderBy:(NSString *)orderBy
-                           page:(NSNumber *)page
-                 recordsPerPage:(NSNumber *)rpp
+                           page:(NSUInteger)page
+                 recordsPerPage:(NSUInteger)rpp
 							completion:(PLYCompletion)completion
 {
 	NSString *path = [self _functionPathForFunction:@"products"];
@@ -608,8 +632,8 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	if (language)   [parameters setObject:language forKey:@"language"];
 	if (name)       [parameters setObject:name     forKey:@"name"];
 	if (orderBy)    [parameters setObject:orderBy  forKey:@"order_by"];
-	if (page)       [parameters setObject:page     forKey:@"page"];
-	if (rpp)        [parameters setObject:rpp      forKey:@"records_per_page"];
+	if (page)       [parameters setObject:@(page)     forKey:@"page"];
+	if (rpp)        [parameters setObject:@(rpp)      forKey:@"records_per_page"];
 	
 	[self _performMethodCallWithPath:path
 								 parameters:parameters
@@ -676,7 +700,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	NSParameterAssert(password);
 	NSParameterAssert(completion);
     
-    _performingLogin = true;
+    _performingLogin = YES;
 	
 	NSString *path = [self _functionPathForFunction:@"login"];
 	
@@ -689,18 +713,24 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 		if (!error && [result isKindOfClass:PLYUser.class])
 		{
 			[self setLoggedInUser:result];
-            
-            // Search for account in keychain.
-            GenericAccount *account = [[AccountManager sharedAccountManager] loadGenericAccountForService:PLY_SERVICE forAccount:user];
-            
-            if(!account) {
-                // Create new account if no existing account have been found.
-                account = [[AccountManager sharedAccountManager] createGenericAccountForService:PLY_SERVICE forAccount:user];
-            }
-            [account setPassword:password];
-            
-            // Save account into keychain
-            [[AccountManager sharedAccountManager] saveGenericAccount:account];
+			
+			// Search for account in keychain.
+			DTKeychain *keychain = [DTKeychain sharedInstance];
+			DTKeychainGenericPassword *serviceAccount = [[keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:user] error:NULL] lastObject];
+			
+			// create new account
+			if (!serviceAccount)
+			{
+				serviceAccount = [DTKeychainGenericPassword new];
+				serviceAccount.service = PLY_SERVICE;
+				serviceAccount.account = user;
+			}
+			
+			// always update password
+			serviceAccount.password = password;
+			
+			// persist
+			[keychain writeKeychainItem:serviceAccount error:NULL];
 		}
 		
 		if (wrappedCompletion)
@@ -708,7 +738,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 			wrappedCompletion(result, error);
 		}
         
-        _performingLogin = false;
+        _performingLogin = NO;
 	};
 	
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil basicAuth:authValue completion:ownCompletion];
@@ -729,9 +759,12 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	NSParameterAssert(completion);
     
     // Remove account from keychain.
-    if(_loggedInUser)
+    if (_loggedInUser)
     {
-        [[AccountManager sharedAccountManager] deleteGenericAccount:_loggedInUser.nickname andService:PLY_SERVICE];
+		 DTKeychain *keychain = [DTKeychain sharedInstance];
+		 
+		 NSArray *accounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:_loggedInUser.nickname] error:NULL];
+		 [keychain removeKeychainItems:accounts error:NULL];
     }
 	
 	NSString *path = [self _functionPathForFunction:@"logout"];
@@ -739,6 +772,19 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:completion];
     
 	[self setLoggedInUser:nil];
+}
+
+/**
+ * Check if user is signed in
+ **/
+- (void)isSignedInWithCompletion:(PLYCompletion)completion
+{
+    NSString *path = [self _functionPathForFunction:@"signedin"];
+    
+    
+    [self _performMethodCallWithPath:path
+                          parameters:nil
+                          completion:completion];
 }
 
 /**
@@ -756,6 +802,72 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:completion];
 }
 
+/**
+ Determines an image URL for the given PLYUser
+  */
+- (NSURL *)avatarImageURLForUser:(PLYUser *)user
+{
+	NSParameterAssert(user);
+	NSAssert(user.Id, @"User needs to have an identifier to retrieve an avator URL");
+	
+	NSString *function = [NSString stringWithFormat:@"/user/%@/avatar", user.Id];
+	NSString *path = [self _functionPathForFunction:function];
+
+	return [self _methodURLForPath:path parameters:nil];
+}
+
+- (void)uploadAvatarImage:(DTImage *)image forUser:(PLYUser *)user completion:(PLYCompletion)completion
+{
+	NSParameterAssert(image);
+	NSParameterAssert(completion);
+	
+	NSString *function = [NSString stringWithFormat:@"/user/%@/avatar", user.Id];
+	NSString *path = [self _functionPathForFunction:function];
+	
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		// reset logged in user avatar URL
+		if ([user.Id isEqualToString:self.loggedInUser.Id])
+		{
+			PLYUserAvatar *avatar = (PLYUserAvatar *)result;
+			
+			// update ID
+			[self.loggedInUser setValue:avatar.Id forKey:@"avatarImageIdentifier"];
+			
+			// reset image URL, this triggers reloading of the image
+			[self.loggedInUser setValue:[self avatarImageURLForUser:user] forKey:@"avatarURL"];
+		}
+		
+		completion(result, error);
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:image completion:wrappedCompletion];
+}
+
+- (void)resetAvatarForUser:(PLYUser *)user completion:(PLYCompletion)completion
+{
+	NSString *function = [NSString stringWithFormat:@"/user/%@/avatar", user.Id];
+	NSString *path = [self _functionPathForFunction:function];
+	
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		// reset logged in user avatar URL
+		if ([user.Id isEqualToString:self.loggedInUser.Id])
+		{
+			// remove the image ID to disable the delete option
+			[self.loggedInUser setValue:nil forKey:@"avatarImageIdentifier"];
+			
+			// reset image URL, this triggers reloading of the image
+			[self.loggedInUser setValue:[self avatarImageURLForUser:user] forKey:@"avatarURL"];
+		}
+		
+		if (completion)
+		{
+			completion(result, error);
+		}
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil payload:nil completion:wrappedCompletion];
+}
+
 #pragma mark - Managing Products
 
 /**
@@ -765,7 +877,6 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 - (void)createProductWithGTIN:(NSString *)gtin dictionary:(NSDictionary *)dictionary completion:(PLYCompletion)completion
 {
 	NSParameterAssert(gtin);
-	NSParameterAssert(dictionary);
 	NSParameterAssert(completion);
 	
 	NSString *path = [self _functionPathForFunction:@"products"];
@@ -788,6 +899,29 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:dictionary completion:completion];
 }
 
+
+#pragma mark - Working with Brands and Brand Owners
+
+- (void)getRecommendedBrandOwnersForGTIN:(NSString *)GTIN
+										completion:(PLYCompletion)completion
+{
+	NSParameterAssert(GTIN);
+	NSParameterAssert(completion);
+	
+	NSString *path = [self _functionPathForFunction:[NSString stringWithFormat:@"/product/%@/recommended_brand_owners", GTIN]];
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:nil completion:completion];
+}
+
+
+- (void)getBrandsWithCompletion:(PLYCompletion)completion
+{
+	NSString *path = [self _functionPathForFunction:[NSString stringWithFormat:@"/products/brands"]];
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:nil completion:completion];
+}
+
+
 #pragma mark - Image Handling
 
 /**
@@ -808,7 +942,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
  * Upload a image for a product.
  * ATTENTION: Login required
  **/
-- (void)uploadImageData:(UIImage *)data forGTIN:(NSString *)gtin completion:(PLYCompletion)completion
+- (void)uploadImageData:(DTImage *)data forGTIN:(NSString *)gtin completion:(PLYCompletion)completion
 {
 	NSParameterAssert(gtin);
 	NSParameterAssert(data);
@@ -820,15 +954,44 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:data completion:completion];
 }
 
+- (NSURL *)URLForImage:(PLYImage *)image maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop;{
+	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:3];
+	
+	if (maxWidth>0)
+	{
+		[parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxWidth] forKey:@"max_width"];
+	}
+	
+	if (maxHeight>0)
+	{
+		[parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxHeight] forKey:@"max_height"];
+	}
+	
+	if (crop)
+	{
+		[parameters setObject:@"true" forKey:@"crop"];
+	}
+	
+	if (image.imageURL)
+	{
+		NSString *urlString = [image.imageURL absoluteString];
+		NSString *path = [PLYServer _addQueryParameterToUrl:urlString parameters:parameters];
+		
+		return [NSURL URLWithString:path];
+	}
+	
+	return nil;
+}
+
 #pragma mark - Opines
 
 - (void) performSearchForOpineWithGTIN:(NSString *)gtin
                           withLanguage:(NSString *)language
                   fromUserWithNickname:(NSString *)nickname
-                        showFiendsOnly:(BOOL *)showFiendsOnly
+                        showFriendsOnly:(BOOL *)showFriendsOnly
                                orderBy:(NSString *)orderBy
-                                  page:(NSNumber *)page
-                        recordsPerPage:(NSNumber *)rpp
+                                  page:(NSUInteger)page
+                        recordsPerPage:(NSUInteger)rpp
                             completion:(PLYCompletion)completion
 {
 	NSParameterAssert(completion);
@@ -842,31 +1005,24 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	if (language)       [parameters setObject:language forKey:@"language"];
 	if (nickname)       [parameters setObject:nickname forKey:@"nickname"];
 	
-    if (showFiendsOnly) [parameters setObject:@"true"   forKey:@"show_fiends_only"];
-    else                [parameters setObject:@"false"   forKey:@"show_fiends_only"];
+    if (showFriendsOnly) [parameters setObject:@"true"   forKey:@"show_friends_only"];
+    else                [parameters setObject:@"false"   forKey:@"show_friends_only"];
 	
     if (orderBy)        [parameters setObject:orderBy  forKey:@"order_by"];
-	if (page)           [parameters setObject:page     forKey:@"page"];
-	if (rpp)            [parameters setObject:rpp      forKey:@"records_per_page"];
+	if (page)           [parameters setObject:@(page)     forKey:@"page"];
+	if (rpp)            [parameters setObject:@(rpp)      forKey:@"records_per_page"];
 	
 	[self _performMethodCallWithPath:path parameters:parameters completion:completion];
 }
 
 - (void)createOpine:(PLYOpine *)opine
-         completion:(PLYCompletion)completion{
-
+			completion:(PLYCompletion)completion
+{
 	NSParameterAssert(opine);
-    NSParameterAssert(opine.parent);
-    NSParameterAssert(opine.text);
-    NSParameterAssert(opine.GTIN);
-    NSParameterAssert(opine.language);
+	NSParameterAssert(opine.text);
+	NSParameterAssert(opine.GTIN);
+	NSParameterAssert(opine.language);
 	NSParameterAssert(completion);
-    
-    // only the reference to the entity is needed, so we reduce it.
-    PLYVotableEntity *reducedParent = [[PLYVotableEntity alloc] init];
-    reducedParent.Class = opine.parent.Class;
-    reducedParent.Id = opine.parent.Id;
-    [opine setParent:reducedParent];
 	
 	NSString *function = @"opines";
 	NSString *path = [self _functionPathForFunction:function];
@@ -882,10 +1038,10 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 - (void) performSearchForReviewWithGTIN:(NSString *)gtin
                            withLanguage:(NSString *)language
                    fromUserWithNickname:(NSString *)nickname
-                             withRating:(NSNumber *)rating
+                             withRating:(float)rating
                                 orderBy:(NSString *)orderBy
-                                   page:(NSNumber *)page
-                         recordsPerPage:(NSNumber *)rpp
+                                   page:(NSUInteger)page
+                         recordsPerPage:(NSUInteger)rpp
                              completion:(PLYCompletion)completion
 {
 	NSParameterAssert(completion);
@@ -895,13 +1051,13 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	
 	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
 	
-	if (gtin)       [parameters setObject:gtin     forKey:@"gtin"];
-	if (language)   [parameters setObject:language forKey:@"language"];
-	if (nickname)   [parameters setObject:nickname forKey:@"nickname"];
-	if (rating)     [parameters setObject:rating   forKey:@"rating"];
-	if (orderBy)    [parameters setObject:orderBy  forKey:@"order_by"];
-	if (page)       [parameters setObject:page     forKey:@"page"];
-	if (rpp)        [parameters setObject:rpp      forKey:@"records_per_page"];
+	if (gtin)       [parameters setObject:gtin      forKey:@"gtin"];
+	if (language)   [parameters setObject:language  forKey:@"language"];
+	if (nickname)   [parameters setObject:nickname  forKey:@"nickname"];
+	if (rating)     [parameters setObject:@(rating) forKey:@"rating"];
+	if (orderBy)    [parameters setObject:orderBy   forKey:@"order_by"];
+	if (page)       [parameters setObject:@(page)   forKey:@"page"];
+	if (rpp)        [parameters setObject:@(rpp)    forKey:@"records_per_page"];
 	
 	[self _performMethodCallWithPath:path parameters:parameters completion:completion];
 }
@@ -948,8 +1104,8 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
  **/
 - (void) performSearchForProductListFromUser:(PLYUser *)user
                                  andListType:(NSString *)listType
-                                        page:(NSNumber *)page
-                              recordsPerPage:(NSNumber *)rpp
+                                        page:(NSUInteger)page
+                              recordsPerPage:(NSUInteger)rpp
                                   completion:(PLYCompletion)completion{
 	
 	NSParameterAssert(completion);
@@ -961,8 +1117,8 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	
 	if (user)       [parameters setObject:user.Id  forKey:@"user_id"];
 	if (listType)   [parameters setObject:listType forKey:@"language"];
-	if (page)       [parameters setObject:page     forKey:@"page"];
-	if (rpp)        [parameters setObject:rpp      forKey:@"records_per_page"];
+	if (page)       [parameters setObject:@(page)     forKey:@"page"];
+	if (rpp)        [parameters setObject:@(rpp)      forKey:@"records_per_page"];
 	
 	[self _performMethodCallWithPath:path parameters:parameters completion:completion];
 }
@@ -1111,38 +1267,12 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 }
 
 /**
- * Get the avatar of an specific user with nickname.
- **/
-- (void) getAvatarImageUrlFromUser:(PLYUser *)user
-								completion:(PLYCompletion)completion
-{
-	NSParameterAssert(user);
-	NSParameterAssert(completion);
-	
-	NSURL *url = nil;
-	
-	if (user.avatarURL)
-	{
-		url = user.avatarURL;
-	}
-	else if(user.nickname)
-	{
-		NSString *function = [NSString stringWithFormat:@"user/%@/avatar", user.nickname];
-		NSString *path = [self _functionPathForFunction:function];
-		
-		url = [NSURL URLWithString:path relativeToURL:_hostURL];
-	}
-	
-	completion(url, nil);
-}
-
-/**
  * Returns the follower from a specific user.
  * ATTENTION: Login required
  **/
 - (void) getFollowerFromUser:(NSString *)nickname
-                        page:(NSNumber *)page
-              recordsPerPage:(NSNumber *)rpp
+                        page:(NSUInteger)page
+              recordsPerPage:(NSUInteger)rpp
                   completion:(PLYCompletion)completion{
 	NSParameterAssert(nickname);
 	NSParameterAssert(completion);
@@ -1152,8 +1282,8 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	
 	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
 	
-	if (page)       [parameters setObject:page     forKey:@"page"];
-	if (rpp)        [parameters setObject:rpp      forKey:@"records_per_page"];
+	if (page)       [parameters setObject:@(page)     forKey:@"page"];
+	if (rpp)        [parameters setObject:@(rpp)      forKey:@"records_per_page"];
 	
 	[self _performMethodCallWithPath:path parameters:parameters completion:completion];
 }
@@ -1163,8 +1293,8 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
  * ATTENTION: Login required
  **/
 - (void) getFollowingFromUser:(NSString *)nickname
-                         page:(NSNumber *)page
-               recordsPerPage:(NSNumber *)rpp
+                         page:(NSUInteger)page
+               recordsPerPage:(NSUInteger)rpp
 						 completion:(PLYCompletion)completion{
 	NSParameterAssert(nickname);
 	NSParameterAssert(completion);
@@ -1174,8 +1304,8 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	
 	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
 	
-	if (page)       [parameters setObject:page     forKey:@"page"];
-	if (rpp)        [parameters setObject:rpp      forKey:@"records_per_page"];
+	if (page)       [parameters setObject:@(page)     forKey:@"page"];
+	if (rpp)        [parameters setObject:@(rpp)      forKey:@"records_per_page"];
 	
 	[self _performMethodCallWithPath:path parameters:parameters completion:completion];
 }
@@ -1234,7 +1364,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 
 #pragma mark - Timelines
 
-- (void)timelineForAllUsersWithCount:(NSNumber *)count completion:(PLYCompletion)completion
+- (void)timelineForAllUsersWithCount:(NSUInteger)count completion:(PLYCompletion)completion
 {
 	NSParameterAssert(completion);
 	
@@ -1248,7 +1378,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
                             completion:completion];
 }
 
-- (void)timelineForAllUsersWithCount:(NSNumber *)count
+- (void)timelineForAllUsersWithCount:(NSUInteger)count
                              sinceID:(NSString *)sinceID
                              untilID:(NSString *)untilID
                           showOpines:(BOOL)showOpines
@@ -1273,7 +1403,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 	[self _performMethodCallWithPath:path parameters:params completion:completion];
 }
 
-- (void)timelineForMeWithCount:(NSNumber *)count
+- (void)timelineForMeWithCount:(NSUInteger)count
                              sinceID:(NSString *)sinceID
                              untilID:(NSString *)untilID
                           showOpines:(BOOL)showOpines
@@ -1301,7 +1431,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 - (void)timelineForUser:(NSString *)nickname
                 sinceID:(NSString *)sinceID
                 untilID:(NSString *)untilID
-                  count:(NSNumber *)count
+                  count:(NSUInteger)count
              showOpines:(BOOL)showOpines
             showReviews:(BOOL)showReviews
              showImages:(BOOL)showImages
@@ -1328,7 +1458,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 - (void)timelineForProduct:(NSString *)GTIN
                    sinceID:(NSString *)sinceID
                    untilID:(NSString *)untilID
-                     count:(NSNumber *)count
+                     count:(NSUInteger)count
                 showOpines:(BOOL)showOpines
                showReviews:(BOOL)showReviews
                 showImages:(BOOL)showImages
@@ -1354,7 +1484,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
 
 - (NSMutableDictionary *) createTimelineParameterWithSinceID:(NSString *)sinceID
                                                      untilID:(NSString *)untilID
-                                                       count:(NSNumber *)count
+                                                       count:(NSUInteger)count
                                                   showOpines:(BOOL)showOpines
                                                  showReviews:(BOOL)showReviews
                                                   showImages:(BOOL)showImages
@@ -1364,7 +1494,7 @@ stringByAddingPercentEncodingWithAllowedCharacters:\
     
     if (sinceID)            [tmp setObject:sinceID forKey:@"since_id"];
     if (untilID)            [tmp setObject:untilID forKey:@"until_id"];
-    if (count && count > 0) [tmp setObject:count forKey:@"count"];
+    if (count)              [tmp setObject:@(count) forKey:@"count"];
     
     [tmp setObject:((showOpines)   ? @"true" : @"false") forKey:@"opines"];
     [tmp setObject:((showReviews)  ? @"true" : @"false") forKey:@"reviews"];

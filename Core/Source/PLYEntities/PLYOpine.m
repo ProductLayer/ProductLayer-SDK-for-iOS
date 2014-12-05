@@ -7,6 +7,7 @@
 //
 
 #import "PLYOpine.h"
+#import "PLYImage.h"
 
 @implementation PLYOpine
 
@@ -57,6 +58,22 @@
 			self.images = tmpArray;
 		}
 	}
+	else if ([key isEqualToString:@"pl-share-twitter"])
+	{
+		[self setValue:value forKey:@"shareOnTwitter"];
+	}
+	else if ([key isEqualToString:@"pl-share-facebook"])
+	{
+		[self setValue:value forKey:@"shareOnFacebook"];
+	}
+	else if ([key isEqualToString:@"pl-share-twitter-post_id"])
+	{
+		[self setValue:value forKey:@"twitterPostIdentifier"];
+	}
+	else if ([key isEqualToString:@"pl-share-facebook-post_id"])
+	{
+		[self setValue:value forKey:@"facebookPostIdentifier"];
+	}
 	else
 	{
 		[super setValue:value forKey:key];
@@ -74,7 +91,7 @@
 	
 	if (_parent)
 	{
-		dict[@"pl-parent"] = [_parent dictionaryRepresentation];
+		dict[@"pl-parent"] = [_parent objectReference];
 	}
 	
 	if (_GTIN)
@@ -91,6 +108,16 @@
 	{
 		dict[@"pl-opine-location"] = @{@"latitude" : @(_location.latitude),
 												 @"longitude" : @(_location.longitude)};
+	}
+	
+	if (_shareOnFacebook)
+	{
+		dict[@"pl-share-facebook"] = @(_shareOnFacebook);
+	}
+	
+	if (_shareOnTwitter)
+	{
+		dict[@"pl-share-twitter"] = @(_shareOnTwitter);
 	}
 	
 	if ([_images count])

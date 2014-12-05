@@ -109,6 +109,7 @@ NSArray *PLYAllEntityClasses()
 	return self;
 }
 
+
 #pragma mark - Value Getting/Setting
 
 // setting common values from dictionary
@@ -198,11 +199,26 @@ NSArray *PLYAllEntityClasses()
 	
 	if (_version)
 	{
-		dict[@"pl-version"] = _version;
+		dict[@"pl-version"] = @(_version);
 	}
 	
 	// return immutable
 	return [dict copy];
+}
+
+- (NSDictionary *)objectReference
+{
+	if (!_Class || !_Id)
+	{
+		return nil;
+	}
+	
+	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+	
+	dict[@"pl-class"] = _Class;
+	dict[@"pl-id"] = _Id;
+	
+	return dict;
 }
 
 #pragma mark - NSCopying

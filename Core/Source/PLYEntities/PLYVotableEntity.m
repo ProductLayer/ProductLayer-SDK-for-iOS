@@ -44,7 +44,7 @@
 	}
 	else if ([key isEqualToString:@"pl-vote-score"])
 	{
-		self.votingScore = value;
+		[self setValue:value forKey:@"votingScore"];
 	}
 	else
 	{
@@ -58,7 +58,7 @@
 	
 	if (_votingScore)
 	{
-		dict[@"pl-vote-score"] = _votingScore;
+		dict[@"pl-vote-score"] = @(_votingScore);
 	}
 	
 	if ([_upVoter count])

@@ -49,7 +49,7 @@
 }
 
 -(void) updateCell{
-    _productImage.hidden = true;
+    _productImage.hidden = YES;
     
     [_productName setText:_product.name];
     
@@ -85,8 +85,8 @@
                 
                 int imageSize = _productImage.frame.size.width*[[UIScreen mainScreen] scale];
                 
-                NSURL *imageURL = [NSURL URLWithString:[imageMeta getUrlForWidth:imageSize andHeight:imageSize crop:true]];
-                
+					NSURL *imageURL = [[PLYServer sharedServer] URLForImage:imageMeta maxWidth:imageSize maxHeight:imageSize crop:YES];
+					
                 NSString *imageIdentifier = [imageURL lastPathComponent];
                 
                 // check if we have a cached version
@@ -136,7 +136,7 @@
                 [_productImage setImage:[UIImage imageNamed:@"no_image.png"]];
             }
             
-            _productImage.hidden = false;
+            _productImage.hidden = NO;
 		});
 	}];
 }

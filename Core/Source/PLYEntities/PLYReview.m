@@ -34,7 +34,7 @@
 	}
 	else if ([key isEqualToString:@"pl-rev-rating"])
 	{
-		self.rating = value;
+		[self setValue:value forKey:@"rating"];
 	}
 	else if ([key isEqualToString:@"pl-lng"])
 	{
@@ -67,7 +67,7 @@
 	
 	if (_rating)
 	{
-		dict[@"pl-rev-rating"] = _rating;
+		dict[@"pl-rev-rating"] = @(_rating);
 	}
 	
 	if (_language)
