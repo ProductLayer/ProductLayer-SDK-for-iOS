@@ -593,8 +593,8 @@
 									 name:nil
 								language:language
 								 orderBy:@"pl-lng_asc"
-									 page:nil
-						recordsPerPage:nil
+									 page:0
+						recordsPerPage:0
 							 completion:completion];
 }
 
@@ -608,8 +608,8 @@
 									 name:name
 								language:language
 								 orderBy:@"pl-prod-name_asc"
-									 page:nil
-						recordsPerPage:nil
+									 page:0
+						recordsPerPage:0
 							 completion:completion];
 }
 
@@ -620,8 +620,8 @@
                            name:(NSString *)name
                        language:(NSString *)language
                         orderBy:(NSString *)orderBy
-                           page:(NSNumber *)page
-                 recordsPerPage:(NSNumber *)rpp
+                           page:(NSUInteger)page
+                 recordsPerPage:(NSUInteger)rpp
 							completion:(PLYCompletion)completion
 {
 	NSString *path = [self _functionPathForFunction:@"products"];
@@ -632,8 +632,8 @@
 	if (language)   [parameters setObject:language forKey:@"language"];
 	if (name)       [parameters setObject:name     forKey:@"name"];
 	if (orderBy)    [parameters setObject:orderBy  forKey:@"order_by"];
-	if (page)       [parameters setObject:page     forKey:@"page"];
-	if (rpp)        [parameters setObject:rpp      forKey:@"records_per_page"];
+	if (page)       [parameters setObject:@(page)     forKey:@"page"];
+	if (rpp)        [parameters setObject:@(rpp)      forKey:@"records_per_page"];
 	
 	[self _performMethodCallWithPath:path
 								 parameters:parameters
@@ -990,8 +990,8 @@
                   fromUserWithNickname:(NSString *)nickname
                         showFiendsOnly:(BOOL *)showFiendsOnly
                                orderBy:(NSString *)orderBy
-                                  page:(NSNumber *)page
-                        recordsPerPage:(NSNumber *)rpp
+                                  page:(NSUInteger)page
+                        recordsPerPage:(NSUInteger)rpp
                             completion:(PLYCompletion)completion
 {
 	NSParameterAssert(completion);
@@ -1009,8 +1009,8 @@
     else                [parameters setObject:@"false"   forKey:@"show_fiends_only"];
 	
     if (orderBy)        [parameters setObject:orderBy  forKey:@"order_by"];
-	if (page)           [parameters setObject:page     forKey:@"page"];
-	if (rpp)            [parameters setObject:rpp      forKey:@"records_per_page"];
+	if (page)           [parameters setObject:@(page)     forKey:@"page"];
+	if (rpp)            [parameters setObject:@(rpp)      forKey:@"records_per_page"];
 	
 	[self _performMethodCallWithPath:path parameters:parameters completion:completion];
 }
@@ -1038,10 +1038,10 @@
 - (void) performSearchForReviewWithGTIN:(NSString *)gtin
                            withLanguage:(NSString *)language
                    fromUserWithNickname:(NSString *)nickname
-                             withRating:(NSNumber *)rating
+                             withRating:(float)rating
                                 orderBy:(NSString *)orderBy
-                                   page:(NSNumber *)page
-                         recordsPerPage:(NSNumber *)rpp
+                                   page:(NSUInteger)page
+                         recordsPerPage:(NSUInteger)rpp
                              completion:(PLYCompletion)completion
 {
 	NSParameterAssert(completion);
@@ -1051,13 +1051,13 @@
 	
 	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
 	
-	if (gtin)       [parameters setObject:gtin     forKey:@"gtin"];
-	if (language)   [parameters setObject:language forKey:@"language"];
-	if (nickname)   [parameters setObject:nickname forKey:@"nickname"];
-	if (rating)     [parameters setObject:rating   forKey:@"rating"];
-	if (orderBy)    [parameters setObject:orderBy  forKey:@"order_by"];
-	if (page)       [parameters setObject:page     forKey:@"page"];
-	if (rpp)        [parameters setObject:rpp      forKey:@"records_per_page"];
+	if (gtin)       [parameters setObject:gtin      forKey:@"gtin"];
+	if (language)   [parameters setObject:language  forKey:@"language"];
+	if (nickname)   [parameters setObject:nickname  forKey:@"nickname"];
+	if (rating)     [parameters setObject:@(rating) forKey:@"rating"];
+	if (orderBy)    [parameters setObject:orderBy   forKey:@"order_by"];
+	if (page)       [parameters setObject:@(page)   forKey:@"page"];
+	if (rpp)        [parameters setObject:@(rpp)    forKey:@"records_per_page"];
 	
 	[self _performMethodCallWithPath:path parameters:parameters completion:completion];
 }
@@ -1104,8 +1104,8 @@
  **/
 - (void) performSearchForProductListFromUser:(PLYUser *)user
                                  andListType:(NSString *)listType
-                                        page:(NSNumber *)page
-                              recordsPerPage:(NSNumber *)rpp
+                                        page:(NSUInteger)page
+                              recordsPerPage:(NSUInteger)rpp
                                   completion:(PLYCompletion)completion{
 	
 	NSParameterAssert(completion);
@@ -1117,8 +1117,8 @@
 	
 	if (user)       [parameters setObject:user.Id  forKey:@"user_id"];
 	if (listType)   [parameters setObject:listType forKey:@"language"];
-	if (page)       [parameters setObject:page     forKey:@"page"];
-	if (rpp)        [parameters setObject:rpp      forKey:@"records_per_page"];
+	if (page)       [parameters setObject:@(page)     forKey:@"page"];
+	if (rpp)        [parameters setObject:@(rpp)      forKey:@"records_per_page"];
 	
 	[self _performMethodCallWithPath:path parameters:parameters completion:completion];
 }
@@ -1271,8 +1271,8 @@
  * ATTENTION: Login required
  **/
 - (void) getFollowerFromUser:(NSString *)nickname
-                        page:(NSNumber *)page
-              recordsPerPage:(NSNumber *)rpp
+                        page:(NSUInteger)page
+              recordsPerPage:(NSUInteger)rpp
                   completion:(PLYCompletion)completion{
 	NSParameterAssert(nickname);
 	NSParameterAssert(completion);
@@ -1282,8 +1282,8 @@
 	
 	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
 	
-	if (page)       [parameters setObject:page     forKey:@"page"];
-	if (rpp)        [parameters setObject:rpp      forKey:@"records_per_page"];
+	if (page)       [parameters setObject:@(page)     forKey:@"page"];
+	if (rpp)        [parameters setObject:@(rpp)      forKey:@"records_per_page"];
 	
 	[self _performMethodCallWithPath:path parameters:parameters completion:completion];
 }
@@ -1293,8 +1293,8 @@
  * ATTENTION: Login required
  **/
 - (void) getFollowingFromUser:(NSString *)nickname
-                         page:(NSNumber *)page
-               recordsPerPage:(NSNumber *)rpp
+                         page:(NSUInteger)page
+               recordsPerPage:(NSUInteger)rpp
 						 completion:(PLYCompletion)completion{
 	NSParameterAssert(nickname);
 	NSParameterAssert(completion);
@@ -1304,8 +1304,8 @@
 	
 	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
 	
-	if (page)       [parameters setObject:page     forKey:@"page"];
-	if (rpp)        [parameters setObject:rpp      forKey:@"records_per_page"];
+	if (page)       [parameters setObject:@(page)     forKey:@"page"];
+	if (rpp)        [parameters setObject:@(rpp)      forKey:@"records_per_page"];
 	
 	[self _performMethodCallWithPath:path parameters:parameters completion:completion];
 }
@@ -1364,7 +1364,7 @@
 
 #pragma mark - Timelines
 
-- (void)timelineForAllUsersWithCount:(NSNumber *)count completion:(PLYCompletion)completion
+- (void)timelineForAllUsersWithCount:(NSUInteger)count completion:(PLYCompletion)completion
 {
 	NSParameterAssert(completion);
 	
@@ -1378,7 +1378,7 @@
                             completion:completion];
 }
 
-- (void)timelineForAllUsersWithCount:(NSNumber *)count
+- (void)timelineForAllUsersWithCount:(NSUInteger)count
                              sinceID:(NSString *)sinceID
                              untilID:(NSString *)untilID
                           showOpines:(BOOL)showOpines
@@ -1403,7 +1403,7 @@
 	[self _performMethodCallWithPath:path parameters:params completion:completion];
 }
 
-- (void)timelineForMeWithCount:(NSNumber *)count
+- (void)timelineForMeWithCount:(NSUInteger)count
                              sinceID:(NSString *)sinceID
                              untilID:(NSString *)untilID
                           showOpines:(BOOL)showOpines
@@ -1431,7 +1431,7 @@
 - (void)timelineForUser:(NSString *)nickname
                 sinceID:(NSString *)sinceID
                 untilID:(NSString *)untilID
-                  count:(NSNumber *)count
+                  count:(NSUInteger)count
              showOpines:(BOOL)showOpines
             showReviews:(BOOL)showReviews
              showImages:(BOOL)showImages
@@ -1458,7 +1458,7 @@
 - (void)timelineForProduct:(NSString *)GTIN
                    sinceID:(NSString *)sinceID
                    untilID:(NSString *)untilID
-                     count:(NSNumber *)count
+                     count:(NSUInteger)count
                 showOpines:(BOOL)showOpines
                showReviews:(BOOL)showReviews
                 showImages:(BOOL)showImages
@@ -1484,7 +1484,7 @@
 
 - (NSMutableDictionary *) createTimelineParameterWithSinceID:(NSString *)sinceID
                                                      untilID:(NSString *)untilID
-                                                       count:(NSNumber *)count
+                                                       count:(NSUInteger)count
                                                   showOpines:(BOOL)showOpines
                                                  showReviews:(BOOL)showReviews
                                                   showImages:(BOOL)showImages
@@ -1494,7 +1494,7 @@
     
     if (sinceID)            [tmp setObject:sinceID forKey:@"since_id"];
     if (untilID)            [tmp setObject:untilID forKey:@"until_id"];
-    if (count && count > 0) [tmp setObject:count forKey:@"count"];
+    if (count)              [tmp setObject:@(count) forKey:@"count"];
     
     [tmp setObject:((showOpines)   ? @"true" : @"false") forKey:@"opines"];
     [tmp setObject:((showReviews)  ? @"true" : @"false") forKey:@"reviews"];

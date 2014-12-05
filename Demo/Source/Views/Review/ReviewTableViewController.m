@@ -58,10 +58,10 @@
     [[PLYServer sharedServer] performSearchForReviewWithGTIN:_gtin
                                    withLanguage:_locale.localeIdentifier
                            fromUserWithNickname:_userNickname
-                                     withRating:nil
+                                     withRating:0
                                         orderBy:@"pl-id_asc"
-                                           page:[NSNumber numberWithInt:0]
-                                 recordsPerPage:[NSNumber numberWithInt:20]
+                                           page:0
+                                 recordsPerPage:20
                                      completion:^(id result, NSError *error) {
                                          if(error) {
                                              DTBlockPerformSyncIfOnMainThreadElseAsync(^{

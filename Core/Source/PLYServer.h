@@ -297,8 +297,8 @@ typedef void (^PLYCompletion)(id result, NSError *error);
                   fromUserWithNickname:(NSString *)nickname
                         showFiendsOnly:(BOOL *)showFiendsOnly
                                orderBy:(NSString *)orderBy
-                                  page:(NSNumber *)page
-                        recordsPerPage:(NSNumber *)rpp
+                                  page:(NSUInteger)page
+                        recordsPerPage:(NSUInteger)rpp
                             completion:(PLYCompletion)completion;
 
 /*
@@ -329,10 +329,10 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 - (void)performSearchForReviewWithGTIN:(NSString *)gtin
                           withLanguage:(NSString *)language
                   fromUserWithNickname:(NSString *)nickname
-                            withRating:(NSNumber *)rating
+                            withRating:(float)rating
                                orderBy:(NSString *)orderBy
-                                  page:(NSNumber *)page
-                        recordsPerPage:(NSNumber *)rpp
+                                  page:(NSUInteger)page
+                        recordsPerPage:(NSUInteger)rpp
                             completion:(PLYCompletion)completion;
 
 /*
@@ -364,7 +364,7 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @param rpp The records per page to retrieve
  @param completion The completion handler for the request
  */
-- (void)performSearchForProductListFromUser:(PLYUser *)user andListType:(NSString *)listType page:(NSNumber *)page recordsPerPage:(NSNumber *)rpp completion:(PLYCompletion)completion;
+- (void)performSearchForProductListFromUser:(PLYUser *)user andListType:(NSString *)listType page:(NSUInteger)page recordsPerPage:(NSUInteger)rpp completion:(PLYCompletion)completion;
 
 /**
  Retrieves a product list by ID
@@ -448,7 +448,7 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @param rpp The records per page to retrieve
  @param completion The completion handler for the request
  */
-- (void)getFollowerFromUser:(NSString *)nickname page:(NSNumber *)page recordsPerPage:(NSNumber *)rpp completion:(PLYCompletion)completion;
+- (void)getFollowerFromUser:(NSString *)nickname page:(NSUInteger)page recordsPerPage:(NSUInteger)rpp completion:(PLYCompletion)completion;
 
 /**
  Retrieves the friends a user is following
@@ -457,7 +457,7 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @param rpp The records per page to retrieve
  @param completion The completion handler for the request
  */
-- (void)getFollowingFromUser:(NSString *)nickname page:(NSNumber *)page recordsPerPage:(NSNumber *)rpp completion:(PLYCompletion)completion;
+- (void)getFollowingFromUser:(NSString *)nickname page:(NSUInteger)page recordsPerPage:(NSUInteger)rpp completion:(PLYCompletion)completion;
 
 /**
  Follows a user by nickname
@@ -483,7 +483,7 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @param completion The completion handler
  */
 
-- (void)timelineForAllUsersWithCount:(NSNumber *)count completion:(PLYCompletion)completion;
+- (void)timelineForAllUsersWithCount:(NSUInteger)count completion:(PLYCompletion)completion;
 
 /**
  The the latest timeline entries
@@ -496,7 +496,7 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @param showProducts If true products will be included otherwise not
  @param completion The completion handler
  */
-- (void)timelineForAllUsersWithCount:(NSNumber *)count
+- (void)timelineForAllUsersWithCount:(NSUInteger)count
                              sinceID:(NSString *)sinceID
                              untilID:(NSString *)untilID
                           showOpines:(BOOL)showOpines
@@ -516,7 +516,7 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @param showProducts If true products will be included otherwise not
  @param completion The completion handler
  */
-- (void)timelineForMeWithCount:(NSNumber *)count
+- (void)timelineForMeWithCount:(NSUInteger)count
                        sinceID:(NSString *)sinceID
                        untilID:(NSString *)untilID
                     showOpines:(BOOL)showOpines
@@ -540,7 +540,7 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 - (void)timelineForUser:(NSString *)nickname
                 sinceID:(NSString *)sinceID
                 untilID:(NSString *)untilID
-                  count:(NSNumber *)count
+                  count:(NSUInteger)count
              showOpines:(BOOL)showOpines
             showReviews:(BOOL)showReviews
              showImages:(BOOL)showImages
@@ -562,7 +562,7 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 - (void)timelineForProduct:(NSString *)gtin
                    sinceID:(NSString *)sinceID
                    untilID:(NSString *)untilID
-                     count:(NSNumber *)count
+                     count:(NSUInteger)count
                 showOpines:(BOOL)showOpines
                showReviews:(BOOL)showReviews
                 showImages:(BOOL)showImages

@@ -65,8 +65,8 @@
                                         fromUserWithNickname:_userNickname
                                                   showFiendsOnly:false
                                                      orderBy:@"pl-id_asc"
-                                                        page:[NSNumber numberWithInt:0]
-                                              recordsPerPage:[NSNumber numberWithInt:20]
+                                                        page:0
+                                              recordsPerPage:20
                                                   completion:^(id result, NSError *error) {
                                                       if(error) {
                                                           DTBlockPerformSyncIfOnMainThreadElseAsync(^{
