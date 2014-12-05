@@ -45,7 +45,8 @@ NSBundle *PLYResourceBundle()
 		NSBundle *bundle = [NSBundle bundleForClass:[PLYImage class]];
 		NSString *extension = [[bundle bundlePath] pathExtension];
 		
-		if ([extension isEqualToString:@"app"])
+		if ([extension isEqualToString:@"app"] ||
+			 [extension isEqualToString:@"xctest"])
 		{
 			// inside .app we need to get the resource bundle
 			NSString *resourceBundlePath = [bundle pathForResource:@"ProductLayerSDK" ofType:@"bundle"];

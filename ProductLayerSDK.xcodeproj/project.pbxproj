@@ -6,20 +6,6 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		A7D2A0A819224754003C256C /* Documentation */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = A7D2A0C519224754003C256C /* Build configuration list for PBXAggregateTarget "Documentation" */;
-			buildPhases = (
-				A7D2A0C619224759003C256C /* ShellScript */,
-			);
-			dependencies = (
-			);
-			name = Documentation;
-			productName = Documentation;
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
 		A701C4FA1A1F55580013CB8D /* PLYBrandPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A701C4F71A1F55580013CB8D /* PLYBrandPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A701C4FB1A1F55580013CB8D /* PLYBrandPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A701C4F81A1F55580013CB8D /* PLYBrandPickerViewController.m */; };
@@ -134,8 +120,9 @@
 		A75CF7861A30E573007E30FC /* PLYBrandPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A75CF7831A30E573007E30FC /* PLYBrandPickerViewController.xib */; };
 		A75CF7871A30E573007E30FC /* PLYGuidedInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A75CF7841A30E573007E30FC /* PLYGuidedInputViewController.xib */; };
 		A75CF7881A30E573007E30FC /* PLYGuidedInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A75CF7841A30E573007E30FC /* PLYGuidedInputViewController.xib */; };
-		A75CF7C41A3196FD007E30FC /* ProductLayer.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A7D997EB1A2B11A800C80C2B /* ProductLayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A75CF7C81A3197D7007E30FC /* PLYFunctionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A75CF7C71A3197D7007E30FC /* PLYFunctionsTest.m */; };
+		A75CF7F81A31A2A3007E30FC /* ProductLayerSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A76A570C1986937D00751454 /* ProductLayerSDK.bundle */; };
+		A75CF7F91A31A2A9007E30FC /* libProductLayerSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B21721183F8A3800C38635 /* libProductLayerSDK.a */; };
 		A76478991A18A8830000500C /* PLYSearchableTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76478971A18A8830000500C /* PLYSearchableTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A764789A1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76478981A18A8830000500C /* PLYSearchableTableViewController.m */; };
 		A764789B1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76478981A18A8830000500C /* PLYSearchableTableViewController.m */; };
@@ -222,7 +209,7 @@
 		A7EE55A31A121C8300DD55FE /* PLYCategoryPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE55A11A121C8300DD55FE /* PLYCategoryPickerViewController.m */; };
 		A7EE55A41A121C8300DD55FE /* PLYCategoryPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE55A11A121C8300DD55FE /* PLYCategoryPickerViewController.m */; };
 		C92A6256198A1B3900997DDC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C92A6255198A1B3900997DDC /* Security.framework */; };
-		C97D2D081A0037D3003885A1 /* ProductLayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A7590ADA19ED77710084EBCA /* ProductLayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C97D2D081A0037D3003885A1 /* ProductLayerSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A7590ADA19ED77710084EBCA /* ProductLayerSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C97FAA18191CCA3400144D2C /* PLYErrorMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA17191CCA3400144D2C /* PLYErrorMessage.m */; };
 		C97FAA1C191CCA4D00144D2C /* PLYErrorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA1B191CCA4D00144D2C /* PLYErrorResponse.m */; };
 		C97FAA93191D618C00144D2C /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA2C191D618C00144D2C /* AppSettings.m */; };
@@ -363,19 +350,19 @@
 			remoteGlobalIDString = A7590AD919ED77710084EBCA;
 			remoteInfo = ProductLayer;
 		};
-		A75CF7C11A3196C9007E30FC /* PBXContainerItemProxy */ = {
+		A75CF7F41A31A28B007E30FC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A7B214EE183F842000C38635 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = A7590AD919ED77710084EBCA;
-			remoteInfo = "ProductLayer (iOS)";
+			remoteGlobalIDString = A7B21720183F8A3800C38635;
+			remoteInfo = "Static Library";
 		};
-		A75CF7C51A3197AE007E30FC /* PBXContainerItemProxy */ = {
+		A75CF7F61A31A294007E30FC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A7B214EE183F842000C38635 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = A7B214F5183F842000C38635;
-			remoteInfo = "Demo App";
+			remoteGlobalIDString = A76A570B1986937D00751454;
+			remoteInfo = "Resource Bundle";
 		};
 		A76A5716198693A400751454 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -639,16 +626,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		A75CF7C31A3196E2007E30FC /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				A75CF7C41A3196FD007E30FC /* ProductLayer.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		A7B2171F183F8A3800C38635 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -665,7 +642,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				A7EA08451A2B378F00B61CCE /* DTFoundation.framework in Embed Frameworks */,
-				C97D2D081A0037D3003885A1 /* ProductLayer.framework in Embed Frameworks */,
+				C97D2D081A0037D3003885A1 /* ProductLayerSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -691,7 +668,7 @@
 		A7548AEA196C2E7C000B72EB /* PLYEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYEntity.m; path = PLYEntities/PLYEntity.m; sourceTree = "<group>"; };
 		A7548B22196C4C16000B72EB /* PLYImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYImage.h; path = PLYEntities/PLYImage.h; sourceTree = "<group>"; };
 		A7548B23196C4C16000B72EB /* PLYImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYImage.m; path = PLYEntities/PLYImage.m; sourceTree = "<group>"; };
-		A7590ADA19ED77710084EBCA /* ProductLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ProductLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7590ADA19ED77710084EBCA /* ProductLayerSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ProductLayerSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7590B4019ED7CDF0084EBCA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A75CF7331A30B48A007E30FC /* PLYVideoPreviewInterestBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYVideoPreviewInterestBox.h; sourceTree = "<group>"; };
 		A75CF7341A30B48A007E30FC /* PLYVideoPreviewInterestBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYVideoPreviewInterestBox.m; sourceTree = "<group>"; };
@@ -749,7 +726,7 @@
 		A7B214FB183F842000C38635 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A7B214FD183F842000C38635 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A7B21518183F842000C38635 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		A7B21721183F8A3800C38635 /* libProductLayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libProductLayer.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7B21721183F8A3800C38635 /* libProductLayerSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libProductLayerSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7B26EDC194F253A00E536A3 /* ProductLayerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductLayerConfig.h; sourceTree = "<group>"; };
 		A7B4418A183F90B900E8A170 /* DTFoundation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTFoundation.xcodeproj; path = DTFoundation/DTFoundation.xcodeproj; sourceTree = "<group>"; };
 		A7B4423C183F91E700E8A170 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -772,7 +749,7 @@
 		A7B4877E1987CFB200FA8F83 /* PLYVotableEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYVotableEntity.m; path = PLYEntities/PLYVotableEntity.m; sourceTree = "<group>"; };
 		A7CD959019FA821E008E3A41 /* PLYOpineComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYOpineComposeViewController.h; sourceTree = "<group>"; };
 		A7CD959119FA821E008E3A41 /* PLYOpineComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYOpineComposeViewController.m; sourceTree = "<group>"; };
-		A7D997EB1A2B11A800C80C2B /* ProductLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ProductLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7D997EB1A2B11A800C80C2B /* ProductLayerSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ProductLayerSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7EA07231A2B14A800B61CCE /* PLYCompatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYCompatibility.h; sourceTree = "<group>"; };
 		A7EA07261A2B160900B61CCE /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		A7EA07281A2B161400B61CCE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -930,6 +907,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A75CF7F91A31A2A9007E30FC /* libProductLayerSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1133,10 +1111,10 @@
 			isa = PBXGroup;
 			children = (
 				A7B214F6183F842000C38635 /* ProductLayerSDK.app */,
-				A7B21721183F8A3800C38635 /* libProductLayer.a */,
+				A7B21721183F8A3800C38635 /* libProductLayerSDK.a */,
 				A76A570C1986937D00751454 /* ProductLayerSDK.bundle */,
-				A7590ADA19ED77710084EBCA /* ProductLayer.framework */,
-				A7D997EB1A2B11A800C80C2B /* ProductLayer.framework */,
+				A7590ADA19ED77710084EBCA /* ProductLayerSDK.framework */,
+				A7D997EB1A2B11A800C80C2B /* ProductLayerSDK.framework */,
 				A75CF7B01A31965E007E30FC /* UnitTests_iOS.xctest */,
 			);
 			name = Products;
@@ -1688,7 +1666,7 @@
 			);
 			name = "ProductLayer (iOS)";
 			productName = ProductLayer;
-			productReference = A7590ADA19ED77710084EBCA /* ProductLayer.framework */;
+			productReference = A7590ADA19ED77710084EBCA /* ProductLayerSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		A75CF7AF1A31965E007E30FC /* Unit Tests (iOS) */ = {
@@ -1698,13 +1676,12 @@
 				A75CF7AC1A31965E007E30FC /* Sources */,
 				A75CF7AD1A31965E007E30FC /* Frameworks */,
 				A75CF7AE1A31965E007E30FC /* Resources */,
-				A75CF7C31A3196E2007E30FC /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A75CF7C61A3197AE007E30FC /* PBXTargetDependency */,
-				A75CF7C21A3196C9007E30FC /* PBXTargetDependency */,
+				A75CF7F71A31A294007E30FC /* PBXTargetDependency */,
+				A75CF7F51A31A28B007E30FC /* PBXTargetDependency */,
 			);
 			name = "Unit Tests (iOS)";
 			productName = "Unit Tests (iOS)";
@@ -1751,9 +1728,9 @@
 			productReference = A7B214F6183F842000C38635 /* ProductLayerSDK.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A7B21720183F8A3800C38635 /* Static Library */ = {
+		A7B21720183F8A3800C38635 /* Static Library (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A7B2173D183F8A3800C38635 /* Build configuration list for PBXNativeTarget "Static Library" */;
+			buildConfigurationList = A7B2173D183F8A3800C38635 /* Build configuration list for PBXNativeTarget "Static Library (iOS)" */;
 			buildPhases = (
 				A7B2171D183F8A3800C38635 /* Sources */,
 				A7B2171E183F8A3800C38635 /* Frameworks */,
@@ -1764,9 +1741,9 @@
 			dependencies = (
 				A7ACC9A71A307B80004EE5BD /* PBXTargetDependency */,
 			);
-			name = "Static Library";
+			name = "Static Library (iOS)";
 			productName = ProductLayer;
-			productReference = A7B21721183F8A3800C38635 /* libProductLayer.a */;
+			productReference = A7B21721183F8A3800C38635 /* libProductLayerSDK.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		A7D997EA1A2B11A800C80C2B /* ProductLayer (Mac) */ = {
@@ -1786,7 +1763,7 @@
 			);
 			name = "ProductLayer (Mac)";
 			productName = ProductLayer_Mac;
-			productReference = A7D997EB1A2B11A800C80C2B /* ProductLayer.framework */;
+			productReference = A7D997EB1A2B11A800C80C2B /* ProductLayerSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -1846,8 +1823,7 @@
 			projectRoot = "";
 			targets = (
 				A7B214F5183F842000C38635 /* Demo App */,
-				A7B21720183F8A3800C38635 /* Static Library */,
-				A7D2A0A819224754003C256C /* Documentation */,
+				A7B21720183F8A3800C38635 /* Static Library (iOS) */,
 				A76A570B1986937D00751454 /* Resource Bundle */,
 				A7590AD919ED77710084EBCA /* ProductLayer (iOS) */,
 				A7D997EA1A2B11A800C80C2B /* ProductLayer (Mac) */,
@@ -2126,6 +2102,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A75CF7F81A31A2A3007E30FC /* ProductLayerSDK.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2198,23 +2175,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		A7D2A0C619224759003C256C /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/appledoc --print-settings --output \"${BUILD_DIR}/Documentation/\" \"${PROJECT_DIR}\"\necho \"Documentation Output directory: ${BUILD_DIR}/Documentation/\"";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A7590AD519ED77710084EBCA /* Sources */ = {
@@ -2409,15 +2369,15 @@
 			target = A7590AD919ED77710084EBCA /* ProductLayer (iOS) */;
 			targetProxy = A7590AF119ED77710084EBCA /* PBXContainerItemProxy */;
 		};
-		A75CF7C21A3196C9007E30FC /* PBXTargetDependency */ = {
+		A75CF7F51A31A28B007E30FC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A7590AD919ED77710084EBCA /* ProductLayer (iOS) */;
-			targetProxy = A75CF7C11A3196C9007E30FC /* PBXContainerItemProxy */;
+			target = A7B21720183F8A3800C38635 /* Static Library (iOS) */;
+			targetProxy = A75CF7F41A31A28B007E30FC /* PBXContainerItemProxy */;
 		};
-		A75CF7C61A3197AE007E30FC /* PBXTargetDependency */ = {
+		A75CF7F71A31A294007E30FC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A7B214F5183F842000C38635 /* Demo App */;
-			targetProxy = A75CF7C51A3197AE007E30FC /* PBXContainerItemProxy */;
+			target = A76A570B1986937D00751454 /* Resource Bundle */;
+			targetProxy = A75CF7F61A31A294007E30FC /* PBXContainerItemProxy */;
 		};
 		A76A5717198693A400751454 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2489,17 +2449,13 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "Core/Framework-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = ProductLayer;
+				PRODUCT_NAME = ProductLayerSDK;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
@@ -2529,7 +2485,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = ProductLayer;
+				PRODUCT_NAME = ProductLayerSDK;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
@@ -2559,7 +2515,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = ProductLayer;
+				PRODUCT_NAME = ProductLayerSDK;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
@@ -2571,7 +2527,6 @@
 		A75CF7B91A31965E007E30FC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2580,24 +2535,18 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Test/UnitTests-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "Test/UnitTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = UnitTests_iOS;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ProductLayerSDK.app/ProductLayerSDK";
 			};
 			name = Debug;
 		};
 		A75CF7BA1A31965E007E30FC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2612,14 +2561,12 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = UnitTests_iOS;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ProductLayerSDK.app/ProductLayerSDK";
 			};
 			name = Release;
 		};
 		A75CF7BB1A31965E007E30FC /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2634,7 +2581,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = UnitTests_iOS;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ProductLayerSDK.app/ProductLayerSDK";
 			};
 			name = AdHoc;
 		};
@@ -2706,20 +2652,9 @@
 				DSTROOT = /tmp/ProductLayer.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				PRODUCT_NAME = ProductLayer;
+				PRODUCT_NAME = ProductLayerSDK;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTFoundation/\"/** \"${PROJECT_DIR}/Externals/DTKeychain/\"/**";
-			};
-			name = Coverage;
-		};
-		A75CF7CD1A319B14007E30FC /* Coverage */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Coverage;
 		};
@@ -2728,10 +2663,6 @@
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "Core/Resources/Bundle-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
@@ -2758,17 +2689,13 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "Core/Framework-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = ProductLayer;
+				PRODUCT_NAME = ProductLayerSDK;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
@@ -2791,10 +2718,6 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "Core/Framework-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -2805,7 +2728,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = ProductLayer;
+				PRODUCT_NAME = ProductLayerSDK;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
@@ -2817,7 +2740,6 @@
 		A75CF7D11A319B14007E30FC /* Coverage */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2826,17 +2748,12 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Test/UnitTests-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "Test/UnitTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = UnitTests_iOS;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ProductLayerSDK.app/ProductLayerSDK";
 			};
 			name = Coverage;
 		};
@@ -2845,10 +2762,6 @@
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "Core/Resources/Bundle-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
@@ -3013,11 +2926,7 @@
 				DSTROOT = /tmp/ProductLayer.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				PRODUCT_NAME = ProductLayer;
+				PRODUCT_NAME = ProductLayerSDK;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTFoundation/\"/** \"${PROJECT_DIR}/Externals/DTKeychain/\"/**";
 			};
@@ -3030,32 +2939,11 @@
 				DSTROOT = /tmp/ProductLayer.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
-				PRODUCT_NAME = ProductLayer;
+				PRODUCT_NAME = ProductLayerSDK;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTFoundation/\"/** \"${PROJECT_DIR}/Externals/DTKeychain/\"/**";
 			};
 			name = Release;
-		};
-		A7D2A0A919224754003C256C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		A7D2A0AA19224754003C256C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		A7D2A0AB19224754003C256C /* AdHoc */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = AdHoc;
 		};
 		A7D997FF1A2B11A800C80C2B /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -3071,10 +2959,6 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "Core/Framework-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -3085,7 +2969,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = ProductLayer;
+				PRODUCT_NAME = ProductLayerSDK;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
@@ -3119,7 +3003,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = ProductLayer;
+				PRODUCT_NAME = ProductLayerSDK;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
@@ -3153,7 +3037,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = ProductLayer;
+				PRODUCT_NAME = ProductLayerSDK;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
@@ -3222,7 +3106,7 @@
 				DSTROOT = /tmp/ProductLayer.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
-				PRODUCT_NAME = ProductLayer;
+				PRODUCT_NAME = ProductLayerSDK;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTFoundation/\"/** \"${PROJECT_DIR}/Externals/DTKeychain/\"/**";
 			};
@@ -3285,24 +3169,13 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A7B2173D183F8A3800C38635 /* Build configuration list for PBXNativeTarget "Static Library" */ = {
+		A7B2173D183F8A3800C38635 /* Build configuration list for PBXNativeTarget "Static Library (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A7B2173E183F8A3800C38635 /* Debug */,
 				A75CF7CC1A319B14007E30FC /* Coverage */,
 				A7B2173F183F8A3800C38635 /* Release */,
 				C98CD26F1910E1450035647C /* AdHoc */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A7D2A0C519224754003C256C /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A7D2A0A919224754003C256C /* Debug */,
-				A75CF7CD1A319B14007E30FC /* Coverage */,
-				A7D2A0AA19224754003C256C /* Release */,
-				A7D2A0AB19224754003C256C /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
