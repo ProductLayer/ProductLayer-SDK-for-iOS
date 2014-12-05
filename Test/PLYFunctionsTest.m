@@ -11,6 +11,7 @@
 
 #import "PLYFunctions.h"
 #import "PLYCompatibility.h"
+#import "ProductLayer.h"
 
 @interface PLYFunctionsTest : XCTestCase
 

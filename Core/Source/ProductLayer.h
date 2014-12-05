@@ -1,4 +1,4 @@
-// all-inclusive header for Product Layer API
+// Global Header for ProductLayerSDK
 
 // system headers used throughout
 #import <Foundation/Foundation.h>
@@ -45,9 +45,3 @@
 	#import "PLYVideoPreviewView.h"
 
 #endif
-
-//! Project version number for ProductLayer.
-FOUNDATION_EXPORT double ProductLayerVersionNumber;
-
-//! Project version string for ProductLayer.
-FOUNDATION_EXPORT const unsigned char ProductLayerVersionString[];
