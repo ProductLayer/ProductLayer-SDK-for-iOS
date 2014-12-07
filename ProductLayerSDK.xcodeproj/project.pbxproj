@@ -3139,6 +3139,7 @@
 				A75CF7BB1A31965E007E30FC /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A76A57101986937D00751454 /* Build configuration list for PBXNativeTarget "Resource Bundle" */ = {
 			isa = XCConfigurationList;
