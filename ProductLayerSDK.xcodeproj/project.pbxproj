@@ -164,6 +164,7 @@
 		A7B442B8183F9D0300E8A170 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B442B7183F9D0300E8A170 /* AVFoundation.framework */; };
 		A7B4873B1987CA7800FA8F83 /* PLYOpine.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B4873A1987CA7800FA8F83 /* PLYOpine.m */; };
 		A7B4877F1987CFB200FA8F83 /* PLYVotableEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B4877E1987CFB200FA8F83 /* PLYVotableEntity.m */; };
+		A7C488A81A36ECBA004AC656 /* PLYEntityTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C488A71A36ECBA004AC656 /* PLYEntityTest.m */; };
 		A7CD959219FA821E008E3A41 /* PLYOpineComposeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A7CD959019FA821E008E3A41 /* PLYOpineComposeViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7CD959319FA821E008E3A41 /* PLYOpineComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CD959119FA821E008E3A41 /* PLYOpineComposeViewController.m */; };
 		A7CD959419FA821E008E3A41 /* PLYOpineComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CD959119FA821E008E3A41 /* PLYOpineComposeViewController.m */; };
@@ -747,6 +748,7 @@
 		A7B4873A1987CA7800FA8F83 /* PLYOpine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYOpine.m; path = PLYEntities/PLYOpine.m; sourceTree = "<group>"; };
 		A7B4877D1987CFB200FA8F83 /* PLYVotableEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYVotableEntity.h; path = PLYEntities/PLYVotableEntity.h; sourceTree = "<group>"; };
 		A7B4877E1987CFB200FA8F83 /* PLYVotableEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYVotableEntity.m; path = PLYEntities/PLYVotableEntity.m; sourceTree = "<group>"; };
+		A7C488A71A36ECBA004AC656 /* PLYEntityTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYEntityTest.m; sourceTree = "<group>"; };
 		A7CD959019FA821E008E3A41 /* PLYOpineComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYOpineComposeViewController.h; sourceTree = "<group>"; };
 		A7CD959119FA821E008E3A41 /* PLYOpineComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYOpineComposeViewController.m; sourceTree = "<group>"; };
 		A7D997EB1A2B11A800C80C2B /* ProductLayerSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ProductLayerSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -991,6 +993,7 @@
 				A75CF7C91A319A1D007E30FC /* UnitTests-Prefix.pch */,
 				A75CF7BD1A319699007E30FC /* UnitTests-Info.plist */,
 				A75CF7C71A3197D7007E30FC /* PLYFunctionsTest.m */,
+				A7C488A71A36ECBA004AC656 /* PLYEntityTest.m */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -2227,6 +2230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7C488A81A36ECBA004AC656 /* PLYEntityTest.m in Sources */,
 				A75CF7C81A3197D7007E30FC /* PLYFunctionsTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
