@@ -8,6 +8,8 @@
 
 #import "PLYEntity.h"
 #import "PLYUser.h"
+#import "PLYErrorResponse.h"
+
 #import <objc/runtime.h>
 
 // lookup table mapping class strings to objc classes
@@ -77,15 +79,30 @@ NSArray *PLYAllEntityClasses()
 
 + (PLYEntity *)entityFromDictionary:(NSDictionary *)dictionary
 {
+	Class entityClass;
 	NSString *objectType = dictionary[@"pl-class"];
-	Class entityClass = _entityClassLookup[objectType];
 	
-	if (!entityClass)
+	if (objectType)
 	{
-		NSLog(@"Unknown object type identifier '%@'", objectType);
-		return nil;
+		entityClass = _entityClassLookup[objectType];
+		
+		// not found in lookup
+		if (!entityClass)
+		{
+			NSLog(@"Unknown object type identifier '%@'", objectType);
+			return nil;
+		}
+	}
+	else
+	{
+		// might be an error, those have no object identifier
+		if (dictionary[@"errors"])
+		{
+			entityClass = [PLYErrorResponse class];
+		}
 	}
 	
+	// at this point, if there is no entityClass we return nil
 	return [[entityClass alloc] initWithDictionary:dictionary];
 }
 

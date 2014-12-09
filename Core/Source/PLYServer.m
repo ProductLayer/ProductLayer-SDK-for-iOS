@@ -394,12 +394,18 @@
 												
 												if (statusCode >= 400)
 												{
-													PLYErrorResponse *errorResponse = [[PLYErrorResponse alloc] initWithDictionary:result];
-													
-													if(errorResponse && [errorResponse.errors count] > 0){
-														retError = [self _errorWithCode:statusCode
-																						message:((PLYErrorMessage *)[errorResponse.errors objectAtIndex:0]).message];
-													} else {
+													if ([result isKindOfClass:[PLYErrorResponse class]])
+													{
+														// pick out first of potentially multiple errors
+														PLYErrorResponse *errorResponse = (PLYErrorResponse *)result;
+														PLYErrorMessage *firstError = [errorResponse.errors firstObject];
+														NSString *message = firstError.message;
+														
+														retError = [self _errorWithCode:statusCode message:message];
+													}
+													else
+													{
+														// construct new error for the status code
 														retError = [self _errorWithCode:statusCode
 																						message:[NSHTTPURLResponse localizedStringForStatusCode:(NSInteger)statusCode]];
 													}
