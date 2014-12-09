@@ -332,7 +332,8 @@
                                                             
                                                             result = plainText;
 														}
-													} else if ([contentType hasPrefix:@"text/html"])
+													}
+													else if ([contentType hasPrefix:@"text/html"])
 													{
 														ignoreContent = YES;
 													}
@@ -360,7 +361,7 @@
 													id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
 													
 													// Try to parse the json object
-													if ([jsonObject isKindOfClass:[NSArray class]] && [jsonObject count])
+													if ([jsonObject isKindOfClass:[NSArray class]])
 													{
 														NSMutableArray *objectArray = [NSMutableArray arrayWithCapacity:1];
 														
@@ -380,26 +381,19 @@
 															
 															[objectArray addObject:object];
 														}
-														
-														// If the objects couldn't be parsed return the json object.
-														if(objectArray.count > 0){
-															result = objectArray;
-														} else {
-															result = jsonObject;
-														}
-													} else if ([jsonObject isKindOfClass:[NSDictionary class]]){
-														id object = [PLYEntity entityFromDictionary:jsonObject];
-														
-														if(object == nil) {
-															result = jsonObject;
-														}
-														else {
-															result = object;
-														}
+													
+														// result is converted objects
+														result = [objectArray copy];
+													}
+													else if ([jsonObject isKindOfClass:[NSDictionary class]])
+													{
+														// result is one converted object
+														result = [PLYEntity entityFromDictionary:jsonObject];
 													}
 												}
 												
-												if (statusCode >= 400) {
+												if (statusCode >= 400)
+												{
 													PLYErrorResponse *errorResponse = [[PLYErrorResponse alloc] initWithDictionary:result];
 													
 													if(errorResponse && [errorResponse.errors count] > 0){
