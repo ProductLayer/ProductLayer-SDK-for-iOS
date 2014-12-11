@@ -69,13 +69,13 @@ DTColor *PLYBrandColor()
 /**
  Creates MongoDB/Java timestamp from NSDate
  */
-NSDate *PLYJavaTimestampToNSDate(unsigned long long  timestamp)
+NSDate *PLYJavaTimestampToNSDate(double timestamp)
 {
 	NSTimeInterval seconds = timestamp/1000.0;
 	return [NSDate dateWithTimeIntervalSince1970:seconds];
 }
 
-unsigned long long  PLYJavaTimestampFromNSDate(NSDate *date)
+double PLYJavaTimestampFromNSDate(NSDate *date)
 {
 	NSTimeInterval seconds = [date timeIntervalSince1970];
 	return seconds * 1000.0;

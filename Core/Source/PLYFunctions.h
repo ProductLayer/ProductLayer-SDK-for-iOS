@@ -37,9 +37,9 @@ DTColor *PLYBrandColor();
 /**
  Converts MongoDB/Java timestamp to NSDate
  */
-NSDate *PLYJavaTimestampToNSDate(unsigned long long timestamp);
+NSDate *PLYJavaTimestampToNSDate(double timestamp);
 
 /**
  Creates MongoDB/Java timestamp from NSDate
 */
-unsigned long long PLYJavaTimestampFromNSDate(NSDate *date);
+double PLYJavaTimestampFromNSDate(NSDate *date);
