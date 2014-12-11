@@ -9,6 +9,7 @@
 #import "PLYEntity.h"
 #import "PLYUser.h"
 #import "PLYErrorResponse.h"
+#import "PLYFunctions.h"
 
 #import <objc/runtime.h>
 
@@ -169,8 +170,7 @@ NSArray *PLYAllEntityClasses()
 	}
 	else if ([key isEqualToString:@"pl-created-time"])
 	{
-		NSTimeInterval interval = [value doubleValue];
-		self.createdTime = [NSDate dateWithTimeIntervalSince1970:interval];
+		self.createdTime = PLYJavaTimestampToNSDate([value longValue]);
 	}
 	else if ([key isEqualToString:@"pl-upd-by"])
 	{
@@ -181,8 +181,7 @@ NSArray *PLYAllEntityClasses()
 	}
 	else if ([key isEqualToString:@"pl-upd-time"])
 	{
-		NSTimeInterval interval = [value doubleValue];
-		self.updatedTime = [NSDate dateWithTimeIntervalSince1970:interval];
+		self.updatedTime = PLYJavaTimestampToNSDate([value longValue]);
 	}
 	else if ([key isEqualToString:@"pl-version"])
 	{
@@ -221,7 +220,7 @@ NSArray *PLYAllEntityClasses()
 	
 	if (_createdTime)
 	{
-		dict[@"pl-created-time"] = @([_createdTime timeIntervalSince1970]);
+		dict[@"pl-created-time"] = @(PLYJavaTimestampFromNSDate(_createdTime));
 	}
 	
 	if (_updatedBy)
@@ -231,7 +230,7 @@ NSArray *PLYAllEntityClasses()
 	
 	if (_updatedTime)
 	{
-		dict[@"pl-upd-time"] = @([_updatedTime timeIntervalSince1970]);
+		dict[@"pl-upd-time"] = @(PLYJavaTimestampFromNSDate(_updatedTime));
 	}
 	
 	if (_version)

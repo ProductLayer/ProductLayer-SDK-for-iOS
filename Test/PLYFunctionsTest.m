@@ -38,6 +38,55 @@
 	XCTAssertNotNil(color, @"Should have gotten the brand tint color");
 }
 
+- (void)testDecodeTimestamp
+{
+	long timestamp = 1418133077783;
+	
+	NSDate *date = PLYJavaTimestampToNSDate(timestamp);
+	
+	NSCalendar *cal = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+	cal.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
+	
+	NSDateComponents *comps = [cal components:NSCalendarUnitDay|NSCalendarUnitMonth|NSCalendarUnitYear|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond fromDate:date];
+	
+	XCTAssertEqual(comps.day, 9, @"Day is wrong");
+	XCTAssertEqual(comps.month, 12, @"Month is wrong");
+	XCTAssertEqual(comps.year, 2014, @"Year is wrong");
+	XCTAssertEqual(comps.hour, 13	, @"Hour is wrong");
+	XCTAssertEqual(comps.minute, 51, @"Minute is wrong");
+	XCTAssertEqual(comps.second, 17, @"Second is wrong");
+}
+
+- (void)testEncodeTimestamp
+{
+	NSDateComponents *comps = [NSDateComponents new];
+	comps.day = 9;
+	comps.month = 12;
+	comps.year = 2014;
+	comps.hour = 13;
+	comps.minute = 51;
+	comps.second = 17;
+	
+	NSCalendar *cal = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+	cal.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
+	
+	NSDate *date = [cal dateFromComponents:comps];
+	
+	long timestamp = PLYJavaTimestampFromNSDate(date);
+	
+	XCTAssertEqual(timestamp, 1418133077000, @"Time stamp is wrong");
+}
+
+- (void)testTimestampRoundtrip
+{
+		long timestamp = 1418133077783;
+	NSDate *date = PLYJavaTimestampToNSDate(timestamp);
+	long result = PLYJavaTimestampFromNSDate(date);
+	
+	XCTAssertEqual(result, timestamp, @"result should be equal to start value");
+}
+
+
 #pragma mark - iOS Only
 
 #if TARGET_OS_IPHONE

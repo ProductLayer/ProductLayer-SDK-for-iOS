@@ -33,3 +33,13 @@ NSLocalizedStringFromTableInBundle(key, tbl, PLYResourceBundle(), comment)
  @returns The standard tint color to use for PL-related UI elements
  */
 DTColor *PLYBrandColor();
+
+/**
+ Converts MongoDB/Java timestamp to NSDate
+ */
+NSDate *PLYJavaTimestampToNSDate(long timestamp);
+
+/**
+ Creates MongoDB/Java timestamp from NSDate
+*/
+long PLYJavaTimestampFromNSDate(NSDate *date);
