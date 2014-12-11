@@ -52,7 +52,11 @@
 			for (NSDictionary *oneValue in dict)
 			{
 				PLYImage *image = [[PLYImage alloc] initWithDictionary:oneValue];
-				[tmpArray addObject:image];
+				
+				if (image)
+				{
+					[tmpArray addObject:image];
+				}
 			}
 			
 			self.images = tmpArray;

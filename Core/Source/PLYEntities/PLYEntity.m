@@ -107,8 +107,28 @@ NSArray *PLYAllEntityClasses()
 }
 
 
+- (BOOL)isEqual:(id)object
+{
+	if (!object)
+	{
+		return NO;
+	}
+	
+	if ([object class] != [self class])
+	{
+		return NO;
+	}
+	
+	return [self.Id isEqualToString:[object Id]];
+}
+
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary
 {
+	if ((id)dictionary == [NSNull null])
+	{
+		return nil;
+	}
+	
 	// should not instantiate PLYEntity directy
 	if ([self class] == [PLYEntity class])
 	{
