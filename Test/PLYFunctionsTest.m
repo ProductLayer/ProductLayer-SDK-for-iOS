@@ -40,7 +40,7 @@
 
 - (void)testDecodeTimestamp
 {
-	double timestamp = 1418133077783;
+	double timestamp = 1418133077783.0;
 	
 	NSDate *date = PLYJavaTimestampToNSDate(timestamp);
 	
@@ -74,14 +74,14 @@
 	
 	double timestamp = PLYJavaTimestampFromNSDate(date);
 	
-	XCTAssertEqual(timestamp, 1418133077000, @"Time stamp is wrong");
+	XCTAssertEqual(timestamp, 1418133077000.0, @"Time stamp is wrong");
 }
 
 - (void)testTimestampRoundtrip
 {
-	double timestamp = 1418133077783;
+	double timestamp = 1418133077783.0;
 	NSDate *date = PLYJavaTimestampToNSDate(timestamp);
-	long result = PLYJavaTimestampFromNSDate(date);
+	double result = PLYJavaTimestampFromNSDate(date);
 	
 	XCTAssertEqual(result, timestamp, @"result should be equal to start value");
 }
