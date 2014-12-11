@@ -980,7 +980,10 @@
 		return [NSURL URLWithString:path];
 	}
 	
-	return nil;
+	// no image URL, construct it
+	NSString *function = [NSString stringWithFormat:@"/image/%@.jpg", image.fileId];
+	NSString *path = [self _functionPathForFunction:function];
+	return [self _methodURLForPath:path parameters:parameters];
 }
 
 #pragma mark - Opines
