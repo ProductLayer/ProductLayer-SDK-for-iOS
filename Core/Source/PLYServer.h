@@ -19,6 +19,7 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 @class PLYList;
 @class PLYListItem;
 @class PLYOpine;
+@class PLYProduct;
 @class PLYReview;
 @class PLYUser;
 @class PLYVotableEntity;
@@ -301,7 +302,7 @@ typedef void (^PLYCompletion)(id result, NSError *error);
                         recordsPerPage:(NSUInteger)rpp
                             completion:(PLYCompletion)completion;
 
-/*
+/**
  Create an opine.
  
  @param opine The opine
@@ -309,6 +310,14 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  */
 - (void)createOpine:(PLYOpine *)opine
          completion:(PLYCompletion)completion;
+
+/**
+ Destroy an opine.
+ @param opine The opine
+ @param completion The completion handler for the request
+ */
+- (void)deleteOpine:(PLYOpine *)opine
+			completion:(PLYCompletion)completion;
 
 /**
  @name Reviews
@@ -478,95 +487,20 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  */
 
 /**
- The the latest timeline entries
- @param count The maximum number of objects returned
- @param completion The completion handler
+ Get a user's timeline
+ @param user The user for whom you want to get the timeline
+ @param options A dictionary with options to determine which entities to include
+ @param completion The completion handler for the request
  */
-
-- (void)timelineForAllUsersWithCount:(NSUInteger)count completion:(PLYCompletion)completion;
-
-/**
- The the latest timeline entries
- @param count The maximum number of objects returned
- @param sinceID Returns results with an ID greater than (that is, more recent than) the specified ID
- @param untilID Returns results with an ID greater than (that is, more recent than) the specified ID
- @param showOpines If true opines will be included otherwise not
- @param showReviews If true reviews will be included otherwise not
- @param showImages If true images will be included otherwise not
- @param showProducts If true products will be included otherwise not
- @param completion The completion handler
- */
-- (void)timelineForAllUsersWithCount:(NSUInteger)count
-                             sinceID:(NSString *)sinceID
-                             untilID:(NSString *)untilID
-                          showOpines:(BOOL)showOpines
-                         showReviews:(BOOL)showReviews
-                          showImages:(BOOL)showImages
-                        showProducts:(BOOL)showProducts
-                          completion:(PLYCompletion)completion;
-
-/**
- The the latest timeline entries for the logged in user (me)
- @param count The maximum number of objects returned
- @param sinceID Returns results with an ID greater than (that is, more recent than) the specified ID
- @param untilID Returns results with an ID greater than (that is, more recent than) the specified ID
- @param showOpines If true opines will be included otherwise not
- @param showReviews If true reviews will be included otherwise not
- @param showImages If true images will be included otherwise not
- @param showProducts If true products will be included otherwise not
- @param completion The completion handler
- */
-- (void)timelineForMeWithCount:(NSUInteger)count
-                       sinceID:(NSString *)sinceID
-                       untilID:(NSString *)untilID
-                    showOpines:(BOOL)showOpines
-                   showReviews:(BOOL)showReviews
-                    showImages:(BOOL)showImages
-                  showProducts:(BOOL)showProducts
-                    completion:(PLYCompletion)completion;
-
-/**
- The the latest timeline entries for a specific user
- @param nickname The nickname of the user
- @param sinceID Returns results with an ID greater than (that is, more recent than) the specified ID
- @param untilID Returns results with an ID greater than (that is, more recent than) the specified ID
- @param count The maximum number of objects returned
- @param showOpines If true opines will be included otherwise not
- @param showReviews If true reviews will be included otherwise not
- @param showImages If true images will be included otherwise not
- @param showProducts If true products will be included otherwise not
- @param completion The completion handler
- */
-- (void)timelineForUser:(NSString *)nickname
-                sinceID:(NSString *)sinceID
-                untilID:(NSString *)untilID
-                  count:(NSUInteger)count
-             showOpines:(BOOL)showOpines
-            showReviews:(BOOL)showReviews
-             showImages:(BOOL)showImages
-           showProducts:(BOOL)showProducts
-             completion:(PLYCompletion)completion;
+- (void)timelineForUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion;
 
 /**
  The the latest timeline entries for a specific product
- @param gtin The GTIN (barcode) of the product
- @param sinceID Returns results with an ID greater than (that is, more recent than) the specified ID
- @param untilID Returns results with an ID greater than (that is, more recent than) the specified ID
- @param count The maximum number of objects returned
- @param showOpines If true opines will be included otherwise not
- @param showReviews If true reviews will be included otherwise not
- @param showImages If true images will be included otherwise not
- @param showProducts If true products will be included otherwise not
- @param completion The completion handler
+ @param product The PLYProduct to retrieve the timeline for
+ @param options A dictionary with options to determine which entities to include
+ @param completion The completion handler for the request
  */
-- (void)timelineForProduct:(NSString *)gtin
-                   sinceID:(NSString *)sinceID
-                   untilID:(NSString *)untilID
-                     count:(NSUInteger)count
-                showOpines:(BOOL)showOpines
-               showReviews:(BOOL)showReviews
-                showImages:(BOOL)showImages
-              showProducts:(BOOL)showProducts
+- (void)timelineForProduct:(PLYProduct *)product
                 completion:(PLYCompletion)completion;
 
 

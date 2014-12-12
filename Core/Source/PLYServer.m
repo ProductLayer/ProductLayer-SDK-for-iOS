@@ -1033,6 +1033,18 @@
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:[opine dictionaryRepresentation] completion:completion];
 }
 
+- (void)deleteOpine:(PLYOpine *)opine
+			completion:(PLYCompletion)completion
+{
+	NSParameterAssert(opine);
+	NSParameterAssert(completion);
+	
+	NSString *function = [NSString stringWithFormat:@"opine/%@", opine.Id];
+	NSString *path = [self _functionPathForFunction:function];
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil payload:[opine dictionaryRepresentation] completion:completion];
+}
+
 #pragma mark - Reviews
 
 /**
@@ -1366,6 +1378,91 @@
 }
 
 #pragma mark - Timelines
+
+- (void)timelineForUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion
+{
+	NSParameterAssert(user);
+	NSAssert([user isEqual:self.loggedInUser], @"Method %s only working for logged in user at the moment", __PRETTY_FUNCTION__);
+	NSParameterAssert(completion);
+	
+	NSString *function = @"/timeline";
+	NSString *path = [self _functionPathForFunction:function];
+	
+	NSMutableDictionary *params = [NSMutableDictionary dictionary];
+	
+	
+	if ([options[@"PLYTimelineOpionIncludeOpines"] boolValue])
+	{
+		params[@"opines"] = @"true";
+	}
+	else
+	{
+		params[@"opines"] = @"false";
+	}
+
+	if ([options[@"PLYTimelineOpionIncludeReviews"] boolValue])
+	{
+		params[@"reviews"] = @"true";
+	}
+	else
+	{
+		params[@"reviews"] = @"false";
+	}
+
+	if ([options[@"PLYTimelineOpionIncludeImages"] boolValue])
+	{
+		params[@"images"] = @"true";
+	}
+	else
+	{
+		params[@"images"] = @"false";
+	}
+	
+	if ([options[@"PLYTimelineOpionIncludeProducts"] boolValue])
+	{
+		params[@"products"] = @"true";
+	}
+	else
+	{
+		params[@"products"] = @"false";
+	}
+	
+	if ([options[@"PLYTimelineOpionIncludeFriends"] boolValue])
+	{
+		params[@"show_friends_only"] = @"true";
+	}
+	else
+	{
+		params[@"show_friends_only"] = @"false";
+	}
+	
+	if (options[@"PLYTimelineOpionSinceID"])
+	{
+		params[@"since_id"] = options[@"PLYTimelineOpionSinceID"];
+	}
+
+	if (options[@"PLYTimelineOpionUntilID"])
+	{
+		params[@"until_id"] = options[@"PLYTimelineOpionUntilID"];
+	}
+
+	if (options[@"PLYTimelineOpionCount"])
+	{
+		params[@"count"] = options[@"PLYTimelineOpionCount"];
+	}
+	
+	if (options)
+	
+	[self _performMethodCallWithPath:path parameters:params completion:completion];
+}
+
+- (void)timelineForProduct:(PLYProduct *)product completion:(PLYCompletion)completion
+{
+	NSParameterAssert(product);
+	NSParameterAssert(completion);
+	
+}
+
 
 - (void)timelineForAllUsersWithCount:(NSUInteger)count completion:(PLYCompletion)completion
 {
