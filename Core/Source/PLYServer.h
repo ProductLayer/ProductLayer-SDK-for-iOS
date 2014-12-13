@@ -492,7 +492,9 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @param options A dictionary with options to determine which entities to include
  @param completion The completion handler for the request
  */
-- (void)timelineForUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion;
+- (void)timelineForUser:(PLYUser *)user
+					 options:(NSDictionary *)options
+				 completion:(PLYCompletion)completion;
 
 /**
  The the latest timeline entries for a specific product
@@ -501,6 +503,7 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @param completion The completion handler for the request
  */
 - (void)timelineForProduct:(PLYProduct *)product
+						 options:(NSDictionary *)options
                 completion:(PLYCompletion)completion;
 
 

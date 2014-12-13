@@ -1451,157 +1451,71 @@
 		params[@"count"] = options[@"PLYTimelineOpionCount"];
 	}
 	
-	if (options)
-	
 	[self _performMethodCallWithPath:path parameters:params completion:completion];
 }
 
-- (void)timelineForProduct:(PLYProduct *)product completion:(PLYCompletion)completion
+- (void)timelineForProduct:(PLYProduct *)product options:(NSDictionary *)options completion:(PLYCompletion)completion
 {
 	NSParameterAssert(product);
 	NSParameterAssert(completion);
 	
-}
-
-
-- (void)timelineForAllUsersWithCount:(NSUInteger)count completion:(PLYCompletion)completion
-{
-	NSParameterAssert(completion);
-	
-	[self timelineForAllUsersWithCount:count
-                               sinceID:nil
-                               untilID:nil
-                            showOpines:true
-                           showReviews:true
-                            showImages:true
-                          showProducts:true
-                            completion:completion];
-}
-
-- (void)timelineForAllUsersWithCount:(NSUInteger)count
-                             sinceID:(NSString *)sinceID
-                             untilID:(NSString *)untilID
-                          showOpines:(BOOL)showOpines
-                         showReviews:(BOOL)showReviews
-                          showImages:(BOOL)showImages
-                        showProducts:(BOOL)showProducts
-                          completion:(PLYCompletion)completion
-{
-	NSParameterAssert(completion);
-	
-	NSString *function = @"/timeline";
+	NSString *function = [NSString stringWithFormat:@"/timeline/product/%@", product.GTIN];
 	NSString *path = [self _functionPathForFunction:function];
-    
-    NSMutableDictionary *params = [self createTimelineParameterWithSinceID:sinceID
-                                                                   untilID:untilID
-                                                                     count:count
-                                                                showOpines:showOpines
-                                                               showReviews:showReviews
-                                                                showImages:showImages
-                                                              showProducts:showProducts];
+	
+	NSMutableDictionary *params = [NSMutableDictionary dictionary];
+	
+	if ([options[@"PLYTimelineOpionIncludeOpines"] boolValue])
+	{
+		params[@"opines"] = @"true";
+	}
+	else
+	{
+		params[@"opines"] = @"false";
+	}
+	
+	if ([options[@"PLYTimelineOpionIncludeReviews"] boolValue])
+	{
+		params[@"reviews"] = @"true";
+	}
+	else
+	{
+		params[@"reviews"] = @"false";
+	}
+	
+	if ([options[@"PLYTimelineOpionIncludeImages"] boolValue])
+	{
+		params[@"images"] = @"true";
+	}
+	else
+	{
+		params[@"images"] = @"false";
+	}
+	
+	if ([options[@"PLYTimelineOpionIncludeProducts"] boolValue])
+	{
+		params[@"products"] = @"true";
+	}
+	else
+	{
+		params[@"products"] = @"false";
+	}
+	
+	if (options[@"PLYTimelineOpionSinceID"])
+	{
+		params[@"since_id"] = options[@"PLYTimelineOpionSinceID"];
+	}
+	
+	if (options[@"PLYTimelineOpionUntilID"])
+	{
+		params[@"until_id"] = options[@"PLYTimelineOpionUntilID"];
+	}
+	
+	if (options[@"PLYTimelineOpionCount"])
+	{
+		params[@"count"] = options[@"PLYTimelineOpionCount"];
+	}
 	
 	[self _performMethodCallWithPath:path parameters:params completion:completion];
-}
-
-- (void)timelineForMeWithCount:(NSUInteger)count
-                             sinceID:(NSString *)sinceID
-                             untilID:(NSString *)untilID
-                          showOpines:(BOOL)showOpines
-                         showReviews:(BOOL)showReviews
-                          showImages:(BOOL)showImages
-                        showProducts:(BOOL)showProducts
-                          completion:(PLYCompletion)completion
-{
-	NSParameterAssert(completion);
-	
-	NSString *function = @"/timeline/me";
-	NSString *path = [self _functionPathForFunction:function];
-    
-    NSMutableDictionary *params = [self createTimelineParameterWithSinceID:sinceID
-                                                                   untilID:untilID
-                                                                     count:count
-                                                                showOpines:showOpines
-                                                               showReviews:showReviews
-                                                                showImages:showImages
-                                                              showProducts:showProducts];
-	
-	[self _performMethodCallWithPath:path parameters:params completion:completion];
-}
-
-- (void)timelineForUser:(NSString *)nickname
-                sinceID:(NSString *)sinceID
-                untilID:(NSString *)untilID
-                  count:(NSUInteger)count
-             showOpines:(BOOL)showOpines
-            showReviews:(BOOL)showReviews
-             showImages:(BOOL)showImages
-           showProducts:(BOOL)showProducts
-             completion:(PLYCompletion)completion
-{
-    NSParameterAssert(nickname);
-	NSParameterAssert(completion);
-	
-	NSString *function = [NSString stringWithFormat:@"/timeline/user/%@", nickname];
-	NSString *path = [self _functionPathForFunction:function];
-    
-    NSMutableDictionary *params = [self createTimelineParameterWithSinceID:sinceID
-                                                                   untilID:untilID
-                                                                     count:count
-                                                                showOpines:showOpines
-                                                               showReviews:showReviews
-                                                                showImages:showImages
-                                                              showProducts:showProducts];
-	
-	[self _performMethodCallWithPath:path parameters:params completion:completion];
-}
-
-- (void)timelineForProduct:(NSString *)GTIN
-                   sinceID:(NSString *)sinceID
-                   untilID:(NSString *)untilID
-                     count:(NSUInteger)count
-                showOpines:(BOOL)showOpines
-               showReviews:(BOOL)showReviews
-                showImages:(BOOL)showImages
-              showProducts:(BOOL)showProducts
-                completion:(PLYCompletion)completion
-{
-    NSParameterAssert(GTIN);
-	NSParameterAssert(completion);
-	
-	NSString *function = [NSString stringWithFormat:@"/timeline/product/%@", GTIN];
-	NSString *path = [self _functionPathForFunction:function];
-    
-    NSMutableDictionary *params = [self createTimelineParameterWithSinceID:sinceID
-                                                                   untilID:untilID
-                                                                     count:count
-                                                                showOpines:showOpines
-                                                               showReviews:showReviews
-                                                                showImages:showImages
-                                                              showProducts:showProducts];
-	
-	[self _performMethodCallWithPath:path parameters:params completion:completion];
-}
-
-- (NSMutableDictionary *) createTimelineParameterWithSinceID:(NSString *)sinceID
-                                                     untilID:(NSString *)untilID
-                                                       count:(NSUInteger)count
-                                                  showOpines:(BOOL)showOpines
-                                                 showReviews:(BOOL)showReviews
-                                                  showImages:(BOOL)showImages
-                                                showProducts:(BOOL)showProducts
-{
-    NSMutableDictionary *tmp = [[NSMutableDictionary alloc] init];
-    
-    if (sinceID)            [tmp setObject:sinceID forKey:@"since_id"];
-    if (untilID)            [tmp setObject:untilID forKey:@"until_id"];
-    if (count)              [tmp setObject:@(count) forKey:@"count"];
-    
-    [tmp setObject:((showOpines)   ? @"true" : @"false") forKey:@"opines"];
-    [tmp setObject:((showReviews)  ? @"true" : @"false") forKey:@"reviews"];
-    [tmp setObject:((showImages)   ? @"true" : @"false") forKey:@"images"];
-    [tmp setObject:((showProducts) ? @"true" : @"false") forKey:@"products"];
-    
-    return tmp;
 }
 
 #pragma mark - Votings
