@@ -367,19 +367,20 @@
 														
 														for (NSDictionary *dictObject in jsonObject)
 														{
-															if (![dictObject isKindOfClass:[NSDictionary class]])
+															if ([dictObject isKindOfClass:[NSDictionary class]])
 															{
-																break;
-															}
-															
-															id object = [PLYEntity entityFromDictionary:dictObject];
-															
-															if (!object)
-															{
+																id object = [PLYEntity entityFromDictionary:dictObject];
+																
+																if (object)
+																{
+																	[objectArray addObject:object];
+																}
+																
 																continue;
 															}
 															
-															[objectArray addObject:object];
+															// cannot be an entity, just add it
+															[objectArray addObject:dictObject];
 														}
 													
 														// result is converted objects
