@@ -170,7 +170,7 @@ NSArray *PLYAllEntityClasses()
 	}
 	else if ([key isEqualToString:@"pl-created-time"])
 	{
-		self.createdTime = PLYJavaTimestampToNSDate([value longValue]);
+		self.createdTime = PLYJavaTimestampToNSDate([value doubleValue]);
 	}
 	else if ([key isEqualToString:@"pl-upd-by"])
 	{
@@ -181,7 +181,7 @@ NSArray *PLYAllEntityClasses()
 	}
 	else if ([key isEqualToString:@"pl-upd-time"])
 	{
-		self.updatedTime = PLYJavaTimestampToNSDate([value longValue]);
+		self.updatedTime = PLYJavaTimestampToNSDate([value doubleValue]);
 	}
 	else if ([key isEqualToString:@"pl-version"])
 	{
