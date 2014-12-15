@@ -86,6 +86,206 @@
 	XCTAssertEqual(result, timestamp, @"result should be equal to start value");
 }
 
+#pragma mark - PLYGTINIsValidGlobally
+
+- (void)testPrefix010
+{
+	// GTIN-13
+	BOOL b = PLYGTINIsValidGlobally(@"0123456789123");
+	XCTAssertTrue(b, @"010 should be globally valid");
+	
+	// GTIN-12
+	b = PLYGTINIsValidGlobally(@"123456789123");
+	XCTAssertTrue(b, @"010 should be globally valid");
+}
+
+- (void)testPrefix022
+{
+	// GTIN-13
+	BOOL b = PLYGTINIsValidGlobally(@"0223456789123");
+	XCTAssertFalse(b, @"022 should not be globally valid");
+	
+	// GTIN-12
+	b = PLYGTINIsValidGlobally(@"223456789123");
+	XCTAssertFalse(b, @"022 should not be globally valid");
+}
+
+- (void)testPrefix033
+{
+	// GTIN-13
+	BOOL b = PLYGTINIsValidGlobally(@"0333456789123");
+	XCTAssertTrue(b, @"033 should be globally valid");
+	
+	// GTIN-12
+	b = PLYGTINIsValidGlobally(@"133456789123");
+	XCTAssertTrue(b, @"033 should be globally valid");
+}
+
+- (void)testPrefix041
+{
+	// GTIN-13
+	BOOL b = PLYGTINIsValidGlobally(@"0413456789123");
+	XCTAssertFalse(b, @"041 should not be globally valid");
+	
+	// GTIN-12
+	b = PLYGTINIsValidGlobally(@"413456789123");
+	XCTAssertFalse(b, @"041 should not be globally valid");
+}
+
+- (void)testPrefix059
+{
+	// GTIN-13
+	BOOL b = PLYGTINIsValidGlobally(@"0593456789123");
+	XCTAssertFalse(b, @"059 should not be globally valid");
+	
+	// GTIN-12
+	b = PLYGTINIsValidGlobally(@"593456789123");
+	XCTAssertFalse(b, @"059 should not be globally valid");
+}
+
+- (void)testPrefix081
+{
+	// GTIN-13
+	BOOL b = PLYGTINIsValidGlobally(@"0813456789123");
+	XCTAssertTrue(b, @"081 should be globally valid");
+	
+	// GTIN-12
+	b = PLYGTINIsValidGlobally(@"813456789123");
+	XCTAssertTrue(b, @"081 should be globally valid");
+}
+
+- (void)testPrefix199
+{
+	// GTIN-13
+	BOOL b = PLYGTINIsValidGlobally(@"1993456789123");
+	XCTAssertTrue(b, @"199 should be globally valid");
+}
+
+- (void)testPrefix20
+{
+	// GTIN-13
+	BOOL b = PLYGTINIsValidGlobally(@"2093456789123");
+	XCTAssertFalse(b, @"20 should not be globally valid");
+}
+
+- (void)testPrefix300
+{
+	// GTIN-13
+	BOOL b = PLYGTINIsValidGlobally(@"3003456789123");
+	XCTAssertTrue(b, @"300 should be globally valid");
+}
+
+- (void)testPrefix976
+{
+	// GTIN-13
+	BOOL b = PLYGTINIsValidGlobally(@"9763456789123");
+	XCTAssertTrue(b, @"976 should be globally valid");
+}
+
+- (void)testPrefix977
+{
+	// GTIN-13
+	BOOL b = PLYGTINIsValidGlobally(@"9773456789123");
+	XCTAssertTrue(b, @"977 should be globally valid");
+}
+
+- (void)testPrefix978
+{
+	// GTIN-13
+	BOOL b = PLYGTINIsValidGlobally(@"9783456789123");
+	XCTAssertTrue(b, @"978 should be globally valid");
+}
+
+- (void)testPrefix980
+{
+	// GTIN-13
+	BOOL b = PLYGTINIsValidGlobally(@"9803456789123");
+	XCTAssertFalse(b, @"980 should not be globally valid");
+}
+
+- (void)testPrefix981
+{
+	// GTIN-13
+	BOOL b = PLYGTINIsValidGlobally(@"9813456789123");
+	XCTAssertFalse(b, @"981 should not be globally valid");
+}
+
+- (void)testPrefix985
+{
+	// GTIN-13
+	BOOL b = PLYGTINIsValidGlobally(@"9853456789123");
+	XCTAssertFalse(b, @"985 should not be globally valid");
+}
+
+- (void)testPrefix99
+{
+	// GTIN-13
+	BOOL b = PLYGTINIsValidGlobally(@"9953456789123");
+	XCTAssertFalse(b, @"99 should not be globally valid");
+}
+
+- (void)testGTIN8_Prefix0
+{
+	// GTIN-13
+	BOOL b = PLYGTINIsValidGlobally(@"01234567");
+	XCTAssertFalse(b, @"0 should not be globally valid");
+}
+
+- (void)testGTIN8_Prefix100_139
+{
+	// GTIN-8
+	BOOL b = PLYGTINIsValidGlobally(@"10034567");
+	XCTAssertTrue(b, @"100 should be globally valid");
+	
+	b = PLYGTINIsValidGlobally(@"13934567");
+	XCTAssertTrue(b, @"139 should be globally valid");
+}
+
+- (void)testGTIN8_Prefix140_199
+{
+	// GTIN-8
+	BOOL b = PLYGTINIsValidGlobally(@"14034567");
+	XCTAssertFalse(b, @"140 should not be globally valid");
+	
+	b = PLYGTINIsValidGlobally(@"19934567");
+	XCTAssertFalse(b, @"199 should not be globally valid");
+}
+
+- (void)testGTIN8_Prefix2
+{
+	// GTIN-8
+	BOOL b = PLYGTINIsValidGlobally(@"24034567");
+	XCTAssertFalse(b, @"2 should not be globally valid");
+}
+
+- (void)testGTIN8_Prefix300_969
+{
+	// GTIN-8
+	BOOL b = PLYGTINIsValidGlobally(@"30034567");
+	XCTAssertTrue(b, @"300 should be globally valid");
+	
+	b = PLYGTINIsValidGlobally(@"96934567");
+	XCTAssertTrue(b, @"969 should be globally valid");
+}
+
+- (void)testGTIN8_Prefix97_99
+{
+	// GTIN-8
+	BOOL b = PLYGTINIsValidGlobally(@"97034567");
+	XCTAssertFalse(b, @"97 should not be globally valid");
+	
+	b = PLYGTINIsValidGlobally(@"98034567");
+	XCTAssertFalse(b, @"98 should not be globally valid");
+
+	b = PLYGTINIsValidGlobally(@"99034567");
+	XCTAssertFalse(b, @"99 should not be globally valid");
+}
+
+- (void)testWrongGTINLength
+{
+	XCTAssertThrows(PLYGTINIsValidGlobally(@"123"));
+}
+
 
 #pragma mark - iOS Only
 
