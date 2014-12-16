@@ -12,6 +12,7 @@
 
 #import "ProductLayer.h"
 #import "DTBlockFunctions.h"
+#import "DTLog.h"
 
 @interface PLYOpineComposeViewController () <UITextViewDelegate, CLLocationManagerDelegate>
 
@@ -191,6 +192,15 @@
 	[self _updateSocialButtons];
 	[self _updateCharacterCount];
 	[self _updateLocationButton];
+	
+	// warn developer about missing authorization message
+	if (![self _hasAlwaysInfoPlistMessage] && ![self _hasWhenInUseInfoPlistMessage])
+	{
+		DTLogWarning(@"Cannot request location authorization, because both NSLocationWhenInUseUsageDescription and NSLocationAlwaysUsageDescription keys are missing from app's info.plist. Removing location button.");
+		
+		[_addressLabel removeFromSuperview];
+		[_locationButton removeFromSuperview];
+	}
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -369,10 +379,6 @@
 		else if ([self _hasWhenInUseInfoPlistMessage])
 		{
 			[_locationManager requestWhenInUseAuthorization];
-		}
-		else
-		{
-			NSLog(@"Cannot request location authorization, because both NSLocationWhenInUseUsageDescription and NSLocationAlwaysUsageDescription keys are missing from app's info.plist");
 		}
 		
 		return;
