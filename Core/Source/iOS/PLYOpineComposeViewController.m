@@ -257,7 +257,7 @@
 		_characterRemainingLabel.textColor = [UIColor redColor];
 	}
 	
-	_characterRemainingLabel.text = [NSString stringWithFormat:@"%ld", remainingChars];
+	_characterRemainingLabel.text = [NSString stringWithFormat:@"%ld", (long)remainingChars];
 }
 
 - (void)_updateSocialButtons
