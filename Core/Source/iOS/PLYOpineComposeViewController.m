@@ -402,7 +402,7 @@
 	_addressLabel.text = nil;
 }
 
-- (void)_updateAddressLabelWithPlacemark:(CLPlacemark *)placemark
+- (void)_updateAddressLabelWithAddressFromPlacemark:(CLPlacemark *)placemark
 {
 	NSDictionary *addressDictionary = placemark.addressDictionary;
 	
@@ -436,7 +436,7 @@
 	_addressLabel.text = label;
 }
 
-- (void)_updateAddressLabelWithLocation:(CLLocation *)location
+- (void)_updateAddressWithLatLongFromLocation:(CLLocation *)location
 {
 	double latitude = location.coordinate.latitude;
 	double longitude = location.coordinate.longitude;
@@ -457,6 +457,36 @@
 	char longDirection = (longitude >= 0) ? 'E' : 'W';
 	
 	_addressLabel.text = [NSString stringWithFormat:@"%i° %i' %c, %i° %i' %c", latDegrees, latMinutes, latDirection, longDegrees, longMinutes, longDirection];
+}
+
+- (void)_updateAddressLabelFromLocation:(CLLocation *)location
+{
+	if (!_geoCoder)
+	{
+		_geoCoder = [[CLGeocoder alloc] init];
+	}
+	
+	[_geoCoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+		
+		// prevent late arrivals
+		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+			
+			if (!_postLocation)
+			{
+				_addressLabel.text = nil;
+				return;
+			}
+			
+			if (placemarks)
+			{
+				[self _updateAddressLabelWithAddressFromPlacemark:[placemarks firstObject]];
+			}
+			else
+			{
+				[self _updateAddressWithLatLongFromLocation:location];
+			}
+		});
+	}];
 }
 
 #pragma mark - Actions
@@ -520,7 +550,7 @@
 		
 		if (_mostRecentLocation)
 		{
-			[self _updateAddressLabelWithLocation:_mostRecentLocation];
+			[self _updateAddressLabelFromLocation:_mostRecentLocation];
 		}
 	}
 	else
@@ -620,22 +650,9 @@
 		{
 			_mostRecentLocation = location;
 			
-			if (!_geoCoder)
-			{
-				_geoCoder = [[CLGeocoder alloc] init];
-			}
-			
-			[_geoCoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
-				
-				if (placemarks)
-				{
-					[self _updateAddressLabelWithPlacemark:[placemarks firstObject]];
-				}
-				else
-				{
-					[self _updateAddressLabelWithLocation:location];
-				}
-			}];
+			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+				[self _updateAddressLabelFromLocation:location];
+			});
 		}
 	}
 }
@@ -645,6 +662,11 @@
 	if (status != kCLAuthorizationStatusDenied && status != kCLAuthorizationStatusRestricted && status != kCLAuthorizationStatusNotDetermined)
 	{
 		[manager startUpdatingLocation];
+	}
+	else
+	{
+		// remove previous contents
+		_addressLabel.text = nil;
 	}
 
 	[self _updateLocationButton];
@@ -674,6 +696,13 @@
 	
 	_postToTwitter = opine.shareOnTwitter;
 	_postToFacebook = opine.shareOnFacebook;
+	
+	if (opine.location.latitude || opine.location.longitude)
+	{
+		_mostRecentLocation = [[CLLocation alloc] initWithLatitude:opine.location.latitude longitude:opine.location.longitude];
+		
+		[self _updateAddressLabelFromLocation:_mostRecentLocation];
+	}
 }
 
 @end
