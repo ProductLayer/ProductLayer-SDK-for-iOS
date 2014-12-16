@@ -281,6 +281,9 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 {
 	for (PLYFormValidator *oneValidator in _validators)
 	{
+		// revalidate
+		[oneValidator validate];
+
 		if (!oneValidator.isValid)
 		{
 			return NO;
@@ -311,12 +314,13 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	if (textField == _nameField)
 	{
 		[_passwordField becomeFirstResponder];
-		return NO;
+		return YES;
 	}
 	
 	if ([self _allFieldsValid])
 	{
 		[self done:nil];
+		return YES;
 	}
 	
 	return NO;
