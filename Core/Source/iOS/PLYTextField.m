@@ -75,6 +75,8 @@
 	
 	self.translatesAutoresizingMaskIntoConstraints = NO;
 	
+	[self addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
+	
 	// keep track of the keyboard language
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inputModeDidChange:) name:@"UITextInputCurrentInputModeDidChangeNotification" object:nil];
 	
@@ -102,6 +104,15 @@
 	_lastKeyboardLanguage = lang;
 }
 
+#pragma mark - Actions
+
+- (void)textChanged:(PLYTextField *)sender
+{
+	_usedInputLanguage = _lastKeyboardLanguage;
+	
+	[_validator validate];
+}
+
 #pragma mark - Notifications
 
 - (void)inputModeDidChange:(NSNotification *)notification
@@ -117,15 +128,6 @@
     [super setText:text];
     
     [_validator validate];
-}
-
-- (void)insertText:(NSString *)text
-{
-	[super insertText:text];
-	
-	_usedInputLanguage = _lastKeyboardLanguage;
-
-	[_validator validate];
 }
 
 - (void)setValidator:(PLYFormValidator *)validator
