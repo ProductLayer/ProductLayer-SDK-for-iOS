@@ -180,27 +180,29 @@
 	_postLocation = [[NSUserDefaults standardUserDefaults] boolForKey:PLYUserDefaultOpineComposerIncludeLocation];
 	
 	// need location manager to get feedback about authorization status
-	_locationManager = [[CLLocationManager alloc] init];
-	_locationManager.delegate = self;
-	
-	if (_postLocation)
+	if ([self _hasAlwaysInfoPlistMessage] || [self _hasWhenInUseInfoPlistMessage])
 	{
-		[self _enableLocationUpdatesIfAuthorized];
+		_locationManager = [[CLLocationManager alloc] init];
+		_locationManager.delegate = self;
+	
+		if (_postLocation)
+		{
+			[self _enableLocationUpdatesIfAuthorized];
+		}
+	}
+	else
+	{
+		// warn developer about missing authorization message
+		DTLogWarning(@"Cannot request location authorization, because both NSLocationWhenInUseUsageDescription and NSLocationAlwaysUsageDescription keys are missing from app's info.plist. Removing location button.");
+		
+		[_addressLabel removeFromSuperview];
+		[_locationButton removeFromSuperview];
 	}
 	
 	[self _updateSaveButtonState];
 	[self _updateSocialButtons];
 	[self _updateCharacterCount];
 	[self _updateLocationButton];
-	
-	// warn developer about missing authorization message
-	if (![self _hasAlwaysInfoPlistMessage] && ![self _hasWhenInUseInfoPlistMessage])
-	{
-		DTLogWarning(@"Cannot request location authorization, because both NSLocationWhenInUseUsageDescription and NSLocationAlwaysUsageDescription keys are missing from app's info.plist. Removing location button.");
-		
-		[_addressLabel removeFromSuperview];
-		[_locationButton removeFromSuperview];
-	}
 }
 
 - (void)viewDidAppear:(BOOL)animated
