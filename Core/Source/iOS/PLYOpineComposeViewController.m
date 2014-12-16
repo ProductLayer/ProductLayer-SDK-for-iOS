@@ -316,7 +316,6 @@
 	[self.view layoutIfNeeded];
 	
 	[UIView commitAnimations];
-	
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
