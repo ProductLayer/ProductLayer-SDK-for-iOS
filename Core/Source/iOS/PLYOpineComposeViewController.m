@@ -28,6 +28,8 @@
 	UIButton *_twitterButton;
 	UIButton *_facebookButton;
 	
+	UILabel *_characterRemainingLabel;
+	
 	UIEdgeInsets _insets;
 	
 	BOOL _postToTwitter;
@@ -111,6 +113,8 @@
 	_textView.layer.borderWidth = 1;
 	_textView.layer.cornerRadius = 10;
 	_textView.scrollIndicatorInsets = UIEdgeInsetsMake(5, 0, 5, 0);
+	_textView.keyboardType = UIKeyboardTypeTwitter;
+	_textView.textContainerInset = UIEdgeInsetsMake(10, 5, 30, 5);
 	
 	[view addSubview:_textView];
 
@@ -129,6 +133,10 @@
 	[_facebookButton setImage:facebookIcon forState:UIControlStateNormal];
 	[_facebookButton addTarget:self action:@selector(_handleFacebook:) forControlEvents:UIControlEventTouchUpInside];
 	[view addSubview:_facebookButton];
+	
+	_characterRemainingLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+	_characterRemainingLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+	[view addSubview:_characterRemainingLabel];
 	
 	[self _updateSocialButtons];
 	
@@ -172,6 +180,8 @@
 	_textView.frame = CGRectMake(10+_insets.left, [top length]+10+_insets.top, self.view.bounds.size.width-20-_insets.left - _insets.right, self.view.bounds.size.height - [top length] - [bottom length] - 20 - _insets.bottom - 40);
 	_facebookButton.frame = CGRectMake( CGRectGetMaxX(_textView.frame) - 50, CGRectGetMaxY(_textView.frame), 50, 50);
 	_twitterButton.frame = CGRectMake( CGRectGetMaxX(_textView.frame) - 100, CGRectGetMaxY(_textView.frame), 50, 50);
+	
+	_characterRemainingLabel.frame = CGRectMake(CGRectGetMinX(_textView.frame)+10, CGRectGetMaxY(_textView.frame)-30, 50, 30);
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -180,6 +190,7 @@
 	
 	_textView.text = _text;
 	[self _updateButtonState];
+	[self _updateCharacterCount];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -201,6 +212,29 @@
 - (void)_updateButtonState
 {
 	_saveButtonItem.enabled = [_textView.text length]>0;
+}
+
+- (void)_updateCharacterCount
+{
+	NSInteger remainingChars = 140 - [_textView.text length];
+	
+	if (_postToTwitter)
+	{
+		remainingChars -= 24;
+	}
+	
+	if (remainingChars>=0)
+	{
+		_characterRemainingLabel.textColor = [UIColor lightGrayColor];
+		_saveButtonItem.enabled = YES;
+	}
+	else
+	{
+		_characterRemainingLabel.textColor = [UIColor redColor];
+		_saveButtonItem.enabled = NO;
+	}
+	
+	_characterRemainingLabel.text = [NSString stringWithFormat:@"%ld", remainingChars];
 }
 
 #pragma mark - Actions
@@ -241,12 +275,14 @@
 {
 	_postToTwitter = !_postToTwitter;
 	[self _updateSocialButtons];
+	[self _updateCharacterCount];
 }
 
 - (void)_handleFacebook:(id)sender
 {
 	_postToFacebook = !_postToFacebook;
 	[self _updateSocialButtons];
+	[self _updateCharacterCount];
 }
 
 #pragma mark - Notifications
@@ -309,6 +345,8 @@
 - (void)textViewDidChange:(UITextView *)textView
 {
 	[self _updateButtonState];
+	[self _updateCharacterCount];
+
 	_language = _textView.usedInputLanguage;
 }
 
