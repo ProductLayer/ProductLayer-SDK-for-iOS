@@ -90,6 +90,8 @@
 
 	NSString *locationPath = [PLYResourceBundle() pathForResource:@"location" ofType:@"png"];
 	UIImage *locationIcon = [[UIImage imageWithContentsOfFile:locationPath] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+	NSAssert(locationIcon!=nil, @"Missing Location icon in resource bundle");
+	
 	_locationButton = [UIButton buttonWithType:UIButtonTypeCustom];
 	_locationButton.frame = CGRectMake(0, 0, 50, 50);
 	[_locationButton setImage:locationIcon forState:UIControlStateNormal];
@@ -98,6 +100,8 @@
 
 	NSString *twitterPath = [PLYResourceBundle() pathForResource:@"twitter" ofType:@"png"];
 	UIImage *twitterIcon = [[UIImage imageWithContentsOfFile:twitterPath] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+	NSAssert(twitterIcon!=nil, @"Missing Twitter icon in resource bundle");
+
 	_twitterButton = [UIButton buttonWithType:UIButtonTypeCustom];
 	_twitterButton.frame = CGRectMake(0, 0, 50, 50);
 	[_twitterButton setImage:twitterIcon forState:UIControlStateNormal];
@@ -106,6 +110,8 @@
 	
 	NSString *facebookPath = [PLYResourceBundle() pathForResource:@"facebook" ofType:@"png"];
 	UIImage *facebookIcon = [[UIImage imageWithContentsOfFile:facebookPath] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+	NSAssert(facebookIcon!=nil, @"Missing Facebook icon in resource bundle");
+	
 	_facebookButton = [UIButton buttonWithType:UIButtonTypeCustom];
 	_facebookButton.frame = CGRectMake(0, 0, 50, 50);
 	[_facebookButton setImage:facebookIcon forState:UIControlStateNormal];
