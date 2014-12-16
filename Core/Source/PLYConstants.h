@@ -15,3 +15,8 @@ extern NSString * const PLYErrorDomain;
  Notification that gets sent if there is a problem logging in or refreshing the session
  */
 extern NSString * const PLYServerLoginErrorNotification;
+
+/**
+ User Defaults Keys
+*/
+extern NSString * const PLYUserDefaultOpineComposerIncludeLocation;

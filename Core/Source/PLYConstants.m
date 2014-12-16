@@ -10,6 +10,4 @@
 
 NSString * const PLYErrorDomain = @"Product Layer API";
 NSString * const PLYServerLoginErrorNotification = @"PLYServerLoginErrorNotification";
-
-
-
+NSString * const PLYUserDefaultOpineComposerIncludeLocation = @"PLYUserDefaultOpineComposerIncludeLocation";
