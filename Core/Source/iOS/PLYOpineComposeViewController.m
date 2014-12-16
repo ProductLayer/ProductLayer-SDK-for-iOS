@@ -216,7 +216,8 @@
 
 - (void)_updateCharacterCount
 {
-	NSInteger remainingChars = 140 - [_textView.text length];
+	NSString *trimmedString = [_textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	NSInteger remainingChars = 140 - [trimmedString length];
 	
 	if (_postToTwitter)
 	{
@@ -257,7 +258,7 @@
 	if ([_textView.text length])
 	{
 		opine = [[PLYOpine alloc] init];
-		opine.text = _textView.text;
+		opine.text = [_textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 		opine.language = _language;
 		opine.shareOnFacebook = _postToFacebook;
 		opine.shareOnTwitter = _postToTwitter;
