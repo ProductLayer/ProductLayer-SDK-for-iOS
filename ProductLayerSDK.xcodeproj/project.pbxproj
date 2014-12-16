@@ -143,6 +143,12 @@
 		A776659E1A1B547B008AB88C /* PLYNonEmptyValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = A776659C1A1B547B008AB88C /* PLYNonEmptyValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A776659F1A1B547B008AB88C /* PLYNonEmptyValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A776659D1A1B547B008AB88C /* PLYNonEmptyValidator.m */; };
 		A77665A01A1B547B008AB88C /* PLYNonEmptyValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A776659D1A1B547B008AB88C /* PLYNonEmptyValidator.m */; };
+		A778606F1A407C3800560889 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = A778606C1A407C3800560889 /* location.png */; };
+		A77860701A407C3800560889 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = A778606C1A407C3800560889 /* location.png */; };
+		A77860711A407C3800560889 /* location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A778606D1A407C3800560889 /* location@2x.png */; };
+		A77860721A407C3800560889 /* location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A778606D1A407C3800560889 /* location@2x.png */; };
+		A77860731A407C3800560889 /* location@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A778606E1A407C3800560889 /* location@3x.png */; };
+		A77860741A407C3800560889 /* location@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A778606E1A407C3800560889 /* location@3x.png */; };
 		A7A38CD21A2B4FFD005D8395 /* PLYFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A38CD01A2B4FFD005D8395 /* PLYFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7A38CD31A2B4FFD005D8395 /* PLYFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A38CD01A2B4FFD005D8395 /* PLYFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7A38CD41A2B4FFD005D8395 /* PLYFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A38CD11A2B4FFD005D8395 /* PLYFunctions.m */; };
@@ -720,6 +726,9 @@
 		A77665941A1B369A008AB88C /* PLYGuidedInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYGuidedInputViewController.m; sourceTree = "<group>"; };
 		A776659C1A1B547B008AB88C /* PLYNonEmptyValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYNonEmptyValidator.h; sourceTree = "<group>"; };
 		A776659D1A1B547B008AB88C /* PLYNonEmptyValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYNonEmptyValidator.m; sourceTree = "<group>"; };
+		A778606C1A407C3800560889 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
+		A778606D1A407C3800560889 /* location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location@2x.png"; sourceTree = "<group>"; };
+		A778606E1A407C3800560889 /* location@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location@3x.png"; sourceTree = "<group>"; };
 		A7A38CD01A2B4FFD005D8395 /* PLYFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYFunctions.h; sourceTree = "<group>"; };
 		A7A38CD11A2B4FFD005D8395 /* PLYFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYFunctions.m; sourceTree = "<group>"; };
 		A7B214F6183F842000C38635 /* ProductLayerSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductLayerSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1012,12 +1021,15 @@
 			children = (
 				A75CF7831A30E573007E30FC /* PLYBrandPickerViewController.xib */,
 				A75CF7841A30E573007E30FC /* PLYGuidedInputViewController.xib */,
-				A701C5001A1FC89A0013CB8D /* twitter.png */,
-				A701C5011A1FC89A0013CB8D /* twitter@2x.png */,
-				A701C5021A1FC89A0013CB8D /* twitter@3x.png */,
 				A701C5031A1FC89A0013CB8D /* facebook.png */,
 				A701C5041A1FC89A0013CB8D /* facebook@2x.png */,
 				A701C5051A1FC89A0013CB8D /* facebook@3x.png */,
+				A778606C1A407C3800560889 /* location.png */,
+				A778606D1A407C3800560889 /* location@2x.png */,
+				A778606E1A407C3800560889 /* location@3x.png */,
+				A701C5001A1FC89A0013CB8D /* twitter.png */,
+				A701C5011A1FC89A0013CB8D /* twitter@2x.png */,
+				A701C5021A1FC89A0013CB8D /* twitter@3x.png */,
 				A76A5719198693ED00751454 /* Bundle-Info.plist */,
 				A76A56E81986922300751454 /* API.strings */,
 				A76A56E91986922300751454 /* UI.strings */,
@@ -2096,8 +2108,11 @@
 				A701C5091A1FC89A0013CB8D /* twitter@2x.png in Resources */,
 				A701C5071A1FC89A0013CB8D /* twitter.png in Resources */,
 				A75CF7861A30E573007E30FC /* PLYBrandPickerViewController.xib in Resources */,
+				A77860701A407C3800560889 /* location.png in Resources */,
+				A77860721A407C3800560889 /* location@2x.png in Resources */,
 				A7590B2F19ED77C40084EBCA /* UI.strings in Resources */,
 				A7590B2E19ED77C40084EBCA /* API.strings in Resources */,
+				A77860741A407C3800560889 /* location@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2121,8 +2136,11 @@
 				A701C5081A1FC89A0013CB8D /* twitter@2x.png in Resources */,
 				A701C5061A1FC89A0013CB8D /* twitter.png in Resources */,
 				A75CF7851A30E573007E30FC /* PLYBrandPickerViewController.xib in Resources */,
+				A778606F1A407C3800560889 /* location.png in Resources */,
+				A77860711A407C3800560889 /* location@2x.png in Resources */,
 				A76A57151986939700751454 /* UI.strings in Resources */,
 				A76A57141986939700751454 /* API.strings in Resources */,
+				A77860731A407C3800560889 /* location@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
