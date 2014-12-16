@@ -1383,14 +1383,12 @@
 - (void)timelineForUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion
 {
 	NSParameterAssert(user);
-	NSAssert([user isEqual:self.loggedInUser], @"Method %s only working for logged in user at the moment", __PRETTY_FUNCTION__);
 	NSParameterAssert(completion);
 	
-	NSString *function = @"/timeline";
+	NSString *function = [NSString stringWithFormat:@"/timeline/user/%@", user.Id];
 	NSString *path = [self _functionPathForFunction:function];
 	
 	NSMutableDictionary *params = [NSMutableDictionary dictionary];
-	
 	
 	if ([options[@"PLYTimelineOpionIncludeOpines"] boolValue])
 	{
@@ -1430,11 +1428,11 @@
 	
 	if ([options[@"PLYTimelineOpionIncludeFriends"] boolValue])
 	{
-		params[@"show_friends_only"] = @"true";
+		params[@"include_friends"] = @"true";
 	}
 	else
 	{
-		params[@"show_friends_only"] = @"false";
+		params[@"include_friends"] = @"false";
 	}
 	
 	if (options[@"PLYTimelineOpionSinceID"])
