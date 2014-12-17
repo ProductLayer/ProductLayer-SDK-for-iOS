@@ -48,6 +48,11 @@
 	{
 		_hostURL = PLY_ENDPOINT_URL;
 		_configuration = configuration;
+		
+		
+#if TARGET_OS_IPHONE
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:[UIApplication sharedApplication]];
+#endif
 	}
 	
 	return self;
@@ -62,6 +67,11 @@
 	NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
     
 	return [self initWithSessionConfiguration:config];
+}
+
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark Singleton Methods
@@ -539,12 +549,14 @@
 
 - (void)renewSessionIfNecessary
 {
-    // Only if the user is logged in check if the session is still valid.
-    if (!self.loggedInUser)
-	 {
-		 return;
-	 }
-	 
+	// Only if the user is logged in check if the session is still valid.
+	if (!self.loggedInUser)
+	{
+		return;
+	}
+	
+	DTLogInfo(@"Renewing session for user '%@'", _loggedInUser.nickname);
+	
 	[self isSignedInWithCompletion:^(id result, NSError *error) {
 		if (error)
 		{
@@ -1593,6 +1605,14 @@
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:completion];
 }
 
+#pragma mark - Notifications
+
+#if TARGET_OS_IPHONE
+- (void)appWillEnterForeground:(NSNotification *)notification
+{
+	[self renewSessionIfNecessary];
+}
+#endif
 
 #pragma mark - Properties
 
