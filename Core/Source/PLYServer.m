@@ -869,6 +869,32 @@
 	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil payload:nil completion:wrappedCompletion];
 }
 
+- (void)loadDetailsForUser:(PLYUser *)user completion:(PLYCompletion)completion
+{
+	NSParameterAssert(user);
+	
+	[self getUserByNickname:user.Id completion:^(id result, NSError *error) {
+		// UI elements might be KVO details, so we do this on the main thread
+		 DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+			 
+			 if (result)
+			 {
+				 NSDictionary *dict = [result dictionaryRepresentation];
+				 [user setValuesForKeysWithDictionary:dict];
+				 
+				 completion(user, nil);
+			 }
+			 else
+			 {
+				 if (completion)
+				 {
+					 completion(nil, error);
+				 }
+			 }
+		 });
+	 }];
+}
+
 #pragma mark - Managing Products
 
 /**

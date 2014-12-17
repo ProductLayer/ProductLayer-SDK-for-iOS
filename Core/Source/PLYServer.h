@@ -174,6 +174,13 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 - (void)resetAvatarForUser:(PLYUser *)user completion:(PLYCompletion)completion;
 
 /**
+ Refreshes/completes a user's details. Updating of the properties is done on the main thread because some controls might be KVO-watching properties. The completion handler returns the passed user object if successful or nil and an `NSError` if not.
+ @param user The user to refresh and/or load updated details for
+ @param completion The completion handler for the request
+ */
+- (void)loadDetailsForUser:(PLYUser *)user completion:(PLYCompletion)completion;
+
+/**
  Nickname of the currently logged in user or `nil` if not logged in
  */
 @property (nonatomic, readonly) PLYUser *loggedInUser;
