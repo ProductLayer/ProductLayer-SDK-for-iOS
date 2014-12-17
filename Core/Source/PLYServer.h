@@ -477,17 +477,17 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 
 /**
  Follows a user by nickname
- @param nickname The nickname of the user to follow
+ @param user The user to follow
  @param completion The completion handler for the request
  */
-- (void)followUserWithNickname:(NSString *)nickname completion:(PLYCompletion)completion;
+- (void)followUser:(PLYUser *)user completion:(PLYCompletion)completion;
 
 /**
  Unfollows a user by nickname
- @param nickname The nickname of the user to unfollow
+ @param user The user to follow
  @param completion The completion handler for the request
  */
-- (void)unfollowUserWithNickname:(NSString *)nickname completion:(PLYCompletion)completion;
+- (void)unfollowUser:(PLYUser *)user completion:(PLYCompletion)completion;
 
 /**
  @name Timelines

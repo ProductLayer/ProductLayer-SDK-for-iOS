@@ -1368,38 +1368,74 @@
  * Follow a specific user.
  * ATTENTION: Login required
  **/
-- (void) followUserWithNickname:(NSString *)nickname
-                     completion:(PLYCompletion)completion{
-	NSParameterAssert(nickname);
+- (void)followUser:(PLYUser *)user completion:(PLYCompletion)completion
+{
+	NSParameterAssert(user);
 	NSParameterAssert(completion);
 	
 	NSString *function = @"/user/follow";
 	NSString *path = [self _functionPathForFunction:function];
 	
-	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
+	PLYCompletion wrappedCompletion = [completion copy];
+	PLYCompletion ownCompletion = ^(id result, NSError *error) {
+		
+		if (!error && [result isKindOfClass:PLYUser.class])
+		{
+			// update user object
+			[user setValue:@(YES) forKey:@"followed"];
+			
+			// update logged in user
+			if ([result isEqual:_loggedInUser])
+			{
+				[_loggedInUser setValuesForKeysWithDictionary:[result dictionaryRepresentation]];
+			}
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+	};
 	
-	if (nickname)   [parameters setObject:nickname forKey:@"nickname"];
-	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:parameters completion:completion];
+	NSDictionary *params = @{@"nickname": user.nickname};
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:params completion:ownCompletion];
 }
 
 /**
  * Unfollow a specific user.
  * ATTENTION: Login required
  **/
-- (void) unfollowUserWithNickname:(NSString *)nickname
-                       completion:(PLYCompletion)completion{
-	NSParameterAssert(nickname);
+- (void)unfollowUser:(PLYUser *)user completion:(PLYCompletion)completion
+{
+	NSParameterAssert(user);
 	NSParameterAssert(completion);
 	
 	NSString *function = @"/user/unfollow";
 	NSString *path = [self _functionPathForFunction:function];
 	
-	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
+	PLYCompletion wrappedCompletion = [completion copy];
+	PLYCompletion ownCompletion = ^(id result, NSError *error) {
+		
+		if (!error && [result isKindOfClass:PLYUser.class])
+		{
+			// update user object
+			[user setValue:@(NO) forKey:@"followed"];
+			
+			// update logged in user
+			if ([result isEqual:_loggedInUser])
+			{
+				[_loggedInUser setValuesForKeysWithDictionary:[result dictionaryRepresentation]];
+			}
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+	};
 	
-	if (nickname)   [parameters setObject:nickname forKey:@"nickname"];
-	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:parameters completion:completion];
+	NSDictionary *params = @{@"nickname": user.nickname};
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:params completion:ownCompletion];
 }
 
 /**
