@@ -1457,6 +1457,40 @@
 
 #pragma mark - Timelines
 
+- (NSDictionary *)_timelineOptionsFromDictionary:(NSDictionary *)options
+{
+	NSMutableDictionary *params = [NSMutableDictionary dictionary];
+	
+	// default values
+	params[PLYTimelineOptionIncludeOpines] = @"false";
+	params[PLYTimelineOptionIncludeImages] = @"false";
+	params[PLYTimelineOptionIncludeReviews] = @"false";
+	params[PLYTimelineOptionIncludeProducts] = @"false";
+	params[PLYTimelineOptionIncludeFriends] = @"false";
+	
+	[options enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+		
+		if ([obj isKindOfClass:[NSNumber class]] && !strcmp([obj objCType], @encode(BOOL)))
+		{
+			if ([obj boolValue])
+			{
+				params[key] = @"true";
+			}
+			else
+			{
+				params[key] = @"false";
+			}
+			
+			return;
+		}
+		
+		// just transfer other values
+		params[key] = obj;
+	}];
+
+	return [params copy];
+}
+
 - (void)timelineForUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion
 {
 	NSParameterAssert(user);
@@ -1465,68 +1499,7 @@
 	NSString *function = [NSString stringWithFormat:@"/timeline/user/%@", user.Id];
 	NSString *path = [self _functionPathForFunction:function];
 	
-	NSMutableDictionary *params = [NSMutableDictionary dictionary];
-	
-	if ([options[@"PLYTimelineOpionIncludeOpines"] boolValue])
-	{
-		params[@"opines"] = @"true";
-	}
-	else
-	{
-		params[@"opines"] = @"false";
-	}
-
-	if ([options[@"PLYTimelineOpionIncludeReviews"] boolValue])
-	{
-		params[@"reviews"] = @"true";
-	}
-	else
-	{
-		params[@"reviews"] = @"false";
-	}
-
-	if ([options[@"PLYTimelineOpionIncludeImages"] boolValue])
-	{
-		params[@"images"] = @"true";
-	}
-	else
-	{
-		params[@"images"] = @"false";
-	}
-	
-	if ([options[@"PLYTimelineOpionIncludeProducts"] boolValue])
-	{
-		params[@"products"] = @"true";
-	}
-	else
-	{
-		params[@"products"] = @"false";
-	}
-	
-	if ([options[@"PLYTimelineOpionIncludeFriends"] boolValue])
-	{
-		params[@"include_friends"] = @"true";
-	}
-	else
-	{
-		params[@"include_friends"] = @"false";
-	}
-	
-	if (options[@"PLYTimelineOpionSinceID"])
-	{
-		params[@"since_id"] = options[@"PLYTimelineOpionSinceID"];
-	}
-
-	if (options[@"PLYTimelineOpionUntilID"])
-	{
-		params[@"until_id"] = options[@"PLYTimelineOpionUntilID"];
-	}
-
-	if (options[@"PLYTimelineOpionCount"])
-	{
-		params[@"count"] = options[@"PLYTimelineOpionCount"];
-	}
-	
+	NSDictionary *params = [self _timelineOptionsFromDictionary:options];
 	[self _performMethodCallWithPath:path parameters:params completion:completion];
 }
 
@@ -1538,59 +1511,7 @@
 	NSString *function = [NSString stringWithFormat:@"/timeline/product/%@", product.GTIN];
 	NSString *path = [self _functionPathForFunction:function];
 	
-	NSMutableDictionary *params = [NSMutableDictionary dictionary];
-	
-	if ([options[@"PLYTimelineOpionIncludeOpines"] boolValue])
-	{
-		params[@"opines"] = @"true";
-	}
-	else
-	{
-		params[@"opines"] = @"false";
-	}
-	
-	if ([options[@"PLYTimelineOpionIncludeReviews"] boolValue])
-	{
-		params[@"reviews"] = @"true";
-	}
-	else
-	{
-		params[@"reviews"] = @"false";
-	}
-	
-	if ([options[@"PLYTimelineOpionIncludeImages"] boolValue])
-	{
-		params[@"images"] = @"true";
-	}
-	else
-	{
-		params[@"images"] = @"false";
-	}
-	
-	if ([options[@"PLYTimelineOpionIncludeProducts"] boolValue])
-	{
-		params[@"products"] = @"true";
-	}
-	else
-	{
-		params[@"products"] = @"false";
-	}
-	
-	if (options[@"PLYTimelineOpionSinceID"])
-	{
-		params[@"since_id"] = options[@"PLYTimelineOpionSinceID"];
-	}
-	
-	if (options[@"PLYTimelineOpionUntilID"])
-	{
-		params[@"until_id"] = options[@"PLYTimelineOpionUntilID"];
-	}
-	
-	if (options[@"PLYTimelineOpionCount"])
-	{
-		params[@"count"] = options[@"PLYTimelineOpionCount"];
-	}
-	
+	NSDictionary *params = [self _timelineOptionsFromDictionary:options];
 	[self _performMethodCallWithPath:path parameters:params completion:completion];
 }
 

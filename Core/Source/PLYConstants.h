@@ -20,3 +20,16 @@ extern NSString * const PLYServerLoginErrorNotification;
  User Defaults Keys
 */
 extern NSString * const PLYUserDefaultOpineComposerIncludeLocation;
+
+/**
+ Timeline Options
+ */
+extern NSString * const PLYTimelineOptionIncludeOpines;
+extern NSString * const PLYTimelineOptionIncludeReviews;
+extern NSString * const PLYTimelineOptionIncludeImages;
+extern NSString * const PLYTimelineOptionIncludeProducts;
+extern NSString * const PLYTimelineOptionIncludeFriends;
+extern NSString * const PLYTimelineOptionSinceID;
+extern NSString * const PLYTimelineOptionUntilID;
+extern NSString * const PLYTimelineOptionCount;
+
