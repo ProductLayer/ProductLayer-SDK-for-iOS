@@ -1383,6 +1383,7 @@
 		{
 			// update user object
 			[user setValue:@(YES) forKey:@"followed"];
+			[user setValue:@(user.followerCount+1) forKey:@"followerCount"];
 			
 			// update logged in user
 			if ([result isEqual:_loggedInUser])
@@ -1420,6 +1421,7 @@
 		{
 			// update user object
 			[user setValue:@(NO) forKey:@"followed"];
+			[user setValue:@(user.followerCount-1) forKey:@"followerCount"];
 			
 			// update logged in user
 			if ([result isEqual:_loggedInUser])
