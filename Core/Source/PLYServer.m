@@ -1570,16 +1570,16 @@
 	
 	[options enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 		
-		if ([obj isKindOfClass:[NSNumber class]] && !strcmp([obj objCType], @encode(BOOL)))
+		if ([obj isKindOfClass:[NSNumber class]])
 		{
-			if ([obj boolValue])
-			{
-				params[key] = @"true";
-			}
-			else
-			{
-				params[key] = @"false";
-			}
+				if ([obj isEqual:@(YES)])
+				{
+					params[key] = @"true";
+				}
+				else if ([obj isEqual:@(NO)])
+				{
+					params[key] = @"false";
+				}
 			
 			return;
 		}
