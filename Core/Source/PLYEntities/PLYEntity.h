@@ -69,7 +69,7 @@
 /**
  The user who created the object.
  */
-@property (nonatomic, copy) PLYUser *createdBy;
+@property (nonatomic, strong) PLYUser *createdBy;
 
 /**
  The timestamp when object was created.
@@ -79,7 +79,7 @@
 /**
  The user who updated the object the last time.
  */
-@property (nonatomic, copy) PLYUser *updatedBy;
+@property (nonatomic, strong) PLYUser *updatedBy;
 
 /**
  The timestamp when object was updated the last time.

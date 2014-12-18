@@ -894,15 +894,11 @@
 			 {
 				 NSDictionary *dict = [result dictionaryRepresentation];
 				 [user setValuesForKeysWithDictionary:dict];
-				 
-				 completion(user, nil);
 			 }
-			 else
+			 
+			 if (completion)
 			 {
-				 if (completion)
-				 {
-					 completion(nil, error);
-				 }
+				 completion(result, error);
 			 }
 		 });
 	 }];
