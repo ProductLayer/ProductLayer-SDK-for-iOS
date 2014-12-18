@@ -489,6 +489,10 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  */
 - (void)unfollowUser:(PLYUser *)user completion:(PLYCompletion)completion;
 
+
+- (void)followerForUser:(PLYUser *)user completion:(PLYCompletion)completion;
+- (void)followingForUser:(PLYUser *)user completion:(PLYCompletion)completion;
+
 /**
  @name Timelines
  */

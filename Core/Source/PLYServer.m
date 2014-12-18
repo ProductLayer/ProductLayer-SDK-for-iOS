@@ -1437,6 +1437,87 @@
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:params completion:ownCompletion];
 }
 
+
+- (void)followerForUser:(PLYUser *)user completion:(PLYCompletion)completion
+{
+	NSParameterAssert(user);
+	NSParameterAssert(completion);
+	
+	NSString *function = [NSString stringWithFormat:@"/user/%@/follower_ids", user.Id];
+	NSString *path = [self _functionPathForFunction:function];
+	
+	PLYCompletion wrappedCompletion = [completion copy];
+	PLYCompletion ownCompletion = ^(id result, NSError *error) {
+		
+		NSLog(@"%@", result);
+		
+		if (result)
+		{
+			NSMutableArray *tmpArray = [NSMutableArray array];
+			
+			for (NSString *identifier in result)
+			{
+				PLYUser *user = [PLYUser new];
+				user.Id = identifier;
+				
+				NSURL *avatarURL = [self avatarImageURLForUser:user];
+				[user setValue:avatarURL forKey:@"avatarURL"];
+				
+				[tmpArray addObject:user];
+			}
+
+			result = [tmpArray copy];
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+	};
+
+	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:nil completion:ownCompletion];
+}
+
+- (void)followingForUser:(PLYUser *)user completion:(PLYCompletion)completion
+{
+	NSParameterAssert(user);
+	NSParameterAssert(completion);
+	
+	NSString *function = [NSString stringWithFormat:@"/user/%@/following_ids", user.Id];
+	NSString *path = [self _functionPathForFunction:function];
+	
+	PLYCompletion wrappedCompletion = [completion copy];
+	PLYCompletion ownCompletion = ^(id result, NSError *error) {
+		
+		NSLog(@"%@", result);
+		
+		if (result)
+		{
+			NSMutableArray *tmpArray = [NSMutableArray array];
+			
+			for (NSString *identifier in result)
+			{
+				PLYUser *user = [PLYUser new];
+				user.Id = identifier;
+				
+				NSURL *avatarURL = [self avatarImageURLForUser:user];
+				[user setValue:avatarURL forKey:@"avatarURL"];
+				
+				[tmpArray addObject:user];
+			}
+			
+			result = [tmpArray copy];
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:nil completion:ownCompletion];
+}
+
 /**
  * Get specific user with nickname.
  **/

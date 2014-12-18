@@ -129,40 +129,23 @@
 		dict[@"pl-usr-gender"] = _gender;
 	}
 	
-	if (_points)
-	{
-		dict[@"pl-usr-points"] = @(_points);
-	}
+	dict[@"pl-usr-points"] = @(_points);
 	
 	if (_unlockedAchievements)
 	{
 		dict[@"pl-usr-achv_unlocked"] = _unlockedAchievements;
 	}
 	
-	if (_followerCount)
-	{
-		dict[@"pl-usr-follower_cnt"] = @(_followerCount);
-	}
-	
-	if (_followingCount)
-	{
-		dict[@"pl-usr-following_cnt"] = @(_followingCount);
-	}
+	dict[@"pl-usr-follower_cnt"] = @(_followerCount);
+	dict[@"pl-usr-following_cnt"] = @(_followingCount);
 	
 	if (_avatarURL)
 	{
 		dict[@"pl-usr-img"] = [_avatarURL absoluteString];
 	}
 	
-	if (_following)
-	{
-		dict[@"pl-usr-following"] = @(_following);
-	}
-	
-	if (_followed)
-	{
-		dict[@"pl-usr-followed"] = @(_followed);
-	}
+	dict[@"pl-usr-following"] = @(_following);
+	dict[@"pl-usr-followed"] = @(_followed);
 	
 	if (_socialConnections)
 	{
