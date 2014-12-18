@@ -38,6 +38,8 @@
 	
 	NSURLSession *_session;
 	NSURLSessionConfiguration *_configuration;
+	
+	NSCache *_entityCache;
 }
 
 - (instancetype)initWithSessionConfiguration:(NSURLSessionConfiguration *)configuration
@@ -49,6 +51,7 @@
 		_hostURL = PLY_ENDPOINT_URL;
 		_configuration = configuration;
 		
+		_entityCache = [[NSCache alloc] init];
 		
 #if TARGET_OS_IPHONE
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:[UIApplication sharedApplication]];
@@ -589,6 +592,12 @@
 {
 	[self willChangeValueForKey:@"loggedInUser"];
 	_loggedInUser = loggedInUser;
+	
+	if (_loggedInUser)
+	{
+		[_entityCache setObject:_loggedInUser forKey:_loggedInUser.Id];
+	}
+	
 	[self didChangeValueForKey:@"loggedInUser"];
 }
 
@@ -894,6 +903,8 @@
 			 {
 				 NSDictionary *dict = [result dictionaryRepresentation];
 				 [user setValuesForKeysWithDictionary:dict];
+				 
+				 [self _cacheEntity:user];
 			 }
 			 
 			 if (completion)
@@ -1449,21 +1460,26 @@
 	PLYCompletion wrappedCompletion = [completion copy];
 	PLYCompletion ownCompletion = ^(id result, NSError *error) {
 		
-		NSLog(@"%@", result);
-		
 		if (result)
 		{
 			NSMutableArray *tmpArray = [NSMutableArray array];
 			
 			for (NSString *identifier in result)
 			{
-				PLYUser *user = [PLYUser new];
-				user.Id = identifier;
+				PLYUser *cachedUser = [_entityCache objectForKey:identifier];
 				
-				NSURL *avatarURL = [self avatarImageURLForUser:user];
-				[user setValue:avatarURL forKey:@"avatarURL"];
-				
-				[tmpArray addObject:user];
+				if (cachedUser)
+				{
+					[tmpArray addObject:cachedUser];
+				}
+				else
+				{
+					PLYUser *user = [PLYUser new];
+					user.Id = identifier;
+					
+					[self _cacheEntity:user];
+					[tmpArray addObject:user];
+				}
 			}
 
 			result = [tmpArray copy];
@@ -1489,21 +1505,28 @@
 	PLYCompletion wrappedCompletion = [completion copy];
 	PLYCompletion ownCompletion = ^(id result, NSError *error) {
 		
-		NSLog(@"%@", result);
-		
 		if (result)
 		{
 			NSMutableArray *tmpArray = [NSMutableArray array];
 			
 			for (NSString *identifier in result)
 			{
-				PLYUser *user = [PLYUser new];
-				user.Id = identifier;
+				PLYUser *cachedUser = [_entityCache objectForKey:identifier];
 				
-				NSURL *avatarURL = [self avatarImageURLForUser:user];
-				[user setValue:avatarURL forKey:@"avatarURL"];
-				
-				[tmpArray addObject:user];
+				if (cachedUser)
+				{
+					[tmpArray addObject:cachedUser];
+				}
+				else
+				{
+					PLYUser *user = [PLYUser new];
+					user.Id = identifier;
+					
+					[self _cacheEntity:user];
+					[_entityCache setObject:user forKey:identifier];
+					
+					[tmpArray addObject:user];
+				}
 			}
 			
 			result = [tmpArray copy];
@@ -1568,6 +1591,21 @@
 	return [params copy];
 }
 
+- (void)_cacheEntity:(PLYEntity *)entity
+{
+	if ([entity isKindOfClass:[PLYUser class]])
+	{
+		PLYUser *user = (PLYUser *)entity;
+		
+		if (!user.avatarURL)
+		{
+			[user setValue:[self avatarImageURLForUser:user] forKey:@"avatarURL"];
+		}
+	}
+	
+	[_entityCache setObject:entity forKey:entity.Id];
+}
+
 - (void)timelineForUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion
 {
 	NSParameterAssert(user);
@@ -1576,8 +1614,51 @@
 	NSString *function = [NSString stringWithFormat:@"/timeline/user/%@", user.Id];
 	NSString *path = [self _functionPathForFunction:function];
 	
+	PLYCompletion wrappedCompletion = [completion copy];
+	PLYCompletion ownCompletion = ^(id result, NSError *error) {
+		
+		if (result)
+		{
+			NSMutableArray *tmpArray = [NSMutableArray array];
+			
+			for (PLYEntity *entity in result)
+			{
+				PLYUser *cachedUser = [_entityCache objectForKey:entity.createdBy.Id];
+				
+				if (cachedUser)
+				{
+					entity.createdBy = cachedUser;
+				}
+				else
+				{
+					[self _cacheEntity:entity.createdBy];
+				}
+				
+				cachedUser = [_entityCache objectForKey:entity.updatedBy.Id];
+				
+				if (cachedUser)
+				{
+					entity.updatedBy = cachedUser;
+				}
+				else
+				{
+					[self _cacheEntity:entity.updatedBy];
+				}
+				
+				[tmpArray addObject:entity];
+			}
+			
+			result = [tmpArray copy];
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+	};
+	
 	NSDictionary *params = [self _timelineOptionsFromDictionary:options];
-	[self _performMethodCallWithPath:path parameters:params completion:completion];
+	[self _performMethodCallWithPath:path parameters:params completion:ownCompletion];
 }
 
 - (void)timelineForProduct:(PLYProduct *)product options:(NSDictionary *)options completion:(PLYCompletion)completion
