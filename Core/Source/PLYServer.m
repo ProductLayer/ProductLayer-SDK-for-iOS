@@ -838,16 +838,17 @@
 	NSString *path = [self _functionPathForFunction:function];
 	
 	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
-		// reset logged in user avatar URL
-		if ([user.Id isEqualToString:self.loggedInUser.Id])
+		
+		if (result && !error)
 		{
+			// reset user avatar URL
 			PLYUserAvatar *avatar = (PLYUserAvatar *)result;
 			
 			// update ID
-			[self.loggedInUser setValue:avatar.Id forKey:@"avatarImageIdentifier"];
+			[user setValue:avatar.Id forKey:@"avatarImageIdentifier"];
 			
 			// reset image URL, this triggers reloading of the image
-			[self.loggedInUser setValue:[self avatarImageURLForUser:user] forKey:@"avatarURL"];
+			[user setValue:[self avatarImageURLForUser:user] forKey:@"avatarURL"];
 		}
 		
 		completion(result, error);
@@ -863,13 +864,13 @@
 	
 	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
 		// reset logged in user avatar URL
-		if ([user.Id isEqualToString:self.loggedInUser.Id])
+		if (result && !error)
 		{
 			// remove the image ID to disable the delete option
-			[self.loggedInUser setValue:nil forKey:@"avatarImageIdentifier"];
+			[user setValue:nil forKey:@"avatarImageIdentifier"];
 			
 			// reset image URL, this triggers reloading of the image
-			[self.loggedInUser setValue:[self avatarImageURLForUser:user] forKey:@"avatarURL"];
+			[user setValue:[self avatarImageURLForUser:user] forKey:@"avatarURL"];
 		}
 		
 		if (completion)
@@ -889,7 +890,7 @@
 		// UI elements might be KVO details, so we do this on the main thread
 		 DTBlockPerformSyncIfOnMainThreadElseAsync(^{
 			 
-			 if (result)
+			 if (result && !error)
 			 {
 				 NSDictionary *dict = [result dictionaryRepresentation];
 				 [user setValuesForKeysWithDictionary:dict];
