@@ -211,9 +211,10 @@
 	// Add the API key to each request.
    NSAssert(_APIKey, @"Setting an API Key is required to perform requests. Use [[PLYServer sharedServer] setAPIKey:]");
 	[request setValue:_APIKey forHTTPHeaderField:@"API-KEY"];
-	
-	NSMutableString *debugMessage = [NSMutableString string];
-	[debugMessage appendFormat:@"%@ %@\n", request.HTTPMethod, [methodURL absoluteString]];
+
+	// Add preferred languages
+	NSString *languages = [[NSLocale preferredLanguages] componentsJoinedByString:@", "];
+	[request setValue:languages forHTTPHeaderField:@"Accept-Language"];
 	
 	// add body if set
 	if (payload)
