@@ -404,6 +404,12 @@
 													{
 														// result is one converted object
 														result = [PLYEntity entityFromDictionary:jsonObject];
+														
+														// in some occasions we get back a dictionary that is no JSON object, e.g. categories
+														if (!result)
+														{
+															result = jsonObject;
+														}
 													}
 												}
 												
@@ -600,6 +606,25 @@
 	}
 	
 	[self didChangeValueForKey:@"loggedInUser"];
+}
+
+#pragma mark - Helpers
+
+- (NSDictionary *)_dictionaryRepresentationWithoutReadOnlyProperties:(PLYEntity *)entity
+{
+	NSMutableDictionary *tmpDict = [[entity dictionaryRepresentation] mutableCopy];
+	
+	// remove read-only properties
+	[tmpDict removeObjectForKey:@"pl-prod-review-count"];
+	[tmpDict removeObjectForKey:@"pl-prod-review-rating"];
+	[tmpDict removeObjectForKey:@"pl-upd-by"];
+	[tmpDict removeObjectForKey:@"pl-upd-time"];
+	[tmpDict removeObjectForKey:@"pl-created-by"];
+	[tmpDict removeObjectForKey:@"pl-created-time"];
+	[tmpDict removeObjectForKey:@"pl-version"];
+	[tmpDict removeObjectForKey:@"pl-vote-score"];
+	
+	return [tmpDict copy];
 }
 
 
@@ -922,29 +947,32 @@
  * Creates a new product.
  * ATTENTION: Login required
  **/
-- (void)createProductWithGTIN:(NSString *)gtin dictionary:(NSDictionary *)dictionary completion:(PLYCompletion)completion
+- (void)createProduct:(PLYProduct *)product completion:(PLYCompletion)completion
 {
-	NSParameterAssert(gtin);
+	NSParameterAssert(product);
+	NSParameterAssert(product.GTIN);
 	NSParameterAssert(completion);
 	
 	NSString *path = [self _functionPathForFunction:@"products"];
-	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:dictionary completion:completion];
+	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:product];
+
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:completion];
 }
 
 /**
  * Update a specific product.
  * ATTENTION: Login required
  **/
-- (void)updateProductWithGTIN:(NSString *)gtin dictionary:(NSDictionary *)dictionary completion:(PLYCompletion)completion
+- (void)updateProduct:(PLYProduct *)product completion:(PLYCompletion)completion
 {
-	NSParameterAssert(gtin);
-	NSParameterAssert(dictionary);
+	NSParameterAssert(product);
+	NSParameterAssert(product.GTIN);
 	NSParameterAssert(completion);
 	
-	NSString *path = [self _functionPathForFunction:[NSString stringWithFormat:@"/product/%@",gtin]];
+	NSString *path = [self _functionPathForFunction:[NSString stringWithFormat:@"/product/%@",product.GTIN]];
+	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:product];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:dictionary completion:completion];
+	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:payload completion:completion];
 }
 
 
@@ -1066,8 +1094,7 @@
 	[self _performMethodCallWithPath:path parameters:parameters completion:completion];
 }
 
-- (void)createOpine:(PLYOpine *)opine
-			completion:(PLYCompletion)completion
+- (void)createOpine:(PLYOpine *)opine completion:(PLYCompletion)completion
 {
 	NSParameterAssert(opine);
 	NSParameterAssert(opine.text);
@@ -1077,12 +1104,12 @@
 	
 	NSString *function = @"opines";
 	NSString *path = [self _functionPathForFunction:function];
+	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:opine];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:[opine dictionaryRepresentation] completion:completion];
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:completion];
 }
 
-- (void)deleteOpine:(PLYOpine *)opine
-			completion:(PLYCompletion)completion
+- (void)deleteOpine:(PLYOpine *)opine completion:(PLYCompletion)completion
 {
 	NSParameterAssert(opine);
 	NSParameterAssert(completion);
@@ -1090,7 +1117,7 @@
 	NSString *function = [NSString stringWithFormat:@"opine/%@", opine.Id];
 	NSString *path = [self _functionPathForFunction:function];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil payload:[opine dictionaryRepresentation] completion:completion];
+	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil payload:nil completion:completion];
 }
 
 #pragma mark - Reviews
@@ -1129,18 +1156,17 @@
  * Creates a new review for a product.
  * ATTENTION: Login required
  **/
-- (void) createReviewForGTIN:(NSString *)gtin
-						dictionary:(NSDictionary *)dictionary
-						completion:(PLYCompletion)completion
+- (void)createReview:(PLYReview *)review completion:(PLYCompletion)completion
 {
-	NSParameterAssert(gtin);
-	NSParameterAssert(dictionary);
+	NSParameterAssert(review);
+	NSParameterAssert(review.GTIN);
 	NSParameterAssert(completion);
 	
-	NSString *function = [NSString stringWithFormat:@"product/%@/review",gtin];
+	NSString *function = [NSString stringWithFormat:@"product/%@/review",review.GTIN];
 	NSString *path = [self _functionPathForFunction:function];
+	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:review];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:dictionary completion:completion];
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:completion];
 }
 
 #pragma mark - Lists
@@ -1157,8 +1183,9 @@
 	
 	NSString *function = @"lists";
 	NSString *path = [self _functionPathForFunction:function];
+	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:list];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:[list dictionaryRepresentation] completion:completion];
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:completion];
 }
 
 /**
@@ -1215,8 +1242,9 @@
 	
 	NSString *function = [NSString stringWithFormat:@"list/%@", list.Id];
 	NSString *path = [self _functionPathForFunction:function];
+	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:list];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:[list dictionaryRepresentation] completion:completion];
+	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:payload completion:completion];
 }
 
 /**
@@ -1235,7 +1263,7 @@
 	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil completion:completion];
 }
 
-#pragma mark List Items
+#pragma mark - List Items
 
 /**
  * Replaces or add's the product to the list if it doesn't exist.
@@ -1251,8 +1279,9 @@
 	
 	NSString *function = [NSString stringWithFormat:@"list/%@/product/%@", listId,listItem.GTIN];
 	NSString *path = [self _functionPathForFunction:function];
+	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:listItem];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:[listItem dictionaryRepresentation] completion:completion];
+	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:payload completion:completion];
 }
 
 /**
@@ -1272,7 +1301,7 @@
 	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil completion:completion];
 }
 
-#pragma mark List Sharing
+#pragma mark - List Sharing
 
 /**
  * Share the list with a user.

@@ -47,8 +47,8 @@
         return;
     }
     
-    if(!_user.followed){
-    [[PLYServer sharedServer] followUserWithNickname:_user.nickname completion:^(id result, NSError *error) {
+    if(!_user.followed) {
+		 [[PLYServer sharedServer] followUser:_user completion:^(id result, NSError *error) {
 		
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
             if(error){
@@ -64,7 +64,7 @@
 		});
 	}];
     } else {
-        [[PLYServer sharedServer] unfollowUserWithNickname:_user.nickname completion:^(id result, NSError *error) {
+        [[PLYServer sharedServer] unfollowUser:_user completion:^(id result, NSError *error) {
             
             DTBlockPerformSyncIfOnMainThreadElseAsync(^{
                 if(error){

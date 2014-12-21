@@ -198,24 +198,18 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 /**
  Creates a new product.
  
- @param gtin The GTIN (barcode) of the new product
- @param dictionary The values to set on the new product
+ @param product The new PLYProduct to create
  @param completion The completion handler for the request
  */
-- (void)createProductWithGTIN:(NSString *)gtin
-                   dictionary:(NSDictionary *)dictionary
-                   completion:(PLYCompletion)completion;
+- (void)createProduct:(PLYProduct *)product completion:(PLYCompletion)completion;
 
 /**
  Updates an existing product.
  
- @param gtin The GTIN (barcode) of the product
- @param dictionary The values to set on the product
+ @param product The new PLYProduct to update
  @param completion The completion handler for the request
  */
-- (void)updateProductWithGTIN:(NSString *)gtin
-                   dictionary:(NSDictionary *)dictionary
-                   completion:(PLYCompletion)completion;
+- (void)updateProduct:(PLYProduct *)product completion:(PLYCompletion)completion;
 
 
 /**
@@ -315,16 +309,14 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @param opine The opine
  @param completion The completion handler for the request
  */
-- (void)createOpine:(PLYOpine *)opine
-         completion:(PLYCompletion)completion;
+- (void)createOpine:(PLYOpine *)opine completion:(PLYCompletion)completion;
 
 /**
  Destroy an opine.
  @param opine The opine
  @param completion The completion handler for the request
  */
-- (void)deleteOpine:(PLYOpine *)opine
-			completion:(PLYCompletion)completion;
+- (void)deleteOpine:(PLYOpine *)opine completion:(PLYCompletion)completion;
 
 /**
  @name Reviews
@@ -354,13 +346,11 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 /*
  Create a review for a product.
  
- @param gtin The GTIN (barcode) of the product
- @param dictionary The review keys and values to set
+ @param review The PLYReview to create
  @param completion The completion handler for the request
  */
-- (void)createReviewForGTIN:(NSString *)gtin
-                 dictionary:(NSDictionary *)dictionary
-                 completion:(PLYCompletion)completion;
+- (void)createReview:(PLYReview *)review completion:(PLYCompletion)completion;
+
 /**
  @name Lists
  */
