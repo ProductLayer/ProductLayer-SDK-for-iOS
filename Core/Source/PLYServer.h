@@ -174,6 +174,13 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 - (void)resetAvatarForUser:(PLYUser *)user completion:(PLYCompletion)completion;
 
 /**
+ Refreshes/completes a user's details. Updating of the properties is done on the main thread because some controls might be KVO-watching properties. The completion handler returns the passed user object if successful or nil and an `NSError` if not.
+ @param user The user to refresh and/or load updated details for
+ @param completion The completion handler for the request
+ */
+- (void)loadDetailsForUser:(PLYUser *)user completion:(PLYCompletion)completion;
+
+/**
  Nickname of the currently logged in user or `nil` if not logged in
  */
 @property (nonatomic, readonly) PLYUser *loggedInUser;
@@ -191,24 +198,18 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 /**
  Creates a new product.
  
- @param gtin The GTIN (barcode) of the new product
- @param dictionary The values to set on the new product
+ @param product The new PLYProduct to create
  @param completion The completion handler for the request
  */
-- (void)createProductWithGTIN:(NSString *)gtin
-                   dictionary:(NSDictionary *)dictionary
-                   completion:(PLYCompletion)completion;
+- (void)createProduct:(PLYProduct *)product completion:(PLYCompletion)completion;
 
 /**
  Updates an existing product.
  
- @param gtin The GTIN (barcode) of the product
- @param dictionary The values to set on the product
+ @param product The new PLYProduct to update
  @param completion The completion handler for the request
  */
-- (void)updateProductWithGTIN:(NSString *)gtin
-                   dictionary:(NSDictionary *)dictionary
-                   completion:(PLYCompletion)completion;
+- (void)updateProduct:(PLYProduct *)product completion:(PLYCompletion)completion;
 
 
 /**
@@ -308,16 +309,14 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @param opine The opine
  @param completion The completion handler for the request
  */
-- (void)createOpine:(PLYOpine *)opine
-         completion:(PLYCompletion)completion;
+- (void)createOpine:(PLYOpine *)opine completion:(PLYCompletion)completion;
 
 /**
  Destroy an opine.
  @param opine The opine
  @param completion The completion handler for the request
  */
-- (void)deleteOpine:(PLYOpine *)opine
-			completion:(PLYCompletion)completion;
+- (void)deleteOpine:(PLYOpine *)opine completion:(PLYCompletion)completion;
 
 /**
  @name Reviews
@@ -347,13 +346,11 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 /*
  Create a review for a product.
  
- @param gtin The GTIN (barcode) of the product
- @param dictionary The review keys and values to set
+ @param review The PLYReview to create
  @param completion The completion handler for the request
  */
-- (void)createReviewForGTIN:(NSString *)gtin
-                 dictionary:(NSDictionary *)dictionary
-                 completion:(PLYCompletion)completion;
+- (void)createReview:(PLYReview *)review completion:(PLYCompletion)completion;
+
 /**
  @name Lists
  */
@@ -470,17 +467,21 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 
 /**
  Follows a user by nickname
- @param nickname The nickname of the user to follow
+ @param user The user to follow
  @param completion The completion handler for the request
  */
-- (void)followUserWithNickname:(NSString *)nickname completion:(PLYCompletion)completion;
+- (void)followUser:(PLYUser *)user completion:(PLYCompletion)completion;
 
 /**
  Unfollows a user by nickname
- @param nickname The nickname of the user to unfollow
+ @param user The user to follow
  @param completion The completion handler for the request
  */
-- (void)unfollowUserWithNickname:(NSString *)nickname completion:(PLYCompletion)completion;
+- (void)unfollowUser:(PLYUser *)user completion:(PLYCompletion)completion;
+
+
+- (void)followerForUser:(PLYUser *)user completion:(PLYCompletion)completion;
+- (void)followingForUser:(PLYUser *)user completion:(PLYCompletion)completion;
 
 /**
  @name Timelines
@@ -505,6 +506,7 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 - (void)timelineForProduct:(PLYProduct *)product
 						 options:(NSDictionary *)options
                 completion:(PLYCompletion)completion;
+
 
 
 @end

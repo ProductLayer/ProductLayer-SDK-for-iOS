@@ -139,7 +139,7 @@
     
     // Insert Product
     if(_product.Id == nil) {
-        [[PLYServer sharedServer] createProductWithGTIN:_product.GTIN dictionary:[_product dictionaryRepresentation] completion:^(id result, NSError *error) {
+		 [[PLYServer sharedServer] createProduct:_product completion:^(id result, NSError *error) {
 		
             if (error)
             {
@@ -166,7 +166,7 @@
     }
     // Update product
     else {
-        [[PLYServer sharedServer] updateProductWithGTIN:_product.GTIN dictionary:[_product dictionaryRepresentation] completion:^(id result, NSError *error) {
+        [[PLYServer sharedServer] updateProduct:_product completion:^(id result, NSError *error) {
             
             if (error)
             {

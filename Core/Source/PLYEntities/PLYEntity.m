@@ -123,6 +123,11 @@ NSArray *PLYAllEntityClasses()
 	return [self.Id isEqualToString:[object Id]];
 }
 
+- (NSUInteger)hash
+{
+	return [self.Id hash];
+}
+
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary
 {
 	if ((id)dictionary == [NSNull null])

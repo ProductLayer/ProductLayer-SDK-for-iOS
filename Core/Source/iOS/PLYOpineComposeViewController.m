@@ -20,14 +20,13 @@
 
 @implementation PLYOpineComposeViewController
 {
-	PLYTextView *_textView;
 	
+	// Nav Bar
 	UIBarButtonItem *_saveButtonItem;
 	UIBarButtonItem *_cancelButtonItem;
 	
-	NSString *_text;
-	NSString *_language;
-	
+	// UI
+	PLYTextView *_textView;
 	UIButton *_twitterButton;
 	UIButton *_facebookButton;
 	UIButton *_locationButton;
@@ -36,14 +35,18 @@
 	
 	UIEdgeInsets _insets;
 	
+	// location
+	CLLocationManager *_locationManager;
+	CLLocation *_mostRecentLocation;
+	CLGeocoder *_geoCoder;
+	
+	// opine fields
+	NSString *_text;
+	NSString *_language;
+	NSString *_GTIN;
 	BOOL _postLocation;
 	BOOL _postToTwitter;
 	BOOL _postToFacebook;
-	
-	CLLocationManager *_locationManager;
-	CLLocation *_mostRecentLocation;
-	
-	CLGeocoder *_geoCoder;
 }
 
 - (instancetype)initWithOpine:(PLYOpine *)opine
@@ -54,6 +57,7 @@
 	{
 		_text = opine.text;
 		_language = opine.language;
+		_GTIN = opine.GTIN;
 		
 		_postToTwitter = opine.shareOnTwitter;
 		_postToFacebook = opine.shareOnFacebook;
@@ -513,6 +517,7 @@
 		opine.language = _language;
 		opine.shareOnFacebook = _postToFacebook;
 		opine.shareOnTwitter = _postToTwitter;
+		opine.GTIN = _GTIN;
 	
 		if (_postLocation && _mostRecentLocation)
 		{
@@ -693,6 +698,7 @@
 {
 	_text = opine.text;
 	_language = opine.language;
+	_GTIN = opine.GTIN;
 	
 	_postToTwitter = opine.shareOnTwitter;
 	_postToFacebook = opine.shareOnFacebook;

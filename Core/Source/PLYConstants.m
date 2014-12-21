@@ -11,3 +11,17 @@
 NSString * const PLYErrorDomain = @"Product Layer API";
 NSString * const PLYServerLoginErrorNotification = @"PLYServerLoginErrorNotification";
 NSString * const PLYUserDefaultOpineComposerIncludeLocation = @"PLYUserDefaultOpineComposerIncludeLocation";
+
+// Timeline Options
+
+/**
+ Timeline Options
+ */
+NSString * const PLYTimelineOptionIncludeOpines = @"opines";
+NSString * const PLYTimelineOptionIncludeReviews = @"reviews";
+NSString * const PLYTimelineOptionIncludeImages = @"images";
+NSString * const PLYTimelineOptionIncludeProducts = @"products";
+NSString * const PLYTimelineOptionIncludeFriends = @"include_friends";
+NSString * const PLYTimelineOptionSinceID = @"since_id";
+NSString * const PLYTimelineOptionUntilID = @"until_id";
+NSString * const PLYTimelineOptionCount = @"count";
