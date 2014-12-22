@@ -1030,7 +1030,10 @@
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:data completion:completion];
 }
 
-- (NSURL *)URLForImage:(PLYImage *)image maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop;{
+- (NSURL *)URLForImage:(PLYImage *)image maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop
+{
+	NSParameterAssert(image);
+	
 	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:3];
 	
 	if (maxWidth>0)
