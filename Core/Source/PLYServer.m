@@ -56,6 +56,9 @@
 		_configuration = configuration;
 		
 		_entityCache = [[NSCache alloc] init];
+		
+		// load last state (login user)
+		[self _loadState];
 	}
 	
 	return self;
@@ -92,9 +95,6 @@
 - (void)setAPIKey:(NSString *)APIKey
 {
 	_APIKey = APIKey;
-	
-	// load last state (login user)
-	[self _loadState];
 }
 
 #pragma mark - Request Handling
@@ -339,7 +339,16 @@
 												BOOL ignoreContent = NO;
 												long statusCode = httpResp.statusCode;
 												
-												[self _updateAuthTokenFromHeaders:headers];
+												if (statusCode == 403)
+												{
+													DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+														self.loggedInUser = nil;
+													});
+												}
+												else
+												{
+													[self _updateAuthTokenFromHeaders:headers];
+												}
 												
 												if ([data length])
 												{
@@ -535,6 +544,8 @@
 	
 	if (!loggedInUser || !loggedInUser.Id || !loggedInUser.nickname)
 	{
+		DTLogInfo(@"No user logged in");
+
 		return;
 	}
 	
@@ -568,37 +579,21 @@
 	
 	DTKeychainGenericPassword *account = [serviceAccounts firstObject];
 	
-	if (account)
+	if (!account)
 	{
-		_authToken = account.password;
-		
-		DTLogInfo(@"Checking if token for user '%@' is still valid", account.account);
-		
-		[self isSignedInWithCompletion:^(id result, NSError *error) {
-			if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == kCFURLErrorNotConnectedToInternet)
-			{
-				// no Internet
-				return;
-			}
-			
-			if (error || ![result isEqualToString:@"true"])
-			{
-				DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-					// Delete account from the keychain if login failed.
-					[keychain removeKeychainItem:account error:NULL];
-					
-					// delete the logged in user cache
-					[[NSFileManager defaultManager] removeItemAtPath:path error:NULL];
-				});
-			}
-			else
-			{
-				DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-					self.loggedInUser = loggedInUser;
-				});
-			}
-		}];
+		DTLogError(@"No token found in keychain");
+		return;
 	}
+	
+	if (![account.account isEqualToString:loggedInUser.nickname])
+	{
+		DTLogError(@"Found one token in keychain for user '%@', but logged in user has nickname '%@'", account.account, loggedInUser.nickname);
+		
+		return;
+	}
+	
+	_authToken = account.password;
+	self.loggedInUser = loggedInUser;
 }
 
 - (void)_saveState
@@ -774,6 +769,8 @@
 	NSParameterAssert(completion);
     
     _performingLogin = YES;
+	
+	_authToken = nil;
 	
 	NSString *path = [self _functionPathForFunction:@"login"];
 	
