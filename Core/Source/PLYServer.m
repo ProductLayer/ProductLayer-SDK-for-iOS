@@ -21,6 +21,8 @@
 #import "UIApplication+DTNetworkActivity.h"
 #endif
 
+#import "NSString+DTPaths.h"
+
 
 // this is the URL for the endpoint server
 #define PLY_ENDPOINT_URL [NSURL URLWithString:@"https://api.productlayer.com"]
@@ -28,13 +30,15 @@
 // this is a prefix added before REST methods, e.g. for a version of the API
 #define PLY_PATH_PREFIX @"0.4"
 
-#define PLY_SERVICE [PLY_ENDPOINT_URL absoluteString]
+// the service name for saving tokens to the keychain
+#define PLY_SERVICE @"com.productlayer.api.auth-token"
 
 
 @implementation PLYServer
 {
 	NSURL *_hostURL;
 	NSString *_APIKey;
+	NSString *_authToken;
 	
 	NSURLSession *_session;
 	NSURLSessionConfiguration *_configuration;
@@ -53,9 +57,8 @@
 		
 		_entityCache = [[NSCache alloc] init];
 		
-#if TARGET_OS_IPHONE
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:[UIApplication sharedApplication]];
-#endif
+		// load last state (login user)
+		[self _loadState];
 	}
 	
 	return self;
@@ -67,7 +70,7 @@
     _performingLogin = NO;
     
 	// use default config, we need credential & caching
-	NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+	NSURLSessionConfiguration *config = [NSURLSessionConfiguration ephemeralSessionConfiguration];
     
 	return [self initWithSessionConfiguration:config];
 }
@@ -92,9 +95,6 @@
 - (void)setAPIKey:(NSString *)APIKey
 {
 	_APIKey = APIKey;
-	
-	// load last state (login user)
-	[self _loadState];
 }
 
 #pragma mark - Request Handling
@@ -216,6 +216,12 @@
 	NSString *languages = [[NSLocale preferredLanguages] componentsJoinedByString:@", "];
 	[request setValue:languages forHTTPHeaderField:@"Accept-Language"];
 	
+	// add auth token if present
+	if (_authToken)
+	{
+		[request setValue:_authToken forHTTPHeaderField:@"X-ProductLayer-Auth-Token"];
+	}
+	
 	// add body if set
 	if (payload)
 	{
@@ -250,6 +256,20 @@
 	}
 	
 	[self startDataTaskForRequest:request completion:completion];
+}
+
+- (void)_updateAuthTokenFromHeaders:(NSDictionary *)headers
+{
+	NSArray *cookies = [headers[@"Set-Cookie"] componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@",;"]];
+	
+	NSString *authHeaderName = @"X-ProductLayer-Auth-Token";
+	for (NSString *oneCookie in cookies)
+	{
+		if ([oneCookie hasPrefix:authHeaderName])
+		{
+			_authToken = [oneCookie substringFromIndex:[authHeaderName length]+1];
+		}
+	}
 }
 
 - (void)startDataTaskForRequest:(NSMutableURLRequest *)request completion:(PLYCompletion)completion
@@ -318,6 +338,17 @@
 												NSString *contentType = headers[@"Content-Type"];
 												BOOL ignoreContent = NO;
 												long statusCode = httpResp.statusCode;
+												
+												if (statusCode == 403)
+												{
+													DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+														self.loggedInUser = nil;
+													});
+												}
+												else
+												{
+													[self _updateAuthTokenFromHeaders:headers];
+												}
 												
 												if ([data length])
 												{
@@ -505,6 +536,30 @@
 
 - (void)_loadState
 {
+	NSString *path = [[NSString cachesPath] stringByAppendingPathComponent:@"loggedInUser.plist"];
+	
+	// load user from cache file
+	NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
+	PLYUser *loggedInUser = [[PLYUser alloc] initWithDictionary:dict];
+	
+	if (!loggedInUser || !loggedInUser.Id || !loggedInUser.nickname)
+	{
+		DTLogInfo(@"No user logged in");
+
+		return;
+	}
+	
+	PLYUser *cachedUser = [_entityCache objectForKey:loggedInUser.Id];
+	
+	if (cachedUser)
+	{
+		loggedInUser = cachedUser;
+	}
+	else
+	{
+		[_entityCache setObject:loggedInUser forKey:loggedInUser.Id];
+	}
+
 	DTKeychain *keychain = [DTKeychain sharedInstance];
 	NSArray *serviceAccounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:nil] error:NULL];
 	
@@ -524,75 +579,38 @@
 	
 	DTKeychainGenericPassword *account = [serviceAccounts firstObject];
 	
-	if (account)
+	if (!account)
 	{
-		DTLogInfo(@"Logging in user '%@'", account.account);
-		
-		[self loginWithUser:account.account password:account.password completion:^(id result, NSError *error) {
-			if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == kCFURLErrorNotConnectedToInternet)
-			{
-				// no Internet
-				return;
-			}
-			
-			if (error)
-			{
-				DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-					NSDictionary *userInfo = @{@"Error": error};
-					[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerLoginErrorNotification
-																						 object:self
-																					  userInfo:userInfo];
-					
-					// Delete account from the keychain if login failed.
-					[keychain removeKeychainItem:account error:NULL];
-				});
-			}
-			else
-			{
-				DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-					[self setLoggedInUser:result];
-				});
-			}
-		}];
-	}
-}
-
-- (void)renewSessionIfNecessary
-{
-	// Only if the user is logged in check if the session is still valid.
-	if (!self.loggedInUser)
-	{
+		DTLogError(@"No token found in keychain");
 		return;
 	}
 	
-	DTLogInfo(@"Renewing session for user '%@'", _loggedInUser.nickname);
+	if (![account.account isEqualToString:loggedInUser.nickname])
+	{
+		DTLogError(@"Found one token in keychain for user '%@', but logged in user has nickname '%@'", account.account, loggedInUser.nickname);
+		
+		return;
+	}
 	
-	[self isSignedInWithCompletion:^(id result, NSError *error) {
-		if (error)
-		{
-			if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == kCFURLErrorNotConnectedToInternet)
-			{
-				// no Internet
-				return;
-			}
-			
-			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-				NSDictionary *userInfo = @{@"Error": error};
-				[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerLoginErrorNotification
-																					 object:self
-																				  userInfo:userInfo];
-			});
-		}
-		else
-		{
-			if([result isEqualToString:@"true"]){
-				// Nothing to do the session is valid.
-			} else {
-				// Renew the session.
-				[self _loadState];
-			}
-		}
-	}];
+	_authToken = account.password;
+	self.loggedInUser = loggedInUser;
+}
+
+- (void)_saveState
+{
+	NSString *path = [[NSString cachesPath] stringByAppendingPathComponent:@"loggedInUser.plist"];
+	
+	if (_loggedInUser)
+	{
+		NSDictionary *dict = [_loggedInUser dictionaryRepresentation];
+		
+		[dict writeToFile:path atomically:YES];
+	}
+	else
+	{
+		// delete the logged in user cache
+		[[NSFileManager defaultManager] removeItemAtPath:path error:NULL];
+	}
 }
 
 - (void)setLoggedInUser:(PLYUser *)loggedInUser
@@ -604,6 +622,8 @@
 	{
 		[_entityCache setObject:_loggedInUser forKey:_loggedInUser.Id];
 	}
+	
+	[self _saveState];
 	
 	[self didChangeValueForKey:@"loggedInUser"];
 }
@@ -750,6 +770,8 @@
     
     _performingLogin = YES;
 	
+	_authToken = nil;
+	
 	NSString *path = [self _functionPathForFunction:@"login"];
 	
     NSString *authValue = [self basicAuthenticationForUser:user andPassword:password];
@@ -775,7 +797,7 @@
 			}
 			
 			// always update password
-			serviceAccount.password = password;
+			serviceAccount.password = _authToken;
 			
 			// persist
 			[keychain writeKeychainItem:serviceAccount error:NULL];
@@ -789,7 +811,8 @@
         _performingLogin = NO;
 	};
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil basicAuth:authValue completion:ownCompletion];
+	NSDictionary *parameters = @{@"remember_me": @"true"};
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:parameters basicAuth:authValue completion:ownCompletion];
 }
 
 - (NSString *) basicAuthenticationForUser:(NSString *)user andPassword:(NSString *)password{
@@ -813,6 +836,8 @@
 		 
 		 NSArray *accounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:_loggedInUser.nickname] error:NULL];
 		 [keychain removeKeychainItems:accounts error:NULL];
+		 
+		 _authToken = nil;
     }
 	
 	NSString *path = [self _functionPathForFunction:@"logout"];
@@ -1755,15 +1780,6 @@
 	
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:completion];
 }
-
-#pragma mark - Notifications
-
-#if TARGET_OS_IPHONE
-- (void)appWillEnterForeground:(NSNotification *)notification
-{
-	[self renewSessionIfNecessary];
-}
-#endif
 
 #pragma mark - Properties
 
