@@ -341,9 +341,7 @@
 												
 												if (statusCode == 403)
 												{
-													DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-														self.loggedInUser = nil;
-													});
+													[self _loadState];
 												}
 												else
 												{
@@ -603,14 +601,51 @@
 	if (_loggedInUser)
 	{
 		NSDictionary *dict = [_loggedInUser dictionaryRepresentation];
-		
 		[dict writeToFile:path atomically:YES];
+
+		// Search for account in keychain.
+		DTKeychain *keychain = [DTKeychain sharedInstance];
+		DTKeychainGenericPassword *serviceAccount = [[keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:_loggedInUser.nickname] error:NULL] lastObject];
+		
+		// create new account
+		if (!serviceAccount)
+		{
+			serviceAccount = [DTKeychainGenericPassword new];
+			serviceAccount.service = PLY_SERVICE;
+			serviceAccount.account = _loggedInUser.nickname;
+		}
+		
+		// always update password
+		serviceAccount.password = _authToken;
+		
+		// persist
+		[keychain writeKeychainItem:serviceAccount error:NULL];
 	}
 	else
 	{
 		// delete the logged in user cache
 		[[NSFileManager defaultManager] removeItemAtPath:path error:NULL];
 	}
+}
+
+- (void)_invalidateAuthToken
+{
+	DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+		// remove logged in user
+		[self setLoggedInUser:nil];
+		
+		// update the persisted state
+		[self _saveState];
+		
+		// remove all tokens from keychain
+		DTKeychain *keychain = [DTKeychain sharedInstance];
+		NSArray *serviceAccounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:nil] error:NULL];
+		
+		for (DTKeychainItem *item in serviceAccounts)
+		{
+			[keychain removeKeychainItem:item error:NULL];
+		}
+	});
 }
 
 - (void)setLoggedInUser:(PLYUser *)loggedInUser
@@ -622,8 +657,6 @@
 	{
 		[_entityCache setObject:_loggedInUser forKey:_loggedInUser.Id];
 	}
-	
-	[self _saveState];
 	
 	[self didChangeValueForKey:@"loggedInUser"];
 }
@@ -784,23 +817,7 @@
 		{
 			[self setLoggedInUser:result];
 			
-			// Search for account in keychain.
-			DTKeychain *keychain = [DTKeychain sharedInstance];
-			DTKeychainGenericPassword *serviceAccount = [[keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:user] error:NULL] lastObject];
-			
-			// create new account
-			if (!serviceAccount)
-			{
-				serviceAccount = [DTKeychainGenericPassword new];
-				serviceAccount.service = PLY_SERVICE;
-				serviceAccount.account = user;
-			}
-			
-			// always update password
-			serviceAccount.password = _authToken;
-			
-			// persist
-			[keychain writeKeychainItem:serviceAccount error:NULL];
+			[self _saveState];
 		}
 		
 		if (wrappedCompletion)
@@ -843,8 +860,8 @@
 	NSString *path = [self _functionPathForFunction:@"logout"];
 	
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:completion];
-    
-	[self setLoggedInUser:nil];
+	
+	[self _invalidateAuthToken];
 }
 
 /**
