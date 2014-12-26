@@ -34,6 +34,13 @@
 #define PLY_SERVICE @"com.productlayer.api.auth-token"
 
 
+@interface PLYServer ()
+
+@property (nonatomic, readwrite, strong) PLYUser *loggedInUser;
+
+@end
+
+
 @implementation PLYServer
 {
 	NSURL *_hostURL;
@@ -547,31 +554,18 @@
 		return;
 	}
 	
-	PLYUser *cachedUser = [_entityCache objectForKey:loggedInUser.Id];
+	// replace with entity from cache if it exists
+	loggedInUser = (PLYUser *)[self _entityByUpdatingCachedEntity:loggedInUser];
 	
-	if (cachedUser)
-	{
-		loggedInUser = cachedUser;
-	}
-	else
-	{
-		[_entityCache setObject:loggedInUser forKey:loggedInUser.Id];
-	}
-
+	// get auth token from keychain for this user
 	DTKeychain *keychain = [DTKeychain sharedInstance];
-	NSArray *serviceAccounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:nil] error:NULL];
 	
-	if ([serviceAccounts count]>1)
+	NSError *error;
+	NSArray *serviceAccounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:loggedInUser.Id] error:&error];
+	
+	if (!serviceAccounts)
 	{
-		// There should be only one account for productlayer for security reasons delete all accounts
-		
-		for (DTKeychainItem *item in serviceAccounts)
-		{
-			[keychain removeKeychainItem:item error:NULL];
-		}
-		
-		DTLogError(@"Found %d keychain items for service '%@', where maximum one was expected. Deleted all items.", [serviceAccounts count], PLY_SERVICE);
-		
+		DTLogError(@"Error retrieving keychain item: %@", [error localizedDescription]);
 		return;
 	}
 	
@@ -583,13 +577,6 @@
 		return;
 	}
 	
-	if (![account.account isEqualToString:loggedInUser.nickname])
-	{
-		DTLogError(@"Found one token in keychain for user '%@', but logged in user has nickname '%@'", account.account, loggedInUser.nickname);
-		
-		return;
-	}
-	
 	_authToken = account.password;
 	self.loggedInUser = loggedInUser;
 }
@@ -598,44 +585,10 @@
 {
 	NSString *path = [[NSString cachesPath] stringByAppendingPathComponent:@"loggedInUser.plist"];
 	
-	if (_loggedInUser)
-	{
-		NSDictionary *dict = [_loggedInUser dictionaryRepresentation];
-		[dict writeToFile:path atomically:YES];
-
-		// Search for account in keychain.
-		DTKeychain *keychain = [DTKeychain sharedInstance];
-		DTKeychainGenericPassword *serviceAccount = [[keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:_loggedInUser.nickname] error:NULL] lastObject];
-		
-		// create new account
-		if (!serviceAccount)
-		{
-			serviceAccount = [DTKeychainGenericPassword new];
-			serviceAccount.service = PLY_SERVICE;
-			serviceAccount.account = _loggedInUser.nickname;
-		}
-		
-		// always update password
-		serviceAccount.password = _authToken;
-		
-		// persist
-		[keychain writeKeychainItem:serviceAccount error:NULL];
-	}
-	else
+	if (!_loggedInUser)
 	{
 		// delete the logged in user cache
 		[[NSFileManager defaultManager] removeItemAtPath:path error:NULL];
-	}
-}
-
-- (void)_invalidateAuthToken
-{
-	DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-		// remove logged in user
-		[self setLoggedInUser:nil];
-		
-		// update the persisted state
-		[self _saveState];
 		
 		// remove all tokens from keychain
 		DTKeychain *keychain = [DTKeychain sharedInstance];
@@ -645,20 +598,55 @@
 		{
 			[keychain removeKeychainItem:item error:NULL];
 		}
-	});
-}
-
-- (void)setLoggedInUser:(PLYUser *)loggedInUser
-{
-	[self willChangeValueForKey:@"loggedInUser"];
-	_loggedInUser = loggedInUser;
 	
-	if (_loggedInUser)
-	{
-		[_entityCache setObject:_loggedInUser forKey:_loggedInUser.Id];
+		return;
 	}
 	
-	[self didChangeValueForKey:@"loggedInUser"];
+	NSDictionary *dict = [_loggedInUser dictionaryRepresentation];
+	[dict writeToFile:path atomically:YES];
+	
+	// Search for account in keychain.
+	DTKeychain *keychain = [DTKeychain sharedInstance];
+	
+	NSError *error;
+	NSArray *serviceAccounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:_loggedInUser.Id] error:&error];
+	
+	// create new account
+	if (!serviceAccounts)
+	{
+		DTLogError(@"Error querying keychain: %@", [error localizedDescription]);
+		return;
+	}
+	
+	DTKeychainGenericPassword *account = [serviceAccounts lastObject];
+	
+	if (!account)
+	{
+		// need to make a new one
+		account = [DTKeychainGenericPassword new];
+		account.service = PLY_SERVICE;
+		account.account = _loggedInUser.Id;
+	}
+	
+	// always update password
+	account.password = _authToken;
+	
+	// persist
+	if (![keychain writeKeychainItem:account error:&error])
+	{
+		DTLogError(@"Error creating keychain entry: %@", [error localizedDescription]);
+	};
+}
+
+- (void)_invalidateAuthToken
+{
+	DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+		// remove logged in user
+		self.loggedInUser = nil;
+		
+		// update the persisted state
+		[self _saveState];
+	});
 }
 
 #pragma mark - Helpers
@@ -680,6 +668,24 @@
 	return [tmpDict copy];
 }
 
+// return a cached updated version of the entity, or cache the entity if there was no cached version
+- (id)_entityByUpdatingCachedEntity:(PLYEntity *)entity
+{
+	PLYEntity *cachedEntity = [_entityCache objectForKey:entity.Id];
+	
+	if (cachedEntity)
+	{
+		NSDictionary *dict = [entity dictionaryRepresentation];
+		[cachedEntity setValuesForKeysWithDictionary:dict];
+		
+		return cachedEntity;
+	}
+	
+	// cache it
+	[_entityCache setObject:entity forKey:entity.Id];
+	
+	return entity;
+}
 
 #pragma mark - Search
 
@@ -815,8 +821,7 @@
 		
 		if (!error && [result isKindOfClass:PLYUser.class])
 		{
-			[self setLoggedInUser:result];
-			
+			self.loggedInUser = [self _entityByUpdatingCachedEntity:result];
 			[self _saveState];
 		}
 		
@@ -969,10 +974,14 @@
 			 
 			 if (result && !error)
 			 {
-				 NSDictionary *dict = [result dictionaryRepresentation];
-				 [user setValuesForKeysWithDictionary:dict];
+				 PLYUser *user = [self _entityByUpdatingCachedEntity:result];
 				 
-				 [self _cacheEntity:user];
+				 if (completion)
+				 {
+					 completion(user, nil);
+				 }
+				 
+				 return;
 			 }
 			 
 			 if (completion)
@@ -1551,8 +1560,8 @@
 				{
 					PLYUser *user = [PLYUser new];
 					user.Id = identifier;
+					user = [self _entityByUpdatingCachedEntity:user];
 					
-					[self _cacheEntity:user];
 					[tmpArray addObject:user];
 				}
 			}
@@ -1596,9 +1605,7 @@
 				{
 					PLYUser *user = [PLYUser new];
 					user.Id = identifier;
-					
-					[self _cacheEntity:user];
-					[_entityCache setObject:user forKey:identifier];
+					user = [self _entityByUpdatingCachedEntity:user];
 					
 					[tmpArray addObject:user];
 				}
@@ -1666,21 +1673,6 @@
 	return [params copy];
 }
 
-- (void)_cacheEntity:(PLYEntity *)entity
-{
-	if ([entity isKindOfClass:[PLYUser class]])
-	{
-		PLYUser *user = (PLYUser *)entity;
-		
-		if (!user.avatarURL)
-		{
-			[user setValue:[self avatarImageURLForUser:user] forKey:@"avatarURL"];
-		}
-	}
-	
-	[_entityCache setObject:entity forKey:entity.Id];
-}
-
 - (void)timelineForUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion
 {
 	NSParameterAssert(user);
@@ -1694,36 +1686,15 @@
 		
 		if (result)
 		{
-			NSMutableArray *tmpArray = [NSMutableArray array];
-			
+			// update user entities with cached versions
 			for (PLYEntity *entity in result)
 			{
-				PLYUser *cachedUser = [_entityCache objectForKey:entity.createdBy.Id];
-				
-				if (cachedUser)
+				if ([entity isKindOfClass:[PLYEntity class]])
 				{
-					entity.createdBy = cachedUser;
+					entity.createdBy = [self _entityByUpdatingCachedEntity:entity.createdBy];
+					entity.updatedBy = [self _entityByUpdatingCachedEntity:entity.updatedBy];
 				}
-				else
-				{
-					[self _cacheEntity:entity.createdBy];
-				}
-				
-				cachedUser = [_entityCache objectForKey:entity.updatedBy.Id];
-				
-				if (cachedUser)
-				{
-					entity.updatedBy = cachedUser;
-				}
-				else
-				{
-					[self _cacheEntity:entity.updatedBy];
-				}
-				
-				[tmpArray addObject:entity];
 			}
-			
-			result = [tmpArray copy];
 		}
 		
 		if (wrappedCompletion)
