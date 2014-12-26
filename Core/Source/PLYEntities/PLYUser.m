@@ -7,6 +7,7 @@
 //
 
 #import "PLYUser.h"
+#import "PLYUserAvatar.h"
 
 
 @interface PLYUser ()
@@ -144,6 +145,11 @@
 		dict[@"pl-usr-img"] = [_avatarURL absoluteString];
 	}
 	
+	if (_avatarImageIdentifier)
+	{
+		dict[@"pl-usr-img_id"] = _avatarImageIdentifier;
+	}
+	
 	dict[@"pl-usr-following"] = @(_following);
 	dict[@"pl-usr-followed"] = @(_followed);
 	
@@ -155,4 +161,24 @@
 	// return immutable
 	return [dict copy];
 }
+
+- (PLYUserAvatar *)avatar
+{
+	PLYUserAvatar *avatar = [PLYUserAvatar new];
+	[avatar setValue:self.nickname forKey:@"userNickname"];
+	[avatar setValue:self.Id forKey:@"userID"];
+
+	if (_avatarImageIdentifier)
+	{
+		[avatar setValue:_avatarImageIdentifier forKey:@"fileId"];
+	}
+	
+	if (_avatarURL)
+	{
+		[avatar setValue:_avatarURL forKey:@"imageURL"];
+	}
+	
+	return avatar;
+}
+
 @end

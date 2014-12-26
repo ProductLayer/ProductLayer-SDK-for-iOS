@@ -961,7 +961,7 @@
 			PLYUserAvatar *avatar = (PLYUserAvatar *)result;
 			
 			// update ID
-			[user setValue:avatar.Id forKey:@"avatarImageIdentifier"];
+			[user setValue:avatar.fileId forKey:@"avatarImageIdentifier"];
 			
 			// reset image URL, this triggers reloading of the image
 			[user setValue:[self avatarImageURLForUser:user] forKey:@"avatarURL"];

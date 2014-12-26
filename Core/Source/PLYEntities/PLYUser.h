@@ -8,7 +8,7 @@
 
 #import "PLYEntity.h"
 
-@class PLYAuditor;
+@class PLYAuditor, PLYUserAvatar;
 
 /**
  Model class representing a ProductLayer user
@@ -85,5 +85,11 @@
  The social connections of the user
  */
 @property (nonatomic, readonly) NSDictionary *socialConnections;
+
+
+/**
+ An PLYUserAvatar object for the receiver
+ */
+- (PLYUserAvatar *)avatar;
 
 @end
