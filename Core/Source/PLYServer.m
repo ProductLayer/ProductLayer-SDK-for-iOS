@@ -687,7 +687,7 @@
 	
 	if (cachedEntity)
 	{
-		if (entity.version > cachedEntity.version)
+		if (entity.version >= cachedEntity.version)
 		{
 			NSDictionary *dict = [entity dictionaryRepresentation];
 			[cachedEntity setValuesForKeysWithDictionary:dict];
