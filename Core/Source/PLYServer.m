@@ -102,6 +102,18 @@
 - (void)setAPIKey:(NSString *)APIKey
 {
 	_APIKey = APIKey;
+	
+	// try to update details (like score for logged in user)
+	if (_loggedInUser)
+	{
+		[self loadDetailsForUser:_loggedInUser completion:^(id result, NSError *error) {
+			if (error)
+			{
+				DTLogError(@"Error updating details for logged in user: %@", [error localizedDescription]);
+				return;
+			}
+		}];
+	}
 }
 
 #pragma mark - Request Handling
@@ -555,7 +567,7 @@
 	}
 	
 	// replace with entity from cache if it exists
-	loggedInUser = (PLYUser *)[self _entityByUpdatingCachedEntity:loggedInUser];
+	loggedInUser = [self _entityByUpdatingCachedEntity:loggedInUser];
 	
 	// get auth token from keychain for this user
 	DTKeychain *keychain = [DTKeychain sharedInstance];
@@ -585,7 +597,7 @@
 {
 	NSString *path = [[NSString cachesPath] stringByAppendingPathComponent:@"loggedInUser.plist"];
 	
-	if (!_loggedInUser)
+	if (!_loggedInUser || !_authToken)
 	{
 		// delete the logged in user cache
 		[[NSFileManager defaultManager] removeItemAtPath:path error:NULL];
@@ -675,14 +687,36 @@
 	
 	if (cachedEntity)
 	{
-		NSDictionary *dict = [entity dictionaryRepresentation];
-		[cachedEntity setValuesForKeysWithDictionary:dict];
+		if (entity.version > cachedEntity.version)
+		{
+			NSDictionary *dict = [entity dictionaryRepresentation];
+			[cachedEntity setValuesForKeysWithDictionary:dict];
+			
+			// changes to logged in user needs to be persisted
+			if (cachedEntity == _loggedInUser)
+			{
+				[self _saveState];
+			}
+		}
 		
-		return cachedEntity;
+		entity = cachedEntity;
+	}
+	else
+	{
+		// cache it
+		[_entityCache setObject:entity forKey:entity.Id];
 	}
 	
-	// cache it
-	[_entityCache setObject:entity forKey:entity.Id];
+	// add the avatar URL since some views need it without having access to PLYServer
+	if ([entity isKindOfClass:[PLYUser class]])
+	{
+		PLYUser *user = (PLYUser *)entity;
+		
+		if (!user.avatarURL)
+		{
+			[user setValue:[self avatarImageURLForUser:user] forKey:@"avatarURL"];
+		}
+	}
 	
 	return entity;
 }
