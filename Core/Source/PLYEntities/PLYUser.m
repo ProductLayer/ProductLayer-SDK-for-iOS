@@ -149,6 +149,10 @@
 	{
 		dict[@"pl-usr-img_id"] = _avatarImageIdentifier;
 	}
+	else
+	{
+		dict[@"pl-usr-img_id"] = [NSNull null];
+	}
 	
 	dict[@"pl-usr-following"] = @(_following);
 	dict[@"pl-usr-followed"] = @(_followed);
