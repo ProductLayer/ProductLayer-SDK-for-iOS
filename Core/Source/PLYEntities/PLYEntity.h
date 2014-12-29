@@ -49,6 +49,7 @@
 
 /**
  Updates an entity with values from another entity. This also sets values to zero or `nil` if they are so in the source entity
+ @param entity The entity to get the new values for the receiver from
  */
 - (void)updateFromEntity:(PLYEntity *)entity;
 
