@@ -89,4 +89,13 @@
 	return [dict copy];
 }
 
+- (void)updateFromEntity:(PLYVotableEntity *)entity
+{
+	[super updateFromEntity:entity];
+	
+	self.votingScore = entity.votingScore;
+	self.upVoter = entity.upVoter;
+	self.downVoter = entity.downVoter;
+}
+
 @end

@@ -689,8 +689,7 @@
 	{
 		if (entity.version >= cachedEntity.version)
 		{
-			NSDictionary *dict = [entity dictionaryRepresentation];
-			[cachedEntity setValuesForKeysWithDictionary:dict];
+			[cachedEntity updateFromEntity:entity];
 			
 			// changes to logged in user needs to be persisted
 			if (cachedEntity == _loggedInUser)
@@ -1514,7 +1513,7 @@
 			// update logged in user
 			if ([result isEqual:_loggedInUser])
 			{
-				[_loggedInUser setValuesForKeysWithDictionary:[result dictionaryRepresentation]];
+				[_loggedInUser updateFromEntity:result];
 			}
 		}
 		
@@ -1552,7 +1551,7 @@
 			// update logged in user
 			if ([result isEqual:_loggedInUser])
 			{
-				[_loggedInUser setValuesForKeysWithDictionary:[result dictionaryRepresentation]];
+				[_loggedInUser updateFromEntity:result];
 			}
 		}
 		

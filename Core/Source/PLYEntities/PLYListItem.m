@@ -67,4 +67,14 @@
 	return [dict copy];
 }
 
+- (void)updateFromEntity:(PLYListItem *)entity
+{
+	[super updateFromEntity:entity];
+	
+	self.GTIN = entity.GTIN;
+	self.note = entity.note;
+	self.quantity = entity.quantity;
+	self.priority = entity.priority;
+}
+
 @end

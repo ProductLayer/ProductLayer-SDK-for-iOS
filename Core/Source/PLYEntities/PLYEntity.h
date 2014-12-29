@@ -48,6 +48,11 @@
 - (NSDictionary *)objectReference;
 
 /**
+ Updates an entity with values from another entity. This also sets values to zero or `nil` if they are so in the source entity
+ */
+- (void)updateFromEntity:(PLYEntity *)entity;
+
+/**
  @name Common Properties
  */
 

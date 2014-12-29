@@ -9,8 +9,16 @@
 #import "PLYOpine.h"
 #import "PLYImage.h"
 
-@implementation PLYOpine
+@interface PLYOpine ()
 
+// read-only properties are writable internally
+
+@property (nonatomic, copy, readwrite) NSString *twitterPostIdentifier;
+@property (nonatomic, copy, readwrite) NSString *facebookPostIdentifier;
+
+@end
+
+@implementation PLYOpine
 
 + (NSString *)entityTypeIdentifier
 {
@@ -138,6 +146,23 @@
 	
 	// return immutable
 	return [dict copy];
+}
+
+- (void)updateFromEntity:(PLYOpine *)entity
+{
+	[super updateFromEntity:entity];
+	
+	self.text = entity.text;
+	self.parent = entity.parent;
+	self.GTIN = entity.GTIN;
+	self.language = entity.language;
+	self.location = entity.location;
+	self.images = entity.images;
+	self.shareOnTwitter = entity.shareOnTwitter;
+	self.shareOnFacebook = entity.shareOnFacebook;
+	
+	self.facebookPostIdentifier = entity.facebookPostIdentifier;
+	self.twitterPostIdentifier = entity.twitterPostIdentifier;
 }
 
 @end

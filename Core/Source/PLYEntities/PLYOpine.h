@@ -63,11 +63,11 @@ typedef struct { double latitude; double longitude; } PLYLocationCoordinate2D;
 /**
  If the opine was cross-posted to Twitter, this is the identifier
  */
-@property (nonatomic, readonly) NSString *twitterPostIdentifier;
+@property (nonatomic, copy, readonly) NSString *twitterPostIdentifier;
 
 /**
  If the opine was cross-posted to Facebook, this is the identifier
  */
-@property (nonatomic, readonly) NSString *facebookPostIdentifier;
+@property (nonatomic, copy, readonly) NSString *facebookPostIdentifier;
 
 @end

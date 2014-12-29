@@ -15,6 +15,17 @@
 // private property, set if user has an avatar
 @property (nonatomic, copy) NSString *avatarImageIdentifier;
 
+// all read-only properties are settable internally
+
+@property (nonatomic, assign, readwrite) NSInteger points;
+@property (nonatomic, copy, readwrite) NSArray *unlockedAchievements;
+@property (nonatomic, assign, readwrite) NSUInteger followerCount;
+@property (nonatomic, assign, readwrite) NSUInteger followingCount;
+@property (nonatomic, copy, readwrite) NSURL *avatarURL;
+@property (nonatomic, assign, readwrite) BOOL following;
+@property (nonatomic, assign, readwrite) BOOL followed;
+@property (nonatomic, copy, readwrite) NSDictionary *socialConnections;
+
 @end
 
 @implementation PLYUser
@@ -130,15 +141,25 @@
 		dict[@"pl-usr-gender"] = _gender;
 	}
 	
-	dict[@"pl-usr-points"] = @(_points);
+	if (_points)
+	{
+		dict[@"pl-usr-points"] = @(_points);
+	}
 	
 	if (_unlockedAchievements)
 	{
 		dict[@"pl-usr-achv_unlocked"] = _unlockedAchievements;
 	}
 	
-	dict[@"pl-usr-follower_cnt"] = @(_followerCount);
-	dict[@"pl-usr-following_cnt"] = @(_followingCount);
+	if (_followerCount)
+	{
+		dict[@"pl-usr-follower_cnt"] = @(_followerCount);
+	}
+	
+	if (_followingCount)
+	{
+		dict[@"pl-usr-following_cnt"] = @(_followingCount);
+	}
 	
 	if (_avatarURL)
 	{
@@ -149,13 +170,16 @@
 	{
 		dict[@"pl-usr-img_id"] = _avatarImageIdentifier;
 	}
-	else
+	
+	if (_following)
 	{
-		dict[@"pl-usr-img_id"] = [NSNull null];
+		dict[@"pl-usr-following"] = @(_following);
 	}
 	
-	dict[@"pl-usr-following"] = @(_following);
-	dict[@"pl-usr-followed"] = @(_followed);
+	if (_followed)
+	{
+		dict[@"pl-usr-followed"] = @(_followed);
+	}
 	
 	if (_socialConnections)
 	{
@@ -183,6 +207,26 @@
 	}
 	
 	return avatar;
+}
+
+- (void)updateFromEntity:(PLYUser *)entity
+{
+	[super updateFromEntity:entity];
+	
+	self.nickname = entity.nickname;
+	self.firstName = entity.firstName;
+	self.lastName = entity.lastName;
+	self.email = entity.email;
+	self.birthday = entity.birthday;
+	self.gender = entity.gender;
+	self.points = entity.points;
+	self.unlockedAchievements = entity.unlockedAchievements;
+	self.followerCount = entity.followerCount;
+	self.followingCount = entity.followingCount;
+	self.avatarURL = entity.avatarURL;
+	self.following = entity.following;
+	self.followed = entity.followed;
+	self.socialConnections = entity.socialConnections;
 }
 
 @end

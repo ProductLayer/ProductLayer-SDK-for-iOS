@@ -49,4 +49,13 @@
 	// return immutable
 	return [dict copy];
 }
+
+- (void)updateFromEntity:(PLYUserAvatar *)entity
+{
+	[super updateFromEntity:entity];
+	
+	self.userID = entity.userID;
+	self.userNickname = entity.userNickname;
+}
+
 @end

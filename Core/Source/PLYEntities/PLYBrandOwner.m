@@ -69,4 +69,12 @@
 	return [dict copy];
 }
 
+- (void)updateFromEntity:(PLYBrandOwner *)entity
+{
+	[super updateFromEntity:entity];
+	
+	self.name = entity.name;
+	self.brands = entity.brands;
+}
+
 @end

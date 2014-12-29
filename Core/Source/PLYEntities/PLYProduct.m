@@ -192,4 +192,25 @@
 	return [dict copy];
 }
 
+- (void)updateFromEntity:(PLYProduct *)entity
+{
+	[super updateFromEntity:entity];
+	
+	self.brandName = entity.brandName;
+	self.brandOwner = entity.brandOwner;
+	self.language = entity.language;
+	self.category = entity.category;
+	self.longDescription = entity.longDescription;
+	self.shortDescription = entity.shortDescription;
+	self.GTIN = entity.GTIN;
+	self.homepage = entity.homepage;
+	self.links = entity.links;
+	self.packaging = entity.packaging;
+	self.averageReviewRating = entity.averageReviewRating;
+	self.numberOfReviews = entity.numberOfReviews;
+	self.characteristics = entity.characteristics;
+	self.nutritious = entity.nutritious;
+	self.sourceURL = entity.sourceURL;
+}
+
 @end

@@ -262,6 +262,19 @@ NSArray *PLYAllEntityClasses()
 	return dict;
 }
 
+- (void)updateFromEntity:(PLYEntity *)entity
+{
+	NSAssert([entity class] == [self class], @"Cannot update entity from different class");
+	
+	self.Class = entity.Class;
+	self.Id = entity.Id;
+	self.version = entity.version;
+	self.createdBy = entity.createdBy;
+	self.createdTime = entity.createdTime;
+	self.updatedBy = entity.updatedBy;
+	self.updatedTime = entity.updatedTime;
+}
+
 #pragma mark - NSCopying
 
 - (id)copyWithZone:(NSZone *)zone
