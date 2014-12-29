@@ -1759,28 +1759,27 @@
 	NSParameterAssert(voteableEntity);
 	NSParameterAssert(completion);
 	
-	NSString *function;
+	NSString *entityType;
 	if ([voteableEntity isKindOfClass:[PLYImage class]])
 	{
-		function = [NSString stringWithFormat:@"image/%@/up_vote", [(PLYImage *)voteableEntity fileId]];
+		entityType = @"image";
 	}
 	else if ([voteableEntity isKindOfClass:[PLYProduct class]])
 	{
-		function = [NSString stringWithFormat:@"product/%@/up_vote", [voteableEntity Id]];
+		entityType = @"product";
 	}
 	else if ([voteableEntity isKindOfClass:[PLYOpine class]])
 	{
-		function = [NSString stringWithFormat:@"opine/%@/up_vote", [voteableEntity Id]];
+		entityType = @"opine";
 	}
 	else if ([voteableEntity isKindOfClass:[PLYReview class]])
 	{
-		function = [NSString stringWithFormat:@"review/%@/up_vote", [voteableEntity Id]];
-	}
-	else
-	{
-		NSAssert(false, @"Can't vote this entity.");
+		entityType = @"review";
 	}
 	
+	NSAssert(entityType!=nil, @"Can't vote this entity.");
+	
+	NSString *function = [NSString stringWithFormat:@"%@/%@/up_vote", entityType, voteableEntity.Id];
 	NSString *path = [self _functionPathForFunction:function];
 	
 	PLYCompletion wrappedCompletion = [completion copy];
@@ -1805,28 +1804,27 @@
 	NSParameterAssert(voteableEntity);
 	NSParameterAssert(completion);
 	
-	NSString *function;
+	NSString *entityType;
 	if ([voteableEntity isKindOfClass:[PLYImage class]])
 	{
-		function = [NSString stringWithFormat:@"image/%@/down_vote", [(PLYImage *)voteableEntity fileId]];
+		entityType = @"image";
 	}
 	else if ([voteableEntity isKindOfClass:[PLYProduct class]])
 	{
-		function = [NSString stringWithFormat:@"product/%@/down_vote", [voteableEntity Id]];
+		entityType = @"product";
 	}
 	else if ([voteableEntity isKindOfClass:[PLYOpine class]])
 	{
-		function = [NSString stringWithFormat:@"opine/%@/down_vote", [voteableEntity Id]];
+		entityType = @"opine";
 	}
 	else if ([voteableEntity isKindOfClass:[PLYReview class]])
 	{
-		function = [NSString stringWithFormat:@"review/%@/down_vote", [voteableEntity Id]];
-	}
-	else
-	{
-		NSAssert(false, @"Can't vote this entity.");
+		entityType = @"review";
 	}
 	
+	NSAssert(entityType!=nil, @"Can't vote this entity.");
+	
+	NSString *function = [NSString stringWithFormat:@"%@/%@/down_vote", entityType, voteableEntity.Id];
 	NSString *path = [self _functionPathForFunction:function];
 	
 	PLYCompletion wrappedCompletion = [completion copy];
