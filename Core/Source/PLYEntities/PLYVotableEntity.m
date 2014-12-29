@@ -98,4 +98,14 @@
 	self.downVoter = entity.downVoter;
 }
 
+- (BOOL)canBeVoted
+{
+	if (self.Id)
+	{
+		return YES;
+	}
+	
+	return NO;
+}
+
 @end

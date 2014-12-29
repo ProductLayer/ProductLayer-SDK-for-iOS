@@ -98,4 +98,14 @@
 	self.GTIN = entity.GTIN;
 }
 
+- (BOOL)canBeVoted
+{
+	if (self.fileId)
+	{
+		return YES;
+	}
+	
+	return NO;
+}
+
 @end

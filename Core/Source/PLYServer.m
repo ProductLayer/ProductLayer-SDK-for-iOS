@@ -1754,52 +1754,95 @@
 
 #pragma mark - Votings
 
-- (void)upVote:(PLYVotableEntity *)voteableEntity
-    completion:(PLYCompletion)completion{
-    
+- (void)upVote:(PLYVotableEntity *)voteableEntity completion:(PLYCompletion)completion
+{
 	NSParameterAssert(voteableEntity);
 	NSParameterAssert(completion);
-    
-    NSString *function;
-    if([voteableEntity isKindOfClass:[PLYImage class]]){
-        function = [NSString stringWithFormat:@"image/%@/up_vote", [(PLYImage *)voteableEntity fileId]];
-    } else if ([voteableEntity isKindOfClass:[PLYProduct class]]){
-        function = [NSString stringWithFormat:@"product/%@/up_vote", [voteableEntity Id]];
-    } else if ([voteableEntity isKindOfClass:[PLYOpine class]]){
-        function = [NSString stringWithFormat:@"opine/%@/up_vote", [voteableEntity Id]];
-    } else if ([voteableEntity isKindOfClass:[PLYReview class]]){
-        function = [NSString stringWithFormat:@"review/%@/up_vote", [voteableEntity Id]];
-    } else {
-        NSAssert(false, @"Can't vote this entity.");
-    }
-    
-    NSString *path = [self _functionPathForFunction:function];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:completion];
+	NSString *function;
+	if ([voteableEntity isKindOfClass:[PLYImage class]])
+	{
+		function = [NSString stringWithFormat:@"image/%@/up_vote", [(PLYImage *)voteableEntity fileId]];
+	}
+	else if ([voteableEntity isKindOfClass:[PLYProduct class]])
+	{
+		function = [NSString stringWithFormat:@"product/%@/up_vote", [voteableEntity Id]];
+	}
+	else if ([voteableEntity isKindOfClass:[PLYOpine class]])
+	{
+		function = [NSString stringWithFormat:@"opine/%@/up_vote", [voteableEntity Id]];
+	}
+	else if ([voteableEntity isKindOfClass:[PLYReview class]])
+	{
+		function = [NSString stringWithFormat:@"review/%@/up_vote", [voteableEntity Id]];
+	}
+	else
+	{
+		NSAssert(false, @"Can't vote this entity.");
+	}
+	
+	NSString *path = [self _functionPathForFunction:function];
+	
+	PLYCompletion wrappedCompletion = [completion copy];
+	PLYCompletion ownCompletion = ^(id result, NSError *error) {
+		if (result)
+		{
+			[voteableEntity updateFromEntity:result];
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:ownCompletion];
 }
 
 - (void)downVote:(PLYVotableEntity *)voteableEntity
-      completion:(PLYCompletion)completion{
-    
-    NSParameterAssert(voteableEntity);
-	NSParameterAssert(completion);
-    
-    NSString *function;
-    if([voteableEntity isKindOfClass:[PLYImage class]]){
-        function = [NSString stringWithFormat:@"image/%@/down_vote", [(PLYImage *)voteableEntity fileId]];
-    } else if ([voteableEntity isKindOfClass:[PLYProduct class]]){
-        function = [NSString stringWithFormat:@"product/%@/down_vote", [voteableEntity Id]];
-    } else if ([voteableEntity isKindOfClass:[PLYOpine class]]){
-        function = [NSString stringWithFormat:@"opine/%@/down_vote", [voteableEntity Id]];
-    } else if ([voteableEntity isKindOfClass:[PLYReview class]]){
-        function = [NSString stringWithFormat:@"review/%@/down_vote", [voteableEntity Id]];
-    } else {
-        NSAssert(false, @"Can't vote this entity.");
-    }
-    
-    NSString *path = [self _functionPathForFunction:function];
+		completion:(PLYCompletion)completion{
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:completion];
+	NSParameterAssert(voteableEntity);
+	NSParameterAssert(completion);
+	
+	NSString *function;
+	if ([voteableEntity isKindOfClass:[PLYImage class]])
+	{
+		function = [NSString stringWithFormat:@"image/%@/down_vote", [(PLYImage *)voteableEntity fileId]];
+	}
+	else if ([voteableEntity isKindOfClass:[PLYProduct class]])
+	{
+		function = [NSString stringWithFormat:@"product/%@/down_vote", [voteableEntity Id]];
+	}
+	else if ([voteableEntity isKindOfClass:[PLYOpine class]])
+	{
+		function = [NSString stringWithFormat:@"opine/%@/down_vote", [voteableEntity Id]];
+	}
+	else if ([voteableEntity isKindOfClass:[PLYReview class]])
+	{
+		function = [NSString stringWithFormat:@"review/%@/down_vote", [voteableEntity Id]];
+	}
+	else
+	{
+		NSAssert(false, @"Can't vote this entity.");
+	}
+	
+	NSString *path = [self _functionPathForFunction:function];
+	
+	PLYCompletion wrappedCompletion = [completion copy];
+	PLYCompletion ownCompletion = ^(id result, NSError *error) {
+		if (result)
+		{
+			[voteableEntity updateFromEntity:result];
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:ownCompletion];
 }
 
 #pragma mark - Properties

@@ -32,4 +32,9 @@
  */
 @property (nonatomic, copy) NSArray *downVoter;
 
+/**
+ Convenience property stating if voting is supported on this entity. That is for images if there is a fileID present.
+ */
+@property (nonatomic, readonly) BOOL canBeVoted;
+
 @end
