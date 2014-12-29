@@ -58,4 +58,9 @@
 	self.userNickname = entity.userNickname;
 }
 
+- (BOOL)canBeVoted
+{
+	return NO;
+}
+
 @end
