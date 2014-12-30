@@ -1150,6 +1150,33 @@
 	return [self _methodURLForPath:path parameters:parameters];
 }
 
+- (NSURL *)URLForProductImageWithGTIN:(NSString *)GTIN maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop
+{
+	NSParameterAssert(GTIN);
+	
+	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:3];
+	
+	if (maxWidth>0)
+	{
+		[parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxWidth] forKey:@"max_width"];
+	}
+	
+	if (maxHeight>0)
+	{
+		[parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxHeight] forKey:@"max_height"];
+	}
+	
+	if (crop)
+	{
+		[parameters setObject:@"true" forKey:@"crop"];
+	}
+	
+	// no image URL, construct it
+	NSString *function = [NSString stringWithFormat:@"/product/%@/default_image", GTIN];
+	NSString *path = [self _functionPathForFunction:function];
+	return [self _methodURLForPath:path parameters:parameters];
+}
+
 #pragma mark - Opines
 
 - (void) performSearchForOpineWithGTIN:(NSString *)gtin

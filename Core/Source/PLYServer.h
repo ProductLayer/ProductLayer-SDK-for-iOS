@@ -273,6 +273,17 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  */
 - (NSURL *)URLForImage:(PLYImage *)image maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop;
 
+
+/**
+ Determins the image URL for the given default image for a given GTIN
+ @param GTIN The GTIN to produce the URL for
+ @param maxWidth The maximum width of the image
+ @param maxHeight The maximum height of the image
+ @param crop If the image should be cropped
+ @returns The URL for the image
+ */
+- (NSURL *)URLForProductImageWithGTIN:(NSString *)GTIN maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop;
+
 /**
  @name Opines
  */
