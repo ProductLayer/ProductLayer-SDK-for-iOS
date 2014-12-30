@@ -687,7 +687,8 @@
 	
 	if (cachedEntity)
 	{
-		if (entity.version >= cachedEntity.version)
+		// only update if the new entity is not a stub
+		if (entity.Class && entity.version >= cachedEntity.version)
 		{
 			[cachedEntity updateFromEntity:entity];
 			
@@ -1677,31 +1678,12 @@
 	NSMutableDictionary *params = [NSMutableDictionary dictionary];
 	
 	// default values
-	params[PLYTimelineOptionIncludeOpines] = @"false";
-	params[PLYTimelineOptionIncludeImages] = @"false";
-	params[PLYTimelineOptionIncludeReviews] = @"false";
-	params[PLYTimelineOptionIncludeProducts] = @"false";
-	params[PLYTimelineOptionIncludeFriends] = @"false";
-	
-	[options enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-		
-		if ([obj isKindOfClass:[NSNumber class]])
-		{
-				if ([obj isEqual:@(YES)])
-				{
-					params[key] = @"true";
-				}
-				else if ([obj isEqual:@(NO)])
-				{
-					params[key] = @"false";
-				}
-			
-			return;
-		}
-		
-		// just transfer other values
-		params[key] = obj;
-	}];
+	params[PLYTimelineOptionIncludeOpines] = [options[PLYTimelineOptionIncludeOpines] boolValue]?@"true":@"false";
+	params[PLYTimelineOptionIncludeImages] = [options[PLYTimelineOptionIncludeImages] boolValue]?@"true":@"false";
+	params[PLYTimelineOptionIncludeReviews] = [options[PLYTimelineOptionIncludeReviews] boolValue]?@"true":@"false";
+	params[PLYTimelineOptionIncludeProducts] = [options[PLYTimelineOptionIncludeProducts] boolValue]?@"true":@"false";
+	params[PLYTimelineOptionIncludeFriends] = [options[PLYTimelineOptionIncludeFriends] boolValue]?@"true":@"false";
+	params[PLYTimelineOptionCount] = options[PLYTimelineOptionCount];
 
 	return [params copy];
 }
@@ -1748,8 +1730,30 @@
 	NSString *function = [NSString stringWithFormat:@"/timeline/product/%@", product.GTIN];
 	NSString *path = [self _functionPathForFunction:function];
 	
+	PLYCompletion wrappedCompletion = [completion copy];
+	PLYCompletion ownCompletion = ^(id result, NSError *error) {
+		
+		if (result)
+		{
+			// update user entities with cached versions
+			for (PLYEntity *entity in result)
+			{
+				if ([entity isKindOfClass:[PLYEntity class]])
+				{
+					entity.createdBy = [self _entityByUpdatingCachedEntity:entity.createdBy];
+					entity.updatedBy = [self _entityByUpdatingCachedEntity:entity.updatedBy];
+				}
+			}
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+	};
+	
 	NSDictionary *params = [self _timelineOptionsFromDictionary:options];
-	[self _performMethodCallWithPath:path parameters:params completion:completion];
+	[self _performMethodCallWithPath:path parameters:params completion:ownCompletion];
 }
 
 #pragma mark - Votings
