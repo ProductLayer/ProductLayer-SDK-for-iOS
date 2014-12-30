@@ -205,6 +205,7 @@
 	self.GTIN = entity.GTIN;
 	self.homepage = entity.homepage;
 	self.links = entity.links;
+	self.name = entity.name;
 	self.packaging = entity.packaging;
 	self.averageReviewRating = entity.averageReviewRating;
 	self.numberOfReviews = entity.numberOfReviews;
