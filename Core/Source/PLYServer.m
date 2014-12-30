@@ -1675,7 +1675,7 @@
 
 - (NSDictionary *)_timelineOptionsFromDictionary:(NSDictionary *)options
 {
-	NSMutableDictionary *params = [NSMutableDictionary dictionary];
+	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:options];
 	
 	// default values
 	params[PLYTimelineOptionIncludeOpines] = [options[PLYTimelineOptionIncludeOpines] boolValue]?@"true":@"false";
@@ -1683,8 +1683,7 @@
 	params[PLYTimelineOptionIncludeReviews] = [options[PLYTimelineOptionIncludeReviews] boolValue]?@"true":@"false";
 	params[PLYTimelineOptionIncludeProducts] = [options[PLYTimelineOptionIncludeProducts] boolValue]?@"true":@"false";
 	params[PLYTimelineOptionIncludeFriends] = [options[PLYTimelineOptionIncludeFriends] boolValue]?@"true":@"false";
-	params[PLYTimelineOptionCount] = options[PLYTimelineOptionCount];
-
+	
 	return [params copy];
 }
 
