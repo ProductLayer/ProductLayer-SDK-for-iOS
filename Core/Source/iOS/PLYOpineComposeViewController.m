@@ -39,14 +39,9 @@
 	CLLocationManager *_locationManager;
 	CLLocation *_mostRecentLocation;
 	CLGeocoder *_geoCoder;
-	
-	// opine fields
-	NSString *_text;
-	NSString *_language;
-	NSString *_GTIN;
+
+	PLYOpine *_opine;
 	BOOL _postLocation;
-	BOOL _postToTwitter;
-	BOOL _postToFacebook;
 }
 
 - (instancetype)initWithOpine:(PLYOpine *)opine
@@ -55,12 +50,10 @@
 	
 	if (self)
 	{
-		_text = opine.text;
-		_language = opine.language;
-		_GTIN = opine.GTIN;
-		
-		_postToTwitter = opine.shareOnTwitter;
-		_postToFacebook = opine.shareOnFacebook;
+		if (opine)
+		{
+			_opine = [opine copy];
+		}
 	}
 	
 	return self;
@@ -142,12 +135,6 @@
 	_saveButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)];
 	self.navigationItem.rightBarButtonItem = _saveButtonItem;
 	
-	// default language is current system language
-	if (!_language)
-	{
-		_language = [[NSLocale preferredLanguages] objectAtIndex:0];
-	}
-	
 	self.automaticallyAdjustsScrollViewInsets = NO;
 	
 	_insets = UIEdgeInsetsZero;
@@ -184,7 +171,7 @@
 {
 	[super viewWillAppear:animated];
 	
-	_textView.text = _text;
+	_textView.text = self.opine.text;
 	
 	// location updates
 	_postLocation = [[NSUserDefaults standardUserDefaults] boolForKey:PLYUserDefaultOpineComposerIncludeLocation];
@@ -236,7 +223,7 @@
 	NSString *trimmedString = [_textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 	NSInteger remainingChars = 140 - [trimmedString length];
 	
-	if (_postToTwitter)
+	if (self.opine.shareOnTwitter)
 	{
 		remainingChars -= 24;
 	}
@@ -272,7 +259,7 @@
 	}
 	else
 	{
-		_postToTwitter = NO;
+		self.opine.shareOnTwitter = NO;
 		_twitterButton.enabled = NO;
 	}
 	
@@ -282,12 +269,12 @@
 	}
 	else
 	{
-		_postToFacebook = NO;
+		self.opine.shareOnFacebook = NO;
 		_facebookButton.enabled = NO;
 	}
 	
 	
-	if (_postToFacebook)
+	if (self.opine.shareOnFacebook)
 	{
 		_facebookButton.tintColor = PLYBrandColor();
 	}
@@ -296,7 +283,7 @@
 		_facebookButton.tintColor = [UIColor grayColor];
 	}
 	
-	if (_postToTwitter)
+	if (self.opine.shareOnTwitter)
 	{
 		_twitterButton.tintColor = PLYBrandColor();
 	}
@@ -507,17 +494,10 @@
 
 - (void)save:(id)sender
 {
-	PLYOpine *opine = nil;
- 
 	// return nil if there is no text
 	if ([_textView.text length])
 	{
-		opine = [[PLYOpine alloc] init];
-		opine.text = [_textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-		opine.language = _language;
-		opine.shareOnFacebook = _postToFacebook;
-		opine.shareOnTwitter = _postToTwitter;
-		opine.GTIN = _GTIN;
+		self.opine.text = [_textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 	
 		if (_postLocation && _mostRecentLocation)
 		{
@@ -525,13 +505,13 @@
 			loc.latitude = _mostRecentLocation.coordinate.latitude;
 			loc.longitude = _mostRecentLocation.coordinate.longitude;
 			
-			opine.location = loc;
+			self.opine.location = loc;
 		}
 	}
 	
 	if ([_delegate respondsToSelector:@selector(opineComposeViewController:didFinishWithOpine:)])
 	{
-		[_delegate opineComposeViewController:self didFinishWithOpine:opine];
+		[_delegate opineComposeViewController:self didFinishWithOpine:_opine];
 	}
 	
 	[self dismissViewControllerAnimated:YES completion:NULL];
@@ -539,7 +519,7 @@
 
 - (void)_handleTwitter:(id)sender
 {
-	_postToTwitter = !_postToTwitter;
+	self.opine.shareOnTwitter = !self.opine.shareOnTwitter;
 	
 	[self _updateSocialButtons];
 	[self _updateCharacterCount];
@@ -572,7 +552,7 @@
 
 - (void)_handleFacebook:(id)sender
 {
-	_postToFacebook = !_postToFacebook;
+	self.opine.shareOnFacebook = !self.opine.shareOnFacebook;
 	[self _updateSocialButtons];
 	[self _updateCharacterCount];
 }
@@ -638,7 +618,7 @@
 	[self _updateSaveButtonState];
 	[self _updateCharacterCount];
 
-	_language = _textView.usedInputLanguage;
+	self.opine.language = _textView.usedInputLanguage;
 }
 
 #pragma mark - CLLocationManagerDelegate
@@ -696,12 +676,7 @@
 
 - (void)setOpine:(PLYOpine *)opine
 {
-	_text = opine.text;
-	_language = opine.language;
-	_GTIN = opine.GTIN;
-	
-	_postToTwitter = opine.shareOnTwitter;
-	_postToFacebook = opine.shareOnFacebook;
+	_opine = [opine copy];
 	
 	if (opine.location.latitude || opine.location.longitude)
 	{
@@ -709,6 +684,17 @@
 		
 		[self _updateAddressLabelFromLocation:_mostRecentLocation];
 	}
+}
+
+- (PLYOpine *)opine
+{
+	if (!_opine)
+	{
+		// need an opine to store edited values in
+		_opine = [PLYOpine new];
+	}
+	
+	return _opine;
 }
 
 @end
