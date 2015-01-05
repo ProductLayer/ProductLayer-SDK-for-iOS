@@ -730,13 +730,53 @@
 {
 	NSParameterAssert(gtin);
 	
+	PLYCompletion wrappedCompletion = [completion copy];
+	
+	PLYCompletion ownCompletion = ^(id result, NSError *error) {
+		
+		if (!error)
+		{
+			for (PLYVotableEntity *entity in result)
+			{
+				// replace upvoters with cached entities
+				NSMutableArray *tmpUpArray = [NSMutableArray array];
+				
+				for (PLYUser *user in entity.upVoter)
+				{
+					PLYUser *updatedUser = [self _entityByUpdatingCachedEntity:user];
+					[tmpUpArray addObject:updatedUser];
+				}
+				
+				entity.upVoter = [tmpUpArray copy];
+				
+				// replaces downvoters with cached entities
+				NSMutableArray *tmpDownArray = [NSMutableArray array];
+				
+				for (PLYUser *user in entity.downVoter)
+				{
+					PLYUser *updatedUser = [self _entityByUpdatingCachedEntity:user];
+					[tmpDownArray addObject:updatedUser];
+				}
+				
+				entity.downVoter = [tmpDownArray copy];
+			}
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+		
+		_performingLogin = NO;
+	};
+	
 	[self performSearchForProduct:gtin
 									 name:nil
 								language:language
 								 orderBy:@"pl-lng_asc"
 									 page:0
 						recordsPerPage:0
-							 completion:completion];
+							 completion:ownCompletion];
 }
 
 /**
