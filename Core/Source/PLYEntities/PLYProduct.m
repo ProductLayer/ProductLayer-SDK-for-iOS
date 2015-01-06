@@ -7,7 +7,7 @@
 //
 
 #import "PLYProduct.h"
-
+#import "PLYImage.h"
 #import "PLYUser.h"
 #import "PLYPackaging.h"
 
@@ -84,6 +84,10 @@
 	else if ([key isEqualToString:@"pl-prod-name"])
 	{
 		[self setValue:value forKey:@"name"];
+	}
+	else if ([key isEqualToString:@"pl-prod-img"])
+	{
+		_defaultImage = [[PLYImage alloc] initWithDictionary:value];
 	}
 	else if ([key isEqualToString:@"pl-prod-pkg"])
 	{
@@ -165,6 +169,11 @@
 		dict[@"pl-prod-name"] = _name;
 	}
 	
+	if (_defaultImage)
+	{
+		dict[@"pl-prod-img"] = [_defaultImage dictionaryRepresentation];
+	}
+	
 	if (_packaging)
 	{
 		dict[@"pl-prod-pkg"] = [_packaging dictionaryRepresentation];
@@ -212,6 +221,7 @@
 	self.characteristics = entity.characteristics;
 	self.nutritious = entity.nutritious;
 	self.sourceURL = entity.sourceURL;
+	self.defaultImage = entity.defaultImage;
 }
 
 @end

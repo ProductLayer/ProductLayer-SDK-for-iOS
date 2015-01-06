@@ -8,8 +8,7 @@
 
 #import "PLYVotableEntity.h"
 
-@class PLYAuditor;
-@class PLYPackaging;
+@class PLYAuditor, PLYImage, PLYPackaging;
 
 /**
  API model class representing a product
@@ -70,6 +69,11 @@
  The name of the product.
  */
 @property (nonatomic, copy) NSString *name;
+
+/**
+ The default image of the product
+ */
+@property (nonatomic, copy) PLYImage *defaultImage;
 
 /** 
  The packaging information.

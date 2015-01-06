@@ -90,6 +90,6 @@
 /**
  An PLYUserAvatar object for the receiver
  */
-- (PLYUserAvatar *)avatar;
+@property (nonatomic, copy, readonly) PLYUserAvatar *avatar;
 
 @end

@@ -707,17 +707,6 @@
 		[_entityCache setObject:entity forKey:entity.Id];
 	}
 	
-	// add the avatar URL since some views need it without having access to PLYServer
-	if ([entity isKindOfClass:[PLYUser class]])
-	{
-		PLYUser *user = (PLYUser *)entity;
-		
-		if (!user.avatarURL)
-		{
-			[user setValue:[self avatarImageURLForUser:user] forKey:@"avatarURL"];
-		}
-	}
-	
 	return entity;
 }
 

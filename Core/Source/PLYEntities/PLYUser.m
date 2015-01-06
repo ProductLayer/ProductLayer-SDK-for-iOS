@@ -25,6 +25,7 @@
 @property (nonatomic, assign, readwrite) BOOL following;
 @property (nonatomic, assign, readwrite) BOOL followed;
 @property (nonatomic, copy, readwrite) NSDictionary *socialConnections;
+@property (nonatomic, copy, readwrite) PLYUserAvatar *avatar;
 
 @end
 
@@ -100,6 +101,10 @@
 	else if ([key isEqualToString:@"pl-usr-social-connections"])
 	{
 		[self setValue:value forKey:@"socialConnections"];
+	}
+	else if ([key isEqualToString:@"pl-usr-avatar"])
+	{
+		_avatar = [[PLYUserAvatar alloc] initWithDictionary:value];
 	}
 	else
 	{
@@ -186,28 +191,38 @@
 		dict[@"pl-usr-social-connections"] = _socialConnections;
 	}
 	
+	if (_avatar)
+	{
+		dict[@"pl-usr-avatar"] = [_avatar dictionaryRepresentation];
+	}
+	
 	// return immutable
 	return [dict copy];
 }
 
-- (PLYUserAvatar *)avatar
-{
-	PLYUserAvatar *avatar = [PLYUserAvatar new];
-	[avatar setValue:self.nickname forKey:@"userNickname"];
-	[avatar setValue:self.Id forKey:@"userID"];
-
-	if (_avatarImageIdentifier)
-	{
-		[avatar setValue:_avatarImageIdentifier forKey:@"fileId"];
-	}
-	
-	if (_avatarURL)
-	{
-		[avatar setValue:_avatarURL forKey:@"imageURL"];
-	}
-	
-	return avatar;
-}
+//- (PLYUserAvatar *)avatar
+//{
+//	if (_avatar)
+//	{
+//		return _avatar;
+//	}
+//	
+//	PLYUserAvatar *avatar = [PLYUserAvatar new];
+//	[avatar setValue:self.nickname forKey:@"userNickname"];
+//	[avatar setValue:self.Id forKey:@"userID"];
+//
+//	if (_avatarImageIdentifier)
+//	{
+//		[avatar setValue:_avatarImageIdentifier forKey:@"fileId"];
+//	}
+//	
+//	if (_avatarURL)
+//	{
+//		[avatar setValue:_avatarURL forKey:@"imageURL"];
+//	}
+//	
+//	return avatar;
+//}
 
 - (void)updateFromEntity:(PLYUser *)entity
 {
@@ -227,6 +242,7 @@
 	self.following = entity.following;
 	self.followed = entity.followed;
 	self.socialConnections = entity.socialConnections;
+	self.avatar = entity.avatar;
 }
 
 @end
