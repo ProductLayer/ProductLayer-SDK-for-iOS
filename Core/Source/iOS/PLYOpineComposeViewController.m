@@ -494,6 +494,8 @@
 
 - (void)save:(id)sender
 {
+	[_textView resignFirstResponder];
+	
 	NSString *newText = [_textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 	
 	// return nil if there is no text
