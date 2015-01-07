@@ -12,16 +12,12 @@
 
 @interface PLYUser ()
 
-// private property, set if user has an avatar
-@property (nonatomic, copy) NSString *avatarImageIdentifier;
-
 // all read-only properties are settable internally
 
 @property (nonatomic, assign, readwrite) NSInteger points;
 @property (nonatomic, copy, readwrite) NSArray *unlockedAchievements;
 @property (nonatomic, assign, readwrite) NSUInteger followerCount;
 @property (nonatomic, assign, readwrite) NSUInteger followingCount;
-@property (nonatomic, copy, readwrite) NSURL *avatarURL;
 @property (nonatomic, assign, readwrite) BOOL following;
 @property (nonatomic, assign, readwrite) BOOL followed;
 @property (nonatomic, copy, readwrite) NSDictionary *socialConnections;
@@ -84,7 +80,7 @@
 	}
 	else if ([key isEqualToString:@"pl-usr-img"])
 	{
-		_avatarURL = [NSURL URLWithString:value];
+		// ignore
 	}
 	else if ([key isEqualToString:@"pl-usr-followed"])
 	{
@@ -96,7 +92,7 @@
 	}
 	else if ([key isEqualToString:@"pl-usr-img_id"])
 	{
-		[self setValue:value forKey:@"avatarImageIdentifier"];
+		// ignore
 	}
 	else if ([key isEqualToString:@"pl-usr-social-connections"])
 	{
@@ -166,16 +162,6 @@
 		dict[@"pl-usr-following_cnt"] = @(_followingCount);
 	}
 	
-	if (_avatarURL)
-	{
-		dict[@"pl-usr-img"] = [_avatarURL absoluteString];
-	}
-	
-	if (_avatarImageIdentifier)
-	{
-		dict[@"pl-usr-img_id"] = _avatarImageIdentifier;
-	}
-	
 	if (_following)
 	{
 		dict[@"pl-usr-following"] = @(_following);
@@ -200,30 +186,6 @@
 	return [dict copy];
 }
 
-//- (PLYUserAvatar *)avatar
-//{
-//	if (_avatar)
-//	{
-//		return _avatar;
-//	}
-//	
-//	PLYUserAvatar *avatar = [PLYUserAvatar new];
-//	[avatar setValue:self.nickname forKey:@"userNickname"];
-//	[avatar setValue:self.Id forKey:@"userID"];
-//
-//	if (_avatarImageIdentifier)
-//	{
-//		[avatar setValue:_avatarImageIdentifier forKey:@"fileId"];
-//	}
-//	
-//	if (_avatarURL)
-//	{
-//		[avatar setValue:_avatarURL forKey:@"imageURL"];
-//	}
-//	
-//	return avatar;
-//}
-
 - (void)updateFromEntity:(PLYUser *)entity
 {
 	[super updateFromEntity:entity];
@@ -238,7 +200,6 @@
 	self.unlockedAchievements = entity.unlockedAchievements;
 	self.followerCount = entity.followerCount;
 	self.followingCount = entity.followingCount;
-	self.avatarURL = entity.avatarURL;
 	self.following = entity.following;
 	self.followed = entity.followed;
 	self.socialConnections = entity.socialConnections;
