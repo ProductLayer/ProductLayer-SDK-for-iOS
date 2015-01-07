@@ -553,101 +553,124 @@
 
 - (void)_loadState
 {
-	NSString *path = [[NSString cachesPath] stringByAppendingPathComponent:@"loggedInUser.plist"];
-	
-	// load user from cache file
-	NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
-	PLYUser *loggedInUser = [[PLYUser alloc] initWithDictionary:dict];
-	
-	if (!loggedInUser || !loggedInUser.Id || !loggedInUser.nickname)
+	@synchronized(self)
 	{
-		DTLogInfo(@"No user logged in");
-
-		return;
+		NSString *path = [[NSString cachesPath] stringByAppendingPathComponent:@"loggedInUser.plist"];
+		
+		if (![[NSFileManager defaultManager] fileExistsAtPath:path])
+		{
+			DTLogInfo(@"No loggedInUser plist found");
+			
+			return;
+		}
+		
+		// load user from cache file
+		NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
+		PLYUser *loggedInUser = [[PLYUser alloc] initWithDictionary:dict];
+		
+		
+		if (!loggedInUser || !loggedInUser.Id || !loggedInUser.nickname)
+		{
+			DTLogInfo(@"No user logged in");
+			
+			return;
+		}
+		
+		// replace with entity from cache if it exists
+		loggedInUser = [self _entityByUpdatingCachedEntity:loggedInUser];
+		
+		// get auth token from keychain for this user
+		DTKeychain *keychain = [DTKeychain sharedInstance];
+		
+		NSError *error;
+		NSArray *serviceAccounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:loggedInUser.Id] error:&error];
+		
+		if (!serviceAccounts)
+		{
+			DTLogError(@"Error retrieving keychain item: %@", [error localizedDescription]);
+			return;
+		}
+		
+		DTKeychainGenericPassword *account = [serviceAccounts firstObject];
+		
+		if (!account)
+		{
+			DTLogError(@"No token found in keychain");
+			return;
+		}
+		
+		_authToken = account.password;
+		self.loggedInUser = loggedInUser;
 	}
-	
-	// replace with entity from cache if it exists
-	loggedInUser = [self _entityByUpdatingCachedEntity:loggedInUser];
-	
-	// get auth token from keychain for this user
-	DTKeychain *keychain = [DTKeychain sharedInstance];
-	
-	NSError *error;
-	NSArray *serviceAccounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:loggedInUser.Id] error:&error];
-	
-	if (!serviceAccounts)
-	{
-		DTLogError(@"Error retrieving keychain item: %@", [error localizedDescription]);
-		return;
-	}
-	
-	DTKeychainGenericPassword *account = [serviceAccounts firstObject];
-	
-	if (!account)
-	{
-		DTLogError(@"No token found in keychain");
-		return;
-	}
-	
-	_authToken = account.password;
-	self.loggedInUser = loggedInUser;
 }
 
 - (void)_saveState
 {
-	NSString *path = [[NSString cachesPath] stringByAppendingPathComponent:@"loggedInUser.plist"];
-	
-	if (!_loggedInUser || !_authToken)
+	@synchronized(self)
 	{
-		// delete the logged in user cache
-		[[NSFileManager defaultManager] removeItemAtPath:path error:NULL];
+		NSString *path = [[NSString cachesPath] stringByAppendingPathComponent:@"loggedInUser.plist"];
 		
-		// remove all tokens from keychain
-		DTKeychain *keychain = [DTKeychain sharedInstance];
-		NSArray *serviceAccounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:nil] error:NULL];
-		
-		for (DTKeychainItem *item in serviceAccounts)
+		if (!_loggedInUser || !_authToken)
 		{
-			[keychain removeKeychainItem:item error:NULL];
+			DTLogInfo(@"Removing logged in user and keychain item");
+			
+			// delete the logged in user cache
+			[[NSFileManager defaultManager] removeItemAtPath:path error:NULL];
+			
+			// remove all tokens from keychain
+			DTKeychain *keychain = [DTKeychain sharedInstance];
+			NSArray *serviceAccounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:nil] error:NULL];
+			
+			for (DTKeychainItem *item in serviceAccounts)
+			{
+				[keychain removeKeychainItem:item error:NULL];
+			}
+			
+			return;
 		}
-	
-		return;
+		
+		NSDictionary *dict = [_loggedInUser dictionaryRepresentation];
+		[dict writeToFile:path atomically:YES];
+		
+		if (![[NSFileManager defaultManager] fileExistsAtPath:path])
+		{
+			DTLogError(@"An error occurred persisting %@", dict);
+			
+			return;
+		}
+		
+		// Search for account in keychain.
+		DTKeychain *keychain = [DTKeychain sharedInstance];
+		
+		NSError *error;
+		NSArray *serviceAccounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:_loggedInUser.Id] error:&error];
+		
+		// create new account
+		if (!serviceAccounts)
+		{
+			DTLogError(@"Error querying keychain: %@", [error localizedDescription]);
+			return;
+		}
+		
+		DTKeychainGenericPassword *account = [serviceAccounts lastObject];
+		
+		if (!account)
+		{
+			// need to make a new one
+			account = [DTKeychainGenericPassword new];
+			account.service = PLY_SERVICE;
+			account.account = _loggedInUser.Id;
+		}
+		
+		// always update password
+		account.password = _authToken;
+		
+		// persist
+		if (![keychain writeKeychainItem:account error:&error])
+		{
+			DTLogError(@"Error creating keychain entry: %@", [error localizedDescription]);
+		};
 	}
-	
-	NSDictionary *dict = [_loggedInUser dictionaryRepresentation];
-	[dict writeToFile:path atomically:YES];
-	
-	// Search for account in keychain.
-	DTKeychain *keychain = [DTKeychain sharedInstance];
-	
-	NSError *error;
-	NSArray *serviceAccounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:_loggedInUser.Id] error:&error];
-	
-	// create new account
-	if (!serviceAccounts)
-	{
-		DTLogError(@"Error querying keychain: %@", [error localizedDescription]);
-		return;
-	}
-	
-	DTKeychainGenericPassword *account = [serviceAccounts lastObject];
-	
-	if (!account)
-	{
-		// need to make a new one
-		account = [DTKeychainGenericPassword new];
-		account.service = PLY_SERVICE;
-		account.account = _loggedInUser.Id;
-	}
-	
-	// always update password
-	account.password = _authToken;
-	
-	// persist
-	if (![keychain writeKeychainItem:account error:&error])
-	{
-		DTLogError(@"Error creating keychain entry: %@", [error localizedDescription]);
-	};
 }
 
 - (void)_invalidateAuthToken
