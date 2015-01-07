@@ -494,10 +494,16 @@
 
 - (void)save:(id)sender
 {
+	NSString *newText = [_textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	
 	// return nil if there is no text
-	if ([_textView.text length])
+	if ([newText length])
 	{
-		self.opine.text = [_textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+		if (![self.opine.text isEqualToString:newText])
+		{
+			self.opine.text = newText;
+			self.opine.language = _textView.usedInputLanguage;
+		}
 	
 		if (_postLocation && _mostRecentLocation)
 		{
