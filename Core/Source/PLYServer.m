@@ -989,11 +989,14 @@
 			// reset user avatar URL
 			PLYUserAvatar *avatar = (PLYUserAvatar *)result;
 			
-			// update ID
-			[user setValue:avatar.fileId forKey:@"avatarImageIdentifier"];
+			// update Avatar
+			[user setValue:avatar forKey:@"avatar"];
 			
-			// reset image URL, this triggers reloading of the image
-			[user setValue:[self avatarImageURLForUser:user] forKey:@"avatarURL"];
+			// persist for logged in user
+			if (user == _loggedInUser)
+			{
+				[self _saveState];
+			}
 		}
 		
 		completion(result, error);
@@ -1011,11 +1014,8 @@
 		// reset logged in user avatar URL
 		if (result && !error)
 		{
-			// remove the image ID to disable the delete option
-			[user setValue:nil forKey:@"avatarImageIdentifier"];
-			
-			// reset image URL, this triggers reloading of the image
-			[user setValue:[self avatarImageURLForUser:user] forKey:@"avatarURL"];
+			// workaround, need to get new placeholder avatar
+			[self loadDetailsForUser:user completion:NULL];
 		}
 		
 		if (completion)
@@ -1147,6 +1147,11 @@
 - (NSURL *)URLForImage:(PLYImage *)image maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop
 {
 	NSParameterAssert(image);
+
+	if ([image.fileId isEqualToString:@"EXTERNAL"])
+	{
+		return image.imageURL;
+	}
 	
 	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:3];
 	
@@ -1163,14 +1168,6 @@
 	if (crop)
 	{
 		[parameters setObject:@"true" forKey:@"crop"];
-	}
-	
-	if (image.imageURL)
-	{
-		NSString *urlString = [image.imageURL absoluteString];
-		NSString *path = [PLYServer _addQueryParameterToUrl:urlString parameters:parameters];
-		
-		return [NSURL URLWithString:path];
 	}
 	
 	// no image URL, construct it
