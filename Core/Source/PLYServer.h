@@ -127,6 +127,13 @@ typedef void (^PLYCompletion)(id result, NSError *error);
            completion:(PLYCompletion)completion;
 
 /**
+ Authenticates a user for subsequent use of API operations which require authentication
+ @param token The authorization token
+ @param completion The completion handler for the request
+ */
+- (void)loginWithToken:(NSString *)token completion:(PLYCompletion)completion;
+
+/**
  Invalidates a user's authentication.
  @param completion The completion handler for the request
  */

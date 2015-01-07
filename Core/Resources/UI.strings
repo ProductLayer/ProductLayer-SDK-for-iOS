@@ -8,7 +8,7 @@
 // ------- Global
 
 /* User Name Field Placeholder */
-"PLY_NAME_PLACEHOLDER" =  "John Appleseed";
+"PLY_NAME_PLACEHOLDER" =  "John";
 
 /* Password Field Placeholder */
 "PLY_PASSWORD_PLACEHOLDER" =  "Password";

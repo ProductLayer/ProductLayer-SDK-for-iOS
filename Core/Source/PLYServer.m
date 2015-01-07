@@ -930,6 +930,39 @@
 	return [NSString stringWithFormat:@"Basic %@", [authData base64EncodedStringWithOptions:0]];
 }
 
+- (void)loginWithToken:(NSString *)token completion:(PLYCompletion)completion
+{
+	NSParameterAssert(token);
+	NSParameterAssert(completion);
+	
+	_performingLogin = YES;
+	
+	_authToken = token;
+	
+	NSString *path = [self _functionPathForFunction:@"login"];
+	
+	PLYCompletion wrappedCompletion = [completion copy];
+	
+	PLYCompletion ownCompletion = ^(id result, NSError *error) {
+		
+		if (!error && [result isKindOfClass:PLYUser.class])
+		{
+			self.loggedInUser = [self _entityByUpdatingCachedEntity:result];
+			[self _saveState];
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+		
+		_performingLogin = NO;
+	};
+	
+	NSDictionary *parameters = @{@"remember_me": @"true"};
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:parameters basicAuth:nil completion:ownCompletion];
+}
+
 /**
  * Logout the current user.
  **/
