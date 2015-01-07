@@ -938,6 +938,7 @@
 	_performingLogin = YES;
 	
 	_authToken = token;
+	_loggedInUser = nil;
 	
 	NSString *path = [self _functionPathForFunction:@"login"];
 	
