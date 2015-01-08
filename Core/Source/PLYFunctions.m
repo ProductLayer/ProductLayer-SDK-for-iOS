@@ -31,6 +31,51 @@ PLYProduct *PLYProductBestMatchingUserPreferredLanguages(NSArray *products)
 	return [sorted firstObject];
 }
 
+BOOL PLYIsValidGTIN(NSString *GTIN)
+{
+	NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^[0-9]+$" options:0 error:NULL];
+	
+	NSArray *matches = [regex matchesInString:GTIN options:0 range:NSMakeRange(0, [GTIN length])];
+	
+	if ([matches count]!=1)
+	{
+		// not numeric
+		return NO;
+	}
+	
+	if ([GTIN length]>14)
+	{
+		// too long
+		return NO;
+	}
+	
+	// pad to 14 digits
+	while ([GTIN length]<14)
+	{
+		GTIN = [@"0" stringByAppendingString:GTIN];
+	}
+	
+	NSInteger sum = 0;
+	
+	// sum the first
+	for (NSInteger i = 0; i<13; i++)
+	{
+		NSInteger digit = [[GTIN substringWithRange:NSMakeRange(i, 1)] integerValue];
+		
+		// every second value multiplied by 3
+		if ((i+1)%2)
+		{
+			digit *= 3;
+		}
+		
+		sum += digit;
+	}
+	
+	NSInteger check = (10 - (sum%10)) % 10;
+	NSInteger lastDigit = [[GTIN substringWithRange:NSMakeRange(13, 1)] integerValue];
+	
+	return lastDigit == check;
+}
 
 #pragma mark - Localization and Resources
 

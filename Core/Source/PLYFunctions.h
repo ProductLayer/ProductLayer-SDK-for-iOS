@@ -17,6 +17,11 @@
 PLYProduct *PLYProductBestMatchingUserPreferredLanguages(NSArray *products);
 
 /**
+ Function to validate a GTIN
+ */
+BOOL PLYIsValidGTIN(NSString *GTIN);
+
+/**
  Helper function to return the NSBundle that contains the localized strings.
  @returns The bundle to retrieve resources for ProductLayerSDK from
  */
