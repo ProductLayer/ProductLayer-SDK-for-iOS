@@ -1315,7 +1315,20 @@
 	NSString *function = [NSString stringWithFormat:@"opine/%@", opine.Id];
 	NSString *path = [self _functionPathForFunction:function];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil payload:nil completion:completion];
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		
+		if (!error || [error code]==404)
+		{
+			// broadcast info that this entity is no more
+			
+			NSDictionary *userInfo = @{PLYServerDidDeleteEntityKey: opine};
+			[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidDeleteEntityNotification object:self userInfo:userInfo];
+		}
+		
+		completion(result, error);
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil payload:nil completion:wrappedCompletion];
 }
 
 #pragma mark - Reviews
