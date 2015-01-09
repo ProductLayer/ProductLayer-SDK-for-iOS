@@ -1112,6 +1112,38 @@
 	 }];
 }
 
+
+
+
+- (NSURLRequest *)_URLRequestForSocialService:(NSString *)service
+{
+	NSString *redirectStr = @"http://productlayer.com";
+	
+	NSString *function = [@"/signin/" stringByAppendingString:service];
+	NSString *path = [self _functionPathForFunction:function];
+	NSURL *methodURL = [self _methodURLForPath:path
+											  parameters:@{@"callback": redirectStr}];
+	
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:methodURL];
+	request.HTTPMethod = @"POST";
+	
+	// Add the API key to each request.
+	NSAssert(_APIKey, @"Setting an API Key is required to perform requests. Use [[PLYServer sharedServer] setAPIKey:]");
+	[request setValue:_APIKey forHTTPHeaderField:@"API-KEY"];
+
+	return request;
+}
+
+- (NSURLRequest *)URLRequestForFacebookSignIn
+{
+	return [self _URLRequestForSocialService:@"facebook"];
+}
+
+- (NSURLRequest *)URLRequestForTwitterSignIn
+{
+	return [self _URLRequestForSocialService:@"twitter"];
+}
+
 #pragma mark - Managing Products
 
 /**
