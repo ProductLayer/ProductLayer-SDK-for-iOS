@@ -8,6 +8,10 @@
 
 @class PLYSocialAuthWebViewController;
 
+
+/**
+ Protocol for informing a delegate to PLYSocialAuthWebViewController about the authorization result
+ */
 @protocol PLYSocialAuthResultDelegate <NSObject>
 
 @optional
