@@ -183,6 +183,18 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 - (void)loadDetailsForUser:(PLYUser *)user completion:(PLYCompletion)completion;
 
 /**
+ Provides an URL request for the social signin flow for Facebook
+ @returns A configured NSURLRequest for presenting in a web view
+ */
+- (NSURLRequest *)URLRequestForFacebookSignIn;
+
+/**
+ Provides an URL request for the social signin flow for Twitter
+ @returns A configured NSURLRequest for presenting in a web view
+ */
+- (NSURLRequest *)URLRequestForTwitterSignIn;
+
+/**
  Nickname of the currently logged in user or `nil` if not logged in
  */
 @property (nonatomic, readonly) PLYUser *loggedInUser;

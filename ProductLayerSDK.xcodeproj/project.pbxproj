@@ -124,9 +124,26 @@
 		A75CF7C81A3197D7007E30FC /* PLYFunctionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A75CF7C71A3197D7007E30FC /* PLYFunctionsTest.m */; };
 		A75CF7F81A31A2A3007E30FC /* ProductLayerSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A76A570C1986937D00751454 /* ProductLayerSDK.bundle */; };
 		A75CF7F91A31A2A9007E30FC /* libProductLayerSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B21721183F8A3800C38635 /* libProductLayerSDK.a */; };
+		A762933A1A5FF1CC00208A27 /* PLYSocialAuthWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76293191A5FEC3000208A27 /* PLYSocialAuthWebViewController.m */; };
+		A762933B1A5FF1CF00208A27 /* PLYSocialAuthWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76293191A5FEC3000208A27 /* PLYSocialAuthWebViewController.m */; };
+		A762933E1A5FF20300208A27 /* PLYSocialAuthFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A762933C1A5FF20300208A27 /* PLYSocialAuthFunctions.h */; };
+		A762933F1A5FF20300208A27 /* PLYSocialAuthFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A762933D1A5FF20300208A27 /* PLYSocialAuthFunctions.m */; };
+		A76293401A5FF20300208A27 /* PLYSocialAuthFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A762933D1A5FF20300208A27 /* PLYSocialAuthFunctions.m */; };
 		A76478991A18A8830000500C /* PLYSearchableTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76478971A18A8830000500C /* PLYSearchableTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A764789A1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76478981A18A8830000500C /* PLYSearchableTableViewController.m */; };
 		A764789B1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76478981A18A8830000500C /* PLYSearchableTableViewController.m */; };
+		A76561791A60169900AA6FEE /* facebook-button.png in Resources */ = {isa = PBXBuildFile; fileRef = A76561761A60169900AA6FEE /* facebook-button.png */; };
+		A765617A1A60169900AA6FEE /* facebook-button.png in Resources */ = {isa = PBXBuildFile; fileRef = A76561761A60169900AA6FEE /* facebook-button.png */; };
+		A765617B1A60169900AA6FEE /* facebook-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76561771A60169900AA6FEE /* facebook-button@2x.png */; };
+		A765617C1A60169900AA6FEE /* facebook-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76561771A60169900AA6FEE /* facebook-button@2x.png */; };
+		A765617D1A60169900AA6FEE /* facebook-button@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76561781A60169900AA6FEE /* facebook-button@3x.png */; };
+		A765617E1A60169900AA6FEE /* facebook-button@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76561781A60169900AA6FEE /* facebook-button@3x.png */; };
+		A76561A11A6016A500AA6FEE /* twitter-button.png in Resources */ = {isa = PBXBuildFile; fileRef = A765619E1A6016A500AA6FEE /* twitter-button.png */; };
+		A76561A21A6016A500AA6FEE /* twitter-button.png in Resources */ = {isa = PBXBuildFile; fileRef = A765619E1A6016A500AA6FEE /* twitter-button.png */; };
+		A76561A31A6016A500AA6FEE /* twitter-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A765619F1A6016A500AA6FEE /* twitter-button@2x.png */; };
+		A76561A41A6016A500AA6FEE /* twitter-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A765619F1A6016A500AA6FEE /* twitter-button@2x.png */; };
+		A76561A51A6016A500AA6FEE /* twitter-button@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76561A01A6016A500AA6FEE /* twitter-button@3x.png */; };
+		A76561A61A6016A500AA6FEE /* twitter-button@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76561A01A6016A500AA6FEE /* twitter-button@3x.png */; };
 		A76A57141986939700751454 /* API.strings in Resources */ = {isa = PBXBuildFile; fileRef = A76A56E81986922300751454 /* API.strings */; };
 		A76A57151986939700751454 /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = A76A56E91986922300751454 /* UI.strings */; };
 		A76A571B1986A6D300751454 /* ProductLayerSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A76A570C1986937D00751454 /* ProductLayerSDK.bundle */; };
@@ -702,8 +719,18 @@
 		A75CF7BD1A319699007E30FC /* UnitTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
 		A75CF7C71A3197D7007E30FC /* PLYFunctionsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYFunctionsTest.m; sourceTree = "<group>"; };
 		A75CF7C91A319A1D007E30FC /* UnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UnitTests-Prefix.pch"; sourceTree = "<group>"; };
+		A76293181A5FEC3000208A27 /* PLYSocialAuthWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYSocialAuthWebViewController.h; sourceTree = "<group>"; };
+		A76293191A5FEC3000208A27 /* PLYSocialAuthWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYSocialAuthWebViewController.m; sourceTree = "<group>"; };
+		A762933C1A5FF20300208A27 /* PLYSocialAuthFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYSocialAuthFunctions.h; sourceTree = "<group>"; };
+		A762933D1A5FF20300208A27 /* PLYSocialAuthFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYSocialAuthFunctions.m; sourceTree = "<group>"; };
 		A76478971A18A8830000500C /* PLYSearchableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYSearchableTableViewController.h; sourceTree = "<group>"; };
 		A76478981A18A8830000500C /* PLYSearchableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYSearchableTableViewController.m; sourceTree = "<group>"; };
+		A76561761A60169900AA6FEE /* facebook-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-button.png"; sourceTree = "<group>"; };
+		A76561771A60169900AA6FEE /* facebook-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-button@2x.png"; sourceTree = "<group>"; };
+		A76561781A60169900AA6FEE /* facebook-button@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-button@3x.png"; sourceTree = "<group>"; };
+		A765619E1A6016A500AA6FEE /* twitter-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-button.png"; sourceTree = "<group>"; };
+		A765619F1A6016A500AA6FEE /* twitter-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-button@2x.png"; sourceTree = "<group>"; };
+		A76561A01A6016A500AA6FEE /* twitter-button@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-button@3x.png"; sourceTree = "<group>"; };
 		A7696B4B19ED91E000C1D3C4 /* Framework-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Framework-Info.plist"; sourceTree = "<group>"; };
 		A76A56E81986922300751454 /* API.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = API.strings; sourceTree = "<group>"; };
 		A76A56E91986922300751454 /* UI.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = UI.strings; sourceTree = "<group>"; };
@@ -1032,12 +1059,18 @@
 				A701C5031A1FC89A0013CB8D /* facebook.png */,
 				A701C5041A1FC89A0013CB8D /* facebook@2x.png */,
 				A701C5051A1FC89A0013CB8D /* facebook@3x.png */,
+				A76561761A60169900AA6FEE /* facebook-button.png */,
+				A76561771A60169900AA6FEE /* facebook-button@2x.png */,
+				A76561781A60169900AA6FEE /* facebook-button@3x.png */,
 				A778606C1A407C3800560889 /* location.png */,
 				A778606D1A407C3800560889 /* location@2x.png */,
 				A778606E1A407C3800560889 /* location@3x.png */,
 				A701C5001A1FC89A0013CB8D /* twitter.png */,
 				A701C5011A1FC89A0013CB8D /* twitter@2x.png */,
 				A701C5021A1FC89A0013CB8D /* twitter@3x.png */,
+				A765619E1A6016A500AA6FEE /* twitter-button.png */,
+				A765619F1A6016A500AA6FEE /* twitter-button@2x.png */,
+				A76561A01A6016A500AA6FEE /* twitter-button@3x.png */,
 				A76A5719198693ED00751454 /* Bundle-Info.plist */,
 				A76A56E81986922300751454 /* API.strings */,
 				A76A56E91986922300751454 /* UI.strings */,
@@ -1087,6 +1120,10 @@
 		A76D3F8E19866B690032FE59 /* Login/Signup */ = {
 			isa = PBXGroup;
 			children = (
+				A762933C1A5FF20300208A27 /* PLYSocialAuthFunctions.h */,
+				A762933D1A5FF20300208A27 /* PLYSocialAuthFunctions.m */,
+				A76293181A5FEC3000208A27 /* PLYSocialAuthWebViewController.h */,
+				A76293191A5FEC3000208A27 /* PLYSocialAuthWebViewController.m */,
 				A76D3F5D198650770032FE59 /* PLYLoginViewController.h */,
 				A76D3F5E198650770032FE59 /* PLYLoginViewController.m */,
 				A76D3F8F19866E0E0032FE59 /* PLYLostPasswordViewController.h */,
@@ -1614,6 +1651,7 @@
 				A7590B1F19ED77B80084EBCA /* PLYProduct.h in Headers */,
 				A75CF7441A30B48A007E30FC /* PLYVideoPreviewView.h in Headers */,
 				A719180E1A1B5B1B002C2D76 /* PLYContentsDidChangeValidator.h in Headers */,
+				A762933E1A5FF20300208A27 /* PLYSocialAuthFunctions.h in Headers */,
 				A7590B1119ED77B80084EBCA /* PLYErrorMessage.h in Headers */,
 				A7EA07241A2B14A800B61CCE /* PLYCompatibility.h in Headers */,
 				A7590B2519ED77B80084EBCA /* PLYProductCategory.h in Headers */,
@@ -2112,17 +2150,23 @@
 			files = (
 				A75CF7881A30E573007E30FC /* PLYGuidedInputViewController.xib in Resources */,
 				A701C50B1A1FC89A0013CB8D /* twitter@3x.png in Resources */,
+				A76561A41A6016A500AA6FEE /* twitter-button@2x.png in Resources */,
+				A765617C1A60169900AA6FEE /* facebook-button@2x.png in Resources */,
 				A701C50D1A1FC89A0013CB8D /* facebook.png in Resources */,
 				A701C5111A1FC89A0013CB8D /* facebook@3x.png in Resources */,
+				A76561A61A6016A500AA6FEE /* twitter-button@3x.png in Resources */,
 				A701C50F1A1FC89A0013CB8D /* facebook@2x.png in Resources */,
 				A701C5091A1FC89A0013CB8D /* twitter@2x.png in Resources */,
+				A765617E1A60169900AA6FEE /* facebook-button@3x.png in Resources */,
 				A701C5071A1FC89A0013CB8D /* twitter.png in Resources */,
 				A75CF7861A30E573007E30FC /* PLYBrandPickerViewController.xib in Resources */,
 				A77860701A407C3800560889 /* location.png in Resources */,
 				A77860721A407C3800560889 /* location@2x.png in Resources */,
 				A7590B2F19ED77C40084EBCA /* UI.strings in Resources */,
+				A76561A21A6016A500AA6FEE /* twitter-button.png in Resources */,
 				A7590B2E19ED77C40084EBCA /* API.strings in Resources */,
 				A77860741A407C3800560889 /* location@3x.png in Resources */,
+				A765617A1A60169900AA6FEE /* facebook-button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2140,17 +2184,23 @@
 			files = (
 				A75CF7871A30E573007E30FC /* PLYGuidedInputViewController.xib in Resources */,
 				A701C50A1A1FC89A0013CB8D /* twitter@3x.png in Resources */,
+				A76561A31A6016A500AA6FEE /* twitter-button@2x.png in Resources */,
+				A765617B1A60169900AA6FEE /* facebook-button@2x.png in Resources */,
 				A701C50C1A1FC89A0013CB8D /* facebook.png in Resources */,
 				A701C5101A1FC89A0013CB8D /* facebook@3x.png in Resources */,
+				A76561A51A6016A500AA6FEE /* twitter-button@3x.png in Resources */,
 				A701C50E1A1FC89A0013CB8D /* facebook@2x.png in Resources */,
 				A701C5081A1FC89A0013CB8D /* twitter@2x.png in Resources */,
+				A765617D1A60169900AA6FEE /* facebook-button@3x.png in Resources */,
 				A701C5061A1FC89A0013CB8D /* twitter.png in Resources */,
 				A75CF7851A30E573007E30FC /* PLYBrandPickerViewController.xib in Resources */,
 				A778606F1A407C3800560889 /* location.png in Resources */,
 				A77860711A407C3800560889 /* location@2x.png in Resources */,
 				A76A57151986939700751454 /* UI.strings in Resources */,
+				A76561A11A6016A500AA6FEE /* twitter-button.png in Resources */,
 				A76A57141986939700751454 /* API.strings in Resources */,
 				A77860731A407C3800560889 /* location@3x.png in Resources */,
+				A76561791A60169900AA6FEE /* facebook-button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2215,6 +2265,7 @@
 				A7590B0E19ED77B40084EBCA /* PLYUserNameValidator.m in Sources */,
 				A7590B2219ED77B80084EBCA /* PLYReview.m in Sources */,
 				A764789B1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */,
+				A762933A1A5FF1CC00208A27 /* PLYSocialAuthWebViewController.m in Sources */,
 				A7590B1C19ED77B80084EBCA /* PLYOpine.m in Sources */,
 				A73803361A28E91800011D9C /* PLYTextView.m in Sources */,
 				A7590B2D19ED77BD0084EBCA /* PLYConstants.m in Sources */,
@@ -2248,6 +2299,7 @@
 				A701C4FD1A1F55580013CB8D /* PLYBrandPickerViewController.m in Sources */,
 				A77665A01A1B547B008AB88C /* PLYNonEmptyValidator.m in Sources */,
 				A7590B1019ED77B80084EBCA /* PLYEntity.m in Sources */,
+				A76293401A5FF20300208A27 /* PLYSocialAuthFunctions.m in Sources */,
 				A7590B2419ED77B80084EBCA /* PLYUser.m in Sources */,
 				A7590B0419ED77B40084EBCA /* PLYSignUpViewController.m in Sources */,
 				A7590B2619ED77B80084EBCA /* PLYProductCategory.m in Sources */,
@@ -2323,6 +2375,7 @@
 				A76D3F69198650770032FE59 /* PLYLoginViewController.m in Sources */,
 				C98CD2671910E0D70035647C /* PLYPackaging.m in Sources */,
 				A764789A1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */,
+				A762933B1A5FF1CF00208A27 /* PLYSocialAuthWebViewController.m in Sources */,
 				C98CD2681910E0D70035647C /* PLYProduct.m in Sources */,
 				A73803351A28E91800011D9C /* PLYTextView.m in Sources */,
 				A7548B24196C4C16000B72EB /* PLYImage.m in Sources */,
@@ -2356,6 +2409,7 @@
 				A701C4FB1A1F55580013CB8D /* PLYBrandPickerViewController.m in Sources */,
 				A776659F1A1B547B008AB88C /* PLYNonEmptyValidator.m in Sources */,
 				C9ADBDD41911502B004C81B3 /* PLYUser.m in Sources */,
+				A762933F1A5FF20300208A27 /* PLYSocialAuthFunctions.m in Sources */,
 				A76D3F6A198650770032FE59 /* PLYSignUpViewController.m in Sources */,
 				A76D3F6D198650770032FE59 /* UIViewController+ProductLayer.m in Sources */,
 				A7B442A4183F97B800E8A170 /* PLYConstants.m in Sources */,
