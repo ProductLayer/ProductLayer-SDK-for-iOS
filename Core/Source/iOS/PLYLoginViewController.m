@@ -142,7 +142,7 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 																						lostPwButton, signupButton, explainLabel,
 																						_twitterButton, _facebookButton);
 	NSArray *constraints1 =
-	[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide]-[explainLabel]-[_nameField]-[_passwordField]-[lostPwButton]-[signupButton]-(50)-[_twitterButton]-[_facebookButton]"
+	[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide]-[explainLabel]-[_nameField]-[_passwordField]-[lostPwButton]-[signupButton]-(50)-[_twitterButton]-(20)-[_facebookButton]"
 														 options:0 metrics:nil views:viewsDictionary];
 	NSArray *constraints2 =
 	[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_nameField(300)]"

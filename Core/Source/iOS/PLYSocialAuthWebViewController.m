@@ -179,8 +179,6 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-	NSLog(@"%@ %ld", request.URL, navigationType);
-	
 	if ([request.URL.absoluteString isEqualToString:@"about:blank"])
 	{
 		[self cancel:nil];
