@@ -8,17 +8,20 @@
 
 @class PLYSocialAuthWebViewController;
 
-@protocol OAuthResultDelegate <NSObject>
+@protocol PLYSocialAuthResultDelegate <NSObject>
 
 @optional
 
 /**
  Method for informing the delegate that authorization was denied by the user
+ @param webViewController The controller sending the message
  */
 - (void)authorizationWasDenied:(PLYSocialAuthWebViewController *)webViewController;
 
 /**
  Method for informing the delegate that authorization was granted by the user
+ @param webViewController The controller sending the message
+ @param token The received authorization token
  */
 - (void)authorizationWasGranted:(PLYSocialAuthWebViewController *)webViewController forToken:(NSString *)token;
 
@@ -31,10 +34,12 @@
 @interface PLYSocialAuthWebViewController : UIViewController
 
 // delegate to inform about the authorization result
-@property (nonatomic, weak) id <OAuthResultDelegate> authorizationDelegate;
+@property (nonatomic, weak) id <PLYSocialAuthResultDelegate> authorizationDelegate;
 
 /**
- Load the authorization form with a proper OAuth request, this is the request you get from step 2 in DTOAuthClient.
+ Load the authorization form with a proper auth request from PLYServer
+ @param request The authorization URL request
+ @param completion The completion handler
  */
 - (void)startAuthorizationFlowWithRequest:(NSURLRequest *)request completion:(void (^)(BOOL isAuthenticated, NSString *token))completion;
 
