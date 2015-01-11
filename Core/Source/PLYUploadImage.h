@@ -8,10 +8,13 @@
 
 #import "PLYImage.h"
 
+/**
+ Variant of PLYImage that also contains the image data for uploading
+ */
 @interface PLYUploadImage : PLYImage
 
 /**
- Variant of PLYImage that also contains the image data for uploading
+ The NSData representation of the image to upload
  */
 @property (nonatomic, copy) NSData *imageData;
 
