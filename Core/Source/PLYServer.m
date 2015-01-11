@@ -706,10 +706,17 @@
 // return a cached updated version of the entity, or cache the entity if there was no cached version
 - (id)_entityByUpdatingCachedEntity:(PLYEntity *)entity
 {
+	NSAssert([entity isKindOfClass:[PLYEntity class]], @"Incorrect parameter for %s", __PRETTY_FUNCTION__);
+
 	PLYEntity *cachedEntity = [_entityCache objectForKey:entity.Id];
 	
 	if (cachedEntity)
 	{
+		if ([entity isKindOfClass:[PLYProduct class]])
+		{
+			NSLog(@"update cached %@ %@", [(PLYProduct *)entity name], entity.Id);
+		}
+		
 		// only update if the new entity is not a stub
 		if (entity.Class && entity.version >= cachedEntity.version)
 		{
@@ -726,12 +733,50 @@
 	}
 	else
 	{
+		if ([entity isKindOfClass:[PLYProduct class]])
+		{
+			NSLog(@"new cached %@ %@", [(PLYProduct *)entity name], entity.Id);
+		}
 		// cache it
 		[_entityCache setObject:entity forKey:entity.Id];
 	}
 	
 	return entity;
 }
+
+- (NSArray *)_arrayOfUpdatedCachedEntities:(NSArray *)array
+{
+	NSAssert([array isKindOfClass:[NSArray class]], @"Incorrect parameter for %s", __PRETTY_FUNCTION__);
+	
+	NSMutableArray *tmpArray = [NSMutableArray array];
+	
+	// update user entities with cached versions
+	for (PLYEntity *entity in array)
+	{
+		PLYEntity *cachedEntity = [self _entityByUpdatingCachedEntity:entity];
+		[tmpArray addObject:cachedEntity];
+		
+		if ([cachedEntity isKindOfClass:[PLYEntity class]])
+		{
+			cachedEntity.createdBy = [self _entityByUpdatingCachedEntity:cachedEntity.createdBy];
+			cachedEntity.updatedBy = [self _entityByUpdatingCachedEntity:cachedEntity.updatedBy];
+		}
+		
+		// replace products with cached versions
+		if ([cachedEntity isKindOfClass:[PLYOpine class]])
+		{
+			PLYOpine *opine = (PLYOpine *)cachedEntity;
+			
+			if (opine.product)
+			{
+				opine.product = [self _entityByUpdatingCachedEntity:opine.product];
+			}
+		}
+	}
+	
+	return [tmpArray copy];
+}
+
 
 #pragma mark - Search
 
@@ -1855,15 +1900,7 @@
 		
 		if (result)
 		{
-			// update user entities with cached versions
-			for (PLYEntity *entity in result)
-			{
-				if ([entity isKindOfClass:[PLYEntity class]])
-				{
-					entity.createdBy = [self _entityByUpdatingCachedEntity:entity.createdBy];
-					entity.updatedBy = [self _entityByUpdatingCachedEntity:entity.updatedBy];
-				}
-			}
+			result = [self _arrayOfUpdatedCachedEntities:result];
 		}
 		
 		if (wrappedCompletion)
@@ -1889,15 +1926,7 @@
 		
 		if (result)
 		{
-			// update user entities with cached versions
-			for (PLYEntity *entity in result)
-			{
-				if ([entity isKindOfClass:[PLYEntity class]])
-				{
-					entity.createdBy = [self _entityByUpdatingCachedEntity:entity.createdBy];
-					entity.updatedBy = [self _entityByUpdatingCachedEntity:entity.updatedBy];
-				}
-			}
+			result = [self _arrayOfUpdatedCachedEntities:result];
 		}
 		
 		if (wrappedCompletion)

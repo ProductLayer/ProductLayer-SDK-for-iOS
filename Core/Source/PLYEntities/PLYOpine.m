@@ -8,6 +8,7 @@
 
 #import "PLYOpine.h"
 #import "PLYImage.h"
+#import "PLYProduct.h"
 
 @interface PLYOpine ()
 
@@ -69,6 +70,10 @@
 			
 			self.images = tmpArray;
 		}
+	}
+	else if ([key isEqualToString:@"pl-prod"])
+	{
+		self.product = [[PLYProduct alloc] initWithDictionary:value];
 	}
 	else if ([key isEqualToString:@"pl-share-twitter"])
 	{
@@ -144,6 +149,11 @@
 		dict[@"pl-opine-img"] = tmpArray;
 	}
 	
+	if (_product)
+	{
+		dict[@"pl-prod"] = [_product dictionaryRepresentation];
+	}
+	
 	// return immutable
 	return [dict copy];
 }
@@ -155,6 +165,7 @@
 	self.text = entity.text;
 	self.parent = entity.parent;
 	self.GTIN = entity.GTIN;
+	self.product = entity.product;
 	self.language = entity.language;
 	self.location = entity.location;
 	self.images = entity.images;
