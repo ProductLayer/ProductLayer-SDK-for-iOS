@@ -580,7 +580,7 @@
 
 - (void)_updatePhotoButton
 {
-	NSString *title = [NSString stringWithFormat:@" %ld", [_attachedImages count]];
+	NSString *title = [NSString stringWithFormat:@" %ld", (unsigned long)[_attachedImages count]];
 	[_photoButton setTitle:title forState:UIControlStateNormal];
 }
 
