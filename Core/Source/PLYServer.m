@@ -721,11 +721,6 @@
 	
 	if (cachedEntity)
 	{
-		if ([entity isKindOfClass:[PLYProduct class]])
-		{
-			NSLog(@"update cached %@ %@", [(PLYProduct *)entity name], entity.Id);
-		}
-		
 		// only update if the new entity is not a stub
 		if (entity.Class && entity.version >= cachedEntity.version)
 		{
@@ -742,10 +737,6 @@
 	}
 	else
 	{
-		if ([entity isKindOfClass:[PLYProduct class]])
-		{
-			NSLog(@"new cached %@ %@", [(PLYProduct *)entity name], entity.Id);
-		}
 		// cache it
 		[_entityCache setObject:entity forKey:entity.Id];
 	}

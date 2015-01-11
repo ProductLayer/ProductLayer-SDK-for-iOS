@@ -106,14 +106,14 @@
 																		 toItem:_frameView
 																	 attribute:NSLayoutAttributeLeft
 																	multiplier:1.0
-																	  constant:0]];
+																	  constant:5]];
 
 	[_frameView addConstraint:[NSLayoutConstraint constraintWithItem:_textView attribute:NSLayoutAttributeRight
 																			relatedBy:NSLayoutRelationEqual
 																				toItem:_frameView
 																			attribute:NSLayoutAttributeRight
 																		  multiplier:1.0
-																			 constant:0]];
+																			 constant:5]];
 
 	[_frameView addConstraint:[NSLayoutConstraint constraintWithItem:_textView attribute:NSLayoutAttributeTop
 																			relatedBy:NSLayoutRelationEqual
@@ -162,7 +162,7 @@
 																		 toItem:_textView
 																	 attribute:NSLayoutAttributeLeft
 																	multiplier:1.0
-																	  constant:10]];
+																	  constant:5]];
 	
 	NSString *cameraIconPath = [PLYResourceBundle() pathForResource:@"camera-icon" ofType:@"png"];
 	UIImage *cameraIcon = [[UIImage imageWithContentsOfFile:cameraIconPath] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -170,8 +170,8 @@
 	
 	_photoButton = [UIButton buttonWithType:UIButtonTypeSystem];
 	_photoButton.translatesAutoresizingMaskIntoConstraints = NO;
+	_photoButton.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
 	[_photoButton setTitle:@" 0" forState:UIControlStateNormal];
-
 	[_photoButton setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
 	[_photoButton setImage:cameraIcon forState:UIControlStateNormal];
 	[_photoButton addTarget:self action:@selector(_handlePhoto:) forControlEvents:UIControlEventTouchUpInside];
@@ -182,14 +182,14 @@
 																		 toItem:_frameView
 																	 attribute:NSLayoutAttributeRight
 																	multiplier:1.0
-																	  constant:-10]];
+																	  constant:0]];
 
 	[view addConstraint:[NSLayoutConstraint constraintWithItem:_photoButton attribute:NSLayoutAttributeBottom
 																	 relatedBy:NSLayoutRelationEqual
 																		 toItem:_frameView
 																	 attribute:NSLayoutAttributeBottom
 																	multiplier:1.0
-																	  constant:-10]];
+																	  constant:0]];
 	
 	[view addConstraint:[NSLayoutConstraint constraintWithItem:_photoButton attribute:NSLayoutAttributeBottom
 																	 relatedBy:NSLayoutRelationEqual
