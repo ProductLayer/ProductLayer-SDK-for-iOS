@@ -140,10 +140,8 @@
 	_insets = UIEdgeInsetsZero;
 	
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	[center addObserver:self selector:@selector(keyboardWillShow:)
-						name:UIKeyboardWillShowNotification object:nil];
-	[center addObserver:self selector:@selector(keyboardWillHide:)
-						name:UIKeyboardWillHideNotification object:nil];
+	[center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+	[center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 	
 	// observe the logged in user
 	[self.productLayerServer addObserver:self forKeyPath:@"loggedInUser" options:NSKeyValueObservingOptionNew context:NULL];
@@ -156,7 +154,7 @@
 	id<UILayoutSupport>top = [self topLayoutGuide];
 	id<UILayoutSupport>bottom = [self bottomLayoutGuide];
 	
-	_textView.frame = CGRectMake(10+_insets.left, [top length]+10+_insets.top, self.view.bounds.size.width-20-_insets.left - _insets.right, self.view.bounds.size.height - [top length] - [bottom length] - 20 - _insets.bottom - 40);
+	_textView.frame = CGRectMake(10+_insets.left, [top length]+10+_insets.top, self.view.bounds.size.width-20-_insets.left - _insets.right, self.view.bounds.size.height - [top length] - [bottom length] - 60 - _insets.bottom);
 	_facebookButton.frame = CGRectMake( CGRectGetMaxX(_textView.frame) - 50, CGRectGetMaxY(_textView.frame), 50, 50);
 	_twitterButton.frame = CGRectMake( CGRectGetMaxX(_textView.frame) - 100, CGRectGetMaxY(_textView.frame), 50, 50);
 	_locationButton.frame = CGRectMake( CGRectGetMinX(_textView.frame), CGRectGetMaxY(_textView.frame), 50, 50);
