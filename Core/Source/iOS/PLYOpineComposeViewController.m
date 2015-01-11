@@ -14,7 +14,10 @@
 #import "DTBlockFunctions.h"
 #import "DTLog.h"
 
-@interface PLYOpineComposeViewController () <UITextViewDelegate, CLLocationManagerDelegate>
+@interface PLYOpineComposeViewController () <UITextViewDelegate,  // for tracking entered text
+															CLLocationManagerDelegate, // for attaching location
+															UIImagePickerControllerDelegate,
+                                             UINavigationControllerDelegate>  // for image picker
 
 @end
 
@@ -26,10 +29,12 @@
 	UIBarButtonItem *_cancelButtonItem;
 	
 	// UI
+	UIView *_frameView;
 	PLYTextView *_textView;
 	UIButton *_twitterButton;
 	UIButton *_facebookButton;
 	UIButton *_locationButton;
+	UIButton *_photoButton;
 	UILabel *_addressLabel;
 	UILabel *_characterRemainingLabel;
 	
@@ -42,6 +47,9 @@
 
 	PLYOpine *_opine;
 	BOOL _postLocation;
+	
+	// images
+	NSMutableArray *_attachedImages;
 }
 
 - (instancetype)initWithOpine:(PLYOpine *)opine
@@ -53,6 +61,8 @@
 		if (opine)
 		{
 			_opine = [opine copy];
+			
+			_attachedImages = [NSMutableArray arrayWithArray:_opine.images];
 		}
 	}
 	
@@ -72,19 +82,46 @@
 	UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
 	view.backgroundColor = [UIColor whiteColor];
 	
-	_textView = [[PLYTextView alloc] initWithFrame:CGRectInset(view.bounds, 20, 20)];
-	_textView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	_frameView = [[UIView alloc] initWithFrame:CGRectInset(view.bounds, 20, 20)];
+	_frameView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+	_frameView.layer.borderColor = PLYBrandColor().CGColor;
+	_frameView.layer.borderWidth = 1;
+	_frameView.layer.cornerRadius = 10;
+	_frameView.clipsToBounds = YES;
+	[view addSubview:_frameView];
+	
+	
+	_textView = [[PLYTextView alloc] initWithFrame:CGRectZero];
+	_textView.translatesAutoresizingMaskIntoConstraints = NO;
 	_textView.delegate = self;
 	_textView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-	_textView.layer.borderColor = PLYBrandColor().CGColor;
-	_textView.layer.borderWidth = 1;
-	_textView.layer.cornerRadius = 10;
-	_textView.scrollIndicatorInsets = UIEdgeInsetsMake(5, 0, 5, 0);
+	_textView.scrollIndicatorInsets = UIEdgeInsetsMake(5, 0, 0, 0);
 	_textView.keyboardType = UIKeyboardTypeTwitter;
-	_textView.textContainerInset = UIEdgeInsetsMake(10, 5, 30, 5);
+	[_frameView addSubview:_textView];
 	
-	[view addSubview:_textView];
+	_textView.text = self.opine.text;
 
+	[_frameView addConstraint:[NSLayoutConstraint constraintWithItem:_textView attribute:NSLayoutAttributeLeft
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:_frameView
+																	 attribute:NSLayoutAttributeLeft
+																	multiplier:1.0
+																	  constant:0]];
+
+	[_frameView addConstraint:[NSLayoutConstraint constraintWithItem:_textView attribute:NSLayoutAttributeRight
+																			relatedBy:NSLayoutRelationEqual
+																				toItem:_frameView
+																			attribute:NSLayoutAttributeRight
+																		  multiplier:1.0
+																			 constant:0]];
+
+	[_frameView addConstraint:[NSLayoutConstraint constraintWithItem:_textView attribute:NSLayoutAttributeTop
+																			relatedBy:NSLayoutRelationEqual
+																				toItem:_frameView
+																			attribute:NSLayoutAttributeTop
+																		  multiplier:1.0
+																			 constant:0]];
+	
 	NSString *locationPath = [PLYResourceBundle() pathForResource:@"location" ofType:@"png"];
 	UIImage *locationIcon = [[UIImage imageWithContentsOfFile:locationPath] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 	NSAssert(locationIcon!=nil, @"Missing Location icon in resource bundle");
@@ -115,9 +152,70 @@
 	[_facebookButton addTarget:self action:@selector(_handleFacebook:) forControlEvents:UIControlEventTouchUpInside];
 	[view addSubview:_facebookButton];
 	
-	_characterRemainingLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+	_characterRemainingLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+	_characterRemainingLabel.translatesAutoresizingMaskIntoConstraints = NO;
 	_characterRemainingLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
-	[view addSubview:_characterRemainingLabel];
+	[_frameView addSubview:_characterRemainingLabel];
+	
+	[view addConstraint:[NSLayoutConstraint constraintWithItem:_characterRemainingLabel attribute:NSLayoutAttributeLeft
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:_textView
+																	 attribute:NSLayoutAttributeLeft
+																	multiplier:1.0
+																	  constant:10]];
+	
+	NSString *cameraIconPath = [PLYResourceBundle() pathForResource:@"camera-icon" ofType:@"png"];
+	UIImage *cameraIcon = [[UIImage imageWithContentsOfFile:cameraIconPath] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+	NSAssert(cameraIconPath!=nil, @"Missing Camera icon in resource bundle");
+	
+	_photoButton = [UIButton buttonWithType:UIButtonTypeSystem];
+	_photoButton.translatesAutoresizingMaskIntoConstraints = NO;
+	[_photoButton setTitle:@" 0" forState:UIControlStateNormal];
+
+	[_photoButton setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+	[_photoButton setImage:cameraIcon forState:UIControlStateNormal];
+	[_photoButton addTarget:self action:@selector(_handlePhoto:) forControlEvents:UIControlEventTouchUpInside];
+	[_frameView addSubview:_photoButton];
+	
+	[view addConstraint:[NSLayoutConstraint constraintWithItem:_photoButton attribute:NSLayoutAttributeRight
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:_frameView
+																	 attribute:NSLayoutAttributeRight
+																	multiplier:1.0
+																	  constant:-10]];
+
+	[view addConstraint:[NSLayoutConstraint constraintWithItem:_photoButton attribute:NSLayoutAttributeBottom
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:_frameView
+																	 attribute:NSLayoutAttributeBottom
+																	multiplier:1.0
+																	  constant:-10]];
+	
+	[view addConstraint:[NSLayoutConstraint constraintWithItem:_photoButton attribute:NSLayoutAttributeBottom
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:_characterRemainingLabel
+																	 attribute:NSLayoutAttributeBottom
+																	multiplier:1.0
+																	  constant:0]];
+
+	[view addConstraint:[NSLayoutConstraint constraintWithItem:_photoButton attribute:NSLayoutAttributeCenterY
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:_characterRemainingLabel
+																	 attribute:NSLayoutAttributeCenterY
+																	multiplier:1.0
+																	  constant:0]];
+
+	[_frameView addConstraint:[NSLayoutConstraint constraintWithItem:_textView attribute:NSLayoutAttributeBottom
+																			 relatedBy:NSLayoutRelationEqual
+																				 toItem:_photoButton
+																			 attribute:NSLayoutAttributeTop
+																			multiplier:1.0
+																			  constant:-10]];
+
+
+	
+	[self _updateCharacterCount];
+	[view layoutIfNeeded];
 	
 	_addressLabel = [[UILabel alloc] initWithFrame:CGRectZero];
 	_addressLabel.textColor = [UIColor lightGrayColor];
@@ -153,23 +251,25 @@
 	
 	id<UILayoutSupport>top = [self topLayoutGuide];
 	id<UILayoutSupport>bottom = [self bottomLayoutGuide];
-	
-	_textView.frame = CGRectMake(10+_insets.left, [top length]+10+_insets.top, self.view.bounds.size.width-20-_insets.left - _insets.right, self.view.bounds.size.height - [top length] - [bottom length] - 60 - _insets.bottom);
-	_facebookButton.frame = CGRectMake( CGRectGetMaxX(_textView.frame) - 50, CGRectGetMaxY(_textView.frame), 50, 50);
-	_twitterButton.frame = CGRectMake( CGRectGetMaxX(_textView.frame) - 100, CGRectGetMaxY(_textView.frame), 50, 50);
-	_locationButton.frame = CGRectMake( CGRectGetMinX(_textView.frame), CGRectGetMaxY(_textView.frame), 50, 50);
-	
-	_characterRemainingLabel.frame = CGRectMake(CGRectGetMinX(_textView.frame)+10, CGRectGetMaxY(_textView.frame)-30, 50, 30);
+
+	_frameView.frame = CGRectMake(10+_insets.left, [top length]+10+_insets.top, self.view.bounds.size.width-20-_insets.left - _insets.right, self.view.bounds.size.height - [top length] - [bottom length] - 60 - _insets.bottom);
+//	_textView.frame = CGRectMake(10+_insets.left, [top length]+10+_insets.top, self.view.bounds.size.width-20-_insets.left - _insets.right, self.view.bounds.size.height - [top length] - [bottom length] - 60 - _insets.bottom);
+	_facebookButton.frame = CGRectMake( CGRectGetMaxX(_frameView.frame) - 50, CGRectGetMaxY(_frameView.frame), 50, 50);
+	_twitterButton.frame = CGRectMake( CGRectGetMaxX(_frameView.frame) - 100, CGRectGetMaxY(_frameView.frame), 50, 50);
+	_locationButton.frame = CGRectMake( CGRectGetMinX(_frameView.frame), CGRectGetMaxY(_frameView.frame), 50, 50);
 	
 	CGFloat x = CGRectGetMaxX(_locationButton.frame);
-	_addressLabel.frame = CGRectMake(x, CGRectGetMaxY(_textView.frame), CGRectGetMinX(_twitterButton.frame)- x, 50);
+	_addressLabel.frame = CGRectMake(x, CGRectGetMaxY(_frameView.frame), CGRectGetMinX(_twitterButton.frame)- x, 50);
+}
+
+- (void)viewDidLayoutSubviews
+{
+	
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	
-	_textView.text = self.opine.text;
 	
 	// location updates
 	_postLocation = [[NSUserDefaults standardUserDefaults] boolForKey:PLYUserDefaultOpineComposerIncludeLocation];
@@ -478,6 +578,12 @@
 	}];
 }
 
+- (void)_updatePhotoButton
+{
+	NSString *title = [NSString stringWithFormat:@" %ld", [_attachedImages count]];
+	[_photoButton setTitle:title forState:UIControlStateNormal];
+}
+
 #pragma mark - Actions
 
 - (void)cancel:(id)sender
@@ -513,6 +619,21 @@
 			
 			self.opine.location = loc;
 		}
+	}
+	
+	if ([_attachedImages count])
+	{
+		NSMutableArray *tmpArray = [NSMutableArray new];
+		
+		for (UIImage *image in _attachedImages)
+		{
+			PLYUploadImage *plyImage = [PLYUploadImage new];
+			plyImage.imageData = UIImageJPEGRepresentation(image, 0.81);
+			
+			[tmpArray addObject:plyImage];
+		}
+		
+		self.opine.images = tmpArray;
 	}
 	
 	if ([_delegate respondsToSelector:@selector(opineComposeViewController:didFinishWithOpine:)])
@@ -561,6 +682,57 @@
 	self.opine.shareOnFacebook = !self.opine.shareOnFacebook;
 	[self _updateSocialButtons];
 	[self _updateCharacterCount];
+}
+
+- (void)_handlePhoto:(id)sender
+{
+	UIAlertController *alert = [UIAlertController alertControllerWithTitle:PLYLocalizedStringFromTable(@"OPINE_PHOTO_ACTIONS_TITLE", @"UI", @"Title for actions menu from opine photo button") message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+	
+	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+	{
+		NSString *text = PLYLocalizedStringFromTable(@"OPINE_IMAGE_FROM_CAM", @"UI", @"Add new opine image from camera");
+		UIAlertAction *newPhotoAction = [UIAlertAction actionWithTitle:text style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+			UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+			picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+			picker.delegate = self;
+			picker.allowsEditing = YES;
+			
+			[self presentViewController:picker animated:YES completion:NULL];
+		}];
+		
+		[alert addAction:newPhotoAction];
+	}
+	
+	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+	{
+		NSString *text = PLYLocalizedStringFromTable(@"OPINE_IMAGE_FROM_LIBRARY", @"UI", @"Select new opine image from library");
+		UIAlertAction *updateAvatar = [UIAlertAction actionWithTitle:text style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+			UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+			picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+			picker.delegate = self;
+			picker.allowsEditing = YES;
+			
+			[self presentViewController:picker animated:YES completion:NULL];
+		}];
+		
+		[alert addAction:updateAvatar];
+	}
+	
+	if ([_attachedImages count])
+	{
+		NSString *text  = PLYLocalizedStringFromTable(@"OPINE_DELETE_IMAGES_ACTION", @"UI", @"Option to delete all opine attachments");
+		UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:text style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+			_attachedImages = nil;
+			[self _updatePhotoButton];
+		}];
+		
+		[alert addAction:deleteAction];
+	}
+	
+	UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:PLYLocalizedStringFromTable(@"PLY_ALERT_CANCEL", @"UI", @"To cancel something") style:UIAlertActionStyleCancel handler:NULL];
+	[alert addAction:cancelAction];
+	
+	[self presentViewController:alert animated:YES completion:NULL];
 }
 
 #pragma mark - Notifications
@@ -663,6 +835,28 @@
 	[self _updateLocationButton];
 }
 
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+	UIImage *image = info[UIImagePickerControllerEditedImage];
+	
+	if (!_attachedImages)
+	{
+		_attachedImages = [NSMutableArray new];
+	}
+	
+	[_attachedImages addObject:image];
+	[self _updatePhotoButton];
+	
+	[picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+	[picker dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - Public Interface
 
 - (NSString *)opineText
@@ -683,6 +877,7 @@
 - (void)setOpine:(PLYOpine *)opine
 {
 	_opine = [opine copy];
+	_attachedImages = [NSMutableArray arrayWithArray:_opine.images];
 	
 	if (opine.location.latitude || opine.location.longitude)
 	{

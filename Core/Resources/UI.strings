@@ -19,6 +19,8 @@
 /* Alert acknowledgement button title */
 "PLY_ALERT_OK" = "Ok";
 
+/* Alert cancel title */
+"PLY_ALERT_CANCEL" = "Cancel";
 
 // ------ Login
 
@@ -88,3 +90,19 @@
 
 /* Title of the view controller showing brands */
 "PLY_BRANDS_TITLE" = "Brands";
+
+
+// ------- PLYOpineComposeViewController
+
+/* Title for actions menu from opine photo button */
+"OPINE_PHOTO_ACTIONS_TITLE" = "Opine Photos";
+
+/* Add new opine image from camera */
+"OPINE_IMAGE_FROM_CAM" = "Take new picture";
+
+/* Select new opine image from library */
+"OPINE_IMAGE_FROM_LIBRARY" = "Pick image from library";
+
+/* Option to delete all opine attachments */
+"OPINE_DELETE_IMAGES_ACTION" = "Reset attached images";
+

@@ -18,6 +18,7 @@
 #import "PLYReview.h"
 #import "PLYList.h"
 #import "PLYListItem.h"
+#import "PLYUploadImage.h"
 #import "PLYUser.h"
 #import "PLYUserAvatar.h"
 #import "PLYErrorMessage.h"

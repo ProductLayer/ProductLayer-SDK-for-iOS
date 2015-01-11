@@ -144,6 +144,13 @@
 		A76561A41A6016A500AA6FEE /* twitter-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A765619F1A6016A500AA6FEE /* twitter-button@2x.png */; };
 		A76561A51A6016A500AA6FEE /* twitter-button@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76561A01A6016A500AA6FEE /* twitter-button@3x.png */; };
 		A76561A61A6016A500AA6FEE /* twitter-button@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76561A01A6016A500AA6FEE /* twitter-button@3x.png */; };
+		A7657AC81A62D8E200CBDBD9 /* camera-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A7657AC51A62D8E200CBDBD9 /* camera-icon.png */; };
+		A7657AC91A62D8E200CBDBD9 /* camera-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A7657AC51A62D8E200CBDBD9 /* camera-icon.png */; };
+		A7657ACA1A62D8E200CBDBD9 /* camera-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7657AC61A62D8E200CBDBD9 /* camera-icon@2x.png */; };
+		A7657ACB1A62D8E200CBDBD9 /* camera-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7657AC61A62D8E200CBDBD9 /* camera-icon@2x.png */; };
+		A7657ACC1A62D8E200CBDBD9 /* camera-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7657AC71A62D8E200CBDBD9 /* camera-icon@3x.png */; };
+		A7657ACD1A62D8E200CBDBD9 /* camera-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7657AC71A62D8E200CBDBD9 /* camera-icon@3x.png */; };
+		A7657AF31A630B9000CBDBD9 /* PLYUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7657AF21A630B9000CBDBD9 /* PLYUploadImage.m */; };
 		A76A57141986939700751454 /* API.strings in Resources */ = {isa = PBXBuildFile; fileRef = A76A56E81986922300751454 /* API.strings */; };
 		A76A57151986939700751454 /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = A76A56E91986922300751454 /* UI.strings */; };
 		A76A571B1986A6D300751454 /* ProductLayerSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A76A570C1986937D00751454 /* ProductLayerSDK.bundle */; };
@@ -731,6 +738,11 @@
 		A765619E1A6016A500AA6FEE /* twitter-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-button.png"; sourceTree = "<group>"; };
 		A765619F1A6016A500AA6FEE /* twitter-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-button@2x.png"; sourceTree = "<group>"; };
 		A76561A01A6016A500AA6FEE /* twitter-button@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-button@3x.png"; sourceTree = "<group>"; };
+		A7657AC51A62D8E200CBDBD9 /* camera-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-icon.png"; sourceTree = "<group>"; };
+		A7657AC61A62D8E200CBDBD9 /* camera-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-icon@2x.png"; sourceTree = "<group>"; };
+		A7657AC71A62D8E200CBDBD9 /* camera-icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-icon@3x.png"; sourceTree = "<group>"; };
+		A7657AF11A630B9000CBDBD9 /* PLYUploadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYUploadImage.h; sourceTree = "<group>"; };
+		A7657AF21A630B9000CBDBD9 /* PLYUploadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYUploadImage.m; sourceTree = "<group>"; };
 		A7696B4B19ED91E000C1D3C4 /* Framework-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Framework-Info.plist"; sourceTree = "<group>"; };
 		A76A56E81986922300751454 /* API.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = API.strings; sourceTree = "<group>"; };
 		A76A56E91986922300751454 /* UI.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = UI.strings; sourceTree = "<group>"; };
@@ -1056,6 +1068,9 @@
 			children = (
 				A75CF7831A30E573007E30FC /* PLYBrandPickerViewController.xib */,
 				A75CF7841A30E573007E30FC /* PLYGuidedInputViewController.xib */,
+				A7657AC51A62D8E200CBDBD9 /* camera-icon.png */,
+				A7657AC61A62D8E200CBDBD9 /* camera-icon@2x.png */,
+				A7657AC71A62D8E200CBDBD9 /* camera-icon@3x.png */,
 				A701C5031A1FC89A0013CB8D /* facebook.png */,
 				A701C5041A1FC89A0013CB8D /* facebook@2x.png */,
 				A701C5051A1FC89A0013CB8D /* facebook@3x.png */,
@@ -1625,6 +1640,8 @@
 				C97FAADF1921FCFA00144D2C /* PLYProductCategory.m */,
 				A7B4877D1987CFB200FA8F83 /* PLYVotableEntity.h */,
 				A7B4877E1987CFB200FA8F83 /* PLYVotableEntity.m */,
+				A7657AF11A630B9000CBDBD9 /* PLYUploadImage.h */,
+				A7657AF21A630B9000CBDBD9 /* PLYUploadImage.m */,
 			);
 			name = PLYEntities;
 			sourceTree = "<group>";
@@ -2151,6 +2168,7 @@
 				A75CF7881A30E573007E30FC /* PLYGuidedInputViewController.xib in Resources */,
 				A701C50B1A1FC89A0013CB8D /* twitter@3x.png in Resources */,
 				A76561A41A6016A500AA6FEE /* twitter-button@2x.png in Resources */,
+				A7657ACD1A62D8E200CBDBD9 /* camera-icon@3x.png in Resources */,
 				A765617C1A60169900AA6FEE /* facebook-button@2x.png in Resources */,
 				A701C50D1A1FC89A0013CB8D /* facebook.png in Resources */,
 				A701C5111A1FC89A0013CB8D /* facebook@3x.png in Resources */,
@@ -2164,7 +2182,9 @@
 				A77860721A407C3800560889 /* location@2x.png in Resources */,
 				A7590B2F19ED77C40084EBCA /* UI.strings in Resources */,
 				A76561A21A6016A500AA6FEE /* twitter-button.png in Resources */,
+				A7657ACB1A62D8E200CBDBD9 /* camera-icon@2x.png in Resources */,
 				A7590B2E19ED77C40084EBCA /* API.strings in Resources */,
+				A7657AC91A62D8E200CBDBD9 /* camera-icon.png in Resources */,
 				A77860741A407C3800560889 /* location@3x.png in Resources */,
 				A765617A1A60169900AA6FEE /* facebook-button.png in Resources */,
 			);
@@ -2185,6 +2205,7 @@
 				A75CF7871A30E573007E30FC /* PLYGuidedInputViewController.xib in Resources */,
 				A701C50A1A1FC89A0013CB8D /* twitter@3x.png in Resources */,
 				A76561A31A6016A500AA6FEE /* twitter-button@2x.png in Resources */,
+				A7657ACC1A62D8E200CBDBD9 /* camera-icon@3x.png in Resources */,
 				A765617B1A60169900AA6FEE /* facebook-button@2x.png in Resources */,
 				A701C50C1A1FC89A0013CB8D /* facebook.png in Resources */,
 				A701C5101A1FC89A0013CB8D /* facebook@3x.png in Resources */,
@@ -2198,7 +2219,9 @@
 				A77860711A407C3800560889 /* location@2x.png in Resources */,
 				A76A57151986939700751454 /* UI.strings in Resources */,
 				A76561A11A6016A500AA6FEE /* twitter-button.png in Resources */,
+				A7657ACA1A62D8E200CBDBD9 /* camera-icon@2x.png in Resources */,
 				A76A57141986939700751454 /* API.strings in Resources */,
+				A7657AC81A62D8E200CBDBD9 /* camera-icon.png in Resources */,
 				A77860731A407C3800560889 /* location@3x.png in Resources */,
 				A76561791A60169900AA6FEE /* facebook-button.png in Resources */,
 			);
@@ -2350,6 +2373,7 @@
 				C97FAAD5192145F800144D2C /* LocalizableStringPicker.m in Sources */,
 				C97FAAAB191D618C00144D2C /* RatingTableCell.m in Sources */,
 				C97FAAA8191D618C00144D2C /* SearchProductViewController.m in Sources */,
+				A7657AF31A630B9000CBDBD9 /* PLYUploadImage.m in Sources */,
 				C97FAAA0191D618C00144D2C /* ProductImageViewController.m in Sources */,
 				C97FAAA7191D618C00144D2C /* ProductViewController.m in Sources */,
 				C97FAAAD191D618C00144D2C /* ReviewTableViewController.m in Sources */,

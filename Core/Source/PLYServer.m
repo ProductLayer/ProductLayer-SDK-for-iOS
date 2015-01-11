@@ -248,14 +248,23 @@
 		
 		if ([payload isKindOfClass:[DTImage class]])
 		{
-			payloadData = DTImageJPEGRepresentation(payload, 0.8);
+			payloadData = DTImageJPEGRepresentation(payload, 0.81);
 			[request setValue:@"image/jpeg" forHTTPHeaderField:@"Content-Type"];
 			request.timeoutInterval = 60;
 		}
 		else if ([payload isKindOfClass:[NSData class]])
 		{
 			payloadData = [payload copy];
-			[request setValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
+			
+			// workaround for generic data upload for image
+			if ([path containsString:@"image"])
+			{
+				[request setValue:@"image/jpeg" forHTTPHeaderField:@"Content-Type"];
+			}
+			else
+			{
+				[request setValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
+			}
 			
 			request.timeoutInterval = 60;
 		}
@@ -1377,11 +1386,59 @@
 	NSParameterAssert(opine.language);
 	NSParameterAssert(completion);
 	
-	NSString *function = @"opines";
-	NSString *path = [self _functionPathForFunction:function];
-	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:opine];
+	// first we need to upload all PLYUploadImage objects
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:completion];
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+		
+		dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+		__block NSError *imageUploadError;
+
+		NSMutableArray *images = [NSMutableArray new];
+
+		for (PLYUploadImage *image in opine.images)
+		{
+			if ([image isKindOfClass:[PLYUploadImage class]])
+			{
+				[self uploadImageData:(id)image.imageData forGTIN:opine.GTIN completion:^(id result, NSError *error) {
+					if (result)
+					{
+						// replace upload image with result
+						[images addObject:result];
+					}
+					else
+					{
+						imageUploadError = error;
+					}
+					
+					dispatch_semaphore_signal(sema);
+				}];
+			}
+			else
+			{
+				[images addObject:image];
+			}
+			
+			dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+			
+			if (imageUploadError)
+			{
+				completion(nil, imageUploadError);
+				return;
+			}
+		}
+		
+		// all images uploaded
+		if ([images count])
+		{
+			opine.images = images;
+		}
+		
+		NSString *function = @"opines";
+		NSString *path = [self _functionPathForFunction:function];
+		NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:opine];
+		
+		[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:completion];
+	});
 }
 
 - (void)deleteOpine:(PLYOpine *)opine completion:(PLYCompletion)completion
