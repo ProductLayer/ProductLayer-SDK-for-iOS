@@ -94,6 +94,9 @@
 
 // ------- PLYOpineComposeViewController
 
+/* Title of opine composer */
+"OPINE_COMPOSER_TITLE" = "Your Opinion";
+
 /* Title for actions menu from opine photo button */
 "OPINE_PHOTO_ACTIONS_TITLE" = "Opine Photos";
 
@@ -105,4 +108,3 @@
 
 /* Option to delete all opine attachments */
 "OPINE_DELETE_IMAGES_ACTION" = "Reset attached images";
-

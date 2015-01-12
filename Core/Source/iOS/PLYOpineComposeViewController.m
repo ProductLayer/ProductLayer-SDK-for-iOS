@@ -38,8 +38,6 @@
 	UILabel *_addressLabel;
 	UILabel *_characterRemainingLabel;
 	
-	UIEdgeInsets _insets;
-	
 	// location
 	CLLocationManager *_locationManager;
 	CLLocation *_mostRecentLocation;
@@ -50,6 +48,8 @@
 	
 	// images
 	NSMutableArray *_attachedImages;
+	
+	NSLayoutConstraint *_bottomMarginConstraint;
 }
 
 - (instancetype)initWithOpine:(PLYOpine *)opine
@@ -79,11 +79,11 @@
 
 - (void)loadView
 {
-	UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+	UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
 	view.backgroundColor = [UIColor whiteColor];
 	
-	_frameView = [[UIView alloc] initWithFrame:CGRectInset(view.bounds, 20, 20)];
-	_frameView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+	_frameView = [[UIView alloc] initWithFrame:CGRectZero];
+	_frameView.translatesAutoresizingMaskIntoConstraints = NO;
 	_frameView.layer.borderColor = PLYBrandColor().CGColor;
 	_frameView.layer.borderWidth = 1;
 	_frameView.layer.cornerRadius = 10;
@@ -127,17 +127,22 @@
 	NSAssert(locationIcon!=nil, @"Missing Location icon in resource bundle");
 	
 	_locationButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	_locationButton.frame = CGRectMake(0, 0, 50, 50);
+	_locationButton.translatesAutoresizingMaskIntoConstraints = NO;
 	[_locationButton setImage:locationIcon forState:UIControlStateNormal];
 	[_locationButton addTarget:self action:@selector(_handleLocation:) forControlEvents:UIControlEventTouchUpInside];
 	[view addSubview:_locationButton];
+	
+	_addressLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+	_addressLabel.translatesAutoresizingMaskIntoConstraints = NO;
+	_addressLabel.textColor = [UIColor lightGrayColor];
+	[view addSubview:_addressLabel];
 
 	NSString *twitterPath = [PLYResourceBundle() pathForResource:@"twitter" ofType:@"png"];
 	UIImage *twitterIcon = [[UIImage imageWithContentsOfFile:twitterPath] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 	NSAssert(twitterIcon!=nil, @"Missing Twitter icon in resource bundle");
 
 	_twitterButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	_twitterButton.frame = CGRectMake(0, 0, 50, 50);
+	_twitterButton.translatesAutoresizingMaskIntoConstraints = NO;
 	[_twitterButton setImage:twitterIcon forState:UIControlStateNormal];
 	[_twitterButton addTarget:self action:@selector(_handleTwitter:) forControlEvents:UIControlEventTouchUpInside];
 	[view addSubview:_twitterButton];
@@ -147,7 +152,7 @@
 	NSAssert(facebookIcon!=nil, @"Missing Facebook icon in resource bundle");
 	
 	_facebookButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	_facebookButton.frame = CGRectMake(0, 0, 50, 50);
+	_facebookButton.translatesAutoresizingMaskIntoConstraints = NO;
 	[_facebookButton setImage:facebookIcon forState:UIControlStateNormal];
 	[_facebookButton addTarget:self action:@selector(_handleFacebook:) forControlEvents:UIControlEventTouchUpInside];
 	[view addSubview:_facebookButton];
@@ -177,6 +182,7 @@
 	[_photoButton addTarget:self action:@selector(_handlePhoto:) forControlEvents:UIControlEventTouchUpInside];
 	[_frameView addSubview:_photoButton];
 	
+	
 	[view addConstraint:[NSLayoutConstraint constraintWithItem:_photoButton attribute:NSLayoutAttributeRight
 																	 relatedBy:NSLayoutRelationEqual
 																		 toItem:_frameView
@@ -189,7 +195,7 @@
 																		 toItem:_frameView
 																	 attribute:NSLayoutAttributeBottom
 																	multiplier:1.0
-																	  constant:0]];
+																	  constant:5]];
 	
 	[view addConstraint:[NSLayoutConstraint constraintWithItem:_photoButton attribute:NSLayoutAttributeBottom
 																	 relatedBy:NSLayoutRelationEqual
@@ -210,22 +216,159 @@
 																				 toItem:_photoButton
 																			 attribute:NSLayoutAttributeTop
 																			multiplier:1.0
-																			  constant:-10]];
+																			  constant:5]];
+	
 
+	[_facebookButton addConstraint:[NSLayoutConstraint constraintWithItem:_facebookButton attribute:NSLayoutAttributeWidth
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:nil
+																	 attribute:NSLayoutAttributeNotAnAttribute
+																	multiplier:1.0
+																	  constant:50]];
 
+	[_facebookButton addConstraint:[NSLayoutConstraint constraintWithItem:_facebookButton attribute:NSLayoutAttributeHeight
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:nil
+																	 attribute:NSLayoutAttributeNotAnAttribute
+																	multiplier:1.0
+																	  constant:50]];
 	
-	[self _updateCharacterCount];
-	[view layoutIfNeeded];
+	[view addConstraint:[NSLayoutConstraint constraintWithItem:_facebookButton attribute:NSLayoutAttributeRight
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:_frameView
+																	 attribute:NSLayoutAttributeRight
+																	multiplier:1.0
+																	  constant:0]];
+
+	[view addConstraint:[NSLayoutConstraint constraintWithItem:_facebookButton attribute:NSLayoutAttributeTop
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:_frameView
+																	 attribute:NSLayoutAttributeBottom
+																	multiplier:1.0
+																	  constant:0]];
 	
-	_addressLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-	_addressLabel.textColor = [UIColor lightGrayColor];
-	[view addSubview:_addressLabel];
+	[_twitterButton addConstraint:[NSLayoutConstraint constraintWithItem:_twitterButton attribute:NSLayoutAttributeWidth
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:nil
+																	 attribute:NSLayoutAttributeNotAnAttribute
+																	multiplier:1.0
+																	  constant:50]];
 	
-	[self _updateSocialButtons];
+	[_twitterButton addConstraint:[NSLayoutConstraint constraintWithItem:_twitterButton attribute:NSLayoutAttributeHeight
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:nil
+																	 attribute:NSLayoutAttributeNotAnAttribute
+																	multiplier:1.0
+																	  constant:50]];
+	
+	[view addConstraint:[NSLayoutConstraint constraintWithItem:_twitterButton attribute:NSLayoutAttributeRight
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:_facebookButton
+																	 attribute:NSLayoutAttributeLeft
+																	multiplier:1.0
+																	  constant:0]];
+	
+	[view addConstraint:[NSLayoutConstraint constraintWithItem:_twitterButton attribute:NSLayoutAttributeTop
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:_frameView
+																	 attribute:NSLayoutAttributeBottom
+																	multiplier:1.0
+																	  constant:0]];
+
+	[_locationButton addConstraint:[NSLayoutConstraint constraintWithItem:_locationButton attribute:NSLayoutAttributeWidth
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:nil
+																	 attribute:NSLayoutAttributeNotAnAttribute
+																	multiplier:1.0
+																	  constant:50]];
+	
+	[_locationButton addConstraint:[NSLayoutConstraint constraintWithItem:_locationButton attribute:NSLayoutAttributeHeight
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:nil
+																	 attribute:NSLayoutAttributeNotAnAttribute
+																	multiplier:1.0
+																	  constant:50]];
+	
+	[view addConstraint:[NSLayoutConstraint constraintWithItem:_locationButton attribute:NSLayoutAttributeLeft
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:_frameView
+																	 attribute:NSLayoutAttributeLeft
+																	multiplier:1.0
+																	  constant:0]];
+	
+	[view addConstraint:[NSLayoutConstraint constraintWithItem:_locationButton attribute:NSLayoutAttributeTop
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:_frameView
+																	 attribute:NSLayoutAttributeBottom
+																	multiplier:1.0
+																	  constant:0]];
+	
+	[_addressLabel addConstraint:[NSLayoutConstraint constraintWithItem:_addressLabel attribute:NSLayoutAttributeHeight
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:nil
+																	 attribute:NSLayoutAttributeNotAnAttribute
+																	multiplier:1.0
+																	  constant:50]];
+	
+	[view addConstraint:[NSLayoutConstraint constraintWithItem:_addressLabel attribute:NSLayoutAttributeLeft
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:_locationButton
+																	 attribute:NSLayoutAttributeRight
+																	multiplier:1.0
+																	  constant:0]];
+
+	[view addConstraint:[NSLayoutConstraint constraintWithItem:_addressLabel attribute:NSLayoutAttributeRight
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:_twitterButton
+																	 attribute:NSLayoutAttributeLeft
+																	multiplier:1.0
+																	  constant:50]];
+	
+	[view addConstraint:[NSLayoutConstraint constraintWithItem:_addressLabel attribute:NSLayoutAttributeTop
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:_frameView
+																	 attribute:NSLayoutAttributeBottom
+																	multiplier:1.0
+																	  constant:0]];
+	
 	
 	self.view = view;
 	
-	self.navigationItem.title = @"Your Opinion";
+	
+	[view addConstraint:[NSLayoutConstraint constraintWithItem:_frameView attribute:NSLayoutAttributeTop
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:self.topLayoutGuide
+																	 attribute:NSLayoutAttributeBottom
+																	multiplier:1.0
+																	  constant:10]];
+	
+	[view addConstraint:[NSLayoutConstraint constraintWithItem:_frameView attribute:NSLayoutAttributeLeft
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:view
+																	 attribute:NSLayoutAttributeLeft
+																	multiplier:1.0
+																	  constant:10]];
+
+	[view addConstraint:[NSLayoutConstraint constraintWithItem:_frameView attribute:NSLayoutAttributeRight
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:view
+																	 attribute:NSLayoutAttributeRight
+																	multiplier:1.0
+																	  constant:-10]];
+	
+	
+	_bottomMarginConstraint = [NSLayoutConstraint constraintWithItem:self.bottomLayoutGuide
+																			 attribute:NSLayoutAttributeTop
+																			 relatedBy:NSLayoutRelationEqual
+																				 toItem:_facebookButton
+																			 attribute:NSLayoutAttributeBottom
+																			multiplier:1.0
+																			  constant:0];
+	_bottomMarginConstraint.priority = UILayoutPriorityDefaultHigh;
+	[view addConstraint:_bottomMarginConstraint];
+
+	
+	self.navigationItem.title = PLYLocalizedStringFromTable(@"OPINE_COMPOSER_TITLE", @"UI", @"Title of opine composer");
 	
 	UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
 	self.navigationItem.leftBarButtonItem = cancelItem;
@@ -235,36 +378,12 @@
 	
 	self.automaticallyAdjustsScrollViewInsets = NO;
 	
-	_insets = UIEdgeInsetsZero;
-	
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 	[center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 	
 	// observe the logged in user
 	[self.productLayerServer addObserver:self forKeyPath:@"loggedInUser" options:NSKeyValueObservingOptionNew context:NULL];
-}
-
-- (void)viewWillLayoutSubviews
-{
-	[super viewWillLayoutSubviews];
-	
-	id<UILayoutSupport>top = [self topLayoutGuide];
-	id<UILayoutSupport>bottom = [self bottomLayoutGuide];
-
-	_frameView.frame = CGRectMake(10+_insets.left, [top length]+10+_insets.top, self.view.bounds.size.width-20-_insets.left - _insets.right, self.view.bounds.size.height - [top length] - [bottom length] - 60 - _insets.bottom);
-//	_textView.frame = CGRectMake(10+_insets.left, [top length]+10+_insets.top, self.view.bounds.size.width-20-_insets.left - _insets.right, self.view.bounds.size.height - [top length] - [bottom length] - 60 - _insets.bottom);
-	_facebookButton.frame = CGRectMake( CGRectGetMaxX(_frameView.frame) - 50, CGRectGetMaxY(_frameView.frame), 50, 50);
-	_twitterButton.frame = CGRectMake( CGRectGetMaxX(_frameView.frame) - 100, CGRectGetMaxY(_frameView.frame), 50, 50);
-	_locationButton.frame = CGRectMake( CGRectGetMinX(_frameView.frame), CGRectGetMaxY(_frameView.frame), 50, 50);
-	
-	CGFloat x = CGRectGetMaxX(_locationButton.frame);
-	_addressLabel.frame = CGRectMake(x, CGRectGetMaxY(_frameView.frame), CGRectGetMinX(_twitterButton.frame)- x, 50);
-}
-
-- (void)viewDidLayoutSubviews
-{
-	
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -298,6 +417,7 @@
 	[self _updateSocialButtons];
 	[self _updateCharacterCount];
 	[self _updateLocationButton];
+	[self _updatePhotoButton];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -623,17 +743,11 @@
 	
 	if ([_attachedImages count])
 	{
-		NSMutableArray *tmpArray = [NSMutableArray new];
-		
-		for (UIImage *image in _attachedImages)
-		{
-			PLYUploadImage *plyImage = [PLYUploadImage new];
-			plyImage.imageData = UIImageJPEGRepresentation(image, 0.81);
-			
-			[tmpArray addObject:plyImage];
-		}
-		
-		self.opine.images = tmpArray;
+		self.opine.images = _attachedImages;
+	}
+	else
+	{
+		self.opine.images = nil;
 	}
 	
 	if ([_delegate respondsToSelector:@selector(opineComposeViewController:didFinishWithOpine:)])
@@ -752,36 +866,34 @@
 	// now this might be rotated, so convert it back
 	coveredFrame = [self.view.window convertRect:coveredFrame toView:self.view.superview];
  
-	// set inset to make up for covered array at bottom
-	_insets = UIEdgeInsetsMake(0, 0, coveredFrame.size.height, 0);
+	// set inset to make up for covered height at bottom
+	_bottomMarginConstraint.constant = coveredFrame.size.height;
 	
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:[notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
-	[UIView setAnimationCurve:[notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]];
-	[UIView setAnimationBeginsFromCurrentState:YES];
+	NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+	NSUInteger options = [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
 	
-	// work
-	[self.view setNeedsLayout];
-	[self.view layoutIfNeeded];
-	
-	[UIView commitAnimations];
+	[UIView animateWithDuration:duration
+								 delay:0
+							  options:options | UIViewAnimationOptionBeginFromCurrentState
+						  animations:^{
+							  [self.view layoutIfNeeded];
+						  } completion:NULL];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
 	// set inset to make up for no longer covered array at bottom
-	_insets = UIEdgeInsetsMake(0, 0, 0, 0);
+	_bottomMarginConstraint.constant = 0;
 	
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:[notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
-	[UIView setAnimationCurve:[notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]];
-	[UIView setAnimationBeginsFromCurrentState:YES];
+	NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+	NSUInteger options = [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
 	
-	// work
-	[self.view setNeedsLayout];
-	[self.view layoutIfNeeded];
-	
-	[UIView commitAnimations];
+	[UIView animateWithDuration:duration
+								 delay:0
+							  options:options | UIViewAnimationOptionBeginFromCurrentState
+						  animations:^{
+							  [self.view layoutIfNeeded];
+						  } completion:NULL];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -846,7 +958,11 @@
 		_attachedImages = [NSMutableArray new];
 	}
 	
-	[_attachedImages addObject:image];
+	// put the image into an upload image
+	PLYUploadImage *plyImage = [PLYUploadImage new];
+	plyImage.imageData = UIImageJPEGRepresentation(image, 0.81);
+	[_attachedImages addObject:plyImage];
+	
 	[self _updatePhotoButton];
 	
 	[picker dismissViewControllerAnimated:YES completion:nil];
@@ -878,6 +994,7 @@
 {
 	_opine = [opine copy];
 	_attachedImages = [NSMutableArray arrayWithArray:_opine.images];
+	[self _updatePhotoButton];
 	
 	if (opine.location.latitude || opine.location.longitude)
 	{
