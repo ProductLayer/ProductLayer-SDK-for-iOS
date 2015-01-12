@@ -8,6 +8,7 @@
 
 #import "PLYOpine.h"
 #import "PLYImage.h"
+#import "PLYUploadImage.h"
 #import "PLYProduct.h"
 
 @interface PLYOpine ()
@@ -60,12 +61,8 @@
 			
 			for (NSDictionary *oneValue in dict)
 			{
-				PLYImage *image = [[PLYImage alloc] initWithDictionary:oneValue];
-				
-				if (image)
-				{
-					[tmpArray addObject:image];
-				}
+				PLYEntity *entity = [PLYEntity entityFromDictionary:oneValue];
+				[tmpArray addObject:entity];
 			}
 			
 			self.images = tmpArray;

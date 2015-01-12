@@ -959,8 +959,7 @@
 	}
 	
 	// put the image into an upload image
-	PLYUploadImage *plyImage = [PLYUploadImage new];
-	plyImage.imageData = UIImageJPEGRepresentation(image, 0.81);
+	PLYUploadImage *plyImage = [[PLYUploadImage alloc] initWithImageData:UIImageJPEGRepresentation(image, 0.81)];
 	[_attachedImages addObject:plyImage];
 	
 	[self _updatePhotoButton];

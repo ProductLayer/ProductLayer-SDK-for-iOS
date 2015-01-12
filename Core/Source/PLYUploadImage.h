@@ -14,8 +14,13 @@
 @interface PLYUploadImage : PLYImage
 
 /**
+ Dedicated initializer with image data
+ */
+- (instancetype)initWithImageData:(NSData *)data;
+
+/**
  The NSData representation of the image to upload
  */
-@property (nonatomic, copy) NSData *imageData;
+@property (nonatomic, copy, readonly) NSData *imageData;
 
 @end
