@@ -15,6 +15,7 @@
 
 /**
  Dedicated initializer with image data
+ @param data The image date to embed in the upload image
  */
 - (instancetype)initWithImageData:(NSData *)data;
 
