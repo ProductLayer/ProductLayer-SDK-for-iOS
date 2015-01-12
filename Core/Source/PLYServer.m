@@ -34,7 +34,7 @@
 #define PLY_SERVICE @"com.productlayer.api.auth-token"
 
 
-@interface PLYServer ()
+@interface PLYServer () <NSCacheDelegate>
 
 @property (nonatomic, readwrite, strong) PLYUser *loggedInUser;
 
@@ -63,9 +63,14 @@
 		_configuration = configuration;
 		
 		_entityCache = [[NSCache alloc] init];
+		_entityCache.delegate = self;
 		
 		// load last state (login user)
 		[self _loadState];
+
+#if TARGET_OS_IPHONE
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:[UIApplication sharedApplication]];
+#endif
 	}
 	
 	return self;
@@ -85,6 +90,11 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)cache:(NSCache *)cache willEvictObject:(id)obj
+{
+	NSLog(@"evict: %@ with ID %@", obj, [obj Id]);
 }
 
 #pragma mark Singleton Methods
@@ -2102,6 +2112,20 @@
 	};
 	
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:ownCompletion];
+}
+
+#pragma mark - Notifications
+
+- (void)_didEnterForeground:(NSNotification *)notification
+{
+	if (self.loggedInUser)
+	{
+		// restore logged in user in cache
+		[_entityCache setObject:self.loggedInUser forKey:self.loggedInUser.Id];
+		
+		DTLogInfo(@"Refreshing details for logged in user '%@'", self.loggedInUser.nickname);
+		[self loadDetailsForUser:self.loggedInUser completion:NULL];
+	}
 }
 
 #pragma mark - Properties
