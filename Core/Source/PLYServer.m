@@ -324,8 +324,8 @@
 												id result = nil;
 												
 												// check for transport error, e.g. no network connection
-												if (retError) {
-													
+												if (retError)
+												{
 													completion(nil, retError);
 													return;
 												}
@@ -371,7 +371,7 @@
 												{
 													[self _loadState];
 												}
-												else
+												else if (statusCode < 400)
 												{
 													[self _updateAuthTokenFromHeaders:headers];
 												}
@@ -483,9 +483,16 @@
 													}
 													else
 													{
-														// construct new error for the status code
-														retError = [self _errorWithCode:statusCode
-																						message:[NSHTTPURLResponse localizedStringForStatusCode:(NSInteger)statusCode]];
+														if ((statusCode == 404 || statusCode >= 500) && [contentType isEqualToString:@"text/html"])
+														{
+															retError = [self _errorWithCode:statusCode message:@"ProductLayer API currently not available. Please try again later."];
+														}
+														else
+														{
+															// construct new error for the status code
+															retError = [self _errorWithCode:statusCode
+																							message:[NSHTTPURLResponse localizedStringForStatusCode:(NSInteger)statusCode]];
+														}
 													}
 													
 													// error(s) means that there was no usable result
