@@ -38,6 +38,8 @@
 	UILabel *_addressLabel;
 	UILabel *_characterRemainingLabel;
 	
+	UILabel *_productNameLabel;
+	
 	// location
 	CLLocationManager *_locationManager;
 	CLLocation *_mostRecentLocation;
@@ -50,6 +52,7 @@
 	NSMutableArray *_attachedImages;
 	
 	NSLayoutConstraint *_bottomMarginConstraint;
+	NSLayoutConstraint *_belowProductLabelConstraint;
 }
 
 - (instancetype)initWithOpine:(PLYOpine *)opine
@@ -94,13 +97,12 @@
 	_textView = [[PLYTextView alloc] initWithFrame:CGRectZero];
 	_textView.translatesAutoresizingMaskIntoConstraints = NO;
 	_textView.delegate = self;
-	_textView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
 	_textView.scrollIndicatorInsets = UIEdgeInsetsMake(5, 0, 0, 0);
 	_textView.keyboardType = UIKeyboardTypeTwitter;
 	[_frameView addSubview:_textView];
 	
 	_textView.text = self.opine.text;
-
+	
 	[_frameView addConstraint:[NSLayoutConstraint constraintWithItem:_textView attribute:NSLayoutAttributeLeft
 																	 relatedBy:NSLayoutRelationEqual
 																		 toItem:_frameView
@@ -159,7 +161,6 @@
 	
 	_characterRemainingLabel = [[UILabel alloc] initWithFrame:CGRectZero];
 	_characterRemainingLabel.translatesAutoresizingMaskIntoConstraints = NO;
-	_characterRemainingLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
 	[_frameView addSubview:_characterRemainingLabel];
 	
 	[view addConstraint:[NSLayoutConstraint constraintWithItem:_characterRemainingLabel attribute:NSLayoutAttributeLeft
@@ -182,6 +183,48 @@
 	[_photoButton addTarget:self action:@selector(_handlePhoto:) forControlEvents:UIControlEventTouchUpInside];
 	[_frameView addSubview:_photoButton];
 	
+	
+	_productNameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+	_productNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
+	_productNameLabel.textColor = PLYBrandColor();
+	[view addSubview:_productNameLabel];
+	
+	self.view = view;
+
+	[self _updateLabelFonts];
+	
+	// product name label
+	
+	[view addConstraint:[NSLayoutConstraint constraintWithItem:_productNameLabel attribute:NSLayoutAttributeLeft
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:_textView
+																	 attribute:NSLayoutAttributeLeft
+																	multiplier:1.0
+																	  constant:0]];
+	
+	[view addConstraint:[NSLayoutConstraint constraintWithItem:_productNameLabel attribute:NSLayoutAttributeRight
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:_textView
+																	 attribute:NSLayoutAttributeRight
+																	multiplier:1.0
+																	  constant:0]];
+	
+	[view addConstraint:[NSLayoutConstraint constraintWithItem:_productNameLabel attribute:NSLayoutAttributeTop
+																	 relatedBy:NSLayoutRelationEqual
+																		 toItem:self.topLayoutGuide
+																	 attribute:NSLayoutAttributeBottom
+																	multiplier:1.0
+																	  constant:10]];
+	
+	_belowProductLabelConstraint = [NSLayoutConstraint constraintWithItem:_frameView attribute:NSLayoutAttributeTop
+																					relatedBy:NSLayoutRelationEqual
+																						toItem:_productNameLabel
+																					attribute:NSLayoutAttributeBottom
+																				  multiplier:1.0
+																					 constant:5];
+	[view addConstraint:_belowProductLabelConstraint];
+	
+	// photo button
 	
 	[view addConstraint:[NSLayoutConstraint constraintWithItem:_photoButton attribute:NSLayoutAttributeRight
 																	 relatedBy:NSLayoutRelationEqual
@@ -331,17 +374,6 @@
 																	multiplier:1.0
 																	  constant:0]];
 	
-	
-	self.view = view;
-	
-	
-	[view addConstraint:[NSLayoutConstraint constraintWithItem:_frameView attribute:NSLayoutAttributeTop
-																	 relatedBy:NSLayoutRelationEqual
-																		 toItem:self.topLayoutGuide
-																	 attribute:NSLayoutAttributeBottom
-																	multiplier:1.0
-																	  constant:10]];
-	
 	[view addConstraint:[NSLayoutConstraint constraintWithItem:_frameView attribute:NSLayoutAttributeLeft
 																	 relatedBy:NSLayoutRelationEqual
 																		 toItem:view
@@ -384,6 +416,12 @@
 	
 	// observe the logged in user
 	[self.productLayerServer addObserver:self forKeyPath:@"loggedInUser" options:NSKeyValueObservingOptionNew context:NULL];
+	
+	// observe the font size
+	[[NSNotificationCenter defaultCenter] addObserver:self
+														  selector:@selector(_didChangePreferredContentSize:)
+																name:UIContentSizeCategoryDidChangeNotification
+															 object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -418,6 +456,7 @@
 	[self _updateCharacterCount];
 	[self _updateLocationButton];
 	[self _updatePhotoButton];
+	[self _updateProductNameLabel];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -704,6 +743,29 @@
 	[_photoButton setTitle:title forState:UIControlStateNormal];
 }
 
+- (void)_updateProductNameLabel
+{
+	_productNameLabel.text = _productName;
+	
+	if ([_productName length])
+	{
+		_belowProductLabelConstraint.constant = 5;
+	}
+	else
+	{
+		_belowProductLabelConstraint.constant = 0;
+	}
+}
+
+- (void)_updateLabelFonts
+{
+	_textView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+	_characterRemainingLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+	_productNameLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+	_addressLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+	_photoButton.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+}
+
 #pragma mark - Actions
 
 - (void)cancel:(id)sender
@@ -901,6 +963,11 @@
 	[self _updateSocialButtons];
 }
 
+- (void)_didChangePreferredContentSize:(NSNotification *)notification
+{
+	[self _updateLabelFonts];
+}
+
 #pragma mark - UITextViewDelegate
 
 - (void)textViewDidChange:(UITextView *)textView
@@ -1001,6 +1068,13 @@
 		
 		[self _updateAddressLabelFromLocation:_mostRecentLocation];
 	}
+}
+
+- (void)setProductName:(NSString *)productName
+{
+	_productName = [productName copy];
+	
+	[self _updateProductNameLabel];
 }
 
 - (PLYOpine *)opine

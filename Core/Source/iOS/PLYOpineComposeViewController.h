@@ -55,6 +55,12 @@
  */
 @property (nonatomic, copy) PLYOpine *opine;
 
+
+/**
+ The product name to write above the text view. If it is `nil` the label is not shown
+ */
+@property (nonatomic, copy) NSString *productName;
+
 /**
  The delegate for the compose view controller
  */
