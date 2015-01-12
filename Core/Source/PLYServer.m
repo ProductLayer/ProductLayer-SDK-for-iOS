@@ -74,11 +74,11 @@
 // designated initializer
 - (instancetype)init
 {
-    _performingLogin = NO;
-    
+	_performingLogin = NO;
+	
 	// use default config, we need credential & caching
 	NSURLSessionConfiguration *config = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-    
+	
 	return [self initWithSessionConfiguration:config];
 }
 
@@ -134,7 +134,7 @@
 
 // constructs the path for a method call
 - (NSURL *)_methodURLForPath:(NSString *)path
-                  parameters:(NSDictionary *)parameters {
+						parameters:(NSDictionary *)parameters {
 	// turns the API_ENDPOINT into NSURL
 	NSURL *endpointURL = PLY_ENDPOINT_URL;
 	
@@ -175,41 +175,41 @@
 }
 
 - (void)_performMethodCallWithPath:(NSString *)path
-                        parameters:(NSDictionary *)parameters
-                        completion:(PLYCompletion)completion{
+								parameters:(NSDictionary *)parameters
+								completion:(PLYCompletion)completion{
 	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:parameters payload:nil basicAuth:nil completion:completion];
 }
 
 - (void)_performMethodCallWithPath:(NSString *)path
-                        HTTPMethod:(NSString *)HTTPMethod
-                        parameters:(NSDictionary *)parameters
-                        completion:(PLYCompletion)completion {
+								HTTPMethod:(NSString *)HTTPMethod
+								parameters:(NSDictionary *)parameters
+								completion:(PLYCompletion)completion {
 	[self _performMethodCallWithPath:path HTTPMethod:HTTPMethod parameters:parameters payload:nil basicAuth:nil completion:completion];
 }
 
 - (void)_performMethodCallWithPath:(NSString *)path
-                        HTTPMethod:(NSString *)HTTPMethod
-                        parameters:(NSDictionary *)parameters
-                           payload:(id)payload
-                        completion:(PLYCompletion)completion{
+								HTTPMethod:(NSString *)HTTPMethod
+								parameters:(NSDictionary *)parameters
+									payload:(id)payload
+								completion:(PLYCompletion)completion{
 	[self _performMethodCallWithPath:path HTTPMethod:HTTPMethod parameters:parameters payload:payload basicAuth:nil completion:completion];
 }
 
 - (void)_performMethodCallWithPath:(NSString *)path
-                        HTTPMethod:(NSString *)HTTPMethod
-                        parameters:(NSDictionary *)parameters
-                         basicAuth:(NSString *)basicAuth
-                        completion:(PLYCompletion)completion{
+								HTTPMethod:(NSString *)HTTPMethod
+								parameters:(NSDictionary *)parameters
+								 basicAuth:(NSString *)basicAuth
+								completion:(PLYCompletion)completion{
 	[self _performMethodCallWithPath:path HTTPMethod:HTTPMethod parameters:parameters payload:nil basicAuth:basicAuth completion:completion];
 }
 
 // internal method that executes actual API calls
 - (void)_performMethodCallWithPath:(NSString *)path
-                        HTTPMethod:(NSString *)HTTPMethod
-                        parameters:(NSDictionary *)parameters
-                           payload:(id)payload
-                         basicAuth:(NSString *)basicAuth
-                        completion:(PLYCompletion)completion
+								HTTPMethod:(NSString *)HTTPMethod
+								parameters:(NSDictionary *)parameters
+									payload:(id)payload
+								 basicAuth:(NSString *)basicAuth
+								completion:(PLYCompletion)completion
 {
 	NSURL *methodURL = [self _methodURLForPath:path
 											  parameters:parameters];
@@ -220,7 +220,7 @@
 	{
 		request.HTTPMethod = HTTPMethod;
 	}
-
+	
 	// Set basic authorization if available
 	if (basicAuth)
 	{
@@ -228,9 +228,9 @@
 	}
 	
 	// Add the API key to each request.
-   NSAssert(_APIKey, @"Setting an API Key is required to perform requests. Use [[PLYServer sharedServer] setAPIKey:]");
+	NSAssert(_APIKey, @"Setting an API Key is required to perform requests. Use [[PLYServer sharedServer] setAPIKey:]");
 	[request setValue:_APIKey forHTTPHeaderField:@"API-KEY"];
-
+	
 	// Add preferred languages
 	NSString *languages = [[NSLocale preferredLanguages] componentsJoinedByString:@", "];
 	[request setValue:languages forHTTPHeaderField:@"Accept-Language"];
@@ -390,8 +390,8 @@
 															DTLogDebug(@"%@", plainText);
 															
 															ignoreContent = YES;
-                                                            
-                                                            result = plainText;
+															
+															result = plainText;
 														}
 														else
 														{
@@ -400,8 +400,8 @@
 															
 															NSDictionary *userInfo = @{NSLocalizedDescriptionKey:  errorMessage};
 															error = [NSError errorWithDomain:PLYErrorDomain code:0 userInfo:userInfo];
-                                                            
-                                                            result = plainText;
+															
+															result = plainText;
 														}
 													}
 													else if ([contentType hasPrefix:@"text/html"])
@@ -453,7 +453,7 @@
 															// cannot be an entity, just add it
 															[objectArray addObject:dictObject];
 														}
-													
+														
 														// result is converted objects
 														result = [objectArray copy];
 													}
@@ -716,7 +716,7 @@
 - (id)_entityByUpdatingCachedEntity:(PLYEntity *)entity
 {
 	NSAssert([entity isKindOfClass:[PLYEntity class]], @"Incorrect parameter for %s", __PRETTY_FUNCTION__);
-
+	
 	PLYEntity *cachedEntity = [_entityCache objectForKey:entity.Id];
 	
 	if (cachedEntity)
@@ -855,11 +855,11 @@
  * Search for a product. If no search paramter are present the first 50 products will be presented.
  **/
 - (void)performSearchForProduct:(NSString *)gtin
-                           name:(NSString *)name
-                       language:(NSString *)language
-                        orderBy:(NSString *)orderBy
-                           page:(NSUInteger)page
-                 recordsPerPage:(NSUInteger)rpp
+									name:(NSString *)name
+							  language:(NSString *)language
+								orderBy:(NSString *)orderBy
+									page:(NSUInteger)page
+					  recordsPerPage:(NSUInteger)rpp
 							completion:(PLYCompletion)completion
 {
 	NSString *path = [self _functionPathForFunction:@"products"];
@@ -937,14 +937,14 @@
 	NSParameterAssert(user);
 	NSParameterAssert(password);
 	NSParameterAssert(completion);
-    
-    _performingLogin = YES;
+	
+	_performingLogin = YES;
 	
 	_authToken = nil;
 	
 	NSString *path = [self _functionPathForFunction:@"login"];
 	
-    NSString *authValue = [self basicAuthenticationForUser:user andPassword:password];
+	NSString *authValue = [self basicAuthenticationForUser:user andPassword:password];
 	
 	PLYCompletion wrappedCompletion = [completion copy];
 	
@@ -960,8 +960,8 @@
 		{
 			wrappedCompletion(result, error);
 		}
-        
-        _performingLogin = NO;
+		
+		_performingLogin = NO;
 	};
 	
 	NSDictionary *parameters = @{@"remember_me": @"true"};
@@ -1015,17 +1015,17 @@
 - (void)logoutUserWithCompletion:(PLYCompletion)completion
 {
 	NSParameterAssert(completion);
-    
-    // Remove account from keychain.
-    if (_loggedInUser)
-    {
-		 DTKeychain *keychain = [DTKeychain sharedInstance];
-		 
-		 NSArray *accounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:_loggedInUser.nickname] error:NULL];
-		 [keychain removeKeychainItems:accounts error:NULL];
-		 
-		 _authToken = nil;
-    }
+	
+	// Remove account from keychain.
+	if (_loggedInUser)
+	{
+		DTKeychain *keychain = [DTKeychain sharedInstance];
+		
+		NSArray *accounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:_loggedInUser.nickname] error:NULL];
+		[keychain removeKeychainItems:accounts error:NULL];
+		
+		_authToken = nil;
+	}
 	
 	NSString *path = [self _functionPathForFunction:@"logout"];
 	
@@ -1039,19 +1039,19 @@
  **/
 - (void)isSignedInWithCompletion:(PLYCompletion)completion
 {
-    NSString *path = [self _functionPathForFunction:@"signedin"];
-    
-    
-    [self _performMethodCallWithPath:path
-                          parameters:nil
-                          completion:completion];
+	NSString *path = [self _functionPathForFunction:@"signedin"];
+	
+	
+	[self _performMethodCallWithPath:path
+								 parameters:nil
+								 completion:completion];
 }
 
 /**
  * Generates a new password for the user. The password will be send to the users email.
  **/
 - (void)requestNewPasswordForUserWithEmail:(NSString *)email
-                                completion:(PLYCompletion)completion{
+										  completion:(PLYCompletion)completion{
 	NSParameterAssert(email);
 	NSParameterAssert(completion);
 	
@@ -1064,7 +1064,7 @@
 
 /**
  Determines an image URL for the given PLYUser
-  */
+ */
 - (NSURL *)avatarImageURLForUser:(PLYUser *)user
 {
 	NSParameterAssert(user);
@@ -1072,7 +1072,7 @@
 	
 	NSString *function = [NSString stringWithFormat:@"/user/%@/avatar", user.Id];
 	NSString *path = [self _functionPathForFunction:function];
-
+	
 	return [self _methodURLForPath:path parameters:nil];
 }
 
@@ -1135,26 +1135,26 @@
 	
 	[self getUserByNickname:user.Id completion:^(id result, NSError *error) {
 		// UI elements might be KVO details, so we do this on the main thread
-		 DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-			 
-			 if (result && !error)
-			 {
-				 PLYUser *user = [self _entityByUpdatingCachedEntity:result];
-				 
-				 if (completion)
-				 {
-					 completion(user, nil);
-				 }
-				 
-				 return;
-			 }
-			 
-			 if (completion)
-			 {
-				 completion(result, error);
-			 }
-		 });
-	 }];
+		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+			
+			if (result && !error)
+			{
+				PLYUser *user = [self _entityByUpdatingCachedEntity:result];
+				
+				if (completion)
+				{
+					completion(user, nil);
+				}
+				
+				return;
+			}
+			
+			if (completion)
+			{
+				completion(result, error);
+			}
+		});
+	}];
 }
 
 
@@ -1175,7 +1175,7 @@
 	// Add the API key to each request.
 	NSAssert(_APIKey, @"Setting an API Key is required to perform requests. Use [[PLYServer sharedServer] setAPIKey:]");
 	[request setValue:_APIKey forHTTPHeaderField:@"API-KEY"];
-
+	
 	return request;
 }
 
@@ -1203,7 +1203,7 @@
 	
 	NSString *path = [self _functionPathForFunction:@"products"];
 	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:product];
-
+	
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:completion];
 }
 
@@ -1258,8 +1258,8 @@
 	NSString *path = [self _functionPathForFunction:function];
 	
 	[self _performMethodCallWithPath:path
-                          parameters:nil
-                          completion:completion];
+								 parameters:nil
+								 completion:completion];
 }
 
 /**
@@ -1281,7 +1281,7 @@
 - (NSURL *)URLForImage:(PLYImage *)image maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop
 {
 	NSParameterAssert(image);
-
+	
 	if ([image.fileId isEqualToString:@"EXTERNAL"])
 	{
 		return image.imageURL;
@@ -1337,16 +1337,70 @@
 	return [self _methodURLForPath:path parameters:parameters];
 }
 
+// new array returned as result in completion handler
+- (void)_uploadImagesWhereNecessary:(NSArray *)images forGTIN:(NSString *)GTIN completion:(PLYCompletion)completion
+{
+	// do it on background queue to not block the main thread or the NSURLSession thread
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+		
+		dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+		__block NSError *imageUploadError;
+		
+		NSMutableArray *uploadedImages = [NSMutableArray new];
+		
+		for (PLYUploadImage *image in images)
+		{
+			if ([image isKindOfClass:[PLYUploadImage class]])
+			{
+				[self uploadImageData:(id)image.imageData forGTIN:GTIN completion:^(id result, NSError *error) {
+					if (result)
+					{
+						// replace upload image with result
+						[uploadedImages addObject:result];
+					}
+					else
+					{
+						imageUploadError = error;
+					}
+					
+					dispatch_semaphore_signal(sema);
+				}];
+			}
+			else
+			{
+				[uploadedImages addObject:image];
+			}
+			
+			dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+			
+			if (imageUploadError)
+			{
+				completion(nil, imageUploadError);
+				return;
+			}
+		}
+		
+		id result = nil;
+		
+		if ([uploadedImages count])
+		{
+			result = [uploadedImages copy];
+		}
+		
+		completion(result, nil);
+	});
+}
+
 #pragma mark - Opines
 
 - (void) performSearchForOpineWithGTIN:(NSString *)gtin
-                          withLanguage:(NSString *)language
-                  fromUserWithNickname:(NSString *)nickname
-                        showFriendsOnly:(BOOL *)showFriendsOnly
-                               orderBy:(NSString *)orderBy
-                                  page:(NSUInteger)page
-                        recordsPerPage:(NSUInteger)rpp
-                            completion:(PLYCompletion)completion
+								  withLanguage:(NSString *)language
+						fromUserWithNickname:(NSString *)nickname
+							  showFriendsOnly:(BOOL *)showFriendsOnly
+										 orderBy:(NSString *)orderBy
+											 page:(NSUInteger)page
+								recordsPerPage:(NSUInteger)rpp
+									 completion:(PLYCompletion)completion
 {
 	NSParameterAssert(completion);
 	
@@ -1359,10 +1413,10 @@
 	if (language)       [parameters setObject:language forKey:@"language"];
 	if (nickname)       [parameters setObject:nickname forKey:@"nickname"];
 	
-    if (showFriendsOnly) [parameters setObject:@"true"   forKey:@"show_friends_only"];
-    else                [parameters setObject:@"false"   forKey:@"show_friends_only"];
+	if (showFriendsOnly) [parameters setObject:@"true"   forKey:@"show_friends_only"];
+	else                [parameters setObject:@"false"   forKey:@"show_friends_only"];
 	
-    if (orderBy)        [parameters setObject:orderBy  forKey:@"order_by"];
+	if (orderBy)        [parameters setObject:orderBy  forKey:@"order_by"];
 	if (page)           [parameters setObject:@(page)     forKey:@"page"];
 	if (rpp)            [parameters setObject:@(rpp)      forKey:@"records_per_page"];
 	
@@ -1378,58 +1432,23 @@
 	NSParameterAssert(completion);
 	
 	// first we need to upload all PLYUploadImage objects
-	
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+	[self _uploadImagesWhereNecessary:opine.images forGTIN:opine.GTIN completion:^(id result, NSError *error) {
 		
-		dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-		__block NSError *imageUploadError;
-
-		NSMutableArray *images = [NSMutableArray new];
-
-		for (PLYUploadImage *image in opine.images)
+		if (error)
 		{
-			if ([image isKindOfClass:[PLYUploadImage class]])
-			{
-				[self uploadImageData:(id)image.imageData forGTIN:opine.GTIN completion:^(id result, NSError *error) {
-					if (result)
-					{
-						// replace upload image with result
-						[images addObject:result];
-					}
-					else
-					{
-						imageUploadError = error;
-					}
-					
-					dispatch_semaphore_signal(sema);
-				}];
-			}
-			else
-			{
-				[images addObject:image];
-			}
-			
-			dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-			
-			if (imageUploadError)
-			{
-				completion(nil, imageUploadError);
-				return;
-			}
+			completion(nil, error);
+			return;
 		}
 		
-		// all images uploaded
-		if ([images count])
-		{
-			opine.images = images;
-		}
+		// at this point the images are all uploaded and turned into PLYImages
+		opine.images = result;
 		
 		NSString *function = @"opines";
 		NSString *path = [self _functionPathForFunction:function];
 		NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:opine];
 		
 		[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:completion];
-	});
+	}];
 }
 
 - (void)deleteOpine:(PLYOpine *)opine completion:(PLYCompletion)completion
@@ -1462,13 +1481,13 @@
  * Search for reviews.
  **/
 - (void) performSearchForReviewWithGTIN:(NSString *)gtin
-                           withLanguage:(NSString *)language
-                   fromUserWithNickname:(NSString *)nickname
-                             withRating:(float)rating
-                                orderBy:(NSString *)orderBy
-                                   page:(NSUInteger)page
-                         recordsPerPage:(NSUInteger)rpp
-                             completion:(PLYCompletion)completion
+									withLanguage:(NSString *)language
+						 fromUserWithNickname:(NSString *)nickname
+									  withRating:(float)rating
+										  orderBy:(NSString *)orderBy
+											  page:(NSUInteger)page
+								 recordsPerPage:(NSUInteger)rpp
+									  completion:(PLYCompletion)completion
 {
 	NSParameterAssert(completion);
 	
@@ -1512,7 +1531,7 @@
  * ATTENTION: Login required
  **/
 - (void) createProductList:(PLYList *)list
-                completion:(PLYCompletion)completion
+					 completion:(PLYCompletion)completion
 {
 	NSParameterAssert(list);
 	NSParameterAssert(completion);
@@ -1529,10 +1548,10 @@
  * ATTENTION: Login required
  **/
 - (void) performSearchForProductListFromUser:(PLYUser *)user
-                                 andListType:(NSString *)listType
-                                        page:(NSUInteger)page
-                              recordsPerPage:(NSUInteger)rpp
-                                  completion:(PLYCompletion)completion{
+											andListType:(NSString *)listType
+													 page:(NSUInteger)page
+										recordsPerPage:(NSUInteger)rpp
+											 completion:(PLYCompletion)completion{
 	
 	NSParameterAssert(completion);
 	
@@ -1555,7 +1574,7 @@
  * ATTENTION: Login required
  **/
 - (void) getProductListWithId:(NSString *)listId
-                   completion:(PLYCompletion)completion{
+						 completion:(PLYCompletion)completion{
 	NSParameterAssert(listId);
 	NSParameterAssert(completion);
 	
@@ -1571,7 +1590,7 @@
  * ATTENTION: Login required
  **/
 - (void) updateProductList:(PLYList *)list
-                completion:(PLYCompletion)completion{
+					 completion:(PLYCompletion)completion{
 	NSParameterAssert(list);
 	NSParameterAssert(list.Id);
 	NSParameterAssert(completion);
@@ -1589,7 +1608,7 @@
  * ATTENTION: Login required
  **/
 - (void) deleteProductListWithId:(NSString *)listId
-                      completion:(PLYCompletion)completion{
+							 completion:(PLYCompletion)completion{
 	NSParameterAssert(listId);
 	NSParameterAssert(completion);
 	
@@ -1606,8 +1625,8 @@
  * ATTENTION: Login required
  **/
 - (void) addOrReplaceListItem:(PLYListItem *)listItem
-                 toListWithId:(NSString *)listId
-                   completion:(PLYCompletion)completion{
+					  toListWithId:(NSString *)listId
+						 completion:(PLYCompletion)completion{
 	NSParameterAssert(listItem);
 	NSParameterAssert(listItem.GTIN);
 	NSParameterAssert(listId);
@@ -1644,8 +1663,8 @@
  * ATTENTION: Login required
  **/
 - (void) shareProductListWithId:(NSString *)listId
-                     withUserId:(NSString *)userId
-                     completion:(PLYCompletion)completion{
+							withUserId:(NSString *)userId
+							completion:(PLYCompletion)completion{
 	NSParameterAssert(userId);
 	NSParameterAssert(listId);
 	NSParameterAssert(completion);
@@ -1661,8 +1680,8 @@
  * ATTENTION: Login required
  **/
 - (void) unshareProductListWithId:(NSString *)listId
-                       withUserId:(NSString *)userId
-                       completion:(PLYCompletion)completion{
+							  withUserId:(NSString *)userId
+							  completion:(PLYCompletion)completion{
 	NSParameterAssert(userId);
 	NSParameterAssert(listId);
 	NSParameterAssert(completion);
@@ -1679,7 +1698,7 @@
  * The searchText can contain the email, nickname, first name and last name of the user.
  **/
 - (void) performUserSearch:(NSString *)searchText
-                completion:(PLYCompletion)completion
+					 completion:(PLYCompletion)completion
 {
 	NSParameterAssert(searchText);
 	NSParameterAssert(completion);
@@ -1699,9 +1718,9 @@
  * ATTENTION: Login required
  **/
 - (void) getFollowerFromUser:(NSString *)nickname
-                        page:(NSUInteger)page
-              recordsPerPage:(NSUInteger)rpp
-                  completion:(PLYCompletion)completion{
+								page:(NSUInteger)page
+				  recordsPerPage:(NSUInteger)rpp
+						completion:(PLYCompletion)completion{
 	NSParameterAssert(nickname);
 	NSParameterAssert(completion);
 	
@@ -1721,8 +1740,8 @@
  * ATTENTION: Login required
  **/
 - (void) getFollowingFromUser:(NSString *)nickname
-                         page:(NSUInteger)page
-               recordsPerPage:(NSUInteger)rpp
+								 page:(NSUInteger)page
+					recordsPerPage:(NSUInteger)rpp
 						 completion:(PLYCompletion)completion{
 	NSParameterAssert(nickname);
 	NSParameterAssert(completion);
@@ -1847,7 +1866,7 @@
 					[tmpArray addObject:user];
 				}
 			}
-
+			
 			result = [tmpArray copy];
 		}
 		
@@ -1856,7 +1875,7 @@
 			wrappedCompletion(result, error);
 		}
 	};
-
+	
 	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:nil completion:ownCompletion];
 }
 
@@ -1909,7 +1928,7 @@
  * Get specific user with nickname.
  **/
 - (void)  getUserByNickname:(NSString *)nickname
-                 completion:(PLYCompletion)completion{
+					  completion:(PLYCompletion)completion{
 	NSParameterAssert(nickname);
 	NSParameterAssert(completion);
 	
@@ -2083,9 +2102,9 @@
 // lazy initializer for URL session
 - (NSURLSession *)session {
 	if (!_session) {
-        // Set save cookies policy
-        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
-        
+		// Set save cookies policy
+		[[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
+		
 		_session = [NSURLSession sessionWithConfiguration:_configuration];
 	}
 	

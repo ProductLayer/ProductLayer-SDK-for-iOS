@@ -27,6 +27,8 @@
 		A71918101A1B5B1B002C2D76 /* PLYContentsDidChangeValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A719180D1A1B5B1B002C2D76 /* PLYContentsDidChangeValidator.m */; };
 		A71C2BBB1843AD9B00B77DB4 /* libDTDownload_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A71C2B9D1843AD8D00B77DB4 /* libDTDownload_iOS.a */; };
 		A71C2BBD1843ADA600B77DB4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71C2BBC1843ADA600B77DB4 /* CoreData.framework */; };
+		A731FE7B1A63DAC500D341FC /* PLYUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7657AF21A630B9000CBDBD9 /* PLYUploadImage.m */; };
+		A731FE9B1A63DAC700D341FC /* PLYUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7657AF21A630B9000CBDBD9 /* PLYUploadImage.m */; };
 		A73803341A28E91800011D9C /* PLYTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = A73803321A28E91800011D9C /* PLYTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A73803351A28E91800011D9C /* PLYTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A73803331A28E91800011D9C /* PLYTextView.m */; };
 		A73803361A28E91800011D9C /* PLYTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A73803331A28E91800011D9C /* PLYTextView.m */; };
@@ -2287,6 +2289,7 @@
 			files = (
 				A7590B0E19ED77B40084EBCA /* PLYUserNameValidator.m in Sources */,
 				A7590B2219ED77B80084EBCA /* PLYReview.m in Sources */,
+				A731FE7B1A63DAC500D341FC /* PLYUploadImage.m in Sources */,
 				A764789B1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */,
 				A762933A1A5FF1CC00208A27 /* PLYSocialAuthWebViewController.m in Sources */,
 				A7590B1C19ED77B80084EBCA /* PLYOpine.m in Sources */,
@@ -2448,6 +2451,7 @@
 				A7EA07111A2B139C00B61CCE /* PLYListItem.m in Sources */,
 				A7EA07191A2B139C00B61CCE /* PLYReview.m in Sources */,
 				A75CF75C1A30B4BD007E30FC /* PLYUserAvatar.m in Sources */,
+				A731FE9B1A63DAC700D341FC /* PLYUploadImage.m in Sources */,
 				A7EA070F1A2B139C00B61CCE /* PLYList.m in Sources */,
 				A7EA07091A2B139C00B61CCE /* PLYErrorMessage.m in Sources */,
 				A7EA071F1A2B139C00B61CCE /* PLYProductCategory.m in Sources */,
