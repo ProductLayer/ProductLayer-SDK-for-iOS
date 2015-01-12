@@ -115,7 +115,7 @@
 																				toItem:_frameView
 																			attribute:NSLayoutAttributeRight
 																		  multiplier:1.0
-																			 constant:5]];
+																			 constant:-5]];
 
 	[_frameView addConstraint:[NSLayoutConstraint constraintWithItem:_textView attribute:NSLayoutAttributeTop
 																			relatedBy:NSLayoutRelationEqual
@@ -761,7 +761,7 @@
 {
 	_textView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
 	_characterRemainingLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
-	_productNameLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+	_productNameLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
 	_addressLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
 	_photoButton.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
 }
