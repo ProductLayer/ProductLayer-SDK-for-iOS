@@ -2131,11 +2131,10 @@
 #pragma mark - Properties
 
 // lazy initializer for URL session
-- (NSURLSession *)session {
-	if (!_session) {
-		// Set save cookies policy
-		[[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
-		
+- (NSURLSession *)session
+{
+	if (!_session)
+	{
 		_session = [NSURLSession sessionWithConfiguration:_configuration];
 	}
 	
