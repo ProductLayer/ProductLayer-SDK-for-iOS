@@ -105,4 +105,9 @@
  */
 @property (nonatomic, copy) NSURL *sourceURL;
 
+/**
+ Other languages in which the receiver is localized
+ */
+@property (nonatomic, copy) NSArray *additionalLanguages;
+
 @end

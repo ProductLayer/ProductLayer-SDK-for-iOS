@@ -109,6 +109,10 @@
 	{
 		[self setValue:value forKey:@"nutritious"];
 	}
+	else if ([key isEqualToString:@"pl-additional-lng"])
+	{
+		self.additionalLanguages = value;
+	}
 	else
 	{
 		[super setValue:value forKey:key];
@@ -197,6 +201,11 @@
 		dict[@"pl-prod-src"] = [self.sourceURL absoluteString];
 	}
 	
+	if (_additionalLanguages)
+	{
+		dict[@"pl-additional-lng"] = _additionalLanguages;
+	}
+	
 	// return immutable
 	return [dict copy];
 }
@@ -222,6 +231,7 @@
 	self.nutritious = entity.nutritious;
 	self.sourceURL = entity.sourceURL;
 	self.defaultImage = entity.defaultImage;
+	self.additionalLanguages = entity.additionalLanguages;
 }
 
 @end
