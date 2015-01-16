@@ -28,6 +28,16 @@ extern NSString * const PLYServerDidDeleteEntityNotification;
 extern NSString * const PLYServerDidDeleteEntityKey;
 
 /**
+ Notification for when a list has been modified
+ */
+extern NSString * const PLYServerDidModifyListNotification;
+
+/**
+ Key in the info dictionary for PLYServerDidModifyListNotification
+ */
+extern NSString * const PLYServerDidModifyListKey;
+
+/**
  User Defaults Keys
 */
 extern NSString * const PLYUserDefaultOpineComposerIncludeLocation;

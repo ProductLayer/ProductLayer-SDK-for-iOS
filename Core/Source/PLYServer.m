@@ -1652,7 +1652,7 @@
  * Replaces or add's the product to the list if it doesn't exist.
  * ATTENTION: Login required
  **/
-- (void) addOrReplaceListItem:(PLYListItem *)listItem
+- (void)addOrReplaceListItem:(PLYListItem *)listItem
 					  toListWithId:(NSString *)listId
 						 completion:(PLYCompletion)completion{
 	NSParameterAssert(listItem);
@@ -1664,7 +1664,20 @@
 	NSString *path = [self _functionPathForFunction:function];
 	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:listItem];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:payload completion:completion];
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		
+		if (!error || [error code]==404)
+		{
+			// broadcast info that this list was modified
+			
+			NSDictionary *userInfo = @{PLYServerDidModifyListKey:listId};
+			[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidModifyListNotification object:self userInfo:userInfo];
+		}
+		
+		completion(result, error);
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:payload completion:wrappedCompletion];
 }
 
 /**
@@ -1681,7 +1694,20 @@
 	NSString *function = [NSString stringWithFormat:@"list/%@/product/%@", listId,gtin];
 	NSString *path = [self _functionPathForFunction:function];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil completion:completion];
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		
+		if (!error || [error code]==404)
+		{
+			// broadcast info that this list was modified
+			
+			NSDictionary *userInfo = @{PLYServerDidModifyListKey:listId};
+			[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidModifyListNotification object:self userInfo:userInfo];
+		}
+		
+		completion(result, error);
+	};
+
+	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil completion:wrappedCompletion];
 }
 
 #pragma mark - List Sharing
