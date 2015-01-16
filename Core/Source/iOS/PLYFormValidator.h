@@ -42,7 +42,7 @@
 /**
  A delegate (e.g. the form) to inform when the validty state changed
  */
-@property (nonatomic, weak) id <PLYFormValidationDelegate> delegate;
+@property (nonatomic, weak) IBOutlet id<PLYFormValidationDelegate> delegate;
 
 
 /**

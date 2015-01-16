@@ -398,6 +398,11 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 - (void)performSearchForProductListFromUser:(PLYUser *)user andListType:(NSString *)listType page:(NSUInteger)page recordsPerPage:(NSUInteger)rpp completion:(PLYCompletion)completion;
 
 /**
+ Gets a user's lists
+ */
+- (void)listsOfUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion;
+
+/**
  Retrieves a product list by ID
  @param listId The identifier of the list to retrieve
  @param completion The completion handler for the request

@@ -17,7 +17,7 @@
 /**
  An object that validates the text field contents after every change
  */
-@property (nonatomic, strong) PLYFormValidator *validator;
+@property (nonatomic, strong) IBOutlet PLYFormValidator *validator;
 
 /**
  The language last used for input

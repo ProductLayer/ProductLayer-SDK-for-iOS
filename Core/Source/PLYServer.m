@@ -1585,6 +1585,17 @@
 	[self _performMethodCallWithPath:path parameters:parameters completion:completion];
 }
 
+- (void)listsOfUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion
+{
+	NSParameterAssert(user);
+	NSParameterAssert(completion);
+	
+	NSString *function = [NSString stringWithFormat:@"/user/%@/lists", user.Id];
+	NSString *path = [self _functionPathForFunction:function];
+
+	[self _performMethodCallWithPath:path parameters:nil completion:completion];
+}
+
 /**
  * Request a product list by id.
  * The product list can only be requested if the user is the owner, the list is shared with the user or if the list is public.
