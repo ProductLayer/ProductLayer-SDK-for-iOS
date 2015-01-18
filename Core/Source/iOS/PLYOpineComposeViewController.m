@@ -960,7 +960,9 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-	[self _updateSocialButtons];
+	DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+		[self _updateSocialButtons];
+	});
 }
 
 - (void)_didChangePreferredContentSize:(NSNotification *)notification
