@@ -399,6 +399,9 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 
 /**
  Gets a user's lists
+ @param user The PLYUser to retrieve the lists for
+ @param options options to restrict the lists
+ @param completion The completion handler for the request
  */
 - (void)listsOfUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion;
 
