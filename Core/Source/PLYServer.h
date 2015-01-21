@@ -68,6 +68,14 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 
 
 /**
+ Searches for products with a query string
+ @param query The text to search for
+ @param options Search options
+ @param completion The completion handler for the request
+ */
+- (void)searchForProductsMatchingQuery:(NSString *)query options:(NSDictionary *)options completion:(PLYCompletion)completion;
+
+/**
  @name Getting more Information about Products
  */
 

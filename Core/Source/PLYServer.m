@@ -895,6 +895,20 @@
 								 completion:completion];
 }
 
+
+- (void)searchForProductsMatchingQuery:(NSString *)query options:(NSDictionary *)options completion:(PLYCompletion)completion
+{
+	NSString *path = [self _functionPathForFunction:@"products"];
+	
+	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
+
+	parameters[@"query"] = [query stringByURLEncoding];
+	
+	[self _performMethodCallWithPath:path
+								 parameters:parameters
+								 completion:completion];
+}
+
 #pragma mark - Products
 
 /**
