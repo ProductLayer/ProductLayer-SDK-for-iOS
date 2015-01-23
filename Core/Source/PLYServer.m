@@ -781,12 +781,12 @@
 		
 		if ([cachedEntity isKindOfClass:[PLYEntity class]])
 		{
-			if (cachedEntity.createdBy)
+			if (cachedEntity.createdBy && ![cachedEntity isEqual:cachedEntity.createdBy])
 			{
 				cachedEntity.createdBy = [self _entityByUpdatingCachedEntity:cachedEntity.createdBy];
 			}
 			
-			if (cachedEntity.updatedBy)
+			if (cachedEntity.updatedBy && ![cachedEntity isEqual:cachedEntity.updatedBy])
 			{
 				cachedEntity.updatedBy = [self _entityByUpdatingCachedEntity:cachedEntity.updatedBy];
 			}
