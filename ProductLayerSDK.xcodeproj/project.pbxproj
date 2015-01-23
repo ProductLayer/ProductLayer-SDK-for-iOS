@@ -241,6 +241,14 @@
 		A7EA08411A2B341300B61CCE /* DTFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7EA08351A2B31B500B61CCE /* DTFoundation.framework */; };
 		A7EA08441A2B377300B61CCE /* DTFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7EA08351A2B31B500B61CCE /* DTFoundation.framework */; };
 		A7EA08451A2B378F00B61CCE /* DTFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A7EA08351A2B31B500B61CCE /* DTFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A7EB72731A72B42300FFD4CC /* PLYProblemReport.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EB72711A72B42300FFD4CC /* PLYProblemReport.h */; };
+		A7EB72741A72B42300FFD4CC /* PLYProblemReport.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EB72711A72B42300FFD4CC /* PLYProblemReport.h */; };
+		A7EB72751A72B42300FFD4CC /* PLYProblemReport.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EB72721A72B42300FFD4CC /* PLYProblemReport.m */; };
+		A7EB72761A72B42300FFD4CC /* PLYProblemReport.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EB72721A72B42300FFD4CC /* PLYProblemReport.m */; };
+		A7EB72771A72B42300FFD4CC /* PLYProblemReport.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EB72721A72B42300FFD4CC /* PLYProblemReport.m */; };
+		A7EB727B1A72B43F00FFD4CC /* PLYReportProblemViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EB72791A72B43F00FFD4CC /* PLYReportProblemViewController.h */; };
+		A7EB727C1A72B43F00FFD4CC /* PLYReportProblemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EB727A1A72B43F00FFD4CC /* PLYReportProblemViewController.m */; };
+		A7EB727D1A72B43F00FFD4CC /* PLYReportProblemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EB727A1A72B43F00FFD4CC /* PLYReportProblemViewController.m */; };
 		A7EE55A21A121C8300DD55FE /* PLYCategoryPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EE55A01A121C8300DD55FE /* PLYCategoryPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7EE55A31A121C8300DD55FE /* PLYCategoryPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE55A11A121C8300DD55FE /* PLYCategoryPickerViewController.m */; };
 		A7EE55A41A121C8300DD55FE /* PLYCategoryPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE55A11A121C8300DD55FE /* PLYCategoryPickerViewController.m */; };
@@ -812,6 +820,10 @@
 		A7EA07281A2B161400B61CCE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		A7EA072A1A2B164E00B61CCE /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
 		A7EA072E1A2B197300B61CCE /* libDTFoundation_Mac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libDTFoundation_Mac.a; path = Externals/DTDownload/Externals/DTFoundation/build/Debug/libDTFoundation_Mac.a; sourceTree = "<group>"; };
+		A7EB72711A72B42300FFD4CC /* PLYProblemReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYProblemReport.h; sourceTree = "<group>"; };
+		A7EB72721A72B42300FFD4CC /* PLYProblemReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYProblemReport.m; sourceTree = "<group>"; };
+		A7EB72791A72B43F00FFD4CC /* PLYReportProblemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYReportProblemViewController.h; sourceTree = "<group>"; };
+		A7EB727A1A72B43F00FFD4CC /* PLYReportProblemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYReportProblemViewController.m; sourceTree = "<group>"; };
 		A7EE55A01A121C8300DD55FE /* PLYCategoryPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYCategoryPickerViewController.h; sourceTree = "<group>"; };
 		A7EE55A11A121C8300DD55FE /* PLYCategoryPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYCategoryPickerViewController.m; sourceTree = "<group>"; };
 		C92A6255198A1B3900997DDC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -1098,6 +1110,7 @@
 		A76D3F58198650770032FE59 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				A7EB72781A72B43400FFD4CC /* Problem Reports */,
 				A75CF7471A30B48D007E30FC /* Barcode Scanner */,
 				A77665921A1B3673008AB88C /* Input */,
 				A76D3F65198650770032FE59 /* UIViewController+ProductLayer.h */,
@@ -1337,6 +1350,15 @@
 				A7A38CD11A2B4FFD005D8395 /* PLYFunctions.m */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		A7EB72781A72B43400FFD4CC /* Problem Reports */ = {
+			isa = PBXGroup;
+			children = (
+				A7EB72791A72B43F00FFD4CC /* PLYReportProblemViewController.h */,
+				A7EB727A1A72B43F00FFD4CC /* PLYReportProblemViewController.m */,
+			);
+			name = "Problem Reports";
 			sourceTree = "<group>";
 		};
 		A7EE559E1A121C3300DD55FE /* Categories */ = {
@@ -1630,6 +1652,8 @@
 				A7B4873A1987CA7800FA8F83 /* PLYOpine.m */,
 				C9D31F6C190A742500C91A08 /* PLYPackaging.h */,
 				C9D31F6D190A742500C91A08 /* PLYPackaging.m */,
+				A7EB72711A72B42300FFD4CC /* PLYProblemReport.h */,
+				A7EB72721A72B42300FFD4CC /* PLYProblemReport.m */,
 				C9D31F6E190A742500C91A08 /* PLYProduct.h */,
 				C9D31F6F190A742500C91A08 /* PLYProduct.m */,
 				C9D31F76190ABE0E00C91A08 /* PLYReview.h */,
@@ -1657,6 +1681,7 @@
 			files = (
 				A7590B2B19ED77BD0084EBCA /* ProductLayer.h in Headers */,
 				A7590B1719ED77B80084EBCA /* PLYList.h in Headers */,
+				A7EB72731A72B42300FFD4CC /* PLYProblemReport.h in Headers */,
 				A7590B0B19ED77B40084EBCA /* PLYTextField.h in Headers */,
 				A7590B0919ED77B40084EBCA /* PLYFormValidator.h in Headers */,
 				A76478991A18A8830000500C /* PLYSearchableTableViewController.h in Headers */,
@@ -1694,6 +1719,7 @@
 				A7590B1D19ED77B80084EBCA /* PLYPackaging.h in Headers */,
 				A7590B0119ED77B40084EBCA /* PLYLostPasswordViewController.h in Headers */,
 				A75CF7811A30DF4E007E30FC /* PLYEntities.h in Headers */,
+				A7EB727B1A72B43F00FFD4CC /* PLYReportProblemViewController.h in Headers */,
 				A7CD959219FA821E008E3A41 /* PLYOpineComposeViewController.h in Headers */,
 				A7590B0319ED77B40084EBCA /* PLYSignUpViewController.h in Headers */,
 				A701C4FA1A1F55580013CB8D /* PLYBrandPickerViewController.h in Headers */,
@@ -1706,6 +1732,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7EA070C1A2B139C00B61CCE /* PLYImage.h in Headers */,
+				A7EB72741A72B42300FFD4CC /* PLYProblemReport.h in Headers */,
 				A7EA071E1A2B139C00B61CCE /* PLYProductCategory.h in Headers */,
 				A7EA070E1A2B139C00B61CCE /* PLYList.h in Headers */,
 				A75CF74F1A30B4BD007E30FC /* PLYBrand.h in Headers */,
@@ -2295,10 +2322,12 @@
 				A7590B1C19ED77B80084EBCA /* PLYOpine.m in Sources */,
 				A73803361A28E91800011D9C /* PLYTextView.m in Sources */,
 				A7590B2D19ED77BD0084EBCA /* PLYConstants.m in Sources */,
+				A7EB727D1A72B43F00FFD4CC /* PLYReportProblemViewController.m in Sources */,
 				A77665991A1B369A008AB88C /* PLYGuidedInputViewController.m in Sources */,
 				A7590B0019ED77B40084EBCA /* PLYLoginViewController.m in Sources */,
 				A7A38CD51A2B4FFD005D8395 /* PLYFunctions.m in Sources */,
 				A75CF75B1A30B4BD007E30FC /* PLYUserAvatar.m in Sources */,
+				A7EB72761A72B42300FFD4CC /* PLYProblemReport.m in Sources */,
 				A7590B1619ED77B80084EBCA /* PLYImage.m in Sources */,
 				A7590B0619ED77B40084EBCA /* UIViewController+ProductLayer.m in Sources */,
 				A75CF7431A30B48A007E30FC /* PLYAVFoundationFunctions.m in Sources */,
@@ -2410,6 +2439,7 @@
 				C97FAA18191CCA3400144D2C /* PLYErrorMessage.m in Sources */,
 				A7A38CD41A2B4FFD005D8395 /* PLYFunctions.m in Sources */,
 				A75CF75A1A30B4BD007E30FC /* PLYUserAvatar.m in Sources */,
+				A7EB72751A72B42300FFD4CC /* PLYProblemReport.m in Sources */,
 				A7B4873B1987CA7800FA8F83 /* PLYOpine.m in Sources */,
 				C98CD2691910E0D70035647C /* PLYReview.m in Sources */,
 				A75CF7421A30B48A007E30FC /* PLYAVFoundationFunctions.m in Sources */,
@@ -2422,6 +2452,7 @@
 				C98CD26A1910E0D70035647C /* PLYList.m in Sources */,
 				C97FAA1C191CCA4D00144D2C /* PLYErrorResponse.m in Sources */,
 				A76D3F68198650770032FE59 /* PLYFormValidator.m in Sources */,
+				A7EB727C1A72B43F00FFD4CC /* PLYReportProblemViewController.m in Sources */,
 				A75CF7451A30B48A007E30FC /* PLYVideoPreviewView.m in Sources */,
 				A7CD959319FA821E008E3A41 /* PLYOpineComposeViewController.m in Sources */,
 				C98CD26B1910E0D70035647C /* PLYListItem.m in Sources */,
@@ -2458,6 +2489,7 @@
 				A7EA07071A2B139C00B61CCE /* PLYEntity.m in Sources */,
 				A75CF7571A30B4BD007E30FC /* PLYBrandOwner.m in Sources */,
 				A7EA072C1A2B176D00B61CCE /* PLYServer.m in Sources */,
+				A7EB72771A72B42300FFD4CC /* PLYProblemReport.m in Sources */,
 				A7EA07151A2B139C00B61CCE /* PLYPackaging.m in Sources */,
 				A7EA070D1A2B139C00B61CCE /* PLYImage.m in Sources */,
 				A7EA070B1A2B139C00B61CCE /* PLYErrorResponse.m in Sources */,

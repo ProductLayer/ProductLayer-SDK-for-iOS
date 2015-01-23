@@ -108,3 +108,17 @@
 
 /* Option to delete all opine attachments */
 "OPINE_DELETE_IMAGES_ACTION" = "Reset attached images";
+
+
+// ------- PLYReportProblemViewController
+
+/* Title of report problem composer */
+"REPORT_PROBLEM_TITLE" = "Report Problem with %@";
+
+/* Alert title when creating of problem report fails */
+"PLY_REPORT_FAILED_TITLE" = "Sending of problem report failed";
+
+// the kinds of items that can be reported
+"REPORT_TYPE_IMAGE" = "Image";
+"REPORT_TYPE_PRODUCT" = "Product";
+"REPORT_TYPE_USER" = "User";

@@ -2215,6 +2215,71 @@
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:ownCompletion];
 }
 
+#pragma mark - Problem Reports
+
+- (void)createProblemReport:(PLYProblemReport *)report completion:(PLYCompletion)completion
+{
+	NSParameterAssert(report);
+	NSParameterAssert(completion);
+	
+	/*
+	NSString *entityType;
+	if ([report.entity isKindOfClass:[PLYImage class]])
+	{
+		entityType = @"image";
+	}
+	else if ([report.entity isKindOfClass:[PLYProduct class]])
+	{
+		entityType = @"products";
+	}
+	else if ([report.entity isKindOfClass:[PLYOpine class]])
+	{
+		entityType = @"opine";
+	}
+	else if ([report.entity isKindOfClass:[PLYReview class]])
+	{
+		entityType = @"review";
+	}
+	
+	NSAssert(entityType!=nil, @"Can't report issue with this entity.");
+	*/
+	
+	NSString *function;
+	NSDictionary *parameters;
+ 
+	if ([report.entity isKindOfClass:[PLYUser class]])
+	{
+		function = @"users/report_problem";
+		parameters = @{@"user_id": report.entity.Id};
+	}
+	else if ([report.entity isKindOfClass:[PLYProduct class]])
+	{
+		function = @"products/report_problem";
+		parameters = @{@"product_id": report.entity.Id};
+	}
+	else if ([report.entity isKindOfClass:[PLYUserAvatar class]])
+	{
+		function = @"users/report_problem";
+		PLYUserAvatar *avatar = (PLYUserAvatar *)report.entity;
+		PLYUser *user = avatar.createdBy;
+		parameters = @{@"user_id": user.Id};
+	}
+	else if ([report.entity isKindOfClass:[PLYImage class]])
+	{
+		function = @"images/report_problem";
+		parameters = @{@"image_id": report.entity.Id};
+	}
+	else
+	{
+		NSAssert(NO, @"Can't report issue on such an entity");
+	}
+	
+	NSString *path = [self _functionPathForFunction:function];
+	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:report];
+
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:parameters payload:payload completion:completion];
+}
+
 #pragma mark - Notifications
 
 - (void)_didEnterForeground:(NSNotification *)notification

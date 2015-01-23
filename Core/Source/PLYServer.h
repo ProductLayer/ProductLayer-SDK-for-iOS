@@ -7,22 +7,12 @@
 //
 
 #import "PLYCompatibility.h"
+#import "PLYEntities.h"
 
 /**
  Completion handler for ProductLayer API calls
  */
 typedef void (^PLYCompletion)(id result, NSError *error);
-
-// String Constants
-
-@class PLYImage;
-@class PLYList;
-@class PLYListItem;
-@class PLYOpine;
-@class PLYProduct;
-@class PLYReview;
-@class PLYUser;
-@class PLYVotableEntity;
 
 /**
  Wrapper for the ProductLayer API
@@ -548,6 +538,13 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 						 options:(NSDictionary *)options
                 completion:(PLYCompletion)completion;
 
+/**
+ @name Reporting Issues
+ */
 
+/**
+ Reports a problem with a given entity
+ */
+- (void)createProblemReport:(PLYProblemReport *)report completion:(PLYCompletion)completion;
 
 @end

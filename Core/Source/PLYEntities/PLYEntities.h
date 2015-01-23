@@ -12,6 +12,7 @@
 #import "PLYBrandOwner.h"
 #import "PLYImage.h"
 #import "PLYOpine.h"
+#import "PLYProblemReport.h"
 #import "PLYProduct.h"
 #import "PLYProductCategory.h"
 #import "PLYPackaging.h"
