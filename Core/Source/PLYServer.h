@@ -476,10 +476,10 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 
 /**
  Search for a user by name
- @param searchText The text to search for
+ @param query The text to search for
  @param completion The completion handler for the request
  */
-- (void)performUserSearch:(NSString *)searchText completion:(PLYCompletion)completion;
+- (void)searchForUsersMatchingQuery:(NSString *)query completion:(PLYCompletion)completion;
 
 /**
  Retrieves a user by nickname

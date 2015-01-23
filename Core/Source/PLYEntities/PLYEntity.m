@@ -220,7 +220,19 @@ NSArray *PLYAllEntityClasses()
 	
 	if (_createdBy)
 	{
-		dict[@"pl-created-by"] = [_createdBy dictionaryRepresentation];
+		if (_createdBy == self)
+		{
+			NSDictionary *ref = [_createdBy objectReference];
+			
+			if (ref)
+			{
+				dict[@"pl-created-by"] = ref;
+			}
+		}
+		else
+		{
+			dict[@"pl-created-by"] = [_createdBy dictionaryRepresentation];
+		}
 	}
 	
 	if (_createdTime)
@@ -230,7 +242,19 @@ NSArray *PLYAllEntityClasses()
 	
 	if (_updatedBy)
 	{
-		dict[@"pl-upd-by"] = [_updatedBy dictionaryRepresentation];
+		if (_createdBy == self)
+		{
+			NSDictionary *ref = [_updatedBy objectReference];
+			
+			if (ref)
+			{
+				dict[@"pl-created-by"] = ref;
+			}
+		}
+		else
+		{
+			dict[@"pl-upd-by"] = [_updatedBy dictionaryRepresentation];
+		}
 	}
 	
 	if (_updatedTime)

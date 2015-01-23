@@ -203,7 +203,11 @@
 	self.following = entity.following;
 	self.followed = entity.followed;
 	self.socialConnections = entity.socialConnections;
-	self.avatar = entity.avatar;
+	
+	if (entity.avatar)
+	{
+		self.avatar = entity.avatar;
+	}
 }
 
 @end

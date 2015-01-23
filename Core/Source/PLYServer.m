@@ -441,6 +441,8 @@
 												{
 													id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
 													
+													NSLog(@"%@", jsonObject);
+													
 													// Try to parse the json object
 													if ([jsonObject isKindOfClass:[NSArray class]])
 													{
@@ -738,6 +740,12 @@
 	
 	if (cachedEntity)
 	{
+		if (cachedEntity == entity)
+		{
+			// cannot update from myself
+			return entity;
+		}
+		
 		// only update if the new entity is not a stub
 		if (entity.Class && entity.version >= cachedEntity.version)
 		{
@@ -775,8 +783,15 @@
 		
 		if ([cachedEntity isKindOfClass:[PLYEntity class]])
 		{
-			cachedEntity.createdBy = [self _entityByUpdatingCachedEntity:cachedEntity.createdBy];
-			cachedEntity.updatedBy = [self _entityByUpdatingCachedEntity:cachedEntity.updatedBy];
+			if (cachedEntity.createdBy)
+			{
+				cachedEntity.createdBy = [self _entityByUpdatingCachedEntity:cachedEntity.createdBy];
+			}
+			
+			if (cachedEntity.updatedBy)
+			{
+				cachedEntity.updatedBy = [self _entityByUpdatingCachedEntity:cachedEntity.updatedBy];
+			}
 		}
 		
 		// replace products with cached versions
@@ -901,12 +916,28 @@
 	NSString *path = [self _functionPathForFunction:@"products"];
 	
 	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
-
 	parameters[@"query"] = [query stringByURLEncoding];
 	
-	[self _performMethodCallWithPath:path
-								 parameters:parameters
-								 completion:completion];
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		
+		if ([error code] == 404)
+		{
+			error = nil;
+			result = @[];
+		}
+		
+		if (result)
+		{
+			result = [self _arrayOfUpdatedCachedEntities:result];
+		}
+		
+		if (completion)
+		{
+			completion(result, error);
+		}
+	};
+	
+	[self _performMethodCallWithPath:path parameters:parameters completion:wrappedCompletion];
 }
 
 #pragma mark - Products
@@ -1765,20 +1796,35 @@
  * Search for a user with a simple text search.
  * The searchText can contain the email, nickname, first name and last name of the user.
  **/
-- (void) performUserSearch:(NSString *)searchText
-					 completion:(PLYCompletion)completion
+- (void)searchForUsersMatchingQuery:(NSString *)query completion:(PLYCompletion)completion
 {
-	NSParameterAssert(searchText);
+	NSParameterAssert(query);
 	NSParameterAssert(completion);
 	
 	NSString *function = @"users";
 	NSString *path = [self _functionPathForFunction:function];
+	NSDictionary *parameters = @{@"query": query};
 	
-	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		
+		if ([error code] == 404)
+		{
+			error = nil;
+			result = @[];
+		}
+		
+		if (result)
+		{
+			result = [self _arrayOfUpdatedCachedEntities:result];
+		}
+		
+		if (completion)
+		{
+			completion(result, error);
+		}
+	};
 	
-	if (searchText)       [parameters setObject:searchText     forKey:@"query"];
-	
-	[self _performMethodCallWithPath:path parameters:parameters completion:completion];
+	[self _performMethodCallWithPath:path parameters:parameters completion:wrappedCompletion];
 }
 
 /**
@@ -1846,6 +1892,9 @@
 			[user setValue:@(YES) forKey:@"followed"];
 			[user setValue:@(user.followerCount+1) forKey:@"followerCount"];
 			
+			// update cached object
+			[self _entityByUpdatingCachedEntity:user];
+			
 			// update logged in user
 			if ([result isEqual:_loggedInUser])
 			{
@@ -1883,6 +1932,9 @@
 			// update user object
 			[user setValue:@(NO) forKey:@"followed"];
 			[user setValue:@(user.followerCount-1) forKey:@"followerCount"];
+			
+			// update cached object
+			[self _entityByUpdatingCachedEntity:user];
 			
 			// update logged in user
 			if ([result isEqual:_loggedInUser])
