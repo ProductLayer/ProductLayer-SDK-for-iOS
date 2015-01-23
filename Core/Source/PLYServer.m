@@ -441,8 +441,6 @@
 												{
 													id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
 													
-													NSLog(@"%@", jsonObject);
-													
 													// Try to parse the json object
 													if ([jsonObject isKindOfClass:[NSArray class]])
 													{
