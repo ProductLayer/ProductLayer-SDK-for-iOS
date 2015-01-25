@@ -2258,6 +2258,28 @@
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:parameters payload:payload completion:completion];
 }
 
+#pragma mark - Working with Categories
+
+- (void)categoryForKey:(NSString *)key language:(NSString *)language completion:(PLYCompletion)completion
+{
+	NSParameterAssert(completion);
+	
+	NSString *function = [NSString stringWithFormat:@"/category/%@", key];
+	NSString *path = [self _functionPathForFunction:function];
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:nil payload:nil completion:completion];
+}
+
+- (void)categoriesWithLanguage:(NSString *)language completion:(PLYCompletion)completion
+{
+	NSParameterAssert(completion);
+	
+	NSString *function = @"/categories";
+	NSString *path = [self _functionPathForFunction:function];
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:nil payload:nil completion:completion];
+}
+
 #pragma mark - Notifications
 
 - (void)_didEnterForeground:(NSNotification *)notification

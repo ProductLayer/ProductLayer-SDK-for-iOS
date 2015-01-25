@@ -10,6 +10,7 @@
 
 #import "PLYBrand.h"
 #import "PLYBrandOwner.h"
+#import "PLYCategory.h"
 #import "PLYImage.h"
 #import "PLYOpine.h"
 #import "PLYProblemReport.h"

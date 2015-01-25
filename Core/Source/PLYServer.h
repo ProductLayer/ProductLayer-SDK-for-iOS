@@ -549,4 +549,23 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  */
 - (void)createProblemReport:(PLYProblemReport *)report completion:(PLYCompletion)completion;
 
+/**
+ @name Working with Categories
+ */
+
+/**
+ Retrieves the PLCategory object for a given key and language
+ @param key The category key
+ @param langauge The language to retrieve the category for
+ @param completion The completion handler for the request
+ */
+- (void)categoryForKey:(NSString *)key language:(NSString *)language completion:(PLYCompletion)completion;
+
+/**
+ Retrieves all top-level PLCategory object for a given language
+ @param langauge The language to retrieve the category for or `nil` to return the best matching language
+ @param completion The completion handler for the request
+ */
+- (void)categoriesWithLanguage:(NSString *)language completion:(PLYCompletion)completion;
+
 @end

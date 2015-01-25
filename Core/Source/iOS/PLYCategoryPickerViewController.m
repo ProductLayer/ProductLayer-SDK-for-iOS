@@ -39,6 +39,7 @@ NSArray *_sortedKeys = nil;
 	[self _loadCategoriesFromCache];
 	
 	self.navigationItem.title = PLYLocalizedStringFromTable(@"PLY_CATEGORIES_TITLE", @"UI", @"Title of the view controller showing brands");
+	self.searchController.hidesNavigationBarDuringPresentation = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -74,6 +75,15 @@ NSArray *_sortedKeys = nil;
 	[super viewDidAppear:animated];
 	
 	[self _updateCategoriesFromServer];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+	
+	[self.transitionCoordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+		[self.searchController.searchBar resignFirstResponder];
+	} completion:NULL];
 }
 
 - (void)_setupForTraitCollection:(UITraitCollection *)collection
@@ -294,7 +304,10 @@ NSArray *_sortedKeys = nil;
 		
 		if ([catKey isEqualToString:key])
 		{
-			[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] animated:animated scrollPosition:UITableViewScrollPositionMiddle];
+			// need next run loop or else the inset is not set yet from presentation
+			dispatch_async(dispatch_get_main_queue(), ^{
+				[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] animated:animated scrollPosition:UITableViewScrollPositionMiddle];
+			});
 			*stop = YES;
 		}
 	}];
@@ -360,11 +373,14 @@ NSArray *_sortedKeys = nil;
 	if (self.searchController.isActive)
 	{
 		self.selectedCategoryKey = _filteredKeys[indexPath.row];
+		
+		[self.searchController setActive:NO];
 	}
 	else
 	{
 		self.selectedCategoryKey = _sortedKeys[indexPath.row];
 	}
+	
 	
 	if ([_delegate respondsToSelector:@selector(categoryPicker:didSelectCategoryWithKey:)])
 	{
