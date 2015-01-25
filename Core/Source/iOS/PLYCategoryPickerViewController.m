@@ -348,6 +348,8 @@ NSArray *_sortedKeys = nil;
 	UIView *bgColorView = [[UIView alloc] init];
 	bgColorView.backgroundColor = PLYBrandColor();
 	[cell setSelectedBackgroundView:bgColorView];
+	
+	cell.textLabel.highlightedTextColor = [UIColor whiteColor];
  
 	if (self.searchController.isActive)
 	{
