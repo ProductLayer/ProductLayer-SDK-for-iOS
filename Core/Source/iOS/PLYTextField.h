@@ -6,8 +6,7 @@
 //  Copyright (c) 2014 ProductLayer. All rights reserved.
 //
 
-@class PLYFormValidator;
-
+#import "PLYFormValidator.h"
 
 /**
  A text field that has a PLYFormValidator attached for validating contents

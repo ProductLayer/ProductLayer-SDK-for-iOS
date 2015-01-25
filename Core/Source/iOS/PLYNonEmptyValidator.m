@@ -21,7 +21,10 @@
 	
 	UITextField *field = (UITextField *)self.control;
 	
-	self.valid = ([field.text length]>0);
+	// trim the text
+	NSString *text = [field.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	
+	self.valid = ([text length]>0);
 }
 
 @end
