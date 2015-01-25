@@ -16,11 +16,13 @@
 
 /**
  Action to send the current report if valid
+ @param sender The sender of the action
  */
 - (IBAction)sendReport:(id)sender;
 
 /**
  Action to cancel the report composition
+ @param sender The sender of the action
  */
 - (IBAction)cancel:(id)sender;
 
