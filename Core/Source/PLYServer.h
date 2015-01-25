@@ -543,7 +543,9 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  */
 
 /**
- Reports a problem with a given entity
+ Reports a problem with a given entity, which can either be a PLYImage, PLYUser, PLYUserAvater or PLYProduct 
+ @param report The problem report to send create
+ @param completion The completion handler for the request
  */
 - (void)createProblemReport:(PLYProblemReport *)report completion:(PLYCompletion)completion;
 

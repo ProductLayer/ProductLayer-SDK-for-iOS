@@ -2221,29 +2221,7 @@
 {
 	NSParameterAssert(report);
 	NSParameterAssert(completion);
-	
-	/*
-	NSString *entityType;
-	if ([report.entity isKindOfClass:[PLYImage class]])
-	{
-		entityType = @"image";
-	}
-	else if ([report.entity isKindOfClass:[PLYProduct class]])
-	{
-		entityType = @"products";
-	}
-	else if ([report.entity isKindOfClass:[PLYOpine class]])
-	{
-		entityType = @"opine";
-	}
-	else if ([report.entity isKindOfClass:[PLYReview class]])
-	{
-		entityType = @"review";
-	}
-	
-	NSAssert(entityType!=nil, @"Can't report issue with this entity.");
-	*/
-	
+		
 	NSString *function;
 	NSDictionary *parameters;
  
