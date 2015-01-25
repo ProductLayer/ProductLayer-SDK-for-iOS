@@ -1199,7 +1199,12 @@
 			
 			if (result && !error)
 			{
-				PLYUser *user = [self _entityByUpdatingCachedEntity:result];
+				PLYUser *cachedUser = [self _entityByUpdatingCachedEntity:result];
+				
+				if (cachedUser != user)
+				{
+					[user updateFromEntity:cachedUser];
+				}
 				
 				if (completion)
 				{
