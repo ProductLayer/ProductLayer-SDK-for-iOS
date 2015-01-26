@@ -11,7 +11,32 @@
 
 PLYProduct *PLYProductBestMatchingUserPreferredLanguages(NSArray *products)
 {
-	for (NSString *lang in [NSLocale preferredLanguages])
+	NSMutableArray *languages = [[NSLocale preferredLanguages] mutableCopy];
+	
+	// according to http://www.weltsprachen.net and http://www.w3schools.com/tags/ref_language_codes.asp
+	NSArray *secondaryLanguages = @[@"en",  // English
+											  @"zh",  // Chinese
+											  @"hi",  // Hindi
+											  @"es",  // Spanish
+											  @"fr",  // French
+											  @"ar",  // Arabic
+											  @"ru",  // Russian
+											  @"pt",  // Portuguese
+											  @"bn",  // Bengalese
+											  @"de",  // German
+											  @"ja",  // Japanese
+											  @"ko"   // Korean
+											 ];
+	
+	for (NSString *secondLang in secondaryLanguages)
+	{
+		if (![languages containsObject:secondLang])
+		{
+			[languages addObject:secondLang];
+		}
+	}
+	
+	for (NSString *lang in languages)
 	{
 		for (PLYProduct *product in products)
 		{
