@@ -1269,7 +1269,26 @@
 	NSString *path = [self _functionPathForFunction:@"products"];
 	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:product];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:completion];
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		
+		if (result)
+		{
+			// update cache
+			PLYProduct *updatedProduct = [self _entityByUpdatingCachedEntity:result];
+			updatedProduct.createdBy = [self _entityByUpdatingCachedEntity:updatedProduct.createdBy];
+			updatedProduct.updatedBy = [self _entityByUpdatingCachedEntity:updatedProduct.updatedBy];
+			
+			NSDictionary *userInfo = @{PLYServerDidUpdateEntityKey: updatedProduct};
+			[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidUpdateEntityNotification object:self userInfo:userInfo];
+		}
+		
+		if (completion)
+		{
+			completion(result, error);
+		}
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:wrappedCompletion];
 }
 
 /**
@@ -1285,7 +1304,26 @@
 	NSString *path = [self _functionPathForFunction:[NSString stringWithFormat:@"/product/%@",product.GTIN]];
 	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:product];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:payload completion:completion];
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		
+		if (result)
+		{
+			// update cache
+			PLYProduct *updatedProduct = [self _entityByUpdatingCachedEntity:result];
+			updatedProduct.createdBy = [self _entityByUpdatingCachedEntity:updatedProduct.createdBy];
+			updatedProduct.updatedBy = [self _entityByUpdatingCachedEntity:updatedProduct.updatedBy];
+			
+			NSDictionary *userInfo = @{PLYServerDidUpdateEntityKey: updatedProduct};
+			[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidUpdateEntityNotification object:self userInfo:userInfo];
+		}
+		
+		if (completion)
+		{
+			completion(result, error);
+		}
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:payload completion:wrappedCompletion];
 }
 
 

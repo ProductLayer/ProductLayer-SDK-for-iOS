@@ -38,6 +38,17 @@ extern NSString * const PLYServerDidModifyListNotification;
 extern NSString * const PLYServerDidModifyListKey;
 
 /**
+ Notification if a product has been updated
+ */
+extern NSString * const PLYServerDidUpdateEntityNotification;
+
+/**
+ Key in the info dictionary for PLYServerDidUpdateEntityNotification
+ */
+extern NSString * const PLYServerDidUpdateEntityKey;
+
+
+/**
  User Defaults Keys
 */
 extern NSString * const PLYUserDefaultOpineComposerIncludeLocation;
