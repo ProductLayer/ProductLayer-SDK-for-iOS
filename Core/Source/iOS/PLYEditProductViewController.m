@@ -318,6 +318,12 @@
 		
 		dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
 		
+		if (!existingProduct && !_product.name)
+		{
+			// this is a dummy product and so we make this into the new language
+			existingProduct = _product;
+		}
+		
 		if (existingProduct)
 		{
 			saveProduct.Id = existingProduct.Id;
@@ -328,6 +334,12 @@
 		}
 		else
 		{
+			if (!_product.name)
+			{
+				// dummy
+			}
+			
+			
 			[self.productLayerServer createProduct:saveProduct completion:^(id result, NSError *error) {
 				completion(error);
 			}];
