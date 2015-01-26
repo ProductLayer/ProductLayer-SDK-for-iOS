@@ -556,14 +556,14 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 /**
  Retrieves the PLCategory object for a given key and language
  @param key The category key
- @param langauge The language to retrieve the category for
+ @param language The language to retrieve the category for
  @param completion The completion handler for the request
  */
 - (void)categoryForKey:(NSString *)key language:(NSString *)language completion:(PLYCompletion)completion;
 
 /**
  Retrieves all top-level PLCategory object for a given language
- @param langauge The language to retrieve the category for or `nil` to return the best matching language
+ @param language The language to retrieve the category for or `nil` to return the best matching language
  @param completion The completion handler for the request
  */
 - (void)categoriesWithLanguage:(NSString *)language completion:(PLYCompletion)completion;
