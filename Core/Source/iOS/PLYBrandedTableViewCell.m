@@ -54,6 +54,7 @@
 	if (self.accessoryType == UITableViewCellAccessoryDisclosureIndicator)
 	{
 		self.accessoryView = [DTCustomColoredAccessory accessoryWithColor:PLYBrandColor() type:DTCustomColoredAccessoryTypeRight];
+		self.accessoryView.userInteractionEnabled = NO;
 	}
 }
 
