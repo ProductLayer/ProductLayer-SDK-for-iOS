@@ -11,9 +11,10 @@
 #import "ProductLayer.h"
 
 #import "DTBlockFunctions.h"
+#import "NSString+DTPaths.h"
 
 
-@interface PLYEditProductViewController () <PLYFormValidationDelegate, PLYCategoryPickerViewControllerDelegate, PLYBrandPickerViewControllerDelegate>
+@interface PLYEditProductViewController () <PLYFormValidationDelegate, PLYCategoryPickerViewControllerDelegate, PLYBrandPickerViewControllerDelegate, PLYBrandOwnerPickerViewControllerDelegate>
 
 @end
 
@@ -51,6 +52,9 @@
 	}
 	
 	self.saveButtonItem.enabled = [self _saveIsPossible];
+	
+	// load category list if possible
+	[self _loadCategoriesFromCache];
 }
 
 #pragma mark - Helpers
@@ -78,6 +82,42 @@
 	return nil;
 }
 
+- (void)_saveCategoriesInCache
+{
+	NSString *language = [[NSLocale preferredLanguages] firstObject];
+	NSString *path = [[NSString cachesPath] stringByAppendingFormat:@"PLYCategories_%@.plist", language];
+	
+	NSMutableArray *tmpArray = [NSMutableArray array];
+	
+	for (PLYCategory *category in _categories)
+	{
+		NSDictionary *dict = [category dictionaryRepresentation];
+		[tmpArray addObject:dict];
+	}
+	
+	[tmpArray writeToFile:path atomically:YES];
+}
+
+- (void)_loadCategoriesFromCache
+{
+	NSString *language = [[NSLocale preferredLanguages] firstObject];
+	NSString *path = [[NSString cachesPath] stringByAppendingFormat:@"PLYCategories_%@.plist", language];
+	NSArray *array = [NSArray arrayWithContentsOfFile:path];
+	
+	if (array)
+	{
+		NSMutableArray *tmpArray = [NSMutableArray array];
+		
+		for (NSDictionary *dict in array)
+		{
+			PLYCategory *category = [[PLYCategory alloc] initWithDictionary:dict];
+			[tmpArray addObject:category];
+		}
+		
+		_categories = [tmpArray copy];
+	}
+}
+
 - (void)_updateCategoryForKey:(NSString *)key
 {
 	void (^block)() = ^ {
@@ -101,8 +141,9 @@
 		});
 	};
 	
+	NSString *path = [self _pathOfCategories:_categories forKey:key];
 	
-	if (!_categories)
+	if (!path || !_categories)
 	{
 		NSString *language = [[NSLocale preferredLanguages] firstObject];
 		
@@ -110,6 +151,9 @@
 			if (result)
 			{
 				_categories = result;
+				
+				[self _saveCategoriesInCache];
+				
 				block();
 			}
 		}];
@@ -221,7 +265,17 @@
 			
 			break;
 		}
+		
+		case 2:
+		{
+			PLYBrandOwnerPickerViewController *brandPicker = [PLYBrandOwnerPickerViewController new];
+			brandPicker.selectedBrandOwnerName = _brandOwner;
+			brandPicker.GTIN = _product.GTIN;
+			brandPicker.delegate = self;
+			[self.navigationController pushViewController:brandPicker animated:YES];
 			
+			break;		}
+		
 		case 3:
 		{
 			PLYCategoryPickerViewController *categories = [[PLYCategoryPickerViewController alloc] init];
@@ -427,6 +481,18 @@
 	
 	[self.navigationController popViewControllerAnimated:YES];
 }
+
+#pragma mark - PLYBrandOwnerPickerViewControllerDelegate
+
+- (void)brandOwnerPickerDidSelect:(PLYBrandOwnerPickerViewController *)brandOwnerPicker
+{
+	_brandOwner = brandOwnerPicker.selectedBrandOwnerName;
+	
+	[self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:2]] withRowAnimation:UITableViewRowAnimationAutomatic];
+	
+	[self.navigationController popViewControllerAnimated:YES];
+}
+
 
 #pragma mark - Properties
 
