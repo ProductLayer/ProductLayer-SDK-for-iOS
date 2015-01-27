@@ -16,7 +16,7 @@
 @optional
 /**
  Called if the user selects a row
- @param brandPicker The sender of the message
+ @param brandOwnerPicker The sender of the message
  */
 - (void)brandOwnerPickerDidSelect:(PLYBrandOwnerPickerViewController *)brandOwnerPicker;
 
