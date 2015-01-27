@@ -86,10 +86,36 @@
 /* Title of the view controller showing categories */
 "PLY_CATEGORIES_TITLE" = "Categories";
 
-// ------- PLYBrandOwnerViewController
+
+// ------- PLYBrandPickerViewController
 
 /* Title of the view controller showing brands */
 "PLY_BRANDS_TITLE" = "Brands";
+
+/* Title of section for creating a new brand */
+"PLY_CREATE_BRAND" = "Create Brand";
+
+/* Title of section containing likely brands */
+"PLY_LIKELY_BRANDS" = "Likely Brands";
+
+/* Title of section containing known brands */
+"PLY_KNOWN_BRANDS" = "Known Brands";
+
+
+
+// ------- PLYBrandOwnerPickerViewController
+
+/* Title of the view controller showing brand owners */
+"PLY_BRAND_OWNERS_TITLE" = "Brand Owners";
+
+/* Title of section for creating a new brand owner */
+"PLY_CREATE_BRAND_OWNER" = "Create Brand Owner";
+
+/* Title of section containing likely brand owners */
+"PLY_LIKELY_BRAND_OWNERS" = "Likely Brand Owners";
+
+/* Title of section containing known brand owners */
+"PLY_KNOWN_BRAND_OWNERS" = "Known Brand Owners";
 
 
 // ------- PLYOpineComposeViewController
