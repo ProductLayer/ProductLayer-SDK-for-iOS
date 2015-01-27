@@ -110,7 +110,9 @@
 	
 	if (!_categories)
 	{
-		[self.productLayerServer categoriesWithLanguage:nil completion:^(id result, NSError *error) {
+		NSString *language = [[NSLocale preferredLanguages] firstObject];
+		
+		[self.productLayerServer categoriesWithLanguage:language completion:^(id result, NSError *error) {
 			if (result)
 			{
 				_categories = result;
