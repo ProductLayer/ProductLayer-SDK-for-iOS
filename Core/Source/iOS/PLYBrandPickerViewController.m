@@ -133,7 +133,7 @@
 	dispatch_semaphore_t sema = dispatch_semaphore_create(0);
 	
 	
-	[self.productLayerServer getBrandsWithCompletion:^(NSArray *result, NSError *error) {
+	[self.productLayerServer brandsWithCompletion:^(NSArray *result, NSError *error) {
 		
 		if ([result isKindOfClass:[NSDictionary class]])
 		{
@@ -141,7 +141,10 @@
 			result = dict[@"pl-values"];
 		}
 		
-			_knownBrandNames = [result sortedArrayUsingSelector:@selector(localizedStandardCompare:)];
+		NSMutableArray *tmpArray = [result mutableCopy];
+		[tmpArray removeObject:@""];
+		
+		_knownBrandNames = [tmpArray sortedArrayUsingSelector:@selector(localizedStandardCompare:)];
 		
 		dispatch_semaphore_signal(sema);
 	}];
@@ -150,7 +153,7 @@
 	
 	if (_GTIN)
 	{
-		[self.productLayerServer getRecommendedBrandOwnersForGTIN:_GTIN completion:^(id result, NSError *error) {
+		[self.productLayerServer recommendedBrandOwnersForGTIN:_GTIN completion:^(id result, NSError *error) {
 			
 			NSMutableArray *tmpArray = [NSMutableArray array];
 			
@@ -341,17 +344,17 @@
 	{
 		case 0:
 		{
-			return @"Create Brand";
+			return  PLYLocalizedStringFromTable(@"PLY_CREATE_BRAND", @"UI", @"Title of section for creating a new brand");
 		}
 
 		case 1:
 		{
-			return @"Likely Brands";
+			return  PLYLocalizedStringFromTable(@"PLY_LIKELY_BRANDS", @"UI", @"Title of section containing likely brands");
 		}
 
 		case 2:
 		{
-			return @"Known Brands";
+			return  PLYLocalizedStringFromTable(@"PLY_KNOWN_BRANDS", @"UI", @"Title of section containing known brands");
 		}
 	}
 	
