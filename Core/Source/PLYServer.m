@@ -2319,8 +2319,9 @@
 	
 	NSString *function = [NSString stringWithFormat:@"/category/%@", key];
 	NSString *path = [self _functionPathForFunction:function];
+	NSDictionary *params = @{@"language": language?language:@"auto"};
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:nil payload:nil completion:completion];
+	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:params payload:nil completion:completion];
 }
 
 - (void)categoriesWithLanguage:(NSString *)language completion:(PLYCompletion)completion
@@ -2329,8 +2330,9 @@
 	
 	NSString *function = @"/categories";
 	NSString *path = [self _functionPathForFunction:function];
+	NSDictionary *params = @{@"language": language?language:@"auto"};
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:nil payload:nil completion:completion];
+	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:params payload:nil completion:completion];
 }
 
 #pragma mark - Notifications
