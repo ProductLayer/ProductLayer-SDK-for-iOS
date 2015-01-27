@@ -2295,6 +2295,11 @@
 		function = @"images/report_problem";
 		parameters = @{@"image_id": report.entity.Id};
 	}
+	else if ([report.entity isKindOfClass:[PLYOpine class]])
+	{
+		function = @"opine/report_problem";
+		parameters = @{@"opine_id": report.entity.Id};
+	}
 	else
 	{
 		NSAssert(NO, @"Can't report issue on such an entity");

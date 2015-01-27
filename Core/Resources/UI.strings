@@ -148,3 +148,4 @@
 "REPORT_TYPE_IMAGE" = "Image";
 "REPORT_TYPE_PRODUCT" = "Product";
 "REPORT_TYPE_USER" = "User";
+"REPORT_TYPE_OPINE" = "Opine";

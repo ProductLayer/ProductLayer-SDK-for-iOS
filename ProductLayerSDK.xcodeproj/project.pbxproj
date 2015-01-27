@@ -194,6 +194,8 @@
 		A77FFAA51A77907B0019DD5C /* PLYBrandedTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A77FFAA31A77907B0019DD5C /* PLYBrandedTableViewCell.h */; };
 		A77FFAA61A77907B0019DD5C /* PLYBrandedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A77FFAA41A77907B0019DD5C /* PLYBrandedTableViewCell.m */; };
 		A77FFAA71A77907B0019DD5C /* PLYBrandedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A77FFAA41A77907B0019DD5C /* PLYBrandedTableViewCell.m */; };
+		A77FFACE1A77E5790019DD5C /* PLYBrandOwnerPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A77FFAAD1A77E5120019DD5C /* PLYBrandOwnerPickerViewController.m */; };
+		A77FFACF1A77E57B0019DD5C /* PLYBrandOwnerPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A77FFAAD1A77E5120019DD5C /* PLYBrandOwnerPickerViewController.m */; };
 		A78DB5E51A46E26A00CD8A14 /* ProductLayerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D997EB1A2B11A800C80C2B /* ProductLayerSDK.framework */; };
 		A7A38CD21A2B4FFD005D8395 /* PLYFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A38CD01A2B4FFD005D8395 /* PLYFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7A38CD31A2B4FFD005D8395 /* PLYFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A38CD01A2B4FFD005D8395 /* PLYFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -810,6 +812,8 @@
 		A77860941A40830200560889 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A77FFAA31A77907B0019DD5C /* PLYBrandedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYBrandedTableViewCell.h; sourceTree = "<group>"; };
 		A77FFAA41A77907B0019DD5C /* PLYBrandedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYBrandedTableViewCell.m; sourceTree = "<group>"; };
+		A77FFAAC1A77E5120019DD5C /* PLYBrandOwnerPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYBrandOwnerPickerViewController.h; sourceTree = "<group>"; };
+		A77FFAAD1A77E5120019DD5C /* PLYBrandOwnerPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYBrandOwnerPickerViewController.m; sourceTree = "<group>"; };
 		A7A38CD01A2B4FFD005D8395 /* PLYFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYFunctions.h; sourceTree = "<group>"; };
 		A7A38CD11A2B4FFD005D8395 /* PLYFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYFunctions.m; sourceTree = "<group>"; };
 		A7B214F6183F842000C38635 /* ProductLayerSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductLayerSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1113,6 +1117,8 @@
 			children = (
 				A701C4F71A1F55580013CB8D /* PLYBrandPickerViewController.h */,
 				A701C4F81A1F55580013CB8D /* PLYBrandPickerViewController.m */,
+				A77FFAAC1A77E5120019DD5C /* PLYBrandOwnerPickerViewController.h */,
+				A77FFAAD1A77E5120019DD5C /* PLYBrandOwnerPickerViewController.m */,
 			);
 			name = Brands;
 			sourceTree = "<group>";
@@ -2421,6 +2427,7 @@
 				A72592B41A757D5900952685 /* PLYCategory.m in Sources */,
 				A7590B2419ED77B80084EBCA /* PLYUser.m in Sources */,
 				A7590B0419ED77B40084EBCA /* PLYSignUpViewController.m in Sources */,
+				A77FFACF1A77E57B0019DD5C /* PLYBrandOwnerPickerViewController.m in Sources */,
 				A7590B2619ED77B80084EBCA /* PLYProductCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2494,6 +2501,7 @@
 			files = (
 				A76D3F69198650770032FE59 /* PLYLoginViewController.m in Sources */,
 				C98CD2671910E0D70035647C /* PLYPackaging.m in Sources */,
+				A77FFACE1A77E5790019DD5C /* PLYBrandOwnerPickerViewController.m in Sources */,
 				A764789A1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */,
 				A762933B1A5FF1CF00208A27 /* PLYSocialAuthWebViewController.m in Sources */,
 				C98CD2681910E0D70035647C /* PLYProduct.m in Sources */,

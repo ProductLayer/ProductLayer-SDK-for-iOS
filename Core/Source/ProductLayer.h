@@ -37,6 +37,7 @@
 	#import "PLYBrandPickerViewController.h"
 	#import "PLYBrandOwnerPickerViewController.h"
 	#import "PLYGuidedInputViewController.h"
+	#import "PLYReportProblemViewController.h"
 
 	// Input Validation
 	#import "PLYFormValidator.h"

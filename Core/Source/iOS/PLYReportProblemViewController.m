@@ -172,6 +172,10 @@
 	{
 		itemName = PLYLocalizedStringFromTable(@"REPORT_TYPE_PRODUCT", @"UI", @"A product");
 	}
+	else if ([_problematicEntity isKindOfClass:[PLYOpine class]])
+	{
+		itemName = PLYLocalizedStringFromTable(@"REPORT_TYPE_OPINE", @"UI", @"An opine");
+	}
 	else
 	{
 		NSAssert(NO, @"Can't report issue on such an entity");
