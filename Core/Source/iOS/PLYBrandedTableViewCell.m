@@ -13,22 +13,41 @@
 
 @implementation PLYBrandedTableViewCell
 
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+	self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+	
+	if (self)
+	{
+		[self _commonSetup];
+	}
+	
+	return self;
+}
+
 - (void)awakeFromNib
 {
 	[super awakeFromNib];
 	
+	[self _commonSetup];
+}
+
+#pragma mark - Helpers
+
+- (void)_commonSetup
+{
 	// set product layer color as background
 	UIView *bgColorView = [[UIView alloc] init];
 	bgColorView.backgroundColor = PLYBrandColor();
 	[self setSelectedBackgroundView:bgColorView];
 	
+	// set the label color for when the cell is highlighted
 	[self.textLabel setHighlightedTextColor:[UIColor whiteColor]];
 	[self.detailTextLabel setHighlightedTextColor:[UIColor whiteColor]];
 	
+	// adjust custom accessory if necessary
 	[self _updateAccessoryView];
 }
-
-#pragma mark - Helpers
 
 - (void)_updateAccessoryView
 {
@@ -37,7 +56,6 @@
 		self.accessoryView = [DTCustomColoredAccessory accessoryWithColor:PLYBrandColor() type:DTCustomColoredAccessoryTypeRight];
 	}
 }
-
 
 #pragma mark - Properties
 

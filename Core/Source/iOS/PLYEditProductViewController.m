@@ -20,23 +20,17 @@
 @implementation PLYEditProductViewController
 {
 	PLYTextField *_nameField;
-	PLYTextField *_brandField;
-	PLYTextField *_brandOwnerField;
 	
+	NSString *_brandName;
+	NSString *_brandOwner;
 	NSString *_selectedCategoryKey;
 	NSArray *_categories;
 }
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+	[super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-	
 	[self.tableView registerClass:[PLYTextFieldTableViewCell class] forCellReuseIdentifier:@"PLYTextFieldTableViewCell"];
 	[self.tableView registerClass:[PLYBrandedTableViewCell class] forCellReuseIdentifier:@"PLYBrandedTableViewCell"];
 	
@@ -176,87 +170,74 @@
 	}
 }
 
+- (void)_configureProductNameCell:(UITableViewCell *)cell
+{
+	PLYTextFieldTableViewCell *nameCell = (PLYTextFieldTableViewCell *)cell;
+	_nameField = [nameCell textField];
+	_nameField.placeholder = @"ACME Productname";
+	
+	if ([_product.name length])
+	{
+		_nameField.text = _product.name;
+		_nameField.validator = [PLYContentsDidChangeValidator validatorWithDelegate:self originalContents:_product.name];
+	}
+	else
+	{
+		_nameField.validator = [PLYNonEmptyValidator validatorWithDelegate:self];
+	}
+}
+
+- (void)_configureBrandNameCell:(UITableViewCell *)cell
+{
+	cell.textLabel.text = _brandName;
+}
+
+- (void)_configureBrandOwnerCell:(UITableViewCell *)cell
+{
+	cell.textLabel.text = _brandOwner;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if (indexPath.section == 3)
-	{
-		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PLYBrandedTableViewCell" forIndexPath:indexPath];
-		
-		// set product layer color as background
-		UIView *bgColorView = [[UIView alloc] init];
-		bgColorView.backgroundColor = PLYBrandColor();
-		[cell setSelectedBackgroundView:bgColorView];
-		
-		cell.textLabel.highlightedTextColor = [UIColor whiteColor];
-		
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-		
-		return cell;
-	}
-	
-	
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PLYTextFieldTableViewCell" forIndexPath:indexPath];
-	cell.selectionStyle = UITableViewCellSelectionStyleNone;
-	
-	
 	switch (indexPath.section)
 	{
 	  case 0:
 		{
-			_nameField = [(PLYTextFieldTableViewCell *)cell textField];
-			_nameField.placeholder = @"ACME Productname";
+			UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PLYTextFieldTableViewCell" forIndexPath:indexPath];
+			[self _configureProductNameCell:cell];
 			
-			if ([_product.name length])
-			{
-				_nameField.text = _product.name;
-				_nameField.validator = [PLYContentsDidChangeValidator validatorWithDelegate:self originalContents:_product.name];
-			}
-			else
-			{
-				_nameField.validator = [PLYNonEmptyValidator validatorWithDelegate:self];
-			}
-			
-			break;
+			return cell;
 		}
 			
 		case 1:
 		{
-			_brandField = [(PLYTextFieldTableViewCell *)cell textField];
-			_brandField.placeholder = @"ACME";
-
-			if ([_product.brandName length])
-			{
-				_brandField.text = _product.brandName;
-				_brandField.validator = [PLYContentsDidChangeValidator validatorWithDelegate:self originalContents:_product.brandName];
-			}
-			else
-			{
-				_brandField.validator = [PLYNonEmptyValidator validatorWithDelegate:self];
-			}
-
-			break;
-		}
+			UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PLYBrandedTableViewCell" forIndexPath:indexPath];
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			[self _configureBrandNameCell:cell];
 			
+			return cell;
+		}
+
 		case 2:
 		{
-			_brandOwnerField = [(PLYTextFieldTableViewCell *)cell textField];
-			_brandOwnerField.placeholder = @"ACME Corporation LTD";
+			UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PLYBrandedTableViewCell" forIndexPath:indexPath];
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			[self _configureBrandOwnerCell:cell];
 			
-			if ([_product.brandOwner length])
-			{
-				_brandOwnerField.text = _product.brandOwner;
-				_brandOwnerField.validator = [PLYContentsDidChangeValidator validatorWithDelegate:self originalContents:_product.brandOwner];
-			}
-			else
-			{
-				_brandOwnerField.validator = [PLYNonEmptyValidator validatorWithDelegate:self];
-			}
+			return cell;
+		}
 			
-			break;
+		case 3:
+		{
+			UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PLYBrandedTableViewCell" forIndexPath:indexPath];
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			
+			return cell;
 		}
 	}
 	
-	return cell;
+	// should never get here
+	return nil;
 }
 
 
@@ -285,14 +266,14 @@
 		}
 	}
 	
-	if ([_brandField.validator isValid])
+	if ([_brandName length])
 	{
-		saveProduct.brandName = _brandField.text;
+		saveProduct.brandName = _brandName;
 	}
 	
-	if ([_brandOwnerField.validator isValid])
+	if ([_brandOwner length])
 	{
-		saveProduct.brandOwner = _brandOwnerField.text;
+		saveProduct.brandOwner = _brandOwner;
 	}
 	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
@@ -351,12 +332,12 @@
 		didChange = YES;
 	}
 	
-	if ([_brandField.validator isValid])
+	if (_brandName && ![_brandName isEqualToString:_product.brandName])
 	{
 		didChange = YES;
 	}
 	
-	if ([_brandOwnerField.validator isValid])
+	if (_brandOwner && ![_brandOwner isEqualToString:_product.brandOwner])
 	{
 		didChange = YES;
 	}
@@ -406,6 +387,9 @@
 	{
 		_product.name = nil;
 	}
+	
+	_brandName = _product.brandName;
+	_brandOwner = _product.brandOwner;
 	
 	if (_product.category)
 	{
