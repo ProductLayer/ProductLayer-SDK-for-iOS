@@ -324,7 +324,7 @@
 			existingProduct = _product;
 		}
 		
-		if (existingProduct)
+		if (existingProduct && existingProduct.Id)
 		{
 			saveProduct.Id = existingProduct.Id;
 			
@@ -334,12 +334,6 @@
 		}
 		else
 		{
-			if (!_product.name)
-			{
-				// dummy
-			}
-			
-			
 			[self.productLayerServer createProduct:saveProduct completion:^(id result, NSError *error) {
 				completion(error);
 			}];
