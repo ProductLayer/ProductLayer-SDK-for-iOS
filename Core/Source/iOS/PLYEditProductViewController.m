@@ -10,9 +10,6 @@
 #import "PLYTextFieldTableViewCell.h"
 #import "ProductLayer.h"
 
-#import "PLYNonEmptyValidator.h"
-#import "PLYContentsDidChangeValidator.h"
-
 #import "DTBlockFunctions.h"
 
 
@@ -41,6 +38,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
 	[self.tableView registerClass:[PLYTextFieldTableViewCell class] forCellReuseIdentifier:@"PLYTextFieldTableViewCell"];
+	[self.tableView registerClass:[PLYBrandedTableViewCell class] forCellReuseIdentifier:@"PLYBrandedTableViewCell"];
 	
 	self.navigationItem.title = @"Edit Product";
 }
@@ -182,8 +180,7 @@
 {
 	if (indexPath.section == 3)
 	{
-		UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PLYBrandedTableViewCell" forIndexPath:indexPath];
 		
 		// set product layer color as background
 		UIView *bgColorView = [[UIView alloc] init];
@@ -191,6 +188,8 @@
 		[cell setSelectedBackgroundView:bgColorView];
 		
 		cell.textLabel.highlightedTextColor = [UIColor whiteColor];
+		
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		
 		return cell;
 	}
