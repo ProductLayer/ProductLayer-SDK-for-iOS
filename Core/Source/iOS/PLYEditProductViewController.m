@@ -13,7 +13,7 @@
 #import "DTBlockFunctions.h"
 
 
-@interface PLYEditProductViewController () <PLYFormValidationDelegate, PLYCategoryPickerViewControllerDelegate>
+@interface PLYEditProductViewController () <PLYFormValidationDelegate, PLYCategoryPickerViewControllerDelegate, PLYBrandPickerViewControllerDelegate>
 
 @end
 
@@ -49,6 +49,8 @@
 	{
 		[self _updateCategoryForKey:@"pl-prod-cat-uncategorized"];
 	}
+	
+	self.saveButtonItem.enabled = [self _saveIsPossible];
 }
 
 #pragma mark - Helpers
@@ -118,6 +120,51 @@
 	}
 }
 
+- (void)_configureProductNameCell:(UITableViewCell *)cell
+{
+	PLYTextFieldTableViewCell *nameCell = (PLYTextFieldTableViewCell *)cell;
+	_nameField = [nameCell textField];
+	_nameField.placeholder = @"ACME Productname";
+	
+	if ([_product.name length])
+	{
+		_nameField.text = _product.name;
+		_nameField.validator = [PLYContentsDidChangeValidator validatorWithDelegate:self originalContents:_product.name];
+	}
+	else
+	{
+		_nameField.validator = [PLYNonEmptyValidator validatorWithDelegate:self];
+	}
+}
+
+- (void)_configureBrandNameCell:(UITableViewCell *)cell
+{
+	if ([_brandName length])
+	{
+		cell.textLabel.text = _brandName;
+		cell.textLabel.textColor = [UIColor blackColor];
+	}
+	else
+	{
+		cell.textLabel.text = @"Unknown";
+		cell.textLabel.textColor = [UIColor grayColor];
+	}
+}
+
+- (void)_configureBrandOwnerCell:(UITableViewCell *)cell
+{
+	if ([_brandOwner length])
+	{
+		cell.textLabel.text = _brandOwner;
+		cell.textLabel.textColor = [UIColor blackColor];
+	}
+	else
+	{
+		cell.textLabel.text = @"Unknown";
+		cell.textLabel.textColor = [UIColor grayColor];
+	}
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -161,40 +208,30 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if (indexPath.section == 3)
+	switch (indexPath.section)
 	{
-		PLYCategoryPickerViewController *categories = [[PLYCategoryPickerViewController alloc] init];
-		categories.selectedCategoryKey = _selectedCategoryKey;
-		categories.delegate = self;
-		[self.navigationController pushViewController:categories animated:YES];
+		case 1:
+		{
+			PLYBrandPickerViewController *brandPicker = [PLYBrandPickerViewController new];
+			brandPicker.selectedBrandName = _brandName;
+			brandPicker.selectedBrandOwnerName = _brandOwner;
+			brandPicker.GTIN = _product.GTIN;
+			brandPicker.delegate = self;
+			[self.navigationController pushViewController:brandPicker animated:YES];
+			
+			break;
+		}
+			
+		case 3:
+		{
+			PLYCategoryPickerViewController *categories = [[PLYCategoryPickerViewController alloc] init];
+			categories.selectedCategoryKey = _selectedCategoryKey;
+			categories.delegate = self;
+			[self.navigationController pushViewController:categories animated:YES];
+			
+			break;
+		}
 	}
-}
-
-- (void)_configureProductNameCell:(UITableViewCell *)cell
-{
-	PLYTextFieldTableViewCell *nameCell = (PLYTextFieldTableViewCell *)cell;
-	_nameField = [nameCell textField];
-	_nameField.placeholder = @"ACME Productname";
-	
-	if ([_product.name length])
-	{
-		_nameField.text = _product.name;
-		_nameField.validator = [PLYContentsDidChangeValidator validatorWithDelegate:self originalContents:_product.name];
-	}
-	else
-	{
-		_nameField.validator = [PLYNonEmptyValidator validatorWithDelegate:self];
-	}
-}
-
-- (void)_configureBrandNameCell:(UITableViewCell *)cell
-{
-	cell.textLabel.text = _brandName;
-}
-
-- (void)_configureBrandOwnerCell:(UITableViewCell *)cell
-{
-	cell.textLabel.text = _brandOwner;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -363,6 +400,7 @@
 }
 
 #pragma mark - PLYCategoryPickerViewControllerDelegate
+
 - (void)categoryPicker:(PLYCategoryPickerViewController *)categoryPicker didSelectCategoryWithKey:(NSString *)key
 {
 	if ([key isEqualToString:_selectedCategoryKey])
@@ -371,9 +409,22 @@
 	}
 	
 	_selectedCategoryKey = key;
-	//[self _updateCategoryForKey:key];
 	
-	self.saveButtonItem.enabled = [self _saveIsPossible];
+	[self.navigationController popViewControllerAnimated:YES];
+	
+	// viewWillAppear updates the shown category
+}
+
+#pragma mark - PLYBrandPickerViewControllerDelegate
+
+- (void)brandPickerDidSelect:(PLYBrandPickerViewController *)brandPicker
+{
+	_brandName = brandPicker.selectedBrandName;
+	_brandOwner = brandPicker.selectedBrandOwnerName;
+	
+	[self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:1],
+														  [NSIndexPath indexPathForRow:0 inSection:2]] withRowAnimation:UITableViewRowAnimationAutomatic];
+	
 	[self.navigationController popViewControllerAnimated:YES];
 }
 
