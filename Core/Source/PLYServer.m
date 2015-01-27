@@ -1329,8 +1329,7 @@
 
 #pragma mark - Working with Brands and Brand Owners
 
-- (void)getRecommendedBrandOwnersForGTIN:(NSString *)GTIN
-										completion:(PLYCompletion)completion
+- (void)recommendedBrandOwnersForGTIN:(NSString *)GTIN completion:(PLYCompletion)completion
 {
 	NSParameterAssert(GTIN);
 	NSParameterAssert(completion);
@@ -1341,13 +1340,19 @@
 }
 
 
-- (void)getBrandsWithCompletion:(PLYCompletion)completion
+- (void)brandsWithCompletion:(PLYCompletion)completion
 {
 	NSString *path = [self _functionPathForFunction:[NSString stringWithFormat:@"/products/brands"]];
 	
 	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:nil completion:completion];
 }
 
+- (void)brandOwnersWithCompletion:(PLYCompletion)completion
+{
+	NSString *path = [self _functionPathForFunction:[NSString stringWithFormat:@"/products/brand_owners"]];
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:nil completion:completion];
+}
 
 #pragma mark - Image Handling
 

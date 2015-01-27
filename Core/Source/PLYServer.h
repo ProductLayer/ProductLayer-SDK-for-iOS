@@ -233,14 +233,20 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @param GTIN The GTIN of the product
  @param completion The completion handler for the request
  */
-- (void)getRecommendedBrandOwnersForGTIN:(NSString *)GTIN
+- (void)recommendedBrandOwnersForGTIN:(NSString *)GTIN
 										completion:(PLYCompletion)completion;
 
 /**
  Retrieves a list of all known brands
  @param completion The completion handler for the request
  */
-- (void)getBrandsWithCompletion:(PLYCompletion)completion;
+- (void)brandsWithCompletion:(PLYCompletion)completion;
+
+/**
+ Retrieves a list of all known brand owners
+ @param completion The completion handler for the request
+ */
+- (void)brandOwnersWithCompletion:(PLYCompletion)completion;
 
 
 /**

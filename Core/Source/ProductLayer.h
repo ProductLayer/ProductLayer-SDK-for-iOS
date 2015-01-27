@@ -35,6 +35,7 @@
 	#import "PLYFormEmailValidator.h"
 	#import "PLYCategoryPickerViewController.h"
 	#import "PLYBrandPickerViewController.h"
+	#import "PLYBrandOwnerPickerViewController.h"
 	#import "PLYGuidedInputViewController.h"
 
 	// Input Validation
