@@ -11,6 +11,7 @@
 #import "PLYVideoPreviewInterestBox.h"
 #import "PLYAVFoundationFunctions.h"
 #import "DTLog.h"
+#import "PLYFunctions.h"
 
 #import <AVFoundation/AVFoundation.h>
 
@@ -739,7 +740,17 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
             {
                if ([code length]>=16 && ([code hasPrefix:@"01"] || [code hasPrefix:@"02"]))
                {
-                  code = [code substringWithRange:NSMakeRange(2, 14)];
+						if (!PLYIsValidGTIN(code))
+						{
+							// ignore the prefix
+							code = [code substringWithRange:NSMakeRange(3, 13)];
+						}
+						
+						if (!PLYIsValidGTIN(code))
+						{
+							// continue, invalid contents
+							continue;
+						}
                }
                else
                {
