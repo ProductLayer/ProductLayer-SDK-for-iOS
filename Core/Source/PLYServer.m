@@ -10,6 +10,7 @@
 
 #import "PLYConstants.h"
 #import "PLYEntities.h"
+#import "PLYFunctions.h"
 
 #import "DTLog.h"
 #import "NSString+DTURLEncoding.h"
@@ -1420,7 +1421,13 @@
 
 - (NSURL *)URLForProductImageWithGTIN:(NSString *)GTIN maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop
 {
-	NSParameterAssert(GTIN);
+	NSParameterAssert(PLYIsValidGTIN(GTIN));
+	
+	if ([GTIN length]<14)
+	{
+		// make sure it is 14 digits
+		GTIN = [[@"00000000000000" stringByAppendingString:GTIN] substringWithRange:NSMakeRange([GTIN length], 14)];
+	}
 	
 	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:3];
 	
