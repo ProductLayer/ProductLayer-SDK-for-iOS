@@ -1874,50 +1874,6 @@
 }
 
 /**
- * Returns the follower from a specific user.
- * ATTENTION: Login required
- **/
-- (void) getFollowerFromUser:(NSString *)nickname
-								page:(NSUInteger)page
-				  recordsPerPage:(NSUInteger)rpp
-						completion:(PLYCompletion)completion{
-	NSParameterAssert(nickname);
-	NSParameterAssert(completion);
-	
-	NSString *function = [NSString stringWithFormat:@"user/%@/follower", nickname];
-	NSString *path = [self _functionPathForFunction:function];
-	
-	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
-	
-	if (page)       [parameters setObject:@(page)     forKey:@"page"];
-	if (rpp)        [parameters setObject:@(rpp)      forKey:@"records_per_page"];
-	
-	[self _performMethodCallWithPath:path parameters:parameters completion:completion];
-}
-
-/**
- * Returns the followed users by the specific user.
- * ATTENTION: Login required
- **/
-- (void) getFollowingFromUser:(NSString *)nickname
-								 page:(NSUInteger)page
-					recordsPerPage:(NSUInteger)rpp
-						 completion:(PLYCompletion)completion{
-	NSParameterAssert(nickname);
-	NSParameterAssert(completion);
-	
-	NSString *function = [NSString stringWithFormat:@"user/%@/following", nickname];
-	NSString *path = [self _functionPathForFunction:function];
-	
-	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
-	
-	if (page)       [parameters setObject:@(page)     forKey:@"page"];
-	if (rpp)        [parameters setObject:@(rpp)      forKey:@"records_per_page"];
-	
-	[self _performMethodCallWithPath:path parameters:parameters completion:completion];
-}
-
-/**
  * Follow a specific user.
  * ATTENTION: Login required
  **/
@@ -1999,13 +1955,12 @@
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:params completion:ownCompletion];
 }
 
-
-- (void)followerForUser:(PLYUser *)user completion:(PLYCompletion)completion
+- (void)followerForUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion
 {
 	NSParameterAssert(user);
 	NSParameterAssert(completion);
 	
-	NSString *function = [NSString stringWithFormat:@"/user/%@/follower_ids", user.Id];
+	NSString *function = [NSString stringWithFormat:@"/user/%@/follower", user.Id];
 	NSString *path = [self _functionPathForFunction:function];
 	
 	PLYCompletion wrappedCompletion = [completion copy];
@@ -2015,22 +1970,10 @@
 		{
 			NSMutableArray *tmpArray = [NSMutableArray array];
 			
-			for (NSString *identifier in result)
+			for (PLYUser *user in result)
 			{
-				PLYUser *cachedUser = [_entityCache objectForKey:identifier];
-				
-				if (cachedUser)
-				{
-					[tmpArray addObject:cachedUser];
-				}
-				else
-				{
-					PLYUser *user = [PLYUser new];
-					user.Id = identifier;
-					user = [self _entityByUpdatingCachedEntity:user];
-					
-					[tmpArray addObject:user];
-				}
+				PLYUser *cachedUser = [self _entityByUpdatingCachedEntity:user];
+				[tmpArray addObject:cachedUser];
 			}
 			
 			result = [tmpArray copy];
@@ -2042,15 +1985,15 @@
 		}
 	};
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:nil completion:ownCompletion];
+	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:options completion:ownCompletion];
 }
 
-- (void)followingForUser:(PLYUser *)user completion:(PLYCompletion)completion
+- (void)followingForUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion
 {
 	NSParameterAssert(user);
 	NSParameterAssert(completion);
 	
-	NSString *function = [NSString stringWithFormat:@"/user/%@/following_ids", user.Id];
+	NSString *function = [NSString stringWithFormat:@"/user/%@/following", user.Id];
 	NSString *path = [self _functionPathForFunction:function];
 	
 	PLYCompletion wrappedCompletion = [completion copy];
@@ -2060,22 +2003,10 @@
 		{
 			NSMutableArray *tmpArray = [NSMutableArray array];
 			
-			for (NSString *identifier in result)
+			for (PLYUser *user in result)
 			{
-				PLYUser *cachedUser = [_entityCache objectForKey:identifier];
-				
-				if (cachedUser)
-				{
-					[tmpArray addObject:cachedUser];
-				}
-				else
-				{
-					PLYUser *user = [PLYUser new];
-					user.Id = identifier;
-					user = [self _entityByUpdatingCachedEntity:user];
-					
-					[tmpArray addObject:user];
-				}
+				PLYUser *cachedUser = [self _entityByUpdatingCachedEntity:user];
+				[tmpArray addObject:cachedUser];
 			}
 			
 			result = [tmpArray copy];
@@ -2087,7 +2018,7 @@
 		}
 	};
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:nil completion:ownCompletion];
+	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:options completion:ownCompletion];
 }
 
 /**

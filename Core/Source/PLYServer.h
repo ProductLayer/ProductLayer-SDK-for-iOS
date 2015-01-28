@@ -486,21 +486,19 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 
 /**
  Retrieves a user's followers
- @param nickname The nickname to search for
- @param page The page number to retrieve of the search results
- @param rpp The records per page to retrieve
+ @param user The user for whom you want to get the followers
+ @param options A dictionary with options to determine paging options
  @param completion The completion handler for the request
  */
-- (void)getFollowerFromUser:(NSString *)nickname page:(NSUInteger)page recordsPerPage:(NSUInteger)rpp completion:(PLYCompletion)completion;
+- (void)followerForUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion;
 
 /**
  Retrieves the friends a user is following
- @param nickname The nickname to search for
- @param page The page number to retrieve of the search results
- @param rpp The records per page to retrieve
+ @param user The user for whom you want to get the followers
+ @param options A dictionary with options to determine paging options
  @param completion The completion handler for the request
  */
-- (void)getFollowingFromUser:(NSString *)nickname page:(NSUInteger)page recordsPerPage:(NSUInteger)rpp completion:(PLYCompletion)completion;
+- (void)followingForUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion;
 
 /**
  Follows a user by nickname
@@ -516,9 +514,6 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  */
 - (void)unfollowUser:(PLYUser *)user completion:(PLYCompletion)completion;
 
-
-- (void)followerForUser:(PLYUser *)user completion:(PLYCompletion)completion;
-- (void)followingForUser:(PLYUser *)user completion:(PLYCompletion)completion;
 
 /**
  @name Timelines
