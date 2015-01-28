@@ -56,6 +56,10 @@
 		self.accessoryView = [DTCustomColoredAccessory accessoryWithColor:PLYBrandColor() type:DTCustomColoredAccessoryTypeRight];
 		self.accessoryView.userInteractionEnabled = NO;
 	}
+	else
+	{
+		self.accessoryView = nil;
+	}
 }
 
 #pragma mark - Properties
