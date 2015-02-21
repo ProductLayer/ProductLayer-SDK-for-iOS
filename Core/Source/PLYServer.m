@@ -2060,10 +2060,19 @@
 
 - (void)timelineForUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion
 {
-	NSParameterAssert(user);
 	NSParameterAssert(completion);
 	
-	NSString *function = [NSString stringWithFormat:@"/timeline/user/%@", user.Id];
+	NSString *function;
+ 
+	if (user)
+	{
+		function = [NSString stringWithFormat:@"/timeline/user/%@", user.Id];
+	}
+	else
+	{
+		function = @"/timeline/";
+	}
+	
 	NSString *path = [self _functionPathForFunction:function];
 	
 	PLYCompletion wrappedCompletion = [completion copy];
