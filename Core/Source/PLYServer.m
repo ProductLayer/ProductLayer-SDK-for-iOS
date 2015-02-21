@@ -692,6 +692,11 @@
 		// always update password
 		account.password = _authToken;
 		
+		NSDictionary *userDict = [_loggedInUser dictionaryRepresentation];
+		NSData *data = [NSJSONSerialization dataWithJSONObject:userDict options:0 error:NULL];
+		NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+		account.descriptionText = jsonString;
+		
 		// persist
 		if (![keychain writeKeychainItem:account error:&error])
 		{
