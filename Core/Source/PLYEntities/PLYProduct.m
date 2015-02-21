@@ -113,6 +113,10 @@
 	{
 		self.additionalLanguages = value;
 	}
+	else if ([key isEqualToString:@"pl-prod-lnks-buy"])
+	{
+		[self setValue:value forKey:@"buyLinks"];
+	}
 	else
 	{
 		[super setValue:value forKey:key];
@@ -206,6 +210,11 @@
 		dict[@"pl-additional-lng"] = _additionalLanguages;
 	}
 	
+	if (_buyLinks)
+	{
+		dict[@"pl-prod-lnks-buy"] = _buyLinks;
+	}
+	
 	// return immutable
 	return [dict copy];
 }
@@ -232,6 +241,7 @@
 	self.sourceURL = entity.sourceURL;
 	self.defaultImage = entity.defaultImage;
 	self.additionalLanguages = entity.additionalLanguages;
+	self.buyLinks = entity.buyLinks;
 }
 
 @end

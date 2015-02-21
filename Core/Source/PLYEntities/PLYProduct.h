@@ -110,4 +110,9 @@
  */
 @property (nonatomic, copy) NSArray *additionalLanguages;
 
+/**
+ Links where the product can be bought
+ */
+@property (nonatomic, copy) NSDictionary *buyLinks;
+
 @end
