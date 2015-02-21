@@ -93,12 +93,12 @@
 /**
  The characteristics information.
  */
-@property (nonatomic, strong) NSMutableDictionary *characteristics;
+@property (nonatomic, copy) NSDictionary *characteristics;
 
 /**
  The nutrition information.
  */
-@property (nonatomic, strong) NSMutableDictionary *nutritious;
+@property (nonatomic, copy) NSDictionary *nutritious;
 
 /**
  The source URL of the product information
