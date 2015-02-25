@@ -42,6 +42,13 @@
 /* Alert title when login fails */
 "PLY_LOGIN_FAILED_TITLE" = "Login Failed";
 
+/* Button for signing in with Twitter */
+"SIGN_IN_WITH_TWITTER" = "Sign in with Twitter";
+
+/* Button for signing in with Facebook */
+"SIGN_IN_WITH_FACEBOOK" = "Sign in with Facebook";
+
+
 // ------- Lost PW
 
 /* Explanation to show on lost password dialog */
@@ -54,10 +61,10 @@
 "PLY_LOSTPW_NO_USER" = "There is no user with this email address.";
 
 /* Title of alert in lost password dialog */
-"PLY_LOSTPW_ERROR_ALERT" = "Error requesting new password";
+"PLY_LOSTPW_ERROR_ALERT" = "Error requesting new password.";
 
 /* Title for successful password reset */
-"PLY_LOSTPW_SUCCESS_ALERT_TITLE" = "Password reset successful";
+"PLY_LOSTPW_SUCCESS_ALERT_TITLE" = "Password reset successful.";
 
 /* Message for successful password reset */
 "PLY_LOSTPW_SUCCESS_ALERT_MSG" = "A new password was send to you by email.";
@@ -149,3 +156,21 @@
 "REPORT_TYPE_PRODUCT" = "Product";
 "REPORT_TYPE_USER" = "User";
 "REPORT_TYPE_OPINE" = "Opine";
+
+
+// ------- PLYEditProductViewController
+
+/* Title for VC for editing products */
+"EDIT_PRODUCT_TITLE" = "Edit Product";
+
+/* Title for section containing product name */
+"EDIT_PRODUCT_SECTION_TITLE" = "Title";
+
+/* Title for section containing product brand name */
+"EDIT_PRODUCT_SECTION_BRAND" = "Brand";
+
+/* Title for section containing product brand owner name */
+"EDIT_PRODUCT_SECTION_BRAND_OWNER" = "Brand Owner";
+
+/* Title for section containing product category name */
+"EDIT_PRODUCT_SECTION_CATEGORY" = "Category";

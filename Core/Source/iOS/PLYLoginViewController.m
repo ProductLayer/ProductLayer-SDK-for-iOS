@@ -104,7 +104,7 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	_facebookButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[_facebookButton addTarget:self action:@selector(signInWithFacebook:) forControlEvents:UIControlEventTouchUpInside];
 	_facebookButton.translatesAutoresizingMaskIntoConstraints = NO;
-	[_facebookButton setTitle:@"Sign in with Facebook" forState:UIControlStateNormal];
+	[_facebookButton setTitle:PLYLocalizedStringFromTable(@"SIGN_IN_WITH_FACEBOOK", @"UI", @"Button for signing in with Facebook") forState:UIControlStateNormal];
 	[_facebookButton setImage:facebookIcon forState:UIControlStateNormal];
 	[self.view addSubview:_facebookButton];
 	
@@ -124,7 +124,7 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	_twitterButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[_twitterButton addTarget:self action:@selector(signInWithTwitter:) forControlEvents:UIControlEventTouchUpInside];
 	_twitterButton.translatesAutoresizingMaskIntoConstraints = NO;
-	[_twitterButton setTitle:@"Sign in with Twitter" forState:UIControlStateNormal];
+	[_twitterButton setTitle:PLYLocalizedStringFromTable(@"SIGN_IN_WITH_TWITTER", @"UI", @"Button for signing in with Twitter") forState:UIControlStateNormal];
 	[_twitterButton setImage:twitterIcon forState:UIControlStateNormal];
 	[self.view addSubview:_twitterButton];
 	

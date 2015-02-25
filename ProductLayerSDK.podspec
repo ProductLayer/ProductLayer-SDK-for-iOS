@@ -34,7 +34,7 @@ Pod::Spec.new do |spec|
 	ss.frameworks = 'AVFoundation'
     ss.ios.dependency 'ProductLayerSDK/Core'
     ss.ios.dependency 'DTFoundation/UIKit_BlocksAdditions'
-  	ss.ios.resource_bundles = { 'ProductLayerSDK' => ['Core/Resources/*.strings', 'Core/Resources/*.png', 'Core/Resources/*.xib'] }
+  	ss.ios.resource_bundles = { 'ProductLayerSDK' => ['Core/Resources/*'] }
   end
 
 end

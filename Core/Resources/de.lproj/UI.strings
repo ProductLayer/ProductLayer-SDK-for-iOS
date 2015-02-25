@@ -1,0 +1,175 @@
+/*
+ * Localizable.strings for en_US
+ *
+ * Copyright (c) 2014 ProductLayer. All rights reserved.
+ */
+
+
+// ------- Global
+
+/* User Name Field Placeholder */
+"PLY_NAME_PLACEHOLDER" =  "Max";
+
+/* Password Field Placeholder */
+"PLY_PASSWORD_PLACEHOLDER" =  "Kennwort";
+
+/* Placeholder for email text field */
+"PLY_EMAIL_PLACEHOLDER" = "max@productlayer.com";
+
+/* Alert acknowledgement button title */
+"PLY_ALERT_OK" = "Ok";
+
+/* Alert cancel title */
+"PLY_ALERT_CANCEL" = "Abbrechen";
+
+// ------ Login
+
+/* Explanation to show on login dialog */
+"PLY_LOGIN_EXPLAIN" = "Melde Dich bei ProductLayer an um die Zeitleiste Deiner Freunde zu sehen und eigene Meinungen abzugeben.";
+
+/* Link to lost password dialog */
+"PLY_LOGIN_LOST_PASSWORD" = "Kennwort vergessen ...";
+
+/* Link to create new account dialog */
+"PLY_LOGIN_CREATE_ACCOUNT" =  "Neues Konto anlegen ...";
+
+/* Text for done button in login dialog */
+"PLY_LOGIN_RIGHT_BUTTON_TITLE" = "Anmelden";
+
+/* Short title used as back button from other view controllers going back to login */
+"PLY_LOGIN_SHORT_TITLE" = "Anmelden";
+
+/* Alert title when login fails */
+"PLY_LOGIN_FAILED_TITLE" = "Anmeldung fehlgeschlagen";
+
+/* Button for signing in with Twitter */
+"SIGN_IN_WITH_TWITTER" = "Mit Twitter anmelden";
+
+/* Button for signing in with Facebook */
+"SIGN_IN_WITH_FACEBOOK" = "Mit Facebook anmelden";
+
+// ------- Lost PW
+
+/* Explanation to show on lost password dialog */
+"PLY_LOSTPW_EXPLAIN" = "Gib Deine E-Mail an damit ProductLayer Dir ein neues zufälliges Kennwort schicken kann.";
+
+/* Text for done button in lost password dialog */
+"PLY_LOSTPW_RIGHT_BUTTON_TITLE" = "Senden";
+
+/* Alert when user is not found */
+"PLY_LOSTPW_NO_USER" = "Es existiert kein Benutzer mit dieser E-Mail Adresse.";
+
+/* Title of alert in lost password dialog */
+"PLY_LOSTPW_ERROR_ALERT" = "Fehler beim Setzen eines neuen Kennworts.";
+
+/* Title for successful password reset */
+"PLY_LOSTPW_SUCCESS_ALERT_TITLE" = "Kennwort erfolgreich neu gesetzt.";
+
+/* Message for successful password reset */
+"PLY_LOSTPW_SUCCESS_ALERT_MSG" = "Ein neues Kennwort wurde Dir per E-Mail geschickt.";
+
+
+// ------- Sign Up
+
+/* Explanation to show on sign up dialog */
+"PLY_SIGNUP_EXPLAIN" = "Wähle einen Spitznamen aus und gib Deine E-Mail bekannt so dass wir Dir das initiale Kennwort senden können.";
+
+/* Text for done button in sign up dialog */
+"PLY_SIGNUP_RIGHT_BUTTON_TITLE" = "Registrieren";
+
+/* Title of alert in signup dialog */
+"PLY_SIGNUP_ERROR_ALERT" = "Registrierung fehlgeschlagen";
+
+/* Title for successful sign up */
+"PLY_SIGNUP_SUCCESS_ALERT_TITLE" = "Registrierung erfolgreich";
+
+/* Message for successful sign up */
+"PLY_SIGNUP_SUCCESS_ALERT_MSG" = "Bitte überprüfe Deinen Posteingang. Du bekommst ein initiales Kennwort, dass Du ändern solltest. Danach kannst Du Dich mit Benutzernamen und Kennwort anmelden.";
+
+
+// ------- PLYCategoryPickerViewController
+
+/* Title of the view controller showing categories */
+"PLY_CATEGORIES_TITLE" = "Kategorien";
+
+
+// ------- PLYBrandPickerViewController
+
+/* Title of the view controller showing brands */
+"PLY_BRANDS_TITLE" = "Marken";
+
+/* Title of section for creating a new brand */
+"PLY_CREATE_BRAND" = "Neue Marke";
+
+/* Title of section containing likely brands */
+"PLY_LIKELY_BRANDS" = "Likely Brands";
+
+/* Title of section containing known brands */
+"PLY_KNOWN_BRANDS" = "Wahrscheinliche Marken";
+
+
+
+// ------- PLYBrandOwnerPickerViewController
+
+/* Title of the view controller showing brand owners */
+"PLY_BRAND_OWNERS_TITLE" = "Marken-Besitzer";
+
+/* Title of section for creating a new brand owner */
+"PLY_CREATE_BRAND_OWNER" = "Neuer Marken-Besitzer";
+
+/* Title of section containing likely brand owners */
+"PLY_LIKELY_BRAND_OWNERS" = "Wahrscheinliche Marken-Besitzer";
+
+/* Title of section containing known brand owners */
+"PLY_KNOWN_BRAND_OWNERS" = "Bekannte Marken-Besitzer";
+
+
+// ------- PLYOpineComposeViewController
+
+/* Title of opine composer */
+"OPINE_COMPOSER_TITLE" = "Deine Meinung";
+
+/* Title for actions menu from opine photo button */
+"OPINE_PHOTO_ACTIONS_TITLE" = "Bilder für Meinung";
+
+/* Add new opine image from camera */
+"OPINE_IMAGE_FROM_CAM" = "Neues Foto machen";
+
+/* Select new opine image from library */
+"OPINE_IMAGE_FROM_LIBRARY" = "Foto aus Bibliothek wählen";
+
+/* Option to delete all opine attachments */
+"OPINE_DELETE_IMAGES_ACTION" = "Beigefügte Bilder entfernen";
+
+
+// ------- PLYReportProblemViewController
+
+/* Title of report problem composer */
+"REPORT_PROBLEM_TITLE" = "Problem mit %@";
+
+/* Alert title when creating of problem report fails */
+"PLY_REPORT_FAILED_TITLE" = "Senden des Problem-Berichts fehlgeschlagen";
+
+// the kinds of items that can be reported
+"REPORT_TYPE_IMAGE" = "Bild";
+"REPORT_TYPE_PRODUCT" = "Produkt";
+"REPORT_TYPE_USER" = "Benutzer";
+"REPORT_TYPE_OPINE" = "Meinung";
+
+
+// ------- PLYEditProductViewController
+
+/* Title for VC for editing products */
+"EDIT_PRODUCT_TITLE" = "Produkt bearbeiten";
+
+/* Title for section containing product name */
+"EDIT_PRODUCT_SECTION_TITLE" = "Titel";
+
+/* Title for section containing product brand name */
+"EDIT_PRODUCT_SECTION_BRAND" = "Marke";
+
+/* Title for section containing product brand owner name */
+"EDIT_PRODUCT_SECTION_BRAND_OWNER" = "Marken-Besitzer";
+
+/* Title for section containing product category name */
+"EDIT_PRODUCT_SECTION_CATEGORY" = "Kategorie";

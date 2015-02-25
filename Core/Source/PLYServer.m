@@ -95,7 +95,7 @@
 
 - (void)cache:(NSCache *)cache willEvictObject:(id)obj
 {
-	NSLog(@"evict: %@ with ID %@", obj, [obj Id]);
+	DTLogDebug(@"evict: %@ with ID %@", obj, [obj Id]);
 }
 
 #pragma mark Singleton Methods
@@ -1426,7 +1426,10 @@
 
 - (NSURL *)URLForProductImageWithGTIN:(NSString *)GTIN maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop
 {
-	NSParameterAssert(PLYIsValidGTIN(GTIN));
+	if (!PLYIsValidGTIN(GTIN))
+	{
+		return nil;
+	}
 	
 	if ([GTIN length]<14)
 	{

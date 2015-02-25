@@ -35,7 +35,7 @@
 	[self.tableView registerClass:[PLYTextFieldTableViewCell class] forCellReuseIdentifier:@"PLYTextFieldTableViewCell"];
 	[self.tableView registerClass:[PLYBrandedTableViewCell class] forCellReuseIdentifier:@"PLYBrandedTableViewCell"];
 	
-	self.navigationItem.title = @"Edit Product";
+	self.navigationItem.title = PLYLocalizedStringFromTable(@"EDIT_PRODUCT_TITLE", @"UI", @"Title for VC for editing products");
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -228,22 +228,22 @@
 	{
  	 	case 0:
 		{
-			return @"Title";
+			return PLYLocalizedStringFromTable(@"EDIT_PRODUCT_SECTION_TITLE", @"UI", @"Title for section containing product name");
 		}
 			
 		case 1:
 		{
-			return @"Brand";
+			return PLYLocalizedStringFromTable(@"EDIT_PRODUCT_SECTION_BRAND", @"UI", @"Title for section containing product brand name");
 		}
 			
 		case 2:
 		{
-			return @"Brand Owner";
+			return PLYLocalizedStringFromTable(@"EDIT_PRODUCT_SECTION_BRAND_OWNER", @"UI", @"Title for section containing product brand owner name");
 		}
 			
 		case 3:
 		{
-			return @"Category";
+			return PLYLocalizedStringFromTable(@"EDIT_PRODUCT_SECTION_CATEGORY", @"UI", @"Title for section containing product category name");
 		}
 	}
 	
