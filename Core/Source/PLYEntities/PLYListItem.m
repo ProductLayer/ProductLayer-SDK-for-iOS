@@ -70,7 +70,7 @@
 	
 	if (_product)
 	{
-		dict[@"pl-prod"] = _product;
+		dict[@"pl-prod"] = [_product dictionaryRepresentation];
 	}
 	
 	// return immutable
