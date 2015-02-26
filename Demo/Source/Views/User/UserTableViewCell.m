@@ -135,7 +135,8 @@
 	NSString *imageIdentifier = [_user.Id copy];
 	
 	// need to load it
-	UIImage *image = [[DTDownloadCache sharedInstance] cachedImageForURL:_user.avatarURL option:DTDownloadCacheOptionLoadIfNotCached completion:^(NSURL *URL, UIImage *image, NSError *error) {
+	NSURL *imageURL = [[PLYServer sharedServer] avatarImageURLForUser:_user];
+	UIImage *image = [[DTDownloadCache sharedInstance] cachedImageForURL:imageURL option:DTDownloadCacheOptionLoadIfNotCached completion:^(NSURL *URL, UIImage *image, NSError *error) {
 		
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
 			if (error)
