@@ -10,6 +10,7 @@
 #import <XCTest/XCTest.h>
 
 #import "PLYFunctions.h"
+#import "PLYJavaTimestampFunctions.h"
 #import "PLYCompatibility.h"
 
 @interface PLYFunctionsTest : XCTestCase
