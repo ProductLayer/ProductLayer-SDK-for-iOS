@@ -166,6 +166,11 @@
 		A7657ACC1A62D8E200CBDBD9 /* camera-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7657AC71A62D8E200CBDBD9 /* camera-icon@3x.png */; };
 		A7657ACD1A62D8E200CBDBD9 /* camera-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7657AC71A62D8E200CBDBD9 /* camera-icon@3x.png */; };
 		A7657AF31A630B9000CBDBD9 /* PLYUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7657AF21A630B9000CBDBD9 /* PLYUploadImage.m */; };
+		A7665D0B1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7665D091A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m */; };
+		A7665D0C1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7665D091A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m */; };
+		A7665D0D1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7665D091A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m */; };
+		A7665D0E1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D0A1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h */; };
+		A7665D0F1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D0A1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h */; };
 		A76A57141986939700751454 /* API.strings in Resources */ = {isa = PBXBuildFile; fileRef = A76A56E81986922300751454 /* API.strings */; };
 		A76A571B1986A6D300751454 /* ProductLayerSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A76A570C1986937D00751454 /* ProductLayerSDK.bundle */; };
 		A76D3F67198650770032FE59 /* PLYFormEmailValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F5A198650770032FE59 /* PLYFormEmailValidator.m */; };
@@ -780,6 +785,8 @@
 		A7657AC71A62D8E200CBDBD9 /* camera-icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-icon@3x.png"; sourceTree = "<group>"; };
 		A7657AF11A630B9000CBDBD9 /* PLYUploadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYUploadImage.h; sourceTree = "<group>"; };
 		A7657AF21A630B9000CBDBD9 /* PLYUploadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYUploadImage.m; sourceTree = "<group>"; };
+		A7665D091A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYJavaTimestampFunctions.m; path = PLYEntities/PLYJavaTimestampFunctions.m; sourceTree = "<group>"; };
+		A7665D0A1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYJavaTimestampFunctions.h; path = PLYEntities/PLYJavaTimestampFunctions.h; sourceTree = "<group>"; };
 		A7696B4B19ED91E000C1D3C4 /* Framework-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Framework-Info.plist"; sourceTree = "<group>"; };
 		A76A56E81986922300751454 /* API.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = API.strings; sourceTree = "<group>"; };
 		A76A570C1986937D00751454 /* ProductLayerSDK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProductLayerSDK.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1704,6 +1711,8 @@
 				C97FAA1B191CCA4D00144D2C /* PLYErrorResponse.m */,
 				A7548B22196C4C16000B72EB /* PLYImage.h */,
 				A7548B23196C4C16000B72EB /* PLYImage.m */,
+				A7665D0A1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h */,
+				A7665D091A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m */,
 				C98CD25F190FC4E60035647C /* PLYList.h */,
 				C98CD260190FC4E60035647C /* PLYList.m */,
 				C98CD262190FC7D50035647C /* PLYListItem.h */,
@@ -1768,6 +1777,7 @@
 				A7590B0719ED77B40084EBCA /* PLYFormEmailValidator.h in Headers */,
 				A77FFAA51A77907B0019DD5C /* PLYBrandedTableViewCell.h in Headers */,
 				A7590B2719ED77B80084EBCA /* PLYVotableEntity.h in Headers */,
+				A7665D0E1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h in Headers */,
 				A7590B0519ED77B40084EBCA /* UIViewController+ProductLayer.h in Headers */,
 				A7590B1319ED77B80084EBCA /* PLYErrorResponse.h in Headers */,
 				A7590B2319ED77B80084EBCA /* PLYUser.h in Headers */,
@@ -1806,6 +1816,7 @@
 				A7EA07141A2B139C00B61CCE /* PLYPackaging.h in Headers */,
 				A72592B71A757D5900952685 /* PLYCategory.h in Headers */,
 				A7EA07161A2B139C00B61CCE /* PLYProduct.h in Headers */,
+				A7665D0F1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h in Headers */,
 				A7EA07121A2B139C00B61CCE /* PLYOpine.h in Headers */,
 				A75CF7821A30DF4E007E30FC /* PLYEntities.h in Headers */,
 				A7EA07011A2B12E900B61CCE /* ProductLayer.h in Headers */,
@@ -2403,6 +2414,7 @@
 				A7590B2819ED77B80084EBCA /* PLYVotableEntity.m in Sources */,
 				A71918101A1B5B1B002C2D76 /* PLYContentsDidChangeValidator.m in Sources */,
 				A72592BC1A757D9400952685 /* PLYTextFieldTableViewCell.m in Sources */,
+				A7665D0C1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m in Sources */,
 				A75CF73D1A30B48A007E30FC /* PLYVideoPreviewInterestBox.m in Sources */,
 				A7590B2019ED77B80084EBCA /* PLYProduct.m in Sources */,
 				A7590B2A19ED77BD0084EBCA /* PLYServer.m in Sources */,
@@ -2504,6 +2516,7 @@
 				C98CD2671910E0D70035647C /* PLYPackaging.m in Sources */,
 				A77FFACE1A77E5790019DD5C /* PLYBrandOwnerPickerViewController.m in Sources */,
 				A764789A1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */,
+				A7665D0B1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m in Sources */,
 				A762933B1A5FF1CF00208A27 /* PLYSocialAuthWebViewController.m in Sources */,
 				C98CD2681910E0D70035647C /* PLYProduct.m in Sources */,
 				A73803351A28E91800011D9C /* PLYTextView.m in Sources */,
@@ -2570,6 +2583,7 @@
 				A7EA072C1A2B176D00B61CCE /* PLYServer.m in Sources */,
 				A7EB72771A72B42300FFD4CC /* PLYProblemReport.m in Sources */,
 				A7EA07151A2B139C00B61CCE /* PLYPackaging.m in Sources */,
+				A7665D0D1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m in Sources */,
 				A7EA070D1A2B139C00B61CCE /* PLYImage.m in Sources */,
 				A7EA070B1A2B139C00B61CCE /* PLYErrorResponse.m in Sources */,
 				A75CF7521A30B4BD007E30FC /* PLYBrand.m in Sources */,
