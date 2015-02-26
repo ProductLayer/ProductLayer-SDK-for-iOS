@@ -10,6 +10,7 @@
 
 #import "PLYConstants.h"
 #import "PLYEntities.h"
+#import "PLYFunctions.h"
 
 #import "DTLog.h"
 #import "NSString+DTURLEncoding.h"
@@ -21,23 +22,36 @@
 #import "UIApplication+DTNetworkActivity.h"
 #endif
 
+#import "NSString+DTPaths.h"
+
 
 // this is the URL for the endpoint server
 #define PLY_ENDPOINT_URL [NSURL URLWithString:@"https://api.productlayer.com"]
 
 // this is a prefix added before REST methods, e.g. for a version of the API
-#define PLY_PATH_PREFIX @"0.3"
+#define PLY_PATH_PREFIX @"0.4"
 
-#define PLY_SERVICE [PLY_ENDPOINT_URL absoluteString]
+// the service name for saving tokens to the keychain
+#define PLY_SERVICE @"com.productlayer.api.auth-token"
+
+
+@interface PLYServer () <NSCacheDelegate>
+
+@property (nonatomic, readwrite, strong) PLYUser *loggedInUser;
+
+@end
 
 
 @implementation PLYServer
 {
 	NSURL *_hostURL;
 	NSString *_APIKey;
+	NSString *_authToken;
 	
 	NSURLSession *_session;
 	NSURLSessionConfiguration *_configuration;
+	
+	NSCache *_entityCache;
 }
 
 - (instancetype)initWithSessionConfiguration:(NSURLSessionConfiguration *)configuration
@@ -48,6 +62,16 @@
 	{
 		_hostURL = PLY_ENDPOINT_URL;
 		_configuration = configuration;
+		
+		_entityCache = [[NSCache alloc] init];
+		_entityCache.delegate = self;
+		
+		// load last state (login user)
+		[self _loadState];
+
+#if TARGET_OS_IPHONE
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:[UIApplication sharedApplication]];
+#endif
 	}
 	
 	return self;
@@ -56,12 +80,22 @@
 // designated initializer
 - (instancetype)init
 {
-    _performingLogin = NO;
-    
+	_performingLogin = NO;
+	
 	// use default config, we need credential & caching
-	NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-    
+	NSURLSessionConfiguration *config = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+	
 	return [self initWithSessionConfiguration:config];
+}
+
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)cache:(NSCache *)cache willEvictObject:(id)obj
+{
+	DTLogDebug(@"evict: %@ with ID %@", obj, [obj Id]);
 }
 
 #pragma mark Singleton Methods
@@ -80,8 +114,17 @@
 {
 	_APIKey = APIKey;
 	
-	// load last state (login user)
-	[self _loadState];
+	// try to update details (like score for logged in user)
+	if (_loggedInUser)
+	{
+		[self loadDetailsForUser:_loggedInUser completion:^(id result, NSError *error) {
+			if (error)
+			{
+				DTLogError(@"Error updating details for logged in user: %@", [error localizedDescription]);
+				return;
+			}
+		}];
+	}
 }
 
 #pragma mark - Request Handling
@@ -102,7 +145,7 @@
 
 // constructs the path for a method call
 - (NSURL *)_methodURLForPath:(NSString *)path
-                  parameters:(NSDictionary *)parameters {
+						parameters:(NSDictionary *)parameters {
 	// turns the API_ENDPOINT into NSURL
 	NSURL *endpointURL = PLY_ENDPOINT_URL;
 	
@@ -143,41 +186,41 @@
 }
 
 - (void)_performMethodCallWithPath:(NSString *)path
-                        parameters:(NSDictionary *)parameters
-                        completion:(PLYCompletion)completion{
+								parameters:(NSDictionary *)parameters
+								completion:(PLYCompletion)completion{
 	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:parameters payload:nil basicAuth:nil completion:completion];
 }
 
 - (void)_performMethodCallWithPath:(NSString *)path
-                        HTTPMethod:(NSString *)HTTPMethod
-                        parameters:(NSDictionary *)parameters
-                        completion:(PLYCompletion)completion {
+								HTTPMethod:(NSString *)HTTPMethod
+								parameters:(NSDictionary *)parameters
+								completion:(PLYCompletion)completion {
 	[self _performMethodCallWithPath:path HTTPMethod:HTTPMethod parameters:parameters payload:nil basicAuth:nil completion:completion];
 }
 
 - (void)_performMethodCallWithPath:(NSString *)path
-                        HTTPMethod:(NSString *)HTTPMethod
-                        parameters:(NSDictionary *)parameters
-                           payload:(id)payload
-                        completion:(PLYCompletion)completion{
+								HTTPMethod:(NSString *)HTTPMethod
+								parameters:(NSDictionary *)parameters
+									payload:(id)payload
+								completion:(PLYCompletion)completion{
 	[self _performMethodCallWithPath:path HTTPMethod:HTTPMethod parameters:parameters payload:payload basicAuth:nil completion:completion];
 }
 
 - (void)_performMethodCallWithPath:(NSString *)path
-                        HTTPMethod:(NSString *)HTTPMethod
-                        parameters:(NSDictionary *)parameters
-                         basicAuth:(NSString *)basicAuth
-                        completion:(PLYCompletion)completion{
+								HTTPMethod:(NSString *)HTTPMethod
+								parameters:(NSDictionary *)parameters
+								 basicAuth:(NSString *)basicAuth
+								completion:(PLYCompletion)completion{
 	[self _performMethodCallWithPath:path HTTPMethod:HTTPMethod parameters:parameters payload:nil basicAuth:basicAuth completion:completion];
 }
 
 // internal method that executes actual API calls
 - (void)_performMethodCallWithPath:(NSString *)path
-                        HTTPMethod:(NSString *)HTTPMethod
-                        parameters:(NSDictionary *)parameters
-                           payload:(id)payload
-                         basicAuth:(NSString *)basicAuth
-                        completion:(PLYCompletion)completion
+								HTTPMethod:(NSString *)HTTPMethod
+								parameters:(NSDictionary *)parameters
+									payload:(id)payload
+								 basicAuth:(NSString *)basicAuth
+								completion:(PLYCompletion)completion
 {
 	NSURL *methodURL = [self _methodURLForPath:path
 											  parameters:parameters];
@@ -188,7 +231,7 @@
 	{
 		request.HTTPMethod = HTTPMethod;
 	}
-
+	
 	// Set basic authorization if available
 	if (basicAuth)
 	{
@@ -196,11 +239,18 @@
 	}
 	
 	// Add the API key to each request.
-   NSAssert(_APIKey, @"Setting an API Key is required to perform requests. Use [[PLYServer sharedServer] setAPIKey:]");
+	NSAssert(_APIKey, @"Setting an API Key is required to perform requests. Use [[PLYServer sharedServer] setAPIKey:]");
 	[request setValue:_APIKey forHTTPHeaderField:@"API-KEY"];
 	
-	NSMutableString *debugMessage = [NSMutableString string];
-	[debugMessage appendFormat:@"%@ %@\n", request.HTTPMethod, [methodURL absoluteString]];
+	// Add preferred languages
+	NSString *languages = [[NSLocale preferredLanguages] componentsJoinedByString:@", "];
+	[request setValue:languages forHTTPHeaderField:@"Accept-Language"];
+	
+	// add auth token if present
+	if (_authToken)
+	{
+		[request setValue:_authToken forHTTPHeaderField:@"X-ProductLayer-Auth-Token"];
+	}
 	
 	// add body if set
 	if (payload)
@@ -209,14 +259,23 @@
 		
 		if ([payload isKindOfClass:[DTImage class]])
 		{
-			payloadData = DTImageJPEGRepresentation(payload, 0.8);
+			payloadData = DTImageJPEGRepresentation(payload, 0.81);
 			[request setValue:@"image/jpeg" forHTTPHeaderField:@"Content-Type"];
 			request.timeoutInterval = 60;
 		}
 		else if ([payload isKindOfClass:[NSData class]])
 		{
 			payloadData = [payload copy];
-			[request setValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
+			
+			// workaround for generic data upload for image
+			if ([path containsString:@"image"])
+			{
+				[request setValue:@"image/jpeg" forHTTPHeaderField:@"Content-Type"];
+			}
+			else
+			{
+				[request setValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
+			}
 			
 			request.timeoutInterval = 60;
 		}
@@ -236,6 +295,20 @@
 	}
 	
 	[self startDataTaskForRequest:request completion:completion];
+}
+
+- (void)_updateAuthTokenFromHeaders:(NSDictionary *)headers
+{
+	NSArray *cookies = [headers[@"Set-Cookie"] componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@",;"]];
+	
+	NSString *authHeaderName = @"X-ProductLayer-Auth-Token";
+	for (NSString *oneCookie in cookies)
+	{
+		if ([oneCookie hasPrefix:authHeaderName])
+		{
+			_authToken = [oneCookie substringFromIndex:[authHeaderName length]+1];
+		}
+	}
 }
 
 - (void)startDataTaskForRequest:(NSMutableURLRequest *)request completion:(PLYCompletion)completion
@@ -262,8 +335,8 @@
 												id result = nil;
 												
 												// check for transport error, e.g. no network connection
-												if (retError) {
-													
+												if (retError)
+												{
 													completion(nil, retError);
 													return;
 												}
@@ -305,6 +378,15 @@
 												BOOL ignoreContent = NO;
 												long statusCode = httpResp.statusCode;
 												
+												if (statusCode == 403)
+												{
+													[self _loadState];
+												}
+												else if (statusCode < 400)
+												{
+													[self _updateAuthTokenFromHeaders:headers];
+												}
+												
 												if ([data length])
 												{
 													if ([contentType hasPrefix:@"application/json"])
@@ -319,8 +401,8 @@
 															DTLogDebug(@"%@", plainText);
 															
 															ignoreContent = YES;
-                                                            
-                                                            result = plainText;
+															
+															result = plainText;
 														}
 														else
 														{
@@ -329,10 +411,11 @@
 															
 															NSDictionary *userInfo = @{NSLocalizedDescriptionKey:  errorMessage};
 															error = [NSError errorWithDomain:PLYErrorDomain code:0 userInfo:userInfo];
-                                                            
-                                                            result = plainText;
+															
+															result = plainText;
 														}
-													} else if ([contentType hasPrefix:@"text/html"])
+													}
+													else if ([contentType hasPrefix:@"text/html"])
 													{
 														ignoreContent = YES;
 													}
@@ -360,54 +443,67 @@
 													id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
 													
 													// Try to parse the json object
-													if ([jsonObject isKindOfClass:[NSArray class]] && [jsonObject count])
+													if ([jsonObject isKindOfClass:[NSArray class]])
 													{
 														NSMutableArray *objectArray = [NSMutableArray arrayWithCapacity:1];
 														
 														for (NSDictionary *dictObject in jsonObject)
 														{
-															if (![dictObject isKindOfClass:[NSDictionary class]])
+															if ([dictObject isKindOfClass:[NSDictionary class]])
 															{
-																break;
-															}
-															
-															id object = [PLYEntity entityFromDictionary:dictObject];
-															
-															if (!object)
-															{
+																id object = [PLYEntity entityFromDictionary:dictObject];
+																
+																if (object)
+																{
+																	[objectArray addObject:object];
+																}
+																
 																continue;
 															}
 															
-															[objectArray addObject:object];
+															// cannot be an entity, just add it
+															[objectArray addObject:dictObject];
 														}
 														
-														// If the objects couldn't be parsed return the json object.
-														if(objectArray.count > 0){
-															result = objectArray;
-														} else {
-															result = jsonObject;
-														}
-													} else if ([jsonObject isKindOfClass:[NSDictionary class]]){
-														id object = [PLYEntity entityFromDictionary:jsonObject];
+														// result is converted objects
+														result = [objectArray copy];
+													}
+													else if ([jsonObject isKindOfClass:[NSDictionary class]])
+													{
+														// result is one converted object
+														result = [PLYEntity entityFromDictionary:jsonObject];
 														
-														if(object == nil) {
+														// in some occasions we get back a dictionary that is no JSON object, e.g. categories
+														if (!result)
+														{
 															result = jsonObject;
-														}
-														else {
-															result = object;
 														}
 													}
 												}
 												
-												if (statusCode >= 400) {
-													PLYErrorResponse *errorResponse = [[PLYErrorResponse alloc] initWithDictionary:result];
-													
-													if(errorResponse && [errorResponse.errors count] > 0){
-														retError = [self _errorWithCode:statusCode
-																						message:((PLYErrorMessage *)[errorResponse.errors objectAtIndex:0]).message];
-													} else {
-														retError = [self _errorWithCode:statusCode
-																						message:[NSHTTPURLResponse localizedStringForStatusCode:(NSInteger)statusCode]];
+												if (statusCode >= 400)
+												{
+													if ([result isKindOfClass:[PLYErrorResponse class]])
+													{
+														// pick out first of potentially multiple errors
+														PLYErrorResponse *errorResponse = (PLYErrorResponse *)result;
+														PLYErrorMessage *firstError = [errorResponse.errors firstObject];
+														NSString *message = firstError.message;
+														
+														retError = [self _errorWithCode:statusCode message:message];
+													}
+													else
+													{
+														if ((statusCode == 404 || statusCode >= 500) && [contentType isEqualToString:@"text/html"])
+														{
+															retError = [self _errorWithCode:statusCode message:@"ProductLayer API currently not available. Please try again later."];
+														}
+														else
+														{
+															// construct new error for the status code
+															retError = [self _errorWithCode:statusCode
+																							message:[NSHTTPURLResponse localizedStringForStatusCode:(NSInteger)statusCode]];
+														}
 													}
 													
 													// error(s) means that there was no usable result
@@ -484,99 +580,237 @@
 
 - (void)_loadState
 {
-	DTKeychain *keychain = [DTKeychain sharedInstance];
-	NSArray *serviceAccounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:nil] error:NULL];
-	
-	if ([serviceAccounts count]>1)
+	@synchronized(self)
 	{
-		// There should be only one account for productlayer for security reasons delete all accounts
+		NSString *path = [[NSString cachesPath] stringByAppendingPathComponent:@"loggedInUser.plist"];
 		
-		for (DTKeychainItem *item in serviceAccounts)
+		if (![[NSFileManager defaultManager] fileExistsAtPath:path])
 		{
-			[keychain removeKeychainItem:item error:NULL];
+			DTLogInfo(@"No loggedInUser plist found");
+			
+			return;
 		}
 		
-		DTLogError(@"Found %d keychain items for service '%@', where maximum one was expected. Deleted all items.", [serviceAccounts count], PLY_SERVICE);
+		// load user from cache file
+		NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
+		PLYUser *loggedInUser = [[PLYUser alloc] initWithDictionary:dict];
 		
-		return;
-	}
-	
-	DTKeychainGenericPassword *account = [serviceAccounts firstObject];
-	
-	if (account)
-	{
-		DTLogInfo(@"Logging in user '%@'", account.account);
 		
-		[self loginWithUser:account.account password:account.password completion:^(id result, NSError *error) {
-			if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == kCFURLErrorNotConnectedToInternet)
-			{
-				// no Internet
-				return;
-			}
+		if (!loggedInUser || !loggedInUser.Id || !loggedInUser.nickname)
+		{
+			DTLogInfo(@"No user logged in");
 			
-			if (error)
-			{
-				DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-					NSDictionary *userInfo = @{@"Error": error};
-					[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerLoginErrorNotification
-																						 object:self
-																					  userInfo:userInfo];
-					
-					// Delete account from the keychain if login failed.
-					[keychain removeKeychainItem:account error:NULL];
-				});
-			}
-			else
-			{
-				DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-					[self setLoggedInUser:result];
-				});
-			}
-		}];
+			return;
+		}
+		
+		// replace with entity from cache if it exists
+		loggedInUser = [self _entityByUpdatingCachedEntity:loggedInUser];
+		
+		// get auth token from keychain for this user
+		DTKeychain *keychain = [DTKeychain sharedInstance];
+		
+		NSError *error;
+		NSArray *serviceAccounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:loggedInUser.Id] error:&error];
+		
+		if (!serviceAccounts)
+		{
+			DTLogError(@"Error retrieving keychain item: %@", [error localizedDescription]);
+			return;
+		}
+		
+		DTKeychainGenericPassword *account = [serviceAccounts firstObject];
+		
+		if (!account)
+		{
+			DTLogError(@"No token found in keychain");
+			return;
+		}
+		
+		_authToken = account.password;
+		self.loggedInUser = loggedInUser;
 	}
 }
 
-- (void)renewSessionIfNecessary
+- (void)_saveState
 {
-    // Only if the user is logged in check if the session is still valid.
-    if (!self.loggedInUser)
-	 {
-		 return;
-	 }
-	 
-	[self isSignedInWithCompletion:^(id result, NSError *error) {
-		if (error)
+	@synchronized(self)
+	{
+		NSString *path = [[NSString cachesPath] stringByAppendingPathComponent:@"loggedInUser.plist"];
+		
+		if (!_loggedInUser || !_authToken)
 		{
-			if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == kCFURLErrorNotConnectedToInternet)
+			DTLogInfo(@"Removing logged in user and keychain item");
+			
+			// delete the logged in user cache
+			[[NSFileManager defaultManager] removeItemAtPath:path error:NULL];
+			
+			// remove all tokens from keychain
+			DTKeychain *keychain = [DTKeychain sharedInstance];
+			NSArray *serviceAccounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:nil] error:NULL];
+			
+			for (DTKeychainItem *item in serviceAccounts)
 			{
-				// no Internet
-				return;
+				[keychain removeKeychainItem:item error:NULL];
 			}
 			
-			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-				NSDictionary *userInfo = @{@"Error": error};
-				[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerLoginErrorNotification
-																					 object:self
-																				  userInfo:userInfo];
-			});
+			return;
 		}
-		else
+		
+		NSDictionary *dict = [_loggedInUser dictionaryRepresentation];
+		[dict writeToFile:path atomically:YES];
+		
+		if (![[NSFileManager defaultManager] fileExistsAtPath:path])
 		{
-			if([result isEqualToString:@"true"]){
-				// Nothing to do the session is valid.
-			} else {
-				// Renew the session.
-				[self _loadState];
-			}
+			DTLogError(@"An error occurred persisting %@", dict);
+			
+			return;
 		}
-	}];
+		
+		// Search for account in keychain.
+		DTKeychain *keychain = [DTKeychain sharedInstance];
+		
+		NSError *error;
+		NSArray *serviceAccounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:_loggedInUser.Id] error:&error];
+		
+		// create new account
+		if (!serviceAccounts)
+		{
+			DTLogError(@"Error querying keychain: %@", [error localizedDescription]);
+			return;
+		}
+		
+		DTKeychainGenericPassword *account = [serviceAccounts lastObject];
+		
+		if (!account)
+		{
+			// need to make a new one
+			account = [DTKeychainGenericPassword new];
+			account.service = PLY_SERVICE;
+			account.account = _loggedInUser.Id;
+		}
+		
+		// always update password
+		account.password = _authToken;
+		
+		NSDictionary *userDict = [_loggedInUser dictionaryRepresentation];
+		NSData *data = [NSJSONSerialization dataWithJSONObject:userDict options:0 error:NULL];
+		NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+		account.descriptionText = jsonString;
+		
+		// persist
+		if (![keychain writeKeychainItem:account error:&error])
+		{
+			DTLogError(@"Error creating keychain entry: %@", [error localizedDescription]);
+		};
+	}
 }
 
-- (void)setLoggedInUser:(PLYUser *)loggedInUser
+- (void)_invalidateAuthToken
 {
-	[self willChangeValueForKey:@"loggedInUser"];
-	_loggedInUser = loggedInUser;
-	[self didChangeValueForKey:@"loggedInUser"];
+	DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+		// remove logged in user
+		self.loggedInUser = nil;
+		
+		// update the persisted state
+		[self _saveState];
+	});
+}
+
+#pragma mark - Helpers
+
+- (NSDictionary *)_dictionaryRepresentationWithoutReadOnlyProperties:(PLYEntity *)entity
+{
+	NSMutableDictionary *tmpDict = [[entity dictionaryRepresentation] mutableCopy];
+	
+	// remove read-only properties
+	[tmpDict removeObjectForKey:@"pl-prod-review-count"];
+	[tmpDict removeObjectForKey:@"pl-prod-review-rating"];
+	[tmpDict removeObjectForKey:@"pl-upd-by"];
+	[tmpDict removeObjectForKey:@"pl-upd-time"];
+	[tmpDict removeObjectForKey:@"pl-created-by"];
+	[tmpDict removeObjectForKey:@"pl-created-time"];
+	[tmpDict removeObjectForKey:@"pl-version"];
+	[tmpDict removeObjectForKey:@"pl-vote-score"];
+	
+	return [tmpDict copy];
+}
+
+// return a cached updated version of the entity, or cache the entity if there was no cached version
+- (id)_entityByUpdatingCachedEntity:(PLYEntity *)entity
+{
+	NSAssert([entity isKindOfClass:[PLYEntity class]], @"Incorrect parameter for %s", __PRETTY_FUNCTION__);
+	
+	PLYEntity *cachedEntity = [_entityCache objectForKey:entity.Id];
+	
+	if (cachedEntity)
+	{
+		if (cachedEntity == entity)
+		{
+			// cannot update from myself
+			return entity;
+		}
+		
+		// only update if the new entity is not a stub
+		if (entity.Class && entity.version >= cachedEntity.version)
+		{
+			[cachedEntity updateFromEntity:entity];
+			
+			// changes to logged in user needs to be persisted
+			if (cachedEntity == _loggedInUser)
+			{
+				[self _saveState];
+			}
+		}
+		
+		entity = cachedEntity;
+	}
+	else
+	{
+		// cache it
+		[_entityCache setObject:entity forKey:entity.Id];
+	}
+	
+	return entity;
+}
+
+- (NSArray *)_arrayOfUpdatedCachedEntities:(NSArray *)array
+{
+	NSAssert([array isKindOfClass:[NSArray class]], @"Incorrect parameter for %s", __PRETTY_FUNCTION__);
+	
+	NSMutableArray *tmpArray = [NSMutableArray array];
+	
+	// update user entities with cached versions
+	for (PLYEntity *entity in array)
+	{
+		PLYEntity *cachedEntity = [self _entityByUpdatingCachedEntity:entity];
+		[tmpArray addObject:cachedEntity];
+		
+		if ([cachedEntity isKindOfClass:[PLYEntity class]])
+		{
+			if (cachedEntity.createdBy && ![cachedEntity isEqual:cachedEntity.createdBy])
+			{
+				cachedEntity.createdBy = [self _entityByUpdatingCachedEntity:cachedEntity.createdBy];
+			}
+			
+			if (cachedEntity.updatedBy && ![cachedEntity isEqual:cachedEntity.updatedBy])
+			{
+				cachedEntity.updatedBy = [self _entityByUpdatingCachedEntity:cachedEntity.updatedBy];
+			}
+		}
+		
+		// replace products with cached versions
+		if ([cachedEntity isKindOfClass:[PLYOpine class]])
+		{
+			PLYOpine *opine = (PLYOpine *)cachedEntity;
+			
+			if (opine.product)
+			{
+				opine.product = [self _entityByUpdatingCachedEntity:opine.product];
+			}
+		}
+	}
+	
+	return [tmpArray copy];
 }
 
 
@@ -589,13 +823,53 @@
 {
 	NSParameterAssert(gtin);
 	
+	PLYCompletion wrappedCompletion = [completion copy];
+	
+	PLYCompletion ownCompletion = ^(id result, NSError *error) {
+		
+		if (!error)
+		{
+			for (PLYVotableEntity *entity in result)
+			{
+				// replace upvoters with cached entities
+				NSMutableArray *tmpUpArray = [NSMutableArray array];
+				
+				for (PLYUser *user in entity.upVoter)
+				{
+					PLYUser *updatedUser = [self _entityByUpdatingCachedEntity:user];
+					[tmpUpArray addObject:updatedUser];
+				}
+				
+				entity.upVoter = [tmpUpArray copy];
+				
+				// replaces downvoters with cached entities
+				NSMutableArray *tmpDownArray = [NSMutableArray array];
+				
+				for (PLYUser *user in entity.downVoter)
+				{
+					PLYUser *updatedUser = [self _entityByUpdatingCachedEntity:user];
+					[tmpDownArray addObject:updatedUser];
+				}
+				
+				entity.downVoter = [tmpDownArray copy];
+			}
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+		
+		_performingLogin = NO;
+	};
+	
 	[self performSearchForProduct:gtin
 									 name:nil
 								language:language
 								 orderBy:@"pl-lng_asc"
 									 page:0
 						recordsPerPage:0
-							 completion:completion];
+							 completion:ownCompletion];
 }
 
 /**
@@ -617,11 +891,11 @@
  * Search for a product. If no search paramter are present the first 50 products will be presented.
  **/
 - (void)performSearchForProduct:(NSString *)gtin
-                           name:(NSString *)name
-                       language:(NSString *)language
-                        orderBy:(NSString *)orderBy
-                           page:(NSUInteger)page
-                 recordsPerPage:(NSUInteger)rpp
+									name:(NSString *)name
+							  language:(NSString *)language
+								orderBy:(NSString *)orderBy
+									page:(NSUInteger)page
+					  recordsPerPage:(NSUInteger)rpp
 							completion:(PLYCompletion)completion
 {
 	NSString *path = [self _functionPathForFunction:@"products"];
@@ -638,6 +912,36 @@
 	[self _performMethodCallWithPath:path
 								 parameters:parameters
 								 completion:completion];
+}
+
+
+- (void)searchForProductsMatchingQuery:(NSString *)query options:(NSDictionary *)options completion:(PLYCompletion)completion
+{
+	NSString *path = [self _functionPathForFunction:@"products"];
+	
+	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
+	parameters[@"query"] = [query stringByURLEncoding];
+	
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		
+		if ([error code] == 404)
+		{
+			error = nil;
+			result = @[];
+		}
+		
+		if (result)
+		{
+			result = [self _arrayOfUpdatedCachedEntities:result];
+		}
+		
+		if (completion)
+		{
+			completion(result, error);
+		}
+	};
+	
+	[self _performMethodCallWithPath:path parameters:parameters completion:wrappedCompletion];
 }
 
 #pragma mark - Products
@@ -699,12 +1003,14 @@
 	NSParameterAssert(user);
 	NSParameterAssert(password);
 	NSParameterAssert(completion);
-    
-    _performingLogin = YES;
+	
+	_performingLogin = YES;
+	
+	_authToken = nil;
 	
 	NSString *path = [self _functionPathForFunction:@"login"];
 	
-    NSString *authValue = [self basicAuthenticationForUser:user andPassword:password];
+	NSString *authValue = [self basicAuthenticationForUser:user andPassword:password];
 	
 	PLYCompletion wrappedCompletion = [completion copy];
 	
@@ -712,36 +1018,20 @@
 		
 		if (!error && [result isKindOfClass:PLYUser.class])
 		{
-			[self setLoggedInUser:result];
-			
-			// Search for account in keychain.
-			DTKeychain *keychain = [DTKeychain sharedInstance];
-			DTKeychainGenericPassword *serviceAccount = [[keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:user] error:NULL] lastObject];
-			
-			// create new account
-			if (!serviceAccount)
-			{
-				serviceAccount = [DTKeychainGenericPassword new];
-				serviceAccount.service = PLY_SERVICE;
-				serviceAccount.account = user;
-			}
-			
-			// always update password
-			serviceAccount.password = password;
-			
-			// persist
-			[keychain writeKeychainItem:serviceAccount error:NULL];
+			self.loggedInUser = [self _entityByUpdatingCachedEntity:result];
+			[self _saveState];
 		}
 		
 		if (wrappedCompletion)
 		{
 			wrappedCompletion(result, error);
 		}
-        
-        _performingLogin = NO;
+		
+		_performingLogin = NO;
 	};
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil basicAuth:authValue completion:ownCompletion];
+	NSDictionary *parameters = @{@"remember_me": @"true"};
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:parameters basicAuth:authValue completion:ownCompletion];
 }
 
 - (NSString *) basicAuthenticationForUser:(NSString *)user andPassword:(NSString *)password{
@@ -751,27 +1041,63 @@
 	return [NSString stringWithFormat:@"Basic %@", [authData base64EncodedStringWithOptions:0]];
 }
 
+- (void)loginWithToken:(NSString *)token completion:(PLYCompletion)completion
+{
+	NSParameterAssert(token);
+	NSParameterAssert(completion);
+	
+	_performingLogin = YES;
+	
+	_authToken = token;
+	_loggedInUser = nil;
+	
+	NSString *path = [self _functionPathForFunction:@"login"];
+	
+	PLYCompletion wrappedCompletion = [completion copy];
+	
+	PLYCompletion ownCompletion = ^(id result, NSError *error) {
+		
+		if (!error && [result isKindOfClass:PLYUser.class])
+		{
+			self.loggedInUser = [self _entityByUpdatingCachedEntity:result];
+			[self _saveState];
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+		
+		_performingLogin = NO;
+	};
+	
+	NSDictionary *parameters = @{@"remember_me": @"true"};
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:parameters basicAuth:nil completion:ownCompletion];
+}
+
 /**
  * Logout the current user.
  **/
 - (void)logoutUserWithCompletion:(PLYCompletion)completion
 {
 	NSParameterAssert(completion);
-    
-    // Remove account from keychain.
-    if (_loggedInUser)
-    {
-		 DTKeychain *keychain = [DTKeychain sharedInstance];
-		 
-		 NSArray *accounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:_loggedInUser.nickname] error:NULL];
-		 [keychain removeKeychainItems:accounts error:NULL];
-    }
+	
+	// Remove account from keychain.
+	if (_loggedInUser)
+	{
+		DTKeychain *keychain = [DTKeychain sharedInstance];
+		
+		NSArray *accounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:_loggedInUser.nickname] error:NULL];
+		[keychain removeKeychainItems:accounts error:NULL];
+		
+		_authToken = nil;
+	}
 	
 	NSString *path = [self _functionPathForFunction:@"logout"];
 	
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:completion];
-    
-	[self setLoggedInUser:nil];
+	
+	[self _invalidateAuthToken];
 }
 
 /**
@@ -779,19 +1105,19 @@
  **/
 - (void)isSignedInWithCompletion:(PLYCompletion)completion
 {
-    NSString *path = [self _functionPathForFunction:@"signedin"];
-    
-    
-    [self _performMethodCallWithPath:path
-                          parameters:nil
-                          completion:completion];
+	NSString *path = [self _functionPathForFunction:@"signedin"];
+	
+	
+	[self _performMethodCallWithPath:path
+								 parameters:nil
+								 completion:completion];
 }
 
 /**
  * Generates a new password for the user. The password will be send to the users email.
  **/
 - (void)requestNewPasswordForUserWithEmail:(NSString *)email
-                                completion:(PLYCompletion)completion{
+										  completion:(PLYCompletion)completion{
 	NSParameterAssert(email);
 	NSParameterAssert(completion);
 	
@@ -804,7 +1130,7 @@
 
 /**
  Determines an image URL for the given PLYUser
-  */
+ */
 - (NSURL *)avatarImageURLForUser:(PLYUser *)user
 {
 	NSParameterAssert(user);
@@ -812,7 +1138,7 @@
 	
 	NSString *function = [NSString stringWithFormat:@"/user/%@/avatar", user.Id];
 	NSString *path = [self _functionPathForFunction:function];
-
+	
 	return [self _methodURLForPath:path parameters:nil];
 }
 
@@ -825,16 +1151,20 @@
 	NSString *path = [self _functionPathForFunction:function];
 	
 	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
-		// reset logged in user avatar URL
-		if ([user.Id isEqualToString:self.loggedInUser.Id])
+		
+		if (result && !error)
 		{
+			// reset user avatar URL
 			PLYUserAvatar *avatar = (PLYUserAvatar *)result;
 			
-			// update ID
-			[self.loggedInUser setValue:avatar.Id forKey:@"avatarImageIdentifier"];
+			// update Avatar
+			[user setValue:avatar forKey:@"avatar"];
 			
-			// reset image URL, this triggers reloading of the image
-			[self.loggedInUser setValue:[self avatarImageURLForUser:user] forKey:@"avatarURL"];
+			// persist for logged in user
+			if (user == _loggedInUser)
+			{
+				[self _saveState];
+			}
 		}
 		
 		completion(result, error);
@@ -850,13 +1180,10 @@
 	
 	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
 		// reset logged in user avatar URL
-		if ([user.Id isEqualToString:self.loggedInUser.Id])
+		if (result && !error)
 		{
-			// remove the image ID to disable the delete option
-			[self.loggedInUser setValue:nil forKey:@"avatarImageIdentifier"];
-			
-			// reset image URL, this triggers reloading of the image
-			[self.loggedInUser setValue:[self avatarImageURLForUser:user] forKey:@"avatarURL"];
+			// workaround, need to get new placeholder avatar
+			[self loadDetailsForUser:user completion:NULL];
 		}
 		
 		if (completion)
@@ -868,42 +1195,147 @@
 	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil payload:nil completion:wrappedCompletion];
 }
 
+- (void)loadDetailsForUser:(PLYUser *)user completion:(PLYCompletion)completion
+{
+	NSParameterAssert(user);
+	
+	[self getUserByNickname:user.Id completion:^(id result, NSError *error) {
+		// UI elements might be KVO details, so we do this on the main thread
+		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+			
+			if (result && !error)
+			{
+				PLYUser *cachedUser = [self _entityByUpdatingCachedEntity:result];
+				
+				if (cachedUser != user)
+				{
+					[user updateFromEntity:cachedUser];
+				}
+				
+				if (completion)
+				{
+					completion(user, nil);
+				}
+				
+				return;
+			}
+			
+			if (completion)
+			{
+				completion(result, error);
+			}
+		});
+	}];
+}
+
+
+
+
+- (NSURLRequest *)_URLRequestForSocialService:(NSString *)service
+{
+	NSString *redirectStr = @"http://productlayer.com";
+	
+	NSString *function = [@"/signin/" stringByAppendingString:service];
+	NSString *path = [self _functionPathForFunction:function];
+	NSURL *methodURL = [self _methodURLForPath:path
+											  parameters:@{@"callback": redirectStr}];
+	
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:methodURL];
+	request.HTTPMethod = @"POST";
+	
+	// Add the API key to each request.
+	NSAssert(_APIKey, @"Setting an API Key is required to perform requests. Use [[PLYServer sharedServer] setAPIKey:]");
+	[request setValue:_APIKey forHTTPHeaderField:@"API-KEY"];
+	
+	return request;
+}
+
+- (NSURLRequest *)URLRequestForFacebookSignIn
+{
+	return [self _URLRequestForSocialService:@"facebook"];
+}
+
+- (NSURLRequest *)URLRequestForTwitterSignIn
+{
+	return [self _URLRequestForSocialService:@"twitter"];
+}
+
 #pragma mark - Managing Products
 
 /**
  * Creates a new product.
  * ATTENTION: Login required
  **/
-- (void)createProductWithGTIN:(NSString *)gtin dictionary:(NSDictionary *)dictionary completion:(PLYCompletion)completion
+- (void)createProduct:(PLYProduct *)product completion:(PLYCompletion)completion
 {
-	NSParameterAssert(gtin);
+	NSParameterAssert(product);
+	NSParameterAssert(product.GTIN);
 	NSParameterAssert(completion);
 	
 	NSString *path = [self _functionPathForFunction:@"products"];
+	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:product];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:dictionary completion:completion];
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		
+		if (result)
+		{
+			// update cache
+			PLYProduct *updatedProduct = [self _entityByUpdatingCachedEntity:result];
+			updatedProduct.createdBy = [self _entityByUpdatingCachedEntity:updatedProduct.createdBy];
+			updatedProduct.updatedBy = [self _entityByUpdatingCachedEntity:updatedProduct.updatedBy];
+			
+			NSDictionary *userInfo = @{PLYServerDidUpdateEntityKey: updatedProduct};
+			[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidUpdateEntityNotification object:self userInfo:userInfo];
+		}
+		
+		if (completion)
+		{
+			completion(result, error);
+		}
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:wrappedCompletion];
 }
 
 /**
  * Update a specific product.
  * ATTENTION: Login required
  **/
-- (void)updateProductWithGTIN:(NSString *)gtin dictionary:(NSDictionary *)dictionary completion:(PLYCompletion)completion
+- (void)updateProduct:(PLYProduct *)product completion:(PLYCompletion)completion
 {
-	NSParameterAssert(gtin);
-	NSParameterAssert(dictionary);
+	NSParameterAssert(product);
+	NSParameterAssert(product.GTIN);
 	NSParameterAssert(completion);
 	
-	NSString *path = [self _functionPathForFunction:[NSString stringWithFormat:@"/product/%@",gtin]];
+	NSString *path = [self _functionPathForFunction:[NSString stringWithFormat:@"/product/%@",product.GTIN]];
+	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:product];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:dictionary completion:completion];
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		
+		if (result)
+		{
+			// update cache
+			PLYProduct *updatedProduct = [self _entityByUpdatingCachedEntity:result];
+			updatedProduct.createdBy = [self _entityByUpdatingCachedEntity:updatedProduct.createdBy];
+			updatedProduct.updatedBy = [self _entityByUpdatingCachedEntity:updatedProduct.updatedBy];
+			
+			NSDictionary *userInfo = @{PLYServerDidUpdateEntityKey: updatedProduct};
+			[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidUpdateEntityNotification object:self userInfo:userInfo];
+		}
+		
+		if (completion)
+		{
+			completion(result, error);
+		}
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:payload completion:wrappedCompletion];
 }
 
 
 #pragma mark - Working with Brands and Brand Owners
 
-- (void)getRecommendedBrandOwnersForGTIN:(NSString *)GTIN
-										completion:(PLYCompletion)completion
+- (void)recommendedBrandOwnersForGTIN:(NSString *)GTIN completion:(PLYCompletion)completion
 {
 	NSParameterAssert(GTIN);
 	NSParameterAssert(completion);
@@ -914,13 +1346,19 @@
 }
 
 
-- (void)getBrandsWithCompletion:(PLYCompletion)completion
+- (void)brandsWithCompletion:(PLYCompletion)completion
 {
 	NSString *path = [self _functionPathForFunction:[NSString stringWithFormat:@"/products/brands"]];
 	
 	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:nil completion:completion];
 }
 
+- (void)brandOwnersWithCompletion:(PLYCompletion)completion
+{
+	NSString *path = [self _functionPathForFunction:[NSString stringWithFormat:@"/products/brand_owners"]];
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:nil completion:completion];
+}
 
 #pragma mark - Image Handling
 
@@ -934,8 +1372,8 @@
 	NSString *path = [self _functionPathForFunction:function];
 	
 	[self _performMethodCallWithPath:path
-                          parameters:nil
-                          completion:completion];
+								 parameters:nil
+								 completion:completion];
 }
 
 /**
@@ -954,7 +1392,15 @@
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:data completion:completion];
 }
 
-- (NSURL *)URLForImage:(PLYImage *)image maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop;{
+- (NSURL *)URLForImage:(PLYImage *)image maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop
+{
+	NSParameterAssert(image);
+	
+	if ([image.fileId isEqualToString:@"EXTERNAL"])
+	{
+		return image.imageURL;
+	}
+	
 	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:3];
 	
 	if (maxWidth>0)
@@ -972,27 +1418,112 @@
 		[parameters setObject:@"true" forKey:@"crop"];
 	}
 	
-	if (image.imageURL)
+	// no image URL, construct it
+	NSString *function = [NSString stringWithFormat:@"/image/%@.jpg", image.fileId];
+	NSString *path = [self _functionPathForFunction:function];
+	return [self _methodURLForPath:path parameters:parameters];
+}
+
+- (NSURL *)URLForProductImageWithGTIN:(NSString *)GTIN maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop
+{
+	if (!PLYIsValidGTIN(GTIN))
 	{
-		NSString *urlString = [image.imageURL absoluteString];
-		NSString *path = [PLYServer _addQueryParameterToUrl:urlString parameters:parameters];
-		
-		return [NSURL URLWithString:path];
+		return nil;
 	}
 	
-	return nil;
+	if ([GTIN length]<14)
+	{
+		// make sure it is 14 digits
+		GTIN = [[@"00000000000000" stringByAppendingString:GTIN] substringWithRange:NSMakeRange([GTIN length], 14)];
+	}
+	
+	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:3];
+	
+	if (maxWidth>0)
+	{
+		[parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxWidth] forKey:@"max_width"];
+	}
+	
+	if (maxHeight>0)
+	{
+		[parameters setObject:[NSString stringWithFormat:@"%lu",(unsigned long)maxHeight] forKey:@"max_height"];
+	}
+	
+	if (crop)
+	{
+		[parameters setObject:@"true" forKey:@"crop"];
+	}
+	
+	// no image URL, construct it
+	NSString *function = [NSString stringWithFormat:@"/product/%@/default_image", GTIN];
+	NSString *path = [self _functionPathForFunction:function];
+	return [self _methodURLForPath:path parameters:parameters];
+}
+
+// new array returned as result in completion handler
+- (void)_uploadImagesWhereNecessary:(NSArray *)images forGTIN:(NSString *)GTIN completion:(PLYCompletion)completion
+{
+	// do it on background queue to not block the main thread or the NSURLSession thread
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+		
+		dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+		__block NSError *imageUploadError;
+		
+		NSMutableArray *uploadedImages = [NSMutableArray new];
+		
+		for (PLYUploadImage *image in images)
+		{
+			if ([image isKindOfClass:[PLYUploadImage class]])
+			{
+				[self uploadImageData:(id)image.imageData forGTIN:GTIN completion:^(id result, NSError *error) {
+					if (result)
+					{
+						// replace upload image with result
+						[uploadedImages addObject:result];
+					}
+					else
+					{
+						imageUploadError = error;
+					}
+					
+					dispatch_semaphore_signal(sema);
+				}];
+			}
+			else
+			{
+				[uploadedImages addObject:image];
+			}
+			
+			dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+			
+			if (imageUploadError)
+			{
+				completion(nil, imageUploadError);
+				return;
+			}
+		}
+		
+		id result = nil;
+		
+		if ([uploadedImages count])
+		{
+			result = [uploadedImages copy];
+		}
+		
+		completion(result, nil);
+	});
 }
 
 #pragma mark - Opines
 
 - (void) performSearchForOpineWithGTIN:(NSString *)gtin
-                          withLanguage:(NSString *)language
-                  fromUserWithNickname:(NSString *)nickname
-                        showFriendsOnly:(BOOL *)showFriendsOnly
-                               orderBy:(NSString *)orderBy
-                                  page:(NSUInteger)page
-                        recordsPerPage:(NSUInteger)rpp
-                            completion:(PLYCompletion)completion
+								  withLanguage:(NSString *)language
+						fromUserWithNickname:(NSString *)nickname
+							  showFriendsOnly:(BOOL *)showFriendsOnly
+										 orderBy:(NSString *)orderBy
+											 page:(NSUInteger)page
+								recordsPerPage:(NSUInteger)rpp
+									 completion:(PLYCompletion)completion
 {
 	NSParameterAssert(completion);
 	
@@ -1005,18 +1536,17 @@
 	if (language)       [parameters setObject:language forKey:@"language"];
 	if (nickname)       [parameters setObject:nickname forKey:@"nickname"];
 	
-    if (showFriendsOnly) [parameters setObject:@"true"   forKey:@"show_friends_only"];
-    else                [parameters setObject:@"false"   forKey:@"show_friends_only"];
+	if (showFriendsOnly) [parameters setObject:@"true"   forKey:@"show_friends_only"];
+	else                [parameters setObject:@"false"   forKey:@"show_friends_only"];
 	
-    if (orderBy)        [parameters setObject:orderBy  forKey:@"order_by"];
+	if (orderBy)        [parameters setObject:orderBy  forKey:@"order_by"];
 	if (page)           [parameters setObject:@(page)     forKey:@"page"];
 	if (rpp)            [parameters setObject:@(rpp)      forKey:@"records_per_page"];
 	
 	[self _performMethodCallWithPath:path parameters:parameters completion:completion];
 }
 
-- (void)createOpine:(PLYOpine *)opine
-			completion:(PLYCompletion)completion
+- (void)createOpine:(PLYOpine *)opine completion:(PLYCompletion)completion
 {
 	NSParameterAssert(opine);
 	NSParameterAssert(opine.text);
@@ -1024,10 +1554,48 @@
 	NSParameterAssert(opine.language);
 	NSParameterAssert(completion);
 	
-	NSString *function = @"opines";
+	// first we need to upload all PLYUploadImage objects
+	[self _uploadImagesWhereNecessary:opine.images forGTIN:opine.GTIN completion:^(id result, NSError *error) {
+		
+		if (error)
+		{
+			completion(nil, error);
+			return;
+		}
+		
+		// at this point the images are all uploaded and turned into PLYImages
+		opine.images = result;
+		
+		NSString *function = @"opines";
+		NSString *path = [self _functionPathForFunction:function];
+		NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:opine];
+		
+		[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:completion];
+	}];
+}
+
+- (void)deleteOpine:(PLYOpine *)opine completion:(PLYCompletion)completion
+{
+	NSParameterAssert(opine);
+	NSParameterAssert(completion);
+	
+	NSString *function = [NSString stringWithFormat:@"opine/%@", opine.Id];
 	NSString *path = [self _functionPathForFunction:function];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:[opine dictionaryRepresentation] completion:completion];
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		
+		if (!error || [error code]==404)
+		{
+			// broadcast info that this entity is no more
+			
+			NSDictionary *userInfo = @{PLYServerDidDeleteEntityKey: opine};
+			[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidDeleteEntityNotification object:self userInfo:userInfo];
+		}
+		
+		completion(result, error);
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil payload:nil completion:wrappedCompletion];
 }
 
 #pragma mark - Reviews
@@ -1036,13 +1604,13 @@
  * Search for reviews.
  **/
 - (void) performSearchForReviewWithGTIN:(NSString *)gtin
-                           withLanguage:(NSString *)language
-                   fromUserWithNickname:(NSString *)nickname
-                             withRating:(float)rating
-                                orderBy:(NSString *)orderBy
-                                   page:(NSUInteger)page
-                         recordsPerPage:(NSUInteger)rpp
-                             completion:(PLYCompletion)completion
+									withLanguage:(NSString *)language
+						 fromUserWithNickname:(NSString *)nickname
+									  withRating:(float)rating
+										  orderBy:(NSString *)orderBy
+											  page:(NSUInteger)page
+								 recordsPerPage:(NSUInteger)rpp
+									  completion:(PLYCompletion)completion
 {
 	NSParameterAssert(completion);
 	
@@ -1066,18 +1634,17 @@
  * Creates a new review for a product.
  * ATTENTION: Login required
  **/
-- (void) createReviewForGTIN:(NSString *)gtin
-						dictionary:(NSDictionary *)dictionary
-						completion:(PLYCompletion)completion
+- (void)createReview:(PLYReview *)review completion:(PLYCompletion)completion
 {
-	NSParameterAssert(gtin);
-	NSParameterAssert(dictionary);
+	NSParameterAssert(review);
+	NSParameterAssert(review.GTIN);
 	NSParameterAssert(completion);
 	
-	NSString *function = [NSString stringWithFormat:@"product/%@/review",gtin];
+	NSString *function = [NSString stringWithFormat:@"product/%@/review",review.GTIN];
 	NSString *path = [self _functionPathForFunction:function];
+	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:review];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:dictionary completion:completion];
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:completion];
 }
 
 #pragma mark - Lists
@@ -1087,15 +1654,16 @@
  * ATTENTION: Login required
  **/
 - (void) createProductList:(PLYList *)list
-                completion:(PLYCompletion)completion
+					 completion:(PLYCompletion)completion
 {
 	NSParameterAssert(list);
 	NSParameterAssert(completion);
 	
 	NSString *function = @"lists";
 	NSString *path = [self _functionPathForFunction:function];
+	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:list];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:[list dictionaryRepresentation] completion:completion];
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:completion];
 }
 
 /**
@@ -1103,10 +1671,10 @@
  * ATTENTION: Login required
  **/
 - (void) performSearchForProductListFromUser:(PLYUser *)user
-                                 andListType:(NSString *)listType
-                                        page:(NSUInteger)page
-                              recordsPerPage:(NSUInteger)rpp
-                                  completion:(PLYCompletion)completion{
+											andListType:(NSString *)listType
+													 page:(NSUInteger)page
+										recordsPerPage:(NSUInteger)rpp
+											 completion:(PLYCompletion)completion{
 	
 	NSParameterAssert(completion);
 	
@@ -1123,13 +1691,24 @@
 	[self _performMethodCallWithPath:path parameters:parameters completion:completion];
 }
 
+- (void)listsOfUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion
+{
+	NSParameterAssert(user);
+	NSParameterAssert(completion);
+	
+	NSString *function = [NSString stringWithFormat:@"/user/%@/lists", user.Id];
+	NSString *path = [self _functionPathForFunction:function];
+
+	[self _performMethodCallWithPath:path parameters:nil completion:completion];
+}
+
 /**
  * Request a product list by id.
  * The product list can only be requested if the user is the owner, the list is shared with the user or if the list is public.
  * ATTENTION: Login required
  **/
 - (void) getProductListWithId:(NSString *)listId
-                   completion:(PLYCompletion)completion{
+						 completion:(PLYCompletion)completion{
 	NSParameterAssert(listId);
 	NSParameterAssert(completion);
 	
@@ -1145,15 +1724,16 @@
  * ATTENTION: Login required
  **/
 - (void) updateProductList:(PLYList *)list
-                completion:(PLYCompletion)completion{
+					 completion:(PLYCompletion)completion{
 	NSParameterAssert(list);
 	NSParameterAssert(list.Id);
 	NSParameterAssert(completion);
 	
 	NSString *function = [NSString stringWithFormat:@"list/%@", list.Id];
 	NSString *path = [self _functionPathForFunction:function];
+	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:list];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:[list dictionaryRepresentation] completion:completion];
+	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:payload completion:completion];
 }
 
 /**
@@ -1162,7 +1742,7 @@
  * ATTENTION: Login required
  **/
 - (void) deleteProductListWithId:(NSString *)listId
-                      completion:(PLYCompletion)completion{
+							 completion:(PLYCompletion)completion{
 	NSParameterAssert(listId);
 	NSParameterAssert(completion);
 	
@@ -1172,15 +1752,15 @@
 	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil completion:completion];
 }
 
-#pragma mark List Items
+#pragma mark - List Items
 
 /**
  * Replaces or add's the product to the list if it doesn't exist.
  * ATTENTION: Login required
  **/
-- (void) addOrReplaceListItem:(PLYListItem *)listItem
-                 toListWithId:(NSString *)listId
-                   completion:(PLYCompletion)completion{
+- (void)addOrReplaceListItem:(PLYListItem *)listItem
+					  toListWithId:(NSString *)listId
+						 completion:(PLYCompletion)completion{
 	NSParameterAssert(listItem);
 	NSParameterAssert(listItem.GTIN);
 	NSParameterAssert(listId);
@@ -1188,8 +1768,22 @@
 	
 	NSString *function = [NSString stringWithFormat:@"list/%@/product/%@", listId,listItem.GTIN];
 	NSString *path = [self _functionPathForFunction:function];
+	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:listItem];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:[listItem dictionaryRepresentation] completion:completion];
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		
+		if (!error || [error code]==404)
+		{
+			// broadcast info that this list was modified
+			
+			NSDictionary *userInfo = @{PLYServerDidModifyListKey:listId};
+			[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidModifyListNotification object:self userInfo:userInfo];
+		}
+		
+		completion(result, error);
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:payload completion:wrappedCompletion];
 }
 
 /**
@@ -1206,18 +1800,31 @@
 	NSString *function = [NSString stringWithFormat:@"list/%@/product/%@", listId,gtin];
 	NSString *path = [self _functionPathForFunction:function];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil completion:completion];
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		
+		if (!error || [error code]==404)
+		{
+			// broadcast info that this list was modified
+			
+			NSDictionary *userInfo = @{PLYServerDidModifyListKey:listId};
+			[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidModifyListNotification object:self userInfo:userInfo];
+		}
+		
+		completion(result, error);
+	};
+
+	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil completion:wrappedCompletion];
 }
 
-#pragma mark List Sharing
+#pragma mark - List Sharing
 
 /**
  * Share the list with a user.
  * ATTENTION: Login required
  **/
 - (void) shareProductListWithId:(NSString *)listId
-                     withUserId:(NSString *)userId
-                     completion:(PLYCompletion)completion{
+							withUserId:(NSString *)userId
+							completion:(PLYCompletion)completion{
 	NSParameterAssert(userId);
 	NSParameterAssert(listId);
 	NSParameterAssert(completion);
@@ -1233,8 +1840,8 @@
  * ATTENTION: Login required
  **/
 - (void) unshareProductListWithId:(NSString *)listId
-                       withUserId:(NSString *)userId
-                       completion:(PLYCompletion)completion{
+							  withUserId:(NSString *)userId
+							  completion:(PLYCompletion)completion{
 	NSParameterAssert(userId);
 	NSParameterAssert(listId);
 	NSParameterAssert(completion);
@@ -1250,109 +1857,190 @@
  * Search for a user with a simple text search.
  * The searchText can contain the email, nickname, first name and last name of the user.
  **/
-- (void) performUserSearch:(NSString *)searchText
-                completion:(PLYCompletion)completion
+- (void)searchForUsersMatchingQuery:(NSString *)query completion:(PLYCompletion)completion
 {
-	NSParameterAssert(searchText);
+	NSParameterAssert(query);
 	NSParameterAssert(completion);
 	
 	NSString *function = @"users";
 	NSString *path = [self _functionPathForFunction:function];
+	NSDictionary *parameters = @{@"query": query};
 	
-	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		
+		if ([error code] == 404)
+		{
+			error = nil;
+			result = @[];
+		}
+		
+		if (result)
+		{
+			result = [self _arrayOfUpdatedCachedEntities:result];
+		}
+		
+		if (completion)
+		{
+			completion(result, error);
+		}
+	};
 	
-	if (searchText)       [parameters setObject:searchText     forKey:@"query"];
-	
-	[self _performMethodCallWithPath:path parameters:parameters completion:completion];
-}
-
-/**
- * Returns the follower from a specific user.
- * ATTENTION: Login required
- **/
-- (void) getFollowerFromUser:(NSString *)nickname
-                        page:(NSUInteger)page
-              recordsPerPage:(NSUInteger)rpp
-                  completion:(PLYCompletion)completion{
-	NSParameterAssert(nickname);
-	NSParameterAssert(completion);
-	
-	NSString *function = [NSString stringWithFormat:@"user/%@/follower", nickname];
-	NSString *path = [self _functionPathForFunction:function];
-	
-	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
-	
-	if (page)       [parameters setObject:@(page)     forKey:@"page"];
-	if (rpp)        [parameters setObject:@(rpp)      forKey:@"records_per_page"];
-	
-	[self _performMethodCallWithPath:path parameters:parameters completion:completion];
-}
-
-/**
- * Returns the followed users by the specific user.
- * ATTENTION: Login required
- **/
-- (void) getFollowingFromUser:(NSString *)nickname
-                         page:(NSUInteger)page
-               recordsPerPage:(NSUInteger)rpp
-						 completion:(PLYCompletion)completion{
-	NSParameterAssert(nickname);
-	NSParameterAssert(completion);
-	
-	NSString *function = [NSString stringWithFormat:@"user/%@/following", nickname];
-	NSString *path = [self _functionPathForFunction:function];
-	
-	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
-	
-	if (page)       [parameters setObject:@(page)     forKey:@"page"];
-	if (rpp)        [parameters setObject:@(rpp)      forKey:@"records_per_page"];
-	
-	[self _performMethodCallWithPath:path parameters:parameters completion:completion];
+	[self _performMethodCallWithPath:path parameters:parameters completion:wrappedCompletion];
 }
 
 /**
  * Follow a specific user.
  * ATTENTION: Login required
  **/
-- (void) followUserWithNickname:(NSString *)nickname
-                     completion:(PLYCompletion)completion{
-	NSParameterAssert(nickname);
+- (void)followUser:(PLYUser *)user completion:(PLYCompletion)completion
+{
+	NSParameterAssert(user);
 	NSParameterAssert(completion);
 	
 	NSString *function = @"/user/follow";
 	NSString *path = [self _functionPathForFunction:function];
 	
-	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
+	PLYCompletion wrappedCompletion = [completion copy];
+	PLYCompletion ownCompletion = ^(id result, NSError *error) {
+		
+		if (!error && [result isKindOfClass:PLYUser.class])
+		{
+			// update user object
+			[user setValue:@(YES) forKey:@"followed"];
+			[user setValue:@(user.followerCount+1) forKey:@"followerCount"];
+			
+			// update cached object
+			[self _entityByUpdatingCachedEntity:user];
+			
+			// update logged in user
+			if ([result isEqual:_loggedInUser])
+			{
+				[_loggedInUser updateFromEntity:result];
+			}
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+	};
 	
-	if (nickname)   [parameters setObject:nickname forKey:@"nickname"];
-	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:parameters completion:completion];
+	NSDictionary *params = @{@"nickname": user.nickname};
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:params completion:ownCompletion];
 }
 
 /**
  * Unfollow a specific user.
  * ATTENTION: Login required
  **/
-- (void) unfollowUserWithNickname:(NSString *)nickname
-                       completion:(PLYCompletion)completion{
-	NSParameterAssert(nickname);
+- (void)unfollowUser:(PLYUser *)user completion:(PLYCompletion)completion
+{
+	NSParameterAssert(user);
 	NSParameterAssert(completion);
 	
 	NSString *function = @"/user/unfollow";
 	NSString *path = [self _functionPathForFunction:function];
 	
-	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
+	PLYCompletion wrappedCompletion = [completion copy];
+	PLYCompletion ownCompletion = ^(id result, NSError *error) {
+		
+		if (!error && [result isKindOfClass:PLYUser.class])
+		{
+			// update user object
+			[user setValue:@(NO) forKey:@"followed"];
+			[user setValue:@(user.followerCount-1) forKey:@"followerCount"];
+			
+			// update cached object
+			[self _entityByUpdatingCachedEntity:user];
+			
+			// update logged in user
+			if ([result isEqual:_loggedInUser])
+			{
+				[_loggedInUser updateFromEntity:result];
+			}
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+	};
 	
-	if (nickname)   [parameters setObject:nickname forKey:@"nickname"];
+	NSDictionary *params = @{@"nickname": user.nickname};
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:params completion:ownCompletion];
+}
+
+- (void)followerForUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion
+{
+	NSParameterAssert(user);
+	NSParameterAssert(completion);
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:parameters completion:completion];
+	NSString *function = [NSString stringWithFormat:@"/user/%@/follower", user.Id];
+	NSString *path = [self _functionPathForFunction:function];
+	
+	PLYCompletion wrappedCompletion = [completion copy];
+	PLYCompletion ownCompletion = ^(id result, NSError *error) {
+		
+		if (result)
+		{
+			NSMutableArray *tmpArray = [NSMutableArray array];
+			
+			for (PLYUser *user in result)
+			{
+				PLYUser *cachedUser = [self _entityByUpdatingCachedEntity:user];
+				[tmpArray addObject:cachedUser];
+			}
+			
+			result = [tmpArray copy];
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:options completion:ownCompletion];
+}
+
+- (void)followingForUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion
+{
+	NSParameterAssert(user);
+	NSParameterAssert(completion);
+	
+	NSString *function = [NSString stringWithFormat:@"/user/%@/following", user.Id];
+	NSString *path = [self _functionPathForFunction:function];
+	
+	PLYCompletion wrappedCompletion = [completion copy];
+	PLYCompletion ownCompletion = ^(id result, NSError *error) {
+		
+		if (result)
+		{
+			NSMutableArray *tmpArray = [NSMutableArray array];
+			
+			for (PLYUser *user in result)
+			{
+				PLYUser *cachedUser = [self _entityByUpdatingCachedEntity:user];
+				[tmpArray addObject:cachedUser];
+			}
+			
+			result = [tmpArray copy];
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:options completion:ownCompletion];
 }
 
 /**
  * Get specific user with nickname.
  **/
 - (void)  getUserByNickname:(NSString *)nickname
-                 completion:(PLYCompletion)completion{
+					  completion:(PLYCompletion)completion{
 	NSParameterAssert(nickname);
 	NSParameterAssert(completion);
 	
@@ -1364,205 +2052,265 @@
 
 #pragma mark - Timelines
 
-- (void)timelineForAllUsersWithCount:(NSUInteger)count completion:(PLYCompletion)completion
+- (NSDictionary *)_timelineOptionsFromDictionary:(NSDictionary *)options
 {
-	NSParameterAssert(completion);
+	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:options];
 	
-	[self timelineForAllUsersWithCount:count
-                               sinceID:nil
-                               untilID:nil
-                            showOpines:true
-                           showReviews:true
-                            showImages:true
-                          showProducts:true
-                            completion:completion];
+	// default values
+	params[PLYTimelineOptionIncludeOpines] = [options[PLYTimelineOptionIncludeOpines] boolValue]?@"true":@"false";
+	params[PLYTimelineOptionIncludeImages] = [options[PLYTimelineOptionIncludeImages] boolValue]?@"true":@"false";
+	params[PLYTimelineOptionIncludeReviews] = [options[PLYTimelineOptionIncludeReviews] boolValue]?@"true":@"false";
+	params[PLYTimelineOptionIncludeProducts] = [options[PLYTimelineOptionIncludeProducts] boolValue]?@"true":@"false";
+	params[PLYTimelineOptionIncludeFriends] = [options[PLYTimelineOptionIncludeFriends] boolValue]?@"true":@"false";
+	
+	return [params copy];
 }
 
-- (void)timelineForAllUsersWithCount:(NSUInteger)count
-                             sinceID:(NSString *)sinceID
-                             untilID:(NSString *)untilID
-                          showOpines:(BOOL)showOpines
-                         showReviews:(BOOL)showReviews
-                          showImages:(BOOL)showImages
-                        showProducts:(BOOL)showProducts
-                          completion:(PLYCompletion)completion
+- (void)timelineForUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion
 {
 	NSParameterAssert(completion);
 	
-	NSString *function = @"/timeline";
+	NSString *function;
+ 
+	if (user)
+	{
+		function = [NSString stringWithFormat:@"/timeline/user/%@", user.Id];
+	}
+	else
+	{
+		function = @"/timeline/";
+	}
+	
 	NSString *path = [self _functionPathForFunction:function];
-    
-    NSMutableDictionary *params = [self createTimelineParameterWithSinceID:sinceID
-                                                                   untilID:untilID
-                                                                     count:count
-                                                                showOpines:showOpines
-                                                               showReviews:showReviews
-                                                                showImages:showImages
-                                                              showProducts:showProducts];
 	
-	[self _performMethodCallWithPath:path parameters:params completion:completion];
+	PLYCompletion wrappedCompletion = [completion copy];
+	PLYCompletion ownCompletion = ^(id result, NSError *error) {
+		
+		if (result)
+		{
+			result = [self _arrayOfUpdatedCachedEntities:result];
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+	};
+	
+	NSDictionary *params = [self _timelineOptionsFromDictionary:options];
+	[self _performMethodCallWithPath:path parameters:params completion:ownCompletion];
 }
 
-- (void)timelineForMeWithCount:(NSUInteger)count
-                             sinceID:(NSString *)sinceID
-                             untilID:(NSString *)untilID
-                          showOpines:(BOOL)showOpines
-                         showReviews:(BOOL)showReviews
-                          showImages:(BOOL)showImages
-                        showProducts:(BOOL)showProducts
-                          completion:(PLYCompletion)completion
+- (void)timelineForProduct:(PLYProduct *)product options:(NSDictionary *)options completion:(PLYCompletion)completion
 {
+	NSParameterAssert(product);
 	NSParameterAssert(completion);
 	
-	NSString *function = @"/timeline/me";
+	NSString *function = [NSString stringWithFormat:@"/timeline/product/%@", product.GTIN];
 	NSString *path = [self _functionPathForFunction:function];
-    
-    NSMutableDictionary *params = [self createTimelineParameterWithSinceID:sinceID
-                                                                   untilID:untilID
-                                                                     count:count
-                                                                showOpines:showOpines
-                                                               showReviews:showReviews
-                                                                showImages:showImages
-                                                              showProducts:showProducts];
 	
-	[self _performMethodCallWithPath:path parameters:params completion:completion];
-}
-
-- (void)timelineForUser:(NSString *)nickname
-                sinceID:(NSString *)sinceID
-                untilID:(NSString *)untilID
-                  count:(NSUInteger)count
-             showOpines:(BOOL)showOpines
-            showReviews:(BOOL)showReviews
-             showImages:(BOOL)showImages
-           showProducts:(BOOL)showProducts
-             completion:(PLYCompletion)completion
-{
-    NSParameterAssert(nickname);
-	NSParameterAssert(completion);
+	PLYCompletion wrappedCompletion = [completion copy];
+	PLYCompletion ownCompletion = ^(id result, NSError *error) {
+		
+		if (result)
+		{
+			result = [self _arrayOfUpdatedCachedEntities:result];
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+	};
 	
-	NSString *function = [NSString stringWithFormat:@"/timeline/user/%@", nickname];
-	NSString *path = [self _functionPathForFunction:function];
-    
-    NSMutableDictionary *params = [self createTimelineParameterWithSinceID:sinceID
-                                                                   untilID:untilID
-                                                                     count:count
-                                                                showOpines:showOpines
-                                                               showReviews:showReviews
-                                                                showImages:showImages
-                                                              showProducts:showProducts];
-	
-	[self _performMethodCallWithPath:path parameters:params completion:completion];
-}
-
-- (void)timelineForProduct:(NSString *)GTIN
-                   sinceID:(NSString *)sinceID
-                   untilID:(NSString *)untilID
-                     count:(NSUInteger)count
-                showOpines:(BOOL)showOpines
-               showReviews:(BOOL)showReviews
-                showImages:(BOOL)showImages
-              showProducts:(BOOL)showProducts
-                completion:(PLYCompletion)completion
-{
-    NSParameterAssert(GTIN);
-	NSParameterAssert(completion);
-	
-	NSString *function = [NSString stringWithFormat:@"/timeline/product/%@", GTIN];
-	NSString *path = [self _functionPathForFunction:function];
-    
-    NSMutableDictionary *params = [self createTimelineParameterWithSinceID:sinceID
-                                                                   untilID:untilID
-                                                                     count:count
-                                                                showOpines:showOpines
-                                                               showReviews:showReviews
-                                                                showImages:showImages
-                                                              showProducts:showProducts];
-	
-	[self _performMethodCallWithPath:path parameters:params completion:completion];
-}
-
-- (NSMutableDictionary *) createTimelineParameterWithSinceID:(NSString *)sinceID
-                                                     untilID:(NSString *)untilID
-                                                       count:(NSUInteger)count
-                                                  showOpines:(BOOL)showOpines
-                                                 showReviews:(BOOL)showReviews
-                                                  showImages:(BOOL)showImages
-                                                showProducts:(BOOL)showProducts
-{
-    NSMutableDictionary *tmp = [[NSMutableDictionary alloc] init];
-    
-    if (sinceID)            [tmp setObject:sinceID forKey:@"since_id"];
-    if (untilID)            [tmp setObject:untilID forKey:@"until_id"];
-    if (count)              [tmp setObject:@(count) forKey:@"count"];
-    
-    [tmp setObject:((showOpines)   ? @"true" : @"false") forKey:@"opines"];
-    [tmp setObject:((showReviews)  ? @"true" : @"false") forKey:@"reviews"];
-    [tmp setObject:((showImages)   ? @"true" : @"false") forKey:@"images"];
-    [tmp setObject:((showProducts) ? @"true" : @"false") forKey:@"products"];
-    
-    return tmp;
+	NSDictionary *params = [self _timelineOptionsFromDictionary:options];
+	[self _performMethodCallWithPath:path parameters:params completion:ownCompletion];
 }
 
 #pragma mark - Votings
 
-- (void)upVote:(PLYVotableEntity *)voteableEntity
-    completion:(PLYCompletion)completion{
-    
+- (void)upVote:(PLYVotableEntity *)voteableEntity completion:(PLYCompletion)completion
+{
 	NSParameterAssert(voteableEntity);
 	NSParameterAssert(completion);
-    
-    NSString *function;
-    if([voteableEntity isKindOfClass:[PLYImage class]]){
-        function = [NSString stringWithFormat:@"image/%@/up_vote", [(PLYImage *)voteableEntity fileId]];
-    } else if ([voteableEntity isKindOfClass:[PLYProduct class]]){
-        function = [NSString stringWithFormat:@"product/%@/up_vote", [voteableEntity Id]];
-    } else if ([voteableEntity isKindOfClass:[PLYOpine class]]){
-        function = [NSString stringWithFormat:@"opine/%@/up_vote", [voteableEntity Id]];
-    } else if ([voteableEntity isKindOfClass:[PLYReview class]]){
-        function = [NSString stringWithFormat:@"review/%@/up_vote", [voteableEntity Id]];
-    } else {
-        NSAssert(false, @"Can't vote this entity.");
-    }
-    
-    NSString *path = [self _functionPathForFunction:function];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:completion];
+	NSString *entityType;
+	if ([voteableEntity isKindOfClass:[PLYImage class]])
+	{
+		entityType = @"image";
+	}
+	else if ([voteableEntity isKindOfClass:[PLYProduct class]])
+	{
+		entityType = @"product";
+	}
+	else if ([voteableEntity isKindOfClass:[PLYOpine class]])
+	{
+		entityType = @"opine";
+	}
+	else if ([voteableEntity isKindOfClass:[PLYReview class]])
+	{
+		entityType = @"review";
+	}
+	
+	NSAssert(entityType!=nil, @"Can't vote this entity.");
+	
+	NSString *function = [NSString stringWithFormat:@"%@/%@/up_vote", entityType, voteableEntity.Id];
+	NSString *path = [self _functionPathForFunction:function];
+	
+	PLYCompletion wrappedCompletion = [completion copy];
+	PLYCompletion ownCompletion = ^(id result, NSError *error) {
+		if (result)
+		{
+			[voteableEntity updateFromEntity:result];
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:ownCompletion];
 }
 
 - (void)downVote:(PLYVotableEntity *)voteableEntity
-      completion:(PLYCompletion)completion{
-    
-    NSParameterAssert(voteableEntity);
-	NSParameterAssert(completion);
-    
-    NSString *function;
-    if([voteableEntity isKindOfClass:[PLYImage class]]){
-        function = [NSString stringWithFormat:@"image/%@/down_vote", [(PLYImage *)voteableEntity fileId]];
-    } else if ([voteableEntity isKindOfClass:[PLYProduct class]]){
-        function = [NSString stringWithFormat:@"product/%@/down_vote", [voteableEntity Id]];
-    } else if ([voteableEntity isKindOfClass:[PLYOpine class]]){
-        function = [NSString stringWithFormat:@"opine/%@/down_vote", [voteableEntity Id]];
-    } else if ([voteableEntity isKindOfClass:[PLYReview class]]){
-        function = [NSString stringWithFormat:@"review/%@/down_vote", [voteableEntity Id]];
-    } else {
-        NSAssert(false, @"Can't vote this entity.");
-    }
-    
-    NSString *path = [self _functionPathForFunction:function];
+		completion:(PLYCompletion)completion{
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:completion];
+	NSParameterAssert(voteableEntity);
+	NSParameterAssert(completion);
+	
+	NSString *entityType;
+	if ([voteableEntity isKindOfClass:[PLYImage class]])
+	{
+		entityType = @"image";
+	}
+	else if ([voteableEntity isKindOfClass:[PLYProduct class]])
+	{
+		entityType = @"product";
+	}
+	else if ([voteableEntity isKindOfClass:[PLYOpine class]])
+	{
+		entityType = @"opine";
+	}
+	else if ([voteableEntity isKindOfClass:[PLYReview class]])
+	{
+		entityType = @"review";
+	}
+	
+	NSAssert(entityType!=nil, @"Can't vote this entity.");
+	
+	NSString *function = [NSString stringWithFormat:@"%@/%@/down_vote", entityType, voteableEntity.Id];
+	NSString *path = [self _functionPathForFunction:function];
+	
+	PLYCompletion wrappedCompletion = [completion copy];
+	PLYCompletion ownCompletion = ^(id result, NSError *error) {
+		if (result)
+		{
+			[voteableEntity updateFromEntity:result];
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:ownCompletion];
 }
 
+#pragma mark - Problem Reports
+
+- (void)createProblemReport:(PLYProblemReport *)report completion:(PLYCompletion)completion
+{
+	NSParameterAssert(report);
+	NSParameterAssert(completion);
+		
+	NSString *function;
+	NSDictionary *parameters;
+ 
+	if ([report.entity isKindOfClass:[PLYUser class]])
+	{
+		function = @"users/report_problem";
+		parameters = @{@"user_id": report.entity.Id};
+	}
+	else if ([report.entity isKindOfClass:[PLYProduct class]])
+	{
+		function = @"products/report_problem";
+		parameters = @{@"product_id": report.entity.Id};
+	}
+	else if ([report.entity isKindOfClass:[PLYUserAvatar class]])
+	{
+		function = @"users/report_problem";
+		PLYUserAvatar *avatar = (PLYUserAvatar *)report.entity;
+		PLYUser *user = avatar.createdBy;
+		parameters = @{@"user_id": user.Id};
+	}
+	else if ([report.entity isKindOfClass:[PLYImage class]])
+	{
+		function = @"images/report_problem";
+		parameters = @{@"image_id": report.entity.Id};
+	}
+	else if ([report.entity isKindOfClass:[PLYOpine class]])
+	{
+		function = @"opine/report_problem";
+		parameters = @{@"opine_id": report.entity.Id};
+	}
+	else
+	{
+		NSAssert(NO, @"Can't report issue on such an entity");
+	}
+	
+	NSString *path = [self _functionPathForFunction:function];
+	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:report];
+
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:parameters payload:payload completion:completion];
+}
+
+#pragma mark - Working with Categories
+
+- (void)categoryForKey:(NSString *)key language:(NSString *)language completion:(PLYCompletion)completion
+{
+	NSParameterAssert(completion);
+	
+	NSString *function = [NSString stringWithFormat:@"/category/%@", key];
+	NSString *path = [self _functionPathForFunction:function];
+	NSDictionary *params = @{@"language": language?language:@"auto"};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:params payload:nil completion:completion];
+}
+
+- (void)categoriesWithLanguage:(NSString *)language completion:(PLYCompletion)completion
+{
+	NSParameterAssert(completion);
+	
+	NSString *function = @"/categories";
+	NSString *path = [self _functionPathForFunction:function];
+	NSDictionary *params = @{@"language": language?language:@"auto"};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:params payload:nil completion:completion];
+}
+
+#pragma mark - Notifications
+
+- (void)_didEnterForeground:(NSNotification *)notification
+{
+	if (self.loggedInUser)
+	{
+		// restore logged in user in cache
+		[_entityCache setObject:self.loggedInUser forKey:self.loggedInUser.Id];
+		
+		DTLogInfo(@"Refreshing details for logged in user '%@'", self.loggedInUser.nickname);
+		[self loadDetailsForUser:self.loggedInUser completion:NULL];
+	}
+}
 
 #pragma mark - Properties
 
 // lazy initializer for URL session
-- (NSURLSession *)session {
-	if (!_session) {
-        // Set save cookies policy
-        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
-        
+- (NSURLSession *)session
+{
+	if (!_session)
+	{
 		_session = [NSURLSession sessionWithConfiguration:_configuration];
 	}
 	

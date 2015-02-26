@@ -48,6 +48,12 @@
 - (NSDictionary *)objectReference;
 
 /**
+ Updates an entity with values from another entity. This also sets values to zero or `nil` if they are so in the source entity
+ @param entity The entity to get the new values for the receiver from
+ */
+- (void)updateFromEntity:(PLYEntity *)entity;
+
+/**
  @name Common Properties
  */
 
@@ -69,7 +75,7 @@
 /**
  The user who created the object.
  */
-@property (nonatomic, copy) PLYUser *createdBy;
+@property (nonatomic, strong) PLYUser *createdBy;
 
 /**
  The timestamp when object was created.
@@ -79,7 +85,7 @@
 /**
  The user who updated the object the last time.
  */
-@property (nonatomic, copy) PLYUser *updatedBy;
+@property (nonatomic, strong) PLYUser *updatedBy;
 
 /**
  The timestamp when object was updated the last time.

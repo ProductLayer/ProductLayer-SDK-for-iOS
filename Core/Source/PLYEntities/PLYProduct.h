@@ -8,8 +8,7 @@
 
 #import "PLYVotableEntity.h"
 
-@class PLYAuditor;
-@class PLYPackaging;
+@class PLYAuditor, PLYImage, PLYPackaging;
 
 /**
  API model class representing a product
@@ -71,6 +70,11 @@
  */
 @property (nonatomic, copy) NSString *name;
 
+/**
+ The default image of the product
+ */
+@property (nonatomic, copy) PLYImage *defaultImage;
+
 /** 
  The packaging information.
  */
@@ -89,16 +93,26 @@
 /**
  The characteristics information.
  */
-@property (nonatomic, strong) NSMutableDictionary *characteristics;
+@property (nonatomic, copy) NSDictionary *characteristics;
 
 /**
  The nutrition information.
  */
-@property (nonatomic, strong) NSMutableDictionary *nutritious;
+@property (nonatomic, copy) NSDictionary *nutritious;
 
 /**
  The source URL of the product information
  */
 @property (nonatomic, copy) NSURL *sourceURL;
+
+/**
+ Other languages in which the receiver is localized
+ */
+@property (nonatomic, copy) NSArray *additionalLanguages;
+
+/**
+ Links where the product can be bought
+ */
+@property (nonatomic, copy) NSDictionary *buyLinks;
 
 @end

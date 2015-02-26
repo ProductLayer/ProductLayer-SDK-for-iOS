@@ -27,6 +27,22 @@
 		A71918101A1B5B1B002C2D76 /* PLYContentsDidChangeValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A719180D1A1B5B1B002C2D76 /* PLYContentsDidChangeValidator.m */; };
 		A71C2BBB1843AD9B00B77DB4 /* libDTDownload_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A71C2B9D1843AD8D00B77DB4 /* libDTDownload_iOS.a */; };
 		A71C2BBD1843ADA600B77DB4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71C2BBC1843ADA600B77DB4 /* CoreData.framework */; };
+		A72592B31A757D5900952685 /* PLYCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A72592B11A757D5900952685 /* PLYCategory.m */; };
+		A72592B41A757D5900952685 /* PLYCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A72592B11A757D5900952685 /* PLYCategory.m */; };
+		A72592B51A757D5900952685 /* PLYCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A72592B11A757D5900952685 /* PLYCategory.m */; };
+		A72592B61A757D5900952685 /* PLYCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = A72592B21A757D5900952685 /* PLYCategory.h */; };
+		A72592B71A757D5900952685 /* PLYCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = A72592B21A757D5900952685 /* PLYCategory.h */; };
+		A72592BB1A757D9400952685 /* PLYTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A72592B91A757D9400952685 /* PLYTextFieldTableViewCell.m */; };
+		A72592BC1A757D9400952685 /* PLYTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A72592B91A757D9400952685 /* PLYTextFieldTableViewCell.m */; };
+		A72592BD1A757D9400952685 /* PLYEditProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72592BA1A757D9400952685 /* PLYEditProductViewController.m */; };
+		A72592BE1A757D9400952685 /* PLYEditProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72592BA1A757D9400952685 /* PLYEditProductViewController.m */; };
+		A72592C41A757DFB00952685 /* PLYModalTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A72592C21A757DFB00952685 /* PLYModalTableViewController.h */; };
+		A72592C51A757DFB00952685 /* PLYModalTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72592C31A757DFB00952685 /* PLYModalTableViewController.m */; };
+		A72592C61A757DFB00952685 /* PLYModalTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72592C31A757DFB00952685 /* PLYModalTableViewController.m */; };
+		A72592C91A757E1F00952685 /* PLYEditProductViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A72592C71A757E1F00952685 /* PLYEditProductViewController.h */; };
+		A72592CA1A757E1F00952685 /* PLYTextFieldTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A72592C81A757E1F00952685 /* PLYTextFieldTableViewCell.h */; };
+		A731FE7B1A63DAC500D341FC /* PLYUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7657AF21A630B9000CBDBD9 /* PLYUploadImage.m */; };
+		A731FE9B1A63DAC700D341FC /* PLYUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7657AF21A630B9000CBDBD9 /* PLYUploadImage.m */; };
 		A73803341A28E91800011D9C /* PLYTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = A73803321A28E91800011D9C /* PLYTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A73803351A28E91800011D9C /* PLYTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A73803331A28E91800011D9C /* PLYTextView.m */; };
 		A73803361A28E91800011D9C /* PLYTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A73803331A28E91800011D9C /* PLYTextView.m */; };
@@ -36,6 +52,7 @@
 		A740BB7B19F23F8500DA3943 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214F9183F842000C38635 /* Foundation.framework */; };
 		A740BB7C19F23F9200DA3943 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FB183F842000C38635 /* CoreGraphics.framework */; };
 		A740BB7D19F23FA100DA3943 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7590B4019ED7CDF0084EBCA /* QuartzCore.framework */; };
+		A74396011A4090160096CF2F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A74396001A4090160096CF2F /* AddressBookUI.framework */; };
 		A7548AEB196C2E7C000B72EB /* PLYEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548AEA196C2E7C000B72EB /* PLYEntity.m */; };
 		A7548B24196C4C16000B72EB /* PLYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548B23196C4C16000B72EB /* PLYImage.m */; };
 		A7590AFF19ED77B40084EBCA /* PLYLoginViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76D3F5D198650770032FE59 /* PLYLoginViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -86,7 +103,6 @@
 		A7590B2C19ED77BD0084EBCA /* PLYConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B442A2183F97B800E8A170 /* PLYConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7590B2D19ED77BD0084EBCA /* PLYConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B442A3183F97B800E8A170 /* PLYConstants.m */; };
 		A7590B2E19ED77C40084EBCA /* API.strings in Resources */ = {isa = PBXBuildFile; fileRef = A76A56E81986922300751454 /* API.strings */; };
-		A7590B2F19ED77C40084EBCA /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = A76A56E91986922300751454 /* UI.strings */; };
 		A75CF73B1A30B48A007E30FC /* PLYVideoPreviewInterestBox.h in Headers */ = {isa = PBXBuildFile; fileRef = A75CF7331A30B48A007E30FC /* PLYVideoPreviewInterestBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A75CF73C1A30B48A007E30FC /* PLYVideoPreviewInterestBox.m in Sources */ = {isa = PBXBuildFile; fileRef = A75CF7341A30B48A007E30FC /* PLYVideoPreviewInterestBox.m */; };
 		A75CF73D1A30B48A007E30FC /* PLYVideoPreviewInterestBox.m in Sources */ = {isa = PBXBuildFile; fileRef = A75CF7341A30B48A007E30FC /* PLYVideoPreviewInterestBox.m */; };
@@ -123,11 +139,34 @@
 		A75CF7C81A3197D7007E30FC /* PLYFunctionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A75CF7C71A3197D7007E30FC /* PLYFunctionsTest.m */; };
 		A75CF7F81A31A2A3007E30FC /* ProductLayerSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A76A570C1986937D00751454 /* ProductLayerSDK.bundle */; };
 		A75CF7F91A31A2A9007E30FC /* libProductLayerSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B21721183F8A3800C38635 /* libProductLayerSDK.a */; };
+		A762933A1A5FF1CC00208A27 /* PLYSocialAuthWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76293191A5FEC3000208A27 /* PLYSocialAuthWebViewController.m */; };
+		A762933B1A5FF1CF00208A27 /* PLYSocialAuthWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76293191A5FEC3000208A27 /* PLYSocialAuthWebViewController.m */; };
+		A762933E1A5FF20300208A27 /* PLYSocialAuthFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A762933C1A5FF20300208A27 /* PLYSocialAuthFunctions.h */; };
+		A762933F1A5FF20300208A27 /* PLYSocialAuthFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A762933D1A5FF20300208A27 /* PLYSocialAuthFunctions.m */; };
+		A76293401A5FF20300208A27 /* PLYSocialAuthFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A762933D1A5FF20300208A27 /* PLYSocialAuthFunctions.m */; };
 		A76478991A18A8830000500C /* PLYSearchableTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76478971A18A8830000500C /* PLYSearchableTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A764789A1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76478981A18A8830000500C /* PLYSearchableTableViewController.m */; };
 		A764789B1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76478981A18A8830000500C /* PLYSearchableTableViewController.m */; };
+		A76561791A60169900AA6FEE /* facebook-button.png in Resources */ = {isa = PBXBuildFile; fileRef = A76561761A60169900AA6FEE /* facebook-button.png */; };
+		A765617A1A60169900AA6FEE /* facebook-button.png in Resources */ = {isa = PBXBuildFile; fileRef = A76561761A60169900AA6FEE /* facebook-button.png */; };
+		A765617B1A60169900AA6FEE /* facebook-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76561771A60169900AA6FEE /* facebook-button@2x.png */; };
+		A765617C1A60169900AA6FEE /* facebook-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76561771A60169900AA6FEE /* facebook-button@2x.png */; };
+		A765617D1A60169900AA6FEE /* facebook-button@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76561781A60169900AA6FEE /* facebook-button@3x.png */; };
+		A765617E1A60169900AA6FEE /* facebook-button@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76561781A60169900AA6FEE /* facebook-button@3x.png */; };
+		A76561A11A6016A500AA6FEE /* twitter-button.png in Resources */ = {isa = PBXBuildFile; fileRef = A765619E1A6016A500AA6FEE /* twitter-button.png */; };
+		A76561A21A6016A500AA6FEE /* twitter-button.png in Resources */ = {isa = PBXBuildFile; fileRef = A765619E1A6016A500AA6FEE /* twitter-button.png */; };
+		A76561A31A6016A500AA6FEE /* twitter-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A765619F1A6016A500AA6FEE /* twitter-button@2x.png */; };
+		A76561A41A6016A500AA6FEE /* twitter-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A765619F1A6016A500AA6FEE /* twitter-button@2x.png */; };
+		A76561A51A6016A500AA6FEE /* twitter-button@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76561A01A6016A500AA6FEE /* twitter-button@3x.png */; };
+		A76561A61A6016A500AA6FEE /* twitter-button@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76561A01A6016A500AA6FEE /* twitter-button@3x.png */; };
+		A7657AC81A62D8E200CBDBD9 /* camera-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A7657AC51A62D8E200CBDBD9 /* camera-icon.png */; };
+		A7657AC91A62D8E200CBDBD9 /* camera-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A7657AC51A62D8E200CBDBD9 /* camera-icon.png */; };
+		A7657ACA1A62D8E200CBDBD9 /* camera-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7657AC61A62D8E200CBDBD9 /* camera-icon@2x.png */; };
+		A7657ACB1A62D8E200CBDBD9 /* camera-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7657AC61A62D8E200CBDBD9 /* camera-icon@2x.png */; };
+		A7657ACC1A62D8E200CBDBD9 /* camera-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7657AC71A62D8E200CBDBD9 /* camera-icon@3x.png */; };
+		A7657ACD1A62D8E200CBDBD9 /* camera-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7657AC71A62D8E200CBDBD9 /* camera-icon@3x.png */; };
+		A7657AF31A630B9000CBDBD9 /* PLYUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7657AF21A630B9000CBDBD9 /* PLYUploadImage.m */; };
 		A76A57141986939700751454 /* API.strings in Resources */ = {isa = PBXBuildFile; fileRef = A76A56E81986922300751454 /* API.strings */; };
-		A76A57151986939700751454 /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = A76A56E91986922300751454 /* UI.strings */; };
 		A76A571B1986A6D300751454 /* ProductLayerSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A76A570C1986937D00751454 /* ProductLayerSDK.bundle */; };
 		A76D3F67198650770032FE59 /* PLYFormEmailValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F5A198650770032FE59 /* PLYFormEmailValidator.m */; };
 		A76D3F68198650770032FE59 /* PLYFormValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F5C198650770032FE59 /* PLYFormValidator.m */; };
@@ -143,6 +182,19 @@
 		A776659E1A1B547B008AB88C /* PLYNonEmptyValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = A776659C1A1B547B008AB88C /* PLYNonEmptyValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A776659F1A1B547B008AB88C /* PLYNonEmptyValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A776659D1A1B547B008AB88C /* PLYNonEmptyValidator.m */; };
 		A77665A01A1B547B008AB88C /* PLYNonEmptyValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A776659D1A1B547B008AB88C /* PLYNonEmptyValidator.m */; };
+		A778606F1A407C3800560889 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = A778606C1A407C3800560889 /* location.png */; };
+		A77860701A407C3800560889 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = A778606C1A407C3800560889 /* location.png */; };
+		A77860711A407C3800560889 /* location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A778606D1A407C3800560889 /* location@2x.png */; };
+		A77860721A407C3800560889 /* location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A778606D1A407C3800560889 /* location@2x.png */; };
+		A77860731A407C3800560889 /* location@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A778606E1A407C3800560889 /* location@3x.png */; };
+		A77860741A407C3800560889 /* location@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A778606E1A407C3800560889 /* location@3x.png */; };
+		A77860951A40830200560889 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A77860941A40830200560889 /* CoreLocation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		A77FFAA51A77907B0019DD5C /* PLYBrandedTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A77FFAA31A77907B0019DD5C /* PLYBrandedTableViewCell.h */; };
+		A77FFAA61A77907B0019DD5C /* PLYBrandedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A77FFAA41A77907B0019DD5C /* PLYBrandedTableViewCell.m */; };
+		A77FFAA71A77907B0019DD5C /* PLYBrandedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A77FFAA41A77907B0019DD5C /* PLYBrandedTableViewCell.m */; };
+		A77FFACE1A77E5790019DD5C /* PLYBrandOwnerPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A77FFAAD1A77E5120019DD5C /* PLYBrandOwnerPickerViewController.m */; };
+		A77FFACF1A77E57B0019DD5C /* PLYBrandOwnerPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A77FFAAD1A77E5120019DD5C /* PLYBrandOwnerPickerViewController.m */; };
+		A78DB5E51A46E26A00CD8A14 /* ProductLayerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D997EB1A2B11A800C80C2B /* ProductLayerSDK.framework */; };
 		A7A38CD21A2B4FFD005D8395 /* PLYFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A38CD01A2B4FFD005D8395 /* PLYFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7A38CD31A2B4FFD005D8395 /* PLYFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A38CD01A2B4FFD005D8395 /* PLYFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7A38CD41A2B4FFD005D8395 /* PLYFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A38CD11A2B4FFD005D8395 /* PLYFunctions.m */; };
@@ -164,6 +216,7 @@
 		A7B442B8183F9D0300E8A170 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B442B7183F9D0300E8A170 /* AVFoundation.framework */; };
 		A7B4873B1987CA7800FA8F83 /* PLYOpine.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B4873A1987CA7800FA8F83 /* PLYOpine.m */; };
 		A7B4877F1987CFB200FA8F83 /* PLYVotableEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B4877E1987CFB200FA8F83 /* PLYVotableEntity.m */; };
+		A7C488A81A36ECBA004AC656 /* PLYEntityTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C488A71A36ECBA004AC656 /* PLYEntityTest.m */; };
 		A7CD959219FA821E008E3A41 /* PLYOpineComposeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A7CD959019FA821E008E3A41 /* PLYOpineComposeViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7CD959319FA821E008E3A41 /* PLYOpineComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CD959119FA821E008E3A41 /* PLYOpineComposeViewController.m */; };
 		A7CD959419FA821E008E3A41 /* PLYOpineComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CD959119FA821E008E3A41 /* PLYOpineComposeViewController.m */; };
@@ -205,9 +258,19 @@
 		A7EA08411A2B341300B61CCE /* DTFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7EA08351A2B31B500B61CCE /* DTFoundation.framework */; };
 		A7EA08441A2B377300B61CCE /* DTFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7EA08351A2B31B500B61CCE /* DTFoundation.framework */; };
 		A7EA08451A2B378F00B61CCE /* DTFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A7EA08351A2B31B500B61CCE /* DTFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A7EB72731A72B42300FFD4CC /* PLYProblemReport.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EB72711A72B42300FFD4CC /* PLYProblemReport.h */; };
+		A7EB72741A72B42300FFD4CC /* PLYProblemReport.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EB72711A72B42300FFD4CC /* PLYProblemReport.h */; };
+		A7EB72751A72B42300FFD4CC /* PLYProblemReport.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EB72721A72B42300FFD4CC /* PLYProblemReport.m */; };
+		A7EB72761A72B42300FFD4CC /* PLYProblemReport.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EB72721A72B42300FFD4CC /* PLYProblemReport.m */; };
+		A7EB72771A72B42300FFD4CC /* PLYProblemReport.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EB72721A72B42300FFD4CC /* PLYProblemReport.m */; };
+		A7EB727B1A72B43F00FFD4CC /* PLYReportProblemViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EB72791A72B43F00FFD4CC /* PLYReportProblemViewController.h */; };
+		A7EB727C1A72B43F00FFD4CC /* PLYReportProblemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EB727A1A72B43F00FFD4CC /* PLYReportProblemViewController.m */; };
+		A7EB727D1A72B43F00FFD4CC /* PLYReportProblemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EB727A1A72B43F00FFD4CC /* PLYReportProblemViewController.m */; };
 		A7EE55A21A121C8300DD55FE /* PLYCategoryPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EE55A01A121C8300DD55FE /* PLYCategoryPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7EE55A31A121C8300DD55FE /* PLYCategoryPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE55A11A121C8300DD55FE /* PLYCategoryPickerViewController.m */; };
 		A7EE55A41A121C8300DD55FE /* PLYCategoryPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE55A11A121C8300DD55FE /* PLYCategoryPickerViewController.m */; };
+		A7F950651A9E0D10001C86BE /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = A7F950681A9E0D10001C86BE /* UI.strings */; };
+		A7F950661A9E0D10001C86BE /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = A7F950681A9E0D10001C86BE /* UI.strings */; };
 		C92A6256198A1B3900997DDC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C92A6255198A1B3900997DDC /* Security.framework */; };
 		C97D2D081A0037D3003885A1 /* ProductLayerSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A7590ADA19ED77710084EBCA /* ProductLayerSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C97FAA18191CCA3400144D2C /* PLYErrorMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA17191CCA3400144D2C /* PLYErrorMessage.m */; };
@@ -662,8 +725,17 @@
 		A719180D1A1B5B1B002C2D76 /* PLYContentsDidChangeValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYContentsDidChangeValidator.m; sourceTree = "<group>"; };
 		A71C2B921843AD8C00B77DB4 /* DTDownload.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTDownload.xcodeproj; path = DTDownload/DTDownload.xcodeproj; sourceTree = "<group>"; };
 		A71C2BBC1843ADA600B77DB4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		A72592B11A757D5900952685 /* PLYCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYCategory.m; path = PLYEntities/PLYCategory.m; sourceTree = "<group>"; };
+		A72592B21A757D5900952685 /* PLYCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYCategory.h; path = PLYEntities/PLYCategory.h; sourceTree = "<group>"; };
+		A72592B91A757D9400952685 /* PLYTextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYTextFieldTableViewCell.m; sourceTree = "<group>"; };
+		A72592BA1A757D9400952685 /* PLYEditProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYEditProductViewController.m; sourceTree = "<group>"; };
+		A72592C21A757DFB00952685 /* PLYModalTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYModalTableViewController.h; sourceTree = "<group>"; };
+		A72592C31A757DFB00952685 /* PLYModalTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYModalTableViewController.m; sourceTree = "<group>"; };
+		A72592C71A757E1F00952685 /* PLYEditProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYEditProductViewController.h; sourceTree = "<group>"; };
+		A72592C81A757E1F00952685 /* PLYTextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYTextFieldTableViewCell.h; sourceTree = "<group>"; };
 		A73803321A28E91800011D9C /* PLYTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYTextView.h; sourceTree = "<group>"; };
 		A73803331A28E91800011D9C /* PLYTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYTextView.m; sourceTree = "<group>"; };
+		A74396001A4090160096CF2F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		A7548AE9196C2E7C000B72EB /* PLYEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYEntity.h; path = PLYEntities/PLYEntity.h; sourceTree = "<group>"; };
 		A7548AEA196C2E7C000B72EB /* PLYEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYEntity.m; path = PLYEntities/PLYEntity.m; sourceTree = "<group>"; };
 		A7548B22196C4C16000B72EB /* PLYImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYImage.h; path = PLYEntities/PLYImage.h; sourceTree = "<group>"; };
@@ -691,11 +763,25 @@
 		A75CF7BD1A319699007E30FC /* UnitTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
 		A75CF7C71A3197D7007E30FC /* PLYFunctionsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYFunctionsTest.m; sourceTree = "<group>"; };
 		A75CF7C91A319A1D007E30FC /* UnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UnitTests-Prefix.pch"; sourceTree = "<group>"; };
+		A76293181A5FEC3000208A27 /* PLYSocialAuthWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYSocialAuthWebViewController.h; sourceTree = "<group>"; };
+		A76293191A5FEC3000208A27 /* PLYSocialAuthWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYSocialAuthWebViewController.m; sourceTree = "<group>"; };
+		A762933C1A5FF20300208A27 /* PLYSocialAuthFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYSocialAuthFunctions.h; sourceTree = "<group>"; };
+		A762933D1A5FF20300208A27 /* PLYSocialAuthFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYSocialAuthFunctions.m; sourceTree = "<group>"; };
 		A76478971A18A8830000500C /* PLYSearchableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYSearchableTableViewController.h; sourceTree = "<group>"; };
 		A76478981A18A8830000500C /* PLYSearchableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYSearchableTableViewController.m; sourceTree = "<group>"; };
+		A76561761A60169900AA6FEE /* facebook-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-button.png"; sourceTree = "<group>"; };
+		A76561771A60169900AA6FEE /* facebook-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-button@2x.png"; sourceTree = "<group>"; };
+		A76561781A60169900AA6FEE /* facebook-button@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-button@3x.png"; sourceTree = "<group>"; };
+		A765619E1A6016A500AA6FEE /* twitter-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-button.png"; sourceTree = "<group>"; };
+		A765619F1A6016A500AA6FEE /* twitter-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-button@2x.png"; sourceTree = "<group>"; };
+		A76561A01A6016A500AA6FEE /* twitter-button@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-button@3x.png"; sourceTree = "<group>"; };
+		A7657AC51A62D8E200CBDBD9 /* camera-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-icon.png"; sourceTree = "<group>"; };
+		A7657AC61A62D8E200CBDBD9 /* camera-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-icon@2x.png"; sourceTree = "<group>"; };
+		A7657AC71A62D8E200CBDBD9 /* camera-icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-icon@3x.png"; sourceTree = "<group>"; };
+		A7657AF11A630B9000CBDBD9 /* PLYUploadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYUploadImage.h; sourceTree = "<group>"; };
+		A7657AF21A630B9000CBDBD9 /* PLYUploadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYUploadImage.m; sourceTree = "<group>"; };
 		A7696B4B19ED91E000C1D3C4 /* Framework-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Framework-Info.plist"; sourceTree = "<group>"; };
 		A76A56E81986922300751454 /* API.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = API.strings; sourceTree = "<group>"; };
-		A76A56E91986922300751454 /* UI.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = UI.strings; sourceTree = "<group>"; };
 		A76A570C1986937D00751454 /* ProductLayerSDK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProductLayerSDK.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		A76A5719198693ED00751454 /* Bundle-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bundle-Info.plist"; sourceTree = "<group>"; };
 		A76D3F59198650770032FE59 /* PLYFormEmailValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYFormEmailValidator.h; sourceTree = "<group>"; };
@@ -719,6 +805,14 @@
 		A77665941A1B369A008AB88C /* PLYGuidedInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYGuidedInputViewController.m; sourceTree = "<group>"; };
 		A776659C1A1B547B008AB88C /* PLYNonEmptyValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYNonEmptyValidator.h; sourceTree = "<group>"; };
 		A776659D1A1B547B008AB88C /* PLYNonEmptyValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYNonEmptyValidator.m; sourceTree = "<group>"; };
+		A778606C1A407C3800560889 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
+		A778606D1A407C3800560889 /* location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location@2x.png"; sourceTree = "<group>"; };
+		A778606E1A407C3800560889 /* location@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location@3x.png"; sourceTree = "<group>"; };
+		A77860941A40830200560889 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		A77FFAA31A77907B0019DD5C /* PLYBrandedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYBrandedTableViewCell.h; sourceTree = "<group>"; };
+		A77FFAA41A77907B0019DD5C /* PLYBrandedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYBrandedTableViewCell.m; sourceTree = "<group>"; };
+		A77FFAAC1A77E5120019DD5C /* PLYBrandOwnerPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYBrandOwnerPickerViewController.h; sourceTree = "<group>"; };
+		A77FFAAD1A77E5120019DD5C /* PLYBrandOwnerPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYBrandOwnerPickerViewController.m; sourceTree = "<group>"; };
 		A7A38CD01A2B4FFD005D8395 /* PLYFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYFunctions.h; sourceTree = "<group>"; };
 		A7A38CD11A2B4FFD005D8395 /* PLYFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYFunctions.m; sourceTree = "<group>"; };
 		A7B214F6183F842000C38635 /* ProductLayerSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductLayerSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -747,6 +841,7 @@
 		A7B4873A1987CA7800FA8F83 /* PLYOpine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYOpine.m; path = PLYEntities/PLYOpine.m; sourceTree = "<group>"; };
 		A7B4877D1987CFB200FA8F83 /* PLYVotableEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYVotableEntity.h; path = PLYEntities/PLYVotableEntity.h; sourceTree = "<group>"; };
 		A7B4877E1987CFB200FA8F83 /* PLYVotableEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYVotableEntity.m; path = PLYEntities/PLYVotableEntity.m; sourceTree = "<group>"; };
+		A7C488A71A36ECBA004AC656 /* PLYEntityTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYEntityTest.m; sourceTree = "<group>"; };
 		A7CD959019FA821E008E3A41 /* PLYOpineComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYOpineComposeViewController.h; sourceTree = "<group>"; };
 		A7CD959119FA821E008E3A41 /* PLYOpineComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYOpineComposeViewController.m; sourceTree = "<group>"; };
 		A7D997EB1A2B11A800C80C2B /* ProductLayerSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ProductLayerSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -755,8 +850,14 @@
 		A7EA07281A2B161400B61CCE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		A7EA072A1A2B164E00B61CCE /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
 		A7EA072E1A2B197300B61CCE /* libDTFoundation_Mac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libDTFoundation_Mac.a; path = Externals/DTDownload/Externals/DTFoundation/build/Debug/libDTFoundation_Mac.a; sourceTree = "<group>"; };
+		A7EB72711A72B42300FFD4CC /* PLYProblemReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYProblemReport.h; sourceTree = "<group>"; };
+		A7EB72721A72B42300FFD4CC /* PLYProblemReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYProblemReport.m; sourceTree = "<group>"; };
+		A7EB72791A72B43F00FFD4CC /* PLYReportProblemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYReportProblemViewController.h; sourceTree = "<group>"; };
+		A7EB727A1A72B43F00FFD4CC /* PLYReportProblemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYReportProblemViewController.m; sourceTree = "<group>"; };
 		A7EE55A01A121C8300DD55FE /* PLYCategoryPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYCategoryPickerViewController.h; sourceTree = "<group>"; };
 		A7EE55A11A121C8300DD55FE /* PLYCategoryPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYCategoryPickerViewController.m; sourceTree = "<group>"; };
+		A7F950671A9E0D10001C86BE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/UI.strings; sourceTree = "<group>"; };
+		A7F950881A9E0D19001C86BE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/UI.strings; sourceTree = "<group>"; };
 		C92A6255198A1B3900997DDC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		C97FAA16191CCA3400144D2C /* PLYErrorMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYErrorMessage.h; path = PLYEntities/PLYErrorMessage.h; sourceTree = "<group>"; };
 		C97FAA17191CCA3400144D2C /* PLYErrorMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYErrorMessage.m; path = PLYEntities/PLYErrorMessage.m; sourceTree = "<group>"; };
@@ -892,6 +993,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A74396011A4090160096CF2F /* AddressBookUI.framework in Frameworks */,
+				A77860951A40830200560889 /* CoreLocation.framework in Frameworks */,
 				A7ACC99D1A307ABC004EE5BD /* libDTKeychain.a in Frameworks */,
 				A7EA08411A2B341300B61CCE /* DTFoundation.framework in Frameworks */,
 				A740BB7D19F23FA100DA3943 /* QuartzCore.framework in Frameworks */,
@@ -923,6 +1026,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7EA08441A2B377300B61CCE /* DTFoundation.framework in Frameworks */,
+				A78DB5E51A46E26A00CD8A14 /* ProductLayerSDK.framework in Frameworks */,
 				C97FAAE819221CD800144D2C /* libDTProgressHUD_iOS.a in Frameworks */,
 				A71C2BBD1843ADA600B77DB4 /* CoreData.framework in Frameworks */,
 				A71C2BBB1843AD9B00B77DB4 /* libDTDownload_iOS.a in Frameworks */,
@@ -970,6 +1074,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		A72592B81A757D6D00952685 /* Edit Product */ = {
+			isa = PBXGroup;
+			children = (
+				A72592C21A757DFB00952685 /* PLYModalTableViewController.h */,
+				A72592C31A757DFB00952685 /* PLYModalTableViewController.m */,
+				A72592C81A757E1F00952685 /* PLYTextFieldTableViewCell.h */,
+				A72592B91A757D9400952685 /* PLYTextFieldTableViewCell.m */,
+				A72592C71A757E1F00952685 /* PLYEditProductViewController.h */,
+				A72592BA1A757D9400952685 /* PLYEditProductViewController.m */,
+			);
+			name = "Edit Product";
+			sourceTree = "<group>";
+		};
 		A75CF7471A30B48D007E30FC /* Barcode Scanner */ = {
 			isa = PBXGroup;
 			children = (
@@ -991,6 +1108,7 @@
 				A75CF7C91A319A1D007E30FC /* UnitTests-Prefix.pch */,
 				A75CF7BD1A319699007E30FC /* UnitTests-Info.plist */,
 				A75CF7C71A3197D7007E30FC /* PLYFunctionsTest.m */,
+				A7C488A71A36ECBA004AC656 /* PLYEntityTest.m */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -1000,6 +1118,8 @@
 			children = (
 				A701C4F71A1F55580013CB8D /* PLYBrandPickerViewController.h */,
 				A701C4F81A1F55580013CB8D /* PLYBrandPickerViewController.m */,
+				A77FFAAC1A77E5120019DD5C /* PLYBrandOwnerPickerViewController.h */,
+				A77FFAAD1A77E5120019DD5C /* PLYBrandOwnerPickerViewController.m */,
 			);
 			name = Brands;
 			sourceTree = "<group>";
@@ -1009,15 +1129,27 @@
 			children = (
 				A75CF7831A30E573007E30FC /* PLYBrandPickerViewController.xib */,
 				A75CF7841A30E573007E30FC /* PLYGuidedInputViewController.xib */,
-				A701C5001A1FC89A0013CB8D /* twitter.png */,
-				A701C5011A1FC89A0013CB8D /* twitter@2x.png */,
-				A701C5021A1FC89A0013CB8D /* twitter@3x.png */,
+				A7657AC51A62D8E200CBDBD9 /* camera-icon.png */,
+				A7657AC61A62D8E200CBDBD9 /* camera-icon@2x.png */,
+				A7657AC71A62D8E200CBDBD9 /* camera-icon@3x.png */,
 				A701C5031A1FC89A0013CB8D /* facebook.png */,
 				A701C5041A1FC89A0013CB8D /* facebook@2x.png */,
 				A701C5051A1FC89A0013CB8D /* facebook@3x.png */,
+				A76561761A60169900AA6FEE /* facebook-button.png */,
+				A76561771A60169900AA6FEE /* facebook-button@2x.png */,
+				A76561781A60169900AA6FEE /* facebook-button@3x.png */,
+				A778606C1A407C3800560889 /* location.png */,
+				A778606D1A407C3800560889 /* location@2x.png */,
+				A778606E1A407C3800560889 /* location@3x.png */,
+				A701C5001A1FC89A0013CB8D /* twitter.png */,
+				A701C5011A1FC89A0013CB8D /* twitter@2x.png */,
+				A701C5021A1FC89A0013CB8D /* twitter@3x.png */,
+				A765619E1A6016A500AA6FEE /* twitter-button.png */,
+				A765619F1A6016A500AA6FEE /* twitter-button@2x.png */,
+				A76561A01A6016A500AA6FEE /* twitter-button@3x.png */,
 				A76A5719198693ED00751454 /* Bundle-Info.plist */,
 				A76A56E81986922300751454 /* API.strings */,
-				A76A56E91986922300751454 /* UI.strings */,
+				A7F950681A9E0D10001C86BE /* UI.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1025,6 +1157,9 @@
 		A76D3F58198650770032FE59 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				A77FFA831A7790630019DD5C /* Branding */,
+				A72592B81A757D6D00952685 /* Edit Product */,
+				A7EB72781A72B43400FFD4CC /* Problem Reports */,
 				A75CF7471A30B48D007E30FC /* Barcode Scanner */,
 				A77665921A1B3673008AB88C /* Input */,
 				A76D3F65198650770032FE59 /* UIViewController+ProductLayer.h */,
@@ -1064,6 +1199,10 @@
 		A76D3F8E19866B690032FE59 /* Login/Signup */ = {
 			isa = PBXGroup;
 			children = (
+				A762933C1A5FF20300208A27 /* PLYSocialAuthFunctions.h */,
+				A762933D1A5FF20300208A27 /* PLYSocialAuthFunctions.m */,
+				A76293181A5FEC3000208A27 /* PLYSocialAuthWebViewController.h */,
+				A76293191A5FEC3000208A27 /* PLYSocialAuthWebViewController.m */,
 				A76D3F5D198650770032FE59 /* PLYLoginViewController.h */,
 				A76D3F5E198650770032FE59 /* PLYLoginViewController.m */,
 				A76D3F8F19866E0E0032FE59 /* PLYLostPasswordViewController.h */,
@@ -1095,6 +1234,15 @@
 			name = Input;
 			sourceTree = "<group>";
 		};
+		A77FFA831A7790630019DD5C /* Branding */ = {
+			isa = PBXGroup;
+			children = (
+				A77FFAA31A77907B0019DD5C /* PLYBrandedTableViewCell.h */,
+				A77FFAA41A77907B0019DD5C /* PLYBrandedTableViewCell.m */,
+			);
+			name = Branding;
+			sourceTree = "<group>";
+		};
 		A7B214ED183F842000C38635 = {
 			isa = PBXGroup;
 			children = (
@@ -1123,6 +1271,8 @@
 		A7B214F8183F842000C38635 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A74396001A4090160096CF2F /* AddressBookUI.framework */,
+				A77860941A40830200560889 /* CoreLocation.framework */,
 				A7EA072E1A2B197300B61CCE /* libDTFoundation_Mac.a */,
 				A7EA072A1A2B164E00B61CCE /* AppKit.framework */,
 				A7EA07281A2B161400B61CCE /* Foundation.framework */,
@@ -1258,6 +1408,15 @@
 				A7A38CD11A2B4FFD005D8395 /* PLYFunctions.m */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		A7EB72781A72B43400FFD4CC /* Problem Reports */ = {
+			isa = PBXGroup;
+			children = (
+				A7EB72791A72B43F00FFD4CC /* PLYReportProblemViewController.h */,
+				A7EB727A1A72B43F00FFD4CC /* PLYReportProblemViewController.m */,
+			);
+			name = "Problem Reports";
 			sourceTree = "<group>";
 		};
 		A7EE559E1A121C3300DD55FE /* Categories */ = {
@@ -1535,6 +1694,8 @@
 				A75CF7491A30B4BD007E30FC /* PLYBrand.m */,
 				A75CF74A1A30B4BD007E30FC /* PLYBrandOwner.h */,
 				A75CF74B1A30B4BD007E30FC /* PLYBrandOwner.m */,
+				A72592B11A757D5900952685 /* PLYCategory.m */,
+				A72592B21A757D5900952685 /* PLYCategory.h */,
 				A7548AE9196C2E7C000B72EB /* PLYEntity.h */,
 				A7548AEA196C2E7C000B72EB /* PLYEntity.m */,
 				C97FAA16191CCA3400144D2C /* PLYErrorMessage.h */,
@@ -1551,6 +1712,8 @@
 				A7B4873A1987CA7800FA8F83 /* PLYOpine.m */,
 				C9D31F6C190A742500C91A08 /* PLYPackaging.h */,
 				C9D31F6D190A742500C91A08 /* PLYPackaging.m */,
+				A7EB72711A72B42300FFD4CC /* PLYProblemReport.h */,
+				A7EB72721A72B42300FFD4CC /* PLYProblemReport.m */,
 				C9D31F6E190A742500C91A08 /* PLYProduct.h */,
 				C9D31F6F190A742500C91A08 /* PLYProduct.m */,
 				C9D31F76190ABE0E00C91A08 /* PLYReview.h */,
@@ -1563,6 +1726,8 @@
 				C97FAADF1921FCFA00144D2C /* PLYProductCategory.m */,
 				A7B4877D1987CFB200FA8F83 /* PLYVotableEntity.h */,
 				A7B4877E1987CFB200FA8F83 /* PLYVotableEntity.m */,
+				A7657AF11A630B9000CBDBD9 /* PLYUploadImage.h */,
+				A7657AF21A630B9000CBDBD9 /* PLYUploadImage.m */,
 			);
 			name = PLYEntities;
 			sourceTree = "<group>";
@@ -1576,6 +1741,7 @@
 			files = (
 				A7590B2B19ED77BD0084EBCA /* ProductLayer.h in Headers */,
 				A7590B1719ED77B80084EBCA /* PLYList.h in Headers */,
+				A7EB72731A72B42300FFD4CC /* PLYProblemReport.h in Headers */,
 				A7590B0B19ED77B40084EBCA /* PLYTextField.h in Headers */,
 				A7590B0919ED77B40084EBCA /* PLYFormValidator.h in Headers */,
 				A76478991A18A8830000500C /* PLYSearchableTableViewController.h in Headers */,
@@ -1588,14 +1754,19 @@
 				A7590B0D19ED77B40084EBCA /* PLYUserNameValidator.h in Headers */,
 				A7590B1F19ED77B80084EBCA /* PLYProduct.h in Headers */,
 				A75CF7441A30B48A007E30FC /* PLYVideoPreviewView.h in Headers */,
+				A72592C91A757E1F00952685 /* PLYEditProductViewController.h in Headers */,
 				A719180E1A1B5B1B002C2D76 /* PLYContentsDidChangeValidator.h in Headers */,
+				A762933E1A5FF20300208A27 /* PLYSocialAuthFunctions.h in Headers */,
 				A7590B1119ED77B80084EBCA /* PLYErrorMessage.h in Headers */,
 				A7EA07241A2B14A800B61CCE /* PLYCompatibility.h in Headers */,
+				A72592CA1A757E1F00952685 /* PLYTextFieldTableViewCell.h in Headers */,
 				A7590B2519ED77B80084EBCA /* PLYProductCategory.h in Headers */,
 				A7590B1519ED77B80084EBCA /* PLYImage.h in Headers */,
 				A75CF73B1A30B48A007E30FC /* PLYVideoPreviewInterestBox.h in Headers */,
+				A72592B61A757D5900952685 /* PLYCategory.h in Headers */,
 				A75CF7411A30B48A007E30FC /* PLYAVFoundationFunctions.h in Headers */,
 				A7590B0719ED77B40084EBCA /* PLYFormEmailValidator.h in Headers */,
+				A77FFAA51A77907B0019DD5C /* PLYBrandedTableViewCell.h in Headers */,
 				A7590B2719ED77B80084EBCA /* PLYVotableEntity.h in Headers */,
 				A7590B0519ED77B40084EBCA /* UIViewController+ProductLayer.h in Headers */,
 				A7590B1319ED77B80084EBCA /* PLYErrorResponse.h in Headers */,
@@ -1606,12 +1777,14 @@
 				A75CF7531A30B4BD007E30FC /* PLYBrandOwner.h in Headers */,
 				A7EE55A21A121C8300DD55FE /* PLYCategoryPickerViewController.h in Headers */,
 				A7590B1919ED77B80084EBCA /* PLYListItem.h in Headers */,
+				A72592C41A757DFB00952685 /* PLYModalTableViewController.h in Headers */,
 				A7590B2C19ED77BD0084EBCA /* PLYConstants.h in Headers */,
 				A7590B2119ED77B80084EBCA /* PLYReview.h in Headers */,
 				A73803341A28E91800011D9C /* PLYTextView.h in Headers */,
 				A7590B1D19ED77B80084EBCA /* PLYPackaging.h in Headers */,
 				A7590B0119ED77B40084EBCA /* PLYLostPasswordViewController.h in Headers */,
 				A75CF7811A30DF4E007E30FC /* PLYEntities.h in Headers */,
+				A7EB727B1A72B43F00FFD4CC /* PLYReportProblemViewController.h in Headers */,
 				A7CD959219FA821E008E3A41 /* PLYOpineComposeViewController.h in Headers */,
 				A7590B0319ED77B40084EBCA /* PLYSignUpViewController.h in Headers */,
 				A701C4FA1A1F55580013CB8D /* PLYBrandPickerViewController.h in Headers */,
@@ -1624,12 +1797,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7EA070C1A2B139C00B61CCE /* PLYImage.h in Headers */,
+				A7EB72741A72B42300FFD4CC /* PLYProblemReport.h in Headers */,
 				A7EA071E1A2B139C00B61CCE /* PLYProductCategory.h in Headers */,
 				A7EA070E1A2B139C00B61CCE /* PLYList.h in Headers */,
 				A75CF74F1A30B4BD007E30FC /* PLYBrand.h in Headers */,
 				A7EA07101A2B139C00B61CCE /* PLYListItem.h in Headers */,
 				A7EA07081A2B139C00B61CCE /* PLYErrorMessage.h in Headers */,
 				A7EA07141A2B139C00B61CCE /* PLYPackaging.h in Headers */,
+				A72592B71A757D5900952685 /* PLYCategory.h in Headers */,
 				A7EA07161A2B139C00B61CCE /* PLYProduct.h in Headers */,
 				A7EA07121A2B139C00B61CCE /* PLYOpine.h in Headers */,
 				A75CF7821A30DF4E007E30FC /* PLYEntities.h in Headers */,
@@ -2087,14 +2262,26 @@
 			files = (
 				A75CF7881A30E573007E30FC /* PLYGuidedInputViewController.xib in Resources */,
 				A701C50B1A1FC89A0013CB8D /* twitter@3x.png in Resources */,
+				A76561A41A6016A500AA6FEE /* twitter-button@2x.png in Resources */,
+				A7657ACD1A62D8E200CBDBD9 /* camera-icon@3x.png in Resources */,
+				A765617C1A60169900AA6FEE /* facebook-button@2x.png in Resources */,
 				A701C50D1A1FC89A0013CB8D /* facebook.png in Resources */,
 				A701C5111A1FC89A0013CB8D /* facebook@3x.png in Resources */,
+				A76561A61A6016A500AA6FEE /* twitter-button@3x.png in Resources */,
 				A701C50F1A1FC89A0013CB8D /* facebook@2x.png in Resources */,
 				A701C5091A1FC89A0013CB8D /* twitter@2x.png in Resources */,
+				A765617E1A60169900AA6FEE /* facebook-button@3x.png in Resources */,
 				A701C5071A1FC89A0013CB8D /* twitter.png in Resources */,
 				A75CF7861A30E573007E30FC /* PLYBrandPickerViewController.xib in Resources */,
-				A7590B2F19ED77C40084EBCA /* UI.strings in Resources */,
+				A77860701A407C3800560889 /* location.png in Resources */,
+				A77860721A407C3800560889 /* location@2x.png in Resources */,
+				A7F950661A9E0D10001C86BE /* UI.strings in Resources */,
+				A76561A21A6016A500AA6FEE /* twitter-button.png in Resources */,
+				A7657ACB1A62D8E200CBDBD9 /* camera-icon@2x.png in Resources */,
 				A7590B2E19ED77C40084EBCA /* API.strings in Resources */,
+				A7657AC91A62D8E200CBDBD9 /* camera-icon.png in Resources */,
+				A77860741A407C3800560889 /* location@3x.png in Resources */,
+				A765617A1A60169900AA6FEE /* facebook-button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2112,14 +2299,26 @@
 			files = (
 				A75CF7871A30E573007E30FC /* PLYGuidedInputViewController.xib in Resources */,
 				A701C50A1A1FC89A0013CB8D /* twitter@3x.png in Resources */,
+				A76561A31A6016A500AA6FEE /* twitter-button@2x.png in Resources */,
+				A7657ACC1A62D8E200CBDBD9 /* camera-icon@3x.png in Resources */,
+				A765617B1A60169900AA6FEE /* facebook-button@2x.png in Resources */,
 				A701C50C1A1FC89A0013CB8D /* facebook.png in Resources */,
 				A701C5101A1FC89A0013CB8D /* facebook@3x.png in Resources */,
+				A76561A51A6016A500AA6FEE /* twitter-button@3x.png in Resources */,
 				A701C50E1A1FC89A0013CB8D /* facebook@2x.png in Resources */,
 				A701C5081A1FC89A0013CB8D /* twitter@2x.png in Resources */,
+				A765617D1A60169900AA6FEE /* facebook-button@3x.png in Resources */,
 				A701C5061A1FC89A0013CB8D /* twitter.png in Resources */,
 				A75CF7851A30E573007E30FC /* PLYBrandPickerViewController.xib in Resources */,
-				A76A57151986939700751454 /* UI.strings in Resources */,
+				A778606F1A407C3800560889 /* location.png in Resources */,
+				A77860711A407C3800560889 /* location@2x.png in Resources */,
+				A7F950651A9E0D10001C86BE /* UI.strings in Resources */,
+				A76561A11A6016A500AA6FEE /* twitter-button.png in Resources */,
+				A7657ACA1A62D8E200CBDBD9 /* camera-icon@2x.png in Resources */,
 				A76A57141986939700751454 /* API.strings in Resources */,
+				A7657AC81A62D8E200CBDBD9 /* camera-icon.png in Resources */,
+				A77860731A407C3800560889 /* location@3x.png in Resources */,
+				A76561791A60169900AA6FEE /* facebook-button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2182,15 +2381,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7590B0E19ED77B40084EBCA /* PLYUserNameValidator.m in Sources */,
+				A72592C61A757DFB00952685 /* PLYModalTableViewController.m in Sources */,
 				A7590B2219ED77B80084EBCA /* PLYReview.m in Sources */,
+				A731FE7B1A63DAC500D341FC /* PLYUploadImage.m in Sources */,
 				A764789B1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */,
+				A762933A1A5FF1CC00208A27 /* PLYSocialAuthWebViewController.m in Sources */,
 				A7590B1C19ED77B80084EBCA /* PLYOpine.m in Sources */,
 				A73803361A28E91800011D9C /* PLYTextView.m in Sources */,
 				A7590B2D19ED77BD0084EBCA /* PLYConstants.m in Sources */,
+				A7EB727D1A72B43F00FFD4CC /* PLYReportProblemViewController.m in Sources */,
 				A77665991A1B369A008AB88C /* PLYGuidedInputViewController.m in Sources */,
 				A7590B0019ED77B40084EBCA /* PLYLoginViewController.m in Sources */,
 				A7A38CD51A2B4FFD005D8395 /* PLYFunctions.m in Sources */,
 				A75CF75B1A30B4BD007E30FC /* PLYUserAvatar.m in Sources */,
+				A7EB72761A72B42300FFD4CC /* PLYProblemReport.m in Sources */,
 				A7590B1619ED77B80084EBCA /* PLYImage.m in Sources */,
 				A7590B0619ED77B40084EBCA /* UIViewController+ProductLayer.m in Sources */,
 				A75CF7431A30B48A007E30FC /* PLYAVFoundationFunctions.m in Sources */,
@@ -2198,6 +2402,7 @@
 				A75CF7511A30B4BD007E30FC /* PLYBrand.m in Sources */,
 				A7590B2819ED77B80084EBCA /* PLYVotableEntity.m in Sources */,
 				A71918101A1B5B1B002C2D76 /* PLYContentsDidChangeValidator.m in Sources */,
+				A72592BC1A757D9400952685 /* PLYTextFieldTableViewCell.m in Sources */,
 				A75CF73D1A30B48A007E30FC /* PLYVideoPreviewInterestBox.m in Sources */,
 				A7590B2019ED77B80084EBCA /* PLYProduct.m in Sources */,
 				A7590B2A19ED77BD0084EBCA /* PLYServer.m in Sources */,
@@ -2209,6 +2414,8 @@
 				A7EE55A41A121C8300DD55FE /* PLYCategoryPickerViewController.m in Sources */,
 				A75CF7401A30B48A007E30FC /* PLYScannerViewController.m in Sources */,
 				A7590B1419ED77B80084EBCA /* PLYErrorResponse.m in Sources */,
+				A77FFAA71A77907B0019DD5C /* PLYBrandedTableViewCell.m in Sources */,
+				A72592BE1A757D9400952685 /* PLYEditProductViewController.m in Sources */,
 				A75CF7561A30B4BD007E30FC /* PLYBrandOwner.m in Sources */,
 				A7590B0A19ED77B40084EBCA /* PLYFormValidator.m in Sources */,
 				A7590B1819ED77B80084EBCA /* PLYList.m in Sources */,
@@ -2217,8 +2424,11 @@
 				A701C4FD1A1F55580013CB8D /* PLYBrandPickerViewController.m in Sources */,
 				A77665A01A1B547B008AB88C /* PLYNonEmptyValidator.m in Sources */,
 				A7590B1019ED77B80084EBCA /* PLYEntity.m in Sources */,
+				A76293401A5FF20300208A27 /* PLYSocialAuthFunctions.m in Sources */,
+				A72592B41A757D5900952685 /* PLYCategory.m in Sources */,
 				A7590B2419ED77B80084EBCA /* PLYUser.m in Sources */,
 				A7590B0419ED77B40084EBCA /* PLYSignUpViewController.m in Sources */,
+				A77FFACF1A77E57B0019DD5C /* PLYBrandOwnerPickerViewController.m in Sources */,
 				A7590B2619ED77B80084EBCA /* PLYProductCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2227,6 +2437,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7C488A81A36ECBA004AC656 /* PLYEntityTest.m in Sources */,
 				A75CF7C81A3197D7007E30FC /* PLYFunctionsTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2266,6 +2477,7 @@
 				C97FAAD5192145F800144D2C /* LocalizableStringPicker.m in Sources */,
 				C97FAAAB191D618C00144D2C /* RatingTableCell.m in Sources */,
 				C97FAAA8191D618C00144D2C /* SearchProductViewController.m in Sources */,
+				A7657AF31A630B9000CBDBD9 /* PLYUploadImage.m in Sources */,
 				C97FAAA0191D618C00144D2C /* ProductImageViewController.m in Sources */,
 				C97FAAA7191D618C00144D2C /* ProductViewController.m in Sources */,
 				C97FAAAD191D618C00144D2C /* ReviewTableViewController.m in Sources */,
@@ -2290,14 +2502,18 @@
 			files = (
 				A76D3F69198650770032FE59 /* PLYLoginViewController.m in Sources */,
 				C98CD2671910E0D70035647C /* PLYPackaging.m in Sources */,
+				A77FFACE1A77E5790019DD5C /* PLYBrandOwnerPickerViewController.m in Sources */,
 				A764789A1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */,
+				A762933B1A5FF1CF00208A27 /* PLYSocialAuthWebViewController.m in Sources */,
 				C98CD2681910E0D70035647C /* PLYProduct.m in Sources */,
 				A73803351A28E91800011D9C /* PLYTextView.m in Sources */,
 				A7548B24196C4C16000B72EB /* PLYImage.m in Sources */,
 				A77665971A1B369A008AB88C /* PLYGuidedInputViewController.m in Sources */,
 				C97FAA18191CCA3400144D2C /* PLYErrorMessage.m in Sources */,
 				A7A38CD41A2B4FFD005D8395 /* PLYFunctions.m in Sources */,
+				A72592BB1A757D9400952685 /* PLYTextFieldTableViewCell.m in Sources */,
 				A75CF75A1A30B4BD007E30FC /* PLYUserAvatar.m in Sources */,
+				A7EB72751A72B42300FFD4CC /* PLYProblemReport.m in Sources */,
 				A7B4873B1987CA7800FA8F83 /* PLYOpine.m in Sources */,
 				C98CD2691910E0D70035647C /* PLYReview.m in Sources */,
 				A75CF7421A30B48A007E30FC /* PLYAVFoundationFunctions.m in Sources */,
@@ -2310,12 +2526,15 @@
 				C98CD26A1910E0D70035647C /* PLYList.m in Sources */,
 				C97FAA1C191CCA4D00144D2C /* PLYErrorResponse.m in Sources */,
 				A76D3F68198650770032FE59 /* PLYFormValidator.m in Sources */,
+				A7EB727C1A72B43F00FFD4CC /* PLYReportProblemViewController.m in Sources */,
 				A75CF7451A30B48A007E30FC /* PLYVideoPreviewView.m in Sources */,
 				A7CD959319FA821E008E3A41 /* PLYOpineComposeViewController.m in Sources */,
 				C98CD26B1910E0D70035647C /* PLYListItem.m in Sources */,
 				A7EE55A31A121C8300DD55FE /* PLYCategoryPickerViewController.m in Sources */,
 				A75CF73F1A30B48A007E30FC /* PLYScannerViewController.m in Sources */,
+				A72592C51A757DFB00952685 /* PLYModalTableViewController.m in Sources */,
 				A76D3F9119866E0E0032FE59 /* PLYLostPasswordViewController.m in Sources */,
+				A72592B31A757D5900952685 /* PLYCategory.m in Sources */,
 				A75CF7551A30B4BD007E30FC /* PLYBrandOwner.m in Sources */,
 				C97FAAE11921FD1900144D2C /* PLYProductCategory.m in Sources */,
 				A7548AEB196C2E7C000B72EB /* PLYEntity.m in Sources */,
@@ -2324,6 +2543,9 @@
 				A701C4FB1A1F55580013CB8D /* PLYBrandPickerViewController.m in Sources */,
 				A776659F1A1B547B008AB88C /* PLYNonEmptyValidator.m in Sources */,
 				C9ADBDD41911502B004C81B3 /* PLYUser.m in Sources */,
+				A762933F1A5FF20300208A27 /* PLYSocialAuthFunctions.m in Sources */,
+				A72592BD1A757D9400952685 /* PLYEditProductViewController.m in Sources */,
+				A77FFAA61A77907B0019DD5C /* PLYBrandedTableViewCell.m in Sources */,
 				A76D3F6A198650770032FE59 /* PLYSignUpViewController.m in Sources */,
 				A76D3F6D198650770032FE59 /* UIViewController+ProductLayer.m in Sources */,
 				A7B442A4183F97B800E8A170 /* PLYConstants.m in Sources */,
@@ -2338,12 +2560,15 @@
 				A7EA07111A2B139C00B61CCE /* PLYListItem.m in Sources */,
 				A7EA07191A2B139C00B61CCE /* PLYReview.m in Sources */,
 				A75CF75C1A30B4BD007E30FC /* PLYUserAvatar.m in Sources */,
+				A731FE9B1A63DAC700D341FC /* PLYUploadImage.m in Sources */,
 				A7EA070F1A2B139C00B61CCE /* PLYList.m in Sources */,
 				A7EA07091A2B139C00B61CCE /* PLYErrorMessage.m in Sources */,
 				A7EA071F1A2B139C00B61CCE /* PLYProductCategory.m in Sources */,
 				A7EA07071A2B139C00B61CCE /* PLYEntity.m in Sources */,
+				A72592B51A757D5900952685 /* PLYCategory.m in Sources */,
 				A75CF7571A30B4BD007E30FC /* PLYBrandOwner.m in Sources */,
 				A7EA072C1A2B176D00B61CCE /* PLYServer.m in Sources */,
+				A7EB72771A72B42300FFD4CC /* PLYProblemReport.m in Sources */,
 				A7EA07151A2B139C00B61CCE /* PLYPackaging.m in Sources */,
 				A7EA070D1A2B139C00B61CCE /* PLYImage.m in Sources */,
 				A7EA070B1A2B139C00B61CCE /* PLYErrorResponse.m in Sources */,
@@ -2431,12 +2656,22 @@
 			path = Base.lproj;
 			sourceTree = "<group>";
 		};
+		A7F950681A9E0D10001C86BE /* UI.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A7F950671A9E0D10001C86BE /* en */,
+				A7F950881A9E0D19001C86BE /* de */,
+			);
+			name = UI.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		A7590AF419ED77710084EBCA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_MODULES = NO;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2467,6 +2702,7 @@
 		A7590AF519ED77710084EBCA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_MODULES = NO;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2497,6 +2733,7 @@
 		A7590AF619ED77710084EBCA /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_MODULES = NO;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2678,6 +2915,7 @@
 		A75CF7CF1A319B14007E30FC /* Coverage */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_MODULES = NO;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -3139,6 +3377,7 @@
 				A75CF7BB1A31965E007E30FC /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A76A57101986937D00751454 /* Build configuration list for PBXNativeTarget "Resource Bundle" */ = {
 			isa = XCConfigurationList;

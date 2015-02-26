@@ -7,6 +7,7 @@
 //
 
 #import "PLYListItem.h"
+#import "PLYProduct.h"
 
 @implementation PLYListItem
 
@@ -32,6 +33,10 @@
 	else if ([key isEqualToString:@"pl-list-prod-prio"])
 	{
 		[self setValue:value forKey:@"priority"];
+	}
+	else if ([key isEqualToString:@"pl-prod"])
+	{
+		self.product = [[PLYProduct alloc] initWithDictionary:value];
 	}
 	else
 	{
@@ -63,8 +68,24 @@
 		dict[@"pl-list-prod-prio"] = @(_priority);
 	}
 	
+	if (_product)
+	{
+		dict[@"pl-prod"] = [_product dictionaryRepresentation];
+	}
+	
 	// return immutable
 	return [dict copy];
+}
+
+- (void)updateFromEntity:(PLYListItem *)entity
+{
+	[super updateFromEntity:entity];
+	
+	self.GTIN = entity.GTIN;
+	self.note = entity.note;
+	self.quantity = entity.quantity;
+	self.priority = entity.priority;
+	self.product = entity.product;
 }
 
 @end

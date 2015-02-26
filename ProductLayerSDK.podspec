@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = 'ProductLayerSDK'
-  spec.version      = '0.3.0'
+  spec.version      = '0.4.0'
   spec.summary      = "The ultimate product information API, enabling a new breed of product-centric apps."
   spec.homepage     = "https://github.com/ProductLayer/ProductLayer-SDK-for-iOS"
   spec.author       = { "Oliver Drobnik" => "oliver@ProductLayer.com" }
@@ -34,7 +34,7 @@ Pod::Spec.new do |spec|
 	ss.frameworks = 'AVFoundation'
     ss.ios.dependency 'ProductLayerSDK/Core'
     ss.ios.dependency 'DTFoundation/UIKit_BlocksAdditions'
-  	ss.ios.resource_bundles = { 'ProductLayerSDK' => ['Core/Resources/*.strings', 'Core/Resources/*.png', 'Core/Resources/*.xib'] }
+  	ss.ios.resource_bundles = { 'ProductLayerSDK' => ['Core/Resources/*'] }
   end
 
 end

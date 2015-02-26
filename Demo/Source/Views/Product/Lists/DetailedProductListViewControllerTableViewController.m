@@ -102,8 +102,12 @@
             else
             {
                 DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+						 
                     // Delete the row from the data source
-                    [_list.listItems removeObjectAtIndex:indexPath.row];
+						 NSMutableArray *tmpArray = [_list.listItems mutableCopy];
+						 [tmpArray removeObjectAtIndex:indexPath.row];
+						 _list.listItems = tmpArray;
+						 
                     [self.tableView reloadData];
                 });
             }

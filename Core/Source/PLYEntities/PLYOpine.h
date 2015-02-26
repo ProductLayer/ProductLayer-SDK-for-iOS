@@ -10,6 +10,8 @@
 
 typedef struct { double latitude; double longitude; } PLYLocationCoordinate2D;
 
+@class PLYProduct;
+
 /**
  Model object representing a user's opine
  */
@@ -33,6 +35,12 @@ typedef struct { double latitude; double longitude; } PLYLocationCoordinate2D;
  The barcode (GTIN) of the product that this opine refers to
  */
 @property (nonatomic, copy) NSString *GTIN;
+
+
+/**
+ The PLYProduct matching the GTIN and in the best matching language
+ */
+@property (nonatomic, strong) PLYProduct *product;
 
 /**
  The language of the review.
@@ -63,11 +71,11 @@ typedef struct { double latitude; double longitude; } PLYLocationCoordinate2D;
 /**
  If the opine was cross-posted to Twitter, this is the identifier
  */
-@property (nonatomic, readonly) NSString *twitterPostIdentifier;
+@property (nonatomic, copy, readonly) NSString *twitterPostIdentifier;
 
 /**
  If the opine was cross-posted to Facebook, this is the identifier
  */
-@property (nonatomic, readonly) NSString *facebookPostIdentifier;
+@property (nonatomic, copy, readonly) NSString *facebookPostIdentifier;
 
 @end

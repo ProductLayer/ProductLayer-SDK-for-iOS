@@ -103,6 +103,18 @@
 	return [dict copy];
 }
 
+- (void)updateFromEntity:(PLYList *)entity
+{
+	[super updateFromEntity:entity];
+	
+	self.title = entity.title;
+	self.descriptionText = entity.descriptionText;
+	self.listType = entity.listType;
+	self.listItems = entity.listItems;
+	self.shareType = entity.shareType;
+	self.sharedUsers = entity.sharedUsers;
+}
+
 /**
  * Simple check if the product list can be send to the server for saving.
  **/

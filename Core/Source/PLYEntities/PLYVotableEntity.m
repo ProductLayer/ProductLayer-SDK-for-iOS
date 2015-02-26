@@ -89,4 +89,23 @@
 	return [dict copy];
 }
 
+- (void)updateFromEntity:(PLYVotableEntity *)entity
+{
+	[super updateFromEntity:entity];
+	
+	self.votingScore = entity.votingScore;
+	self.upVoter = entity.upVoter;
+	self.downVoter = entity.downVoter;
+}
+
+- (BOOL)canBeVoted
+{
+	if (self.Id)
+	{
+		return YES;
+	}
+	
+	return NO;
+}
+
 @end

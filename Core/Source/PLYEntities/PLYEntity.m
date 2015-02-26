@@ -8,6 +8,9 @@
 
 #import "PLYEntity.h"
 #import "PLYUser.h"
+#import "PLYErrorResponse.h"
+#import "PLYFunctions.h"
+
 #import <objc/runtime.h>
 
 // lookup table mapping class strings to objc classes
@@ -77,21 +80,61 @@ NSArray *PLYAllEntityClasses()
 
 + (PLYEntity *)entityFromDictionary:(NSDictionary *)dictionary
 {
+	Class entityClass;
 	NSString *objectType = dictionary[@"pl-class"];
-	Class entityClass = _entityClassLookup[objectType];
 	
-	if (!entityClass)
+	if (objectType)
 	{
-		NSLog(@"Unknown object type identifier '%@'", objectType);
-		return nil;
+		entityClass = _entityClassLookup[objectType];
+		
+		// not found in lookup
+		if (!entityClass)
+		{
+			NSLog(@"Unknown object type identifier '%@'", objectType);
+			return nil;
+		}
+	}
+	else
+	{
+		// might be an error, those have no object identifier
+		if (dictionary[@"errors"])
+		{
+			entityClass = [PLYErrorResponse class];
+		}
 	}
 	
+	// at this point, if there is no entityClass we return nil
 	return [[entityClass alloc] initWithDictionary:dictionary];
 }
 
 
+- (BOOL)isEqual:(id)object
+{
+	if (!object)
+	{
+		return NO;
+	}
+	
+	if ([object class] != [self class])
+	{
+		return NO;
+	}
+	
+	return [self.Id isEqual:[object Id]];
+}
+
+- (NSUInteger)hash
+{
+	return [self.Id hash];
+}
+
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary
 {
+	if ((id)dictionary == [NSNull null])
+	{
+		return nil;
+	}
+	
 	// should not instantiate PLYEntity directy
 	if ([self class] == [PLYEntity class])
 	{
@@ -132,8 +175,7 @@ NSArray *PLYAllEntityClasses()
 	}
 	else if ([key isEqualToString:@"pl-created-time"])
 	{
-		NSTimeInterval interval = [value doubleValue];
-		self.createdTime = [NSDate dateWithTimeIntervalSince1970:interval];
+		self.createdTime = PLYJavaTimestampToNSDate([value doubleValue]);
 	}
 	else if ([key isEqualToString:@"pl-upd-by"])
 	{
@@ -144,8 +186,7 @@ NSArray *PLYAllEntityClasses()
 	}
 	else if ([key isEqualToString:@"pl-upd-time"])
 	{
-		NSTimeInterval interval = [value doubleValue];
-		self.updatedTime = [NSDate dateWithTimeIntervalSince1970:interval];
+		self.updatedTime = PLYJavaTimestampToNSDate([value doubleValue]);
 	}
 	else if ([key isEqualToString:@"pl-version"])
 	{
@@ -179,22 +220,46 @@ NSArray *PLYAllEntityClasses()
 	
 	if (_createdBy)
 	{
-		dict[@"pl-created-by"] = [_createdBy dictionaryRepresentation];
+		if (_createdBy == self)
+		{
+			NSDictionary *ref = [_createdBy objectReference];
+			
+			if (ref)
+			{
+				dict[@"pl-created-by"] = ref;
+			}
+		}
+		else
+		{
+			dict[@"pl-created-by"] = [_createdBy dictionaryRepresentation];
+		}
 	}
 	
 	if (_createdTime)
 	{
-		dict[@"pl-created-time"] = @([_createdTime timeIntervalSince1970]);
+		dict[@"pl-created-time"] = @(PLYJavaTimestampFromNSDate(_createdTime));
 	}
 	
 	if (_updatedBy)
 	{
-		dict[@"pl-upd-by"] = [_updatedBy dictionaryRepresentation];
+		if (_createdBy == self)
+		{
+			NSDictionary *ref = [_updatedBy objectReference];
+			
+			if (ref)
+			{
+				dict[@"pl-created-by"] = ref;
+			}
+		}
+		else
+		{
+			dict[@"pl-upd-by"] = [_updatedBy dictionaryRepresentation];
+		}
 	}
 	
 	if (_updatedTime)
 	{
-		dict[@"pl-upd-time"] = @([_updatedTime timeIntervalSince1970]);
+		dict[@"pl-upd-time"] = @(PLYJavaTimestampFromNSDate(_updatedTime));
 	}
 	
 	if (_version)
@@ -219,6 +284,19 @@ NSArray *PLYAllEntityClasses()
 	dict[@"pl-id"] = _Id;
 	
 	return dict;
+}
+
+- (void)updateFromEntity:(PLYEntity *)entity
+{
+	NSAssert([entity class] == [self class], @"Cannot update entity from different class");
+	
+	self.Class = entity.Class;
+	self.Id = entity.Id;
+	self.version = entity.version;
+	self.createdBy = entity.createdBy;
+	self.createdTime = entity.createdTime;
+	self.updatedBy = entity.updatedBy;
+	self.updatedTime = entity.updatedTime;
 }
 
 #pragma mark - NSCopying

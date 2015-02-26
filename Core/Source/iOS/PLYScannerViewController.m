@@ -11,6 +11,7 @@
 #import "PLYVideoPreviewInterestBox.h"
 #import "PLYAVFoundationFunctions.h"
 #import "DTLog.h"
+#import "PLYFunctions.h"
 
 #import <AVFoundation/AVFoundation.h>
 
@@ -99,7 +100,8 @@
 	NSArray *barcodes2D = @[AVMetadataObjectTypeEAN13Code,
 									AVMetadataObjectTypeEAN8Code,
 									AVMetadataObjectTypeITF14Code,
-									AVMetadataObjectTypeUPCECode];
+									AVMetadataObjectTypeUPCECode,
+                           AVMetadataObjectTypeCode128Code];
 	NSArray *availableTypes = [_metaDataOutput
 										availableMetadataObjectTypes];
 	
@@ -694,7 +696,7 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
 	{
 		return;
 	}
-	
+   
 	// set to take on codes that this pass of the method is reporting
 	NSMutableSet *reportedCodes = [NSMutableSet set];
 	
@@ -730,12 +732,38 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
 			if (![_visibleCodes containsObject:numberedCode])
 			{
 				DTLogDebug(@"code appeared: %@", numberedCode);
-				
-				if ([_delegate respondsToSelector:
-					  @selector(scanner:didScanGTIN:)])
-				{
-					[_delegate scanner:self didScanGTIN:object.stringValue];
-				}
+            
+            NSString *code = object.stringValue;
+            
+            // simplistic recognition of GTIN encoded in GS1-128
+            if ([object.type isEqualToString:AVMetadataObjectTypeCode128Code])
+            {
+               if ([code length]>=16 && ([code hasPrefix:@"01"] || [code hasPrefix:@"02"]))
+               {
+						if (!PLYIsValidGTIN(code))
+						{
+							// ignore the prefix
+							code = [code substringWithRange:NSMakeRange(3, 13)];
+						}
+						
+						if (!PLYIsValidGTIN(code))
+						{
+							// continue, invalid contents
+							continue;
+						}
+               }
+               else
+               {
+                  // ignore this Code 128
+                  continue;
+               }
+            }
+            
+            if ([_delegate respondsToSelector:
+                 @selector(scanner:didScanGTIN:)])
+            {
+               [_delegate scanner:self didScanGTIN:code];
+            }
 			}
 			
 			[reportedCodes addObject:numberedCode];

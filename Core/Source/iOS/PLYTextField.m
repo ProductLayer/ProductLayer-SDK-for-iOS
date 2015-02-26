@@ -82,6 +82,7 @@
 	
 	// default language is current system language
 	_lastKeyboardLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
+	_usedInputLanguage = _lastKeyboardLanguage;
 }
 
 - (void)_updateUsedLanguage

@@ -227,6 +227,9 @@
 {
 	for (PLYFormValidator *oneValidator in _validators)
 	{
+		// revalidate
+		[oneValidator validate];
+		
 		if (!oneValidator.isValid)
 		{
 			return NO;
@@ -257,12 +260,13 @@
 	if (textField == _nameField)
 	{
 		[_emailField becomeFirstResponder];
-		return NO;
+		return YES;
 	}
 	
 	if ([self _allFieldsValid])
 	{
 		[self done:nil];
+		return YES;
 	}
 	
 	return NO;

@@ -17,6 +17,11 @@
 PLYProduct *PLYProductBestMatchingUserPreferredLanguages(NSArray *products);
 
 /**
+ Function to validate a GTIN
+ */
+BOOL PLYIsValidGTIN(NSString *GTIN);
+
+/**
  Helper function to return the NSBundle that contains the localized strings.
  @returns The bundle to retrieve resources for ProductLayerSDK from
  */
@@ -33,3 +38,19 @@ NSLocalizedStringFromTableInBundle(key, tbl, PLYResourceBundle(), comment)
  @returns The standard tint color to use for PL-related UI elements
  */
 DTColor *PLYBrandColor();
+
+/**
+ Determines if a GTIN is globally valid
+ @returns `YES` if a GTIN is globally unique
+ */
+BOOL PLYGTINIsValidGlobally(NSString *GTIN);
+
+/**
+ Converts MongoDB/Java timestamp to NSDate
+ */
+NSDate *PLYJavaTimestampToNSDate(double timestamp);
+
+/**
+ Creates MongoDB/Java timestamp from NSDate
+*/
+double PLYJavaTimestampFromNSDate(NSDate *date);

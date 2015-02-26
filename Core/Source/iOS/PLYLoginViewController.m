@@ -11,6 +11,8 @@
 #import "PLYLostPasswordViewController.h"
 #import "UIViewController+ProductLayer.h"
 
+#import "PLYSocialAuthWebViewController.h"
+
 #import "ProductLayer.h"
 
 #import "DTBlockFunctions.h"
@@ -28,6 +30,9 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	
 	UIBarButtonItem *_leftButton;
 	UIBarButtonItem *_rightButton;
+	
+	UIButton *_facebookButton;
+	UIButton *_twitterButton;
 }
 
 - (void)viewDidLoad
@@ -92,11 +97,52 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	
 	_validators = [validators copy];
 	
+	NSString *facebookPath = [PLYResourceBundle() pathForResource:@"facebook-button" ofType:@"png"];
+	UIImage *facebookIcon = [[UIImage imageWithContentsOfFile:facebookPath] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+	NSAssert(facebookIcon!=nil, @"Missing Facebook icon in resource bundle");
+	
+	_facebookButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	[_facebookButton addTarget:self action:@selector(signInWithFacebook:) forControlEvents:UIControlEventTouchUpInside];
+	_facebookButton.translatesAutoresizingMaskIntoConstraints = NO;
+	[_facebookButton setTitle:PLYLocalizedStringFromTable(@"SIGN_IN_WITH_FACEBOOK", @"UI", @"Button for signing in with Facebook") forState:UIControlStateNormal];
+	[_facebookButton setImage:facebookIcon forState:UIControlStateNormal];
+	[self.view addSubview:_facebookButton];
+	
+	[self.view addConstraint:
+	 [NSLayoutConstraint constraintWithItem:_facebookButton
+											attribute:NSLayoutAttributeCenterX
+											relatedBy:NSLayoutRelationEqual
+												toItem:self.view
+											attribute:NSLayoutAttributeCenterX
+										  multiplier:1
+											 constant:0]];
+	
+	NSString *twitterPath = [PLYResourceBundle() pathForResource:@"twitter-button" ofType:@"png"];
+	UIImage *twitterIcon = [[UIImage imageWithContentsOfFile:twitterPath] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+	NSAssert(twitterIcon!=nil, @"Missing Twitter icon in resource bundle");
+
+	_twitterButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	[_twitterButton addTarget:self action:@selector(signInWithTwitter:) forControlEvents:UIControlEventTouchUpInside];
+	_twitterButton.translatesAutoresizingMaskIntoConstraints = NO;
+	[_twitterButton setTitle:PLYLocalizedStringFromTable(@"SIGN_IN_WITH_TWITTER", @"UI", @"Button for signing in with Twitter") forState:UIControlStateNormal];
+	[_twitterButton setImage:twitterIcon forState:UIControlStateNormal];
+	[self.view addSubview:_twitterButton];
+	
+	[self.view addConstraint:
+	 [NSLayoutConstraint constraintWithItem:_twitterButton
+											attribute:NSLayoutAttributeCenterX
+											relatedBy:NSLayoutRelationEqual
+												toItem:self.view
+											attribute:NSLayoutAttributeCenterX
+										  multiplier:1
+											 constant:0]];
 	
 	id topGuide = [self topLayoutGuide];
-	NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_nameField, _passwordField, topGuide, lostPwButton, signupButton, explainLabel);
+	NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_nameField, _passwordField, topGuide,
+																						lostPwButton, signupButton, explainLabel,
+																						_twitterButton, _facebookButton);
 	NSArray *constraints1 =
-	[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide]-[explainLabel]-[_nameField]-[_passwordField]-[lostPwButton]-[signupButton]"
+	[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide]-[explainLabel]-[_nameField]-[_passwordField]-[lostPwButton]-[signupButton]-(50)-[_twitterButton]-(20)-[_facebookButton]"
 														 options:0 metrics:nil views:viewsDictionary];
 	NSArray *constraints2 =
 	[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_nameField(300)]"
@@ -211,6 +257,20 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	[self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+- (void)_loginCompleteForUser:(PLYUser *)user
+{
+	UIBarButtonItem *check = [[UIBarButtonItem alloc] initWithTitle:@"👍" style:UIBarButtonItemStylePlain target:nil action:NULL];
+	check.tintColor = self.navigationController.view.tintColor;
+	self.navigationItem.rightBarButtonItem = check;
+	
+	// remember successful login for next time
+	[[NSUserDefaults standardUserDefaults] setObject:user.nickname forKey:LastLoggedInUserDefault];
+	
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		[self dismissViewControllerAnimated:YES completion:NULL];
+	});
+}
+
 - (void)done:(id)sender
 {
 	// dismiss keyboard
@@ -238,18 +298,7 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 				return;
 			}
 			
-			UIBarButtonItem *check = [[UIBarButtonItem alloc] initWithTitle:@"👍" style:UIBarButtonItemStylePlain target:nil action:NULL];
-			check.tintColor = self.navigationController.view.tintColor;
-			self.navigationItem.rightBarButtonItem = check;
-			
-			
-			// remember successful login for next time
-			PLYUser *user = result;
-			[[NSUserDefaults standardUserDefaults] setObject:user.nickname forKey:LastLoggedInUserDefault];
-			
-			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-				[self dismissViewControllerAnimated:YES completion:NULL];
-			});
+			[self _loginCompleteForUser:result];
 		});
 	}];
 }
@@ -275,12 +324,58 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	[self.navigationController pushViewController:lostPw animated:YES];
 }
 
+- (void)_signInFlowWithRequest:(NSURLRequest *)request
+{
+	PLYSocialAuthWebViewController *webVC = [[PLYSocialAuthWebViewController alloc] init];
+	//	webVC.authorizationDelegate = self;
+	
+	UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:webVC];
+	
+	[self presentViewController:nav animated:YES completion:NULL];
+	
+	[webVC startAuthorizationFlowWithRequest:request completion:^(BOOL isAuthenticated, NSString *token)
+	 {
+		 [self dismissViewControllerAnimated:YES completion:^{
+			 
+			 if (isAuthenticated)
+			 {
+				 [self.productLayerServer loginWithToken:token completion:^(id result, NSError *error) {
+					 
+					 if (!result)
+					 {
+						 return;
+					 }
+					 
+					 DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+						 [self _loginCompleteForUser:result];
+					 });
+				 }];
+			 }
+		 }];
+	 }];
+}
+
+- (IBAction)signInWithTwitter:(id)sender
+{
+	NSURLRequest *request = [self.productLayerServer URLRequestForTwitterSignIn];
+	[self _signInFlowWithRequest:request];
+}
+
+- (IBAction)signInWithFacebook:(id)sender
+{
+	NSURLRequest *request = [self.productLayerServer URLRequestForFacebookSignIn];
+	[self _signInFlowWithRequest:request];
+}
+
 #pragma mark - Form Validation
 
 - (BOOL)_allFieldsValid
 {
 	for (PLYFormValidator *oneValidator in _validators)
 	{
+		// revalidate
+		[oneValidator validate];
+
 		if (!oneValidator.isValid)
 		{
 			return NO;
@@ -311,12 +406,13 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	if (textField == _nameField)
 	{
 		[_passwordField becomeFirstResponder];
-		return NO;
+		return YES;
 	}
 	
 	if ([self _allFieldsValid])
 	{
 		[self done:nil];
+		return YES;
 	}
 	
 	return NO;

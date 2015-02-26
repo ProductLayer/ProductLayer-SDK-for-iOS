@@ -254,33 +254,38 @@
         PLYListItem *listItem = [[PLYListItem alloc] init];
         listItem.GTIN = _product.GTIN;
         listItem.quantity = 1;
-        
-        if(!list.listItems){
-            list.listItems = [NSMutableArray arrayWithCapacity:1];
-        }
-        
-        [list.listItems addObject:listItem];
-        
+		 
+		 NSMutableArray *tmpArray = [NSMutableArray arrayWithArray:list.listItems];
+		 [tmpArray addObject:listItem];
+		 list.listItems = tmpArray;
+		 
         // Reload Row
         [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:NO];
     }
 }
 
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(_addProductView){
-        PLYList *list = [_productLists objectAtIndex:indexPath.row];
-        
-        
-        for(PLYListItem *item in list.listItems){
-            if([item.GTIN isEqualToString:_product.GTIN]){
-                [list.listItems removeObject:item];
-                break;
-            }
-        }
-        
-        // Reload Row
-        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:NO];
-    }
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	if (_addProductView)
+	{
+		PLYList *list = [_productLists objectAtIndex:indexPath.row];
+		
+		// Delete the row from the data source
+		NSMutableArray *tmpArray = [list.listItems mutableCopy];
+		
+		for (PLYListItem *item in [tmpArray reverseObjectEnumerator])
+		{
+			if ([item.GTIN isEqualToString:_product.GTIN])
+			{
+				[tmpArray removeObject:item];
+				break;
+			}
+		}
+		list.listItems = tmpArray;
+		
+		// Reload Row
+		[tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:NO];
+	}
 }
 
 #pragma mark - Navigation

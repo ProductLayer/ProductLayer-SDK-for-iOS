@@ -86,4 +86,26 @@
 	return [dict copy];
 }
 
+- (void)updateFromEntity:(PLYImage *)entity
+{
+	[super updateFromEntity:entity];
+	
+	self.fileId = entity.fileId;
+	self.height = entity.height;
+	self.width = entity.width;
+	self.name = entity.name;
+	self.imageURL = entity.imageURL;
+	self.GTIN = entity.GTIN;
+}
+
+- (BOOL)canBeVoted
+{
+	if (self.fileId)
+	{
+		return YES;
+	}
+	
+	return NO;
+}
+
 @end

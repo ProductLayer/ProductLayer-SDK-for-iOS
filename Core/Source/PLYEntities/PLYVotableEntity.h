@@ -20,7 +20,7 @@
 /**
  The sum of all votes (up +1, down -1).
  */
-@property (nonatomic, assign) NSUInteger votingScore;
+@property (nonatomic, assign) NSInteger votingScore;
 
 /**
  The list of user id's who up-voted the review.
@@ -31,5 +31,10 @@
  The list of user id's who down-voted the review.
  */
 @property (nonatomic, copy) NSArray *downVoter;
+
+/**
+ Convenience property stating if voting is supported on this entity. That is for images if there is a fileID present.
+ */
+@property (nonatomic, readonly) BOOL canBeVoted;
 
 @end
