@@ -9,7 +9,7 @@
 #import "PLYEntity.h"
 #import "PLYUser.h"
 #import "PLYErrorResponse.h"
-#import "PLYFunctions.h"
+#import "PLYJavaTimestampFunctions.h"
 
 #import <objc/runtime.h>
 
