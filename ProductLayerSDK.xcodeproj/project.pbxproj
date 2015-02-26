@@ -41,8 +41,6 @@
 		A72592C61A757DFB00952685 /* PLYModalTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72592C31A757DFB00952685 /* PLYModalTableViewController.m */; };
 		A72592C91A757E1F00952685 /* PLYEditProductViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A72592C71A757E1F00952685 /* PLYEditProductViewController.h */; };
 		A72592CA1A757E1F00952685 /* PLYTextFieldTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A72592C81A757E1F00952685 /* PLYTextFieldTableViewCell.h */; };
-		A731FE7B1A63DAC500D341FC /* PLYUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7657AF21A630B9000CBDBD9 /* PLYUploadImage.m */; };
-		A731FE9B1A63DAC700D341FC /* PLYUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7657AF21A630B9000CBDBD9 /* PLYUploadImage.m */; };
 		A73803341A28E91800011D9C /* PLYTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = A73803321A28E91800011D9C /* PLYTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A73803351A28E91800011D9C /* PLYTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A73803331A28E91800011D9C /* PLYTextView.m */; };
 		A73803361A28E91800011D9C /* PLYTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A73803331A28E91800011D9C /* PLYTextView.m */; };
@@ -165,12 +163,16 @@
 		A7657ACB1A62D8E200CBDBD9 /* camera-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7657AC61A62D8E200CBDBD9 /* camera-icon@2x.png */; };
 		A7657ACC1A62D8E200CBDBD9 /* camera-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7657AC71A62D8E200CBDBD9 /* camera-icon@3x.png */; };
 		A7657ACD1A62D8E200CBDBD9 /* camera-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7657AC71A62D8E200CBDBD9 /* camera-icon@3x.png */; };
-		A7657AF31A630B9000CBDBD9 /* PLYUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7657AF21A630B9000CBDBD9 /* PLYUploadImage.m */; };
 		A7665D0B1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7665D091A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m */; };
 		A7665D0C1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7665D091A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m */; };
 		A7665D0D1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7665D091A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m */; };
 		A7665D0E1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D0A1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h */; };
 		A7665D0F1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D0A1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h */; };
+		A7665D411A9FA965001734B8 /* PLYUploadImage.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D3F1A9FA965001734B8 /* PLYUploadImage.h */; };
+		A7665D421A9FA965001734B8 /* PLYUploadImage.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D3F1A9FA965001734B8 /* PLYUploadImage.h */; };
+		A7665D431A9FA965001734B8 /* PLYUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7665D401A9FA965001734B8 /* PLYUploadImage.m */; };
+		A7665D441A9FA965001734B8 /* PLYUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7665D401A9FA965001734B8 /* PLYUploadImage.m */; };
+		A7665D451A9FA965001734B8 /* PLYUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7665D401A9FA965001734B8 /* PLYUploadImage.m */; };
 		A76A57141986939700751454 /* API.strings in Resources */ = {isa = PBXBuildFile; fileRef = A76A56E81986922300751454 /* API.strings */; };
 		A76A571B1986A6D300751454 /* ProductLayerSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A76A570C1986937D00751454 /* ProductLayerSDK.bundle */; };
 		A76D3F67198650770032FE59 /* PLYFormEmailValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F5A198650770032FE59 /* PLYFormEmailValidator.m */; };
@@ -783,10 +785,10 @@
 		A7657AC51A62D8E200CBDBD9 /* camera-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-icon.png"; sourceTree = "<group>"; };
 		A7657AC61A62D8E200CBDBD9 /* camera-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-icon@2x.png"; sourceTree = "<group>"; };
 		A7657AC71A62D8E200CBDBD9 /* camera-icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-icon@3x.png"; sourceTree = "<group>"; };
-		A7657AF11A630B9000CBDBD9 /* PLYUploadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYUploadImage.h; sourceTree = "<group>"; };
-		A7657AF21A630B9000CBDBD9 /* PLYUploadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYUploadImage.m; sourceTree = "<group>"; };
 		A7665D091A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYJavaTimestampFunctions.m; path = PLYEntities/PLYJavaTimestampFunctions.m; sourceTree = "<group>"; };
 		A7665D0A1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYJavaTimestampFunctions.h; path = PLYEntities/PLYJavaTimestampFunctions.h; sourceTree = "<group>"; };
+		A7665D3F1A9FA965001734B8 /* PLYUploadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYUploadImage.h; path = PLYEntities/PLYUploadImage.h; sourceTree = "<group>"; };
+		A7665D401A9FA965001734B8 /* PLYUploadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYUploadImage.m; path = PLYEntities/PLYUploadImage.m; sourceTree = "<group>"; };
 		A7696B4B19ED91E000C1D3C4 /* Framework-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Framework-Info.plist"; sourceTree = "<group>"; };
 		A76A56E81986922300751454 /* API.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = API.strings; sourceTree = "<group>"; };
 		A76A570C1986937D00751454 /* ProductLayerSDK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProductLayerSDK.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1733,10 +1735,10 @@
 				A75CF74D1A30B4BD007E30FC /* PLYUserAvatar.m */,
 				C97FAADE1921FCFA00144D2C /* PLYProductCategory.h */,
 				C97FAADF1921FCFA00144D2C /* PLYProductCategory.m */,
+				A7665D3F1A9FA965001734B8 /* PLYUploadImage.h */,
+				A7665D401A9FA965001734B8 /* PLYUploadImage.m */,
 				A7B4877D1987CFB200FA8F83 /* PLYVotableEntity.h */,
 				A7B4877E1987CFB200FA8F83 /* PLYVotableEntity.m */,
-				A7657AF11A630B9000CBDBD9 /* PLYUploadImage.h */,
-				A7657AF21A630B9000CBDBD9 /* PLYUploadImage.m */,
 			);
 			name = PLYEntities;
 			sourceTree = "<group>";
@@ -1775,6 +1777,7 @@
 				A72592B61A757D5900952685 /* PLYCategory.h in Headers */,
 				A75CF7411A30B48A007E30FC /* PLYAVFoundationFunctions.h in Headers */,
 				A7590B0719ED77B40084EBCA /* PLYFormEmailValidator.h in Headers */,
+				A7665D411A9FA965001734B8 /* PLYUploadImage.h in Headers */,
 				A77FFAA51A77907B0019DD5C /* PLYBrandedTableViewCell.h in Headers */,
 				A7590B2719ED77B80084EBCA /* PLYVotableEntity.h in Headers */,
 				A7665D0E1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h in Headers */,
@@ -1825,6 +1828,7 @@
 				A7EA070A1A2B139C00B61CCE /* PLYErrorResponse.h in Headers */,
 				A7EA07201A2B139C00B61CCE /* PLYVotableEntity.h in Headers */,
 				A75CF7591A30B4BD007E30FC /* PLYUserAvatar.h in Headers */,
+				A7665D421A9FA965001734B8 /* PLYUploadImage.h in Headers */,
 				A7A38CD31A2B4FFD005D8395 /* PLYFunctions.h in Headers */,
 				A7EA07251A2B14A800B61CCE /* PLYCompatibility.h in Headers */,
 				A75CF7541A30B4BD007E30FC /* PLYBrandOwner.h in Headers */,
@@ -2394,7 +2398,6 @@
 				A7590B0E19ED77B40084EBCA /* PLYUserNameValidator.m in Sources */,
 				A72592C61A757DFB00952685 /* PLYModalTableViewController.m in Sources */,
 				A7590B2219ED77B80084EBCA /* PLYReview.m in Sources */,
-				A731FE7B1A63DAC500D341FC /* PLYUploadImage.m in Sources */,
 				A764789B1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */,
 				A762933A1A5FF1CC00208A27 /* PLYSocialAuthWebViewController.m in Sources */,
 				A7590B1C19ED77B80084EBCA /* PLYOpine.m in Sources */,
@@ -2421,6 +2424,7 @@
 				A7590B1E19ED77B80084EBCA /* PLYPackaging.m in Sources */,
 				A7590B0C19ED77B40084EBCA /* PLYTextField.m in Sources */,
 				A75CF7461A30B48A007E30FC /* PLYVideoPreviewView.m in Sources */,
+				A7665D441A9FA965001734B8 /* PLYUploadImage.m in Sources */,
 				A7CD959419FA821E008E3A41 /* PLYOpineComposeViewController.m in Sources */,
 				A7590B1A19ED77B80084EBCA /* PLYListItem.m in Sources */,
 				A7EE55A41A121C8300DD55FE /* PLYCategoryPickerViewController.m in Sources */,
@@ -2489,7 +2493,6 @@
 				C97FAAD5192145F800144D2C /* LocalizableStringPicker.m in Sources */,
 				C97FAAAB191D618C00144D2C /* RatingTableCell.m in Sources */,
 				C97FAAA8191D618C00144D2C /* SearchProductViewController.m in Sources */,
-				A7657AF31A630B9000CBDBD9 /* PLYUploadImage.m in Sources */,
 				C97FAAA0191D618C00144D2C /* ProductImageViewController.m in Sources */,
 				C97FAAA7191D618C00144D2C /* ProductViewController.m in Sources */,
 				C97FAAAD191D618C00144D2C /* ReviewTableViewController.m in Sources */,
@@ -2541,6 +2544,7 @@
 				A76D3F68198650770032FE59 /* PLYFormValidator.m in Sources */,
 				A7EB727C1A72B43F00FFD4CC /* PLYReportProblemViewController.m in Sources */,
 				A75CF7451A30B48A007E30FC /* PLYVideoPreviewView.m in Sources */,
+				A7665D431A9FA965001734B8 /* PLYUploadImage.m in Sources */,
 				A7CD959319FA821E008E3A41 /* PLYOpineComposeViewController.m in Sources */,
 				C98CD26B1910E0D70035647C /* PLYListItem.m in Sources */,
 				A7EE55A31A121C8300DD55FE /* PLYCategoryPickerViewController.m in Sources */,
@@ -2573,10 +2577,10 @@
 				A7EA07111A2B139C00B61CCE /* PLYListItem.m in Sources */,
 				A7EA07191A2B139C00B61CCE /* PLYReview.m in Sources */,
 				A75CF75C1A30B4BD007E30FC /* PLYUserAvatar.m in Sources */,
-				A731FE9B1A63DAC700D341FC /* PLYUploadImage.m in Sources */,
 				A7EA070F1A2B139C00B61CCE /* PLYList.m in Sources */,
 				A7EA07091A2B139C00B61CCE /* PLYErrorMessage.m in Sources */,
 				A7EA071F1A2B139C00B61CCE /* PLYProductCategory.m in Sources */,
+				A7665D451A9FA965001734B8 /* PLYUploadImage.m in Sources */,
 				A7EA07071A2B139C00B61CCE /* PLYEntity.m in Sources */,
 				A72592B51A757D5900952685 /* PLYCategory.m in Sources */,
 				A75CF7571A30B4BD007E30FC /* PLYBrandOwner.m in Sources */,
