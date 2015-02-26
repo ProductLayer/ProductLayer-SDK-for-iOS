@@ -18,8 +18,8 @@ Pod::Spec.new do |spec|
     ss.dependency 'DTFoundation/Core', '~>1.7.4'
     ss.ios.dependency 'DTFoundation/UIKit', '~>1.7.4'
     ss.dependency 'DTKeychain', '~>1.0.0'
-    ss.dependency 'ProductLayerSDK/PLYEntities'
     ss.source_files = 'Core/Source/*.{h,m}'
+    ss.dependency 'ProductLayerSDK/PLYEntities'
   end
 
   spec.subspec 'PLYEntities' do |ss|

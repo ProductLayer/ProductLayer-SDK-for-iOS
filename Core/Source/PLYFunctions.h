@@ -38,19 +38,3 @@ NSLocalizedStringFromTableInBundle(key, tbl, PLYResourceBundle(), comment)
  @returns The standard tint color to use for PL-related UI elements
  */
 DTColor *PLYBrandColor();
-
-/**
- Determines if a GTIN is globally valid
- @returns `YES` if a GTIN is globally unique
- */
-BOOL PLYGTINIsValidGlobally(NSString *GTIN);
-
-/**
- Converts MongoDB/Java timestamp to NSDate
- */
-NSDate *PLYJavaTimestampToNSDate(double timestamp);
-
-/**
- Creates MongoDB/Java timestamp from NSDate
-*/
-double PLYJavaTimestampFromNSDate(NSDate *date);
