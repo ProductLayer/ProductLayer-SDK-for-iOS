@@ -7,12 +7,6 @@
 //
 
 /**
- Determines if a GTIN is globally valid
- @returns `YES` if a GTIN is globally unique
- */
-BOOL PLYGTINIsValidGlobally(NSString *GTIN);
-
-/**
  Converts MongoDB/Java timestamp to NSDate
  */
 NSDate *PLYJavaTimestampToNSDate(double timestamp);
