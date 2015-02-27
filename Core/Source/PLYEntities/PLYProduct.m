@@ -7,7 +7,7 @@
 //
 
 #import "PLYProduct.h"
-
+#import "PLYImage.h"
 #import "PLYUser.h"
 #import "PLYPackaging.h"
 
@@ -85,6 +85,10 @@
 	{
 		[self setValue:value forKey:@"name"];
 	}
+	else if ([key isEqualToString:@"pl-prod-img"])
+	{
+		_defaultImage = [[PLYImage alloc] initWithDictionary:value];
+	}
 	else if ([key isEqualToString:@"pl-prod-pkg"])
 	{
 		[self setValue:value forKey:@"packaging"];
@@ -104,6 +108,14 @@
 	else if ([key isEqualToString:@"pl-prod-nutr"])
 	{
 		[self setValue:value forKey:@"nutritious"];
+	}
+	else if ([key isEqualToString:@"pl-additional-lng"])
+	{
+		self.additionalLanguages = value;
+	}
+	else if ([key isEqualToString:@"pl-prod-lnks-buy"])
+	{
+		[self setValue:value forKey:@"buyLinks"];
 	}
 	else
 	{
@@ -165,6 +177,11 @@
 		dict[@"pl-prod-name"] = _name;
 	}
 	
+	if (_defaultImage)
+	{
+		dict[@"pl-prod-img"] = [_defaultImage dictionaryRepresentation];
+	}
+	
 	if (_packaging)
 	{
 		dict[@"pl-prod-pkg"] = [_packaging dictionaryRepresentation];
@@ -188,8 +205,43 @@
 		dict[@"pl-prod-src"] = [self.sourceURL absoluteString];
 	}
 	
+	if (_additionalLanguages)
+	{
+		dict[@"pl-additional-lng"] = _additionalLanguages;
+	}
+	
+	if (_buyLinks)
+	{
+		dict[@"pl-prod-lnks-buy"] = _buyLinks;
+	}
+	
 	// return immutable
 	return [dict copy];
+}
+
+- (void)updateFromEntity:(PLYProduct *)entity
+{
+	[super updateFromEntity:entity];
+	
+	self.brandName = entity.brandName;
+	self.brandOwner = entity.brandOwner;
+	self.language = entity.language;
+	self.category = entity.category;
+	self.longDescription = entity.longDescription;
+	self.shortDescription = entity.shortDescription;
+	self.GTIN = entity.GTIN;
+	self.homepage = entity.homepage;
+	self.links = entity.links;
+	self.name = entity.name;
+	self.packaging = entity.packaging;
+	self.averageReviewRating = entity.averageReviewRating;
+	self.numberOfReviews = entity.numberOfReviews;
+	self.characteristics = entity.characteristics;
+	self.nutritious = entity.nutritious;
+	self.sourceURL = entity.sourceURL;
+	self.defaultImage = entity.defaultImage;
+	self.additionalLanguages = entity.additionalLanguages;
+	self.buyLinks = entity.buyLinks;
 }
 
 @end

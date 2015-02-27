@@ -40,4 +40,11 @@
 	return [dict copy];
 }
 
+- (void)updateFromEntity:(PLYBrand *)entity
+{
+	[super updateFromEntity:entity];
+	
+	self.name = entity.name;
+}
+
 @end

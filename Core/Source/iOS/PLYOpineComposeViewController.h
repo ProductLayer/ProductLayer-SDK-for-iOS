@@ -47,14 +47,24 @@
 
 
 /**
- Sets up the VC with the contents of an opine
- @param opine The opine to set up from
+ @name Properties
  */
-- (void)setOpine:(PLYOpine *)opine;
+
+/**
+ Sets up the VC with the contents of an opine
+ */
+@property (nonatomic, copy) PLYOpine *opine;
+
+
+/**
+ The product name to write above the text view. If it is `nil` the label is not shown
+ */
+@property (nonatomic, copy) NSString *productName;
 
 /**
  The delegate for the compose view controller
  */
 @property (nonatomic, weak) id<PLYOpineComposeViewControllerDelegate> delegate;
+
 
 @end

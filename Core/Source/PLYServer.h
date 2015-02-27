@@ -7,21 +7,12 @@
 //
 
 #import "PLYCompatibility.h"
+#import "PLYEntities.h"
 
 /**
  Completion handler for ProductLayer API calls
  */
 typedef void (^PLYCompletion)(id result, NSError *error);
-
-// String Constants
-
-@class PLYImage;
-@class PLYList;
-@class PLYListItem;
-@class PLYOpine;
-@class PLYReview;
-@class PLYUser;
-@class PLYVotableEntity;
 
 /**
  Wrapper for the ProductLayer API
@@ -65,6 +56,14 @@ typedef void (^PLYCompletion)(id result, NSError *error);
                     language:(NSString *)language
                   completion:(PLYCompletion)completion;
 
+
+/**
+ Searches for products with a query string
+ @param query The text to search for
+ @param options Search options
+ @param completion The completion handler for the request
+ */
+- (void)searchForProductsMatchingQuery:(NSString *)query options:(NSDictionary *)options completion:(PLYCompletion)completion;
 
 /**
  @name Getting more Information about Products
@@ -126,15 +125,17 @@ typedef void (^PLYCompletion)(id result, NSError *error);
            completion:(PLYCompletion)completion;
 
 /**
+ Authenticates a user for subsequent use of API operations which require authentication
+ @param token The authorization token
+ @param completion The completion handler for the request
+ */
+- (void)loginWithToken:(NSString *)token completion:(PLYCompletion)completion;
+
+/**
  Invalidates a user's authentication.
  @param completion The completion handler for the request
  */
 - (void)logoutUserWithCompletion:(PLYCompletion)completion;
-
-/**
- Renew the user session if the user was logged in but the session timed out.
- */
-- (void)renewSessionIfNecessary;
 
 /**
  Checks if user is signed in.
@@ -173,6 +174,25 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 - (void)resetAvatarForUser:(PLYUser *)user completion:(PLYCompletion)completion;
 
 /**
+ Refreshes/completes a user's details. Updating of the properties is done on the main thread because some controls might be KVO-watching properties. The completion handler returns the passed user object if successful or nil and an `NSError` if not.
+ @param user The user to refresh and/or load updated details for
+ @param completion The completion handler for the request
+ */
+- (void)loadDetailsForUser:(PLYUser *)user completion:(PLYCompletion)completion;
+
+/**
+ Provides an URL request for the social signin flow for Facebook
+ @returns A configured NSURLRequest for presenting in a web view
+ */
+- (NSURLRequest *)URLRequestForFacebookSignIn;
+
+/**
+ Provides an URL request for the social signin flow for Twitter
+ @returns A configured NSURLRequest for presenting in a web view
+ */
+- (NSURLRequest *)URLRequestForTwitterSignIn;
+
+/**
  Nickname of the currently logged in user or `nil` if not logged in
  */
 @property (nonatomic, readonly) PLYUser *loggedInUser;
@@ -190,24 +210,18 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 /**
  Creates a new product.
  
- @param gtin The GTIN (barcode) of the new product
- @param dictionary The values to set on the new product
+ @param product The new PLYProduct to create
  @param completion The completion handler for the request
  */
-- (void)createProductWithGTIN:(NSString *)gtin
-                   dictionary:(NSDictionary *)dictionary
-                   completion:(PLYCompletion)completion;
+- (void)createProduct:(PLYProduct *)product completion:(PLYCompletion)completion;
 
 /**
  Updates an existing product.
  
- @param gtin The GTIN (barcode) of the product
- @param dictionary The values to set on the product
+ @param product The new PLYProduct to update
  @param completion The completion handler for the request
  */
-- (void)updateProductWithGTIN:(NSString *)gtin
-                   dictionary:(NSDictionary *)dictionary
-                   completion:(PLYCompletion)completion;
+- (void)updateProduct:(PLYProduct *)product completion:(PLYCompletion)completion;
 
 
 /**
@@ -219,14 +233,20 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @param GTIN The GTIN of the product
  @param completion The completion handler for the request
  */
-- (void)getRecommendedBrandOwnersForGTIN:(NSString *)GTIN
+- (void)recommendedBrandOwnersForGTIN:(NSString *)GTIN
 										completion:(PLYCompletion)completion;
 
 /**
  Retrieves a list of all known brands
  @param completion The completion handler for the request
  */
-- (void)getBrandsWithCompletion:(PLYCompletion)completion;
+- (void)brandsWithCompletion:(PLYCompletion)completion;
+
+/**
+ Retrieves a list of all known brand owners
+ @param completion The completion handler for the request
+ */
+- (void)brandOwnersWithCompletion:(PLYCompletion)completion;
 
 
 /**
@@ -276,6 +296,17 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  */
 - (NSURL *)URLForImage:(PLYImage *)image maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop;
 
+
+/**
+ Determins the image URL for the given default image for a given GTIN
+ @param GTIN The GTIN to produce the URL for
+ @param maxWidth The maximum width of the image
+ @param maxHeight The maximum height of the image
+ @param crop If the image should be cropped
+ @returns The URL for the image
+ */
+- (NSURL *)URLForProductImageWithGTIN:(NSString *)GTIN maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop;
+
 /**
  @name Opines
  */
@@ -301,14 +332,20 @@ typedef void (^PLYCompletion)(id result, NSError *error);
                         recordsPerPage:(NSUInteger)rpp
                             completion:(PLYCompletion)completion;
 
-/*
+/**
  Create an opine.
  
  @param opine The opine
  @param completion The completion handler for the request
  */
-- (void)createOpine:(PLYOpine *)opine
-         completion:(PLYCompletion)completion;
+- (void)createOpine:(PLYOpine *)opine completion:(PLYCompletion)completion;
+
+/**
+ Destroy an opine.
+ @param opine The opine
+ @param completion The completion handler for the request
+ */
+- (void)deleteOpine:(PLYOpine *)opine completion:(PLYCompletion)completion;
 
 /**
  @name Reviews
@@ -338,13 +375,11 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 /*
  Create a review for a product.
  
- @param gtin The GTIN (barcode) of the product
- @param dictionary The review keys and values to set
+ @param review The PLYReview to create
  @param completion The completion handler for the request
  */
-- (void)createReviewForGTIN:(NSString *)gtin
-                 dictionary:(NSDictionary *)dictionary
-                 completion:(PLYCompletion)completion;
+- (void)createReview:(PLYReview *)review completion:(PLYCompletion)completion;
+
 /**
  @name Lists
  */
@@ -365,6 +400,14 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @param completion The completion handler for the request
  */
 - (void)performSearchForProductListFromUser:(PLYUser *)user andListType:(NSString *)listType page:(NSUInteger)page recordsPerPage:(NSUInteger)rpp completion:(PLYCompletion)completion;
+
+/**
+ Gets a user's lists
+ @param user The PLYUser to retrieve the lists for
+ @param options options to restrict the lists
+ @param completion The completion handler for the request
+ */
+- (void)listsOfUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion;
 
 /**
  Retrieves a product list by ID
@@ -429,10 +472,10 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 
 /**
  Search for a user by name
- @param searchText The text to search for
+ @param query The text to search for
  @param completion The completion handler for the request
  */
-- (void)performUserSearch:(NSString *)searchText completion:(PLYCompletion)completion;
+- (void)searchForUsersMatchingQuery:(NSString *)query completion:(PLYCompletion)completion;
 
 /**
  Retrieves a user by nickname
@@ -443,131 +486,87 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 
 /**
  Retrieves a user's followers
- @param nickname The nickname to search for
- @param page The page number to retrieve of the search results
- @param rpp The records per page to retrieve
+ @param user The user for whom you want to get the followers
+ @param options A dictionary with options to determine paging options
  @param completion The completion handler for the request
  */
-- (void)getFollowerFromUser:(NSString *)nickname page:(NSUInteger)page recordsPerPage:(NSUInteger)rpp completion:(PLYCompletion)completion;
+- (void)followerForUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion;
 
 /**
  Retrieves the friends a user is following
- @param nickname The nickname to search for
- @param page The page number to retrieve of the search results
- @param rpp The records per page to retrieve
+ @param user The user for whom you want to get the followers
+ @param options A dictionary with options to determine paging options
  @param completion The completion handler for the request
  */
-- (void)getFollowingFromUser:(NSString *)nickname page:(NSUInteger)page recordsPerPage:(NSUInteger)rpp completion:(PLYCompletion)completion;
+- (void)followingForUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion;
 
 /**
  Follows a user by nickname
- @param nickname The nickname of the user to follow
+ @param user The user to follow
  @param completion The completion handler for the request
  */
-- (void)followUserWithNickname:(NSString *)nickname completion:(PLYCompletion)completion;
+- (void)followUser:(PLYUser *)user completion:(PLYCompletion)completion;
 
 /**
  Unfollows a user by nickname
- @param nickname The nickname of the user to unfollow
+ @param user The user to follow
  @param completion The completion handler for the request
  */
-- (void)unfollowUserWithNickname:(NSString *)nickname completion:(PLYCompletion)completion;
+- (void)unfollowUser:(PLYUser *)user completion:(PLYCompletion)completion;
+
 
 /**
  @name Timelines
  */
 
 /**
- The the latest timeline entries
- @param count The maximum number of objects returned
- @param completion The completion handler
+ Get a user's timeline
+ @param user The user for whom you want to get the timeline
+ @param options A dictionary with options to determine which entities to include
+ @param completion The completion handler for the request
  */
-
-- (void)timelineForAllUsersWithCount:(NSUInteger)count completion:(PLYCompletion)completion;
-
-/**
- The the latest timeline entries
- @param count The maximum number of objects returned
- @param sinceID Returns results with an ID greater than (that is, more recent than) the specified ID
- @param untilID Returns results with an ID greater than (that is, more recent than) the specified ID
- @param showOpines If true opines will be included otherwise not
- @param showReviews If true reviews will be included otherwise not
- @param showImages If true images will be included otherwise not
- @param showProducts If true products will be included otherwise not
- @param completion The completion handler
- */
-- (void)timelineForAllUsersWithCount:(NSUInteger)count
-                             sinceID:(NSString *)sinceID
-                             untilID:(NSString *)untilID
-                          showOpines:(BOOL)showOpines
-                         showReviews:(BOOL)showReviews
-                          showImages:(BOOL)showImages
-                        showProducts:(BOOL)showProducts
-                          completion:(PLYCompletion)completion;
-
-/**
- The the latest timeline entries for the logged in user (me)
- @param count The maximum number of objects returned
- @param sinceID Returns results with an ID greater than (that is, more recent than) the specified ID
- @param untilID Returns results with an ID greater than (that is, more recent than) the specified ID
- @param showOpines If true opines will be included otherwise not
- @param showReviews If true reviews will be included otherwise not
- @param showImages If true images will be included otherwise not
- @param showProducts If true products will be included otherwise not
- @param completion The completion handler
- */
-- (void)timelineForMeWithCount:(NSUInteger)count
-                       sinceID:(NSString *)sinceID
-                       untilID:(NSString *)untilID
-                    showOpines:(BOOL)showOpines
-                   showReviews:(BOOL)showReviews
-                    showImages:(BOOL)showImages
-                  showProducts:(BOOL)showProducts
-                    completion:(PLYCompletion)completion;
-
-/**
- The the latest timeline entries for a specific user
- @param nickname The nickname of the user
- @param sinceID Returns results with an ID greater than (that is, more recent than) the specified ID
- @param untilID Returns results with an ID greater than (that is, more recent than) the specified ID
- @param count The maximum number of objects returned
- @param showOpines If true opines will be included otherwise not
- @param showReviews If true reviews will be included otherwise not
- @param showImages If true images will be included otherwise not
- @param showProducts If true products will be included otherwise not
- @param completion The completion handler
- */
-- (void)timelineForUser:(NSString *)nickname
-                sinceID:(NSString *)sinceID
-                untilID:(NSString *)untilID
-                  count:(NSUInteger)count
-             showOpines:(BOOL)showOpines
-            showReviews:(BOOL)showReviews
-             showImages:(BOOL)showImages
-           showProducts:(BOOL)showProducts
-             completion:(PLYCompletion)completion;
+- (void)timelineForUser:(PLYUser *)user
+					 options:(NSDictionary *)options
+				 completion:(PLYCompletion)completion;
 
 /**
  The the latest timeline entries for a specific product
- @param gtin The GTIN (barcode) of the product
- @param sinceID Returns results with an ID greater than (that is, more recent than) the specified ID
- @param untilID Returns results with an ID greater than (that is, more recent than) the specified ID
- @param count The maximum number of objects returned
- @param showOpines If true opines will be included otherwise not
- @param showReviews If true reviews will be included otherwise not
- @param showImages If true images will be included otherwise not
- @param showProducts If true products will be included otherwise not
- @param completion The completion handler
+ @param product The PLYProduct to retrieve the timeline for
+ @param options A dictionary with options to determine which entities to include
+ @param completion The completion handler for the request
  */
-- (void)timelineForProduct:(NSString *)gtin
-                   sinceID:(NSString *)sinceID
-                   untilID:(NSString *)untilID
-                     count:(NSUInteger)count
-                showOpines:(BOOL)showOpines
-               showReviews:(BOOL)showReviews
-                showImages:(BOOL)showImages
-              showProducts:(BOOL)showProducts
+- (void)timelineForProduct:(PLYProduct *)product
+						 options:(NSDictionary *)options
                 completion:(PLYCompletion)completion;
 
+/**
+ @name Reporting Issues
+ */
+
+/**
+ Reports a problem with a given entity, which can either be a PLYImage, PLYUser, PLYUserAvater or PLYProduct 
+ @param report The problem report to send create
+ @param completion The completion handler for the request
+ */
+- (void)createProblemReport:(PLYProblemReport *)report completion:(PLYCompletion)completion;
+
+/**
+ @name Working with Categories
+ */
+
+/**
+ Retrieves the PLCategory object for a given key and language
+ @param key The category key
+ @param language The language to retrieve the category for
+ @param completion The completion handler for the request
+ */
+- (void)categoryForKey:(NSString *)key language:(NSString *)language completion:(PLYCompletion)completion;
+
+/**
+ Retrieves all top-level PLCategory object for a given language
+ @param language The language to retrieve the category for or `nil` to return the best matching language
+ @param completion The completion handler for the request
+ */
+- (void)categoriesWithLanguage:(NSString *)language completion:(PLYCompletion)completion;
 
 @end

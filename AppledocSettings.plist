@@ -7,7 +7,7 @@
 	<key>--project-company</key>
 	<string>ProductLayer</string>
 	<key>--project-version</key>
-	<string>0.3</string>
+	<string>0.4</string>
 	<key>--company-id</key>
 	<string>com.productlayer</string>
 	<key>--docset-atom-filename</key>

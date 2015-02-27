@@ -8,7 +8,7 @@
 
 #import "PLYEntity.h"
 
-@class PLYAuditor;
+@class PLYAuditor, PLYUserAvatar;
 
 /**
  Model class representing a ProductLayer user
@@ -53,7 +53,7 @@
 /**
  A list of unlocked achievements.
  */
-@property (nonatomic, readonly) NSArray *unlockedAchievements;
+@property (nonatomic, copy, readonly) NSArray *unlockedAchievements;
 
 /**
  The counter for all user which are follower of this user.
@@ -64,11 +64,6 @@
  The counter for all user this user is following.
  */
 @property (nonatomic, readonly) NSUInteger followingCount;
-
-/**
- The url of the users avatar image. If no image is defined productlayer returns a gravatar image url.
- */
-@property (nonatomic, readonly) NSURL *avatarURL;
 
 /**
  Is this user following the logged in user.
@@ -84,6 +79,12 @@
 /**
  The social connections of the user
  */
-@property (nonatomic, readonly) NSDictionary *socialConnections;
+@property (nonatomic, copy, readonly) NSDictionary *socialConnections;
+
+
+/**
+ An PLYUserAvatar object for the receiver
+ */
+@property (nonatomic, copy, readonly) PLYUserAvatar *avatar;
 
 @end

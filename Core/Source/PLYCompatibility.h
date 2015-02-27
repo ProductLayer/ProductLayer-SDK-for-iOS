@@ -11,8 +11,11 @@
 
 #if TARGET_OS_IPHONE
 
-@compatibility_alias DTColor	UIColor;
-@compatibility_alias DTImage	UIImage;
+//@compatibility_alias DTColor	UIColor;
+//@compatibility_alias DTImage	UIImage;
+
+#define DTColor UIColor
+#define DTImage UIImage
 
 // method for creating data from an NSImage
 static inline NSData *DTImageJPEGRepresentation(DTImage *image, CGFloat compressionQuality)
@@ -28,8 +31,11 @@ static inline NSData *DTImageJPEGRepresentation(DTImage *image, CGFloat compress
 
 #if !TARGET_OS_IPHONE
 
-@compatibility_alias DTColor	NSColor;
-@compatibility_alias DTImage	NSImage;
+//@compatibility_alias DTColor	NSColor;
+//@compatibility_alias DTImage	NSImage;
+
+#define DTColor NSColor
+#define DTImage NSImage
 
 
 // method for creating data from an NSImage

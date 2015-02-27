@@ -14,7 +14,12 @@
 @protocol PLYBrandPickerViewControllerDelegate <NSObject>
 
 @optional
+/**
+ Called if the user selects a row
+ @param brandPicker The sender of the message
+ */
 - (void)brandPickerDidSelect:(PLYBrandPickerViewController *)brandPicker;
+
 @end
 
 /**

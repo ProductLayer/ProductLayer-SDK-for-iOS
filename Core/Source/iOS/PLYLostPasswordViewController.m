@@ -172,6 +172,9 @@
 {
 	for (PLYFormValidator *oneValidator in _validators)
 	{
+		// revalidate
+		[oneValidator validate];
+		
 		if (!oneValidator.isValid)
 		{
 			return NO;
@@ -199,9 +202,11 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if ([self _allFieldsValid])
+	if ([self _allFieldsValid])
 	{
 		[self done:nil];
+		
+		return YES;
 	}
 	
 	return NO;

@@ -62,4 +62,14 @@
 	return [dict copy];
 }
 
+- (void)updateFromEntity:(PLYPackaging *)entity
+{
+	[super updateFromEntity:entity];
+	
+	self.contains = entity.contains;
+	self.name = entity.name;
+	self.descriptionText = entity.descriptionText;
+	self.units = entity.units;
+}
+
 @end

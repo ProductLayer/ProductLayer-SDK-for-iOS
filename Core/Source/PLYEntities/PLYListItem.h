@@ -8,6 +8,8 @@
 
 #import "PLYEntity.h"
 
+@class PLYProduct;
+
 /**
  This object identifies a product in a product list.
  **/
@@ -36,5 +38,10 @@
  The priority to sort the list. e.g.: Which present i prefer for my birthday.
 */
 @property (nonatomic, assign) NSUInteger priority;
+
+/**
+ The PLYProduct matching the GTIN and in the best matching language
+ */
+@property (nonatomic, strong) PLYProduct *product;
 
 @end

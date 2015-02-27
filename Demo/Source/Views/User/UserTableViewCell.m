@@ -47,8 +47,8 @@
         return;
     }
     
-    if(!_user.followed){
-    [[PLYServer sharedServer] followUserWithNickname:_user.nickname completion:^(id result, NSError *error) {
+    if(!_user.followed) {
+		 [[PLYServer sharedServer] followUser:_user completion:^(id result, NSError *error) {
 		
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
             if(error){
@@ -64,7 +64,7 @@
 		});
 	}];
     } else {
-        [[PLYServer sharedServer] unfollowUserWithNickname:_user.nickname completion:^(id result, NSError *error) {
+        [[PLYServer sharedServer] unfollowUser:_user completion:^(id result, NSError *error) {
             
             DTBlockPerformSyncIfOnMainThreadElseAsync(^{
                 if(error){
@@ -135,7 +135,8 @@
 	NSString *imageIdentifier = [_user.Id copy];
 	
 	// need to load it
-	UIImage *image = [[DTDownloadCache sharedInstance] cachedImageForURL:_user.avatarURL option:DTDownloadCacheOptionLoadIfNotCached completion:^(NSURL *URL, UIImage *image, NSError *error) {
+	NSURL *imageURL = [[PLYServer sharedServer] avatarImageURLForUser:_user];
+	UIImage *image = [[DTDownloadCache sharedInstance] cachedImageForURL:imageURL option:DTDownloadCacheOptionLoadIfNotCached completion:^(NSURL *URL, UIImage *image, NSError *error) {
 		
 		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
 			if (error)

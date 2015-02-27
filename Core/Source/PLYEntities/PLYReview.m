@@ -79,4 +79,15 @@
 	return [dict copy];
 }
 
+- (void)updateFromEntity:(PLYReview *)entity
+{
+	[super updateFromEntity:entity];
+	
+	self.GTIN = entity.GTIN;
+	self.subject = entity.subject;
+	self.body = entity.body;
+	self.rating = entity.rating;
+	self.language = entity.language;
+}
+
 @end

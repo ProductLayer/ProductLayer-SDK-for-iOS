@@ -15,3 +15,53 @@ extern NSString * const PLYErrorDomain;
  Notification that gets sent if there is a problem logging in or refreshing the session
  */
 extern NSString * const PLYServerLoginErrorNotification;
+
+
+/**
+ Notification for when an entity has been deleted
+ */
+extern NSString * const PLYServerDidDeleteEntityNotification;
+
+/**
+ Key in the info dictionary for PLYServerDidDeleteEntityNotification
+ */
+extern NSString * const PLYServerDidDeleteEntityKey;
+
+/**
+ Notification for when a list has been modified
+ */
+extern NSString * const PLYServerDidModifyListNotification;
+
+/**
+ Key in the info dictionary for PLYServerDidModifyListNotification
+ */
+extern NSString * const PLYServerDidModifyListKey;
+
+/**
+ Notification if a product has been updated
+ */
+extern NSString * const PLYServerDidUpdateEntityNotification;
+
+/**
+ Key in the info dictionary for PLYServerDidUpdateEntityNotification
+ */
+extern NSString * const PLYServerDidUpdateEntityKey;
+
+
+/**
+ User Defaults Keys
+*/
+extern NSString * const PLYUserDefaultOpineComposerIncludeLocation;
+
+/**
+ Timeline Options
+ */
+extern NSString * const PLYTimelineOptionIncludeOpines;
+extern NSString * const PLYTimelineOptionIncludeReviews;
+extern NSString * const PLYTimelineOptionIncludeImages;
+extern NSString * const PLYTimelineOptionIncludeProducts;
+extern NSString * const PLYTimelineOptionIncludeFriends;
+extern NSString * const PLYTimelineOptionSinceID;
+extern NSString * const PLYTimelineOptionUntilID;
+extern NSString * const PLYTimelineOptionCount;
+

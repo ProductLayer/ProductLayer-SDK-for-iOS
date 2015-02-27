@@ -7,12 +7,21 @@
 //
 
 #import "PLYUser.h"
+#import "PLYUserAvatar.h"
 
 
 @interface PLYUser ()
 
-// private property, set if user has an avatar
-@property (nonatomic, copy) NSString *avatarImageIdentifier;
+// all read-only properties are settable internally
+
+@property (nonatomic, assign, readwrite) NSInteger points;
+@property (nonatomic, copy, readwrite) NSArray *unlockedAchievements;
+@property (nonatomic, assign, readwrite) NSUInteger followerCount;
+@property (nonatomic, assign, readwrite) NSUInteger followingCount;
+@property (nonatomic, assign, readwrite) BOOL following;
+@property (nonatomic, assign, readwrite) BOOL followed;
+@property (nonatomic, copy, readwrite) NSDictionary *socialConnections;
+@property (nonatomic, copy, readwrite) PLYUserAvatar *avatar;
 
 @end
 
@@ -71,7 +80,7 @@
 	}
 	else if ([key isEqualToString:@"pl-usr-img"])
 	{
-		_avatarURL = [NSURL URLWithString:value];
+		// ignore
 	}
 	else if ([key isEqualToString:@"pl-usr-followed"])
 	{
@@ -83,11 +92,15 @@
 	}
 	else if ([key isEqualToString:@"pl-usr-img_id"])
 	{
-		[self setValue:value forKey:@"avatarImageIdentifier"];
+		// ignore
 	}
 	else if ([key isEqualToString:@"pl-usr-social-connections"])
 	{
 		[self setValue:value forKey:@"socialConnections"];
+	}
+	else if ([key isEqualToString:@"pl-usr-avatar"])
+	{
+		_avatar = [[PLYUserAvatar alloc] initWithDictionary:value];
 	}
 	else
 	{
@@ -149,11 +162,6 @@
 		dict[@"pl-usr-following_cnt"] = @(_followingCount);
 	}
 	
-	if (_avatarURL)
-	{
-		dict[@"pl-usr-img"] = [_avatarURL absoluteString];
-	}
-	
 	if (_following)
 	{
 		dict[@"pl-usr-following"] = @(_following);
@@ -169,7 +177,37 @@
 		dict[@"pl-usr-social-connections"] = _socialConnections;
 	}
 	
+	if (_avatar)
+	{
+		dict[@"pl-usr-avatar"] = [_avatar dictionaryRepresentation];
+	}
+	
 	// return immutable
 	return [dict copy];
 }
+
+- (void)updateFromEntity:(PLYUser *)entity
+{
+	[super updateFromEntity:entity];
+	
+	self.nickname = entity.nickname;
+	self.firstName = entity.firstName;
+	self.lastName = entity.lastName;
+	self.email = entity.email;
+	self.birthday = entity.birthday;
+	self.gender = entity.gender;
+	self.points = entity.points;
+	self.unlockedAchievements = entity.unlockedAchievements;
+	self.followerCount = entity.followerCount;
+	self.followingCount = entity.followingCount;
+	self.following = entity.following;
+	self.followed = entity.followed;
+	self.socialConnections = entity.socialConnections;
+	
+	if (entity.avatar)
+	{
+		self.avatar = entity.avatar;
+	}
+}
+
 @end

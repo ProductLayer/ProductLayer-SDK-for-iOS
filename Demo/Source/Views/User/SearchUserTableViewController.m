@@ -110,7 +110,7 @@
     [_hud showWithText:@"searching" progressType:HUDProgressTypeInfinite];
     
     // Search user
-    [[PLYServer sharedServer] performUserSearch:searchBar.text completion:^(id result, NSError *error) {
+    [[PLYServer sharedServer] searchForUsersMatchingQuery:searchBar.text completion:^(id result, NSError *error) {
 		
 		if (error)
 		{
@@ -140,8 +140,11 @@
     _hud.showAnimationType = HUDProgressAnimationTypeFade;
     _hud.hideAnimationType = HUDProgressAnimationTypeFade;
     [_hud showWithText:@"loading" progressType:HUDProgressTypeInfinite];
-    
-    [[PLYServer sharedServer] getFollowerFromUser:_user.nickname page:0 recordsPerPage:50 completion:^(id result, NSError *error) {
+	
+	NSDictionary *options = @{@"page": @"0",
+									  @"records_per_page": @"50"
+									  };
+    [[PLYServer sharedServer] followerForUser:_user options:options completion:^(id result, NSError *error) {
 		
 		if (error)
 		{
@@ -171,8 +174,11 @@
     _hud.showAnimationType = HUDProgressAnimationTypeFade;
     _hud.hideAnimationType = HUDProgressAnimationTypeFade;
     [_hud showWithText:@"loading" progressType:HUDProgressTypeInfinite];
-    
-    [[PLYServer sharedServer] getFollowingFromUser:_user.nickname page:0 recordsPerPage:50 completion:^(id result, NSError *error) {
+	
+	NSDictionary *options = @{@"page": @"0",
+									  @"records_per_page": @"50"
+									  };
+    [[PLYServer sharedServer] followingForUser:_user options:options completion:^(id result, NSError *error) {
 		
 		if (error)
 		{

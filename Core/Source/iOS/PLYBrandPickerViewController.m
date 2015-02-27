@@ -32,21 +32,20 @@
 	NSString *_creatingBrandName;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)viewDidLoad
+{
+	[super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-	
-	// use normal cells
-//	[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CELL_IDENTIFIER];
-	
 	self.navigationItem.title = PLYLocalizedStringFromTable(@"PLY_BRANDS_TITLE", @"UI", @"Title of the view controller showing brands");
 
 	self.tableView.tableHeaderView = self.searchBar;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	
+	self.searchBar.text = _selectedBrandName;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -134,7 +133,7 @@
 	dispatch_semaphore_t sema = dispatch_semaphore_create(0);
 	
 	
-	[self.productLayerServer getBrandsWithCompletion:^(NSArray *result, NSError *error) {
+	[self.productLayerServer brandsWithCompletion:^(NSArray *result, NSError *error) {
 		
 		if ([result isKindOfClass:[NSDictionary class]])
 		{
@@ -142,7 +141,10 @@
 			result = dict[@"pl-values"];
 		}
 		
-			_knownBrandNames = [result sortedArrayUsingSelector:@selector(localizedStandardCompare:)];
+		NSMutableArray *tmpArray = [result mutableCopy];
+		[tmpArray removeObject:@""];
+		
+		_knownBrandNames = [tmpArray sortedArrayUsingSelector:@selector(localizedStandardCompare:)];
 		
 		dispatch_semaphore_signal(sema);
 	}];
@@ -151,7 +153,7 @@
 	
 	if (_GTIN)
 	{
-		[self.productLayerServer getRecommendedBrandOwnersForGTIN:_GTIN completion:^(id result, NSError *error) {
+		[self.productLayerServer recommendedBrandOwnersForGTIN:_GTIN completion:^(id result, NSError *error) {
 			
 			NSMutableArray *tmpArray = [NSMutableArray array];
 			
@@ -172,9 +174,11 @@
 	}
 	
 	dispatch_async(dispatch_get_main_queue(), ^{
+		
 		[self _updateFilter];
 		
-		NSIndexPath *indexPath = [self _indexPathForSelectRowForBrandOwnerName:_selectedBrandOwnerName brandName:_selectedBrandName];
+		BOOL filtered = [self.searchBar.text length]>0;
+		NSIndexPath *indexPath = [self _indexPathForSelectRowForBrandOwnerName:_selectedBrandOwnerName brandName:_selectedBrandName filtered:filtered];
 		
 		if (!indexPath && [_selectedBrandName length])
 		{
@@ -185,6 +189,7 @@
 		[self.tableView reloadData];
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
+			
 			[self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
 		});
 	});
@@ -233,27 +238,37 @@
 	}
 }
 
-- (NSIndexPath *)_indexPathForSelectRowForBrandOwnerName:(NSString *)brandOwnerName brandName:(NSString *)brandName
+- (NSIndexPath *)_indexPathForSelectRowForBrandOwnerName:(NSString *)brandOwnerName brandName:(NSString *)brandName filtered:(BOOL)filtered
 {
 	__block NSIndexPath *indexPath;
 	
-	if (_likelyBrands)
+	NSArray *likelyBrands = filtered?_filteredLikelyBrands:_likelyBrands;
+	NSArray *knownBrandNames = filtered?_filteredKnownBrandNames:_knownBrandNames;
+	
+	if (!brandOwnerName)
 	{
-		[_likelyBrands enumerateObjectsUsingBlock:^(NSDictionary *dict, NSUInteger row, BOOL *stop) {
-			NSString *brand = dict[@"brand"];
-			NSString *owner = dict[@"owner"];
-			
-			if ([brand isEqualToString:brandName] && [owner isEqualToString:brandOwnerName])
-			{
-				indexPath = [NSIndexPath indexPathForRow:row inSection:1];
-				*stop = YES;
-			}
-		}];
+		brandOwnerName = @"";
 	}
+	
+	[likelyBrands enumerateObjectsUsingBlock:^(NSDictionary *dict, NSUInteger row, BOOL *stop) {
+		NSString *brand = dict[@"brand"];
+		NSString *owner = dict[@"owner"];
+		
+		if ([owner isEqualToString:@"unknown"])
+		{
+			owner = @"";
+		}
+		
+		if ([brand isEqualToString:brandName] && [owner isEqualToString:brandOwnerName])
+		{
+			indexPath = [NSIndexPath indexPathForRow:row inSection:1];
+			*stop = YES;
+		}
+	}];
 	
 	if (!indexPath)
 	{
-		[_knownBrandNames enumerateObjectsUsingBlock:^(NSString *brand, NSUInteger row, BOOL *stop) {
+		[knownBrandNames enumerateObjectsUsingBlock:^(NSString *brand, NSUInteger row, BOOL *stop) {
 			if ([brand isEqualToString:brandName])
 			{
 				indexPath = [NSIndexPath indexPathForRow:row inSection:2];
@@ -329,17 +344,17 @@
 	{
 		case 0:
 		{
-			return @"Create Brand";
+			return  PLYLocalizedStringFromTable(@"PLY_CREATE_BRAND", @"UI", @"Title of section for creating a new brand");
 		}
 
 		case 1:
 		{
-			return @"Likely Brands";
+			return  PLYLocalizedStringFromTable(@"PLY_LIKELY_BRANDS", @"UI", @"Title of section containing likely brands");
 		}
 
 		case 2:
 		{
-			return @"Known Brands";
+			return  PLYLocalizedStringFromTable(@"PLY_KNOWN_BRANDS", @"UI", @"Title of section containing known brands");
 		}
 	}
 	

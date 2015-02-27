@@ -58,7 +58,7 @@
 /**
  The list of products.
  */
-@property (nonatomic, strong) NSMutableArray *listItems;
+@property (nonatomic, copy) NSArray *listItems;
 
 /**
  @name Managing Lists

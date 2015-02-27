@@ -8,9 +8,19 @@
 
 #import "PLYOpine.h"
 #import "PLYImage.h"
+#import "PLYUploadImage.h"
+#import "PLYProduct.h"
+
+@interface PLYOpine ()
+
+// read-only properties are writable internally
+
+@property (nonatomic, copy, readwrite) NSString *twitterPostIdentifier;
+@property (nonatomic, copy, readwrite) NSString *facebookPostIdentifier;
+
+@end
 
 @implementation PLYOpine
-
 
 + (NSString *)entityTypeIdentifier
 {
@@ -51,12 +61,16 @@
 			
 			for (NSDictionary *oneValue in dict)
 			{
-				PLYImage *image = [[PLYImage alloc] initWithDictionary:oneValue];
-				[tmpArray addObject:image];
+				PLYEntity *entity = [PLYEntity entityFromDictionary:oneValue];
+				[tmpArray addObject:entity];
 			}
 			
 			self.images = tmpArray;
 		}
+	}
+	else if ([key isEqualToString:@"pl-prod"])
+	{
+		self.product = [[PLYProduct alloc] initWithDictionary:value];
 	}
 	else if ([key isEqualToString:@"pl-share-twitter"])
 	{
@@ -132,8 +146,31 @@
 		dict[@"pl-opine-img"] = tmpArray;
 	}
 	
+	if (_product)
+	{
+		dict[@"pl-prod"] = [_product dictionaryRepresentation];
+	}
+	
 	// return immutable
 	return [dict copy];
+}
+
+- (void)updateFromEntity:(PLYOpine *)entity
+{
+	[super updateFromEntity:entity];
+	
+	self.text = entity.text;
+	self.parent = entity.parent;
+	self.GTIN = entity.GTIN;
+	self.product = entity.product;
+	self.language = entity.language;
+	self.location = entity.location;
+	self.images = entity.images;
+	self.shareOnTwitter = entity.shareOnTwitter;
+	self.shareOnFacebook = entity.shareOnFacebook;
+	
+	self.facebookPostIdentifier = entity.facebookPostIdentifier;
+	self.twitterPostIdentifier = entity.twitterPostIdentifier;
 }
 
 @end
