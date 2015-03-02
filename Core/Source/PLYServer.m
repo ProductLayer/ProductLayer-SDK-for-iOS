@@ -914,6 +914,12 @@
 	{
 		path = [self _functionPathForFunction:@"products"];
 		
+		// this must be an invalid GTIN, nevertheless add it as search term
+		if (gtin)
+		{
+			parameters[@"gtin"] = gtin;
+		}
+		
 		if (name)
 		{
 			parameters[@"name"] = name;
