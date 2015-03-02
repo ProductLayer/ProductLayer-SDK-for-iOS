@@ -829,6 +829,11 @@
 		
 		if (!error)
 		{
+			if ([result isKindOfClass:[PLYEntity class]])
+			{
+				result = @[result];
+			}
+				
 			for (PLYVotableEntity *entity in result)
 			{
 				// replace upvoters with cached entities
@@ -898,17 +903,43 @@
 					  recordsPerPage:(NSUInteger)rpp
 							completion:(PLYCompletion)completion
 {
-	NSString *path = [self _functionPathForFunction:@"products"];
-	
+	NSString *path;
 	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
+ 
+	if (PLYIsValidGTIN(gtin))
+	{
+		path = [self _functionPathForFunction:[NSString stringWithFormat:@"/product/%@", gtin]];
+	}
+	else
+	{
+		path = [self _functionPathForFunction:@"products"];
+		
+		if (name)
+		{
+			parameters[@"name"] = name;
+		}
+		
+		if (orderBy)
+		{
+			parameters[@"order_by"] = orderBy;
+		}
+		
+		if (page)
+		{
+			parameters[@"page"] = @(page);
+		}
+		
+		if (rpp)
+		{
+			parameters[@"records_per_page"] = @(rpp);
+		}
+	}
 	
-	if (gtin)       [parameters setObject:gtin     forKey:@"gtin"];
-	if (language)   [parameters setObject:language forKey:@"language"];
-	if (name)       [parameters setObject:name     forKey:@"name"];
-	if (orderBy)    [parameters setObject:orderBy  forKey:@"order_by"];
-	if (page)       [parameters setObject:@(page)     forKey:@"page"];
-	if (rpp)        [parameters setObject:@(rpp)      forKey:@"records_per_page"];
+	if (language)
+	{
+		parameters[@"language"] = language;
 	
+	}
 	[self _performMethodCallWithPath:path
 								 parameters:parameters
 								 completion:completion];
