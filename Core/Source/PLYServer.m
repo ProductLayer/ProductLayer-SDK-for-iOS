@@ -957,7 +957,7 @@
 	NSString *path = [self _functionPathForFunction:@"products"];
 	
 	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
-	parameters[@"query"] = [query stringByURLEncoding];
+	parameters[@"query"] = query;
 	
 	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
 		
