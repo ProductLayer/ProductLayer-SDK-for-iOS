@@ -28,6 +28,11 @@ BOOL PLYIsValidGTIN(NSString *GTIN);
 BOOL PLYGTINIsValidGlobally(NSString *GTIN);
 
 /**
+ Expands a UPC-E to its UPC-A equivalent
+ */
+NSString *PLYUPCAFromUPCE(NSString *UPCE);
+
+/**
  Helper function to return the NSBundle that contains the localized strings.
  @returns The bundle to retrieve resources for ProductLayerSDK from
  */

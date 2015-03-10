@@ -758,7 +758,12 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
                   continue;
                }
             }
-            
+				else if ([object.type isEqualToString:AVMetadataObjectTypeUPCECode])
+				{
+					// expand to full UPC-A
+					code = PLYUPCAFromUPCE(code);
+				}
+					
             if ([_delegate respondsToSelector:
                  @selector(scanner:didScanGTIN:)])
             {

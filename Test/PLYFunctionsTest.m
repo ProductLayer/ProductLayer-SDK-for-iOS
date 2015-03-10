@@ -288,6 +288,24 @@
 }
 
 
+#pragma mark - Test UPC-E
+
+- (void)testUPCE1
+{
+	NSString *UPCE = @"01236432";
+	NSString *UPCA = PLYUPCAFromUPCE(UPCE);
+	
+	XCTAssertEqualObjects(UPCA, @"012300000642", @"Incorrect expansion value");
+}
+
+- (void)testUPCE2
+{
+	NSString *UPCE = @"04252614";
+	NSString *UPCA = PLYUPCAFromUPCE(UPCE);
+	
+	XCTAssertEqualObjects(UPCA, @"042100005264", @"Incorrect expansion value");
+}
+
 #pragma mark - iOS Only
 
 #if TARGET_OS_IPHONE

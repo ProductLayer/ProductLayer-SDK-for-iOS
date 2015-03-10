@@ -56,7 +56,7 @@ PLYProduct *PLYProductBestMatchingUserPreferredLanguages(NSArray *products)
 	return [sorted firstObject];
 }
 
-BOOL PLYIsValidGTIN(NSString *GTIN)
+NSUInteger PLYCheckDigitForGTIN(NSString *GTIN)
 {
 	NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^[0-9]+$" options:0 error:NULL];
 	
@@ -97,9 +97,15 @@ BOOL PLYIsValidGTIN(NSString *GTIN)
 	}
 	
 	NSInteger check = (10 - (sum%10)) % 10;
+	return check;
+}
+
+BOOL PLYIsValidGTIN(NSString *GTIN)
+{
+	NSInteger checkDigit = PLYCheckDigitForGTIN(GTIN);
 	NSInteger lastDigit = [[GTIN substringWithRange:NSMakeRange(13, 1)] integerValue];
 	
-	return lastDigit == check;
+	return lastDigit == checkDigit;
 }
 
 #pragma mark - Localization and Resources
@@ -244,5 +250,75 @@ BOOL PLYGTINIsValidGlobally(NSString *GTIN)
 	
 	// 100-139, 300-969 fall through
 	return YES;
+}
+
+
+NSString *PLYUPCAFromUPCE(NSString *UPCE)
+{
+	if ([UPCE length]==6)
+	{
+		// do nothing everything is OK
+		return UPCE;
+	}
+	
+	if ([UPCE length]==7)
+	{
+		// truncate last digit - assume that it is the UPCE check digit
+		UPCE = [UPCE substringWithRange:NSMakeRange(0, UPCE.length-1)];
+	}
+	else if ([UPCE length]==8)
+	{
+		// truncate first and last digit
+		// assume that the first digit is the number system digit
+		// and the last digit is the UPCE check digit
+		UPCE = [UPCE substringWithRange:NSMakeRange(0, UPCE.length-1)];
+	}
+	
+	NSInteger digit1 = [[UPCE substringWithRange:NSMakeRange(1, 1)] integerValue];
+	NSInteger digit2 = [[UPCE substringWithRange:NSMakeRange(2, 1)] integerValue];
+	NSInteger digit3 = [[UPCE substringWithRange:NSMakeRange(3, 1)] integerValue];
+	NSInteger digit4 = [[UPCE substringWithRange:NSMakeRange(4, 1)] integerValue];
+	NSInteger digit5 = [[UPCE substringWithRange:NSMakeRange(5, 1)] integerValue];
+	NSInteger digit6 = [[UPCE substringWithRange:NSMakeRange(6, 1)] integerValue];
+	
+	NSString *manufacturer;
+	NSString *item;
+	
+	switch (digit6)
+	{
+		case 0:
+		case 1:
+		case 2:
+		{
+			manufacturer = [NSString stringWithFormat:@"%ld%ld%ld00", (long)digit1, (long)digit2, (long)digit6];
+			item = [NSString stringWithFormat:@"00%ld%ld%ld", (long)digit3, (long)digit4, (long)digit5];
+			break;
+		}
+
+		case 3:
+		{
+			manufacturer = [NSString stringWithFormat:@"%ld%ld%ld00", (long)digit1, (long)digit2, (long)digit3];
+			item = [NSString stringWithFormat:@"000%ld%ld", (long)digit4, (long)digit5];
+			break;
+		}
+
+		case 4:
+		{
+			manufacturer = [NSString stringWithFormat:@"%ld%ld%ld%ld0", (long)digit1, (long)digit2, (long)digit3, (long)digit4];
+			item = [NSString stringWithFormat:@"0000%ld", (long)digit5];
+			break;
+		}
+			
+		default:
+		{
+			manufacturer = [NSString stringWithFormat:@"%ld%ld%ld%ld%ld", (long)digit1, (long)digit2, (long)digit3, (long)digit4, (long)digit5];
+			item = [NSString stringWithFormat:@"0000%ld", (long)digit6];
+		}
+	}
+	
+	NSString *message = [NSString stringWithFormat:@"0%@%@0", manufacturer, item];
+	NSUInteger checkDigit = PLYCheckDigitForGTIN(message);
+	
+	return [NSString stringWithFormat:@"0%@%@%ld", manufacturer, item, (long)checkDigit];
 }
 
