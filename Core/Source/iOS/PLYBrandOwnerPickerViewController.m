@@ -431,7 +431,8 @@
 {
 	if (!indexPath.section)
 	{
-		_selectedBrandOwnerName = self.searchBar.text;
+		NSString *trimmedText = [self.searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+		_selectedBrandOwnerName = trimmedText;
 	}
 	else
 	{
@@ -492,7 +493,17 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-	[self dismissViewControllerAnimated:YES completion:NULL];
+	NSString *trimmedText = [searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	
+	if ([trimmedText length])
+	{
+		if ([_delegate respondsToSelector:@selector(brandPickerDidSelect:)])
+		{
+			_selectedBrandOwnerName = trimmedText;
+			
+			[_delegate brandOwnerPickerDidSelect:self];
+		}
+	}
 }
 
 @end
