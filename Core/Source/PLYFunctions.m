@@ -103,7 +103,7 @@ NSUInteger PLYCheckDigitForGTIN(NSString *GTIN)
 BOOL PLYIsValidGTIN(NSString *GTIN)
 {
 	NSInteger checkDigit = PLYCheckDigitForGTIN(GTIN);
-	NSInteger lastDigit = [[GTIN substringWithRange:NSMakeRange(13, 1)] integerValue];
+	NSInteger lastDigit = [[GTIN substringWithRange:NSMakeRange(GTIN.length-1, 1)] integerValue];
 	
 	return lastDigit == checkDigit;
 }
