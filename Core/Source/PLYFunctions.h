@@ -17,6 +17,11 @@
 PLYProduct *PLYProductBestMatchingUserPreferredLanguages(NSArray *products);
 
 /**
+ Calculates a check digit for a given GTIN
+ */
+NSUInteger PLYCheckDigitForGTIN(NSString *GTIN);
+
+/**
  Function to validate a GTIN
  */
 BOOL PLYIsValidGTIN(NSString *GTIN);
