@@ -58,16 +58,6 @@ PLYProduct *PLYProductBestMatchingUserPreferredLanguages(NSArray *products)
 
 NSUInteger PLYCheckDigitForGTIN(NSString *GTIN)
 {
-	NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^[0-9]+$" options:0 error:NULL];
-	
-	NSArray *matches = [regex matchesInString:GTIN options:0 range:NSMakeRange(0, [GTIN length])];
-	
-	if ([matches count]!=1)
-	{
-		// not numeric
-		return NO;
-	}
-	
 	if ([GTIN length]>14)
 	{
 		// too long
@@ -102,6 +92,16 @@ NSUInteger PLYCheckDigitForGTIN(NSString *GTIN)
 
 BOOL PLYIsValidGTIN(NSString *GTIN)
 {
+	NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^[0-9]+$" options:0 error:NULL];
+	
+	NSArray *matches = [regex matchesInString:GTIN options:0 range:NSMakeRange(0, [GTIN length])];
+	
+	if ([matches count]!=1)
+	{
+		// not numeric
+		return NO;
+	}
+	
 	NSInteger checkDigit = PLYCheckDigitForGTIN(GTIN);
 	NSInteger lastDigit = [[GTIN substringWithRange:NSMakeRange(GTIN.length-1, 1)] integerValue];
 	
