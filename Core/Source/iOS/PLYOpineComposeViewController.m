@@ -689,13 +689,13 @@
 	double latitude = location.coordinate.latitude;
 	double longitude = location.coordinate.longitude;
 	
-	int latSeconds = (int)round(abs(latitude * 3600));
+	int latSeconds = (int)round(fabs(latitude * 3600));
 	int latDegrees = latSeconds / 3600;
 	latSeconds = latSeconds % 3600;
 	int latMinutes = latSeconds / 60;
 	latSeconds %= 60;
 	
-	int longSeconds = (int)round(abs(longitude * 3600));
+	int longSeconds = (int)round(fabs(longitude * 3600));
 	int longDegrees = longSeconds / 3600;
 	longSeconds = longSeconds % 3600;
 	int longMinutes = longSeconds / 60;
