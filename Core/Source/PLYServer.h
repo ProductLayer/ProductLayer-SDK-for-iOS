@@ -193,6 +193,12 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 - (NSURLRequest *)URLRequestForFacebookConnect;
 
 /**
+ Removes the Facebook social connection for the logged in user.
+ @param completion The completion handler for the request
+ */
+- (void)disconnectSocialConnectionForFacebook:(PLYCompletion)completion;
+
+/**
  Provides an URL request for the social signin flow for Twitter
  @returns A configured NSURLRequest for presenting in a web view
  */
@@ -203,6 +209,12 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @returns A configured NSURLRequest for presenting in a web view
  */
 - (NSURLRequest *)URLRequestForTwitterConnect;
+
+/**
+ Removes the Twitter social connection for the logged in user.
+ @param completion The completion handler for the request
+ */
+- (void)disconnectSocialConnectionForTwitter:(PLYCompletion)completion;
 
 
 /**

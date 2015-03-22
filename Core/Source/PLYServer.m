@@ -1305,6 +1305,16 @@
 	return [mutableRequest copy];
 }
 
+- (void)disconnectSocialConnectionForFacebook:(PLYCompletion)completion
+{
+	NSParameterAssert(completion);
+	
+	NSString *function = @"/connect/facebook";
+	NSString *path = [self _functionPathForFunction:function];
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil payload:nil completion:completion];
+}
+
 - (NSURLRequest *)URLRequestForTwitterSignIn
 {
 	return [self _URLRequestForSocialService:@"twitter" function:@"signin" HTTPMethod:@"POST"];
@@ -1318,6 +1328,17 @@
 	[mutableRequest setValue:_authToken forHTTPHeaderField:@"X-ProductLayer-Auth-Token"];
 	return [mutableRequest copy];
 }
+
+- (void)disconnectSocialConnectionForTwitter:(PLYCompletion)completion
+{
+	NSParameterAssert(completion);
+	
+	NSString *function = @"/connect/twitter";
+	NSString *path = [self _functionPathForFunction:function];
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil payload:nil completion:completion];
+}
+
 
 #pragma mark - Managing Products
 
