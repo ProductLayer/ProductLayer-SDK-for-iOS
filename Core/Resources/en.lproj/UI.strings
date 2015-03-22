@@ -174,3 +174,18 @@
 
 /* Title for section containing product category name */
 "EDIT_PRODUCT_SECTION_CATEGORY" = "Category";
+
+
+// ------- PLYSocialConnectionViewController
+
+/* Title of the Social Connections Dialog */
+"SOCIAL_CONNECTIONS_TITLE" = "Social Network Connections";
+
+/* Action to connect a social connection */
+"CONNECT" = "Connect";
+
+/* Action to disconnect a social connection */
+"DISCONNECT" = "Disconnect";
+
+/* Explanation of what the social connections are for */
+"SOCIAL_CONNECTIONS_MSG" = "Connect your social network accounts to use them for signing into prod.ly.\n\nOptionally, you can also share your product opines on these other networks.";

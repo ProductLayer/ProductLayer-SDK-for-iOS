@@ -173,3 +173,18 @@
 
 /* Title for section containing product category name */
 "EDIT_PRODUCT_SECTION_CATEGORY" = "Kategorie";
+
+
+// ------- PLYSocialConnectionViewController
+
+/* Title of the Social Connections Dialog */
+"SOCIAL_CONNECTIONS_TITLE" = "Verbindungen zu Social Networks";
+
+/* Action to connect a social connection */
+"CONNECT" = "Verbinden";
+
+/* Action to disconnect a social connection */
+"DISCONNECT" = "Trennen";
+
+/* Explanation of what the social connections are for */
+"SOCIAL_CONNECTIONS_MSG" = "Verbinde Deine Social Network Konto um sie als alternatives Login zu verwenden.\n\nWahlweise kannst Du auch Deine Produkt-Opines mit diesen Netzen teilen.";
