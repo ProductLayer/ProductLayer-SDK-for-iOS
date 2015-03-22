@@ -187,10 +187,23 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 - (NSURLRequest *)URLRequestForFacebookSignIn;
 
 /**
+ Provides an URL request for the social connect flow for Facebook. This connects the service with the currently logged in user.
+ @returns A configured NSURLRequest for presenting in a web view
+ */
+- (NSURLRequest *)URLRequestForFacebookConnect;
+
+/**
  Provides an URL request for the social signin flow for Twitter
  @returns A configured NSURLRequest for presenting in a web view
  */
 - (NSURLRequest *)URLRequestForTwitterSignIn;
+
+/**
+ Provides an URL request for the social connect flow for Twitter. This connects the service with the currently logged in user.
+ @returns A configured NSURLRequest for presenting in a web view
+ */
+- (NSURLRequest *)URLRequestForTwitterConnect;
+
 
 /**
  Nickname of the currently logged in user or `nil` if not logged in
