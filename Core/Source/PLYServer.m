@@ -1311,7 +1311,20 @@
 	NSString *function = @"/connect/facebook";
 	NSString *path = [self _functionPathForFunction:function];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil payload:nil completion:completion];
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		if (result)
+		{
+			// update cache
+			result = [self _entityByUpdatingCachedEntity:result];
+		}
+		
+		if (completion)
+		{
+			completion(result, error);
+		}
+	};
+
+	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil payload:nil completion:wrappedCompletion];
 }
 
 - (NSURLRequest *)URLRequestForTwitterSignIn
@@ -1335,7 +1348,20 @@
 	NSString *function = @"/connect/twitter";
 	NSString *path = [self _functionPathForFunction:function];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil payload:nil completion:completion];
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		if (result)
+		{
+			// update cache
+			result = [self _entityByUpdatingCachedEntity:result];
+		}
+		
+		if (completion)
+		{
+			completion(result, error);
+		}
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil payload:nil completion:wrappedCompletion];
 }
 
 
