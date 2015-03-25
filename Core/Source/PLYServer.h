@@ -181,6 +181,21 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 - (void)loadDetailsForUser:(PLYUser *)user completion:(PLYCompletion)completion;
 
 /**
+ Nickname of the currently logged in user or `nil` if not logged in
+ */
+@property (nonatomic, readonly) PLYUser *loggedInUser;
+
+/**
+ Property that states if a login action is currently happening
+ */
+@property (nonatomic, readonly) BOOL performingLogin;
+
+
+/**
+ @name Managing Social Connections
+ */
+
+/**
  Provides an URL request for the social signin flow for Facebook
  @returns A configured NSURLRequest for presenting in a web view
  */
@@ -215,17 +230,6 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @param completion The completion handler for the request
  */
 - (void)disconnectSocialConnectionForTwitter:(PLYCompletion)completion;
-
-
-/**
- Nickname of the currently logged in user or `nil` if not logged in
- */
-@property (nonatomic, readonly) PLYUser *loggedInUser;
-
-/**
- Property that states if a login action is currently happening
- */
-@property (nonatomic, readonly) BOOL performingLogin;
 
 
 /**

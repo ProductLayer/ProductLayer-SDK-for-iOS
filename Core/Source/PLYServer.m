@@ -1265,8 +1265,7 @@
 	}];
 }
 
-
-
+#pragma mark - Managing Social Connections
 
 - (NSURLRequest *)_URLRequestForSocialService:(NSString *)service function:(NSString *)function HTTPMethod:(NSString *)HTTPMethod
 {
