@@ -51,7 +51,7 @@
 // ------- Lost PW
 
 /* Explanation to show on lost password dialog */
-"PLY_LOSTPW_EXPLAIN" = "Gib Deine E-Mail an damit ProductLayer Dir ein neues zufälliges Kennwort schicken kann.";
+"PLY_LOSTPW_EXPLAIN" = "Gib Deine E-Mail an um einen Link zum Zurücksetzen Deines Kennworts zu erhalten.";
 
 /* Text for done button in lost password dialog */
 "PLY_LOSTPW_RIGHT_BUTTON_TITLE" = "Senden";
@@ -63,16 +63,16 @@
 "PLY_LOSTPW_ERROR_ALERT" = "Fehler beim Setzen eines neuen Kennworts.";
 
 /* Title for successful password reset */
-"PLY_LOSTPW_SUCCESS_ALERT_TITLE" = "Kennwort erfolgreich neu gesetzt.";
+"PLY_LOSTPW_SUCCESS_ALERT_TITLE" = "Schaue in Deinen Posteingang!";
 
 /* Message for successful password reset */
-"PLY_LOSTPW_SUCCESS_ALERT_MSG" = "Ein neues Kennwort wurde Dir per E-Mail geschickt.";
+"PLY_LOSTPW_SUCCESS_ALERT_MSG" = "Wir haben Dir ein E-Mail mit dem Link zum Zurücksetzen des Kennworts gesendet.";
 
 
 // ------- Sign Up
 
 /* Explanation to show on sign up dialog */
-"PLY_SIGNUP_EXPLAIN" = "Wähle einen Spitznamen aus und gib Deine E-Mail bekannt so dass wir Dir das initiale Kennwort senden können.";
+"PLY_SIGNUP_EXPLAIN" = "Wähle einen Spitznamen aus und gib Deine E-Mail-Adresse ein. Wir senden Dir eine E-Mail mit einem Link zu über den Du Dein Kennwort festlegen kannst.";
 
 /* Text for done button in sign up dialog */
 "PLY_SIGNUP_RIGHT_BUTTON_TITLE" = "Registrieren";
@@ -84,7 +84,7 @@
 "PLY_SIGNUP_SUCCESS_ALERT_TITLE" = "Registrierung erfolgreich";
 
 /* Message for successful sign up */
-"PLY_SIGNUP_SUCCESS_ALERT_MSG" = "Bitte überprüfe Deinen Posteingang. Du bekommst ein initiales Kennwort, dass Du ändern solltest. Danach kannst Du Dich mit Benutzernamen und Kennwort anmelden.";
+"PLY_SIGNUP_SUCCESS_ALERT_MSG" = "Bitte überprüfe Deinen Posteingang. Du bekommst einen Link zu einer Seite, auf der Du Dein Kennwort setzen kannst.";
 
 
 // ------- PLYCategoryPickerViewController
@@ -173,3 +173,18 @@
 
 /* Title for section containing product category name */
 "EDIT_PRODUCT_SECTION_CATEGORY" = "Kategorie";
+
+
+// ------- PLYSocialConnectionViewController
+
+/* Title of the Social Connections Dialog */
+"SOCIAL_CONNECTIONS_TITLE" = "Verbindungen zu Social Networks";
+
+/* Action to connect a social connection */
+"CONNECT" = "Verbinden";
+
+/* Action to disconnect a social connection */
+"DISCONNECT" = "Trennen";
+
+/* Explanation of what the social connections are for */
+"SOCIAL_CONNECTIONS_MSG" = "Verbinde Deine Social Network Konten um sie als alternatives Login zu verwenden.\n\nWahlweise kannst Du auch Deine Produkt-Opines mit diesen Netzen teilen.";

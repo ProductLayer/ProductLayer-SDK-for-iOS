@@ -221,12 +221,12 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 
 - (BOOL)shouldAutorotate
 {
-	return NO;
+	return YES;
 }
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-	return UIInterfaceOrientationPortrait;
+	return UIInterfaceOrientationPortrait | UIInterfaceOrientationPortraitUpsideDown;
 }
 
 - (void)viewWillDisappear:(BOOL)animated

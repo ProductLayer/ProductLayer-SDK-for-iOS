@@ -17,6 +17,11 @@
 PLYProduct *PLYProductBestMatchingUserPreferredLanguages(NSArray *products);
 
 /**
+ Calculates a check digit for a given GTIN
+ */
+NSUInteger PLYCheckDigitForGTIN(NSString *GTIN);
+
+/**
  Function to validate a GTIN
  */
 BOOL PLYIsValidGTIN(NSString *GTIN);
@@ -26,6 +31,11 @@ BOOL PLYIsValidGTIN(NSString *GTIN);
  @returns `YES` if a GTIN is globally unique
  */
 BOOL PLYGTINIsValidGlobally(NSString *GTIN);
+
+/**
+ Expands a UPC-E to its UPC-A equivalent
+ */
+NSString *PLYUPCAFromUPCE(NSString *UPCE);
 
 /**
  Helper function to return the NSBundle that contains the localized strings.

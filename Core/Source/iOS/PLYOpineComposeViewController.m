@@ -7,6 +7,8 @@
 //
 
 #import "PLYOpineComposeViewController.h"
+#import "PLYSocialConnectionViewController.h"
+
 #import "UIViewController+ProductLayer.h"
 #import <CoreLocation/CoreLocation.h>
 
@@ -53,6 +55,18 @@
 	
 	NSLayoutConstraint *_bottomMarginConstraint;
 	NSLayoutConstraint *_belowProductLabelConstraint;
+}
+
++ (void)initialize
+{
+	[super initialize];
+	
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		NSDictionary *defaults = @{@"PLYShareOnTwitter": @(YES),
+											@"PLYShareOnFacebook": @(YES)};
+		[[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
+	});
 }
 
 - (instancetype)initWithOpine:(PLYOpine *)opine
@@ -508,28 +522,50 @@
 	_characterRemainingLabel.text = [NSString stringWithFormat:@"%ld", (long)remainingChars];
 }
 
+- (BOOL)_hasSocialConnection:(NSString *)service
+{
+	return [self.productLayerServer.loggedInUser.socialConnections[service] boolValue];
+}
+
+- (void)_showSocialConnections
+{
+	PLYSocialConnectionViewController *social = [PLYSocialConnectionViewController new];
+	UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:social];
+	
+	social.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(_closeSocialConnections)];
+	
+	[self presentViewController:nav animated:YES completion:NULL];
+}
+
+- (void)_closeSocialConnections
+{
+	[self dismissViewControllerAnimated:YES completion:^{
+		if (!self.opine.shareOnFacebook && [self _hasSocialConnection:@"facebook"])
+		{
+			self.opine.shareOnFacebook = YES;
+		}
+
+		if (!self.opine.shareOnTwitter && [self _hasSocialConnection:@"twitter"])
+		{
+			self.opine.shareOnTwitter = YES;
+		}
+		
+		[self _updateSocialButtons];
+		[self _saveSocialButtonState];
+	}];
+}
+
 - (void)_updateSocialButtons
 {
-	if ([self.productLayerServer.loggedInUser.socialConnections[@"twitter"] boolValue])
-	{
-		_twitterButton.enabled = YES;
-	}
-	else
+	if (![self _hasSocialConnection:@"twitter"])
 	{
 		self.opine.shareOnTwitter = NO;
-		_twitterButton.enabled = NO;
 	}
 	
-	if ([self.productLayerServer.loggedInUser.socialConnections[@"facebook"] boolValue])
-	{
-		_facebookButton.enabled = YES;
-	}
-	else
+	if (![self _hasSocialConnection:@"facebook"])
 	{
 		self.opine.shareOnFacebook = NO;
-		_facebookButton.enabled = NO;
 	}
-	
 	
 	if (self.opine.shareOnFacebook)
 	{
@@ -548,6 +584,14 @@
 	{
 		_twitterButton.tintColor = [UIColor grayColor];
 	}
+}
+
+- (void)_saveSocialButtonState
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setBool:self.opine.shareOnTwitter forKey:@"PLYShareOnTwitter"];
+	[defaults setBool:self.opine.shareOnFacebook forKey:@"PLYShareOnFacebook"];
+	[defaults synchronize];
 }
 
 - (void)_updateLocationButton
@@ -689,13 +733,13 @@
 	double latitude = location.coordinate.latitude;
 	double longitude = location.coordinate.longitude;
 	
-	int latSeconds = (int)round(abs(latitude * 3600));
+	int latSeconds = (int)round(fabs(latitude * 3600));
 	int latDegrees = latSeconds / 3600;
 	latSeconds = latSeconds % 3600;
 	int latMinutes = latSeconds / 60;
 	latSeconds %= 60;
 	
-	int longSeconds = (int)round(abs(longitude * 3600));
+	int longSeconds = (int)round(fabs(longitude * 3600));
 	int longDegrees = longSeconds / 3600;
 	longSeconds = longSeconds % 3600;
 	int longMinutes = longSeconds / 60;
@@ -822,10 +866,35 @@
 
 - (void)_handleTwitter:(id)sender
 {
-	self.opine.shareOnTwitter = !self.opine.shareOnTwitter;
+	if ([self _hasSocialConnection:@"twitter"])
+	{
+		self.opine.shareOnTwitter = !self.opine.shareOnTwitter;
 	
-	[self _updateSocialButtons];
-	[self _updateCharacterCount];
+		[self _updateSocialButtons];
+		[self _updateCharacterCount];
+		[self _saveSocialButtonState];
+		
+		return;
+	}
+	
+	// after returning activate the button if possible
+	[self _showSocialConnections];
+}
+
+- (void)_handleFacebook:(id)sender
+{
+	if ([self _hasSocialConnection:@"facebook"])
+	{
+		self.opine.shareOnFacebook = !self.opine.shareOnFacebook;
+		[self _updateSocialButtons];
+		[self _updateCharacterCount];
+		[self _saveSocialButtonState];
+		
+		return;
+	}
+
+	// after returning activate the button if possible
+	[self _showSocialConnections];
 }
 
 - (void)_handleLocation:(id)sender
@@ -851,13 +920,6 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults setBool:_postLocation forKey:PLYUserDefaultOpineComposerIncludeLocation];
 	[defaults synchronize];
-}
-
-- (void)_handleFacebook:(id)sender
-{
-	self.opine.shareOnFacebook = !self.opine.shareOnFacebook;
-	[self _updateSocialButtons];
-	[self _updateCharacterCount];
 }
 
 - (void)_handlePhoto:(id)sender
@@ -1062,6 +1124,10 @@
 	_attachedImages = [NSMutableArray arrayWithArray:_opine.images];
 	[self _updatePhotoButton];
 	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	_opine.shareOnFacebook = [defaults boolForKey:@"PLYShareOnFacebook"];
+	_opine.shareOnTwitter = [defaults boolForKey:@"PLYShareOnTwitter"];
+	
 	if (opine.location.latitude || opine.location.longitude)
 	{
 		_mostRecentLocation = [[CLLocation alloc] initWithLatitude:opine.location.latitude longitude:opine.location.longitude];
@@ -1083,6 +1149,10 @@
 	{
 		// need an opine to store edited values in
 		_opine = [PLYOpine new];
+		
+		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+		_opine.shareOnFacebook = [defaults boolForKey:@"PLYShareOnFacebook"];
+		_opine.shareOnTwitter = [defaults boolForKey:@"PLYShareOnTwitter"];
 	}
 	
 	return _opine;

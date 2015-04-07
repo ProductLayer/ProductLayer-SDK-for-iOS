@@ -829,6 +829,11 @@
 		
 		if (!error)
 		{
+			if ([result isKindOfClass:[PLYEntity class]])
+			{
+				result = @[result];
+			}
+				
 			for (PLYVotableEntity *entity in result)
 			{
 				// replace upvoters with cached entities
@@ -898,17 +903,49 @@
 					  recordsPerPage:(NSUInteger)rpp
 							completion:(PLYCompletion)completion
 {
-	NSString *path = [self _functionPathForFunction:@"products"];
-	
+	NSString *path;
 	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
+ 
+	if (PLYIsValidGTIN(gtin))
+	{
+		path = [self _functionPathForFunction:[NSString stringWithFormat:@"/product/%@", gtin]];
+	}
+	else
+	{
+		path = [self _functionPathForFunction:@"products"];
+		
+		// this must be an invalid GTIN, nevertheless add it as search term
+		if (gtin)
+		{
+			parameters[@"gtin"] = gtin;
+		}
+		
+		if (name)
+		{
+			parameters[@"name"] = name;
+		}
+		
+		if (orderBy)
+		{
+			parameters[@"order_by"] = orderBy;
+		}
+		
+		if (page)
+		{
+			parameters[@"page"] = @(page);
+		}
+		
+		if (rpp)
+		{
+			parameters[@"records_per_page"] = @(rpp);
+		}
+	}
 	
-	if (gtin)       [parameters setObject:gtin     forKey:@"gtin"];
-	if (language)   [parameters setObject:language forKey:@"language"];
-	if (name)       [parameters setObject:name     forKey:@"name"];
-	if (orderBy)    [parameters setObject:orderBy  forKey:@"order_by"];
-	if (page)       [parameters setObject:@(page)     forKey:@"page"];
-	if (rpp)        [parameters setObject:@(rpp)      forKey:@"records_per_page"];
+	if (language)
+	{
+		parameters[@"language"] = language;
 	
+	}
 	[self _performMethodCallWithPath:path
 								 parameters:parameters
 								 completion:completion];
@@ -920,7 +957,7 @@
 	NSString *path = [self _functionPathForFunction:@"products"];
 	
 	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
-	parameters[@"query"] = [query stringByURLEncoding];
+	parameters[@"query"] = query;
 	
 	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
 		
@@ -1228,15 +1265,18 @@
 	}];
 }
 
+#pragma mark - Managing Social Connections
 
-
-
-- (NSURLRequest *)_URLRequestForSocialService:(NSString *)service
+- (NSURLRequest *)_URLRequestForSocialService:(NSString *)service function:(NSString *)function HTTPMethod:(NSString *)HTTPMethod
 {
+	NSParameterAssert(service);
+	NSParameterAssert(function);
+	NSParameterAssert(HTTPMethod);
+	
 	NSString *redirectStr = @"http://productlayer.com";
 	
-	NSString *function = [@"/signin/" stringByAppendingString:service];
-	NSString *path = [self _functionPathForFunction:function];
+	NSString *functionPath = [NSString stringWithFormat:@"/%@/%@", function, service];
+	NSString *path = [self _functionPathForFunction:functionPath];
 	NSURL *methodURL = [self _methodURLForPath:path
 											  parameters:@{@"callback": redirectStr}];
 	
@@ -1252,13 +1292,78 @@
 
 - (NSURLRequest *)URLRequestForFacebookSignIn
 {
-	return [self _URLRequestForSocialService:@"facebook"];
+	return [self _URLRequestForSocialService:@"facebook" function:@"signin" HTTPMethod:@"POST"];
+}
+
+- (NSURLRequest *)URLRequestForFacebookConnect
+{
+	NSAssert(_authToken, @"Cannot connect to Facebook with no user logged in");
+	
+	NSMutableURLRequest *mutableRequest = [[self _URLRequestForSocialService:@"facebook" function:@"connect" HTTPMethod:@"POST"] mutableCopy];
+	[mutableRequest setValue:_authToken forHTTPHeaderField:@"X-ProductLayer-Auth-Token"];
+	return [mutableRequest copy];
+}
+
+- (void)disconnectSocialConnectionForFacebook:(PLYCompletion)completion
+{
+	NSParameterAssert(completion);
+	
+	NSString *function = @"/connect/facebook";
+	NSString *path = [self _functionPathForFunction:function];
+	
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		if (result)
+		{
+			// update cache
+			result = [self _entityByUpdatingCachedEntity:result];
+		}
+		
+		if (completion)
+		{
+			completion(result, error);
+		}
+	};
+
+	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil payload:nil completion:wrappedCompletion];
 }
 
 - (NSURLRequest *)URLRequestForTwitterSignIn
 {
-	return [self _URLRequestForSocialService:@"twitter"];
+	return [self _URLRequestForSocialService:@"twitter" function:@"signin" HTTPMethod:@"POST"];
 }
+
+- (NSURLRequest *)URLRequestForTwitterConnect
+{
+	NSAssert(_authToken, @"Cannot connect to Facebook with no user logged in");
+	
+	NSMutableURLRequest *mutableRequest = [[self _URLRequestForSocialService:@"twitter" function:@"connect" HTTPMethod:@"POST"] mutableCopy];
+	[mutableRequest setValue:_authToken forHTTPHeaderField:@"X-ProductLayer-Auth-Token"];
+	return [mutableRequest copy];
+}
+
+- (void)disconnectSocialConnectionForTwitter:(PLYCompletion)completion
+{
+	NSParameterAssert(completion);
+	
+	NSString *function = @"/connect/twitter";
+	NSString *path = [self _functionPathForFunction:function];
+	
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		if (result)
+		{
+			// update cache
+			result = [self _entityByUpdatingCachedEntity:result];
+		}
+		
+		if (completion)
+		{
+			completion(result, error);
+		}
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil payload:nil completion:wrappedCompletion];
+}
+
 
 #pragma mark - Managing Products
 

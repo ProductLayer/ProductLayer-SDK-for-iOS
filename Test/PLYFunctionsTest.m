@@ -288,6 +288,70 @@
 }
 
 
+#pragma mark - PLYUPCAFromUPCE
+
+- (void)testUPCE1
+{
+	NSString *UPCE = @"01236432";
+	NSString *UPCA = PLYUPCAFromUPCE(UPCE);
+	
+	XCTAssertEqualObjects(UPCA, @"012300000642", @"Incorrect expansion value");
+}
+
+- (void)testUPCE2
+{
+	NSString *UPCE = @"04252614";
+	NSString *UPCA = PLYUPCAFromUPCE(UPCE);
+	
+	XCTAssertEqualObjects(UPCA, @"042100005264", @"Incorrect expansion value");
+}
+
+- (void)testUPCE3
+{
+	NSString *UPCE = @"01240136";
+	NSString *UPCA = PLYUPCAFromUPCE(UPCE);
+	
+	XCTAssertEqualObjects(UPCA, @"012400000016", @"Incorrect expansion value");
+}
+
+#pragma mark - PLYIsValidGTIN
+
+- (void)testEmmi
+{
+	BOOL b = PLYIsValidGTIN(@"Emmi");
+	
+	XCTAssertFalse(b, @"Should not be recognized as valid");
+}
+
+- (void)testValid
+{
+	BOOL b = PLYIsValidGTIN(@"9781617292156"); // isbn of my book http://manning.com/drobnik, get it!
+	XCTAssertTrue(b, @"Should be recognized as valid");
+}
+
+- (void)testInvalid
+{
+	BOOL b = PLYIsValidGTIN(@"9781617202156"); // one digit off
+	XCTAssertFalse(b, @"Should not be recognized as valid");
+}
+
+#pragma mark - PLYCheckDigitForGTIN
+
+// sample from http://www.gs1.org/how-calculate-check-digit-manually
+- (void)testCheckDigit
+{
+	NSString *gtin = @"6291041500210";
+	NSUInteger check = PLYCheckDigitForGTIN(gtin);
+	XCTAssertEqual(check, 3, @"Check Digit should be 3");
+}
+
+- (void)testCheckDigit2
+{
+	NSString *gtin = @"9781617292150";
+	NSUInteger check = PLYCheckDigitForGTIN(gtin);
+	XCTAssertEqual(check, 6, @"Check Digit should be 6");
+}
+
 #pragma mark - iOS Only
 
 #if TARGET_OS_IPHONE

@@ -52,7 +52,7 @@
 // ------- Lost PW
 
 /* Explanation to show on lost password dialog */
-"PLY_LOSTPW_EXPLAIN" = "Enter your email address to have ProductLayer set a new random password and email it to you.";
+"PLY_LOSTPW_EXPLAIN" = "Enter your email address to receive a password reset e-mail.";
 
 /* Text for done button in lost password dialog */
 "PLY_LOSTPW_RIGHT_BUTTON_TITLE" = "Send";
@@ -64,16 +64,16 @@
 "PLY_LOSTPW_ERROR_ALERT" = "Error requesting new password.";
 
 /* Title for successful password reset */
-"PLY_LOSTPW_SUCCESS_ALERT_TITLE" = "Password reset successful.";
+"PLY_LOSTPW_SUCCESS_ALERT_TITLE" = "Check your inbox!";
 
 /* Message for successful password reset */
-"PLY_LOSTPW_SUCCESS_ALERT_MSG" = "A new password was send to you by email.";
+"PLY_LOSTPW_SUCCESS_ALERT_MSG" = "We sent you an e-mail with a link to reset your password.";
 
 
 // ------- Sign Up
 
 /* Explanation to show on sign up dialog */
-"PLY_SIGNUP_EXPLAIN" = "Pick a nickname and enter your email address so that we can send you the initial password.";
+"PLY_SIGNUP_EXPLAIN" = "Pick a nickname and enter your email address. We will send you an e-mail with a link for setting your password.";
 
 /* Text for done button in sign up dialog */
 "PLY_SIGNUP_RIGHT_BUTTON_TITLE" = "Sign Up";
@@ -85,7 +85,7 @@
 "PLY_SIGNUP_SUCCESS_ALERT_TITLE" = "Sign Up Complete";
 
 /* Message for successful sign up */
-"PLY_SIGNUP_SUCCESS_ALERT_MSG" = "Please check your email inbox. You will receive an initial password which you should change. Then you may login in with your user name and password.";
+"PLY_SIGNUP_SUCCESS_ALERT_MSG" = "Please check your email inbox. You will receive a link to a page where you can set your password.";
 
 
 // ------- PLYCategoryPickerViewController
@@ -174,3 +174,18 @@
 
 /* Title for section containing product category name */
 "EDIT_PRODUCT_SECTION_CATEGORY" = "Category";
+
+
+// ------- PLYSocialConnectionViewController
+
+/* Title of the Social Connections Dialog */
+"SOCIAL_CONNECTIONS_TITLE" = "Social Network Connections";
+
+/* Action to connect a social connection */
+"CONNECT" = "Connect";
+
+/* Action to disconnect a social connection */
+"DISCONNECT" = "Disconnect";
+
+/* Explanation of what the social connections are for */
+"SOCIAL_CONNECTIONS_MSG" = "Connect your social network accounts to use them for signing into prod.ly.\n\nOptionally, you can also share your product opines on these other networks.";
