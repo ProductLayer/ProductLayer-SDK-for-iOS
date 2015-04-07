@@ -11,3 +11,8 @@ To clone the project with all the sub-modules execute the following command:
 ```
 git clone --recursive https://github.com/ProductLayer/ProductLayer-SDK-for-iOS.git
 ```
+
+Apps using this SDK
+-------------------
+
+We love to highlight apps using the ProductLayer SDK. The first app using it is prod.ly the [official client app for the prod.ly social network](https://prod.ly/app/).
