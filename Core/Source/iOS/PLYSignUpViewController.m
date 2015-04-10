@@ -133,12 +133,12 @@
 
 - (BOOL)shouldAutorotate
 {
-	return NO;
+	return YES;
 }
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-	return UIInterfaceOrientationPortrait;
+	return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
 }
 
 - (void)viewWillAppear:(BOOL)animated

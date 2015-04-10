@@ -103,12 +103,12 @@
 
 - (BOOL)shouldAutorotate
 {
-	return NO;
+	return YES;
 }
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-	return UIInterfaceOrientationPortrait;
+	return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
 }
 
 #pragma mark - Actions
