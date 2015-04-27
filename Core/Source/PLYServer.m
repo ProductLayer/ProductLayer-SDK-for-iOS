@@ -1768,7 +1768,21 @@
 	NSString *path = [self _functionPathForFunction:function];
 	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:list];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:completion];
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		
+		if (!error || [error code]==404)
+		{
+			PLYList *list = result;
+			
+			// broadcast info that this list was modified
+			NSDictionary *userInfo = @{PLYServerDidModifyListKey:list.Id};
+			[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidModifyListNotification object:self userInfo:userInfo];
+		}
+		
+		completion(result, error);
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:wrappedCompletion];
 }
 
 /**
@@ -1838,7 +1852,19 @@
 	NSString *path = [self _functionPathForFunction:function];
 	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:list];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:payload completion:completion];
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		
+		if (!error || [error code]==404)
+		{
+			// broadcast info that this list was modified
+			NSDictionary *userInfo = @{PLYServerDidModifyListKey:list.Id};
+			[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidModifyListNotification object:self userInfo:userInfo];
+		}
+		
+		completion(result, error);
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:payload completion:wrappedCompletion];
 }
 
 /**
@@ -1880,7 +1906,6 @@
 		if (!error || [error code]==404)
 		{
 			// broadcast info that this list was modified
-			
 			NSDictionary *userInfo = @{PLYServerDidModifyListKey:listId};
 			[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidModifyListNotification object:self userInfo:userInfo];
 		}
