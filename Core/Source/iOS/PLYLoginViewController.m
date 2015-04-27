@@ -331,6 +331,9 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	
 	UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:webVC];
 	
+	// present sign in forms with same modal style as self
+	nav.modalPresentationStyle = self.modalPresentationStyle;
+	
 	[self presentViewController:nav animated:YES completion:NULL];
 	
 	[webVC startAuthorizationFlowWithRequest:request completion:^(BOOL isAuthenticated, NSString *token)
