@@ -25,3 +25,5 @@
 #import "PLYUserAvatar.h"
 #import "PLYErrorMessage.h"
 #import "PLYErrorResponse.h"
+#import "PLYChatGroup.h"
+#import "PLYChatMessage.h"

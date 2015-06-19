@@ -27,9 +27,10 @@
 
 // this is the URL for the endpoint server
 #define PLY_ENDPOINT_URL [NSURL URLWithString:@"https://api.productlayer.com"]
+//#define PLY_ENDPOINT_URL [NSURL URLWithString:@"http://10.211.55.4:8080"]
 
 // this is a prefix added before REST methods, e.g. for a version of the API
-#define PLY_PATH_PREFIX @"0.4"
+#define PLY_PATH_PREFIX @"0.5"
 
 // the service name for saving tokens to the keychain
 #define PLY_SERVICE @"com.productlayer.api.auth-token"
@@ -868,13 +869,16 @@
 		_performingLogin = NO;
 	};
 	
-	[self performSearchForProduct:gtin
-									 name:nil
-								language:language
-								 orderBy:@"pl-lng_asc"
-									 page:0
-						recordsPerPage:0
-							 completion:ownCompletion];
+    [self performSearchForProduct:gtin
+                             name:nil
+                         language:language
+                            brand:nil
+                       brandOwner:nil
+                      categoryKey:nil
+                          orderBy:@"pl-lng_asc"
+                             page:0
+                   recordsPerPage:0
+                       completion:ownCompletion];
 }
 
 /**
@@ -883,30 +887,36 @@
 - (void)performSearchForName:(NSString *)name language:(NSString *)language completion:(PLYCompletion)completion{
 	NSParameterAssert(name);
 	
-	[self performSearchForProduct:nil
-									 name:name
-								language:language
-								 orderBy:@"pl-prod-name_asc"
-									 page:0
-						recordsPerPage:0
-							 completion:completion];
+    [self performSearchForProduct:nil
+                             name:name
+                         language:language
+                            brand:nil
+                       brandOwner:nil
+                      categoryKey:nil
+                          orderBy:@"pl-prod-name_asc"
+                             page:0
+                   recordsPerPage:0
+                       completion:completion];
 }
 
 /**
  * Search for a product. If no search paramter are present the first 50 products will be presented.
  **/
 - (void)performSearchForProduct:(NSString *)gtin
-									name:(NSString *)name
-							  language:(NSString *)language
-								orderBy:(NSString *)orderBy
-									page:(NSUInteger)page
-					  recordsPerPage:(NSUInteger)rpp
-							completion:(PLYCompletion)completion
+                           name:(NSString *)name
+                       language:(NSString *)language
+                          brand:(NSString *)brand
+                     brandOwner:(NSString *)brandOwner
+                    categoryKey:(NSString* )categoryKey
+                        orderBy:(NSString *)orderBy
+                           page:(NSUInteger)page
+                 recordsPerPage:(NSUInteger)rpp
+                     completion:(PLYCompletion)completion
 {
 	NSString *path;
 	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
  
-	if (PLYIsValidGTIN(gtin))
+	if (gtin && PLYIsValidGTIN(gtin))
 	{
 		path = [self _functionPathForFunction:[NSString stringWithFormat:@"/product/%@", gtin]];
 	}
@@ -924,6 +934,21 @@
 		{
 			parameters[@"name"] = name;
 		}
+        
+        if (brand)
+        {
+            parameters[@"brand"] = brand;
+        }
+        
+        if (brandOwner)
+        {
+            parameters[@"brand_owner"] = brandOwner;
+        }
+        
+        if (categoryKey)
+        {
+            parameters[@"category_key"] = categoryKey;
+        }
 		
 		if (orderBy)
 		{
@@ -1497,7 +1522,11 @@
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:data completion:completion];
 }
 
-- (NSURL *)URLForImage:(PLYImage *)image maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop
+- (NSURL *)URLForImage:(PLYImage *)image maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop {
+    return [self URLForImage:image maxWidth:maxWidth maxHeight:maxHeight crop:crop quality:-1];
+}
+
+- (NSURL *)URLForImage:(PLYImage *)image maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop quality:(NSInteger)quality
 {
 	NSParameterAssert(image);
 	
@@ -1522,6 +1551,11 @@
 	{
 		[parameters setObject:@"true" forKey:@"crop"];
 	}
+    
+    if (quality && quality >= 20 && quality <= 100 )
+    {
+        [parameters setObject:[NSString stringWithFormat:@"%ld",(long)quality] forKey:@"quality"];
+    }
 	
 	// no image URL, construct it
 	NSString *function = [NSString stringWithFormat:@"/image/%@.jpg", image.fileId];
@@ -2419,6 +2453,105 @@
 	
 	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:params payload:nil completion:completion];
 }
+
+#pragma mark - Chat System
+
+- (void) getChatGroupsForLoggedInUser:(PLYCompletion)completion {
+    NSParameterAssert(completion);
+    
+    NSString *function = @"/chat_groups";
+    NSString *path = [self _functionPathForFunction:function];
+    
+    [self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:nil payload:nil completion:completion];
+}
+
+- (void) createNewChatGroup:(PLYChatGroup *)chatGroup completion:(PLYCompletion)completion {
+    NSParameterAssert(chatGroup);
+    NSParameterAssert(completion);
+    
+    NSString *function = @"/chat_groups";
+    NSString *path = [self _functionPathForFunction:function];
+    NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:chatGroup];
+    
+    [self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:completion];
+}
+
+- (void) updateChatGroupTitle:(PLYChatGroup *)chatGroup title:(NSString *)title completion:(PLYCompletion)completion {
+    NSParameterAssert(title);
+    NSParameterAssert(chatGroup);
+    NSParameterAssert(completion);
+    
+    NSString *function = [NSString stringWithFormat:@"/chat_groups/%@/title", chatGroup.Id];
+    NSString *path = [self _functionPathForFunction:function];
+    NSDictionary *payload;
+    payload = @{@"title": title};
+    
+    [self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:payload completion:completion];
+}
+
+- (void) addUserToChatGroup:(PLYChatGroup *)chatGroup userId:(NSString *)userId completion:(PLYCompletion)completion{
+    NSParameterAssert(userId);
+    NSParameterAssert(chatGroup);
+    NSParameterAssert(completion);
+    
+    NSString *function = [NSString stringWithFormat:@"/chat_groups/%@/users", chatGroup.Id];
+    NSString *path = [self _functionPathForFunction:function];
+    NSArray *payload = [NSArray arrayWithObjects: userId, nil];
+    
+    [self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:completion];
+}
+
+- (void) removeUserFromChatGroup:(PLYChatGroup *)chatGroup userId:(NSString *)userId completion:(PLYCompletion)completion {
+    NSParameterAssert(userId);
+    NSParameterAssert(chatGroup);
+    NSParameterAssert(completion);
+    
+    NSString *function = [NSString stringWithFormat:@"/chat_groups/%@/users/%@", chatGroup.Id, userId];
+    NSString *path = [self _functionPathForFunction:function];
+    
+    [self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil payload:nil completion:completion];
+}
+
+- (void) getChatMessagesFromChatGroup:(PLYChatGroup *)chatGroup sinceDate:(NSDate *)sinceDate untilDate:(NSDate *)untilDate count:(int)count completion:(PLYCompletion)completion {
+    NSParameterAssert(chatGroup);
+    NSParameterAssert(completion);
+    
+    NSDictionary *parameters;
+    if (sinceDate)
+    {
+        parameters = @{@"since_timestamp": [NSString stringWithFormat:@"%.f", sinceDate.timeIntervalSince1970 * 1000]};
+    }
+    else if (untilDate)
+    {
+        parameters = @{@"until_timestamp": [NSString stringWithFormat:@"%.f", untilDate.timeIntervalSince1970 * 1000]};
+    }
+    else if (count)
+    {
+        parameters = @{@"count": [NSString stringWithFormat:@"%d", count]};
+    }
+    
+    NSString *function = [NSString stringWithFormat:@"/chat_groups/%@/messages", chatGroup.Id];
+    NSString *path = [self _functionPathForFunction:function];
+    
+    [self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:parameters payload:nil completion:completion];
+}
+
+- (void) createChatMessage:(NSString *)message forChatGroupWithId:(PLYChatGroup *)chatGroup completion:(PLYCompletion)completion {
+    NSParameterAssert(message);
+    NSParameterAssert(chatGroup);
+    NSParameterAssert(completion);
+    
+    NSString *function = [NSString stringWithFormat:@"/chat_groups/%@/messages", chatGroup.Id];
+    NSString *path = [self _functionPathForFunction:function];
+    
+    PLYChatMessage *chatMessage = [[PLYChatMessage alloc] init];
+    chatMessage.message = message;
+    
+    NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:chatMessage];
+    
+    [self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:completion];
+}
+
 
 #pragma mark - Notifications
 

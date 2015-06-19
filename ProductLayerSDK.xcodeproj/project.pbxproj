@@ -281,6 +281,16 @@
 		A7EE90291AC30FD700F63099 /* PLYSocialConnectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE90261AC30FD700F63099 /* PLYSocialConnectionViewController.m */; };
 		A7F950651A9E0D10001C86BE /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = A7F950681A9E0D10001C86BE /* UI.strings */; };
 		A7F950661A9E0D10001C86BE /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = A7F950681A9E0D10001C86BE /* UI.strings */; };
+		C906ED031B2F01C700756079 /* PLYChatMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = C906ECFF1B2F01C700756079 /* PLYChatMessage.h */; };
+		C906ED041B2F01C700756079 /* PLYChatMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = C906ECFF1B2F01C700756079 /* PLYChatMessage.h */; };
+		C906ED051B2F01C700756079 /* PLYChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C906ED001B2F01C700756079 /* PLYChatMessage.m */; };
+		C906ED061B2F01C700756079 /* PLYChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C906ED001B2F01C700756079 /* PLYChatMessage.m */; };
+		C906ED071B2F01C700756079 /* PLYChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C906ED001B2F01C700756079 /* PLYChatMessage.m */; };
+		C906ED081B2F01C700756079 /* PLYChatGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = C906ED011B2F01C700756079 /* PLYChatGroup.m */; };
+		C906ED091B2F01C700756079 /* PLYChatGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = C906ED011B2F01C700756079 /* PLYChatGroup.m */; };
+		C906ED0A1B2F01C700756079 /* PLYChatGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = C906ED011B2F01C700756079 /* PLYChatGroup.m */; };
+		C906ED0B1B2F01C700756079 /* PLYChatGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = C906ED021B2F01C700756079 /* PLYChatGroup.h */; };
+		C906ED0C1B2F01C700756079 /* PLYChatGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = C906ED021B2F01C700756079 /* PLYChatGroup.h */; };
 		C92A6256198A1B3900997DDC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C92A6255198A1B3900997DDC /* Security.framework */; };
 		C97D2D081A0037D3003885A1 /* ProductLayerSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A7590ADA19ED77710084EBCA /* ProductLayerSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C97FAA18191CCA3400144D2C /* PLYErrorMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FAA17191CCA3400144D2C /* PLYErrorMessage.m */; };
@@ -872,6 +882,10 @@
 		A7EE90261AC30FD700F63099 /* PLYSocialConnectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYSocialConnectionViewController.m; sourceTree = "<group>"; };
 		A7F950671A9E0D10001C86BE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/UI.strings; sourceTree = "<group>"; };
 		A7F950881A9E0D19001C86BE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/UI.strings; sourceTree = "<group>"; };
+		C906ECFF1B2F01C700756079 /* PLYChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYChatMessage.h; path = PLYEntities/PLYChatMessage.h; sourceTree = "<group>"; };
+		C906ED001B2F01C700756079 /* PLYChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYChatMessage.m; path = PLYEntities/PLYChatMessage.m; sourceTree = "<group>"; };
+		C906ED011B2F01C700756079 /* PLYChatGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYChatGroup.m; path = PLYEntities/PLYChatGroup.m; sourceTree = "<group>"; };
+		C906ED021B2F01C700756079 /* PLYChatGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYChatGroup.h; path = PLYEntities/PLYChatGroup.h; sourceTree = "<group>"; };
 		C92A6255198A1B3900997DDC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		C97FAA16191CCA3400144D2C /* PLYErrorMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYErrorMessage.h; path = PLYEntities/PLYErrorMessage.h; sourceTree = "<group>"; };
 		C97FAA17191CCA3400144D2C /* PLYErrorMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYErrorMessage.m; path = PLYEntities/PLYErrorMessage.m; sourceTree = "<group>"; };
@@ -1705,6 +1719,10 @@
 		C9D31F45190A705200C91A08 /* PLYEntities */ = {
 			isa = PBXGroup;
 			children = (
+				C906ECFF1B2F01C700756079 /* PLYChatMessage.h */,
+				C906ED001B2F01C700756079 /* PLYChatMessage.m */,
+				C906ED011B2F01C700756079 /* PLYChatGroup.m */,
+				C906ED021B2F01C700756079 /* PLYChatGroup.h */,
 				A75CF7801A30DF4E007E30FC /* PLYEntities.h */,
 				A75CF7481A30B4BD007E30FC /* PLYBrand.h */,
 				A75CF7491A30B4BD007E30FC /* PLYBrand.m */,
@@ -1759,10 +1777,12 @@
 			files = (
 				A7590B2B19ED77BD0084EBCA /* ProductLayer.h in Headers */,
 				A7590B1719ED77B80084EBCA /* PLYList.h in Headers */,
+				C906ED031B2F01C700756079 /* PLYChatMessage.h in Headers */,
 				A7EB72731A72B42300FFD4CC /* PLYProblemReport.h in Headers */,
 				A7590B0B19ED77B40084EBCA /* PLYTextField.h in Headers */,
 				A7590B0919ED77B40084EBCA /* PLYFormValidator.h in Headers */,
 				A76478991A18A8830000500C /* PLYSearchableTableViewController.h in Headers */,
+				C906ED0B1B2F01C700756079 /* PLYChatGroup.h in Headers */,
 				A77665961A1B369A008AB88C /* PLYGuidedInputViewController.h in Headers */,
 				A75CF74E1A30B4BD007E30FC /* PLYBrand.h in Headers */,
 				A7590B1B19ED77B80084EBCA /* PLYOpine.h in Headers */,
@@ -1821,10 +1841,12 @@
 				A7EB72741A72B42300FFD4CC /* PLYProblemReport.h in Headers */,
 				A7EA071E1A2B139C00B61CCE /* PLYProductCategory.h in Headers */,
 				A7EA070E1A2B139C00B61CCE /* PLYList.h in Headers */,
+				C906ED0C1B2F01C700756079 /* PLYChatGroup.h in Headers */,
 				A75CF74F1A30B4BD007E30FC /* PLYBrand.h in Headers */,
 				A7EA07101A2B139C00B61CCE /* PLYListItem.h in Headers */,
 				A7EA07081A2B139C00B61CCE /* PLYErrorMessage.h in Headers */,
 				A7EA07141A2B139C00B61CCE /* PLYPackaging.h in Headers */,
+				C906ED041B2F01C700756079 /* PLYChatMessage.h in Headers */,
 				A72592B71A757D5900952685 /* PLYCategory.h in Headers */,
 				A7EA07161A2B139C00B61CCE /* PLYProduct.h in Headers */,
 				A7665D0F1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h in Headers */,
@@ -2422,6 +2444,7 @@
 				A75CF7431A30B48A007E30FC /* PLYAVFoundationFunctions.m in Sources */,
 				A7590B1219ED77B80084EBCA /* PLYErrorMessage.m in Sources */,
 				A75CF7511A30B4BD007E30FC /* PLYBrand.m in Sources */,
+				C906ED091B2F01C700756079 /* PLYChatGroup.m in Sources */,
 				A7590B2819ED77B80084EBCA /* PLYVotableEntity.m in Sources */,
 				A71918101A1B5B1B002C2D76 /* PLYContentsDidChangeValidator.m in Sources */,
 				A72592BC1A757D9400952685 /* PLYTextFieldTableViewCell.m in Sources */,
@@ -2436,6 +2459,7 @@
 				A7CD959419FA821E008E3A41 /* PLYOpineComposeViewController.m in Sources */,
 				A7590B1A19ED77B80084EBCA /* PLYListItem.m in Sources */,
 				A7EE55A41A121C8300DD55FE /* PLYCategoryPickerViewController.m in Sources */,
+				C906ED061B2F01C700756079 /* PLYChatMessage.m in Sources */,
 				A75CF7401A30B48A007E30FC /* PLYScannerViewController.m in Sources */,
 				A7590B1419ED77B80084EBCA /* PLYErrorResponse.m in Sources */,
 				A77FFAA71A77907B0019DD5C /* PLYBrandedTableViewCell.m in Sources */,
@@ -2543,6 +2567,7 @@
 				C98CD2691910E0D70035647C /* PLYReview.m in Sources */,
 				A75CF7421A30B48A007E30FC /* PLYAVFoundationFunctions.m in Sources */,
 				A76D3F6C198650770032FE59 /* PLYUserNameValidator.m in Sources */,
+				C906ED081B2F01C700756079 /* PLYChatGroup.m in Sources */,
 				A75CF7501A30B4BD007E30FC /* PLYBrand.m in Sources */,
 				A7B4877F1987CFB200FA8F83 /* PLYVotableEntity.m in Sources */,
 				A76D3F67198650770032FE59 /* PLYFormEmailValidator.m in Sources */,
@@ -2557,6 +2582,7 @@
 				A7CD959319FA821E008E3A41 /* PLYOpineComposeViewController.m in Sources */,
 				C98CD26B1910E0D70035647C /* PLYListItem.m in Sources */,
 				A7EE55A31A121C8300DD55FE /* PLYCategoryPickerViewController.m in Sources */,
+				C906ED051B2F01C700756079 /* PLYChatMessage.m in Sources */,
 				A75CF73F1A30B48A007E30FC /* PLYScannerViewController.m in Sources */,
 				A72592C51A757DFB00952685 /* PLYModalTableViewController.m in Sources */,
 				A76D3F9119866E0E0032FE59 /* PLYLostPasswordViewController.m in Sources */,
@@ -2590,6 +2616,7 @@
 				A7EA070F1A2B139C00B61CCE /* PLYList.m in Sources */,
 				A7EA07091A2B139C00B61CCE /* PLYErrorMessage.m in Sources */,
 				A7EA071F1A2B139C00B61CCE /* PLYProductCategory.m in Sources */,
+				C906ED0A1B2F01C700756079 /* PLYChatGroup.m in Sources */,
 				A7665D451A9FA965001734B8 /* PLYUploadImage.m in Sources */,
 				A7EA07071A2B139C00B61CCE /* PLYEntity.m in Sources */,
 				A72592B51A757D5900952685 /* PLYCategory.m in Sources */,
@@ -2604,6 +2631,7 @@
 				A7EA072D1A2B177800B61CCE /* PLYConstants.m in Sources */,
 				A7EA07211A2B139C00B61CCE /* PLYVotableEntity.m in Sources */,
 				A7EA071B1A2B139C00B61CCE /* PLYUser.m in Sources */,
+				C906ED071B2F01C700756079 /* PLYChatMessage.m in Sources */,
 				A7EA07131A2B139C00B61CCE /* PLYOpine.m in Sources */,
 				A7EA07171A2B139C00B61CCE /* PLYProduct.m in Sources */,
 			);

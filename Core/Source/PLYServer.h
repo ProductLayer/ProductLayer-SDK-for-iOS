@@ -56,6 +56,30 @@ typedef void (^PLYCompletion)(id result, NSError *error);
                     language:(NSString *)language
                   completion:(PLYCompletion)completion;
 
+/**
+ Searches for products
+ 
+ @param gtin The GTIN to search for
+ @param name The product name to search for
+ @param language The language code to return results in
+ @param brand Search only products with the specified brand
+ @param brandOwner Search only products with the specified brand owner
+ @param category Search only products within the category
+ @param orderBy The key to order results by, e.g. "pl-created-time_desc"
+ @param page The page number
+ @param rpp The number of results per returned page
+ @param completion The completion handler for the request
+ */
+- (void)performSearchForProduct:(NSString *)gtin
+                           name:(NSString *)name
+                       language:(NSString *)language
+                          brand:(NSString *)brand
+                     brandOwner:(NSString *)brandOwner
+                    categoryKey:(NSString* )categoryKey
+                        orderBy:(NSString *)orderBy
+                           page:(NSUInteger)page
+                 recordsPerPage:(NSUInteger)rpp
+                     completion:(PLYCompletion)completion;
 
 /**
  Searches for products with a query string
@@ -325,6 +349,16 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  */
 - (NSURL *)URLForImage:(PLYImage *)image maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop;
 
+/**
+ Determins the image URL for the given image with a maximum size and optional crop
+ @param image The image to retrieve the URL for
+ @param maxWidth The maximum width of the image
+ @param maxHeight The maximum height of the image
+ @param crop If the image should be cropped
+ @param quality The quality in percent for the image. Must be between 20 and 100.
+ @returns The URL for the image
+ */
+- (NSURL *)URLForImage:(PLYImage *)image maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop quality:(NSInteger)quality;
 
 /**
  Determins the image URL for the given default image for a given GTIN
@@ -597,5 +631,32 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @param completion The completion handler for the request
  */
 - (void)categoriesWithLanguage:(NSString *)language completion:(PLYCompletion)completion;
+
+/**
+ @name Chat System
+ */
+
+/**
+ Get the chat groups for the logged in user.
+ @param completion The completion handler for the request
+ */
+- (void) getChatGroupsForLoggedInUser:(PLYCompletion)completion;
+
+/**
+ Create a new chat group
+ @param chatGroup The title and the members capsulated in a chat group entity.
+ @param completion The completion handler for the request
+ */
+- (void) createNewChatGroup:(PLYChatGroup *)chatGroup completion:(PLYCompletion)completion;
+
+- (void) updateChatGroupTitle:(PLYChatGroup *)chatGroup title:(NSString *)title completion:(PLYCompletion)completion;
+
+- (void) addUserToChatGroup:(PLYChatGroup *)chatGroup userId:(NSString *)userId completion:(PLYCompletion)completion;
+
+- (void) removeUserFromChatGroup:(PLYChatGroup *)chatGroup userId:(NSString *)userId completion:(PLYCompletion)completion;
+
+- (void) getChatMessagesFromChatGroup:(PLYChatGroup *)chatGroup sinceDate:(NSDate *)sinceDate untilDate:(NSDate *)untilDate count:(int)count completion:(PLYCompletion)completion;
+
+- (void) createChatMessage:(NSString *)message forChatGroupWithId:(PLYChatGroup *)chatGroup completion:(PLYCompletion)completion;
 
 @end

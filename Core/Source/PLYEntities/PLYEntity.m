@@ -164,7 +164,11 @@ NSArray *PLYAllEntityClasses()
 	}
 	else if ([key isEqualToString:@"pl-id"])
 	{
-		[self setValue:value forKey:@"Id"];
+        if([value isKindOfClass:[NSNumber class]]) {
+            [self setValue:[(NSNumber *)value stringValue] forKey:@"Id"];
+        } else {
+            [self setValue:value forKey:@"Id"];
+        }
 	}
 	else if ([key isEqualToString:@"pl-created-by"])
 	{
