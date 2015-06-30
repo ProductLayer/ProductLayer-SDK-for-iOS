@@ -50,3 +50,7 @@
 	#import "PLYVideoPreviewView.h"
 
 #endif
+
+// constant for keychain
+#define PLY_SERVICE @"com.productlayer.api.auth-token"
+

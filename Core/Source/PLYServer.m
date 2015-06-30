@@ -6,11 +6,7 @@
 //  Copyright (c) 2013 Cocoanetics. All rights reserved.
 //
 
-#import "PLYServer.h"
-
-#import "PLYConstants.h"
-#import "PLYEntities.h"
-#import "PLYFunctions.h"
+#import "ProductLayer.h"
 
 #import "DTLog.h"
 #import "NSString+DTURLEncoding.h"
@@ -30,10 +26,6 @@
 
 // this is a prefix added before REST methods, e.g. for a version of the API
 #define PLY_PATH_PREFIX @"0.4"
-
-// the service name for saving tokens to the keychain
-#define PLY_SERVICE @"com.productlayer.api.auth-token"
-
 
 @interface PLYServer () <NSCacheDelegate>
 
