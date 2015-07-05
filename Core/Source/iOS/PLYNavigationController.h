@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 ProductLayer. All rights reserved.
 //
 
-@import UIKit
+@import UIKit;
 
 /**
  Navigation controller that allows rotation if the top view controller allows it
