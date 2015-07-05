@@ -818,8 +818,10 @@
 	{
 		[_delegate opineComposeViewControllerDidCancel:self];
 	}
-	
-	[self dismissViewControllerAnimated:YES completion:NULL];
+	else
+	{
+		[self dismissViewControllerAnimated:YES completion:NULL];
+	}
 }
 
 - (void)save:(id)sender
@@ -860,8 +862,11 @@
 	{
 		[_delegate opineComposeViewController:self didFinishWithOpine:_opine];
 	}
-	
-	[self dismissViewControllerAnimated:YES completion:NULL];
+	else
+	{
+		// no delegate, so we are in charge
+		[self dismissViewControllerAnimated:YES completion:NULL];
+	}
 }
 
 - (void)_handleTwitter:(id)sender

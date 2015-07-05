@@ -15,8 +15,10 @@
 #import "DTKeychainGenericPassword.h"
 
 #if TARGET_OS_IPHONE
+
 #import "UIApplication+DTNetworkActivity.h"
 #import "PLYNavigationController.h"
+#import "PLYLoginViewController.h"
 
 #endif
 
@@ -807,6 +809,31 @@
 	return [tmpArray copy];
 }
 
+#if TARGET_OS_IPHONE
+
+- (void)_presentLoginAndPerformBlock:(void(^)(void))block
+{
+	PLYLoginViewController *login = [[PLYLoginViewController alloc] init];
+	if (block)
+	{
+		login.loginCompletion = block;
+	};
+	
+	PLYNavigationController *nav = [[PLYNavigationController alloc] initWithRootViewController:login];
+	
+	UIWindow *window = [[UIApplication sharedApplication].windows firstObject];
+	UIViewController *controllerForPresenting = window.rootViewController;
+	
+	if (controllerForPresenting.presentedViewController)
+	{
+		controllerForPresenting = controllerForPresenting.presentedViewController;
+	}
+	
+	
+	[controllerForPresenting presentViewController:nav animated:YES completion:NULL];
+}
+
+#endif
 
 #pragma mark - Search
 
@@ -1653,13 +1680,16 @@
 	NSParameterAssert(opine.language);
 	NSParameterAssert(completion);
 	
+#if TARGET_OS_IPHONE
 	if (!_loggedInUser)
 	{
+		[self _presentLoginAndPerformBlock:^{
+			[self createOpine:opine completion:completion];
+		}];
 		
-		
-		
-		
+		return;
 	}
+#endif
 	
 	// first we need to upload all PLYUploadImage objects
 	[self _uploadImagesWhereNecessary:opine.images forGTIN:opine.GTIN completion:^(id result, NSError *error) {
