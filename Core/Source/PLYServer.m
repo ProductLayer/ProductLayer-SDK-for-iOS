@@ -16,6 +16,9 @@
 
 #if TARGET_OS_IPHONE
 #import "UIApplication+DTNetworkActivity.h"
+#import "PLYNavigationController.h"
+#import "
+
 #endif
 
 #import "NSString+DTPaths.h"
@@ -1650,6 +1653,14 @@
 	NSParameterAssert(opine.GTIN);
 	NSParameterAssert(opine.language);
 	NSParameterAssert(completion);
+	
+	if (!_loggedInUser)
+	{
+		
+		
+		
+		
+	}
 	
 	// first we need to upload all PLYUploadImage objects
 	[self _uploadImagesWhereNecessary:opine.images forGTIN:opine.GTIN completion:^(id result, NSError *error) {
