@@ -11,7 +11,7 @@
 /**
  Completion handler for Login
  */
-typedef void (^PLYLoginCompletion)();
+typedef void (^PLYLoginCompletion)(BOOL success);
 
 /**
  View Controller for logging in users to Product Layer. Wrap into a `UINavigationController` for presenting it modally

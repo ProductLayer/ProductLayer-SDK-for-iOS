@@ -811,7 +811,7 @@
 
 #if TARGET_OS_IPHONE
 
-- (void)_presentLoginAndPerformBlock:(void(^)(void))block
+- (void)_presentLoginAndPerformBlock:(PLYLoginCompletion)block
 {
 	PLYLoginViewController *login = [[PLYLoginViewController alloc] init];
 	if (block)
@@ -821,14 +821,12 @@
 	
 	PLYNavigationController *nav = [[PLYNavigationController alloc] initWithRootViewController:login];
 	
-	UIWindow *window = [[UIApplication sharedApplication].windows firstObject];
-	UIViewController *controllerForPresenting = window.rootViewController;
+	UIViewController *controllerForPresenting = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
 	
-	if (controllerForPresenting.presentedViewController)
+	while (controllerForPresenting.presentedViewController)
 	{
 		controllerForPresenting = controllerForPresenting.presentedViewController;
 	}
-	
 	
 	[controllerForPresenting presentViewController:nav animated:YES completion:NULL];
 }
@@ -1683,8 +1681,18 @@
 #if TARGET_OS_IPHONE
 	if (!_loggedInUser)
 	{
-		[self _presentLoginAndPerformBlock:^{
-			[self createOpine:opine completion:completion];
+		[self _presentLoginAndPerformBlock:^(BOOL success) {
+			if (success)
+			{
+				// retry now that we are logged in
+				[self createOpine:opine completion:completion];
+			}
+			else if (completion)
+			{
+				// report login failure
+				NSError *error = [self _errorWithCode:404 message:@"Login Required"];
+				completion(nil, error);
+			}
 		}];
 		
 		return;
@@ -2296,6 +2304,27 @@
 	NSParameterAssert(voteableEntity);
 	NSParameterAssert(completion);
 	
+#if TARGET_OS_IPHONE
+	if (!_loggedInUser)
+	{
+		[self _presentLoginAndPerformBlock:^(BOOL success) {
+			if (success)
+			{
+				// retry now that we are logged in
+				[self upVote:voteableEntity completion:completion];
+			}
+			else if (completion)
+			{
+				// report login failure
+				NSError *error = [self _errorWithCode:404 message:@"Login Required"];
+				completion(nil, error);
+			}
+		}];
+		
+		return;
+	}
+#endif
+	
 	NSString *entityType;
 	if ([voteableEntity isKindOfClass:[PLYImage class]])
 	{
@@ -2340,6 +2369,27 @@
 	
 	NSParameterAssert(voteableEntity);
 	NSParameterAssert(completion);
+	
+#if TARGET_OS_IPHONE
+	if (!_loggedInUser)
+	{
+		[self _presentLoginAndPerformBlock:^(BOOL success) {
+			if (success)
+			{
+				// retry now that we are logged in
+				[self downVote:voteableEntity completion:completion];
+			}
+			else if (completion)
+			{
+				// report login failure
+				NSError *error = [self _errorWithCode:404 message:@"Login Required"];
+				completion(nil, error);
+			}
+		}];
+		
+		return;
+	}
+#endif
 	
 	NSString *entityType;
 	if ([voteableEntity isKindOfClass:[PLYImage class]])
@@ -2390,8 +2440,18 @@
 #if TARGET_OS_IPHONE
 	if (!_loggedInUser)
 	{
-		[self _presentLoginAndPerformBlock:^{
-			[self createProblemReport:report completion:completion];
+		[self _presentLoginAndPerformBlock:^(BOOL success) {
+			if (success)
+			{
+				// retry now that we are logged in
+				[self createProblemReport:report completion:completion];
+			}
+			else if (completion)
+			{
+				// report login failure
+				NSError *error = [self _errorWithCode:404 message:@"Login Required"];
+				completion(nil, error);
+			}
 		}];
 		
 		return;
