@@ -1510,6 +1510,27 @@
 	NSParameterAssert(data);
 	NSParameterAssert(completion);
 	
+#if TARGET_OS_IPHONE
+	if (!_loggedInUser)
+	{
+		[self _presentLoginAndPerformBlock:^(BOOL success) {
+			if (success)
+			{
+				// retry now that we are logged in
+				[self uploadImageData:data forGTIN:gtin completion:completion];
+			}
+			else if (completion)
+			{
+				// report login failure
+				NSError *error = [self _errorWithCode:404 message:@"Login Required"];
+				completion(nil, error);
+			}
+		}];
+		
+		return;
+	}
+#endif
+	
 	NSString *function = [NSString stringWithFormat:@"product/%@/images", gtin];
 	NSString *path = [self _functionPathForFunction:function];
 	
@@ -2067,6 +2088,27 @@
 	NSParameterAssert(user);
 	NSParameterAssert(completion);
 	
+#if TARGET_OS_IPHONE
+	if (!_loggedInUser)
+	{
+		[self _presentLoginAndPerformBlock:^(BOOL success) {
+			if (success)
+			{
+				// retry now that we are logged in
+				[self followUser:user completion:completion];
+			}
+			else if (completion)
+			{
+				// report login failure
+				NSError *error = [self _errorWithCode:404 message:@"Login Required"];
+				completion(nil, error);
+			}
+		}];
+		
+		return;
+	}
+#endif
+	
 	NSString *function = @"/user/follow";
 	NSString *path = [self _functionPathForFunction:function];
 	
@@ -2107,6 +2149,27 @@
 {
 	NSParameterAssert(user);
 	NSParameterAssert(completion);
+	
+#if TARGET_OS_IPHONE
+	if (!_loggedInUser)
+	{
+		[self _presentLoginAndPerformBlock:^(BOOL success) {
+			if (success)
+			{
+				// retry now that we are logged in
+				[self unfollowUser:user completion:completion];
+			}
+			else if (completion)
+			{
+				// report login failure
+				NSError *error = [self _errorWithCode:404 message:@"Login Required"];
+				completion(nil, error);
+			}
+		}];
+		
+		return;
+	}
+#endif
 	
 	NSString *function = @"/user/unfollow";
 	NSString *path = [self _functionPathForFunction:function];
