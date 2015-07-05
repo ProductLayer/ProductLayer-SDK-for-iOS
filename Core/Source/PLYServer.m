@@ -2386,6 +2386,17 @@
 {
 	NSParameterAssert(report);
 	NSParameterAssert(completion);
+	
+#if TARGET_OS_IPHONE
+	if (!_loggedInUser)
+	{
+		[self _presentLoginAndPerformBlock:^{
+			[self createProblemReport:report completion:completion];
+		}];
+		
+		return;
+	}
+#endif
 		
 	NSString *function;
 	NSDictionary *parameters;
