@@ -17,7 +17,6 @@
 #if TARGET_OS_IPHONE
 
 #import "UIApplication+DTNetworkActivity.h"
-#import "PLYNavigationController.h"
 #import "PLYLoginViewController.h"
 
 #endif
@@ -1489,7 +1488,7 @@
 #if TARGET_OS_IPHONE
 	if (!_loggedInUser)
 	{
-		[PLYLoginViewController presentLoginUIAndPerformBlock:^(BOOL success) {
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
 			if (success)
 			{
 				// retry now that we are logged in
@@ -1678,7 +1677,7 @@
 #if TARGET_OS_IPHONE
 	if (!_loggedInUser)
 	{
-		[PLYLoginViewController presentLoginUIAndPerformBlock:^(BOOL success) {
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
 			if (success)
 			{
 				// retry now that we are logged in
@@ -2067,7 +2066,7 @@
 #if TARGET_OS_IPHONE
 	if (!_loggedInUser)
 	{
-		[PLYLoginViewController presentLoginUIAndPerformBlock:^(BOOL success) {
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
 			if (success)
 			{
 				// retry now that we are logged in
@@ -2129,7 +2128,7 @@
 #if TARGET_OS_IPHONE
 	if (!_loggedInUser)
 	{
-		[PLYLoginViewController presentLoginUIAndPerformBlock:^(BOOL success) {
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
 			if (success)
 			{
 				// retry now that we are logged in
@@ -2346,7 +2345,7 @@
 #if TARGET_OS_IPHONE
 	if (!_loggedInUser)
 	{
-		[PLYLoginViewController presentLoginUIAndPerformBlock:^(BOOL success) {
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
 			if (success)
 			{
 				// retry now that we are logged in
@@ -2412,7 +2411,7 @@
 #if TARGET_OS_IPHONE
 	if (!_loggedInUser)
 	{
-		[PLYLoginViewController presentLoginUIAndPerformBlock:^(BOOL success) {
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
 			if (success)
 			{
 				// retry now that we are logged in
@@ -2479,7 +2478,7 @@
 #if TARGET_OS_IPHONE
 	if (!_loggedInUser)
 	{
-		[PLYLoginViewController presentLoginUIAndPerformBlock:^(BOOL success) {
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
 			if (success)
 			{
 				// retry now that we are logged in

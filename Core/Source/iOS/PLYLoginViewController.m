@@ -34,6 +34,8 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	
 	UIButton *_facebookButton;
 	UIButton *_twitterButton;
+	
+	UILabel *_explainLabel;
 }
 
 - (void)viewDidLoad
@@ -43,14 +45,14 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	self.view.backgroundColor = [UIColor whiteColor];
 	
 	NSMutableArray *validators = [NSMutableArray array];
-	UILabel *explainLabel = [[UILabel alloc] init];
-	explainLabel.text = PLYLocalizedStringFromTable(@"PLY_LOGIN_EXPLAIN", @"UI", @"Explanation to show on login dialog");
+	_explainLabel = [[UILabel alloc] init];
+	_explainLabel.text = PLYLocalizedStringFromTable(@"PLY_LOGIN_EXPLAIN", @"UI", @"Explanation to show on login dialog");
 	
-	explainLabel.translatesAutoresizingMaskIntoConstraints = NO;
-	explainLabel.numberOfLines = 0;
-	explainLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
-	[explainLabel sizeToFit];
-	[self.view addSubview:explainLabel];
+	_explainLabel.translatesAutoresizingMaskIntoConstraints = NO;
+	_explainLabel.numberOfLines = 0;
+	_explainLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+	[_explainLabel sizeToFit];
+	[self.view addSubview:_explainLabel];
 	
 	PLYUserNameValidator *nameValidator = [PLYUserNameValidator validatorWithDelegate:self];
 	[validators addObject:nameValidator];
@@ -140,10 +142,10 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	
 	id topGuide = [self topLayoutGuide];
 	NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_nameField, _passwordField, topGuide,
-																						lostPwButton, signupButton, explainLabel,
+																						lostPwButton, signupButton, _explainLabel,
 																						_twitterButton, _facebookButton);
 	NSArray *constraints1 =
-	[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide]-[explainLabel]-[_nameField]-[_passwordField]-[lostPwButton]-[signupButton]-(50)-[_twitterButton]-(20)-[_facebookButton]"
+	[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide]-[_explainLabel]-[_nameField]-[_passwordField]-[lostPwButton]-[signupButton]-(50)-[_twitterButton]-(20)-[_facebookButton]"
 														 options:0 metrics:nil views:viewsDictionary];
 	NSArray *constraints2 =
 	[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_nameField(300)]"
@@ -198,7 +200,7 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 											 constant:0]];
 	
 	[self.view addConstraint:
-	 [NSLayoutConstraint constraintWithItem:explainLabel
+	 [NSLayoutConstraint constraintWithItem:_explainLabel
 											attribute:NSLayoutAttributeCenterX
 											relatedBy:NSLayoutRelationEqual
 												toItem:self.view
@@ -246,16 +248,23 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	{
 		_nameField.text = [[NSUserDefaults standardUserDefaults] objectForKey:LastLoggedInUserDefault];
 	}
+	
+	if ([_explanationText length])
+	{
+		_explainLabel.text = _explanationText;
+	}
 }
 
 #pragma mark - Class Methods
 
-+ (void)presentLoginUIAndPerformBlock:(PLYLoginCompletion)block
++ (void)presentLoginWithExplanation:(NSString *)explanation completion:(PLYLoginCompletion)completion
 {
 	PLYLoginViewController *login = [[PLYLoginViewController alloc] init];
-	if (block)
+	login.explanationText = explanation;
+	
+	if (completion)
 	{
-		login.loginCompletion = block;
+		login.loginCompletion = completion;
 	};
 	
 	PLYNavigationController *nav = [[PLYNavigationController alloc] initWithRootViewController:login];

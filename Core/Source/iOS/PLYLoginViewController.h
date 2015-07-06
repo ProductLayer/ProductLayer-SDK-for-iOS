@@ -24,6 +24,11 @@ typedef void (^PLYLoginCompletion)(BOOL success);
  */
 
 /**
+ Explanation text what the benefits of logging in will be. If left `nil` then a default test is used.
+*/
+@property (nonatomic, copy) NSString *explanationText;
+
+/**
  Text field for entering the nickname
  */
 @property (nonatomic, strong) PLYTextField *nameField;
@@ -45,9 +50,10 @@ typedef void (^PLYLoginCompletion)(BOOL success);
 
 /**
  Presents the login UI flow and once the user successfully logs in or cancels performs the block
- @param block The blog to execute after the login flow
+ @param explanation The explanation text describing the benefits of logging in
+ @param completion The blog to execute after the login flow
  */
-+ (void)presentLoginUIAndPerformBlock:(PLYLoginCompletion)block;
++ (void)presentLoginWithExplanation:(NSString *)explanation completion:(PLYLoginCompletion)completion;
 
 
 @end
