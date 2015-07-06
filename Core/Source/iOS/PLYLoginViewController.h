@@ -38,4 +38,16 @@ typedef void (^PLYLoginCompletion)(BOOL success);
  */
 @property (nonatomic, copy) PLYLoginCompletion loginCompletion;
 
+
+/**
+ @name UI
+ */
+
+/**
+ Presents the login UI flow and once the user successfully logs in or cancels performs the block
+ @param block The blog to execute after the login flow
+ */
++ (void)presentLoginUIAndPerformBlock:(PLYLoginCompletion)block;
+
+
 @end

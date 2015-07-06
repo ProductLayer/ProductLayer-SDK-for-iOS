@@ -10,6 +10,7 @@
 #import "PLYSignUpViewController.h"
 #import "PLYLostPasswordViewController.h"
 #import "UIViewController+ProductLayer.h"
+#import "PLYNavigationController.h"
 
 #import "PLYSocialAuthWebViewController.h"
 
@@ -245,6 +246,28 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	{
 		_nameField.text = [[NSUserDefaults standardUserDefaults] objectForKey:LastLoggedInUserDefault];
 	}
+}
+
+#pragma mark - Class Methods
+
++ (void)presentLoginUIAndPerformBlock:(PLYLoginCompletion)block
+{
+	PLYLoginViewController *login = [[PLYLoginViewController alloc] init];
+	if (block)
+	{
+		login.loginCompletion = block;
+	};
+	
+	PLYNavigationController *nav = [[PLYNavigationController alloc] initWithRootViewController:login];
+	
+	UIViewController *controllerForPresenting = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+	
+	while (controllerForPresenting.presentedViewController)
+	{
+		controllerForPresenting = controllerForPresenting.presentedViewController;
+	}
+	
+	[controllerForPresenting presentViewController:nav animated:YES completion:NULL];
 }
 
 #pragma mark - Actions

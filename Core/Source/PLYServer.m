@@ -809,30 +809,6 @@
 	return [tmpArray copy];
 }
 
-#if TARGET_OS_IPHONE
-
-- (void)_presentLoginAndPerformBlock:(PLYLoginCompletion)block
-{
-	PLYLoginViewController *login = [[PLYLoginViewController alloc] init];
-	if (block)
-	{
-		login.loginCompletion = block;
-	};
-	
-	PLYNavigationController *nav = [[PLYNavigationController alloc] initWithRootViewController:login];
-	
-	UIViewController *controllerForPresenting = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
-	
-	while (controllerForPresenting.presentedViewController)
-	{
-		controllerForPresenting = controllerForPresenting.presentedViewController;
-	}
-	
-	[controllerForPresenting presentViewController:nav animated:YES completion:NULL];
-}
-
-#endif
-
 #pragma mark - Search
 
 /**
@@ -1513,7 +1489,7 @@
 #if TARGET_OS_IPHONE
 	if (!_loggedInUser)
 	{
-		[self _presentLoginAndPerformBlock:^(BOOL success) {
+		[PLYLoginViewController presentLoginUIAndPerformBlock:^(BOOL success) {
 			if (success)
 			{
 				// retry now that we are logged in
@@ -1702,7 +1678,7 @@
 #if TARGET_OS_IPHONE
 	if (!_loggedInUser)
 	{
-		[self _presentLoginAndPerformBlock:^(BOOL success) {
+		[PLYLoginViewController presentLoginUIAndPerformBlock:^(BOOL success) {
 			if (success)
 			{
 				// retry now that we are logged in
@@ -2091,7 +2067,7 @@
 #if TARGET_OS_IPHONE
 	if (!_loggedInUser)
 	{
-		[self _presentLoginAndPerformBlock:^(BOOL success) {
+		[PLYLoginViewController presentLoginUIAndPerformBlock:^(BOOL success) {
 			if (success)
 			{
 				// retry now that we are logged in
@@ -2153,7 +2129,7 @@
 #if TARGET_OS_IPHONE
 	if (!_loggedInUser)
 	{
-		[self _presentLoginAndPerformBlock:^(BOOL success) {
+		[PLYLoginViewController presentLoginUIAndPerformBlock:^(BOOL success) {
 			if (success)
 			{
 				// retry now that we are logged in
@@ -2370,7 +2346,7 @@
 #if TARGET_OS_IPHONE
 	if (!_loggedInUser)
 	{
-		[self _presentLoginAndPerformBlock:^(BOOL success) {
+		[PLYLoginViewController presentLoginUIAndPerformBlock:^(BOOL success) {
 			if (success)
 			{
 				// retry now that we are logged in
@@ -2436,7 +2412,7 @@
 #if TARGET_OS_IPHONE
 	if (!_loggedInUser)
 	{
-		[self _presentLoginAndPerformBlock:^(BOOL success) {
+		[PLYLoginViewController presentLoginUIAndPerformBlock:^(BOOL success) {
 			if (success)
 			{
 				// retry now that we are logged in
@@ -2503,7 +2479,7 @@
 #if TARGET_OS_IPHONE
 	if (!_loggedInUser)
 	{
-		[self _presentLoginAndPerformBlock:^(BOOL success) {
+		[PLYLoginViewController presentLoginUIAndPerformBlock:^(BOOL success) {
 			if (success)
 			{
 				// retry now that we are logged in
