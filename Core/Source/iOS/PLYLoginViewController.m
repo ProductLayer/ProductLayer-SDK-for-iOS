@@ -220,6 +220,10 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	
 	NSString *backTitle = PLYLocalizedStringFromTable(@"PLY_LOGIN_SHORT_TITLE", @"UI", @"Short title used as back button from other view controllers going back to login");
 	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:backTitle style:UIBarButtonItemStylePlain target:nil action:NULL];
+	
+	
+	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboardTap:)];
+	[self.view addGestureRecognizer:tap];
 }
 
 - (BOOL)shouldAutorotate
@@ -412,6 +416,12 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 {
 	NSURLRequest *request = [self.productLayerServer URLRequestForFacebookSignIn];
 	[self _signInFlowWithRequest:request];
+}
+
+- (IBAction)dismissKeyboardTap:(id)sender
+{
+	[_nameField resignFirstResponder];
+	[_passwordField resignFirstResponder];
 }
 
 #pragma mark - Form Validation
