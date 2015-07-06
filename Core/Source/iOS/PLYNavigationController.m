@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 ProductLayer. All rights reserved.
 //
 
+#import "PLYCompatibility.h"
 #import "PLYNavigationController.h"
 
 @interface PLYNavigationController ()
@@ -19,7 +20,7 @@
 	return self.topViewController.shouldAutorotate;
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (PLY_SUPPORTED_INTERFACE_ORIENTATIONS_RETURN_TYPE)supportedInterfaceOrientations
 {
 	return self.topViewController.supportedInterfaceOrientations;
 }

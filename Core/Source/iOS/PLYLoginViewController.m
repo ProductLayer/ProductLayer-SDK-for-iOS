@@ -227,7 +227,7 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	return YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (PLY_SUPPORTED_INTERFACE_ORIENTATIONS_RETURN_TYPE)supportedInterfaceOrientations
 {
 	return UIInterfaceOrientationPortrait | UIInterfaceOrientationPortraitUpsideDown;
 }

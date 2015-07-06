@@ -136,7 +136,7 @@
 	return YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (PLY_SUPPORTED_INTERFACE_ORIENTATIONS_RETURN_TYPE)supportedInterfaceOrientations
 {
 	return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
 }

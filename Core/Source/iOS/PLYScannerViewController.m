@@ -660,7 +660,7 @@
 #pragma mark - Interface Rotation
 
 // for demonstration all orientations are supported
-- (NSUInteger)supportedInterfaceOrientations
+- (PLY_SUPPORTED_INTERFACE_ORIENTATIONS_RETURN_TYPE)supportedInterfaceOrientations
 {
 	return UIInterfaceOrientationMaskAll;
 }

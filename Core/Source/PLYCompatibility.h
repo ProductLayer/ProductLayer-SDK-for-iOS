@@ -7,6 +7,7 @@
 //
 
 
+
 #pragma mark - iOS
 
 #if TARGET_OS_IPHONE
@@ -22,6 +23,14 @@ static inline NSData *DTImageJPEGRepresentation(DTImage *image, CGFloat compress
 {
 	return UIImageJPEGRepresentation(image, compressionQuality);
 }
+
+// Changed return type for -supportedInterfaceOrientations as of iOS 9
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_8_4
+#define PLY_SUPPORTED_INTERFACE_ORIENTATIONS_RETURN_TYPE UIInterfaceOrientationMask
+#else
+#define PLY_SUPPORTED_INTERFACE_ORIENTATIONS_RETURN_TYPE NSUInteger
+#endif
 
 #endif
 
