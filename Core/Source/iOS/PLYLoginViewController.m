@@ -155,7 +155,7 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 														 options:0 metrics:nil views:viewsDictionary];
 	
 	NSArray *constraints4 =
-	[NSLayoutConstraint constraintsWithVisualFormat:@"H:[explainLabel(280)]"
+	[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_explainLabel(280)]"
 														 options:0 metrics:nil views:viewsDictionary];
 
 	[self.view addConstraints:constraints1];
@@ -259,24 +259,26 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 
 + (void)presentLoginWithExplanation:(NSString *)explanation completion:(PLYLoginCompletion)completion
 {
-	PLYLoginViewController *login = [[PLYLoginViewController alloc] init];
-	login.explanationText = explanation;
-	
-	if (completion)
-	{
-		login.loginCompletion = completion;
-	};
-	
-	PLYNavigationController *nav = [[PLYNavigationController alloc] initWithRootViewController:login];
-	
-	UIViewController *controllerForPresenting = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
-	
-	while (controllerForPresenting.presentedViewController)
-	{
-		controllerForPresenting = controllerForPresenting.presentedViewController;
-	}
-	
-	[controllerForPresenting presentViewController:nav animated:YES completion:NULL];
+	DTBlockPerformSyncOnMainThread(^{
+		PLYLoginViewController *login = [[PLYLoginViewController alloc] init];
+		login.explanationText = explanation;
+		
+		if (completion)
+		{
+			login.loginCompletion = completion;
+		};
+		
+		PLYNavigationController *nav = [[PLYNavigationController alloc] initWithRootViewController:login];
+		
+		UIViewController *controllerForPresenting = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+		
+		while (controllerForPresenting.presentedViewController)
+		{
+			controllerForPresenting = controllerForPresenting.presentedViewController;
+		}
+		
+		[controllerForPresenting presentViewController:nav animated:YES completion:NULL];
+	});
 }
 
 #pragma mark - Actions

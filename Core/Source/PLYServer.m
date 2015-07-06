@@ -1371,6 +1371,28 @@
 	NSParameterAssert(product.GTIN);
 	NSParameterAssert(completion);
 	
+#if TARGET_OS_IPHONE
+	if (!_loggedInUser)
+	{
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
+			if (success)
+			{
+				// retry now that we are logged in
+				[self createProduct:product completion:completion];
+			}
+			else if (completion)
+			{
+				// report login failure
+				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOGIN_REQUIRED_ERROR", @"UI", @"Error message for activities that require login");
+				NSError *error = [self _errorWithCode:404 message:msg];
+				completion(nil, error);
+			}
+		}];
+		
+		return;
+	}
+#endif
+	
 	NSString *path = [self _functionPathForFunction:@"products"];
 	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:product];
 	
@@ -1405,6 +1427,28 @@
 	NSParameterAssert(product);
 	NSParameterAssert(product.GTIN);
 	NSParameterAssert(completion);
+	
+#if TARGET_OS_IPHONE
+	if (!_loggedInUser)
+	{
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
+			if (success)
+			{
+				// retry now that we are logged in
+				[self updateProduct:product completion:completion];
+			}
+			else if (completion)
+			{
+				// report login failure
+				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOGIN_REQUIRED_ERROR", @"UI", @"Error message for activities that require login");
+				NSError *error = [self _errorWithCode:404 message:msg];
+				completion(nil, error);
+			}
+		}];
+		
+		return;
+	}
+#endif
 	
 	NSString *path = [self _functionPathForFunction:[NSString stringWithFormat:@"/product/%@",product.GTIN]];
 	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:product];
@@ -1497,7 +1541,8 @@
 			else if (completion)
 			{
 				// report login failure
-				NSError *error = [self _errorWithCode:404 message:@"Login Required"];
+				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOGIN_REQUIRED_ERROR", @"UI", @"Error message for activities that require login");
+				NSError *error = [self _errorWithCode:404 message:msg];
 				completion(nil, error);
 			}
 		}];
@@ -1686,7 +1731,8 @@
 			else if (completion)
 			{
 				// report login failure
-				NSError *error = [self _errorWithCode:404 message:@"Login Required"];
+				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOGIN_REQUIRED_ERROR", @"UI", @"Error message for activities that require login");
+				NSError *error = [self _errorWithCode:404 message:msg];
 				completion(nil, error);
 			}
 		}];
@@ -1781,6 +1827,28 @@
 	NSParameterAssert(review.GTIN);
 	NSParameterAssert(completion);
 	
+#if TARGET_OS_IPHONE
+	if (!_loggedInUser)
+	{
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
+			if (success)
+			{
+				// retry now that we are logged in
+				[self createReview:review completion:completion];
+			}
+			else if (completion)
+			{
+				// report login failure
+				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOGIN_REQUIRED_ERROR", @"UI", @"Error message for activities that require login");
+				NSError *error = [self _errorWithCode:404 message:msg];
+				completion(nil, error);
+			}
+		}];
+		
+		return;
+	}
+#endif
+	
 	NSString *function = [NSString stringWithFormat:@"product/%@/review",review.GTIN];
 	NSString *path = [self _functionPathForFunction:function];
 	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:review];
@@ -1794,11 +1862,33 @@
  * Create a new product list for the authenticated user.
  * ATTENTION: Login required
  **/
-- (void) createProductList:(PLYList *)list
+- (void)createProductList:(PLYList *)list
 					 completion:(PLYCompletion)completion
 {
 	NSParameterAssert(list);
 	NSParameterAssert(completion);
+	
+#if TARGET_OS_IPHONE
+	if (!_loggedInUser)
+	{
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
+			if (success)
+			{
+				// retry now that we are logged in
+				[self createProductList:list completion:completion];
+			}
+			else if (completion)
+			{
+				// report login failure
+				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOGIN_REQUIRED_ERROR", @"UI", @"Error message for activities that require login");
+				NSError *error = [self _errorWithCode:404 message:msg];
+				completion(nil, error);
+			}
+		}];
+		
+		return;
+	}
+#endif
 	
 	NSString *function = @"lists";
 	NSString *path = [self _functionPathForFunction:function];
@@ -2075,7 +2165,8 @@
 			else if (completion)
 			{
 				// report login failure
-				NSError *error = [self _errorWithCode:404 message:@"Login Required"];
+				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOGIN_REQUIRED_ERROR", @"UI", @"Error message for activities that require login");
+				NSError *error = [self _errorWithCode:404 message:msg];
 				completion(nil, error);
 			}
 		}];
@@ -2137,7 +2228,8 @@
 			else if (completion)
 			{
 				// report login failure
-				NSError *error = [self _errorWithCode:404 message:@"Login Required"];
+				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOGIN_REQUIRED_ERROR", @"UI", @"Error message for activities that require login");
+				NSError *error = [self _errorWithCode:404 message:msg];
 				completion(nil, error);
 			}
 		}];
@@ -2354,7 +2446,8 @@
 			else if (completion)
 			{
 				// report login failure
-				NSError *error = [self _errorWithCode:404 message:@"Login Required"];
+				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOGIN_REQUIRED_ERROR", @"UI", @"Error message for activities that require login");
+				NSError *error = [self _errorWithCode:404 message:msg];
 				completion(nil, error);
 			}
 		}];
@@ -2420,7 +2513,8 @@
 			else if (completion)
 			{
 				// report login failure
-				NSError *error = [self _errorWithCode:404 message:@"Login Required"];
+				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOGIN_REQUIRED_ERROR", @"UI", @"Error message for activities that require login");
+				NSError *error = [self _errorWithCode:404 message:msg];
 				completion(nil, error);
 			}
 		}];
@@ -2487,7 +2581,8 @@
 			else if (completion)
 			{
 				// report login failure
-				NSError *error = [self _errorWithCode:404 message:@"Login Required"];
+				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOGIN_REQUIRED_ERROR", @"UI", @"Error message for activities that require login");
+				NSError *error = [self _errorWithCode:404 message:msg];
 				completion(nil, error);
 			}
 		}];
