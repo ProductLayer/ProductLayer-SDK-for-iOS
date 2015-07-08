@@ -9,6 +9,8 @@
 #import "PLYFunctions.h"
 #import "PLYProduct.h"
 
+DTColor *_overrideBrandColor = nil;
+
 PLYProduct *PLYProductBestMatchingUserPreferredLanguages(NSArray *products)
 {
 	NSMutableArray *languages = [[NSLocale preferredLanguages] mutableCopy];
@@ -138,7 +140,17 @@ NSBundle *PLYResourceBundle()
 
 DTColor *PLYBrandColor()
 {
+	if (_overrideBrandColor)
+	{
+		return _overrideBrandColor;
+	}
+	
 	return [DTColor colorWithRed:110.0/256.0 green:190.0/256.0 blue:68.0/256.0 alpha:1];
+}
+
+void PLYBrandColorSetOverride(DTColor *color)
+{
+	_overrideBrandColor = color;
 }
 
 BOOL PLYGTINIsValidGlobally(NSString *GTIN)

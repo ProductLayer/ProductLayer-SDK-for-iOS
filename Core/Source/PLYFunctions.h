@@ -54,3 +54,8 @@ NSLocalizedStringFromTableInBundle(key, tbl, PLYResourceBundle(), comment)
  @returns The standard tint color to use for PL-related UI elements
  */
 DTColor *PLYBrandColor();
+
+/**
+ Sets an override color for PLYBrandColor(). If this is set to non-`nil` this is used instead
+*/
+void PLYBrandColorSetOverride(DTColor *color);

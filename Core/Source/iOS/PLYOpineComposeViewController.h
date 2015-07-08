@@ -35,7 +35,7 @@
 
 
 /**
- The standard view controller for composing an opine
+ The standard view controller for composing an opine. If you set a delegate it is responsible for dismissing the composer.
  */
 @interface PLYOpineComposeViewController : UIViewController
 

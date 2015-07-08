@@ -6,11 +6,7 @@
 //  Copyright (c) 2013 Cocoanetics. All rights reserved.
 //
 
-#import "PLYServer.h"
-
-#import "PLYConstants.h"
-#import "PLYEntities.h"
-#import "PLYFunctions.h"
+#import "ProductLayer.h"
 
 #import "DTLog.h"
 #import "NSString+DTURLEncoding.h"
@@ -19,7 +15,10 @@
 #import "DTKeychainGenericPassword.h"
 
 #if TARGET_OS_IPHONE
+
 #import "UIApplication+DTNetworkActivity.h"
+#import "PLYLoginViewController.h"
+
 #endif
 
 #import "NSString+DTPaths.h"
@@ -30,10 +29,6 @@
 
 // this is a prefix added before REST methods, e.g. for a version of the API
 #define PLY_PATH_PREFIX @"0.4"
-
-// the service name for saving tokens to the keychain
-#define PLY_SERVICE @"com.productlayer.api.auth-token"
-
 
 @interface PLYServer () <NSCacheDelegate>
 
@@ -813,7 +808,6 @@
 	return [tmpArray copy];
 }
 
-
 #pragma mark - Search
 
 /**
@@ -1377,6 +1371,28 @@
 	NSParameterAssert(product.GTIN);
 	NSParameterAssert(completion);
 	
+#if TARGET_OS_IPHONE
+	if (!_loggedInUser)
+	{
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
+			if (success)
+			{
+				// retry now that we are logged in
+				[self createProduct:product completion:completion];
+			}
+			else if (completion)
+			{
+				// report login failure
+				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOGIN_REQUIRED_ERROR", @"UI", @"Error message for activities that require login");
+				NSError *error = [self _errorWithCode:404 message:msg];
+				completion(nil, error);
+			}
+		}];
+		
+		return;
+	}
+#endif
+	
 	NSString *path = [self _functionPathForFunction:@"products"];
 	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:product];
 	
@@ -1411,6 +1427,28 @@
 	NSParameterAssert(product);
 	NSParameterAssert(product.GTIN);
 	NSParameterAssert(completion);
+	
+#if TARGET_OS_IPHONE
+	if (!_loggedInUser)
+	{
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
+			if (success)
+			{
+				// retry now that we are logged in
+				[self updateProduct:product completion:completion];
+			}
+			else if (completion)
+			{
+				// report login failure
+				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOGIN_REQUIRED_ERROR", @"UI", @"Error message for activities that require login");
+				NSError *error = [self _errorWithCode:404 message:msg];
+				completion(nil, error);
+			}
+		}];
+		
+		return;
+	}
+#endif
 	
 	NSString *path = [self _functionPathForFunction:[NSString stringWithFormat:@"/product/%@",product.GTIN]];
 	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:product];
@@ -1490,6 +1528,28 @@
 	NSParameterAssert(gtin);
 	NSParameterAssert(data);
 	NSParameterAssert(completion);
+	
+#if TARGET_OS_IPHONE
+	if (!_loggedInUser)
+	{
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
+			if (success)
+			{
+				// retry now that we are logged in
+				[self uploadImageData:data forGTIN:gtin completion:completion];
+			}
+			else if (completion)
+			{
+				// report login failure
+				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOGIN_REQUIRED_ERROR", @"UI", @"Error message for activities that require login");
+				NSError *error = [self _errorWithCode:404 message:msg];
+				completion(nil, error);
+			}
+		}];
+		
+		return;
+	}
+#endif
 	
 	NSString *function = [NSString stringWithFormat:@"product/%@/images", gtin];
 	NSString *path = [self _functionPathForFunction:function];
@@ -1659,6 +1719,28 @@
 	NSParameterAssert(opine.language);
 	NSParameterAssert(completion);
 	
+#if TARGET_OS_IPHONE
+	if (!_loggedInUser)
+	{
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
+			if (success)
+			{
+				// retry now that we are logged in
+				[self createOpine:opine completion:completion];
+			}
+			else if (completion)
+			{
+				// report login failure
+				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOGIN_REQUIRED_ERROR", @"UI", @"Error message for activities that require login");
+				NSError *error = [self _errorWithCode:404 message:msg];
+				completion(nil, error);
+			}
+		}];
+		
+		return;
+	}
+#endif
+	
 	// first we need to upload all PLYUploadImage objects
 	[self _uploadImagesWhereNecessary:opine.images forGTIN:opine.GTIN completion:^(id result, NSError *error) {
 		
@@ -1745,6 +1827,28 @@
 	NSParameterAssert(review.GTIN);
 	NSParameterAssert(completion);
 	
+#if TARGET_OS_IPHONE
+	if (!_loggedInUser)
+	{
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
+			if (success)
+			{
+				// retry now that we are logged in
+				[self createReview:review completion:completion];
+			}
+			else if (completion)
+			{
+				// report login failure
+				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOGIN_REQUIRED_ERROR", @"UI", @"Error message for activities that require login");
+				NSError *error = [self _errorWithCode:404 message:msg];
+				completion(nil, error);
+			}
+		}];
+		
+		return;
+	}
+#endif
+	
 	NSString *function = [NSString stringWithFormat:@"product/%@/review",review.GTIN];
 	NSString *path = [self _functionPathForFunction:function];
 	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:review];
@@ -1758,17 +1862,53 @@
  * Create a new product list for the authenticated user.
  * ATTENTION: Login required
  **/
-- (void) createProductList:(PLYList *)list
+- (void)createProductList:(PLYList *)list
 					 completion:(PLYCompletion)completion
 {
 	NSParameterAssert(list);
 	NSParameterAssert(completion);
 	
+#if TARGET_OS_IPHONE
+	if (!_loggedInUser)
+	{
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
+			if (success)
+			{
+				// retry now that we are logged in
+				[self createProductList:list completion:completion];
+			}
+			else if (completion)
+			{
+				// report login failure
+				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOGIN_REQUIRED_ERROR", @"UI", @"Error message for activities that require login");
+				NSError *error = [self _errorWithCode:404 message:msg];
+				completion(nil, error);
+			}
+		}];
+		
+		return;
+	}
+#endif
+	
 	NSString *function = @"lists";
 	NSString *path = [self _functionPathForFunction:function];
 	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:list];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:completion];
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		
+		if (!error || [error code]==404)
+		{
+			PLYList *list = result;
+			
+			// broadcast info that this list was modified
+			NSDictionary *userInfo = @{PLYServerDidModifyListKey:list.Id};
+			[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidModifyListNotification object:self userInfo:userInfo];
+		}
+		
+		completion(result, error);
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:wrappedCompletion];
 }
 
 /**
@@ -1838,7 +1978,19 @@
 	NSString *path = [self _functionPathForFunction:function];
 	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:list];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:payload completion:completion];
+	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+		
+		if (!error || [error code]==404)
+		{
+			// broadcast info that this list was modified
+			NSDictionary *userInfo = @{PLYServerDidModifyListKey:list.Id};
+			[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidModifyListNotification object:self userInfo:userInfo];
+		}
+		
+		completion(result, error);
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:payload completion:wrappedCompletion];
 }
 
 /**
@@ -1880,7 +2032,6 @@
 		if (!error || [error code]==404)
 		{
 			// broadcast info that this list was modified
-			
 			NSDictionary *userInfo = @{PLYServerDidModifyListKey:listId};
 			[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidModifyListNotification object:self userInfo:userInfo];
 		}
@@ -2002,6 +2153,28 @@
 	NSParameterAssert(user);
 	NSParameterAssert(completion);
 	
+#if TARGET_OS_IPHONE
+	if (!_loggedInUser)
+	{
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
+			if (success)
+			{
+				// retry now that we are logged in
+				[self followUser:user completion:completion];
+			}
+			else if (completion)
+			{
+				// report login failure
+				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOGIN_REQUIRED_ERROR", @"UI", @"Error message for activities that require login");
+				NSError *error = [self _errorWithCode:404 message:msg];
+				completion(nil, error);
+			}
+		}];
+		
+		return;
+	}
+#endif
+	
 	NSString *function = @"/user/follow";
 	NSString *path = [self _functionPathForFunction:function];
 	
@@ -2042,6 +2215,28 @@
 {
 	NSParameterAssert(user);
 	NSParameterAssert(completion);
+	
+#if TARGET_OS_IPHONE
+	if (!_loggedInUser)
+	{
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
+			if (success)
+			{
+				// retry now that we are logged in
+				[self unfollowUser:user completion:completion];
+			}
+			else if (completion)
+			{
+				// report login failure
+				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOGIN_REQUIRED_ERROR", @"UI", @"Error message for activities that require login");
+				NSError *error = [self _errorWithCode:404 message:msg];
+				completion(nil, error);
+			}
+		}];
+		
+		return;
+	}
+#endif
 	
 	NSString *function = @"/user/unfollow";
 	NSString *path = [self _functionPathForFunction:function];
@@ -2239,6 +2434,28 @@
 	NSParameterAssert(voteableEntity);
 	NSParameterAssert(completion);
 	
+#if TARGET_OS_IPHONE
+	if (!_loggedInUser)
+	{
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
+			if (success)
+			{
+				// retry now that we are logged in
+				[self upVote:voteableEntity completion:completion];
+			}
+			else if (completion)
+			{
+				// report login failure
+				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOGIN_REQUIRED_ERROR", @"UI", @"Error message for activities that require login");
+				NSError *error = [self _errorWithCode:404 message:msg];
+				completion(nil, error);
+			}
+		}];
+		
+		return;
+	}
+#endif
+	
 	NSString *entityType;
 	if ([voteableEntity isKindOfClass:[PLYImage class]])
 	{
@@ -2283,6 +2500,28 @@
 	
 	NSParameterAssert(voteableEntity);
 	NSParameterAssert(completion);
+	
+#if TARGET_OS_IPHONE
+	if (!_loggedInUser)
+	{
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
+			if (success)
+			{
+				// retry now that we are logged in
+				[self downVote:voteableEntity completion:completion];
+			}
+			else if (completion)
+			{
+				// report login failure
+				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOGIN_REQUIRED_ERROR", @"UI", @"Error message for activities that require login");
+				NSError *error = [self _errorWithCode:404 message:msg];
+				completion(nil, error);
+			}
+		}];
+		
+		return;
+	}
+#endif
 	
 	NSString *entityType;
 	if ([voteableEntity isKindOfClass:[PLYImage class]])
@@ -2329,6 +2568,28 @@
 {
 	NSParameterAssert(report);
 	NSParameterAssert(completion);
+	
+#if TARGET_OS_IPHONE
+	if (!_loggedInUser)
+	{
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
+			if (success)
+			{
+				// retry now that we are logged in
+				[self createProblemReport:report completion:completion];
+			}
+			else if (completion)
+			{
+				// report login failure
+				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOGIN_REQUIRED_ERROR", @"UI", @"Error message for activities that require login");
+				NSError *error = [self _errorWithCode:404 message:msg];
+				completion(nil, error);
+			}
+		}];
+		
+		return;
+	}
+#endif
 		
 	NSString *function;
 	NSDictionary *parameters;

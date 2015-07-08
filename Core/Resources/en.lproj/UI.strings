@@ -25,7 +25,7 @@
 // ------ Login
 
 /* Explanation to show on login dialog */
-"PLY_LOGIN_EXPLAIN" = "Login to ProductLayer to see your friends timeline and post your own opines.";
+"PLY_LOGIN_EXPLAIN" = "Login to ProductLayer to see your friends timeline and post your own opines. Activities which are modifying data on ProductLayer also require a login.";
 
 /* Link to lost password dialog */
 "PLY_LOGIN_LOST_PASSWORD" = "Lost Password ...";
@@ -189,3 +189,8 @@
 
 /* Explanation of what the social connections are for */
 "SOCIAL_CONNECTIONS_MSG" = "Connect your social network accounts to use them for signing into prod.ly.\n\nOptionally, you can also share your product opines on these other networks.";
+
+// ----- ad-hoc login
+
+/* Error message for activities that require login */
+"PLY_LOGIN_REQUIRED_ERROR" = "Cannot perform this action without being logged in.";

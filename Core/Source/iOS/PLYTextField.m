@@ -90,7 +90,7 @@
 	UITextInputMode *inputMode = [self textInputMode];
 	NSString *lang = inputMode.primaryLanguage;
 	
-	if (!lang || [lang isEqualToString:@"dictation"])
+	if (!lang || [lang isEqualToString:@"dictation"] || [lang isEqualToString:@"mul"])
 	{
 		return;
 	}

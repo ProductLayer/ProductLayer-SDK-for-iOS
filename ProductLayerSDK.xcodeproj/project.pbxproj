@@ -223,6 +223,9 @@
 		A7B442B8183F9D0300E8A170 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B442B7183F9D0300E8A170 /* AVFoundation.framework */; };
 		A7B4873B1987CA7800FA8F83 /* PLYOpine.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B4873A1987CA7800FA8F83 /* PLYOpine.m */; };
 		A7B4877F1987CFB200FA8F83 /* PLYVotableEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B4877E1987CFB200FA8F83 /* PLYVotableEntity.m */; };
+		A7B4CF5A1B49493C004A188E /* PLYNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B4CF581B49493C004A188E /* PLYNavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7B4CF5B1B49493C004A188E /* PLYNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B4CF591B49493C004A188E /* PLYNavigationController.m */; };
+		A7B4CF5C1B49493C004A188E /* PLYNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B4CF591B49493C004A188E /* PLYNavigationController.m */; };
 		A7C488A81A36ECBA004AC656 /* PLYEntityTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C488A71A36ECBA004AC656 /* PLYEntityTest.m */; };
 		A7CD959219FA821E008E3A41 /* PLYOpineComposeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A7CD959019FA821E008E3A41 /* PLYOpineComposeViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7CD959319FA821E008E3A41 /* PLYOpineComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CD959119FA821E008E3A41 /* PLYOpineComposeViewController.m */; };
@@ -853,6 +856,8 @@
 		A7B4873A1987CA7800FA8F83 /* PLYOpine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYOpine.m; path = PLYEntities/PLYOpine.m; sourceTree = "<group>"; };
 		A7B4877D1987CFB200FA8F83 /* PLYVotableEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLYVotableEntity.h; path = PLYEntities/PLYVotableEntity.h; sourceTree = "<group>"; };
 		A7B4877E1987CFB200FA8F83 /* PLYVotableEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYVotableEntity.m; path = PLYEntities/PLYVotableEntity.m; sourceTree = "<group>"; };
+		A7B4CF581B49493C004A188E /* PLYNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYNavigationController.h; sourceTree = "<group>"; };
+		A7B4CF591B49493C004A188E /* PLYNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYNavigationController.m; sourceTree = "<group>"; };
 		A7C488A71A36ECBA004AC656 /* PLYEntityTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYEntityTest.m; sourceTree = "<group>"; };
 		A7CD959019FA821E008E3A41 /* PLYOpineComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYOpineComposeViewController.h; sourceTree = "<group>"; };
 		A7CD959119FA821E008E3A41 /* PLYOpineComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYOpineComposeViewController.m; sourceTree = "<group>"; };
@@ -1178,6 +1183,8 @@
 				A77665921A1B3673008AB88C /* Input */,
 				A76D3F65198650770032FE59 /* UIViewController+ProductLayer.h */,
 				A76D3F66198650770032FE59 /* UIViewController+ProductLayer.m */,
+				A7B4CF581B49493C004A188E /* PLYNavigationController.h */,
+				A7B4CF591B49493C004A188E /* PLYNavigationController.m */,
 				A76478971A18A8830000500C /* PLYSearchableTableViewController.h */,
 				A76478981A18A8830000500C /* PLYSearchableTableViewController.m */,
 				A76478771A18A6E50000500C /* Brands */,
@@ -1765,6 +1772,7 @@
 				A76478991A18A8830000500C /* PLYSearchableTableViewController.h in Headers */,
 				A77665961A1B369A008AB88C /* PLYGuidedInputViewController.h in Headers */,
 				A75CF74E1A30B4BD007E30FC /* PLYBrand.h in Headers */,
+				A7B4CF5A1B49493C004A188E /* PLYNavigationController.h in Headers */,
 				A7590B1B19ED77B80084EBCA /* PLYOpine.h in Headers */,
 				A7590B0F19ED77B80084EBCA /* PLYEntity.h in Headers */,
 				A7590B2919ED77BD0084EBCA /* PLYServer.h in Headers */,
@@ -2432,6 +2440,7 @@
 				A7590B1E19ED77B80084EBCA /* PLYPackaging.m in Sources */,
 				A7590B0C19ED77B40084EBCA /* PLYTextField.m in Sources */,
 				A75CF7461A30B48A007E30FC /* PLYVideoPreviewView.m in Sources */,
+				A7B4CF5C1B49493C004A188E /* PLYNavigationController.m in Sources */,
 				A7665D441A9FA965001734B8 /* PLYUploadImage.m in Sources */,
 				A7CD959419FA821E008E3A41 /* PLYOpineComposeViewController.m in Sources */,
 				A7590B1A19ED77B80084EBCA /* PLYListItem.m in Sources */,
@@ -2553,6 +2562,7 @@
 				A76D3F68198650770032FE59 /* PLYFormValidator.m in Sources */,
 				A7EB727C1A72B43F00FFD4CC /* PLYReportProblemViewController.m in Sources */,
 				A75CF7451A30B48A007E30FC /* PLYVideoPreviewView.m in Sources */,
+				A7B4CF5B1B49493C004A188E /* PLYNavigationController.m in Sources */,
 				A7665D431A9FA965001734B8 /* PLYUploadImage.m in Sources */,
 				A7CD959319FA821E008E3A41 /* PLYOpineComposeViewController.m in Sources */,
 				C98CD26B1910E0D70035647C /* PLYListItem.m in Sources */,
