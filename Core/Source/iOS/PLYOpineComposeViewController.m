@@ -8,6 +8,7 @@
 
 #import "PLYOpineComposeViewController.h"
 #import "PLYSocialConnectionViewController.h"
+#import "PLYLoginViewController.h"
 
 #import "UIViewController+ProductLayer.h"
 #import <CoreLocation/CoreLocation.h>
@@ -866,6 +867,18 @@
 
 - (void)_handleTwitter:(id)sender
 {
+	if (!self.productLayerServer.loggedInUser)
+	{
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
+			if (success)
+			{
+				[self _handleTwitter:sender];
+			}
+		}];
+		
+		return;
+	}
+	
 	if ([self _hasSocialConnection:@"twitter"])
 	{
 		self.opine.shareOnTwitter = !self.opine.shareOnTwitter;
@@ -883,6 +896,18 @@
 
 - (void)_handleFacebook:(id)sender
 {
+	if (!self.productLayerServer.loggedInUser)
+	{
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
+			if (success)
+			{
+				[self _handleFacebook:sender];
+			}
+		}];
+		
+		return;
+	}
+	
 	if ([self _hasSocialConnection:@"facebook"])
 	{
 		self.opine.shareOnFacebook = !self.opine.shareOnFacebook;
