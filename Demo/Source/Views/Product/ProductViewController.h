@@ -11,7 +11,7 @@
 #import "EditProductViewController.h"
 #import "ProductLayerViewController.h"
 
-#import "ProductLayer.h"
+#import "ProductLayerSDK.h"
 
 @interface ProductViewController : ProductLayerViewController <ProductUpdateDelegate>
 

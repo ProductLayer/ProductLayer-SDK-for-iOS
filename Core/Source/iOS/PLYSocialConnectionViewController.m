@@ -8,7 +8,7 @@
 
 #import "PLYSocialConnectionViewController.h"
 #import "UIViewController+ProductLayer.h"
-#import "ProductLayer.h"
+#import "ProductLayerSDK.h"
 
 #import "DTBlockFunctions.h"
 #import "PLYSocialAuthWebViewController.h"

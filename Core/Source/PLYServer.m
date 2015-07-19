@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Cocoanetics. All rights reserved.
 //
 
-#import "ProductLayer.h"
+#import "ProductLayerSDK.h"
 
 #import "DTLog.h"
 #import "NSString+DTURLEncoding.h"

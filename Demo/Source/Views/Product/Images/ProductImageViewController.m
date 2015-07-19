@@ -11,7 +11,7 @@
 #import "BigImageViewController.h"
 #import "UIViewController+Login.h"
 
-#import "ProductLayer.h"
+#import "ProductLayerSDK.h"
 #import "DTFoundation.h"
 #import "DTProgressHUD.h"
 

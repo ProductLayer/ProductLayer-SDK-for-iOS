@@ -18,7 +18,7 @@
 
 #import "DTProgressHUD.h"
 
-#import "ProductLayer.h"
+#import "ProductLayerSDK.h"
 
 @interface ReviewTableViewController ()
 @property (nonatomic) bool isLoading;

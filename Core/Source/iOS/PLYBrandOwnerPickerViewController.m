@@ -9,7 +9,7 @@
 #import "PLYBrandOwnerPickerViewController.h"
 #import "UIViewController+ProductLayer.h"
 
-#import "ProductLayer.h"
+#import "ProductLayerSDK.h"
 
 #define CELL_IDENTIFIER @"Identifier"
 

@@ -9,7 +9,7 @@
 #import "PLYLostPasswordViewController.h"
 #import "UIViewController+ProductLayer.h"
 
-#import "ProductLayer.h"
+#import "ProductLayerSDK.h"
 
 #import "DTBlockFunctions.h"
 #import "DTAlertView.h"

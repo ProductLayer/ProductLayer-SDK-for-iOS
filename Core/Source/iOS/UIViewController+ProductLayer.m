@@ -7,7 +7,7 @@
 //
 
 #import "UIViewController+ProductLayer.h"
-#import "ProductLayer.h"
+#import "ProductLayerSDK.h"
 #import <objc/runtime.h>
 
 

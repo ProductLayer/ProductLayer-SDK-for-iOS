@@ -13,7 +13,7 @@
 #import "DTImageCache.h"
 #import "DTLog.h"
 
-#import "ProductLayer.h"
+#import "ProductLayerSDK.h"
 
 @implementation OpineTableViewCell
 

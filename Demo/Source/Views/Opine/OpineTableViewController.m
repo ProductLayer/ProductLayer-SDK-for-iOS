@@ -17,7 +17,7 @@
 #import "DTProgressHUD.h"
 #import "OpineTableViewCell.h"
 
-#import "ProductLayer.h"
+#import "ProductLayerSDK.h"
 
 @interface OpineTableViewController ()
 @property (nonatomic) bool isLoading;

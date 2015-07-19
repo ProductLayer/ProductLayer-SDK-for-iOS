@@ -9,7 +9,7 @@
 #import "SearchProductViewController.h"
 #import "ProductViewController.h"
 
-#import "ProductLayer.h"
+#import "ProductLayerSDK.h"
 #import "DTBlockFunctions.h"
 #import "DTProgressHUD.h"
 

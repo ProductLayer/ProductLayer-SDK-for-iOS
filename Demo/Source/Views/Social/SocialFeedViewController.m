@@ -8,7 +8,7 @@
 
 #import "SocialFeedViewController.h"
 
-#import "ProductLayer.h"
+#import "ProductLayerSDK.h"
 #import "ProductImageCollectionViewCell.h"
 #import "ProductViewController.h"
 

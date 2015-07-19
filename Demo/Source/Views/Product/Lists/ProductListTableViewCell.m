@@ -8,7 +8,7 @@
 
 #import "ProductListTableViewCell.h"
 
-#import "ProductLayer.h"
+#import "ProductLayerSDK.h"
 
 @implementation ProductListTableViewCell
 

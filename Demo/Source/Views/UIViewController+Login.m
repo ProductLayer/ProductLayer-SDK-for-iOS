@@ -7,7 +7,7 @@
 //
 
 #import "UIViewController+Login.h"
-#import "ProductLayer.h"
+#import "ProductLayerSDK.h"
 #import "DTBlockFunctions.h"
 #import "DTAlertView.h"
 
