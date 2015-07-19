@@ -10,7 +10,7 @@
 #import "EditProductViewController.h"
 #import "ProductImageViewController.h"
 
-#import "ProductLayer.h"
+#import "ProductLayerSDK.h"
 #import "DTFoundation.h"
 
 #import "SearchProductViewController.h"

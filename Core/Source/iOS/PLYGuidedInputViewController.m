@@ -7,7 +7,7 @@
 //
 
 #import "PLYGuidedInputViewController.h"
-#import "ProductLayer.h"
+#import "ProductLayerSDK.h"
 
 @interface PLYGuidedInputViewController () <PLYFormValidationDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;

@@ -9,7 +9,7 @@
 #import "PLYCategoryPickerViewController.h"
 #import "UIViewController+ProductLayer.h"
 
-#import "ProductLayer.h"
+#import "ProductLayerSDK.h"
 
 #import "DTLog.h"
 #import "NSString+DTPaths.h"

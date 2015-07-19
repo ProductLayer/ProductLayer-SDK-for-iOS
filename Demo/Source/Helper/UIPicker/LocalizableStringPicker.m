@@ -7,7 +7,7 @@
 //
 
 #import "LocalizableStringPicker.h"
-#import "ProductLayer.h"
+#import "ProductLayerSDK.h"
 
 @implementation LocalizableStringPicker
 

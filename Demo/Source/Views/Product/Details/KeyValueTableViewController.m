@@ -8,7 +8,7 @@
 
 #import "KeyValueTableViewController.h"
 #import "KeyValueTableViewCell.h"
-#import "ProductLayer.h"
+#import "ProductLayerSDK.h"
 
 @interface KeyValueTableViewController ()
 

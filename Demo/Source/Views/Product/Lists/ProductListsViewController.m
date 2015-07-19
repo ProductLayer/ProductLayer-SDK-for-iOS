@@ -8,7 +8,7 @@
 
 #import "ProductListsViewController.h"
 #import "ProductListTableViewCell.h"
-#import "ProductLayer.h"
+#import "ProductLayerSDK.h"
 #import "UIViewTags.h"
 #import "DTBlockFunctions.h"
 #import "AppSettings.h"

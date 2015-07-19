@@ -30,17 +30,17 @@
 		A72592B31A757D5900952685 /* PLYCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A72592B11A757D5900952685 /* PLYCategory.m */; };
 		A72592B41A757D5900952685 /* PLYCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A72592B11A757D5900952685 /* PLYCategory.m */; };
 		A72592B51A757D5900952685 /* PLYCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A72592B11A757D5900952685 /* PLYCategory.m */; };
-		A72592B61A757D5900952685 /* PLYCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = A72592B21A757D5900952685 /* PLYCategory.h */; };
+		A72592B61A757D5900952685 /* PLYCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = A72592B21A757D5900952685 /* PLYCategory.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A72592B71A757D5900952685 /* PLYCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = A72592B21A757D5900952685 /* PLYCategory.h */; };
 		A72592BB1A757D9400952685 /* PLYTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A72592B91A757D9400952685 /* PLYTextFieldTableViewCell.m */; };
 		A72592BC1A757D9400952685 /* PLYTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A72592B91A757D9400952685 /* PLYTextFieldTableViewCell.m */; };
 		A72592BD1A757D9400952685 /* PLYEditProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72592BA1A757D9400952685 /* PLYEditProductViewController.m */; };
 		A72592BE1A757D9400952685 /* PLYEditProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72592BA1A757D9400952685 /* PLYEditProductViewController.m */; };
-		A72592C41A757DFB00952685 /* PLYModalTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A72592C21A757DFB00952685 /* PLYModalTableViewController.h */; };
+		A72592C41A757DFB00952685 /* PLYModalTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A72592C21A757DFB00952685 /* PLYModalTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A72592C51A757DFB00952685 /* PLYModalTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72592C31A757DFB00952685 /* PLYModalTableViewController.m */; };
 		A72592C61A757DFB00952685 /* PLYModalTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72592C31A757DFB00952685 /* PLYModalTableViewController.m */; };
-		A72592C91A757E1F00952685 /* PLYEditProductViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A72592C71A757E1F00952685 /* PLYEditProductViewController.h */; };
-		A72592CA1A757E1F00952685 /* PLYTextFieldTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A72592C81A757E1F00952685 /* PLYTextFieldTableViewCell.h */; };
+		A72592C91A757E1F00952685 /* PLYEditProductViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A72592C71A757E1F00952685 /* PLYEditProductViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A72592CA1A757E1F00952685 /* PLYTextFieldTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A72592C81A757E1F00952685 /* PLYTextFieldTableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A73803341A28E91800011D9C /* PLYTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = A73803321A28E91800011D9C /* PLYTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A73803351A28E91800011D9C /* PLYTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A73803331A28E91800011D9C /* PLYTextView.m */; };
 		A73803361A28E91800011D9C /* PLYTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A73803331A28E91800011D9C /* PLYTextView.m */; };
@@ -55,9 +55,9 @@
 		A7548B24196C4C16000B72EB /* PLYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548B23196C4C16000B72EB /* PLYImage.m */; };
 		A7590AFF19ED77B40084EBCA /* PLYLoginViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76D3F5D198650770032FE59 /* PLYLoginViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7590B0019ED77B40084EBCA /* PLYLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F5E198650770032FE59 /* PLYLoginViewController.m */; };
-		A7590B0119ED77B40084EBCA /* PLYLostPasswordViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76D3F8F19866E0E0032FE59 /* PLYLostPasswordViewController.h */; };
+		A7590B0119ED77B40084EBCA /* PLYLostPasswordViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76D3F8F19866E0E0032FE59 /* PLYLostPasswordViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7590B0219ED77B40084EBCA /* PLYLostPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F9019866E0E0032FE59 /* PLYLostPasswordViewController.m */; };
-		A7590B0319ED77B40084EBCA /* PLYSignUpViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76D3F5F198650770032FE59 /* PLYSignUpViewController.h */; };
+		A7590B0319ED77B40084EBCA /* PLYSignUpViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76D3F5F198650770032FE59 /* PLYSignUpViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7590B0419ED77B40084EBCA /* PLYSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F60198650770032FE59 /* PLYSignUpViewController.m */; };
 		A7590B0519ED77B40084EBCA /* UIViewController+ProductLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A76D3F65198650770032FE59 /* UIViewController+ProductLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7590B0619ED77B40084EBCA /* UIViewController+ProductLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F66198650770032FE59 /* UIViewController+ProductLayer.m */; };
@@ -97,7 +97,7 @@
 		A7590B2819ED77B80084EBCA /* PLYVotableEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B4877E1987CFB200FA8F83 /* PLYVotableEntity.m */; };
 		A7590B2919ED77BD0084EBCA /* PLYServer.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B44246183F91E700E8A170 /* PLYServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7590B2A19ED77BD0084EBCA /* PLYServer.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B44247183F91E700E8A170 /* PLYServer.m */; };
-		A7590B2B19ED77BD0084EBCA /* ProductLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B44248183F91E700E8A170 /* ProductLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7590B2B19ED77BD0084EBCA /* ProductLayerSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B44248183F91E700E8A170 /* ProductLayerSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7590B2C19ED77BD0084EBCA /* PLYConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B442A2183F97B800E8A170 /* PLYConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7590B2D19ED77BD0084EBCA /* PLYConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B442A3183F97B800E8A170 /* PLYConstants.m */; };
 		A7590B2E19ED77C40084EBCA /* API.strings in Resources */ = {isa = PBXBuildFile; fileRef = A76A56E81986922300751454 /* API.strings */; };
@@ -139,7 +139,7 @@
 		A75CF7F91A31A2A9007E30FC /* libProductLayerSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B21721183F8A3800C38635 /* libProductLayerSDK.a */; };
 		A762933A1A5FF1CC00208A27 /* PLYSocialAuthWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76293191A5FEC3000208A27 /* PLYSocialAuthWebViewController.m */; };
 		A762933B1A5FF1CF00208A27 /* PLYSocialAuthWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76293191A5FEC3000208A27 /* PLYSocialAuthWebViewController.m */; };
-		A762933E1A5FF20300208A27 /* PLYSocialAuthFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A762933C1A5FF20300208A27 /* PLYSocialAuthFunctions.h */; };
+		A762933E1A5FF20300208A27 /* PLYSocialAuthFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A762933C1A5FF20300208A27 /* PLYSocialAuthFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A762933F1A5FF20300208A27 /* PLYSocialAuthFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A762933D1A5FF20300208A27 /* PLYSocialAuthFunctions.m */; };
 		A76293401A5FF20300208A27 /* PLYSocialAuthFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A762933D1A5FF20300208A27 /* PLYSocialAuthFunctions.m */; };
 		A76478991A18A8830000500C /* PLYSearchableTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76478971A18A8830000500C /* PLYSearchableTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -166,9 +166,9 @@
 		A7665D0B1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7665D091A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m */; };
 		A7665D0C1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7665D091A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m */; };
 		A7665D0D1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7665D091A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m */; };
-		A7665D0E1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D0A1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h */; };
+		A7665D0E1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D0A1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7665D0F1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D0A1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h */; };
-		A7665D411A9FA965001734B8 /* PLYUploadImage.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D3F1A9FA965001734B8 /* PLYUploadImage.h */; };
+		A7665D411A9FA965001734B8 /* PLYUploadImage.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D3F1A9FA965001734B8 /* PLYUploadImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7665D421A9FA965001734B8 /* PLYUploadImage.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D3F1A9FA965001734B8 /* PLYUploadImage.h */; };
 		A7665D431A9FA965001734B8 /* PLYUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7665D401A9FA965001734B8 /* PLYUploadImage.m */; };
 		A7665D441A9FA965001734B8 /* PLYUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7665D401A9FA965001734B8 /* PLYUploadImage.m */; };
@@ -196,7 +196,7 @@
 		A77860731A407C3800560889 /* location@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A778606E1A407C3800560889 /* location@3x.png */; };
 		A77860741A407C3800560889 /* location@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A778606E1A407C3800560889 /* location@3x.png */; };
 		A77860951A40830200560889 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A77860941A40830200560889 /* CoreLocation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		A77FFAA51A77907B0019DD5C /* PLYBrandedTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A77FFAA31A77907B0019DD5C /* PLYBrandedTableViewCell.h */; };
+		A77FFAA51A77907B0019DD5C /* PLYBrandedTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A77FFAA31A77907B0019DD5C /* PLYBrandedTableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A77FFAA61A77907B0019DD5C /* PLYBrandedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A77FFAA41A77907B0019DD5C /* PLYBrandedTableViewCell.m */; };
 		A77FFAA71A77907B0019DD5C /* PLYBrandedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A77FFAA41A77907B0019DD5C /* PLYBrandedTableViewCell.m */; };
 		A77FFACE1A77E5790019DD5C /* PLYBrandOwnerPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A77FFAAD1A77E5120019DD5C /* PLYBrandOwnerPickerViewController.m */; };
@@ -230,7 +230,7 @@
 		A7CD959219FA821E008E3A41 /* PLYOpineComposeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A7CD959019FA821E008E3A41 /* PLYOpineComposeViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7CD959319FA821E008E3A41 /* PLYOpineComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CD959119FA821E008E3A41 /* PLYOpineComposeViewController.m */; };
 		A7CD959419FA821E008E3A41 /* PLYOpineComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CD959119FA821E008E3A41 /* PLYOpineComposeViewController.m */; };
-		A7EA07011A2B12E900B61CCE /* ProductLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B44248183F91E700E8A170 /* ProductLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7EA07011A2B12E900B61CCE /* ProductLayerSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B44248183F91E700E8A170 /* ProductLayerSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7EA07061A2B139C00B61CCE /* PLYEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = A7548AE9196C2E7C000B72EB /* PLYEntity.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7EA07071A2B139C00B61CCE /* PLYEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548AEA196C2E7C000B72EB /* PLYEntity.m */; };
 		A7EA07081A2B139C00B61CCE /* PLYErrorMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = C97FAA16191CCA3400144D2C /* PLYErrorMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -268,18 +268,18 @@
 		A7EA08411A2B341300B61CCE /* DTFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7EA08351A2B31B500B61CCE /* DTFoundation.framework */; };
 		A7EA08441A2B377300B61CCE /* DTFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7EA08351A2B31B500B61CCE /* DTFoundation.framework */; };
 		A7EA08451A2B378F00B61CCE /* DTFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A7EA08351A2B31B500B61CCE /* DTFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A7EB72731A72B42300FFD4CC /* PLYProblemReport.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EB72711A72B42300FFD4CC /* PLYProblemReport.h */; };
+		A7EB72731A72B42300FFD4CC /* PLYProblemReport.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EB72711A72B42300FFD4CC /* PLYProblemReport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7EB72741A72B42300FFD4CC /* PLYProblemReport.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EB72711A72B42300FFD4CC /* PLYProblemReport.h */; };
 		A7EB72751A72B42300FFD4CC /* PLYProblemReport.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EB72721A72B42300FFD4CC /* PLYProblemReport.m */; };
 		A7EB72761A72B42300FFD4CC /* PLYProblemReport.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EB72721A72B42300FFD4CC /* PLYProblemReport.m */; };
 		A7EB72771A72B42300FFD4CC /* PLYProblemReport.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EB72721A72B42300FFD4CC /* PLYProblemReport.m */; };
-		A7EB727B1A72B43F00FFD4CC /* PLYReportProblemViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EB72791A72B43F00FFD4CC /* PLYReportProblemViewController.h */; };
+		A7EB727B1A72B43F00FFD4CC /* PLYReportProblemViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EB72791A72B43F00FFD4CC /* PLYReportProblemViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7EB727C1A72B43F00FFD4CC /* PLYReportProblemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EB727A1A72B43F00FFD4CC /* PLYReportProblemViewController.m */; };
 		A7EB727D1A72B43F00FFD4CC /* PLYReportProblemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EB727A1A72B43F00FFD4CC /* PLYReportProblemViewController.m */; };
 		A7EE55A21A121C8300DD55FE /* PLYCategoryPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EE55A01A121C8300DD55FE /* PLYCategoryPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7EE55A31A121C8300DD55FE /* PLYCategoryPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE55A11A121C8300DD55FE /* PLYCategoryPickerViewController.m */; };
 		A7EE55A41A121C8300DD55FE /* PLYCategoryPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE55A11A121C8300DD55FE /* PLYCategoryPickerViewController.m */; };
-		A7EE90271AC30FD700F63099 /* PLYSocialConnectionViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EE90251AC30FD700F63099 /* PLYSocialConnectionViewController.h */; };
+		A7EE90271AC30FD700F63099 /* PLYSocialConnectionViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EE90251AC30FD700F63099 /* PLYSocialConnectionViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7EE90281AC30FD700F63099 /* PLYSocialConnectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE90261AC30FD700F63099 /* PLYSocialConnectionViewController.m */; };
 		A7EE90291AC30FD700F63099 /* PLYSocialConnectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE90261AC30FD700F63099 /* PLYSocialConnectionViewController.m */; };
 		A7F950651A9E0D10001C86BE /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = A7F950681A9E0D10001C86BE /* UI.strings */; };
@@ -843,7 +843,7 @@
 		A7B4423E183F91E700E8A170 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A7B44246183F91E700E8A170 /* PLYServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLYServer.h; sourceTree = "<group>"; };
 		A7B44247183F91E700E8A170 /* PLYServer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLYServer.m; sourceTree = "<group>"; };
-		A7B44248183F91E700E8A170 /* ProductLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductLayer.h; sourceTree = "<group>"; };
+		A7B44248183F91E700E8A170 /* ProductLayerSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductLayerSDK.h; sourceTree = "<group>"; };
 		A7B44249183F921200E8A170 /* ProductLayerSDK-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ProductLayerSDK-Info.plist"; path = "../ProductLayerSDK-Info.plist"; sourceTree = "<group>"; };
 		A7B4424A183F921200E8A170 /* ProductLayerSDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ProductLayerSDK-Prefix.pch"; sourceTree = "<group>"; };
 		A7B44281183F92D600E8A170 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
@@ -1419,7 +1419,7 @@
 		A7B44242183F91E700E8A170 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				A7B44248183F91E700E8A170 /* ProductLayer.h */,
+				A7B44248183F91E700E8A170 /* ProductLayerSDK.h */,
 				A76D3F58198650770032FE59 /* iOS */,
 				C9D31F45190A705200C91A08 /* PLYEntities */,
 				A7EA07231A2B14A800B61CCE /* PLYCompatibility.h */,
@@ -1764,9 +1764,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7590B2B19ED77BD0084EBCA /* ProductLayer.h in Headers */,
+				A7590B2B19ED77BD0084EBCA /* ProductLayerSDK.h in Headers */,
 				A7590B1719ED77B80084EBCA /* PLYList.h in Headers */,
-				A7EB72731A72B42300FFD4CC /* PLYProblemReport.h in Headers */,
 				A7590B0B19ED77B40084EBCA /* PLYTextField.h in Headers */,
 				A7590B0919ED77B40084EBCA /* PLYFormValidator.h in Headers */,
 				A76478991A18A8830000500C /* PLYSearchableTableViewController.h in Headers */,
@@ -1780,23 +1779,15 @@
 				A7590B0D19ED77B40084EBCA /* PLYUserNameValidator.h in Headers */,
 				A7590B1F19ED77B80084EBCA /* PLYProduct.h in Headers */,
 				A75CF7441A30B48A007E30FC /* PLYVideoPreviewView.h in Headers */,
-				A72592C91A757E1F00952685 /* PLYEditProductViewController.h in Headers */,
 				A719180E1A1B5B1B002C2D76 /* PLYContentsDidChangeValidator.h in Headers */,
-				A762933E1A5FF20300208A27 /* PLYSocialAuthFunctions.h in Headers */,
 				A7590B1119ED77B80084EBCA /* PLYErrorMessage.h in Headers */,
 				A7EA07241A2B14A800B61CCE /* PLYCompatibility.h in Headers */,
-				A72592CA1A757E1F00952685 /* PLYTextFieldTableViewCell.h in Headers */,
 				A7590B2519ED77B80084EBCA /* PLYProductCategory.h in Headers */,
 				A7590B1519ED77B80084EBCA /* PLYImage.h in Headers */,
 				A75CF73B1A30B48A007E30FC /* PLYVideoPreviewInterestBox.h in Headers */,
-				A72592B61A757D5900952685 /* PLYCategory.h in Headers */,
 				A75CF7411A30B48A007E30FC /* PLYAVFoundationFunctions.h in Headers */,
-				A7EE90271AC30FD700F63099 /* PLYSocialConnectionViewController.h in Headers */,
 				A7590B0719ED77B40084EBCA /* PLYFormEmailValidator.h in Headers */,
-				A7665D411A9FA965001734B8 /* PLYUploadImage.h in Headers */,
-				A77FFAA51A77907B0019DD5C /* PLYBrandedTableViewCell.h in Headers */,
 				A7590B2719ED77B80084EBCA /* PLYVotableEntity.h in Headers */,
-				A7665D0E1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h in Headers */,
 				A7590B0519ED77B40084EBCA /* UIViewController+ProductLayer.h in Headers */,
 				A7590B1319ED77B80084EBCA /* PLYErrorResponse.h in Headers */,
 				A7590B2319ED77B80084EBCA /* PLYUser.h in Headers */,
@@ -1805,18 +1796,27 @@
 				A7A38CD21A2B4FFD005D8395 /* PLYFunctions.h in Headers */,
 				A75CF7531A30B4BD007E30FC /* PLYBrandOwner.h in Headers */,
 				A7EE55A21A121C8300DD55FE /* PLYCategoryPickerViewController.h in Headers */,
+				A7EB72731A72B42300FFD4CC /* PLYProblemReport.h in Headers */,
+				A72592C91A757E1F00952685 /* PLYEditProductViewController.h in Headers */,
+				A762933E1A5FF20300208A27 /* PLYSocialAuthFunctions.h in Headers */,
+				A72592CA1A757E1F00952685 /* PLYTextFieldTableViewCell.h in Headers */,
+				A72592B61A757D5900952685 /* PLYCategory.h in Headers */,
+				A7EE90271AC30FD700F63099 /* PLYSocialConnectionViewController.h in Headers */,
 				A7590B1919ED77B80084EBCA /* PLYListItem.h in Headers */,
-				A72592C41A757DFB00952685 /* PLYModalTableViewController.h in Headers */,
 				A7590B2C19ED77BD0084EBCA /* PLYConstants.h in Headers */,
+				A7665D411A9FA965001734B8 /* PLYUploadImage.h in Headers */,
+				A77FFAA51A77907B0019DD5C /* PLYBrandedTableViewCell.h in Headers */,
+				A7665D0E1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h in Headers */,
+				A72592C41A757DFB00952685 /* PLYModalTableViewController.h in Headers */,
+				A7590B0119ED77B40084EBCA /* PLYLostPasswordViewController.h in Headers */,
+				A7EB727B1A72B43F00FFD4CC /* PLYReportProblemViewController.h in Headers */,
 				A7590B2119ED77B80084EBCA /* PLYReview.h in Headers */,
 				A73803341A28E91800011D9C /* PLYTextView.h in Headers */,
 				A7590B1D19ED77B80084EBCA /* PLYPackaging.h in Headers */,
-				A7590B0119ED77B40084EBCA /* PLYLostPasswordViewController.h in Headers */,
 				A75CF7811A30DF4E007E30FC /* PLYEntities.h in Headers */,
-				A7EB727B1A72B43F00FFD4CC /* PLYReportProblemViewController.h in Headers */,
 				A7CD959219FA821E008E3A41 /* PLYOpineComposeViewController.h in Headers */,
-				A7590B0319ED77B40084EBCA /* PLYSignUpViewController.h in Headers */,
 				A701C4FA1A1F55580013CB8D /* PLYBrandPickerViewController.h in Headers */,
+				A7590B0319ED77B40084EBCA /* PLYSignUpViewController.h in Headers */,
 				A75CF73E1A30B48A007E30FC /* PLYScannerViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1838,7 +1838,7 @@
 				A7665D0F1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h in Headers */,
 				A7EA07121A2B139C00B61CCE /* PLYOpine.h in Headers */,
 				A75CF7821A30DF4E007E30FC /* PLYEntities.h in Headers */,
-				A7EA07011A2B12E900B61CCE /* ProductLayer.h in Headers */,
+				A7EA07011A2B12E900B61CCE /* ProductLayerSDK.h in Headers */,
 				A7EA071A1A2B139C00B61CCE /* PLYUser.h in Headers */,
 				A7EA07061A2B139C00B61CCE /* PLYEntity.h in Headers */,
 				A7EA070A1A2B139C00B61CCE /* PLYErrorResponse.h in Headers */,
@@ -2710,7 +2710,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CLANG_ENABLE_MODULES = NO;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2741,7 +2740,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CLANG_ENABLE_MODULES = NO;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2772,7 +2770,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CLANG_ENABLE_MODULES = NO;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2954,7 +2951,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CLANG_ENABLE_MODULES = NO;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

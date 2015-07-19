@@ -8,7 +8,7 @@
 
 #import "ListItemTableCell.h"
 
-#import "ProductLayer.h"
+#import "ProductLayerSDK.h"
 #import "AppSettings.h"
 
 #import "DTBlockFunctions.h"

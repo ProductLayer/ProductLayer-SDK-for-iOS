@@ -8,7 +8,7 @@
 
 #import "PLYModalTableViewController.h"
 #import "DTBlockFunctions.h"
-#import "ProductLayer.h"
+#import "ProductLayerSDK.h"
 
 @interface PLYModalTableViewController ()
 

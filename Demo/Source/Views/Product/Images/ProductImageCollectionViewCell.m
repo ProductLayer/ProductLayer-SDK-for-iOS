@@ -16,7 +16,7 @@
 #import "NSString+DTPaths.h"
 
 #import "DTImageCache.h"
-#import "ProductLayer.h"
+#import "ProductLayerSDK.h"
 
 @implementation ProductImageCollectionViewCell
 {
