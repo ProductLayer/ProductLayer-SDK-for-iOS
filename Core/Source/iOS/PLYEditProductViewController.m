@@ -8,7 +8,7 @@
 
 #import "PLYEditProductViewController.h"
 #import "PLYTextFieldTableViewCell.h"
-#import "ProductLayerSDK.h"
+#import "ProductLayerUI.h"
 
 #import "DTBlockFunctions.h"
 #import "NSString+DTPaths.h"

@@ -202,6 +202,7 @@
 		A77FFACE1A77E5790019DD5C /* PLYBrandOwnerPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A77FFAAD1A77E5120019DD5C /* PLYBrandOwnerPickerViewController.m */; };
 		A77FFACF1A77E57B0019DD5C /* PLYBrandOwnerPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A77FFAAD1A77E5120019DD5C /* PLYBrandOwnerPickerViewController.m */; };
 		A78DB5E51A46E26A00CD8A14 /* ProductLayerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D997EB1A2B11A800C80C2B /* ProductLayerSDK.framework */; };
+		A7A0DF2A1B5BB2E500B1E329 /* ProductLayerUI.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A0DF291B5BB2E500B1E329 /* ProductLayerUI.h */; };
 		A7A38CD21A2B4FFD005D8395 /* PLYFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A38CD01A2B4FFD005D8395 /* PLYFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7A38CD31A2B4FFD005D8395 /* PLYFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A38CD01A2B4FFD005D8395 /* PLYFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7A38CD41A2B4FFD005D8395 /* PLYFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A38CD11A2B4FFD005D8395 /* PLYFunctions.m */; };
@@ -828,6 +829,7 @@
 		A77FFAA41A77907B0019DD5C /* PLYBrandedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYBrandedTableViewCell.m; sourceTree = "<group>"; };
 		A77FFAAC1A77E5120019DD5C /* PLYBrandOwnerPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYBrandOwnerPickerViewController.h; sourceTree = "<group>"; };
 		A77FFAAD1A77E5120019DD5C /* PLYBrandOwnerPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYBrandOwnerPickerViewController.m; sourceTree = "<group>"; };
+		A7A0DF291B5BB2E500B1E329 /* ProductLayerUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductLayerUI.h; sourceTree = "<group>"; };
 		A7A38CD01A2B4FFD005D8395 /* PLYFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYFunctions.h; sourceTree = "<group>"; };
 		A7A38CD11A2B4FFD005D8395 /* PLYFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYFunctions.m; sourceTree = "<group>"; };
 		A7B214F6183F842000C38635 /* ProductLayerSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductLayerSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1192,6 +1194,7 @@
 				A7EE559E1A121C3300DD55FE /* Categories */,
 				A76D3F8E19866B690032FE59 /* Login/Signup */,
 				A76D3F8D19866B4B0032FE59 /* Validation */,
+				A7A0DF291B5BB2E500B1E329 /* ProductLayerUI.h */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -1812,6 +1815,7 @@
 				A7EB727B1A72B43F00FFD4CC /* PLYReportProblemViewController.h in Headers */,
 				A7590B2119ED77B80084EBCA /* PLYReview.h in Headers */,
 				A73803341A28E91800011D9C /* PLYTextView.h in Headers */,
+				A7A0DF2A1B5BB2E500B1E329 /* ProductLayerUI.h in Headers */,
 				A7590B1D19ED77B80084EBCA /* PLYPackaging.h in Headers */,
 				A75CF7811A30DF4E007E30FC /* PLYEntities.h in Headers */,
 				A7CD959219FA821E008E3A41 /* PLYOpineComposeViewController.h in Headers */,

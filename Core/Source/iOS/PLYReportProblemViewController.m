@@ -9,7 +9,7 @@
 #import "PLYReportProblemViewController.h"
 #import "PLYTextView.h"
 
-#import "ProductLayerSDK.h"
+#import "ProductLayerUI.h"
 #import "PLYProblemReport.h"
 
 #import "DTBlockFunctions.h"

@@ -16,39 +16,7 @@
 #import "PLYConstants.h"
 #import "PLYFunctions.h"
 #import "PLYServer.h"
-
 #import "PLYEntities.h"
-
-
-#if TARGET_OS_IPHONE
-
-	#import "UIViewController+ProductLayer.h"
-
-	// iOS User Interface
-	#import "PLYBrandedTableViewCell.h"
-	#import "PLYLoginViewController.h"
-	#import "PLYTextField.h"
-	#import "PLYTextView.h"
-	#import "PLYOpineComposeViewController.h"
-	#import "PLYUserNameValidator.h"
-	#import "PLYFormEmailValidator.h"
-	#import "PLYCategoryPickerViewController.h"
-	#import "PLYBrandPickerViewController.h"
-	#import "PLYBrandOwnerPickerViewController.h"
-	#import "PLYGuidedInputViewController.h"
-	#import "PLYReportProblemViewController.h"
-
-	// Input Validation
-	#import "PLYFormValidator.h"
-	#import "PLYNonEmptyValidator.h"
-	#import "PLYContentsDidChangeValidator.h"
-
-	// Scanner
-	#import "PLYScannerViewController.h"
-	#import "PLYVideoPreviewInterestBox.h"
-	#import "PLYVideoPreviewView.h"
-
-#endif
 
 // constant for keychain
 #define PLY_SERVICE @"com.productlayer.api.auth-token"
