@@ -23,6 +23,7 @@
 #import "PLYBrandOwnerPickerViewController.h"
 #import "PLYGuidedInputViewController.h"
 #import "PLYReportProblemViewController.h"
+#import "PLYEditProductViewController.h"
 
 // Input Validation
 #import "PLYFormValidator.h"
