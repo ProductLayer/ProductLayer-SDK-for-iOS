@@ -25,7 +25,7 @@
 // ------ Login
 
 /* Explanation to show on login dialog */
-"PLY_LOGIN_EXPLAIN" = "Melde Dich bei ProductLayer an um die Zeitleiste Deiner Freunde zu sehen und eigene Meinungen abzugeben.";
+"PLY_LOGIN_EXPLAIN" = "Melde Dich bei ProductLayer an um die Zeitleiste Deiner Freunde zu sehen und eigene Meinungen abzugeben. Alle Aktivitäten, die Daten bei ProductLayer verändern, erfordern auch ein Login.";
 
 /* Link to lost password dialog */
 "PLY_LOGIN_LOST_PASSWORD" = "Kennwort vergessen ...";
@@ -188,3 +188,8 @@
 
 /* Explanation of what the social connections are for */
 "SOCIAL_CONNECTIONS_MSG" = "Verbinde Deine Social Network Konten um sie als alternatives Login zu verwenden.\n\nWahlweise kannst Du auch Deine Produkt-Opines mit diesen Netzen teilen.";
+
+// ----- ad-hoc login
+
+/* Error message for activities that require login */
+"PLY_LOGIN_REQUIRED_ERROR" = "Diese Aktion kann nicht ausgeführt werden ohne eingeloggt zu sein.";

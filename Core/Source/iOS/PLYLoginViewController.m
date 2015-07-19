@@ -10,6 +10,7 @@
 #import "PLYSignUpViewController.h"
 #import "PLYLostPasswordViewController.h"
 #import "UIViewController+ProductLayer.h"
+#import "PLYNavigationController.h"
 
 #import "PLYSocialAuthWebViewController.h"
 
@@ -33,6 +34,8 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	
 	UIButton *_facebookButton;
 	UIButton *_twitterButton;
+	
+	UILabel *_explainLabel;
 }
 
 - (void)viewDidLoad
@@ -42,14 +45,14 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	self.view.backgroundColor = [UIColor whiteColor];
 	
 	NSMutableArray *validators = [NSMutableArray array];
-	UILabel *explainLabel = [[UILabel alloc] init];
-	explainLabel.text = PLYLocalizedStringFromTable(@"PLY_LOGIN_EXPLAIN", @"UI", @"Explanation to show on login dialog");
+	_explainLabel = [[UILabel alloc] init];
+	_explainLabel.text = PLYLocalizedStringFromTable(@"PLY_LOGIN_EXPLAIN", @"UI", @"Explanation to show on login dialog");
 	
-	explainLabel.translatesAutoresizingMaskIntoConstraints = NO;
-	explainLabel.numberOfLines = 0;
-	explainLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
-	[explainLabel sizeToFit];
-	[self.view addSubview:explainLabel];
+	_explainLabel.translatesAutoresizingMaskIntoConstraints = NO;
+	_explainLabel.numberOfLines = 0;
+	_explainLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+	[_explainLabel sizeToFit];
+	[self.view addSubview:_explainLabel];
 	
 	PLYUserNameValidator *nameValidator = [PLYUserNameValidator validatorWithDelegate:self];
 	[validators addObject:nameValidator];
@@ -139,10 +142,10 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	
 	id topGuide = [self topLayoutGuide];
 	NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_nameField, _passwordField, topGuide,
-																						lostPwButton, signupButton, explainLabel,
+																						lostPwButton, signupButton, _explainLabel,
 																						_twitterButton, _facebookButton);
 	NSArray *constraints1 =
-	[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide]-[explainLabel]-[_nameField]-[_passwordField]-[lostPwButton]-[signupButton]-(50)-[_twitterButton]-(20)-[_facebookButton]"
+	[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide]-[_explainLabel]-[_nameField]-[_passwordField]-[lostPwButton]-[signupButton]-(50)-[_twitterButton]-(20)-[_facebookButton]"
 														 options:0 metrics:nil views:viewsDictionary];
 	NSArray *constraints2 =
 	[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_nameField(300)]"
@@ -152,7 +155,7 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 														 options:0 metrics:nil views:viewsDictionary];
 	
 	NSArray *constraints4 =
-	[NSLayoutConstraint constraintsWithVisualFormat:@"H:[explainLabel(280)]"
+	[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_explainLabel(280)]"
 														 options:0 metrics:nil views:viewsDictionary];
 
 	[self.view addConstraints:constraints1];
@@ -197,7 +200,7 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 											 constant:0]];
 	
 	[self.view addConstraint:
-	 [NSLayoutConstraint constraintWithItem:explainLabel
+	 [NSLayoutConstraint constraintWithItem:_explainLabel
 											attribute:NSLayoutAttributeCenterX
 											relatedBy:NSLayoutRelationEqual
 												toItem:self.view
@@ -217,6 +220,10 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	
 	NSString *backTitle = PLYLocalizedStringFromTable(@"PLY_LOGIN_SHORT_TITLE", @"UI", @"Short title used as back button from other view controllers going back to login");
 	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:backTitle style:UIBarButtonItemStylePlain target:nil action:NULL];
+	
+	
+	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboardTap:)];
+	[self.view addGestureRecognizer:tap];
 }
 
 - (BOOL)shouldAutorotate
@@ -224,7 +231,7 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	return YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (PLY_SUPPORTED_INTERFACE_ORIENTATIONS_RETURN_TYPE)supportedInterfaceOrientations
 {
 	return UIInterfaceOrientationPortrait | UIInterfaceOrientationPortraitUpsideDown;
 }
@@ -245,6 +252,37 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	{
 		_nameField.text = [[NSUserDefaults standardUserDefaults] objectForKey:LastLoggedInUserDefault];
 	}
+	
+	if ([_explanationText length])
+	{
+		_explainLabel.text = _explanationText;
+	}
+}
+
+#pragma mark - Class Methods
+
++ (void)presentLoginWithExplanation:(NSString *)explanation completion:(PLYLoginCompletion)completion
+{
+	DTBlockPerformSyncOnMainThread(^{
+		PLYLoginViewController *login = [[PLYLoginViewController alloc] init];
+		login.explanationText = explanation;
+		
+		if (completion)
+		{
+			login.loginCompletion = completion;
+		};
+		
+		PLYNavigationController *nav = [[PLYNavigationController alloc] initWithRootViewController:login];
+		
+		UIViewController *controllerForPresenting = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+		
+		while (controllerForPresenting.presentedViewController)
+		{
+			controllerForPresenting = controllerForPresenting.presentedViewController;
+		}
+		
+		[controllerForPresenting presentViewController:nav animated:YES completion:NULL];
+	});
 }
 
 #pragma mark - Actions
@@ -254,7 +292,12 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	// dismiss keyboard
 	[[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 
-	[self dismissViewControllerAnimated:YES completion:NULL];
+	[self dismissViewControllerAnimated:YES completion:^{
+		if (_loginCompletion)
+		{
+			_loginCompletion(NO);
+		}
+	}];
 }
 
 - (void)_loginCompleteForUser:(PLYUser *)user
@@ -267,7 +310,12 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	[[NSUserDefaults standardUserDefaults] setObject:user.nickname forKey:LastLoggedInUserDefault];
 	
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		[self dismissViewControllerAnimated:YES completion:NULL];
+		[self dismissViewControllerAnimated:YES completion:^{
+			if (_loginCompletion)
+			{
+				_loginCompletion(YES);
+			}
+		}];
 	});
 }
 
@@ -331,6 +379,9 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	
 	UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:webVC];
 	
+	// present sign in forms with same modal style as self
+	nav.modalPresentationStyle = self.modalPresentationStyle;
+	
 	[self presentViewController:nav animated:YES completion:NULL];
 	
 	[webVC startAuthorizationFlowWithRequest:request completion:^(BOOL isAuthenticated, NSString *token)
@@ -365,6 +416,12 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 {
 	NSURLRequest *request = [self.productLayerServer URLRequestForFacebookSignIn];
 	[self _signInFlowWithRequest:request];
+}
+
+- (IBAction)dismissKeyboardTap:(id)sender
+{
+	[_nameField resignFirstResponder];
+	[_passwordField resignFirstResponder];
 }
 
 #pragma mark - Form Validation

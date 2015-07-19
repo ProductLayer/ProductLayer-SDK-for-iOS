@@ -137,9 +137,6 @@
 	[center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 	[center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 	
-	// observe the logged in user
-	[self.productLayerServer addObserver:self forKeyPath:@"loggedInUser" options:NSKeyValueObservingOptionNew context:NULL];
-	
 	// observe the font size
 	[[NSNotificationCenter defaultCenter] addObserver:self
 														  selector:@selector(_didChangePreferredContentSize:)
@@ -257,25 +254,6 @@
 		
 		return;
 	}
-	/*
-	DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-		if (self.panelViewController)
-		{
-			[self.panelViewController dismissPanelViewControllerAnimated:YES completion:^{
-				[self showErrorPanelWithTitle:title error:error];
-			}];
-		}
-		else
-		{
-			PRYErrorPanelViewController *panel = [[PRYErrorPanelViewController alloc] initWithNibName:@"PRYErrorPanelViewController" bundle:[NSBundle mainBundle]];
-			panel.text = [error localizedDescription];
-			panel.title = title;
-			[self presentPanelViewController:panel animated:YES completion:NULL];
-			
-			DTLogError(@"%@: %@", title, [error localizedDescription]);
-		}
-	});
-	 */
 }
 
 #pragma mark - UITextViewDelegate

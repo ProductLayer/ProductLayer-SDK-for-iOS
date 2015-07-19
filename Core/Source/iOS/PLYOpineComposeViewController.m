@@ -8,6 +8,7 @@
 
 #import "PLYOpineComposeViewController.h"
 #import "PLYSocialConnectionViewController.h"
+#import "PLYLoginViewController.h"
 
 #import "UIViewController+ProductLayer.h"
 #import <CoreLocation/CoreLocation.h>
@@ -818,8 +819,10 @@
 	{
 		[_delegate opineComposeViewControllerDidCancel:self];
 	}
-	
-	[self dismissViewControllerAnimated:YES completion:NULL];
+	else
+	{
+		[self dismissViewControllerAnimated:YES completion:NULL];
+	}
 }
 
 - (void)save:(id)sender
@@ -860,12 +863,27 @@
 	{
 		[_delegate opineComposeViewController:self didFinishWithOpine:_opine];
 	}
-	
-	[self dismissViewControllerAnimated:YES completion:NULL];
+	else
+	{
+		// no delegate, so we are in charge
+		[self dismissViewControllerAnimated:YES completion:NULL];
+	}
 }
 
 - (void)_handleTwitter:(id)sender
 {
+	if (!self.productLayerServer.loggedInUser)
+	{
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
+			if (success)
+			{
+				[self _handleTwitter:sender];
+			}
+		}];
+		
+		return;
+	}
+	
 	if ([self _hasSocialConnection:@"twitter"])
 	{
 		self.opine.shareOnTwitter = !self.opine.shareOnTwitter;
@@ -883,6 +901,18 @@
 
 - (void)_handleFacebook:(id)sender
 {
+	if (!self.productLayerServer.loggedInUser)
+	{
+		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
+			if (success)
+			{
+				[self _handleFacebook:sender];
+			}
+		}];
+		
+		return;
+	}
+	
 	if ([self _hasSocialConnection:@"facebook"])
 	{
 		self.opine.shareOnFacebook = !self.opine.shareOnFacebook;
