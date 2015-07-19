@@ -18,6 +18,12 @@
 #import "PLYServer.h"
 #import "PLYEntities.h"
 
+#if TARGET_OS_IPHONE
+
+#import "ProductLayerUI.h"
+
+#endif
+
 // constant for keychain
 #define PLY_SERVICE @"com.productlayer.api.auth-token"
 
