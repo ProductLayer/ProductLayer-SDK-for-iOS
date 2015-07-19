@@ -13,7 +13,7 @@
 #import "UIViewController+ProductLayer.h"
 #import <CoreLocation/CoreLocation.h>
 
-#import "ProductLayerSDK.h"
+#import "ProductLayerUI.h"
 #import "DTBlockFunctions.h"
 #import "DTLog.h"
 

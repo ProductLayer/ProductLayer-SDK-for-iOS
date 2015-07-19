@@ -9,7 +9,7 @@
 #import "PLYSignUpViewController.h"
 #import "UIViewController+ProductLayer.h"
 
-#import "ProductLayerSDK.h"
+#import "ProductLayerUI.h"
 
 #import "DTBlockFunctions.h"
 #import "DTAlertView.h"

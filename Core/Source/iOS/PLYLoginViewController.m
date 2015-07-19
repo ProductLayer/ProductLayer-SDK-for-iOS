@@ -14,7 +14,7 @@
 
 #import "PLYSocialAuthWebViewController.h"
 
-#import "ProductLayerSDK.h"
+#import "ProductLayerUI.h"
 
 #import "DTBlockFunctions.h"
 
