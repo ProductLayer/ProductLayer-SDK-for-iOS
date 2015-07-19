@@ -497,7 +497,7 @@
 	
 	if ([trimmedText length])
 	{
-		if ([_delegate respondsToSelector:@selector(brandPickerDidSelect:)])
+		if ([_delegate respondsToSelector:@selector(brandOwnerPickerDidSelect:)])
 		{
 			_selectedBrandOwnerName = trimmedText;
 			
