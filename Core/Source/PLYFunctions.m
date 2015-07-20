@@ -121,18 +121,17 @@ NSBundle *PLYResourceBundle()
 	dispatch_once(&onceToken, ^{
 		// get the same bundle where one of the core entities classes are located in
 		NSBundle *bundle = [NSBundle bundleForClass:[PLYImage class]];
-		NSString *extension = [[bundle bundlePath] pathExtension];
 		
-		// inside a framework, the framework IS the resource bundle
-		_resourceBundle = bundle;
-		
-		// in apps and unit tests we need to get the bundle
-		if ([extension isEqualToString:@"app"] ||
-			 [extension isEqualToString:@"xctest"])
-		{
-			NSString *resourceBundlePath = [bundle pathForResource:@"ProductLayerSDK" ofType:@"bundle"];
-			_resourceBundle = [NSBundle bundleWithPath:resourceBundlePath];
-		}
+        NSString *resourceBundlePath = [bundle pathForResource:@"ProductLayerSDK" ofType:@"bundle"];
+        if (resourceBundlePath)
+        {
+            _resourceBundle = [NSBundle bundleWithPath:resourceBundlePath];
+        }
+        else
+        {
+            // inside a framework, but no bundle found, so that framework IS the resource bundle
+            _resourceBundle = bundle;
+        }
 	});
 	
 	return _resourceBundle;
