@@ -1581,7 +1581,6 @@
 	NSString *function = [NSString stringWithFormat:@"product/%@/images", gtin];
 	NSString *path = [self _functionPathForFunction:function];
 	
-	
 	PLYCompletion wrappedCompletion = [completion copy];
 	PLYCompletion ownCompletion = ^(id result, NSError *error) {
 		
