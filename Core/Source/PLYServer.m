@@ -668,7 +668,7 @@
 		NSArray *serviceAccounts = [keychain keychainItemsMatchingQuery:[DTKeychainGenericPassword keychainItemQueryForService:PLY_SERVICE account:_loggedInUser.Id] error:&error];
 		
 		// create new account
-		if (!serviceAccounts)
+		if (error)
 		{
 			DTLogError(@"Error querying keychain: %@", [error localizedDescription]);
 			return;
@@ -810,6 +810,30 @@
 
 #pragma mark - Search
 
+- (void)_refreshProductsWithGTIN:(NSString *)GTIN
+{
+	[self performSearchForGTIN:GTIN language:nil completion:^(id result, NSError *error) {
+		
+		if (error)
+		{
+			return;
+		}
+		
+		for (PLYProduct *product in result)
+		{
+			PLYProduct *cachedProduct = [_entityCache objectForKey:product.Id];
+			NSUInteger cachedVersion = cachedProduct.version;
+			
+			PLYProduct *updatedProduct = [self _entityByUpdatingCachedEntity:product];
+			if (updatedProduct.version > cachedVersion)
+			{
+				NSDictionary *userInfo = @{PLYServerDidUpdateEntityKey: updatedProduct};
+				[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidUpdateEntityNotification object:self userInfo:userInfo];
+			}
+		}
+	}];
+}
+
 /**
  * Search product by GTIN and language.
  **/
@@ -851,6 +875,9 @@
 				}
 				
 				entity.downVoter = [tmpDownArray copy];
+				
+				// update createdBy
+				entity.createdBy = [self _entityByUpdatingCachedEntity:entity.createdBy];
 			}
 		}
 		
@@ -1554,7 +1581,22 @@
 	NSString *function = [NSString stringWithFormat:@"product/%@/images", gtin];
 	NSString *path = [self _functionPathForFunction:function];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:data completion:completion];
+	
+	PLYCompletion wrappedCompletion = [completion copy];
+	PLYCompletion ownCompletion = ^(id result, NSError *error) {
+		
+		if (!error)
+		{
+			[self _refreshProductsWithGTIN:gtin];
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:data completion:ownCompletion];
 }
 
 - (NSURL *)URLForImage:(PLYImage *)image maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop
