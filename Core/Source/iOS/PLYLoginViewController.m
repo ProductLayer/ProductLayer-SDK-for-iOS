@@ -16,7 +16,7 @@
 
 #import "ProductLayerUI.h"
 
-#import <DTFoundation/DTBlockFunctions.h>
+#import "DTBlockFunctions.h"
 #import <DTFoundation/DTLog.h>
 
 // user default remembering last successful nickname
