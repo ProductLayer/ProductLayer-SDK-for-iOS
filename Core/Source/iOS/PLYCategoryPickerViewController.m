@@ -11,8 +11,9 @@
 
 #import "ProductLayerSDK.h"
 
-#import "DTLog.h"
 #import "NSString+DTPaths.h"
+
+#import <DTFoundation/DTLog.h>
 
 #define CELL_IDENTIFIER @"Identifier"
 

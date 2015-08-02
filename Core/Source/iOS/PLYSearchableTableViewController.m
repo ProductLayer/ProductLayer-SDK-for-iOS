@@ -7,7 +7,8 @@
 //
 
 #import "PLYSearchableTableViewController.h"
-#import "DTLog.h"
+
+#import <DTFoundation/DTLog.h>
 
 @interface PLYSearchableTableViewController ()
 

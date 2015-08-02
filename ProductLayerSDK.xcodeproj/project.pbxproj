@@ -31,7 +31,7 @@
 		A72592B41A757D5900952685 /* PLYCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A72592B11A757D5900952685 /* PLYCategory.m */; };
 		A72592B51A757D5900952685 /* PLYCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A72592B11A757D5900952685 /* PLYCategory.m */; };
 		A72592B61A757D5900952685 /* PLYCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = A72592B21A757D5900952685 /* PLYCategory.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A72592B71A757D5900952685 /* PLYCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = A72592B21A757D5900952685 /* PLYCategory.h */; };
+		A72592B71A757D5900952685 /* PLYCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = A72592B21A757D5900952685 /* PLYCategory.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A72592BB1A757D9400952685 /* PLYTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A72592B91A757D9400952685 /* PLYTextFieldTableViewCell.m */; };
 		A72592BC1A757D9400952685 /* PLYTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A72592B91A757D9400952685 /* PLYTextFieldTableViewCell.m */; };
 		A72592BD1A757D9400952685 /* PLYEditProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72592BA1A757D9400952685 /* PLYEditProductViewController.m */; };
@@ -51,6 +51,37 @@
 		A740BB7C19F23F9200DA3943 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FB183F842000C38635 /* CoreGraphics.framework */; };
 		A740BB7D19F23FA100DA3943 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7590B4019ED7CDF0084EBCA /* QuartzCore.framework */; };
 		A74396011A4090160096CF2F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A74396001A4090160096CF2F /* AddressBookUI.framework */; };
+		A74988191B6EA4E600A66234 /* libDTFoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B4420E183F913000E8A170 /* libDTFoundation.a */; };
+		A74988621B6EA88900A66234 /* PLYBrandOwnerPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A77FFAAC1A77E5120019DD5C /* PLYBrandOwnerPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A74988641B6EA89F00A66234 /* PLYBrandOwnerPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A77FFAAC1A77E5120019DD5C /* PLYBrandOwnerPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A74988651B6EA8A400A66234 /* PLYBrandOwner.h in Headers */ = {isa = PBXBuildFile; fileRef = A75CF74A1A30B4BD007E30FC /* PLYBrandOwner.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A74988661B6EA8AC00A66234 /* ProductLayerSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B44248183F91E700E8A170 /* ProductLayerSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A74988671B6EA8C600A66234 /* PLYJavaTimestampFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D0A1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A74988681B6EA8E400A66234 /* PLYEntities.h in Headers */ = {isa = PBXBuildFile; fileRef = A75CF7801A30DF4E007E30FC /* PLYEntities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A74988691B6EA8E400A66234 /* PLYBrand.h in Headers */ = {isa = PBXBuildFile; fileRef = A75CF7481A30B4BD007E30FC /* PLYBrand.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A749886A1B6EA8E400A66234 /* PLYCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = A72592B21A757D5900952685 /* PLYCategory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A749886B1B6EA8E400A66234 /* PLYEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = A7548AE9196C2E7C000B72EB /* PLYEntity.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A749886C1B6EA8E400A66234 /* PLYErrorMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = C97FAA16191CCA3400144D2C /* PLYErrorMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A749886D1B6EA8E400A66234 /* PLYErrorResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = C97FAA1A191CCA4D00144D2C /* PLYErrorResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A749886E1B6EA8E400A66234 /* PLYImage.h in Headers */ = {isa = PBXBuildFile; fileRef = A7548B22196C4C16000B72EB /* PLYImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A749886F1B6EA8E400A66234 /* PLYList.h in Headers */ = {isa = PBXBuildFile; fileRef = C98CD25F190FC4E60035647C /* PLYList.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A74988701B6EA8E400A66234 /* PLYListItem.h in Headers */ = {isa = PBXBuildFile; fileRef = C98CD262190FC7D50035647C /* PLYListItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A74988711B6EA8E400A66234 /* PLYOpine.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B487391987CA7800FA8F83 /* PLYOpine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A74988721B6EA8E400A66234 /* PLYPackaging.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D31F6C190A742500C91A08 /* PLYPackaging.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A74988731B6EA8E400A66234 /* PLYProblemReport.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EB72711A72B42300FFD4CC /* PLYProblemReport.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A74988741B6EA8E400A66234 /* PLYProduct.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D31F6E190A742500C91A08 /* PLYProduct.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A74988751B6EA8E400A66234 /* PLYReview.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D31F76190ABE0E00C91A08 /* PLYReview.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A74988761B6EA8E400A66234 /* PLYUser.h in Headers */ = {isa = PBXBuildFile; fileRef = C9ADBDD21911502B004C81B3 /* PLYUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A74988771B6EA8E400A66234 /* PLYUserAvatar.h in Headers */ = {isa = PBXBuildFile; fileRef = A75CF74C1A30B4BD007E30FC /* PLYUserAvatar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A74988781B6EA8E400A66234 /* PLYProductCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = C97FAADE1921FCFA00144D2C /* PLYProductCategory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A74988791B6EA8E400A66234 /* PLYUploadImage.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D3F1A9FA965001734B8 /* PLYUploadImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A749887A1B6EA8E400A66234 /* PLYVotableEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B4877D1987CFB200FA8F83 /* PLYVotableEntity.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A749887B1B6EA8E400A66234 /* PLYCompatibility.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EA07231A2B14A800B61CCE /* PLYCompatibility.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A749887C1B6EA8E400A66234 /* PLYConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B442A2183F97B800E8A170 /* PLYConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A749887D1B6EA8E400A66234 /* PLYServer.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B44246183F91E700E8A170 /* PLYServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A749887E1B6EA8E400A66234 /* PLYFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A38CD01A2B4FFD005D8395 /* PLYFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A749887F1B6EA8EB00A66234 /* PLYConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B442A2183F97B800E8A170 /* PLYConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A74988801B6EA8EB00A66234 /* PLYServer.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B44246183F91E700E8A170 /* PLYServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7548AEB196C2E7C000B72EB /* PLYEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548AEA196C2E7C000B72EB /* PLYEntity.m */; };
 		A7548B24196C4C16000B72EB /* PLYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548B23196C4C16000B72EB /* PLYImage.m */; };
 		A7590AFF19ED77B40084EBCA /* PLYLoginViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76D3F5D198650770032FE59 /* PLYLoginViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -167,9 +198,9 @@
 		A7665D0C1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7665D091A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m */; };
 		A7665D0D1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7665D091A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m */; };
 		A7665D0E1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D0A1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A7665D0F1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D0A1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h */; };
+		A7665D0F1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D0A1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7665D411A9FA965001734B8 /* PLYUploadImage.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D3F1A9FA965001734B8 /* PLYUploadImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A7665D421A9FA965001734B8 /* PLYUploadImage.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D3F1A9FA965001734B8 /* PLYUploadImage.h */; };
+		A7665D421A9FA965001734B8 /* PLYUploadImage.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D3F1A9FA965001734B8 /* PLYUploadImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7665D431A9FA965001734B8 /* PLYUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7665D401A9FA965001734B8 /* PLYUploadImage.m */; };
 		A7665D441A9FA965001734B8 /* PLYUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7665D401A9FA965001734B8 /* PLYUploadImage.m */; };
 		A7665D451A9FA965001734B8 /* PLYUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7665D401A9FA965001734B8 /* PLYUploadImage.m */; };
@@ -202,7 +233,7 @@
 		A77FFACE1A77E5790019DD5C /* PLYBrandOwnerPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A77FFAAD1A77E5120019DD5C /* PLYBrandOwnerPickerViewController.m */; };
 		A77FFACF1A77E57B0019DD5C /* PLYBrandOwnerPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A77FFAAD1A77E5120019DD5C /* PLYBrandOwnerPickerViewController.m */; };
 		A78DB5E51A46E26A00CD8A14 /* ProductLayerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D997EB1A2B11A800C80C2B /* ProductLayerSDK.framework */; };
-		A7A0DF2A1B5BB2E500B1E329 /* ProductLayerUI.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A0DF291B5BB2E500B1E329 /* ProductLayerUI.h */; };
+		A7A0DF2A1B5BB2E500B1E329 /* ProductLayerUI.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A0DF291B5BB2E500B1E329 /* ProductLayerUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7A38CD21A2B4FFD005D8395 /* PLYFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A38CD01A2B4FFD005D8395 /* PLYFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7A38CD31A2B4FFD005D8395 /* PLYFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A38CD01A2B4FFD005D8395 /* PLYFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7A38CD41A2B4FFD005D8395 /* PLYFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A38CD11A2B4FFD005D8395 /* PLYFunctions.m */; };
@@ -270,7 +301,7 @@
 		A7EA08441A2B377300B61CCE /* DTFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7EA08351A2B31B500B61CCE /* DTFoundation.framework */; };
 		A7EA08451A2B378F00B61CCE /* DTFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A7EA08351A2B31B500B61CCE /* DTFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A7EB72731A72B42300FFD4CC /* PLYProblemReport.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EB72711A72B42300FFD4CC /* PLYProblemReport.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A7EB72741A72B42300FFD4CC /* PLYProblemReport.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EB72711A72B42300FFD4CC /* PLYProblemReport.h */; };
+		A7EB72741A72B42300FFD4CC /* PLYProblemReport.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EB72711A72B42300FFD4CC /* PLYProblemReport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7EB72751A72B42300FFD4CC /* PLYProblemReport.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EB72721A72B42300FFD4CC /* PLYProblemReport.m */; };
 		A7EB72761A72B42300FFD4CC /* PLYProblemReport.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EB72721A72B42300FFD4CC /* PLYProblemReport.m */; };
 		A7EB72771A72B42300FFD4CC /* PLYProblemReport.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EB72721A72B42300FFD4CC /* PLYProblemReport.m */; };
@@ -419,6 +450,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = A71902A616A8029400C1EC52;
 			remoteInfo = "DTDownload (iOS)";
+		};
+		A74988171B6EA4D800A66234 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B4418A183F90B900E8A170 /* DTFoundation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A70B4CE61486637E00873A4A;
+			remoteInfo = "Static Library";
 		};
 		A7590AF119ED77710084EBCA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -703,15 +741,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		A7B2171F183F8A3800C38635 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C97D2D091A0037D4003885A1 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1062,6 +1091,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A74988191B6EA4E600A66234 /* libDTFoundation.a in Frameworks */,
 				A7ACC9A81A307B86004EE5BD /* libDTKeychain.a in Frameworks */,
 				C92A6256198A1B3900997DDC /* Security.framework in Frameworks */,
 				A7B21722183F8A3800C38635 /* Foundation.framework in Frameworks */,
@@ -1763,6 +1793,40 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		A74988631B6EA89900A66234 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A74988761B6EA8E400A66234 /* PLYUser.h in Headers */,
+				A749887D1B6EA8E400A66234 /* PLYServer.h in Headers */,
+				A74988721B6EA8E400A66234 /* PLYPackaging.h in Headers */,
+				A74988691B6EA8E400A66234 /* PLYBrand.h in Headers */,
+				A749887C1B6EA8E400A66234 /* PLYConstants.h in Headers */,
+				A74988701B6EA8E400A66234 /* PLYListItem.h in Headers */,
+				A74988651B6EA8A400A66234 /* PLYBrandOwner.h in Headers */,
+				A74988671B6EA8C600A66234 /* PLYJavaTimestampFunctions.h in Headers */,
+				A749886B1B6EA8E400A66234 /* PLYEntity.h in Headers */,
+				A749887A1B6EA8E400A66234 /* PLYVotableEntity.h in Headers */,
+				A749886F1B6EA8E400A66234 /* PLYList.h in Headers */,
+				A74988771B6EA8E400A66234 /* PLYUserAvatar.h in Headers */,
+				A749886C1B6EA8E400A66234 /* PLYErrorMessage.h in Headers */,
+				A74988641B6EA89F00A66234 /* PLYBrandOwnerPickerViewController.h in Headers */,
+				A74988791B6EA8E400A66234 /* PLYUploadImage.h in Headers */,
+				A749886A1B6EA8E400A66234 /* PLYCategory.h in Headers */,
+				A74988751B6EA8E400A66234 /* PLYReview.h in Headers */,
+				A749887B1B6EA8E400A66234 /* PLYCompatibility.h in Headers */,
+				A74988731B6EA8E400A66234 /* PLYProblemReport.h in Headers */,
+				A749886E1B6EA8E400A66234 /* PLYImage.h in Headers */,
+				A74988711B6EA8E400A66234 /* PLYOpine.h in Headers */,
+				A74988661B6EA8AC00A66234 /* ProductLayerSDK.h in Headers */,
+				A74988741B6EA8E400A66234 /* PLYProduct.h in Headers */,
+				A749886D1B6EA8E400A66234 /* PLYErrorResponse.h in Headers */,
+				A74988781B6EA8E400A66234 /* PLYProductCategory.h in Headers */,
+				A74988681B6EA8E400A66234 /* PLYEntities.h in Headers */,
+				A749887E1B6EA8E400A66234 /* PLYFunctions.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A7590AD719ED77710084EBCA /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1780,6 +1844,7 @@
 				A7590B2919ED77BD0084EBCA /* PLYServer.h in Headers */,
 				A776659E1A1B547B008AB88C /* PLYNonEmptyValidator.h in Headers */,
 				A7590B0D19ED77B40084EBCA /* PLYUserNameValidator.h in Headers */,
+				A74988621B6EA88900A66234 /* PLYBrandOwnerPickerViewController.h in Headers */,
 				A7590B1F19ED77B80084EBCA /* PLYProduct.h in Headers */,
 				A75CF7441A30B48A007E30FC /* PLYVideoPreviewView.h in Headers */,
 				A719180E1A1B5B1B002C2D76 /* PLYContentsDidChangeValidator.h in Headers */,
@@ -1830,8 +1895,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7EA070C1A2B139C00B61CCE /* PLYImage.h in Headers */,
+				A74988801B6EA8EB00A66234 /* PLYServer.h in Headers */,
 				A7EB72741A72B42300FFD4CC /* PLYProblemReport.h in Headers */,
 				A7EA071E1A2B139C00B61CCE /* PLYProductCategory.h in Headers */,
+				A749887F1B6EA8EB00A66234 /* PLYConstants.h in Headers */,
 				A7EA070E1A2B139C00B61CCE /* PLYList.h in Headers */,
 				A75CF74F1A30B4BD007E30FC /* PLYBrand.h in Headers */,
 				A7EA07101A2B139C00B61CCE /* PLYListItem.h in Headers */,
@@ -1944,11 +2011,12 @@
 			buildPhases = (
 				A7B2171D183F8A3800C38635 /* Sources */,
 				A7B2171E183F8A3800C38635 /* Frameworks */,
-				A7B2171F183F8A3800C38635 /* CopyFiles */,
+				A74988631B6EA89900A66234 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A74988181B6EA4D800A66234 /* PBXTargetDependency */,
 				A7ACC9A71A307B80004EE5BD /* PBXTargetDependency */,
 			);
 			name = "Static Library (iOS)";
@@ -2630,6 +2698,11 @@
 			isa = PBXTargetDependency;
 			name = "DTDownload (iOS)";
 			targetProxy = A71C2BB91843AD9600B77DB4 /* PBXContainerItemProxy */;
+		};
+		A74988181B6EA4D800A66234 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Static Library";
+			targetProxy = A74988171B6EA4D800A66234 /* PBXContainerItemProxy */;
 		};
 		A7590AF219ED77710084EBCA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

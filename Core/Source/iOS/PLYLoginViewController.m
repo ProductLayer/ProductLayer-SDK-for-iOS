@@ -19,6 +19,7 @@
 #import <DTFoundation/DTBlockFunctions.h>
 #import <DTFoundation/DTLog.h>
 
+
 // user default remembering last successful nickname
 NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 

@@ -10,8 +10,10 @@
 #import "PLYVideoPreviewView.h"
 #import "PLYVideoPreviewInterestBox.h"
 #import "PLYAVFoundationFunctions.h"
-#import "DTLog.h"
 #import "PLYFunctions.h"
+
+#import <DTFoundation/DTLog.h>
+
 
 #import <AVFoundation/AVFoundation.h>
 

@@ -8,11 +8,12 @@
 
 #import "ProductLayerSDK.h"
 
-#import "DTLog.h"
 #import "NSString+DTURLEncoding.h"
 #import "DTBlockFunctions.h"
 #import "DTKeychain.h"
 #import "DTKeychainGenericPassword.h"
+
+#import <DTFoundation/DTLog.h>
 
 #if TARGET_OS_IPHONE
 
