@@ -16,7 +16,8 @@
 
 #import "ProductLayerUI.h"
 
-#import "DTBlockFunctions.h"
+#import <DTFoundation/DTBlockFunctions.h>
+#import <DTFoundation/DTLog.h>
 
 // user default remembering last successful nickname
 NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
@@ -36,6 +37,9 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	UIButton *_twitterButton;
 	
 	UILabel *_explainLabel;
+	
+	BOOL _didTryWebCredential;
+	BOOL _userDidPickWebCredential;
 }
 
 - (void)viewDidLoad
@@ -259,6 +263,51 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	}
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	
+	if (_didTryWebCredential)
+	{
+		return;
+	}
+	
+	_didTryWebCredential = YES;
+	
+	SecRequestSharedWebCredential(CFSTR("prod.ly"), NULL, ^(CFArrayRef credentials, CFErrorRef error)
+	{
+		if (error != NULL)
+		{
+			DTLogError(@"Error requesting web credential: %@", [(__bridge NSError *)error localizedDescription]);
+			return;
+		}
+		
+		CFStringRef server = NULL;
+		CFStringRef userName = NULL;
+		CFStringRef password = NULL;
+		
+		// If credentials are found, use them.
+		if (CFArrayGetCount(credentials) > 0)
+		{
+			// There will only ever be one credential dictionary
+			CFDictionaryRef credentialDict =
+			CFArrayGetValueAtIndex(credentials, 0);
+			
+			server = CFDictionaryGetValue(credentialDict, kSecAttrServer);
+			userName = CFDictionaryGetValue(credentialDict, kSecAttrAccount);
+			password = CFDictionaryGetValue(credentialDict, kSecSharedPassword);
+			
+			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+				self.nameField.text = (__bridge NSString *)(userName);
+				self.passwordField.text = (__bridge NSString *)(password);
+				
+				_userDidPickWebCredential = YES;
+				[self done:nil];
+			});
+		}
+	});
+}
+
 #pragma mark - Class Methods
 
 + (void)presentLoginWithExplanation:(NSString *)explanation completion:(PLYLoginCompletion)completion
@@ -344,6 +393,20 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 				[alert show];
 				
 				return;
+			}
+			else
+			{
+				if (!_userDidPickWebCredential)
+				{
+					// also save as shared web credential if possible
+					SecAddSharedWebCredential(CFSTR("prod.ly"), (__bridge CFStringRef)(_nameField.text), (__bridge CFStringRef)(_passwordField.text), ^(CFErrorRef error) {
+						
+						if (error)
+						{
+							DTLogError(@"Error updating web credential: %@", [(__bridge NSError *)error localizedDescription]);
+						}
+					});
+				}
 			}
 			
 			[self _loginCompleteForUser:result];
