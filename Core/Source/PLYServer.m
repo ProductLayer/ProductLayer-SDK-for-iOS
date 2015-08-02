@@ -877,7 +877,10 @@
 				entity.downVoter = [tmpDownArray copy];
 				
 				// update createdBy
-				entity.createdBy = [self _entityByUpdatingCachedEntity:entity.createdBy];
+				if (entity.createdBy)
+				{
+					entity.createdBy = [self _entityByUpdatingCachedEntity:entity.createdBy];
+				}
 			}
 		}
 		
