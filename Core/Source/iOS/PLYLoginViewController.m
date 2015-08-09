@@ -283,29 +283,18 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 			return;
 		}
 		
-		CFStringRef server = NULL;
-		CFStringRef userName = NULL;
-		CFStringRef password = NULL;
+		NSDictionary *credential = [(__bridge NSArray *)credentials firstObject];
 		
-		// If credentials are found, use them.
-		if (CFArrayGetCount(credentials) > 0)
-		{
-			// There will only ever be one credential dictionary
-			CFDictionaryRef credentialDict =
-			CFArrayGetValueAtIndex(credentials, 0);
+		NSString *userName = credential[(__bridge id)(kSecAttrAccount)];
+		NSString *password = credential[(__bridge id)(kSecSharedPassword)];
+		
+		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+			self.nameField.text = userName;
+			self.passwordField.text = password;
 			
-			server = CFDictionaryGetValue(credentialDict, kSecAttrServer);
-			userName = CFDictionaryGetValue(credentialDict, kSecAttrAccount);
-			password = CFDictionaryGetValue(credentialDict, kSecSharedPassword);
-			
-			DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-				self.nameField.text = (__bridge NSString *)(userName);
-				self.passwordField.text = (__bridge NSString *)(password);
-				
-				_userDidPickWebCredential = YES;
-				[self done:nil];
-			});
-		}
+			_userDidPickWebCredential = YES;
+			[self done:nil];
+		});
 	});
 }
 
