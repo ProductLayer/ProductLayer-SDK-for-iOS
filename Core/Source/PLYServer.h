@@ -382,6 +382,15 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 - (void)createOpine:(PLYOpine *)opine completion:(PLYCompletion)completion;
 
 /**
+ Refreshes an opine from the server.
+ 
+ @param opine The opine
+ @param completion The completion handler for the request
+ */
+- (void)refreshOpine:(PLYOpine *)opine completion:(PLYCompletion)completion;
+
+
+/**
  Destroy an opine.
  @param opine The opine
  @param completion The completion handler for the request

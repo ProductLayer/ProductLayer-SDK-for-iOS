@@ -1610,7 +1610,22 @@
 	NSString *function = [NSString stringWithFormat:@"/image/%@", image.fileId];
 	NSString *path = [self _functionPathForFunction:function];
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil payload:nil completion:completion];
+	PLYCompletion wrappedCompletion = [completion copy];
+	PLYCompletion ownCompletion = ^(id result, NSError *error) {
+		
+		if (!error)
+		{
+			NSDictionary *userInfo = @{PLYServerDidDeleteEntityKey: [result lastObject]};
+			[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidDeleteEntityNotification object:self userInfo:userInfo];
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil payload:nil completion:ownCompletion];
 }
 
 - (void)rotateImage:(PLYImage *)image degrees:(NSUInteger)degrees completion:(PLYCompletion)completion
@@ -1627,6 +1642,9 @@
 		if (result)
 		{
 			result = [self _entityByUpdatingCachedEntity:result];
+			
+			NSDictionary *userInfo = @{PLYServerDidUpdateEntityKey: result};
+			[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidUpdateEntityNotification object:self userInfo:userInfo];
 		}
 		
 		if (wrappedCompletion)
@@ -1838,8 +1856,55 @@
 		NSString *path = [self _functionPathForFunction:function];
 		NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:opine];
 		
-		[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:completion];
+		PLYCompletion wrappedCompletion = [completion copy];
+		PLYCompletion ownCompletion = ^(id result, NSError *error) {
+			
+			if (result)
+			{
+				result = [self _entityByUpdatingCachedEntity:result];
+				
+				NSDictionary *userInfo = @{PLYServerDidCreateEntityKey: result};
+				[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidCreateEntityNotification object:self userInfo:userInfo];
+				
+				[self _refreshProductsWithGTIN:opine.GTIN];
+			}
+			
+			if (wrappedCompletion)
+			{
+				wrappedCompletion(result, error);
+			}
+		};
+		
+		[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:ownCompletion];
 	}];
+}
+
+- (void)refreshOpine:(PLYOpine *)opine completion:(PLYCompletion)completion
+{
+	NSParameterAssert(opine.Id);
+	NSParameterAssert(completion);
+	
+	NSString *function = [NSString stringWithFormat:@"/opine/%@", opine.Id];
+	NSString *path = [self _functionPathForFunction:function];
+	
+	PLYCompletion wrappedCompletion = [completion copy];
+	PLYCompletion ownCompletion = ^(id result, NSError *error) {
+		
+		if (result)
+		{
+			result = [self _entityByUpdatingCachedEntity:result];
+			
+			NSDictionary *userInfo = @{PLYServerDidUpdateEntityKey: result};
+			[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidUpdateEntityNotification object:self userInfo:userInfo];
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:nil payload:nil completion:ownCompletion];
 }
 
 - (void)deleteOpine:(PLYOpine *)opine completion:(PLYCompletion)completion
