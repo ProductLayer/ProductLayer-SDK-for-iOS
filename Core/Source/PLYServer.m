@@ -1046,8 +1046,8 @@
  **/
 - (void)createUserWithName:(NSString *)user email:(NSString *)email completion:(PLYCompletion)completion
 {
-	NSParameterAssert(user);
-	NSParameterAssert(email);
+	NSParameterAssert([user length]);
+	NSParameterAssert([email length]);
 	NSParameterAssert(completion);
 	
 	NSString *path = [self _functionPathForFunction:@"users"];
@@ -1062,8 +1062,8 @@
  **/
 - (void)loginWithUser:(NSString *)user password:(NSString *)password completion:(PLYCompletion)completion
 {
-	NSParameterAssert(user);
-	NSParameterAssert(password);
+	NSParameterAssert([user length]);
+	NSParameterAssert([password length]);
 	NSParameterAssert(completion);
 	
 	_performingLogin = YES;

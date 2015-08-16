@@ -366,6 +366,12 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 
 - (void)done:(id)sender
 {
+	if (![self _allFieldsValid])
+	{
+		DTLogError(@"Invalid event: Should not be able to execute done if not both user and password fields are value");
+		return;
+	}
+	
 	// dismiss keyboard
 	[[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 
