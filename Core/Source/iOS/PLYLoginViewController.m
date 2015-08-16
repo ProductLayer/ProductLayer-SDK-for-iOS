@@ -283,6 +283,12 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 			return;
 		}
 		
+		if (!CFArrayGetCount(credentials))
+		{
+			DTLogInfo(@"User did not have any shared web credentials or selected 'Not Now'");
+			return;
+		}
+		
 		NSDictionary *credential = [(__bridge NSArray *)credentials firstObject];
 		
 		NSString *userName = credential[(__bridge id)(kSecAttrAccount)];
