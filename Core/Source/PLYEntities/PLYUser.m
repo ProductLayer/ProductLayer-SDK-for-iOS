@@ -21,6 +21,7 @@
 @property (nonatomic, assign, readwrite) BOOL following;
 @property (nonatomic, assign, readwrite) BOOL followed;
 @property (nonatomic, copy, readwrite) NSDictionary *socialConnections;
+@property (nonatomic, copy, readwrite) NSArray *roles;
 @property (nonatomic, copy, readwrite) PLYUserAvatar *avatar;
 
 @end
@@ -34,9 +35,13 @@
 
 - (void)setValue:(id)value forKey:(NSString *)key
 {
-	if ([key isEqualToString:@"pl-app"] || [key isEqualToString:@"pl-usr-roles"])
+	if ([key isEqualToString:@"pl-app"])
 	{
 		// Do nothing
+	}
+	else if ([key isEqualToString:@"pl-usr-roles"])
+	{
+		self.roles = value;
 	}
 	else if ([key isEqualToString:@"pl-usr-nickname"])
 	{
@@ -182,6 +187,11 @@
 		dict[@"pl-usr-avatar"] = [_avatar dictionaryRepresentation];
 	}
 	
+	if (_roles)
+	{
+		dict[@"pl-usr-roles"] = _roles;
+	}
+	
 	// return immutable
 	return [dict copy];
 }
@@ -203,6 +213,7 @@
 	self.following = entity.following;
 	self.followed = entity.followed;
 	self.socialConnections = entity.socialConnections;
+	self.roles = entity.roles;
 	
 	if (entity.avatar)
 	{

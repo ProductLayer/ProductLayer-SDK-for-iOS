@@ -316,6 +316,19 @@ typedef void (^PLYCompletion)(id result, NSError *error);
              completion:(PLYCompletion)completion;
 
 /**
+ @param image The image to delete
+ @param completion The completion handler for the request
+ */
+- (void)deleteImage:(PLYImage *)image completion:(PLYCompletion)completion;
+
+/**
+ @param image The image to rotate
+ @param degrees The amount to rotate by, allowed values are: 90, 180, 270
+ @param completion The completion handler for the request
+ */
+- (void)rotateImage:(PLYImage *)image degrees:(NSUInteger)degrees completion:(PLYCompletion)completion;
+
+/**
  Determins the image URL for the given image with a maximum size and optional crop
  @param image The image to retrieve the URL for
  @param maxWidth The maximum width of the image
@@ -324,7 +337,6 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @returns The URL for the image
  */
 - (NSURL *)URLForImage:(PLYImage *)image maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop;
-
 
 /**
  Determins the image URL for the given default image for a given GTIN

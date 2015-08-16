@@ -1602,6 +1602,42 @@
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:data completion:ownCompletion];
 }
 
+- (void)deleteImage:(PLYImage *)image completion:(PLYCompletion)completion
+{
+	NSParameterAssert(image.Id);
+	NSParameterAssert(completion);
+	
+	NSString *function = [NSString stringWithFormat:@"/image/%@", image.fileId];
+	NSString *path = [self _functionPathForFunction:function];
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil payload:nil completion:completion];
+}
+
+- (void)rotateImage:(PLYImage *)image degrees:(NSUInteger)degrees completion:(PLYCompletion)completion
+{
+	NSParameterAssert(image.fileId);
+	NSParameterAssert(completion);
+	
+	NSString *function = [NSString stringWithFormat:@"/image/%@/rotate?degrees=%ld", image.fileId, (long)degrees];
+	NSString *path = [self _functionPathForFunction:function];
+	
+	PLYCompletion wrappedCompletion = [completion copy];
+	PLYCompletion ownCompletion = ^(id result, NSError *error) {
+		
+		if (result)
+		{
+			result = [self _entityByUpdatingCachedEntity:result];
+		}
+		
+		if (wrappedCompletion)
+		{
+			wrappedCompletion(result, error);
+		}
+	};
+	
+	[self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:nil payload:nil completion:ownCompletion];
+}
+
 - (NSURL *)URLForImage:(PLYImage *)image maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop
 {
 	NSParameterAssert(image);
