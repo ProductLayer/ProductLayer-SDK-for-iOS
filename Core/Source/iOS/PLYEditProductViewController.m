@@ -145,9 +145,7 @@
 	
 	if (!path || !_categories)
 	{
-		NSString *language = [[NSLocale preferredLanguages] firstObject];
-		
-		[self.productLayerServer categoriesWithLanguage:language completion:^(id result, NSError *error) {
+		[self.productLayerServer categoriesWithLanguage:nil completion:^(id result, NSError *error) {
 			if (result)
 			{
 				_categories = result;
