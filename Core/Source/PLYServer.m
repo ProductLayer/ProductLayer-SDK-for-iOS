@@ -2842,6 +2842,11 @@
 
 - (NSString *)localizedCategoryPathForKey:(NSString *)categoryKey
 {
+    if (!categoryKey)
+    {
+        return nil;
+    }
+    
     NSMutableString *tmpStr = [NSMutableString string];
     
     PLYCategory *category = _categories[categoryKey];
