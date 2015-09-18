@@ -52,114 +52,29 @@
 	}
 	
 	self.saveButtonItem.enabled = [self _saveIsPossible];
-	
-	// load category list if possible
-	[self _loadCategoriesFromCache];
 }
 
 #pragma mark - Helpers
 
-- (NSString *)_pathOfCategories:(NSArray *)categories forKey:(NSString *)key
-{
-	for (PLYCategory *category in categories)
-	{
-		if ([category.key isEqualToString:key])
-		{
-			return category.localizedName;
-		}
-		
-		// search through sub categories
-		
-		NSString *subPath = [self _pathOfCategories:category.subCategories forKey:key];
-		
-		if (subPath)
-		{
-			// sub-category matches, append with slash
-			return [[category.localizedName stringByAppendingString:@" / "] stringByAppendingString:subPath];
-		}
-	}
-	
-	return nil;
-}
-
-- (void)_saveCategoriesInCache
-{
-	NSString *language = [[NSLocale preferredLanguages] firstObject];
-	NSString *path = [[NSString cachesPath] stringByAppendingFormat:@"PLYCategories_%@.plist", language];
-	
-	NSMutableArray *tmpArray = [NSMutableArray array];
-	
-	for (PLYCategory *category in _categories)
-	{
-		NSDictionary *dict = [category dictionaryRepresentation];
-		[tmpArray addObject:dict];
-	}
-	
-	[tmpArray writeToFile:path atomically:YES];
-}
-
-- (void)_loadCategoriesFromCache
-{
-	NSString *language = [[NSLocale preferredLanguages] firstObject];
-	NSString *path = [[NSString cachesPath] stringByAppendingFormat:@"PLYCategories_%@.plist", language];
-	NSArray *array = [NSArray arrayWithContentsOfFile:path];
-	
-	if (array)
-	{
-		NSMutableArray *tmpArray = [NSMutableArray array];
-		
-		for (NSDictionary *dict in array)
-		{
-			PLYCategory *category = [[PLYCategory alloc] initWithDictionary:dict];
-			[tmpArray addObject:category];
-		}
-		
-		_categories = [tmpArray copy];
-	}
-}
-
 - (void)_updateCategoryForKey:(NSString *)key
 {
-	void (^block)() = ^ {
-		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-			UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:3]];
-			
-			NSString *path = [self _pathOfCategories:_categories forKey:key];
-			
-			if (path)
-			{
-				cell.textLabel.textColor = [UIColor blackColor];
-			}
-			
-			if (!path)
-			{
-				path = key;
-				cell.textLabel.textColor = [UIColor redColor];
-			}
-			
-			cell.textLabel.text = path;
-		});
-	};
-	
-	NSString *path = [self _pathOfCategories:_categories forKey:key];
-	
-	if (!path || !_categories)
-	{
-		[self.productLayerServer categoriesWithLanguage:nil completion:^(id result, NSError *error) {
-			if (result)
-			{
-				_categories = result;
-				
-				[self _saveCategoriesInCache];
-				
-				block();
-			}
-		}];
-	}
-	else
-	{
-		block();
-	}
+
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:3]];
+    
+    NSString *path = [self.productLayerServer localizedCategoryPathForKey:_product.category];
+    
+    if (path)
+    {
+        cell.textLabel.textColor = [UIColor blackColor];
+    }
+    
+    if (!path)
+    {
+        path = key;
+        cell.textLabel.textColor = [UIColor redColor];
+    }
+    
+    cell.textLabel.text = path;
 }
 
 - (void)_configureProductNameCell:(UITableViewCell *)cell

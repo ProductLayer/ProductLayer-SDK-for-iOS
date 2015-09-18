@@ -619,4 +619,10 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  */
 - (void)categoriesWithLanguage:(NSString *)language completion:(PLYCompletion)completion;
 
+/**
+ Returns a path string that concatenates the localized category names separated by slashes for a given category key
+ @returns The category path string
+ */
+- (NSString *)localizedCategoryPathForKey:(NSString *)categoryKey;
+
 @end

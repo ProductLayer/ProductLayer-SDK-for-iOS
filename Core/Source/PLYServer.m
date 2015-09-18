@@ -48,6 +48,9 @@
 	NSURLSessionConfiguration *_configuration;
 	
 	NSCache *_entityCache;
+    
+    // cached categories for the user main language
+    NSDictionary *_categories;
 }
 
 - (instancetype)initWithSessionConfiguration:(NSURLSessionConfiguration *)configuration
@@ -64,9 +67,14 @@
 		
 		// load last state (login user)
 		[self _loadState];
-
+        
+        // try to load categories
+        [self _loadCategoriesFromCache];
+        
 #if TARGET_OS_IPHONE
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:[UIApplication sharedApplication]];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_localeDidChange:) name:NSCurrentLocaleDidChangeNotification object:nil];
 #endif
 	}
 	
@@ -121,6 +129,8 @@
 			}
 		}];
 	}
+    
+    [self _refreshCategories];
 }
 
 #pragma mark - Request Handling
@@ -2780,6 +2790,76 @@
 
 #pragma mark - Working with Categories
 
+- (void)_refreshCategories
+{
+    [self categoriesWithLanguage:nil completion:^(id result, NSError *error) {
+        if (error)
+        {
+            DTLogWarning(@"Unable to refresh category list: %@", [error localizedDescription]);
+        }
+        else
+        {
+            DTLogInfo(@"Loaded %ld categories", [result count]);
+            
+            if ([result isKindOfClass:[NSArray class]])
+            {
+                 // turn into flattened dictionary for more efficient lookup
+                NSMutableDictionary *tmpDict = [NSMutableDictionary dictionary];
+                [self _appendCategoriesRecursivelyToDictionary:tmpDict fromArray:result];
+                _categories = [tmpDict copy];
+                
+                [self _storeCategoriesInCache];
+            }
+        }
+    }];
+}
+
+- (PLYCategory *)_parentCategoryOfCategory:(PLYCategory *)category
+{
+    for (PLYCategory *oneCategory in [_categories allValues])
+    {
+        if ([oneCategory.subCategories containsObject:category])
+        {
+            return oneCategory;
+        }
+    }
+    
+    return nil;
+}
+
+- (void)_appendCategoriesRecursivelyToDictionary:(NSMutableDictionary *)dict fromArray:(NSArray *)array
+{
+    for (PLYCategory *category in array)
+    {
+        dict[category.key] = category;
+        
+        if (category.subCategories)
+        {
+            [self _appendCategoriesRecursivelyToDictionary:dict fromArray:category.subCategories];
+        }
+    }
+}
+
+- (NSString *)localizedCategoryPathForKey:(NSString *)categoryKey
+{
+    NSMutableString *tmpStr = [NSMutableString string];
+    
+    PLYCategory *category = _categories[categoryKey];
+    [tmpStr appendString:category.localizedName];
+    
+    PLYCategory *parent = [self _parentCategoryOfCategory:category];
+    
+    while (parent)
+    {
+        [tmpStr insertString:@" / " atIndex:0];
+        [tmpStr insertString:parent.localizedName atIndex:0];
+        
+        parent = [self _parentCategoryOfCategory:parent];
+    }
+    
+    return [tmpStr copy];
+}
+
 - (void)categoryForKey:(NSString *)key language:(NSString *)language completion:(PLYCompletion)completion
 {
 	NSParameterAssert(completion);
@@ -2791,15 +2871,63 @@
 	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:params payload:nil completion:completion];
 }
 
+
+- (void)_storeCategoriesInCache
+{
+    NSMutableDictionary *tmpDict = [NSMutableDictionary dictionary];
+    
+    for (NSString *key in [_categories allKeys])
+    {
+        PLYCategory *category = _categories[key];
+        NSDictionary *dict = [category dictionaryRepresentation];
+        tmpDict[key] = dict;
+    }
+    
+    NSString *path = [[NSString cachesPath] stringByAppendingFormat:@"PLYCategories.plist"];
+    [tmpDict writeToFile:path atomically:YES];
+}
+
+- (void)_loadCategoriesFromCache
+{
+    NSString *path = [[NSString cachesPath] stringByAppendingFormat:@"PLYCategories.plist"];
+    NSDictionary *cache = [NSDictionary dictionaryWithContentsOfFile:path];
+    
+    if (!cache)
+    {
+        return;
+    }
+    
+    NSMutableDictionary *tmpDict = [NSMutableDictionary dictionary];
+    for (NSDictionary *categoryDict in [cache allValues])
+    {
+        PLYCategory *category = (PLYCategory *)[PLYCategory entityFromDictionary:categoryDict];
+        tmpDict[category.key] = category;
+    }
+    
+    _categories = [tmpDict copy];
+}
+
 - (void)categoriesWithLanguage:(NSString *)language completion:(PLYCompletion)completion
 {
 	NSParameterAssert(completion);
+    
+    NSString *usedLange = language?language:@"auto";
 	
 	NSString *function = @"/categories";
 	NSString *path = [self _functionPathForFunction:function];
-	NSDictionary *params = @{@"language": language?language:@"auto"};
+	NSDictionary *params = @{@"language": usedLange};
 	
-	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:params payload:nil completion:completion];
+    PLYCompletion wrappedCompletion = [completion copy];
+    
+    PLYCompletion ownCompletion = ^(id result, NSError *error) {
+        
+        if (wrappedCompletion)
+        {
+            wrappedCompletion(result, error);
+        }
+    };
+    
+	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:params payload:nil completion:ownCompletion];
 }
 
 #pragma mark - Notifications
@@ -2813,7 +2941,15 @@
 		
 		DTLogInfo(@"Refreshing details for logged in user '%@'", self.loggedInUser.nickname);
 		[self loadDetailsForUser:self.loggedInUser completion:NULL];
+        
+        [self _refreshCategories];
 	}
+}
+
+- (void)_localeDidChange:(NSNotification *)notification
+{
+    // language might have changed
+    [self _refreshCategories];
 }
 
 #pragma mark - Properties
