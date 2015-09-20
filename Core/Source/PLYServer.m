@@ -29,7 +29,7 @@
 #define PLY_ENDPOINT_URL [NSURL URLWithString:@"https://api.productlayer.com"]
 
 // this is a prefix added before REST methods, e.g. for a version of the API
-#define PLY_PATH_PREFIX @"0.4"
+#define PLY_PATH_PREFIX @"0.5"
 
 @interface PLYServer () <NSCacheDelegate>
 
