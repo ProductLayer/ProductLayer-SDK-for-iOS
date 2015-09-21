@@ -13,8 +13,9 @@
 #import "ProductViewController.h"
 
 #import "DTBlockFunctions.h"
-#import "DTLog.h"
 #import "DTProgressHUD.h"
+
+#import <DTFoundation/DTLog.h>
 
 typedef enum : NSUInteger {
     LandscapeCell,

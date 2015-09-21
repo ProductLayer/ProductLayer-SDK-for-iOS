@@ -14,8 +14,10 @@
 #import <CoreLocation/CoreLocation.h>
 
 #import "ProductLayerUI.h"
-#import "DTBlockFunctions.h"
-#import "DTLog.h"
+
+#import <DTFoundation/DTBlockFunctions.h>
+#import <DTFoundation/DTLog.h>
+
 
 @interface PLYOpineComposeViewController () <UITextViewDelegate,  // for tracking entered text
 															CLLocationManagerDelegate, // for attaching location

@@ -16,7 +16,9 @@
 
 #import "ProductLayerUI.h"
 
-#import "DTBlockFunctions.h"
+#import <DTFoundation/DTBlockFunctions.h>
+#import <DTFoundation/DTLog.h>
+
 
 // user default remembering last successful nickname
 NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
@@ -36,6 +38,9 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	UIButton *_twitterButton;
 	
 	UILabel *_explainLabel;
+	
+	BOOL _didTryWebCredential;
+	BOOL _userDidPickWebCredential;
 }
 
 - (void)viewDidLoad
@@ -259,6 +264,46 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	}
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	
+	if (_didTryWebCredential)
+	{
+		return;
+	}
+	
+	_didTryWebCredential = YES;
+	
+	SecRequestSharedWebCredential(CFSTR("prod.ly"), NULL, ^(CFArrayRef credentials, CFErrorRef error)
+	{
+		if (error != NULL)
+		{
+			DTLogError(@"Error requesting web credential: %@", [(__bridge NSError *)error localizedDescription]);
+			return;
+		}
+		
+		if (!CFArrayGetCount(credentials))
+		{
+			DTLogInfo(@"User did not have any shared web credentials or selected 'Not Now'");
+			return;
+		}
+		
+		NSDictionary *credential = [(__bridge NSArray *)credentials firstObject];
+		
+		NSString *userName = credential[(__bridge id)(kSecAttrAccount)];
+		NSString *password = credential[(__bridge id)(kSecSharedPassword)];
+		
+		DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+			self.nameField.text = userName;
+			self.passwordField.text = password;
+			
+			_userDidPickWebCredential = YES;
+			[self done:nil];
+		});
+	});
+}
+
 #pragma mark - Class Methods
 
 + (void)presentLoginWithExplanation:(NSString *)explanation completion:(PLYLoginCompletion)completion
@@ -321,6 +366,12 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 
 - (void)done:(id)sender
 {
+	if (![self _allFieldsValid])
+	{
+		DTLogError(@"Invalid event: Should not be able to execute done if not both user and password fields are value");
+		return;
+	}
+	
 	// dismiss keyboard
 	[[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 
@@ -344,6 +395,20 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 				[alert show];
 				
 				return;
+			}
+			else
+			{
+				if (!_userDidPickWebCredential)
+				{
+					// also save as shared web credential if possible
+					SecAddSharedWebCredential(CFSTR("prod.ly"), (__bridge CFStringRef)(_nameField.text), (__bridge CFStringRef)(_passwordField.text), ^(CFErrorRef error) {
+						
+						if (error)
+						{
+							DTLogError(@"Error updating web credential: %@", [(__bridge NSError *)error localizedDescription]);
+						}
+					});
+				}
 			}
 			
 			[self _loginCompleteForUser:result];

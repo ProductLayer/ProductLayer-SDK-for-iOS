@@ -9,7 +9,6 @@
 #import "ProductImageCollectionViewCell.h"
 #import "DTDownloadCache.h"
 #import "DTBlockFunctions.h"
-#import "DTLog.h"
 #import "UIImage+DTFoundation.h"
 #import "DTCoreGraphicsUtils.h"
 #import "NSURL+DTComparing.h"
@@ -17,6 +16,9 @@
 
 #import "DTImageCache.h"
 #import "ProductLayerSDK.h"
+
+#import <DTFoundation/DTLog.h>
+
 
 @implementation ProductImageCollectionViewCell
 {

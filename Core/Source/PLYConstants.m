@@ -11,12 +11,14 @@
 NSString * const PLYErrorDomain = @"Product Layer API";
 NSString * const PLYServerLoginErrorNotification = @"PLYServerLoginErrorNotification";
 NSString * const PLYUserDefaultOpineComposerIncludeLocation = @"PLYUserDefaultOpineComposerIncludeLocation";
+NSString * const PLYServerDidCreateEntityNotification = @"PLYServerDidCreateEntityNotification";
 NSString * const PLYServerDidDeleteEntityNotification = @"PLYServerDidDeleteEntityNotification";
 NSString * const PLYServerDidModifyListNotification = @"PLYServerDidModifyListNotification";
 NSString * const PLYServerDidDeleteEntityKey = @"PLYServerDidDeleteEntityKey";
 NSString * const PLYServerDidModifyListKey = @"PLYServerDidModifyListKey";
 NSString * const PLYServerDidUpdateEntityNotification = @"PLYServerDidUpdateEntityNotification";
 NSString * const PLYServerDidUpdateEntityKey = @"PLYServerDidUpdateEntityKey";
+NSString * const PLYServerDidCreateEntityKey = @"PLYServerDidCreateEntityKey";
 
 /**
  Timeline Options

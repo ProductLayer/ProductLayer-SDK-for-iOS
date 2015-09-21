@@ -11,10 +11,11 @@
 #import "PLYServer.h"
 #import "PLYUser.h"
 
-#import "DTLog.h"
 #import "DTImageCache.h"
 #import "DTDownloadCache.h"
 #import "DTBlockFunctions.h"
+
+#import <DTFoundation/DTLog.h>
 
 @implementation UserTableViewCell
 

@@ -83,6 +83,11 @@
 
 
 /**
+ The roles of the user
+ */
+@property (nonatomic, copy, readonly) NSArray *roles;
+
+/**
  An PLYUserAvatar object for the receiver
  */
 @property (nonatomic, copy, readonly) PLYUserAvatar *avatar;

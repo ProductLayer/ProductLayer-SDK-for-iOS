@@ -11,11 +11,13 @@
 #import "DTBlockFunctions.h"
 #import "DTDownloadCache.h"
 #import "DTImageCache.h"
-#import "DTLog.h"
 
 #import "PLYServer.h"
 #import "PLYImage.h"
 #import "PLYUser.h"
+
+#import <DTFoundation/DTLog.h>
+
 
 @implementation ReviewTableViewCell
 

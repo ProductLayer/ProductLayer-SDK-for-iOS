@@ -11,9 +11,6 @@
 #import "DTBlockFunctions.h"
 #import "DTDownloadCache.h"
 #import "DTImageCache.h"
-#import "DTLog.h"
-#import "DTProgressHUD.h"
-#import "DTAlertView.h"
 
 #import "ReviewTableViewController.h"
 #import "OpineTableViewController.h"
@@ -23,6 +20,10 @@
 
 #import "AppSettings.h"
 #import "UIViewTags.h"
+
+#import <DTFoundation/DTLog.h>
+#import <DTFoundation/DTProgressHUD.h>
+#import <DTFoundation/DTAlertView.h>
 
 @interface ProductViewController ()
 

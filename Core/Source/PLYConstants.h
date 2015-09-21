@@ -16,6 +16,15 @@ extern NSString * const PLYErrorDomain;
  */
 extern NSString * const PLYServerLoginErrorNotification;
 
+/**
+ Notification for when an entity has been deleted
+ */
+extern NSString * const PLYServerDidCreateEntityNotification;
+
+/**
+ Key in the info dictionary for PLYServerDidCreateEntityNotification
+ */
+extern NSString * const PLYServerDidCreateEntityKey;
 
 /**
  Notification for when an entity has been deleted

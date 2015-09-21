@@ -13,7 +13,8 @@
 #import "DTImageCache.h"
 #import "DTDownloadCache.h"
 #import "DTBlockFunctions.h"
-#import "DTLog.h"
+
+#import <DTFoundation/DTLog.h>
 
 @implementation ProductTableViewCell
 
