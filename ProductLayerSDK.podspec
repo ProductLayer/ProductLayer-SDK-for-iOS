@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = 'ProductLayerSDK'
-  spec.version      = '0.4.2'
+  spec.version      = '0.4.3'
   spec.summary      = "The ultimate product information API, enabling a new breed of product-centric apps."
   spec.homepage     = "https://github.com/ProductLayer/ProductLayer-SDK-for-iOS"
   spec.author       = { "Oliver Drobnik" => "oliver@ProductLayer.com" }
