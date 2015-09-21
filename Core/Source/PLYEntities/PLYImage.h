@@ -49,5 +49,9 @@
  */
 @property (nonatomic, copy) NSString *GTIN;
 
+/**
+ The dominant color of the image.
+ */
+@property (nonatomic) NSArray* dominantColor;
 
 @end

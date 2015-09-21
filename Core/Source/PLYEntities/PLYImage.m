@@ -42,6 +42,10 @@
 	{
 		self.GTIN = value;
 	}
+    else if ([key isEqualToString:@"pl-img-dominant_color"])
+    {
+        self.dominantColor = value;
+    }
 	else
 	{
 		[super setValue:value forKey:key];
@@ -81,6 +85,11 @@
 	{
 		dict[@"pl-prod-gtin"] = _GTIN;
 	}
+    
+    if (self.dominantColor)
+    {
+        dict[@"pl-img-dominant_color"] = self.dominantColor;
+    }
 	
 	// return immutable
 	return [dict copy];
@@ -96,6 +105,7 @@
 	self.name = entity.name;
 	self.imageURL = entity.imageURL;
 	self.GTIN = entity.GTIN;
+    self.dominantColor = entity.dominantColor;
 }
 
 - (BOOL)canBeVoted
