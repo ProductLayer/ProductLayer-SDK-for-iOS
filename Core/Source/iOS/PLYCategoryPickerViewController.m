@@ -272,7 +272,7 @@ NSArray *_sortedKeys = nil;
 {
     DTBlockPerformSyncIfOnMainThreadElseAsync(^{
         [self _updateCategories];
-    })
+    });
 }
 
 @end
