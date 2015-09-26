@@ -14,6 +14,7 @@
 #import "NSString+DTPaths.h"
 
 #import <DTFoundation/DTLog.h>
+#import <DTFoundation/DTBlockFunctions.h>
 
 #define CELL_IDENTIFIER @"Identifier"
 
@@ -36,17 +37,23 @@ NSArray *_sortedKeys = nil;
 	// use normal cells
 	[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CELL_IDENTIFIER];
 		
-	// load last category list we had
-	[self _loadCategoriesFromCache];
-	
 	self.navigationItem.title = PLYLocalizedStringFromTable(@"PLY_CATEGORIES_TITLE", @"UI", @"Title of the view controller showing brands");
 	self.searchController.hidesNavigationBarDuringPresentation = NO;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_updatedCategories:) name:PLYServerDidUpdateProductCategoriesNotification object:nil];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
 	
+    [self _updateCategories];
+    
 	// workaround for iPhone 6+ bug
 	if (self.traitCollection.displayScale==3)
 	{
@@ -74,8 +81,6 @@ NSArray *_sortedKeys = nil;
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
-	
-	[self _updateCategoriesFromServer];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -113,164 +118,19 @@ NSArray *_sortedKeys = nil;
 
 #pragma mark - Helpers
 
-- (void)_updateCategories:(NSDictionary *)categories
+- (void)_updateCategories
 {
-	// if there was no change, don't do anything
-	if ([_categoryDictionary isEqualToDictionary:categories])
-	{
-		return;
-	}
-	
-	// remove NULL values from dictionary
-	NSMutableDictionary *cleanDictionary = [NSMutableDictionary dictionary];
-	NSString *language = [self _currentLanguage];
-	
-	for (NSString *oneKey in [categories allKeys])
-	{
-		if ([categories[oneKey] isKindOfClass:[NSString class]])
-		{
-			cleanDictionary[oneKey] = categories[oneKey];
-		}
-		else
-		{
-			DTLogError(@"Category '%@' has invalid value in language '%@'! Ignoring it.", oneKey, language);
-		}
-	}
-	
-	_sortedKeys = [cleanDictionary keysSortedByValueWithOptions:0 usingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
+    NSDictionary *categories = self.productLayerServer.cachedCategories;
+	_sortedKeys = [categories keysSortedByValueWithOptions:0 usingComparator:^NSComparisonResult(PLYCategory *obj1, PLYCategory *obj2) {
 		
-		return [obj1 localizedStandardCompare:obj2];
+		return [obj1.key localizedStandardCompare:obj2.key];
 	}];
 	
-	_categoryDictionary = [cleanDictionary copy];
+	_categoryDictionary = [categories copy];
 	
 	[self.tableView reloadData];
 	
 	[self _selectRowForCategoryKey:_selectedCategoryKey animated:YES];
-}
-
-- (void)_setupDefaultCategories
-{
-	NSArray *categories = [NSMutableArray arrayWithObjects:
-								  @"pl-prod-cat-magazines",
-								  @"pl-prod-cat-books",
-								  @"pl-prod-cat-books-children_and_teenagers",
-								  @"pl-prod-cat-books-comics_and_picturestories",
-								  @"pl-prod-cat-books-computer_and_internet",
-								  @"pl-prod-cat-books-economy_investments",
-								  @"pl-prod-cat-books-health_mind_and_body",
-								  @"pl-prod-cat-books-mystery_suspense",
-								  @"pl-prod-cat-books-novel_stories",
-								  @"pl-prod-cat-books-religious_spirituality",
-								  @"pl-prod-cat-books-romance",
-								  @"pl-prod-cat-books-sciencefiction_and_fantasy",
-								  @"pl-prod-cat-clothes",
-								  @"pl-prod-cat-clothes-jeans",
-								  @"pl-prod-cat-clothes-pants",
-								  @"pl-prod-cat-clothes-shirts",
-								  @"pl-prod-cat-clothes-suites",
-								  @"pl-prod-cat-clothes-underwear",
-								  @"pl-prod-cat-drinks",
-								  @"pl-prod-cat-drinks-alcoholic",
-								  @"pl-prod-cat-drinks-non_alcoholic",
-								  @"pl-prod-cat-electronic",
-								  @"pl-prod-cat-electronic-camera",
-								  @"pl-prod-cat-electronic-computer",
-								  @"pl-prod-cat-electronic-computer-notebook",
-								  @"pl-prod-cat-electronic-computer-tablet",
-								  @"pl-prod-cat-electronic-computer-systems",
-								  @"pl-prod-cat-electronic-computer-components",
-								  @"pl-prod-cat-electronic-computer-audio",
-								  @"pl-prod-cat-electronic-computer-video",
-								  @"pl-prod-cat-electronic-computer-mainboard",
-								  @"pl-prod-cat-electronic-computer-monitor",
-								  @"pl-prod-cat-electronic-computer-network",
-								  @"pl-prod-cat-electronic-computer-cpu",
-								  @"pl-prod-cat-electronic-computer-ram",
-								  @"pl-prod-cat-electronic-computer-storage",
-								  @"pl-prod-cat-electronic-computer-graphic_card",
-								  @"pl-prod-cat-electronic-computer-input_device",
-								  @"pl-prod-cat-electronic-computer-cable",
-								  @"pl-prod-cat-electronic-phones",
-								  @"pl-prod-cat-electronic-tv",
-								  @"pl-prod-cat-electronic-wearables",
-								  @"pl-prod-cat-electronic-printer_and_scanner",
-								  @"pl-prod-cat-electronic-printer_and_scanner-3dprinter",
-								  @"pl-prod-cat-electronic-printer_and_scanner-scanner",
-								  @"pl-prod-cat-electronic-printer_and_scanner-printer",
-								  @"pl-prod-cat-electronic-printer_and_scanner-barcode_printer",
-								  @"pl-prod-cat-electronic-printer_and_scanner-barcode_scanner",
-								  @"pl-prod-cat-electronic-printer_and_scanner-scanner_accessories",
-								  @"pl-prod-cat-electronic-printer_and_scanner-printer_accessories",
-								  @"pl-prod-cat-food",
-								  @"pl-prod-cat-food-dairy",
-								  @"pl-prod-cat-food-fruit",
-								  @"pl-prod-cat-food-grains",
-								  @"pl-prod-cat-food-meat",
-								  @"pl-prod-cat-food-sweets",
-								  @"pl-prod-cat-food-vegetables",
-								  @"pl-prod-cat-food-instant_meal",
-								  @"pl-prod-cat-health_and_personal_care",
-								  @"pl-prod-cat-health_and_personal_care-beauty",
-								  @"pl-prod-cat-home_and_kitchen",
-								  @"pl-prod-cat-industrial_and_scientific",
-								  @"pl-prod-cat-others", nil];
-	
-	NSMutableDictionary *tmpDict = [NSMutableDictionary dictionary];
-	
-	for (NSString *oneKey in categories)
-	{
-		NSString *text = PLYLocalizedStringFromTable(oneKey, @"API", @"Product Category Key");
-		tmpDict[oneKey] = text;
-	}
-	
-	[self _updateCategories:tmpDict];
-	[self _saveCategoriesInCache];
-}
-
-- (void)_saveCategoriesInCache
-{
-	NSString *path = [[NSString cachesPath] stringByAppendingString:@"ProductCategories.plist"];
-	[_categoryDictionary writeToFile:path atomically:YES];
-}
-
-- (void)_loadCategoriesFromCache
-{
-	NSString *path = [[NSString cachesPath] stringByAppendingString:@"ProductCategories.plist"];
-	NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:path];
-	
-	if (dictionary)
-	{
-		[self _updateCategories:dictionary];
-	}
-	else
-	{
-		[self _setupDefaultCategories];
-	}
-}
-
-- (void)_updateCategoriesFromServer
-{
-	NSString *language = [self _currentLanguage];
-
-	[self.productLayerServer getCategoriesForLocale:language completion:^(id result, NSError *error) {
-		if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == kCFURLErrorNotConnectedToInternet)
-		{
-			// no Internet
-			return;
-		}
-		
-		if (!result)
-		{
-			DTLogError(@"Error loading categories from server for language '%@': %@", error, language);
-			return;
-		}
-		
-		dispatch_async(dispatch_get_main_queue(), ^{
-			[self _updateCategories:result];
-			[self _saveCategoriesInCache];
-		});
-	}];
 }
 
 - (void)_updateFilter
@@ -281,9 +141,9 @@ NSArray *_sortedKeys = nil;
 	
 	for (NSString *oneKey in _sortedKeys)
 	{
-		NSString *name = _categoryDictionary[oneKey];
+        NSString *categoryPath = [self.productLayerServer localizedCategoryPathForKey:oneKey];
 		
-		if ([self _text:name containsAllTerms:searchTerms])
+		if ([self _text:categoryPath containsAllTerms:searchTerms])
 		{
 			[tmpArray addObject:oneKey];
 		}
@@ -339,11 +199,7 @@ NSArray *_sortedKeys = nil;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELL_IDENTIFIER forIndexPath:indexPath];
-	
-	if (!cell)
-	{
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELL_IDENTIFIER];
-	}
+    cell.indentationWidth = 20.0;
 	
 	// set product layer color as background
 	UIView *bgColorView = [[UIView alloc] init];
@@ -355,14 +211,33 @@ NSArray *_sortedKeys = nil;
 	if (self.searchController.isActive)
 	{
 		NSString *key = _filteredKeys[indexPath.row];
-		NSString *categoryName = _categoryDictionary[key];
-		
-		cell.textLabel.attributedText	= [self _attributedStringForText:categoryName withSearchTermsMarked:[self currentSearchTerms]];
+        NSString *categoryPath = [self.productLayerServer localizedCategoryPathForKey:key];
+		cell.textLabel.attributedText	= [self _attributedStringForText:categoryPath withSearchTermsMarked:[self currentSearchTerms]];
+        cell.indentationLevel = 0;
+        cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
 	}
 	else
 	{
 		NSString *key = _sortedKeys[indexPath.row];
-		cell.textLabel.text = _categoryDictionary[key];
+        NSString *categoryPath = [self.productLayerServer localizedCategoryPathForKey:key];
+        
+        NSArray *pathComps = [categoryPath componentsSeparatedByString:@"/"];
+        categoryPath = [pathComps lastObject];
+		cell.textLabel.text = categoryPath;
+        cell.indentationLevel = [pathComps count] - 1;
+        
+        if (cell.indentationLevel==0)
+        {
+            cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleTitle2];
+        }
+        else if (cell.indentationLevel==1)
+        {
+            cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleTitle3];
+        }
+        else
+        {
+            cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+        }
 	}
 	
 	cell.textLabel.adjustsFontSizeToFitWidth = YES;
@@ -389,6 +264,15 @@ NSArray *_sortedKeys = nil;
 	{
 		[_delegate categoryPicker:self didSelectCategoryWithKey:self.selectedCategoryKey];
 	}
+}
+
+#pragma mark - Notifications
+
+- (void)_updatedCategories:(NSNotification *)notification
+{
+    DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+        [self _updateCategories];
+    })
 }
 
 @end

@@ -2874,6 +2874,11 @@
 	return [tmpStr copy];
 }
 
+- (NSDictionary *)cachedCategories
+{
+    return _categories;
+}
+
 - (void)categoryForKey:(NSString *)key language:(NSString *)language completion:(PLYCompletion)completion
 {
 	NSParameterAssert(completion);

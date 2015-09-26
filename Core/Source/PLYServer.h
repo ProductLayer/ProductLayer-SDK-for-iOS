@@ -626,4 +626,11 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  */
 - (NSString *)localizedCategoryPathForKey:(NSString *)categoryKey;
 
+
+/**
+ Returns the cached category objects in a flat dictionary, i.e. sub-categories are also at the first level
+ @returns The PLYCategory objects
+ */
+- (NSDictionary *)cachedCategories;
+
 @end
