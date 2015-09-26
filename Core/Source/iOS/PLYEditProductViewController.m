@@ -36,20 +36,20 @@
 	[self.tableView registerClass:[PLYBrandedTableViewCell class] forCellReuseIdentifier:@"PLYBrandedTableViewCell"];
 	
 	self.navigationItem.title = PLYLocalizedStringFromTable(@"EDIT_PRODUCT_TITLE", @"UI", @"Title for VC for editing products");
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_updatedCategories:) name:PLYServerDidUpdateProductCategoriesNotification object:nil];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
 	
-	if (_selectedCategoryKey)
-	{
-		[self _updateCategoryForKey:_selectedCategoryKey];
-	}
-	else
-	{
-		[self _updateCategoryForKey:@"pl-prod-cat-uncategorized"];
-	}
+    [self _updateCategory];
 	
 	self.saveButtonItem.enabled = [self _saveIsPossible];
 }
@@ -61,7 +61,7 @@
 
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:3]];
     
-    NSString *path = [self.productLayerServer localizedCategoryPathForKey:_product.category];
+    NSString *path = [self.productLayerServer localizedCategoryPathForKey:key];
     
     if (path)
     {
@@ -75,6 +75,18 @@
     }
     
     cell.textLabel.text = path;
+}
+
+- (void)_updateCategory
+{
+    if (_selectedCategoryKey)
+    {
+        [self _updateCategoryForKey:_selectedCategoryKey];
+    }
+    else
+    {
+        [self _updateCategoryForKey:@"pl-prod-cat-uncategorized"];
+    }
 }
 
 - (void)_configureProductNameCell:(UITableViewCell *)cell
@@ -425,6 +437,12 @@
 	{
 		_selectedCategoryKey = _product.category;
 	}
+}
+
+#pragma mark - Notifications
+- (void)_updatedCategories:(NSNotification *)notification
+{
+    [self _updateCategory];
 }
 
 @end

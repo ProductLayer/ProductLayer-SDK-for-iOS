@@ -56,6 +56,10 @@ extern NSString * const PLYServerDidUpdateEntityNotification;
  */
 extern NSString * const PLYServerDidUpdateEntityKey;
 
+/**
+ Notification when the list of categories has changed e.g. updated
+ */
+extern NSString * const PLYServerDidUpdateProductCategoriesNotification;
 
 /**
  User Defaults Keys

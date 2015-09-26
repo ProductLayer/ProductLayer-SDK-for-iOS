@@ -2807,6 +2807,8 @@
 				NSMutableDictionary *tmpDict = [NSMutableDictionary dictionary];
 				[self _appendCategoriesRecursivelyToDictionary:tmpDict fromArray:result];
 				_categories = [tmpDict copy];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidUpdateProductCategoriesNotification object:nil];
 				
 				[self _storeCategoriesInCache];
 			}

@@ -19,6 +19,7 @@ NSString * const PLYServerDidModifyListKey = @"PLYServerDidModifyListKey";
 NSString * const PLYServerDidUpdateEntityNotification = @"PLYServerDidUpdateEntityNotification";
 NSString * const PLYServerDidUpdateEntityKey = @"PLYServerDidUpdateEntityKey";
 NSString * const PLYServerDidCreateEntityKey = @"PLYServerDidCreateEntityKey";
+NSString * const PLYServerDidUpdateProductCategoriesNotification = @"PLYServerDidUpdateProductCategoriesNotification";
 
 /**
  Timeline Options
