@@ -101,7 +101,15 @@
 	{
 		[self setValue:value forKey:@"numberOfReviews"];
 	}
-	else if ([key isEqualToString:@"pl-prod-char"])
+    else if ([key isEqualToString:@"pl-prod-opine-count"])
+    {
+        [self setValue:value forKey:@"numberOfOpines"];
+    }
+    else if ([key isEqualToString:@"pl-prod-img-count"])
+    {
+        [self setValue:value forKey:@"numberOfImages"];
+    }
+    else if ([key isEqualToString:@"pl-prod-char"])
 	{
 		[self setValue:value forKey:@"characteristics"];
 	}
@@ -189,6 +197,8 @@
 	
 	dict[@"pl-prod-review-rating"] = @(_averageReviewRating);
 	dict[@"pl-prod-review-count"] = @(_numberOfReviews);
+    dict[@"pl-prod-opine-count"] = @(_numberOfOpines);
+    dict[@"pl-prod-img-count"] = @(_numberOfImages);
 	
 	if (_characteristics)
 	{
@@ -236,6 +246,8 @@
 	self.packaging = entity.packaging;
 	self.averageReviewRating = entity.averageReviewRating;
 	self.numberOfReviews = entity.numberOfReviews;
+    self.numberOfOpines = entity.numberOfOpines;
+    self.numberOfImages = entity.numberOfImages;
 	self.characteristics = entity.characteristics;
 	self.nutritious = entity.nutritious;
 	self.sourceURL = entity.sourceURL;

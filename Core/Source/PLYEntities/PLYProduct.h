@@ -91,6 +91,16 @@
 @property (nonatomic, assign) NSUInteger numberOfReviews;
 
 /**
+ The number of user opines for this product
+ */
+@property (nonatomic, assign) NSUInteger numberOfOpines;
+
+/**
+ The number of images for this product
+ */
+@property (nonatomic, assign) NSUInteger numberOfImages;
+
+/**
  The characteristics information.
  */
 @property (nonatomic, copy) NSDictionary *characteristics;
