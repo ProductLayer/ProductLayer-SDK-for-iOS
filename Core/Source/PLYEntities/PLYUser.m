@@ -23,6 +23,7 @@
 @property (nonatomic, copy, readwrite) NSDictionary *socialConnections;
 @property (nonatomic, copy, readwrite) NSArray *roles;
 @property (nonatomic, copy, readwrite) PLYUserAvatar *avatar;
+@property (nonatomic, copy, readwrite) NSDictionary *settings;
 
 @end
 
@@ -107,7 +108,11 @@
 	{
 		_avatar = [[PLYUserAvatar alloc] initWithDictionary:value];
 	}
-	else
+    else if ([key isEqualToString:@"pl-usr-settings"])
+    {
+        [self setValue:value forKey:@"settings"];
+    }
+    else
 	{
 		[super setValue:value forKey:key];
 	}
@@ -191,6 +196,11 @@
 	{
 		dict[@"pl-usr-roles"] = _roles;
 	}
+    
+    if (_settings)
+    {
+        dict[@"pl-usr-settings"] = _settings;
+    }
 	
 	// return immutable
 	return [dict copy];
@@ -219,6 +229,8 @@
 	{
 		self.avatar = entity.avatar;
 	}
+    
+    self.settings = entity.settings;
 }
 
 @end

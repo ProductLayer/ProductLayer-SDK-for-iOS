@@ -92,4 +92,9 @@
  */
 @property (nonatomic, copy, readonly) PLYUserAvatar *avatar;
 
+/**
+ A dictionary of user-specific preferences
+ */
+@property (nonatomic, copy, readonly) NSDictionary *settings;
+
 @end
