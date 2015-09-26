@@ -42,9 +42,13 @@
 	{
 		self.GTIN = value;
 	}
-    else if ([key isEqualToString:@"pl-img-dominant_color"])
+    else if ([key isEqualToString:@"pl-img-dominant_color_hex"])
     {
         self.dominantColor = value;
+    }
+    else if ([key isEqualToString:@"pl-img-dominant_color"])
+    {
+        // ignore
     }
 	else
 	{
@@ -88,7 +92,7 @@
     
     if (self.dominantColor)
     {
-        dict[@"pl-img-dominant_color"] = self.dominantColor;
+        dict[@"pl-img-dominant_color_hex"] = self.dominantColor;
     }
 	
 	// return immutable
