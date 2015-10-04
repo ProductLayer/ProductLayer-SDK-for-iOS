@@ -94,8 +94,9 @@ NSArray *_sortedKeys = nil;
 
 - (void)_setupForTraitCollection:(UITraitCollection *)collection
 {
-	if (collection.horizontalSizeClass == UIUserInterfaceSizeClassRegular || collection.userInterfaceIdiom == UIUserInterfaceIdiomPad)
+	if (collection.horizontalSizeClass == UIUserInterfaceSizeClassRegular || (collection.userInterfaceIdiom == UIUserInterfaceIdiomPad && self.popoverPresentationController!=nil))
 	{
+		// only hide nav bar if inside popover presentation
 		[self.navigationController setNavigationBarHidden:YES];
 	}
 	else
