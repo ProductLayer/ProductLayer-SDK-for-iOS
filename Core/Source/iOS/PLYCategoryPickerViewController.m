@@ -16,6 +16,8 @@
 #import <DTFoundation/DTLog.h>
 #import <DTFoundation/DTBlockFunctions.h>
 
+@import UIKit;
+
 #define CELL_IDENTIFIER @"Identifier"
 
 // category cache
