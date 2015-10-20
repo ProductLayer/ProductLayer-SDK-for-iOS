@@ -205,18 +205,20 @@
 			
 			NSString *title = PLYLocalizedStringFromTable(@"PLY_SIGNUP_SUCCESS_ALERT_TITLE", @"UI", @"Title for successful sign up");
 			NSString *msg = PLYLocalizedStringFromTable(@"PLY_SIGNUP_SUCCESS_ALERT_MSG", @"UI", @"Message for successful sign up");
-			DTAlertView *alert = [[DTAlertView alloc] initWithTitle:title
-																			message:msg];
 			
-			[alert addButtonWithTitle:PLYLocalizedStringFromTable(@"PLY_ALERT_OK", @"UI", @"Alert acknowledgement button title")
-									  block:^{
-										  if ([_delegate respondsToSelector:@selector(signUpViewController:didSignUpNewUser:)])
-										  {
-											  [_delegate signUpViewController:self didSignUpNewUser:result];
-										  }
-									  }];
 			
-			[alert show];
+			UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:msg preferredStyle:UIAlertControllerStyleAlert];
+			
+			UIAlertAction *okButton = [UIAlertAction actionWithTitle:PLYLocalizedStringFromTable(@"PLY_ALERT_OK", @"UI", @"Alert acknowledgement button title") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+				if ([_delegate respondsToSelector:@selector(signUpViewController:didSignUpNewUser:)])
+				{
+					[_delegate signUpViewController:self didSignUpNewUser:result];
+				}
+			}];
+			
+			[alert addAction:okButton];
+			
+			[self presentViewController:alert animated:YES completion:NULL];
 		});
 	}];
 }

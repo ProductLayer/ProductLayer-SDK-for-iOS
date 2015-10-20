@@ -150,17 +150,19 @@
 				
 				NSString *title = PLYLocalizedStringFromTable(@"PLY_LOSTPW_SUCCESS_ALERT_TITLE", @"UI", @"Title for successful password reset");
 				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOSTPW_SUCCESS_ALERT_MSG", @"UI", @"Message for successful password reset");
-				DTAlertView *alert = [[DTAlertView alloc] initWithTitle:title message:msg];
 				
-				[alert addButtonWithTitle:PLYLocalizedStringFromTable(@"PLY_ALERT_OK", @"UI", @"Alert acknowledgement button title")
-										  block:^{
-											  if ([_delegate respondsToSelector:@selector(lostPasswordViewController:didRequestNewPasswordForUser:)])
-											  {
-												  [_delegate lostPasswordViewController:self didRequestNewPasswordForUser:result];
-											  }
-										  }];
+				UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:msg preferredStyle:UIAlertControllerStyleAlert];
 				
-				[alert show];
+				UIAlertAction *okButton = [UIAlertAction actionWithTitle:PLYLocalizedStringFromTable(@"PLY_ALERT_OK", @"UI", @"Alert acknowledgement button title") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+					if ([_delegate respondsToSelector:@selector(lostPasswordViewController:didRequestNewPasswordForUser:)])
+					{
+						[_delegate lostPasswordViewController:self didRequestNewPasswordForUser:result];
+					}
+				}];
+				
+				[alert addAction:okButton];
+				
+				[self presentViewController:alert animated:YES completion:NULL];
 			}
 		});
 	}];
