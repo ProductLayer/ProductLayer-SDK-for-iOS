@@ -8,6 +8,7 @@
 
 // Collection of headers for PLYEntity subclasses
 
+#import "PLYAchievement.h"
 #import "PLYBrand.h"
 #import "PLYBrandOwner.h"
 #import "PLYCategory.h"

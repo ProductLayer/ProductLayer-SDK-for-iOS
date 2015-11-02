@@ -214,6 +214,12 @@
 		A76D3F6C198650770032FE59 /* PLYUserNameValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F64198650770032FE59 /* PLYUserNameValidator.m */; };
 		A76D3F6D198650770032FE59 /* UIViewController+ProductLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F66198650770032FE59 /* UIViewController+ProductLayer.m */; };
 		A76D3F9119866E0E0032FE59 /* PLYLostPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F9019866E0E0032FE59 /* PLYLostPasswordViewController.m */; };
+		A76E95341BE73CC3007A52DA /* PLYAchievement.h in Headers */ = {isa = PBXBuildFile; fileRef = A76E95321BE73CC3007A52DA /* PLYAchievement.h */; };
+		A76E95351BE73CC3007A52DA /* PLYAchievement.h in Headers */ = {isa = PBXBuildFile; fileRef = A76E95321BE73CC3007A52DA /* PLYAchievement.h */; };
+		A76E95361BE73CC3007A52DA /* PLYAchievement.h in Headers */ = {isa = PBXBuildFile; fileRef = A76E95321BE73CC3007A52DA /* PLYAchievement.h */; };
+		A76E95371BE73CC3007A52DA /* PLYAchievement.m in Sources */ = {isa = PBXBuildFile; fileRef = A76E95331BE73CC3007A52DA /* PLYAchievement.m */; };
+		A76E95381BE73CC3007A52DA /* PLYAchievement.m in Sources */ = {isa = PBXBuildFile; fileRef = A76E95331BE73CC3007A52DA /* PLYAchievement.m */; };
+		A76E95391BE73CC3007A52DA /* PLYAchievement.m in Sources */ = {isa = PBXBuildFile; fileRef = A76E95331BE73CC3007A52DA /* PLYAchievement.m */; };
 		A77665961A1B369A008AB88C /* PLYGuidedInputViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A77665931A1B369A008AB88C /* PLYGuidedInputViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A77665971A1B369A008AB88C /* PLYGuidedInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A77665941A1B369A008AB88C /* PLYGuidedInputViewController.m */; };
 		A77665991A1B369A008AB88C /* PLYGuidedInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A77665941A1B369A008AB88C /* PLYGuidedInputViewController.m */; };
@@ -845,6 +851,8 @@
 		A76D3F66198650770032FE59 /* UIViewController+ProductLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ProductLayer.m"; sourceTree = "<group>"; };
 		A76D3F8F19866E0E0032FE59 /* PLYLostPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYLostPasswordViewController.h; sourceTree = "<group>"; };
 		A76D3F9019866E0E0032FE59 /* PLYLostPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYLostPasswordViewController.m; sourceTree = "<group>"; };
+		A76E95321BE73CC3007A52DA /* PLYAchievement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYAchievement.h; sourceTree = "<group>"; };
+		A76E95331BE73CC3007A52DA /* PLYAchievement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYAchievement.m; sourceTree = "<group>"; };
 		A7730F931A3078D600CCBB7C /* DTKeychain.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTKeychain.xcodeproj; path = DTKeychain/DTKeychain.xcodeproj; sourceTree = "<group>"; };
 		A77665931A1B369A008AB88C /* PLYGuidedInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYGuidedInputViewController.h; sourceTree = "<group>"; };
 		A77665941A1B369A008AB88C /* PLYGuidedInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYGuidedInputViewController.m; sourceTree = "<group>"; };
@@ -1745,6 +1753,8 @@
 		C9D31F45190A705200C91A08 /* PLYEntities */ = {
 			isa = PBXGroup;
 			children = (
+				A76E95321BE73CC3007A52DA /* PLYAchievement.h */,
+				A76E95331BE73CC3007A52DA /* PLYAchievement.m */,
 				A75CF7801A30DF4E007E30FC /* PLYEntities.h */,
 				A75CF7481A30B4BD007E30FC /* PLYBrand.h */,
 				A75CF7491A30B4BD007E30FC /* PLYBrand.m */,
@@ -1797,6 +1807,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A76E95341BE73CC3007A52DA /* PLYAchievement.h in Headers */,
 				A74988761B6EA8E400A66234 /* PLYUser.h in Headers */,
 				A749887D1B6EA8E400A66234 /* PLYServer.h in Headers */,
 				A74988721B6EA8E400A66234 /* PLYPackaging.h in Headers */,
@@ -1863,6 +1874,7 @@
 				A7590AFF19ED77B40084EBCA /* PLYLoginViewController.h in Headers */,
 				A7A38CD21A2B4FFD005D8395 /* PLYFunctions.h in Headers */,
 				A75CF7531A30B4BD007E30FC /* PLYBrandOwner.h in Headers */,
+				A76E95351BE73CC3007A52DA /* PLYAchievement.h in Headers */,
 				A7EE55A21A121C8300DD55FE /* PLYCategoryPickerViewController.h in Headers */,
 				A7EB72731A72B42300FFD4CC /* PLYProblemReport.h in Headers */,
 				A72592C91A757E1F00952685 /* PLYEditProductViewController.h in Headers */,
@@ -1902,6 +1914,7 @@
 				A7EA070E1A2B139C00B61CCE /* PLYList.h in Headers */,
 				A75CF74F1A30B4BD007E30FC /* PLYBrand.h in Headers */,
 				A7EA07101A2B139C00B61CCE /* PLYListItem.h in Headers */,
+				A76E95361BE73CC3007A52DA /* PLYAchievement.h in Headers */,
 				A7EA07081A2B139C00B61CCE /* PLYErrorMessage.h in Headers */,
 				A7EA07141A2B139C00B61CCE /* PLYPackaging.h in Headers */,
 				A72592B71A757D5900952685 /* PLYCategory.h in Headers */,
@@ -2504,6 +2517,7 @@
 				A75CF7511A30B4BD007E30FC /* PLYBrand.m in Sources */,
 				A7590B2819ED77B80084EBCA /* PLYVotableEntity.m in Sources */,
 				A71918101A1B5B1B002C2D76 /* PLYContentsDidChangeValidator.m in Sources */,
+				A76E95381BE73CC3007A52DA /* PLYAchievement.m in Sources */,
 				A72592BC1A757D9400952685 /* PLYTextFieldTableViewCell.m in Sources */,
 				A7665D0C1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m in Sources */,
 				A75CF73D1A30B48A007E30FC /* PLYVideoPreviewInterestBox.m in Sources */,
@@ -2626,6 +2640,7 @@
 				A76D3F6C198650770032FE59 /* PLYUserNameValidator.m in Sources */,
 				A75CF7501A30B4BD007E30FC /* PLYBrand.m in Sources */,
 				A7B4877F1987CFB200FA8F83 /* PLYVotableEntity.m in Sources */,
+				A76E95371BE73CC3007A52DA /* PLYAchievement.m in Sources */,
 				A76D3F67198650770032FE59 /* PLYFormEmailValidator.m in Sources */,
 				A75CF73C1A30B48A007E30FC /* PLYVideoPreviewInterestBox.m in Sources */,
 				A719180F1A1B5B1B002C2D76 /* PLYContentsDidChangeValidator.m in Sources */,
@@ -2674,6 +2689,7 @@
 				A7EA071F1A2B139C00B61CCE /* PLYProductCategory.m in Sources */,
 				A7665D451A9FA965001734B8 /* PLYUploadImage.m in Sources */,
 				A7EA07071A2B139C00B61CCE /* PLYEntity.m in Sources */,
+				A76E95391BE73CC3007A52DA /* PLYAchievement.m in Sources */,
 				A72592B51A757D5900952685 /* PLYCategory.m in Sources */,
 				A75CF7571A30B4BD007E30FC /* PLYBrandOwner.m in Sources */,
 				A7EA072C1A2B176D00B61CCE /* PLYServer.m in Sources */,
