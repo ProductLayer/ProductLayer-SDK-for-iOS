@@ -13,7 +13,6 @@
  */
 @interface PLYAchievement : PLYEntity
 
-
 /**
  Short name of the awarded achievement
  */
@@ -38,6 +37,5 @@
  Internal key identifying the achievement
  */
 @property (nonatomic, copy) NSString *key;
-
 
 @end
