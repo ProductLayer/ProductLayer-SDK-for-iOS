@@ -181,6 +181,13 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 - (void)loadDetailsForUser:(PLYUser *)user completion:(PLYCompletion)completion;
 
 /**
+ Loads the achievements for the given user
+ @param user The user to load achievements for
+ @param completion The completion handler for the request
+ */
+- (void)loadAchievementsForUser:(PLYUser *)user completion:(PLYCompletion)completion;
+
+/**
  Nickname of the currently logged in user or `nil` if not logged in
  */
 @property (nonatomic, readonly) PLYUser *loggedInUser;

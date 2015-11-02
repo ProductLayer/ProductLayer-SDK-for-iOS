@@ -1300,6 +1300,31 @@
 	}];
 }
 
+
+- (void)loadAchievementsForUser:(PLYUser *)user completion:(PLYCompletion)completion
+{
+   	NSParameterAssert(user);
+ 
+    NSString *function = [NSString stringWithFormat:@"/users/%@/achievements", user.Id];
+    NSString *path = [self _functionPathForFunction:function];
+    
+//    PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
+//        // reset logged in user avatar URL
+//        if (result && !error)
+//        {
+//            // workaround, need to get new placeholder avatar
+//            [self loadDetailsForUser:user completion:NULL];
+//        }
+//        
+//        if (completion)
+//        {
+//            completion(result, error);
+//        }
+//    };
+    
+    [self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:nil payload:nil completion:completion];
+}
+
 #pragma mark - Managing Social Connections
 
 - (NSURLRequest *)_URLRequestForSocialService:(NSString *)service function:(NSString *)function HTTPMethod:(NSString *)HTTPMethod
