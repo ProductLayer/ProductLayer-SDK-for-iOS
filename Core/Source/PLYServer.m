@@ -170,15 +170,14 @@
 			NSString *value = parameters[key];
 			
 			// URL-encode
-			NSString *encKey = [key stringByURLEncoding];
 			if([value isKindOfClass:[NSString class]])
 			{
-				value = [value stringByURLEncoding];
+				value = [value stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
 			}
 			
 			// combine into pairs
 			NSString *tmpStr = [NSString stringWithFormat:@"%@=%@",
-									  encKey, value];
+									  key, value];
 			[tmpArray addObject:tmpStr];
 		}
 		
@@ -566,11 +565,11 @@
 			[tmpQuery appendString:@"?"];
 		}
 		
-		[tmpQuery appendString:[key stringByURLEncoding]];
+		[tmpQuery appendString:key];
 		
 		[tmpQuery appendString:@"="];
 		
-		NSString *encoded = [[obj description] stringByURLEncoding];
+		NSString *encoded = [[obj description] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
 		[tmpQuery appendString:encoded];
 	}];
 	
