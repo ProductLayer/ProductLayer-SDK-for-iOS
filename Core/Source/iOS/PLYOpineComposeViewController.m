@@ -284,7 +284,7 @@
 																		 toItem:nil
 																	 attribute:NSLayoutAttributeNotAnAttribute
 																	multiplier:1.0
-																	  constant:50]];
+																	  constant:40]];
 
 	[_facebookButton addConstraint:[NSLayoutConstraint constraintWithItem:_facebookButton attribute:NSLayoutAttributeHeight
 																	 relatedBy:NSLayoutRelationEqual
@@ -312,7 +312,7 @@
 																		 toItem:nil
 																	 attribute:NSLayoutAttributeNotAnAttribute
 																	multiplier:1.0
-																	  constant:50]];
+																	  constant:40]];
 	
 	[_twitterButton addConstraint:[NSLayoutConstraint constraintWithItem:_twitterButton attribute:NSLayoutAttributeHeight
 																	 relatedBy:NSLayoutRelationEqual
@@ -340,7 +340,7 @@
 																		 toItem:nil
 																	 attribute:NSLayoutAttributeNotAnAttribute
 																	multiplier:1.0
-																	  constant:50]];
+																	  constant:40]];
 	
 	[_locationButton addConstraint:[NSLayoutConstraint constraintWithItem:_locationButton attribute:NSLayoutAttributeHeight
 																	 relatedBy:NSLayoutRelationEqual
@@ -382,7 +382,7 @@
 																		 toItem:_twitterButton
 																	 attribute:NSLayoutAttributeLeft
 																	multiplier:1.0
-																	  constant:50]];
+																	  constant:0]];
 	
 	[view addConstraint:[NSLayoutConstraint constraintWithItem:_addressLabel attribute:NSLayoutAttributeTop
 																	 relatedBy:NSLayoutRelationEqual
