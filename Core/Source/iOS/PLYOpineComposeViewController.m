@@ -958,6 +958,17 @@
 {
 	UIAlertController *alert = [UIAlertController alertControllerWithTitle:PLYLocalizedStringFromTable(@"OPINE_PHOTO_ACTIONS_TITLE", @"UI", @"Title for actions menu from opine photo button") message:nil preferredStyle:UIAlertControllerStyleActionSheet];
 	
+    if ([sender isKindOfClass:[UIBarButtonItem class]])
+    {
+        alert.popoverPresentationController.barButtonItem = sender;
+    }
+    else if ([sender isKindOfClass:[UIView class]])
+    {
+        UIView *view = (UIView *)sender;
+        alert.popoverPresentationController.sourceView = view;
+        alert.popoverPresentationController.sourceRect = view.bounds;
+    }
+    
 	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
 	{
 		NSString *text = PLYLocalizedStringFromTable(@"OPINE_IMAGE_FROM_CAM", @"UI", @"Add new opine image from camera");
