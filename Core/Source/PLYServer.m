@@ -316,6 +316,48 @@
 	}
 }
 
+- (void)_checkNewAchievementsFromHeaders:(NSDictionary *)headers
+{
+    NSString *header = headers[@"X-ProductLayer-User-Unlocked-Achievements"];
+
+    if (!header)
+    {
+        return;
+    }
+    
+    header = [header stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"[]"]];
+    
+    NSArray *keys = [header componentsSeparatedByString:@","];
+    
+    DTLogDebug(@"New achievements: %@", header);
+    
+    for (NSString *oneKey in keys)
+    {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        
+        if ([defaults boolForKey:oneKey])
+        {
+            return;
+        }
+        
+        [defaults setBool:YES forKey:oneKey];
+        
+        [self achievementForKey:oneKey completion:^(id result, NSError *error) {
+            
+            if (error)
+            {
+                DTLogError(@"Cannot get achievement for key '%@': %@", oneKey, [error localizedDescription]);
+            }
+            else if ([result isKindOfClass:[PLYAchievement class]])
+            {
+                NSDictionary *userInfo = @{PLYServerAchievementKey: result};
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:PLYServerNewAchievementNotification object:self userInfo:userInfo];
+            }
+        }];
+    }
+}
+
 - (void)startDataTaskForRequest:(NSMutableURLRequest *)request completion:(PLYCompletion)completion
 {
 #if TARGET_OS_IPHONE
@@ -441,6 +483,8 @@
 													{
 														[user setValue:pointsNum forKey:@"points"];
 													}
+                                                    
+                                                    [self _checkNewAchievementsFromHeaders:headers];
 												}
 												
 												if (!error && !ignoreContent)
@@ -1297,6 +1341,16 @@
 			}
 		});
 	}];
+}
+
+- (void)achievementForKey:(NSString *)key completion:(PLYCompletion)completion
+{
+   	NSParameterAssert(key);
+    
+    NSString *function = [NSString stringWithFormat:@"/achievements/%@", key];
+    NSString *path = [self _functionPathForFunction:function];
+    
+    [self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:nil payload:nil completion:completion];
 }
 
 

@@ -62,6 +62,16 @@ extern NSString * const PLYServerDidUpdateEntityKey;
 extern NSString * const PLYServerDidUpdateProductCategoriesNotification;
 
 /**
+ Notification when the user achieved a new achievement
+ */
+extern NSString * const PLYServerNewAchievementNotification;
+
+/**
+ Key in the info dictionary for PLYServerNewAchievementNotification
+ */
+extern NSString * const PLYServerAchievementKey;
+
+/**
  User Defaults Keys
 */
 extern NSString * const PLYUserDefaultOpineComposerIncludeLocation;

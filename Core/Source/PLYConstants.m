@@ -21,6 +21,9 @@ NSString * const PLYServerDidUpdateEntityKey = @"PLYServerDidUpdateEntityKey";
 NSString * const PLYServerDidCreateEntityKey = @"PLYServerDidCreateEntityKey";
 NSString * const PLYServerDidUpdateProductCategoriesNotification = @"PLYServerDidUpdateProductCategoriesNotification";
 
+NSString * const PLYServerNewAchievementNotification = @"PLYServerNewAchievementNotification";
+NSString * const PLYServerAchievementKey = @"PLYServerAchievementKey";
+
 /**
  Timeline Options
  */
