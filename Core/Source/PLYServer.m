@@ -327,35 +327,57 @@
     
     header = [header stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"[]"]];
     
+    
     NSArray *keys = [header componentsSeparatedByString:@","];
     
-    DTLogDebug(@"New achievements: %@", header);
+    DTLogInfo(@"New achievements: %@", header);
     
-    for (NSString *oneKey in keys)
-    {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    // collect the achievements info in background
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        dispatch_semaphore_t sema =  dispatch_semaphore_create(0);
         
-        if ([defaults boolForKey:oneKey])
+        NSMutableArray *achievements = [NSMutableArray array];
+        
+        for (NSString *oneKey in keys)
         {
-            return;
+            NSString *defaultsKey = [self.loggedInUser.Id stringByAppendingString: oneKey];
+            
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            
+            if ([defaults boolForKey:defaultsKey])
+            {
+                // already notified for this achievement
+               // continue;
+            }
+            
+            [defaults setBool:YES forKey:defaultsKey];
+            
+            [self achievementForKey:oneKey completion:^(id result, NSError *error) {
+                
+                if (error)
+                {
+                    DTLogError(@"Cannot get achievement for key '%@': %@", oneKey, [error localizedDescription]);
+                }
+                else if ([result isKindOfClass:[PLYAchievement class]])
+                {
+                    [achievements addObject:result];
+                }
+                
+                dispatch_semaphore_signal(sema);
+            }];
+            
+            dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
         }
         
-        [defaults setBool:YES forKey:oneKey];
+        // now we collected all infos, send notification
         
-        [self achievementForKey:oneKey completion:^(id result, NSError *error) {
+        if ([achievements count])
+        {
+            NSDictionary *userInfo = @{PLYServerAchievementKey: [achievements copy]};
             
-            if (error)
-            {
-                DTLogError(@"Cannot get achievement for key '%@': %@", oneKey, [error localizedDescription]);
-            }
-            else if ([result isKindOfClass:[PLYAchievement class]])
-            {
-                NSDictionary *userInfo = @{PLYServerAchievementKey: result};
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:PLYServerNewAchievementNotification object:self userInfo:userInfo];
-            }
-        }];
-    }
+            [[NSNotificationCenter defaultCenter] postNotificationName:PLYServerNewAchievementNotification object:self userInfo:userInfo];
+        }
+    });
 }
 
 - (void)startDataTaskForRequest:(NSMutableURLRequest *)request completion:(PLYCompletion)completion
@@ -480,13 +502,14 @@
 													NSNumber *pointsNum = headers[@"X-ProductLayer-User-Points"];
 													
 													if (pointsNum)
-													{
-														[user setValue:pointsNum forKey:@"points"];
-													}
+                                                    {
+                                                        [user setValue:pointsNum forKey:@"points"];
+                                                    }
                                                     
                                                     [self _checkNewAchievementsFromHeaders:headers];
-												}
-												
+                                                    
+                                                }
+                                                
 												if (!error && !ignoreContent)
 												{
 													id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
