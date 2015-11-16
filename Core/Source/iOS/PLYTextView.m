@@ -7,6 +7,7 @@
 //
 
 #import "PLYTextView.h"
+#import "PLYFunctions.h"
 
 @implementation PLYTextView
 {
@@ -41,16 +42,73 @@
 {
 	// update language first, other observers might need it
 	_usedInputLanguage = _lastKeyboardLanguage;
-	
+    
 	[super insertText:text];
 }
+
+- (NSString *)replacementTextForURL:(NSURL *)URL
+{
+    if (!URL)
+    {
+        return nil;
+    }
+    
+    if (![URL.host isEqualToString:@"prod.ly"])
+    {
+        return nil;
+    }
+    
+    NSMutableArray *pathComponents = [URL.pathComponents mutableCopy];
+    
+    if ([pathComponents.firstObject isEqualToString:@"/"])
+    {
+        [pathComponents removeObjectAtIndex:0];
+    }
+    
+    if (![pathComponents.firstObject isEqualToString:@"product"])
+    {
+        return nil;
+    }
+    
+    [pathComponents removeObjectAtIndex:0];
+    
+    NSString *GTIN = pathComponents.firstObject;
+    
+    if (!PLYIsValidGTIN(GTIN))
+    {
+        return nil;
+    }
+    
+    return [@"#" stringByAppendingString:GTIN];
+}
+
 
 - (void)replaceRange:(UITextRange *)range withText:(NSString *)text
 {
 	// update language first, other observers might need it
 	_usedInputLanguage = _lastKeyboardLanguage;
-	
+    
 	[super replaceRange:range withText:text];
+}
+
+- (void)paste:(id)sender
+{
+    UIPasteboard *pboard = [UIPasteboard generalPasteboard];
+    
+    NSURL *URL = pboard.URL;
+    
+    if (URL)
+    {
+        NSString *replacement = [self replacementTextForURL:URL];
+        
+        if (replacement)
+        {
+            [self replaceRange:self.selectedTextRange withText:replacement];
+            return;
+        }
+    }
+    
+    [super paste:sender];
 }
 
 - (BOOL)becomeFirstResponder
