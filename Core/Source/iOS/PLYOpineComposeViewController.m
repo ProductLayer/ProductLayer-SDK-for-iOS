@@ -492,19 +492,6 @@
 
 #pragma mark - Helpers
 
-- (NSInteger)_remainingCharacterCount
-{
-	NSString *trimmedString = [_textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-	NSInteger remainingChars = 140 - [trimmedString length];
-	
-	if (self.opine.shareOnTwitter)
-	{
-		remainingChars -= 24;
-	}
-	
-	return remainingChars;
-}
-
 - (void)_updateSaveButtonState
 {
 	_saveButtonItem.enabled = [_textView.text length]>0;
