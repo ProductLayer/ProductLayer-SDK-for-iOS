@@ -88,7 +88,6 @@
 	
 	// use default config, we need credential & caching
 	NSURLSessionConfiguration *config = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-    config.HTTPCookieAcceptPolicy = NSHTTPCookieAcceptPolicyNever;
 	
 	return [self initWithSessionConfiguration:config];
 }
