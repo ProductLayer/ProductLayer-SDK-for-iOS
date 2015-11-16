@@ -88,6 +88,7 @@
 	
 	// use default config, we need credential & caching
 	NSURLSessionConfiguration *config = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+    config.HTTPCookieAcceptPolicy = NSHTTPCookieAcceptPolicyNever;
 	
 	return [self initWithSessionConfiguration:config];
 }
@@ -790,6 +791,18 @@
 
 #pragma mark - Helpers
 
+- (void)_clearSession
+{
+    _authToken = nil;
+    _loggedInUser = nil;
+    
+    // delete all cookies to prevent any from tainting a new session
+    for (NSHTTPCookie *cookie in _configuration.HTTPCookieStorage.cookies)
+    {
+        [_configuration.HTTPCookieStorage deleteCookie:cookie];
+    }
+}
+
 - (NSDictionary *)_dictionaryRepresentationWithoutReadOnlyProperties:(PLYEntity *)entity
 {
 	NSMutableDictionary *tmpDict = [[entity dictionaryRepresentation] mutableCopy];
@@ -1143,9 +1156,8 @@
 	NSParameterAssert(completion);
 	
 	_performingLogin = YES;
-	
-	_authToken = nil;
-	
+    [self _clearSession];
+    
 	NSString *path = [self _functionPathForFunction:@"login"];
 	
 	NSString *authValue = [self basicAuthenticationForUser:user andPassword:password];
@@ -1183,11 +1195,13 @@
 {
 	NSParameterAssert(token);
 	NSParameterAssert(completion);
-	
+
+    [self _clearSession];
+
 	_performingLogin = YES;
-	
-	_authToken = token;
-	_loggedInUser = nil;
+    
+    // set token for restoring old session
+    _authToken = token;
 	
 	NSString *path = [self _functionPathForFunction:@"login"];
 	
@@ -1235,6 +1249,7 @@
 	
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil completion:completion];
 	
+    [self _clearSession];
 	[self _invalidateAuthToken];
 }
 
