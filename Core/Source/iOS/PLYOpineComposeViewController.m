@@ -507,22 +507,15 @@
 
 - (void)_updateSaveButtonState
 {
-	_saveButtonItem.enabled = [_textView.text length]>0 && [self _remainingCharacterCount]>=0;
+	_saveButtonItem.enabled = [_textView.text length]>0;
 }
 
 - (void)_updateCharacterCount
 {
-	NSInteger remainingChars = [self _remainingCharacterCount];
-	if (remainingChars>=0)
-	{
-		_characterRemainingLabel.textColor = [UIColor lightGrayColor];
-	}
-	else
-	{
-		_characterRemainingLabel.textColor = [UIColor redColor];
-	}
-	
-	_characterRemainingLabel.text = [NSString stringWithFormat:@"%ld", (long)remainingChars];
+    NSString *trimmedString = [_textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSInteger count = trimmedString.length;
+
+	_characterRemainingLabel.text = [NSString stringWithFormat:@"%ld", (long)count];
 }
 
 - (BOOL)_hasSocialConnection:(NSString *)service
