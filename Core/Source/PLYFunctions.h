@@ -59,3 +59,15 @@ DTColor *PLYBrandColor();
  Sets an override color for PLYBrandColor(). If this is set to non-`nil` this is used instead
 */
 void PLYBrandColorSetOverride(DTColor *color);
+
+/**
+ Gets the experience level for a point value
+ @returns the floating point level
+ */
+double PLYLevelForPoints(NSUInteger points);
+
+/**
+ Gets the progress in the current level for a point value
+ @returns the percent progress
+ */
+double PLYPercentProgressInLevelForPoints(NSUInteger points);

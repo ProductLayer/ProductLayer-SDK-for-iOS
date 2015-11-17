@@ -333,3 +333,21 @@ NSString *PLYUPCAFromUPCE(NSString *UPCE)
 	return [NSString stringWithFormat:@"0%@%@%ld", manufacturer, item, (long)checkDigit];
 }
 
+#pragma mark - Gamification
+
+double __logx(double value, double base)
+{
+    return log10(value) / log10(base);
+}
+
+double PLYLevelForPoints(NSUInteger points)
+{
+    return 1.0 + __logx(6600.0 + (double)points, 1.05) - __logx(6600.0, 1.05);
+}
+
+double PLYPercentProgressInLevelForPoints(NSUInteger points)
+{
+    double exactLevel = PLYLevelForPoints(points);
+    double level = floor(exactLevel);
+    return exactLevel - level;
+}
