@@ -956,6 +956,7 @@
 			UIImagePickerController *picker = [[UIImagePickerController alloc] init];
 			picker.sourceType = UIImagePickerControllerSourceTypeCamera;
 			picker.delegate = self;
+            picker.modalPresentationStyle = UIModalPresentationFullScreen;
 			
 			[self presentViewController:picker animated:YES completion:NULL];
 		}];
