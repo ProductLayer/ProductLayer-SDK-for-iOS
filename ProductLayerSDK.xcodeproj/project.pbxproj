@@ -268,6 +268,10 @@
 		A7CD959219FA821E008E3A41 /* PLYOpineComposeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A7CD959019FA821E008E3A41 /* PLYOpineComposeViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7CD959319FA821E008E3A41 /* PLYOpineComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CD959119FA821E008E3A41 /* PLYOpineComposeViewController.m */; };
 		A7CD959419FA821E008E3A41 /* PLYOpineComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CD959119FA821E008E3A41 /* PLYOpineComposeViewController.m */; };
+		A7CDFD401BFBB7B200256AAD /* PLYLevelUpAchievement.h in Headers */ = {isa = PBXBuildFile; fileRef = A7CDFD3E1BFBB7B200256AAD /* PLYLevelUpAchievement.h */; };
+		A7CDFD411BFBB7B200256AAD /* PLYLevelUpAchievement.h in Headers */ = {isa = PBXBuildFile; fileRef = A7CDFD3E1BFBB7B200256AAD /* PLYLevelUpAchievement.h */; };
+		A7CDFD421BFBB7B200256AAD /* PLYLevelUpAchievement.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CDFD3F1BFBB7B200256AAD /* PLYLevelUpAchievement.m */; };
+		A7CDFD431BFBB7B200256AAD /* PLYLevelUpAchievement.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CDFD3F1BFBB7B200256AAD /* PLYLevelUpAchievement.m */; };
 		A7EA07011A2B12E900B61CCE /* ProductLayerSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B44248183F91E700E8A170 /* ProductLayerSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7EA07061A2B139C00B61CCE /* PLYEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = A7548AE9196C2E7C000B72EB /* PLYEntity.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7EA07071A2B139C00B61CCE /* PLYEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548AEA196C2E7C000B72EB /* PLYEntity.m */; };
@@ -900,6 +904,8 @@
 		A7C488A71A36ECBA004AC656 /* PLYEntityTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYEntityTest.m; sourceTree = "<group>"; };
 		A7CD959019FA821E008E3A41 /* PLYOpineComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYOpineComposeViewController.h; sourceTree = "<group>"; };
 		A7CD959119FA821E008E3A41 /* PLYOpineComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYOpineComposeViewController.m; sourceTree = "<group>"; };
+		A7CDFD3E1BFBB7B200256AAD /* PLYLevelUpAchievement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYLevelUpAchievement.h; sourceTree = "<group>"; };
+		A7CDFD3F1BFBB7B200256AAD /* PLYLevelUpAchievement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYLevelUpAchievement.m; sourceTree = "<group>"; };
 		A7D997EB1A2B11A800C80C2B /* ProductLayerSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ProductLayerSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7EA07231A2B14A800B61CCE /* PLYCompatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYCompatibility.h; sourceTree = "<group>"; };
 		A7EA07261A2B160900B61CCE /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
@@ -1796,6 +1802,8 @@
 				A7665D401A9FA965001734B8 /* PLYUploadImage.m */,
 				A7B4877D1987CFB200FA8F83 /* PLYVotableEntity.h */,
 				A7B4877E1987CFB200FA8F83 /* PLYVotableEntity.m */,
+				A7CDFD3E1BFBB7B200256AAD /* PLYLevelUpAchievement.h */,
+				A7CDFD3F1BFBB7B200256AAD /* PLYLevelUpAchievement.m */,
 			);
 			name = PLYEntities;
 			sourceTree = "<group>";
@@ -1870,6 +1878,7 @@
 				A7590B0519ED77B40084EBCA /* UIViewController+ProductLayer.h in Headers */,
 				A7590B1319ED77B80084EBCA /* PLYErrorResponse.h in Headers */,
 				A7590B2319ED77B80084EBCA /* PLYUser.h in Headers */,
+				A7CDFD401BFBB7B200256AAD /* PLYLevelUpAchievement.h in Headers */,
 				A75CF7581A30B4BD007E30FC /* PLYUserAvatar.h in Headers */,
 				A7590AFF19ED77B40084EBCA /* PLYLoginViewController.h in Headers */,
 				A7A38CD21A2B4FFD005D8395 /* PLYFunctions.h in Headers */,
@@ -1922,6 +1931,7 @@
 				A7665D0F1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h in Headers */,
 				A7EA07121A2B139C00B61CCE /* PLYOpine.h in Headers */,
 				A75CF7821A30DF4E007E30FC /* PLYEntities.h in Headers */,
+				A7CDFD411BFBB7B200256AAD /* PLYLevelUpAchievement.h in Headers */,
 				A7EA07011A2B12E900B61CCE /* ProductLayerSDK.h in Headers */,
 				A7EA071A1A2B139C00B61CCE /* PLYUser.h in Headers */,
 				A7EA07061A2B139C00B61CCE /* PLYEntity.h in Headers */,
@@ -2511,6 +2521,7 @@
 				A75CF75B1A30B4BD007E30FC /* PLYUserAvatar.m in Sources */,
 				A7EB72761A72B42300FFD4CC /* PLYProblemReport.m in Sources */,
 				A7590B1619ED77B80084EBCA /* PLYImage.m in Sources */,
+				A7CDFD421BFBB7B200256AAD /* PLYLevelUpAchievement.m in Sources */,
 				A7590B0619ED77B40084EBCA /* UIViewController+ProductLayer.m in Sources */,
 				A75CF7431A30B48A007E30FC /* PLYAVFoundationFunctions.m in Sources */,
 				A7590B1219ED77B80084EBCA /* PLYErrorMessage.m in Sources */,
@@ -2685,6 +2696,7 @@
 				A7EA07191A2B139C00B61CCE /* PLYReview.m in Sources */,
 				A75CF75C1A30B4BD007E30FC /* PLYUserAvatar.m in Sources */,
 				A7EA070F1A2B139C00B61CCE /* PLYList.m in Sources */,
+				A7CDFD431BFBB7B200256AAD /* PLYLevelUpAchievement.m in Sources */,
 				A7EA07091A2B139C00B61CCE /* PLYErrorMessage.m in Sources */,
 				A7EA071F1A2B139C00B61CCE /* PLYProductCategory.m in Sources */,
 				A7665D451A9FA965001734B8 /* PLYUploadImage.m in Sources */,

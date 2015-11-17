@@ -29,7 +29,7 @@
 #define PLY_ENDPOINT_URL [NSURL URLWithString:@"https://api.productlayer.com"]
 
 // this is a prefix added before REST methods, e.g. for a version of the API
-#define PLY_PATH_PREFIX @"0.5"
+#define PLY_PATH_PREFIX @"0.5-staging"
 
 @interface PLYServer () <NSCacheDelegate>
 
@@ -316,11 +316,11 @@
 	}
 }
 
-- (void)_checkNewAchievementsFromHeaders:(NSDictionary *)headers
+- (void)_checkNewAchievementsFromHeaders:(NSDictionary *)headers extraAchievement:(PLYAchievement *)achievement
 {
     NSString *header = headers[@"X-ProductLayer-User-Unlocked-Achievements"];
 
-    if (!header)
+    if (!header && !achievement)
     {
         return;
     }
@@ -337,6 +337,11 @@
         dispatch_semaphore_t sema =  dispatch_semaphore_create(0);
         
         NSMutableArray *achievements = [NSMutableArray array];
+        
+        if (achievement)
+        {
+            [achievements addObject:achievement];
+        }
         
         for (NSString *oneKey in keys)
         {
@@ -500,14 +505,29 @@
 												if (user)
 												{
 													NSNumber *pointsNum = headers[@"X-ProductLayer-User-Points"];
-													
+                                                    NSUInteger oldPoints = user.points;
+                                                    NSUInteger oldLevel = PLYLevelForPoints(oldPoints);
+                                                    
 													if (pointsNum)
                                                     {
                                                         [user setValue:pointsNum forKey:@"points"];
                                                     }
                                                     
-                                                    [self _checkNewAchievementsFromHeaders:headers];
+                                                    NSUInteger newLevel = PLYLevelForPoints(user.points);
                                                     
+                                                    PLYLevelUpAchievement *extraAchievement = nil;
+                                                    
+                                                    NSNumber *levelNum = headers[@"X-ProductLayer-User-Level-Changed"];
+                                                    
+                                                    if (levelNum || newLevel > oldLevel)
+                                                    {
+                                                        extraAchievement = [PLYLevelUpAchievement new];
+                                                        extraAchievement.key = [NSString stringWithFormat:@"level-%ld", newLevel];
+                                                        extraAchievement.pointsBeforeLevelUp = oldPoints;
+                                                        extraAchievement.pointsAfterLevelUp = user.points;
+                                                    }
+                                                    
+                                                    [self _checkNewAchievementsFromHeaders:headers extraAchievement:extraAchievement];
                                                 }
                                                 
 												if (!error && !ignoreContent)
