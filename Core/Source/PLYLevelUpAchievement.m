@@ -14,4 +14,9 @@
 
 @implementation PLYLevelUpAchievement
 
++ (NSString *)entityTypeIdentifier
+{
+    return @"com.productlayer.Achievement.LevelUp";
+}
+
 @end
