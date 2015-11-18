@@ -522,7 +522,7 @@
                                                     if (levelNum || newLevel > oldLevel)
                                                     {
                                                         extraAchievement = [PLYLevelUpAchievement new];
-                                                        extraAchievement.key = [NSString stringWithFormat:@"level-%ld", newLevel];
+                                                        extraAchievement.key = [NSString stringWithFormat:@"level-%ld", (unsigned long)newLevel];
                                                         extraAchievement.pointsBeforeLevelUp = oldPoints;
                                                         extraAchievement.pointsAfterLevelUp = user.points;
                                                     }
