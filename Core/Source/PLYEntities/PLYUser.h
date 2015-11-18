@@ -51,6 +51,16 @@
 @property (nonatomic, readonly) NSInteger points;
 
 /**
+ The gamification level of the user
+ */
+@property (nonatomic, readonly) NSInteger level;
+
+/**
+ The gamification level progress of the user
+ */
+@property (nonatomic, readonly) NSInteger progress;
+
+/**
  A list of unlocked achievements.
  */
 @property (nonatomic, copy, readonly) NSArray *unlockedAchievements;

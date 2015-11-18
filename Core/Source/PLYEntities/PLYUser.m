@@ -15,6 +15,10 @@
 // all read-only properties are settable internally
 
 @property (nonatomic, assign, readwrite) NSInteger points;
+@property (nonatomic, assign, readwrite) NSInteger level;
+@property (nonatomic, assign, readwrite) NSInteger progress;
+
+
 @property (nonatomic, copy, readwrite) NSArray *unlockedAchievements;
 @property (nonatomic, assign, readwrite) NSUInteger followerCount;
 @property (nonatomic, assign, readwrite) NSUInteger followingCount;
@@ -72,7 +76,15 @@
 	{
 		[self setValue:value forKey:@"points"];
 	}
-	else if ([key isEqualToString:@"pl-usr-achv_unlocked"])
+    else if ([key isEqualToString:@"pl-usr-level"])
+    {
+        [self setValue:value forKey:@"level"];
+    }
+    else if ([key isEqualToString:@"pl-usr-progress"])
+    {
+        [self setValue:value forKey:@"progress"];
+    }
+    else if ([key isEqualToString:@"pl-usr-achv_unlocked"])
 	{
 		[self setValue:value forKey:@"unlockedAchievements"];
 	}
@@ -156,7 +168,17 @@
 	{
 		dict[@"pl-usr-points"] = @(_points);
 	}
-	
+    
+    if (_level)
+    {
+        dict[@"pl-usr-level"] = @(_level);
+    }
+
+    if (_progress)
+    {
+        dict[@"pl-usr-progress"] = @(_progress);
+    }
+
 	if (_unlockedAchievements)
 	{
 		dict[@"pl-usr-achv_unlocked"] = _unlockedAchievements;
@@ -217,6 +239,8 @@
 	self.birthday = entity.birthday;
 	self.gender = entity.gender;
 	self.points = entity.points;
+    self.level = entity.level;
+    self.progress = entity.progress;
 	self.unlockedAchievements = entity.unlockedAchievements;
 	self.followerCount = entity.followerCount;
 	self.followingCount = entity.followingCount;
