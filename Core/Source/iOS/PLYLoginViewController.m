@@ -547,6 +547,18 @@ NSString * const LastLoggedInUserDefault = @"LastLoggedInUser";
 	_nameField.text = user.nickname;
     
 	[self.navigationController popToViewController:self animated:YES];
+    
+    NSString *title = PLYLocalizedStringFromTable(@"PLY_LOSTPW_SUCCESS_ALERT_TITLE", @"UI", @"Title for successful password reset");
+				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOSTPW_SUCCESS_ALERT_MSG", @"UI", @"Message for successful password reset");
+				
+				UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:msg preferredStyle:UIAlertControllerStyleAlert];
+				
+				UIAlertAction *okButton = [UIAlertAction actionWithTitle:PLYLocalizedStringFromTable(@"PLY_ALERT_OK", @"UI", @"Alert acknowledgement button title") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                }];
+				
+				[alert addAction:okButton];
+    
+    [self.navigationController presentViewController:alert animated:YES completion:NULL];
 }
 
 #pragma mark - PLYSignUpViewControllerDelegate

@@ -111,6 +111,21 @@
 	return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [_emailField becomeFirstResponder];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    // dismiss keyboard
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+}
+
 #pragma mark - Actions
 
 - (void)done:(id)sender
@@ -148,21 +163,12 @@
 				check.tintColor = self.navigationController.view.tintColor;
 				self.navigationItem.rightBarButtonItem = check;
 				
-				NSString *title = PLYLocalizedStringFromTable(@"PLY_LOSTPW_SUCCESS_ALERT_TITLE", @"UI", @"Title for successful password reset");
-				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOSTPW_SUCCESS_ALERT_MSG", @"UI", @"Message for successful password reset");
-				
-				UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:msg preferredStyle:UIAlertControllerStyleAlert];
-				
-				UIAlertAction *okButton = [UIAlertAction actionWithTitle:PLYLocalizedStringFromTable(@"PLY_ALERT_OK", @"UI", @"Alert acknowledgement button title") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-					if ([_delegate respondsToSelector:@selector(lostPasswordViewController:didRequestNewPasswordForUser:)])
-					{
-						[_delegate lostPasswordViewController:self didRequestNewPasswordForUser:result];
-					}
-				}];
-				
-				[alert addAction:okButton];
-				
-				[self presentViewController:alert animated:YES completion:NULL];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    if ([_delegate respondsToSelector:@selector(lostPasswordViewController:didRequestNewPasswordForUser:)])
+                    {
+                        [_delegate lostPasswordViewController:self didRequestNewPasswordForUser:result];
+                    }
+                });
 			}
 		});
 	}];

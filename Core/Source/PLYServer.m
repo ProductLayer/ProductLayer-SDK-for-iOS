@@ -1289,7 +1289,8 @@
  * Generates a new password for the user. The password will be send to the users email.
  **/
 - (void)requestNewPasswordForUserWithEmail:(NSString *)email
-										  completion:(PLYCompletion)completion{
+										  completion:(PLYCompletion)completion
+{
 	NSParameterAssert(email);
 	NSParameterAssert(completion);
 	
@@ -1298,6 +1299,23 @@
 	NSDictionary *payload = [NSDictionary dictionaryWithObject:email forKey:@"email"];
 	
 	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:completion];
+}
+
+/**
+  Sets a new password for the user using a reset token
+ **/
+- (void)setUserPassword:(NSString *)password resetToken:(NSString *)resetToken completion:(PLYCompletion)completion
+{
+    NSParameterAssert(resetToken);
+    NSParameterAssert(password);
+    
+    NSString *path = [self _functionPathForFunction:@"/user/change_password"];
+    
+    NSDictionary *parameters = @{@"reset_token": resetToken};
+    NSDictionary *payload = @{@"new_password": password};
+    
+    
+    [self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:parameters payload:payload completion:completion];
 }
 
 /**

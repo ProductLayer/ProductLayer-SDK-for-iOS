@@ -193,3 +193,17 @@
 
 /* Error message for activities that require login */
 "PLY_LOGIN_REQUIRED_ERROR" = "Diese Aktion kann nicht ausgeführt werden ohne eingeloggt zu sein.";
+
+// ----- PLYChoosePasswordViewController
+
+/* Text for done button in set password dialog */
+"PLY_PASSWORD_RIGHT_BUTTON_TITLE" = "Send";
+
+/* Explanation to show on set password dialog */
+"PLY_SETPASSWD_EXPLAIN" = "Choose a new password";
+
+/* Title for successful password change */
+"PLY_SETPW_SUCCESS_ALERT_TITLE" = "Password Changed";
+
+/* Message for successful password change */
+"PLY_SETPW_SUCCESS_ALERT_MSG" = "The password for user '%@' has been changed. You can now log it with it";

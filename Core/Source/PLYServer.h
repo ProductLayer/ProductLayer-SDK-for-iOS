@@ -152,6 +152,14 @@ typedef void (^PLYCompletion)(id result, NSError *error);
                                 completion:(PLYCompletion)completion;
 
 /**
+ Request new password
+ @param password The user's new password
+ @param resetToken The reset token received by email
+ @param completion The completion handler for the request
+ */
+- (void)setUserPassword:(NSString *)password resetToken:(NSString *)resetToken completion:(PLYCompletion)completion;
+
+/**
  Determines an image URL for the given PLYUser
  @param user The PLYUser to retrieve the avatar image URL for
  @returns An NSURL that shows the user's avatar

@@ -245,6 +245,10 @@
 		A7A38CD41A2B4FFD005D8395 /* PLYFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A38CD11A2B4FFD005D8395 /* PLYFunctions.m */; };
 		A7A38CD51A2B4FFD005D8395 /* PLYFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A38CD11A2B4FFD005D8395 /* PLYFunctions.m */; };
 		A7A38CD61A2B4FFD005D8395 /* PLYFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A38CD11A2B4FFD005D8395 /* PLYFunctions.m */; };
+		A7A77B111BFF8972002FF5B7 /* PLYChoosePasswordViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A77B0F1BFF8972002FF5B7 /* PLYChoosePasswordViewController.h */; };
+		A7A77B121BFF8972002FF5B7 /* PLYChoosePasswordViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A77B0F1BFF8972002FF5B7 /* PLYChoosePasswordViewController.h */; };
+		A7A77B131BFF8972002FF5B7 /* PLYChoosePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A77B101BFF8972002FF5B7 /* PLYChoosePasswordViewController.m */; };
+		A7A77B141BFF8972002FF5B7 /* PLYChoosePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A77B101BFF8972002FF5B7 /* PLYChoosePasswordViewController.m */; };
 		A7ACC99D1A307ABC004EE5BD /* libDTKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7730FBD1A3078D600CCBB7C /* libDTKeychain.a */; };
 		A7ACC9A51A307B57004EE5BD /* libDTKeychain.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A7730FBF1A3078D600CCBB7C /* libDTKeychain.dylib */; };
 		A7ACC9A81A307B86004EE5BD /* libDTKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7730FBD1A3078D600CCBB7C /* libDTKeychain.a */; };
@@ -873,6 +877,8 @@
 		A7A0DF291B5BB2E500B1E329 /* ProductLayerUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductLayerUI.h; sourceTree = "<group>"; };
 		A7A38CD01A2B4FFD005D8395 /* PLYFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYFunctions.h; sourceTree = "<group>"; };
 		A7A38CD11A2B4FFD005D8395 /* PLYFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYFunctions.m; sourceTree = "<group>"; };
+		A7A77B0F1BFF8972002FF5B7 /* PLYChoosePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYChoosePasswordViewController.h; sourceTree = "<group>"; };
+		A7A77B101BFF8972002FF5B7 /* PLYChoosePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYChoosePasswordViewController.m; sourceTree = "<group>"; };
 		A7B214F6183F842000C38635 /* ProductLayerSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductLayerSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7B214F9183F842000C38635 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A7B214FB183F842000C38635 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1279,6 +1285,8 @@
 				A76D3F9019866E0E0032FE59 /* PLYLostPasswordViewController.m */,
 				A76D3F5F198650770032FE59 /* PLYSignUpViewController.h */,
 				A76D3F60198650770032FE59 /* PLYSignUpViewController.m */,
+				A7A77B0F1BFF8972002FF5B7 /* PLYChoosePasswordViewController.h */,
+				A7A77B101BFF8972002FF5B7 /* PLYChoosePasswordViewController.m */,
 			);
 			name = Login/Signup;
 			sourceTree = "<group>";
@@ -1816,6 +1824,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A76E95341BE73CC3007A52DA /* PLYAchievement.h in Headers */,
+				A7A77B111BFF8972002FF5B7 /* PLYChoosePasswordViewController.h in Headers */,
 				A74988761B6EA8E400A66234 /* PLYUser.h in Headers */,
 				A749887D1B6EA8E400A66234 /* PLYServer.h in Headers */,
 				A74988721B6EA8E400A66234 /* PLYPackaging.h in Headers */,
@@ -1886,6 +1895,7 @@
 				A76E95351BE73CC3007A52DA /* PLYAchievement.h in Headers */,
 				A7EE55A21A121C8300DD55FE /* PLYCategoryPickerViewController.h in Headers */,
 				A7EB72731A72B42300FFD4CC /* PLYProblemReport.h in Headers */,
+				A7A77B121BFF8972002FF5B7 /* PLYChoosePasswordViewController.h in Headers */,
 				A72592C91A757E1F00952685 /* PLYEditProductViewController.h in Headers */,
 				A762933E1A5FF20300208A27 /* PLYSocialAuthFunctions.h in Headers */,
 				A72592CA1A757E1F00952685 /* PLYTextFieldTableViewCell.h in Headers */,
@@ -2558,6 +2568,7 @@
 				A76293401A5FF20300208A27 /* PLYSocialAuthFunctions.m in Sources */,
 				A72592B41A757D5900952685 /* PLYCategory.m in Sources */,
 				A7590B2419ED77B80084EBCA /* PLYUser.m in Sources */,
+				A7A77B141BFF8972002FF5B7 /* PLYChoosePasswordViewController.m in Sources */,
 				A7590B0419ED77B40084EBCA /* PLYSignUpViewController.m in Sources */,
 				A77FFACF1A77E57B0019DD5C /* PLYBrandOwnerPickerViewController.m in Sources */,
 				A7590B2619ED77B80084EBCA /* PLYProductCategory.m in Sources */,
@@ -2663,6 +2674,7 @@
 				A7B4CF5B1B49493C004A188E /* PLYNavigationController.m in Sources */,
 				A7665D431A9FA965001734B8 /* PLYUploadImage.m in Sources */,
 				A7CD959319FA821E008E3A41 /* PLYOpineComposeViewController.m in Sources */,
+				A7A77B131BFF8972002FF5B7 /* PLYChoosePasswordViewController.m in Sources */,
 				C98CD26B1910E0D70035647C /* PLYListItem.m in Sources */,
 				A7EE55A31A121C8300DD55FE /* PLYCategoryPickerViewController.m in Sources */,
 				A75CF73F1A30B48A007E30FC /* PLYScannerViewController.m in Sources */,
