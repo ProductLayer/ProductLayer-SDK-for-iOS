@@ -214,7 +214,7 @@ typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
 /**
  Nickname of the currently logged in user or `nil` if not logged in
  */
-@property (nonatomic, readonly) nullable PLYUser *loggedInUser;
+@property (nonatomic, readonly) PLYUser * _Nullable loggedInUser;
 
 /**
  Property that states if a login action is currently happening
