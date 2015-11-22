@@ -2002,7 +2002,7 @@
 - (void) performSearchForOpineWithGTIN:(NSString *)gtin
 								  withLanguage:(NSString *)language
 						fromUserWithNickname:(NSString *)nickname
-							  showFriendsOnly:(BOOL *)showFriendsOnly
+							  showFriendsOnly:(BOOL)showFriendsOnly
 										 orderBy:(NSString *)orderBy
 											 page:(NSUInteger)page
 								recordsPerPage:(NSUInteger)rpp
