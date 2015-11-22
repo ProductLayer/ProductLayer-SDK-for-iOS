@@ -45,13 +45,13 @@ typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
                     language:(nullable NSString *)language
                   completion:(nullable PLYCompletion)completion;
 
-/** 
+/**
  Searches for products by name
-
+ 
  @param name The product name to search for
  @param language The language code to return results in
  @param completion The completion handler for the request
-*/
+ */
 - (void)performSearchForName:(nonnull NSString *)name
                     language:(nullable NSString *)language
                   completion:(nullable PLYCompletion)completion;
@@ -187,7 +187,7 @@ typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
  @param parameters The parameters to PUT on the setting
  @param completion The completion handler for the request
  */
-- (void)updateSetting:(nonnull NSString *)setting parameters:(NSDictionary *)parameters completion:(nullable PLYCompletion)completion;
+- (void)updateSetting:(nonnull NSString *)setting parameters:(nonnull NSDictionary *)parameters completion:(nullable PLYCompletion)completion;
 
 
 /**
@@ -294,7 +294,7 @@ typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
  @param completion The completion handler for the request
  */
 - (void)recommendedBrandOwnersForGTIN:(nonnull NSString *)GTIN
-										completion:(nullable PLYCompletion)completion;
+                           completion:(nullable PLYCompletion)completion;
 
 /**
  Retrieves a list of all known brands
@@ -367,7 +367,7 @@ typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
  @param crop If the image should be cropped
  @returns The URL for the image
  */
-- (NSURL *)URLForImage:(nonnull PLYImage *)image maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop;
+- (nonnull NSURL *)URLForImage:(nonnull PLYImage *)image maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop;
 
 /**
  Determins the image URL for the given default image for a given GTIN
@@ -377,7 +377,7 @@ typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
  @param crop If the image should be cropped
  @returns The URL for the image
  */
-- (NSURL *)URLForProductImageWithGTIN:(nonnull NSString *)GTIN maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop;
+- (nonnull NSURL *)URLForProductImageWithGTIN:(nonnull NSString *)GTIN maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop;
 
 /**
  @name Opines
@@ -398,7 +398,7 @@ typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
 - (void) performSearchForOpineWithGTIN:(nonnull NSString *)gtin
                           withLanguage:(nullable NSString *)language
                   fromUserWithNickname:(nonnull NSString *)nickname
-                        showFriendsOnly:(BOOL *)showFriendsOnly
+                       showFriendsOnly:(BOOL)showFriendsOnly
                                orderBy:(nonnull NSString *)orderBy
                                   page:(NSUInteger)page
                         recordsPerPage:(NSUInteger)rpp
@@ -463,7 +463,7 @@ typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
  @param list The list to create
  @param completion The completion handler for the request
  */
-- (void)createProductList:(PLYList *)list completion:(nullable PLYCompletion)completion;
+- (void)createProductList:(nonnull PLYList *)list completion:(nullable PLYCompletion)completion;
 
 /**
  Finds a user's lists
@@ -473,7 +473,7 @@ typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
  @param rpp The records per page to retrieve
  @param completion The completion handler for the request
  */
-- (void)performSearchForProductListFromUser:(PLYUser *)user andListType:(nonnull NSString *)listType page:(NSUInteger)page recordsPerPage:(NSUInteger)rpp completion:(nullable PLYCompletion)completion;
+- (void)performSearchForProductListFromUser:(nonnull PLYUser *)user andListType:(nonnull NSString *)listType page:(NSUInteger)page recordsPerPage:(NSUInteger)rpp completion:(nullable PLYCompletion)completion;
 
 /**
  Gets a user's lists
@@ -481,7 +481,7 @@ typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
  @param options options to restrict the lists
  @param completion The completion handler for the request
  */
-- (void)listsOfUser:(PLYUser *)user options:(NSDictionary * _Nullable)options completion:(nullable PLYCompletion)completion;
+- (void)listsOfUser:(nonnull PLYUser *)user options:(nullable NSDictionary * _Nullable)options completion:(nullable PLYCompletion)completion;
 
 /**
  Retrieves a product list by ID
@@ -495,7 +495,7 @@ typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
  @param list The list to create
  @param completion The completion handler for the request
  */
-- (void)updateProductList:(PLYList *)list completion:(nullable PLYCompletion)completion;
+- (void)updateProductList:(nonnull PLYList *)list completion:(nullable PLYCompletion)completion;
 
 /**
  Deletes a product list by ID
@@ -510,7 +510,7 @@ typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
  @param listId The list identifier
  @param completion The completion handler
  */
-- (void)addOrReplaceListItem:(PLYListItem *)listItem toListWithId:(nonnull NSString *)listId completion:(nullable PLYCompletion)completion;
+- (void)addOrReplaceListItem:(nonnull PLYListItem *)listItem toListWithId:(nonnull NSString *)listId completion:(nullable PLYCompletion)completion;
 
 /**
  Delete product with GTIN from list.
@@ -579,14 +579,14 @@ typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
  @param user The user to follow
  @param completion The completion handler for the request
  */
-- (void)followUser:(PLYUser *)user completion:(nullable PLYCompletion)completion;
+- (void)followUser:(nonnull PLYUser *)user completion:(nullable PLYCompletion)completion;
 
 /**
  Unfollows a user by nickname
  @param user The user to follow
  @param completion The completion handler for the request
  */
-- (void)unfollowUser:(PLYUser *)user completion:(nullable PLYCompletion)completion;
+- (void)unfollowUser:(nonnull PLYUser *)user completion:(nullable PLYCompletion)completion;
 
 
 /**
@@ -600,8 +600,8 @@ typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
  @param completion The completion handler for the request
  */
 - (void)timelineForUser:(nonnull PLYUser *)user
-					 options:(NSDictionary * _Nullable)options
-				 completion:(nullable PLYCompletion)completion;
+                options:(nullable NSDictionary *)options
+             completion:(nullable PLYCompletion)completion;
 
 /**
  The the latest timeline entries for a specific product
@@ -610,7 +610,7 @@ typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
  @param completion The completion handler for the request
  */
 - (void)timelineForProduct:(nonnull PLYProduct *)product
-						 options:(NSDictionary * _Nullable)options
+                   options:(nullable NSDictionary *)options
                 completion:(nullable PLYCompletion)completion;
 
 /**
@@ -618,11 +618,11 @@ typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
  */
 
 /**
- Reports a problem with a given entity, which can either be a PLYImage, PLYUser, PLYUserAvater or PLYProduct 
+ Reports a problem with a given entity, which can either be a PLYImage, PLYUser, PLYUserAvater or PLYProduct
  @param report The problem report to send create
  @param completion The completion handler for the request
  */
-- (void)createProblemReport:(PLYProblemReport *)report completion:(nullable PLYCompletion)completion;
+- (void)createProblemReport:(nonnull PLYProblemReport *)report completion:(nullable PLYCompletion)completion;
 
 /**
  @name Working with Categories
@@ -655,6 +655,6 @@ typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
  Returns the cached category objects in a flat dictionary, i.e. sub-categories are also at the first level
  @returns The PLYCategory objects
  */
-- (NSDictionary *)cachedCategories;
+- (nullable NSDictionary *)cachedCategories;
 
 @end
