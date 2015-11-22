@@ -172,7 +172,7 @@ typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
  @param user The user to upload an image for
  @param completion The completion handler for the request
  */
-- (void)uploadAvatarImage:(DTImage * _Nonnull)image ForUser:(nonnull PLYUser *)user completion:(nullable PLYCompletion)completion;
+- (void)uploadAvatarImage:(DTImage * _Nonnull)image forUser:(nonnull PLYUser *)user completion:(nullable PLYCompletion)completion;
 
 /**
  Resets the avatar image for currently logged in user
