@@ -481,7 +481,7 @@ typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
  @param options options to restrict the lists
  @param completion The completion handler for the request
  */
-- (void)listsOfUser:(nonnull PLYUser *)user options:(nullable NSDictionary * _Nullable)options completion:(nullable PLYCompletion)completion;
+- (void)listsOfUser:(nonnull PLYUser *)user options:(nullable NSDictionary *)options completion:(nullable PLYCompletion)completion;
 
 /**
  Retrieves a product list by ID
