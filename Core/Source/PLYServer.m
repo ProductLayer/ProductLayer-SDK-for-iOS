@@ -1417,7 +1417,7 @@
     NSInteger i;
     
     for (i=0; i<deviceToken.length; ++i) {
-        [deviceTokenHex appendFormat:@"%02lX", (unsigned long)buf[i]];
+        [deviceTokenHex appendFormat:@"%02lx", (unsigned long)buf[i]];
     }
     
     NSString *appID = mainBundle.bundleIdentifier;
