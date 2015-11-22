@@ -7,6 +7,7 @@
 //
 
 
+#import <Foundation/Foundation.h>
 
 #import "PLYEntities.h"
 #import "PLYCompatibility.h"
@@ -46,8 +47,7 @@ NSBundle *PLYResourceBundle();
 /**
  Convenience macro for retrieving localized strings from resource bundle
  */
-#define PLYLocalizedStringFromTable(key, tbl, comment) \
-NSLocalizedStringFromTableInBundle(key, tbl, PLYResourceBundle(), comment)
+NSString *PLYLocalizedStringFromTable(NSString *key, NSString *tbl, NSString *comment);
 
 /**
  Standard ProductLayer color

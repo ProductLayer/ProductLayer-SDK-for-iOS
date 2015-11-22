@@ -147,6 +147,11 @@ DTColor *PLYBrandColor()
 	return [DTColor colorWithRed:110.0/256.0 green:190.0/256.0 blue:68.0/256.0 alpha:1];
 }
 
+NSString *PLYLocalizedStringFromTable(NSString *key, NSString *tbl, NSString *comment)
+{
+    return NSLocalizedStringFromTableInBundle(key, tbl, PLYResourceBundle(), comment);
+}
+
 void PLYBrandColorSetOverride(DTColor *color)
 {
 	_overrideBrandColor = color;

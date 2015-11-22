@@ -1385,6 +1385,29 @@
 	[self _performMethodCallWithPath:path HTTPMethod:@"DELETE" parameters:nil payload:nil completion:wrappedCompletion];
 }
 
+- (void)updateSetting:(NSString *)setting parameters:(NSDictionary *)parameters completion:(PLYCompletion)completion
+{
+    NSString *function = [NSString stringWithFormat:@"/user/setting/%@", setting];
+    NSString *path = [self _functionPathForFunction:function];
+
+    PLYCompletion wrappedCompletion = ^(PLYUser *result, NSError *error) {
+        // reset logged in user avatar URL
+        if (result)
+        {
+            [self _entityByUpdatingCachedEntity:result];
+        }
+        
+        if (completion)
+        {
+            completion(result, error);
+        }
+    };
+    
+    [self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:parameters payload:nil completion:wrappedCompletion];
+}
+
+
+
 - (void)loadDetailsForUser:(PLYUser *)user completion:(PLYCompletion)completion
 {
 	NSParameterAssert(user);

@@ -208,3 +208,23 @@
 
 /* Message for successful password change */
 "PLY_SETPW_SUCCESS_ALERT_MSG" = "The password for user '%@' has been changed. You can now log it with it";
+
+// ---- NotificationSettingsViewController
+
+/* Title of the Notification Settings Dialog */
+"NOTIFICATION_SETTINGS" = "Notification Settings";
+
+/* "Section title for Notification Settings */
+"TITLE_NOTIFICATIONS" = "Notifications";
+
+/* Section title for Newsletter Settings */
+"TITLE_NEWSLETTER" = "Newsletter";
+
+/* Cell title for email notificiations */
+"EMAIL_NOTIFICATIONS" = "by E-Mail";
+
+/* Cell title for push notificiations */
+"PUSH_NOTIFICATIONS" = "by Apple Push Notifications";
+
+/* Cell title for email newsletter */
+"EMAIL_NEWSLETTER" = "Newsletter Subscription";

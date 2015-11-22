@@ -12,7 +12,7 @@
 /**
  Completion handler for ProductLayer API calls
  */
-typedef void (^PLYCompletion)(id result, NSError *error);
+typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
 
 /**
  Wrapper for the ProductLayer API
@@ -22,13 +22,13 @@ typedef void (^PLYCompletion)(id result, NSError *error);
 /**
  The shared server wrapper.
  */
-+ (id)sharedServer;
++ (_Nonnull id)sharedServer;
 
 /**
  Sets the API Key to be used for authenticating the app for using Product Layer.
  @param APIKey The API key (generated on Product Layer app configuration panel)
  */
-- (void)setAPIKey:(NSString *)APIKey;
+- (void)setAPIKey:( NSString * _Nonnull)APIKey;
 
 /**
  @name Searching for Products
@@ -180,6 +180,14 @@ typedef void (^PLYCompletion)(id result, NSError *error);
  @param completion The completion handler for the request
  */
 - (void)resetAvatarForUser:(PLYUser *)user completion:(PLYCompletion)completion;
+
+/**
+ Sets a communication setting for the  logged in user
+ @param setting The name of the setting
+ @param parameters The parameters to PUT on the setting
+ @param completion The completion handler for the request
+ */
+- (void)updateSetting:(NSString *)setting parameters:(NSDictionary *)parameters completion:(PLYCompletion)completion;
 
 /**
  Refreshes/completes a user's details. Updating of the properties is done on the main thread because some controls might be KVO-watching properties. The completion handler returns the passed user object if successful or nil and an `NSError` if not.
