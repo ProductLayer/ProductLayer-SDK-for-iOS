@@ -29,7 +29,7 @@
 #define PLY_ENDPOINT_URL [NSURL URLWithString:@"https://api.productlayer.com"]
 
 // this is a prefix added before REST methods, e.g. for a version of the API
-#define PLY_PATH_PREFIX @"0.5"
+#define PLY_PATH_PREFIX @"0.5-staging"
 
 @interface PLYServer () <NSCacheDelegate>
 
@@ -1406,6 +1406,39 @@
     [self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:parameters payload:nil completion:wrappedCompletion];
 }
 
+- (void)registerPushToken:(NSData *)deviceToken completion:(__nullable PLYCompletion)completion
+{
+    NSBundle *mainBundle = [NSBundle mainBundle];
+    NSDictionary *infoDict = [mainBundle infoDictionary];
+    
+    NSUInteger capacity = deviceToken.length * 2;
+    NSMutableString *deviceTokenHex = [NSMutableString stringWithCapacity:capacity];
+    const unsigned char *buf = deviceToken.bytes;
+    NSInteger i;
+    
+    for (i=0; i<deviceToken.length; ++i) {
+        [deviceTokenHex appendFormat:@"%02lX", (unsigned long)buf[i]];
+    }
+    
+    NSString *appID = mainBundle.bundleIdentifier;
+    NSString *appName = infoDict[@"CFBundleName"];
+    NSString *identifier = [UIDevice currentDevice].identifierForVendor.UUIDString;
+    
+    NSString *version = infoDict[@"CFBundleShortVersionString"];
+    NSString *build = infoDict[@"CFBundleVersion"];
+    NSString *appVersion = [NSString stringWithFormat:@"%@ (%@)", version, build];
+    
+    NSDictionary *payload = @{@"pl-push-app_identifier": appID,
+                              @"pl-push-app_name": appName,
+                              @"pl-push-app_version": appVersion,
+                              @"pl-push-device_token": deviceTokenHex,
+                              @"pl-push-device_type": @"ios",
+                              @"pl-push-installation_id": identifier};
+    
+    NSString *path = [self _functionPathForFunction:@"/user/me/push/token"];
+
+    [self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:completion];
+}
 
 
 - (void)loadDetailsForUser:(PLYUser *)user completion:(PLYCompletion)completion
@@ -2147,45 +2180,6 @@
 	if (rpp)        [parameters setObject:@(rpp)    forKey:@"records_per_page"];
 	
 	[self _performMethodCallWithPath:path parameters:parameters completion:completion];
-}
-
-/**
- * Creates a new review for a product.
- * ATTENTION: Login required
- **/
-- (void)createReview:(PLYReview *)review completion:(PLYCompletion)completion
-{
-	NSParameterAssert(review);
-	NSParameterAssert(review.GTIN);
-	NSParameterAssert(completion);
-	
-#if TARGET_OS_IPHONE
-	if (!_loggedInUser)
-	{
-		[PLYLoginViewController presentLoginWithExplanation:nil completion:^(BOOL success) {
-			if (success)
-			{
-				// retry now that we are logged in
-				[self createReview:review completion:completion];
-			}
-			else if (completion)
-			{
-				// report login failure
-				NSString *msg = PLYLocalizedStringFromTable(@"PLY_LOGIN_REQUIRED_ERROR", @"UI", @"Error message for activities that require login");
-				NSError *error = [self _errorWithCode:404 message:msg];
-				completion(nil, error);
-			}
-		}];
-		
-		return;
-	}
-#endif
-	
-	NSString *function = [NSString stringWithFormat:@"product/%@/review",review.GTIN];
-	NSString *path = [self _functionPathForFunction:function];
-	NSDictionary *payload = [self _dictionaryRepresentationWithoutReadOnlyProperties:review];
-	
-	[self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:completion];
 }
 
 #pragma mark - Lists

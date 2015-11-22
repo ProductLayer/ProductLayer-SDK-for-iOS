@@ -12,7 +12,7 @@
 /**
  Completion handler for ProductLayer API calls
  */
-typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
+typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
 
 /**
  Wrapper for the ProductLayer API
@@ -22,13 +22,13 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
 /**
  The shared server wrapper.
  */
-+ (_Nonnull id)sharedServer;
++ (nullable id)sharedServer;
 
 /**
  Sets the API Key to be used for authenticating the app for using Product Layer.
  @param APIKey The API key (generated on Product Layer app configuration panel)
  */
-- (void)setAPIKey:( NSString * _Nonnull)APIKey;
+- (void)setAPIKey:(nullable NSString *)APIKey;
 
 /**
  @name Searching for Products
@@ -41,9 +41,9 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param language The language code to return results in
  @param completion The completion handler for the request
  */
-- (void)performSearchForGTIN:(NSString *)gtin
-                    language:(NSString *)language
-                  completion:(PLYCompletion)completion;
+- (void)performSearchForGTIN:(nonnull NSString *)gtin
+                    language:(nullable NSString *)language
+                  completion:(nullable PLYCompletion)completion;
 
 /** 
  Searches for products by name
@@ -52,9 +52,9 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param language The language code to return results in
  @param completion The completion handler for the request
 */
-- (void)performSearchForName:(NSString *)name
-                    language:(NSString *)language
-                  completion:(PLYCompletion)completion;
+- (void)performSearchForName:(nonnull NSString *)name
+                    language:(nullable NSString *)language
+                  completion:(nullable PLYCompletion)completion;
 
 
 /**
@@ -63,7 +63,7 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param options Search options
  @param completion The completion handler for the request
  */
-- (void)searchForProductsMatchingQuery:(NSString *)query options:(NSDictionary *)options completion:(PLYCompletion)completion;
+- (void)searchForProductsMatchingQuery:(nonnull NSString *)query options:(nullable NSDictionary *)options completion:(nullable PLYCompletion)completion;
 
 /**
  @name Getting more Information about Products
@@ -75,8 +75,8 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param gtin The GTIN to retrieve images for
  @param completion The completion handler for the request
  */
-- (void)getImagesForGTIN:(NSString *)gtin
-              completion:(PLYCompletion)completion;
+- (void)getImagesForGTIN:(nonnull NSString *)gtin
+              completion:(nullable PLYCompletion)completion;
 
 /**
  Retrieves most recently uploaded images
@@ -87,7 +87,7 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  */
 - (void)getLastUploadedImagesWithPage:(NSInteger)page
                                andRPP:(NSInteger)rpp
-                           completion:(PLYCompletion)completion;
+                           completion:(nullable PLYCompletion)completion;
 
 /**
  Retrieves a list of categories for a given language
@@ -95,8 +95,8 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param language The language code to return results in
  @param completion The completion handler for the request
  */
-- (void)getCategoriesForLocale:(NSString *)language
-                    completion:(PLYCompletion)completion;
+- (void)getCategoriesForLocale:(nullable NSString *)language
+                    completion:(nullable PLYCompletion)completion;
 
 /**
  @name Managing Users
@@ -109,9 +109,9 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param email The user's e-mail address
  @param completion The completion handler for the request
  */
-- (void)createUserWithName:(NSString *)user
-                     email:(NSString *)email
-                completion:(PLYCompletion)completion;
+- (void)createUserWithName:(nonnull NSString *)user
+                     email:(nonnull NSString *)email
+                completion:(nullable PLYCompletion)completion;
 
 /**
  Authenticates a user for subsequent use of API operations which require authentication
@@ -120,36 +120,36 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param password The user's password
  @param completion The completion handler for the request
  */
-- (void)loginWithUser:(NSString *)user
-             password:(NSString *)password
-           completion:(PLYCompletion)completion;
+- (void)loginWithUser:(nonnull NSString *)user
+             password:(nonnull NSString *)password
+           completion:(nullable PLYCompletion)completion;
 
 /**
  Authenticates a user for subsequent use of API operations which require authentication
  @param token The authorization token
  @param completion The completion handler for the request
  */
-- (void)loginWithToken:(NSString *)token completion:(PLYCompletion)completion;
+- (void)loginWithToken:(nonnull NSString *)token completion:(nullable PLYCompletion)completion;
 
 /**
  Invalidates a user's authentication.
  @param completion The completion handler for the request
  */
-- (void)logoutUserWithCompletion:(PLYCompletion)completion;
+- (void)logoutUserWithCompletion:(nullable PLYCompletion)completion;
 
 /**
  Checks if user is signed in.
  @param completion The completion handler for the request
  */
-- (void)isSignedInWithCompletion:(PLYCompletion)completion;
+- (void)isSignedInWithCompletion:(nullable PLYCompletion)completion;
 
 /**
  Request new password
  @param email The user's e-mail address
  @param completion The completion handler for the request
  */
-- (void)requestNewPasswordForUserWithEmail:(NSString *)email
-                                completion:(PLYCompletion)completion;
+- (void)requestNewPasswordForUserWithEmail:(nonnull NSString *)email
+                                completion:(nullable PLYCompletion)completion;
 
 /**
  Request new password
@@ -157,14 +157,14 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param resetToken The reset token received by email
  @param completion The completion handler for the request
  */
-- (void)setUserPassword:(NSString *)password resetToken:(NSString *)resetToken completion:(PLYCompletion)completion;
+- (void)setUserPassword:(nonnull NSString *)password resetToken:(nonnull NSString *)resetToken completion:(nullable PLYCompletion)completion;
 
 /**
  Determines an image URL for the given PLYUser
  @param user The PLYUser to retrieve the avatar image URL for
  @returns An NSURL that shows the user's avatar
  */
-- (NSURL *)avatarImageURLForUser:(PLYUser *)user;
+- (NSURL * _Nonnull)avatarImageURLForUser:(nonnull PLYUser *)user;
 
 /**
  Uploads a new avatar image for currently logged in user
@@ -172,14 +172,14 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param user The user to upload an image for
  @param completion The completion handler for the request
  */
-- (void)uploadAvatarImage:(DTImage *)image forUser:(PLYUser *)user completion:(PLYCompletion)completion;
+- (void)uploadAvatarImage:(DTImage * _Nonnull)image ForUser:(nonnull PLYUser *)user completion:(nullable PLYCompletion)completion;
 
 /**
  Resets the avatar image for currently logged in user
  @param user The user to delete the avatar image for
  @param completion The completion handler for the request
  */
-- (void)resetAvatarForUser:(PLYUser *)user completion:(PLYCompletion)completion;
+- (void)resetAvatarForUser:(nonnull PLYUser *)user completion:(nullable PLYCompletion)completion;
 
 /**
  Sets a communication setting for the  logged in user
@@ -187,26 +187,34 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param parameters The parameters to PUT on the setting
  @param completion The completion handler for the request
  */
-- (void)updateSetting:(NSString *)setting parameters:(NSDictionary *)parameters completion:(PLYCompletion)completion;
+- (void)updateSetting:(nonnull NSString *)setting parameters:(NSDictionary *)parameters completion:(nullable PLYCompletion)completion;
+
+
+/**
+ Registers the app/device for receiving remote push notification
+ @param deviceToken The token returned by the UIApplicationDelegate method
+ @param completion The completion handler for the request
+ */
+- (void)registerPushToken:(nonnull NSData *)deviceToken completion:(nullable PLYCompletion)completion;
 
 /**
  Refreshes/completes a user's details. Updating of the properties is done on the main thread because some controls might be KVO-watching properties. The completion handler returns the passed user object if successful or nil and an `NSError` if not.
  @param user The user to refresh and/or load updated details for
  @param completion The completion handler for the request
  */
-- (void)loadDetailsForUser:(PLYUser *)user completion:(PLYCompletion)completion;
+- (void)loadDetailsForUser:(nonnull PLYUser *)user completion:(nullable PLYCompletion)completion;
 
 /**
  Loads the achievements for the given user
  @param user The user to load achievements for
  @param completion The completion handler for the request
  */
-- (void)loadAchievementsForUser:(PLYUser *)user completion:(PLYCompletion)completion;
+- (void)loadAchievementsForUser:(nonnull PLYUser *)user completion:(nullable PLYCompletion)completion;
 
 /**
  Nickname of the currently logged in user or `nil` if not logged in
  */
-@property (nonatomic, readonly) PLYUser *loggedInUser;
+@property (nonatomic, readonly) nullable PLYUser *loggedInUser;
 
 /**
  Property that states if a login action is currently happening
@@ -222,37 +230,37 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  Provides an URL request for the social signin flow for Facebook
  @returns A configured NSURLRequest for presenting in a web view
  */
-- (NSURLRequest *)URLRequestForFacebookSignIn;
+- (nonnull NSURLRequest *)URLRequestForFacebookSignIn;
 
 /**
  Provides an URL request for the social connect flow for Facebook. This connects the service with the currently logged in user.
  @returns A configured NSURLRequest for presenting in a web view
  */
-- (NSURLRequest *)URLRequestForFacebookConnect;
+- (nonnull NSURLRequest *)URLRequestForFacebookConnect;
 
 /**
  Removes the Facebook social connection for the logged in user.
  @param completion The completion handler for the request
  */
-- (void)disconnectSocialConnectionForFacebook:(PLYCompletion)completion;
+- (void)disconnectSocialConnectionForFacebook:(nullable PLYCompletion)completion;
 
 /**
  Provides an URL request for the social signin flow for Twitter
  @returns A configured NSURLRequest for presenting in a web view
  */
-- (NSURLRequest *)URLRequestForTwitterSignIn;
+- (nonnull NSURLRequest *)URLRequestForTwitterSignIn;
 
 /**
  Provides an URL request for the social connect flow for Twitter. This connects the service with the currently logged in user.
  @returns A configured NSURLRequest for presenting in a web view
  */
-- (NSURLRequest *)URLRequestForTwitterConnect;
+- (nonnull NSURLRequest *)URLRequestForTwitterConnect;
 
 /**
  Removes the Twitter social connection for the logged in user.
  @param completion The completion handler for the request
  */
-- (void)disconnectSocialConnectionForTwitter:(PLYCompletion)completion;
+- (void)disconnectSocialConnectionForTwitter:(nullable PLYCompletion)completion;
 
 
 /**
@@ -265,7 +273,7 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param product The new PLYProduct to create
  @param completion The completion handler for the request
  */
-- (void)createProduct:(PLYProduct *)product completion:(PLYCompletion)completion;
+- (void)createProduct:(nonnull PLYProduct *)product completion:(nullable PLYCompletion)completion;
 
 /**
  Updates an existing product.
@@ -273,7 +281,7 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param product The new PLYProduct to update
  @param completion The completion handler for the request
  */
-- (void)updateProduct:(PLYProduct *)product completion:(PLYCompletion)completion;
+- (void)updateProduct:(nonnull PLYProduct *)product completion:(nullable PLYCompletion)completion;
 
 
 /**
@@ -285,20 +293,20 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param GTIN The GTIN of the product
  @param completion The completion handler for the request
  */
-- (void)recommendedBrandOwnersForGTIN:(NSString *)GTIN
-										completion:(PLYCompletion)completion;
+- (void)recommendedBrandOwnersForGTIN:(nonnull NSString *)GTIN
+										completion:(nullable PLYCompletion)completion;
 
 /**
  Retrieves a list of all known brands
  @param completion The completion handler for the request
  */
-- (void)brandsWithCompletion:(PLYCompletion)completion;
+- (void)brandsWithCompletion:(nullable PLYCompletion)completion;
 
 /**
  Retrieves a list of all known brand owners
  @param completion The completion handler for the request
  */
-- (void)brandOwnersWithCompletion:(PLYCompletion)completion;
+- (void)brandOwnersWithCompletion:(nullable PLYCompletion)completion;
 
 
 /**
@@ -311,8 +319,8 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param voteableEntity The entity which should be upvoted.
  @param completion The completion handler for the request
  */
-- (void)upVote:(PLYVotableEntity *)voteableEntity
-    completion:(PLYCompletion)completion;
+- (void)upVote:(nonnull PLYVotableEntity *)voteableEntity
+    completion:(nullable PLYCompletion)completion;
 
 /*
  Downvote an votable entity.
@@ -320,8 +328,8 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param voteableEntity The entity which should be downvoted.
  @param completion The completion handler for the request
  */
-- (void)downVote:(PLYVotableEntity *)voteableEntity
-      completion:(PLYCompletion)completion;
+- (void)downVote:(nonnull PLYVotableEntity *)voteableEntity
+      completion:(nullable PLYCompletion)completion;
 
 /**
  @name Image Handling
@@ -334,22 +342,22 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param gtin The GTIN (barcode) of the new product
  @param completion The completion handler for the request
  */
-- (void)uploadImageData:(DTImage *)data
-                forGTIN:(NSString *)gtin
-             completion:(PLYCompletion)completion;
+- (void)uploadImageData:(nonnull DTImage *)data
+                forGTIN:(nonnull NSString *)gtin
+             completion:(nullable PLYCompletion)completion;
 
 /**
  @param image The image to delete
  @param completion The completion handler for the request
  */
-- (void)deleteImage:(PLYImage *)image completion:(PLYCompletion)completion;
+- (void)deleteImage:(nonnull PLYImage *)image completion:(nullable PLYCompletion)completion;
 
 /**
  @param image The image to rotate
  @param degrees The amount to rotate by, allowed values are: 90, 180, 270
  @param completion The completion handler for the request
  */
-- (void)rotateImage:(PLYImage *)image degrees:(NSUInteger)degrees completion:(PLYCompletion)completion;
+- (void)rotateImage:(nonnull PLYImage *)image degrees:(NSUInteger)degrees completion:(nullable PLYCompletion)completion;
 
 /**
  Determins the image URL for the given image with a maximum size and optional crop
@@ -359,7 +367,7 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param crop If the image should be cropped
  @returns The URL for the image
  */
-- (NSURL *)URLForImage:(PLYImage *)image maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop;
+- (NSURL *)URLForImage:(nonnull PLYImage *)image maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop;
 
 /**
  Determins the image URL for the given default image for a given GTIN
@@ -369,7 +377,7 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param crop If the image should be cropped
  @returns The URL for the image
  */
-- (NSURL *)URLForProductImageWithGTIN:(NSString *)GTIN maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop;
+- (NSURL *)URLForProductImageWithGTIN:(nonnull NSString *)GTIN maxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight crop:(BOOL)crop;
 
 /**
  @name Opines
@@ -387,14 +395,14 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param rpp The number of results per returned page
  @param completion The completion handler for the request
  */
-- (void) performSearchForOpineWithGTIN:(NSString *)gtin
-                          withLanguage:(NSString *)language
-                  fromUserWithNickname:(NSString *)nickname
+- (void) performSearchForOpineWithGTIN:(nonnull NSString *)gtin
+                          withLanguage:(nullable NSString *)language
+                  fromUserWithNickname:(nonnull NSString *)nickname
                         showFriendsOnly:(BOOL *)showFriendsOnly
-                               orderBy:(NSString *)orderBy
+                               orderBy:(nonnull NSString *)orderBy
                                   page:(NSUInteger)page
                         recordsPerPage:(NSUInteger)rpp
-                            completion:(PLYCompletion)completion;
+                            completion:(nullable PLYCompletion)completion;
 
 /**
  Create an opine.
@@ -402,7 +410,7 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param opine The opine
  @param completion The completion handler for the request
  */
-- (void)createOpine:(PLYOpine *)opine completion:(PLYCompletion)completion;
+- (void)createOpine:(nonnull PLYOpine *)opine completion:(nullable PLYCompletion)completion;
 
 /**
  Refreshes an opine from the server.
@@ -410,7 +418,7 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param opine The opine
  @param completion The completion handler for the request
  */
-- (void)refreshOpine:(PLYOpine *)opine completion:(PLYCompletion)completion;
+- (void)refreshOpine:(nonnull PLYOpine *)opine completion:(nullable PLYCompletion)completion;
 
 
 /**
@@ -418,7 +426,7 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param opine The opine
  @param completion The completion handler for the request
  */
-- (void)deleteOpine:(PLYOpine *)opine completion:(PLYCompletion)completion;
+- (void)deleteOpine:(nonnull PLYOpine *)opine completion:(nullable PLYCompletion)completion;
 
 /**
  @name Reviews
@@ -436,22 +444,15 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param rpp The number of results per returned page
  @param completion The completion handler for the request
  */
-- (void)performSearchForReviewWithGTIN:(NSString *)gtin
-                          withLanguage:(NSString *)language
-                  fromUserWithNickname:(NSString *)nickname
+- (void)performSearchForReviewWithGTIN:(nonnull NSString *)gtin
+                          withLanguage:(nullable NSString *)language
+                  fromUserWithNickname:(nonnull NSString *)nickname
                             withRating:(float)rating
-                               orderBy:(NSString *)orderBy
+                               orderBy:(nonnull NSString *)orderBy
                                   page:(NSUInteger)page
                         recordsPerPage:(NSUInteger)rpp
-                            completion:(PLYCompletion)completion;
+                            completion:(nullable PLYCompletion)completion;
 
-/*
- Create a review for a product.
- 
- @param review The PLYReview to create
- @param completion The completion handler for the request
- */
-- (void)createReview:(PLYReview *)review completion:(PLYCompletion)completion;
 
 /**
  @name Lists
@@ -462,7 +463,7 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param list The list to create
  @param completion The completion handler for the request
  */
-- (void)createProductList:(PLYList *)list completion:(PLYCompletion)completion;
+- (void)createProductList:(PLYList *)list completion:(nullable PLYCompletion)completion;
 
 /**
  Finds a user's lists
@@ -472,7 +473,7 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param rpp The records per page to retrieve
  @param completion The completion handler for the request
  */
-- (void)performSearchForProductListFromUser:(PLYUser *)user andListType:(NSString *)listType page:(NSUInteger)page recordsPerPage:(NSUInteger)rpp completion:(PLYCompletion)completion;
+- (void)performSearchForProductListFromUser:(PLYUser *)user andListType:(nonnull NSString *)listType page:(NSUInteger)page recordsPerPage:(NSUInteger)rpp completion:(nullable PLYCompletion)completion;
 
 /**
  Gets a user's lists
@@ -480,28 +481,28 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param options options to restrict the lists
  @param completion The completion handler for the request
  */
-- (void)listsOfUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion;
+- (void)listsOfUser:(PLYUser *)user options:(NSDictionary * _Nullable)options completion:(nullable PLYCompletion)completion;
 
 /**
  Retrieves a product list by ID
  @param listId The identifier of the list to retrieve
  @param completion The completion handler for the request
  */
-- (void)getProductListWithId:(NSString *)listId completion:(PLYCompletion)completion;
+- (void)getProductListWithId:(nonnull NSString *)listId completion:(nullable PLYCompletion)completion;
 
 /**
  Updates a product list for the logged in user
  @param list The list to create
  @param completion The completion handler for the request
  */
-- (void)updateProductList:(PLYList *)list completion:(PLYCompletion)completion;
+- (void)updateProductList:(PLYList *)list completion:(nullable PLYCompletion)completion;
 
 /**
  Deletes a product list by ID
  @param listId The identifier of the list to retrieve
  @param completion The completion handler for the request
  */
-- (void)deleteProductListWithId:(NSString *)listId completion:(PLYCompletion)completion;
+- (void)deleteProductListWithId:(nonnull NSString *)listId completion:(nullable PLYCompletion)completion;
 
 /**
  Add/Remove list items
@@ -509,7 +510,7 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param listId The list identifier
  @param completion The completion handler
  */
-- (void)addOrReplaceListItem:(PLYListItem *)listItem toListWithId:(NSString *)listId completion:(PLYCompletion)completion;
+- (void)addOrReplaceListItem:(PLYListItem *)listItem toListWithId:(nonnull NSString *)listId completion:(nullable PLYCompletion)completion;
 
 /**
  Delete product with GTIN from list.
@@ -517,7 +518,7 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param listId The list identifier
  @param completion The completion handler
  */
-- (void)deleteProductWithGTIN:(NSString *)gtin fromListWithId:(NSString *)listId completion:(PLYCompletion)completion;
+- (void)deleteProductWithGTIN:(nonnull NSString *)gtin fromListWithId:(nonnull NSString *)listId completion:(nullable PLYCompletion)completion;
 
 /**
  @name List sharing
@@ -529,7 +530,7 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param userId The identifier of the user to give access to the list
  @param completion The completion handler for the request
  */
-- (void)shareProductListWithId:(NSString *)listId withUserId:(NSString *)userId completion:(PLYCompletion)completion;
+- (void)shareProductListWithId:(nonnull NSString *)listId withUserId:(nonnull NSString *)userId completion:(nullable PLYCompletion)completion;
 
 /**
  Removes list access from another user
@@ -537,7 +538,7 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param userId The identifier of the user to give access to the list
  @param completion The completion handler for the request
  */
-- (void)unshareProductListWithId:(NSString *)listId withUserId:(NSString *)userId completion:(PLYCompletion)completion;
+- (void)unshareProductListWithId:(nonnull NSString *)listId withUserId:(nonnull NSString *)userId completion:(nullable PLYCompletion)completion;
 
 /*
  @name Managing User Relationships
@@ -548,14 +549,14 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param query The text to search for
  @param completion The completion handler for the request
  */
-- (void)searchForUsersMatchingQuery:(NSString *)query completion:(PLYCompletion)completion;
+- (void)searchForUsersMatchingQuery:(nonnull NSString *)query completion:(nullable PLYCompletion)completion;
 
 /**
  Retrieves a user by nickname
  @param nickname The nickname to search for
  @param completion The completion handler for the request
  */
-- (void)getUserByNickname:(NSString *)nickname completion:(PLYCompletion)completion;
+- (void)getUserByNickname:(nonnull NSString *)nickname completion:(nullable PLYCompletion)completion;
 
 /**
  Retrieves a user's followers
@@ -563,7 +564,7 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param options A dictionary with options to determine paging options
  @param completion The completion handler for the request
  */
-- (void)followerForUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion;
+- (void)followerForUser:(nonnull PLYUser *)user options:(NSDictionary * _Nullable)options completion:(nullable PLYCompletion)completion;
 
 /**
  Retrieves the friends a user is following
@@ -571,21 +572,21 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param options A dictionary with options to determine paging options
  @param completion The completion handler for the request
  */
-- (void)followingForUser:(PLYUser *)user options:(NSDictionary *)options completion:(PLYCompletion)completion;
+- (void)followingForUser:(nonnull PLYUser *)user options:(NSDictionary * _Nullable)options completion:(nullable PLYCompletion)completion;
 
 /**
  Follows a user by nickname
  @param user The user to follow
  @param completion The completion handler for the request
  */
-- (void)followUser:(PLYUser *)user completion:(PLYCompletion)completion;
+- (void)followUser:(PLYUser *)user completion:(nullable PLYCompletion)completion;
 
 /**
  Unfollows a user by nickname
  @param user The user to follow
  @param completion The completion handler for the request
  */
-- (void)unfollowUser:(PLYUser *)user completion:(PLYCompletion)completion;
+- (void)unfollowUser:(PLYUser *)user completion:(nullable PLYCompletion)completion;
 
 
 /**
@@ -598,9 +599,9 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param options A dictionary with options to determine which entities to include
  @param completion The completion handler for the request
  */
-- (void)timelineForUser:(PLYUser *)user
-					 options:(NSDictionary *)options
-				 completion:(PLYCompletion)completion;
+- (void)timelineForUser:(nonnull PLYUser *)user
+					 options:(NSDictionary * _Nullable)options
+				 completion:(nullable PLYCompletion)completion;
 
 /**
  The the latest timeline entries for a specific product
@@ -608,9 +609,9 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param options A dictionary with options to determine which entities to include
  @param completion The completion handler for the request
  */
-- (void)timelineForProduct:(PLYProduct *)product
-						 options:(NSDictionary *)options
-                completion:(PLYCompletion)completion;
+- (void)timelineForProduct:(nonnull PLYProduct *)product
+						 options:(NSDictionary * _Nullable)options
+                completion:(nullable PLYCompletion)completion;
 
 /**
  @name Reporting Issues
@@ -621,7 +622,7 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param report The problem report to send create
  @param completion The completion handler for the request
  */
-- (void)createProblemReport:(PLYProblemReport *)report completion:(PLYCompletion)completion;
+- (void)createProblemReport:(PLYProblemReport *)report completion:(nullable PLYCompletion)completion;
 
 /**
  @name Working with Categories
@@ -633,21 +634,21 @@ typedef void (^PLYCompletion)(__nullable id result,  NSError * _Nullable error);
  @param language The language to retrieve the category for
  @param completion The completion handler for the request
  */
-- (void)categoryForKey:(NSString *)key language:(NSString *)language completion:(PLYCompletion)completion;
+- (void)categoryForKey:(nonnull NSString *)key language:(nullable NSString *)language completion:(nullable PLYCompletion)completion;
 
 /**
  Retrieves all top-level PLCategory object for a given language
  @param language The language to retrieve the category for or `nil` to return the best matching language
  @param completion The completion handler for the request
  */
-- (void)categoriesWithLanguage:(NSString *)language completion:(PLYCompletion)completion;
+- (void)categoriesWithLanguage:(nullable NSString *)language completion:(nullable PLYCompletion)completion;
 
 /**
  Returns a path string that concatenates the localized category names separated by slashes for a given category key
  @param categoryKey The key of the category
  @returns The category path string
  */
-- (NSString *)localizedCategoryPathForKey:(NSString *)categoryKey;
+- (nonnull NSString *)localizedCategoryPathForKey:(nonnull NSString *)categoryKey;
 
 
 /**
