@@ -2969,14 +2969,14 @@
 		}
 		else
 		{
-			DTLogInfo(@"Loaded %ld categories", [result count]);
-			
 			if ([result isKindOfClass:[NSArray class]])
 			{
 				// turn into flattened dictionary for more efficient lookup
 				NSMutableDictionary *tmpDict = [NSMutableDictionary dictionary];
 				[self _appendCategoriesRecursivelyToDictionary:tmpDict fromArray:result];
 				_categories = [tmpDict copy];
+                
+                DTLogInfo(@"Loaded %ld categories", [_categories count]);
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidUpdateProductCategoriesNotification object:nil];
 				
