@@ -229,6 +229,9 @@
 {
 	NSURL *methodURL = [self _methodURLForPath:path
 											  parameters:parameters];
+    
+    NSLog(@"%@", methodURL.absoluteString);
+    
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:methodURL];
 	
 	// set method if set
@@ -3118,6 +3121,61 @@
 	
 	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:params payload:nil completion:ownCompletion];
 }
+
+#pragma mark - Entities
+
+- (PLYEntity *)retrieveEntityByIdentifier:(NSString *)identifier class:(Class)class completion:(PLYCompletion)completion
+{
+    NSParameterAssert(identifier);
+    NSParameterAssert(class);
+    
+    NSString *plyClass = [class entityTypeIdentifier];
+    
+    NSString *function = nil;
+    
+    if ([plyClass isEqualToString:@"com.productlayer.Product"])
+    {
+        function = [@"/product/" stringByAppendingString:identifier];
+    }
+    else if ([plyClass isEqualToString:@"com.productlayer.Opine"])
+    {
+        function = [@"/opine/" stringByAppendingString:identifier];
+    }
+    else if ([plyClass isEqualToString:@"com.productlayer.Image"])
+    {
+        function = [@"/image/" stringByAppendingString:identifier];
+    }
+    else if ([plyClass isEqualToString:@"com.productlayer.User"])
+    {
+        function = [@"/user/" stringByAppendingString:identifier];
+    }
+    
+    NSAssert(function!=nil, @"No known path for query for '%@'", plyClass);
+    
+    NSString *path = [self _functionPathForFunction:function];
+    
+    PLYCompletion wrappedCompletion = [completion copy];
+    
+    PLYCompletion ownCompletion = ^(id result, NSError *error) {
+        
+        if (result)
+        {
+            result = [self _entityByUpdatingCachedEntity:result];
+        }
+        
+        if (wrappedCompletion)
+        {
+            wrappedCompletion(result, error);
+        }
+    };
+    
+    [self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:nil payload:nil completion:ownCompletion];
+    
+    
+    // return previously cached entity
+    return [_entityCache objectForKey:identifier];
+}
+
 
 #pragma mark - Notifications
 

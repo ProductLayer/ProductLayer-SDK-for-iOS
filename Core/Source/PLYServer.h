@@ -657,4 +657,17 @@ typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
  */
 - (nullable NSDictionary *)cachedCategories;
 
+/**
+ @name Entity Handling
+ */
+
+/**
+ Retrieves an entity by its type and identifier
+ @param identifier The server-side identifier of the entity
+ @param identifier The class (derived from PLYEntity)
+ @param completion The completion handler for the request
+ @returns A previously cached entity or `nil`
+ */
+- (nullable PLYEntity *)retrieveEntityByIdentifier:(nonnull NSString *)identifier class:(nonnull Class)class completion:(nullable PLYCompletion)completion;
+
 @end
