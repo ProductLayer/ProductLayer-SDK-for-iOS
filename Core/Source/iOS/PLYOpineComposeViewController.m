@@ -115,7 +115,7 @@
 	_textView.translatesAutoresizingMaskIntoConstraints = NO;
 	_textView.delegate = self;
 	_textView.scrollIndicatorInsets = UIEdgeInsetsMake(5, 0, 0, 0);
-	_textView.keyboardType = UIKeyboardTypeTwitter;
+	_textView.keyboardType = UIKeyboardTypeDefault;
 	[_frameView addSubview:_textView];
 	
 	_textView.text = self.opine.text;
