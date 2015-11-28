@@ -3143,7 +3143,7 @@
     }
     else if ([plyClass isEqualToString:@"com.productlayer.Image"])
     {
-        function = [@"/image/" stringByAppendingString:identifier];
+        function = [NSString stringWithFormat:@"/image/%@/meta", identifier];
     }
     else if ([plyClass isEqualToString:@"com.productlayer.User"])
     {
