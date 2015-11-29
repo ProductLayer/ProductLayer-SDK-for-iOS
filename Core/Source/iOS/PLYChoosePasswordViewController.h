@@ -18,6 +18,7 @@
 /**
  Called if the server reported that the passward was correctly set
  @param choosePasswordViewController The view controller sending the message
+ @param user The user for which the password was changed
  */
 - (void)choosePasswordViewControllerDidFinish:(PLYChoosePasswordViewController *)choosePasswordViewController forUser:(PLYUser *)user;
 @end

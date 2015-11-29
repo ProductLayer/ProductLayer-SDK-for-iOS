@@ -664,6 +664,7 @@ typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
 /**
  Retrieves an entity by its type and identifier
  @param identifier The server-side identifier of the entity
+ @param class The PLYEntity subclass for the entity
  @param completion The completion handler for the request
  @returns A previously cached entity or `nil`
  */
