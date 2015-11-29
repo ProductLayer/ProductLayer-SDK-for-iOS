@@ -23,6 +23,10 @@
 - (void)choosePasswordViewControllerDidFinish:(PLYChoosePasswordViewController *)choosePasswordViewController forUser:(PLYUser *)user;
 @end
 
+
+/**
+ View controller that lets a user set a password with a token he received by e-mail.
+ */
 @interface PLYChoosePasswordViewController : UIViewController
 
 /**
