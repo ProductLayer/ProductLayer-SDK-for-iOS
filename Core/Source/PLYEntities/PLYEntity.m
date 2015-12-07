@@ -120,7 +120,12 @@ NSArray *PLYAllEntityClasses()
 		return NO;
 	}
 	
-	return [self.Id isEqual:[object Id]];
+    if ([self.Id isKindOfClass:[NSString class]])
+    {
+        return [self.Id isEqualToString:[object Id]];
+    }
+
+    return [self.Id.description isEqualToString:[[object Id] description]];
 }
 
 - (NSUInteger)hash
