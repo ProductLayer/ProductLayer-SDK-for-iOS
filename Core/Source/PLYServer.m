@@ -230,8 +230,6 @@
 	NSURL *methodURL = [self _methodURLForPath:path
 											  parameters:parameters];
     
-    NSLog(@"%@", methodURL.absoluteString);
-    
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:methodURL];
 	
 	// set method if set
@@ -1092,7 +1090,7 @@
 {
 	NSString *path = [self _functionPathForFunction:@"products"];
 	
-	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
+	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:options];
 	parameters[@"query"] = query;
 	
 	PLYCompletion wrappedCompletion = ^(id result, NSError *error) {
