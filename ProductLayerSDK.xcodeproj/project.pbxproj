@@ -56,7 +56,7 @@
 		A74988641B6EA89F00A66234 /* PLYBrandOwnerPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A77FFAAC1A77E5120019DD5C /* PLYBrandOwnerPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A74988651B6EA8A400A66234 /* PLYBrandOwner.h in Headers */ = {isa = PBXBuildFile; fileRef = A75CF74A1A30B4BD007E30FC /* PLYBrandOwner.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A74988661B6EA8AC00A66234 /* ProductLayerSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B44248183F91E700E8A170 /* ProductLayerSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A74988671B6EA8C600A66234 /* PLYJavaTimestampFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D0A1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A74988671B6EA8C600A66234 /* PLYJavaTimestampFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D0A1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h */; };
 		A74988681B6EA8E400A66234 /* PLYEntities.h in Headers */ = {isa = PBXBuildFile; fileRef = A75CF7801A30DF4E007E30FC /* PLYEntities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A74988691B6EA8E400A66234 /* PLYBrand.h in Headers */ = {isa = PBXBuildFile; fileRef = A75CF7481A30B4BD007E30FC /* PLYBrand.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A749886A1B6EA8E400A66234 /* PLYCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = A72592B21A757D5900952685 /* PLYCategory.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -86,7 +86,7 @@
 		A7548B24196C4C16000B72EB /* PLYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7548B23196C4C16000B72EB /* PLYImage.m */; };
 		A7590AFF19ED77B40084EBCA /* PLYLoginViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76D3F5D198650770032FE59 /* PLYLoginViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7590B0019ED77B40084EBCA /* PLYLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F5E198650770032FE59 /* PLYLoginViewController.m */; };
-		A7590B0119ED77B40084EBCA /* PLYLostPasswordViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76D3F8F19866E0E0032FE59 /* PLYLostPasswordViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7590B0119ED77B40084EBCA /* PLYLostPasswordViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76D3F8F19866E0E0032FE59 /* PLYLostPasswordViewController.h */; };
 		A7590B0219ED77B40084EBCA /* PLYLostPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F9019866E0E0032FE59 /* PLYLostPasswordViewController.m */; };
 		A7590B0319ED77B40084EBCA /* PLYSignUpViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76D3F5F198650770032FE59 /* PLYSignUpViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7590B0419ED77B40084EBCA /* PLYSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F60198650770032FE59 /* PLYSignUpViewController.m */; };
@@ -197,8 +197,8 @@
 		A7665D0B1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7665D091A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m */; };
 		A7665D0C1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7665D091A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m */; };
 		A7665D0D1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7665D091A9FA7FB001734B8 /* PLYJavaTimestampFunctions.m */; };
-		A7665D0E1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D0A1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A7665D0F1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D0A1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7665D0E1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D0A1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h */; };
+		A7665D0F1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D0A1A9FA7FB001734B8 /* PLYJavaTimestampFunctions.h */; };
 		A7665D411A9FA965001734B8 /* PLYUploadImage.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D3F1A9FA965001734B8 /* PLYUploadImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7665D421A9FA965001734B8 /* PLYUploadImage.h in Headers */ = {isa = PBXBuildFile; fileRef = A7665D3F1A9FA965001734B8 /* PLYUploadImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7665D431A9FA965001734B8 /* PLYUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7665D401A9FA965001734B8 /* PLYUploadImage.m */; };
@@ -214,9 +214,9 @@
 		A76D3F6C198650770032FE59 /* PLYUserNameValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F64198650770032FE59 /* PLYUserNameValidator.m */; };
 		A76D3F6D198650770032FE59 /* UIViewController+ProductLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F66198650770032FE59 /* UIViewController+ProductLayer.m */; };
 		A76D3F9119866E0E0032FE59 /* PLYLostPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76D3F9019866E0E0032FE59 /* PLYLostPasswordViewController.m */; };
-		A76E95341BE73CC3007A52DA /* PLYAchievement.h in Headers */ = {isa = PBXBuildFile; fileRef = A76E95321BE73CC3007A52DA /* PLYAchievement.h */; };
-		A76E95351BE73CC3007A52DA /* PLYAchievement.h in Headers */ = {isa = PBXBuildFile; fileRef = A76E95321BE73CC3007A52DA /* PLYAchievement.h */; };
-		A76E95361BE73CC3007A52DA /* PLYAchievement.h in Headers */ = {isa = PBXBuildFile; fileRef = A76E95321BE73CC3007A52DA /* PLYAchievement.h */; };
+		A76E95341BE73CC3007A52DA /* PLYAchievement.h in Headers */ = {isa = PBXBuildFile; fileRef = A76E95321BE73CC3007A52DA /* PLYAchievement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A76E95351BE73CC3007A52DA /* PLYAchievement.h in Headers */ = {isa = PBXBuildFile; fileRef = A76E95321BE73CC3007A52DA /* PLYAchievement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A76E95361BE73CC3007A52DA /* PLYAchievement.h in Headers */ = {isa = PBXBuildFile; fileRef = A76E95321BE73CC3007A52DA /* PLYAchievement.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A76E95371BE73CC3007A52DA /* PLYAchievement.m in Sources */ = {isa = PBXBuildFile; fileRef = A76E95331BE73CC3007A52DA /* PLYAchievement.m */; };
 		A76E95381BE73CC3007A52DA /* PLYAchievement.m in Sources */ = {isa = PBXBuildFile; fileRef = A76E95331BE73CC3007A52DA /* PLYAchievement.m */; };
 		A76E95391BE73CC3007A52DA /* PLYAchievement.m in Sources */ = {isa = PBXBuildFile; fileRef = A76E95331BE73CC3007A52DA /* PLYAchievement.m */; };
@@ -268,12 +268,17 @@
 		A7B4CF5A1B49493C004A188E /* PLYNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B4CF581B49493C004A188E /* PLYNavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7B4CF5B1B49493C004A188E /* PLYNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B4CF591B49493C004A188E /* PLYNavigationController.m */; };
 		A7B4CF5C1B49493C004A188E /* PLYNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B4CF591B49493C004A188E /* PLYNavigationController.m */; };
+		A7C19F271CCCC68900C10A0B /* CategoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C19F261CCCC68900C10A0B /* CategoryManager.swift */; };
+		A7C19F281CCCC68900C10A0B /* CategoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C19F261CCCC68900C10A0B /* CategoryManager.swift */; };
+		A7C19F291CCCC68900C10A0B /* CategoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C19F261CCCC68900C10A0B /* CategoryManager.swift */; };
+		A7C19F481CCCC71400C10A0B /* PLYLevelUpAchievement.h in Headers */ = {isa = PBXBuildFile; fileRef = A7CDFD3E1BFBB7B200256AAD /* PLYLevelUpAchievement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7C19F491CCCC81400C10A0B /* PLYLostPasswordViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A76D3F8F19866E0E0032FE59 /* PLYLostPasswordViewController.h */; };
 		A7C488A81A36ECBA004AC656 /* PLYEntityTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C488A71A36ECBA004AC656 /* PLYEntityTest.m */; };
 		A7CD959219FA821E008E3A41 /* PLYOpineComposeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A7CD959019FA821E008E3A41 /* PLYOpineComposeViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7CD959319FA821E008E3A41 /* PLYOpineComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CD959119FA821E008E3A41 /* PLYOpineComposeViewController.m */; };
 		A7CD959419FA821E008E3A41 /* PLYOpineComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CD959119FA821E008E3A41 /* PLYOpineComposeViewController.m */; };
-		A7CDFD401BFBB7B200256AAD /* PLYLevelUpAchievement.h in Headers */ = {isa = PBXBuildFile; fileRef = A7CDFD3E1BFBB7B200256AAD /* PLYLevelUpAchievement.h */; };
-		A7CDFD411BFBB7B200256AAD /* PLYLevelUpAchievement.h in Headers */ = {isa = PBXBuildFile; fileRef = A7CDFD3E1BFBB7B200256AAD /* PLYLevelUpAchievement.h */; };
+		A7CDFD401BFBB7B200256AAD /* PLYLevelUpAchievement.h in Headers */ = {isa = PBXBuildFile; fileRef = A7CDFD3E1BFBB7B200256AAD /* PLYLevelUpAchievement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7CDFD411BFBB7B200256AAD /* PLYLevelUpAchievement.h in Headers */ = {isa = PBXBuildFile; fileRef = A7CDFD3E1BFBB7B200256AAD /* PLYLevelUpAchievement.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7CDFD421BFBB7B200256AAD /* PLYLevelUpAchievement.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CDFD3F1BFBB7B200256AAD /* PLYLevelUpAchievement.m */; };
 		A7CDFD431BFBB7B200256AAD /* PLYLevelUpAchievement.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CDFD3F1BFBB7B200256AAD /* PLYLevelUpAchievement.m */; };
 		A7EA07011A2B12E900B61CCE /* ProductLayerSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B44248183F91E700E8A170 /* ProductLayerSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -907,6 +912,7 @@
 		A7B4877E1987CFB200FA8F83 /* PLYVotableEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLYVotableEntity.m; path = PLYEntities/PLYVotableEntity.m; sourceTree = "<group>"; };
 		A7B4CF581B49493C004A188E /* PLYNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYNavigationController.h; sourceTree = "<group>"; };
 		A7B4CF591B49493C004A188E /* PLYNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYNavigationController.m; sourceTree = "<group>"; };
+		A7C19F261CCCC68900C10A0B /* CategoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryManager.swift; sourceTree = "<group>"; };
 		A7C488A71A36ECBA004AC656 /* PLYEntityTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYEntityTest.m; sourceTree = "<group>"; };
 		A7CD959019FA821E008E3A41 /* PLYOpineComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLYOpineComposeViewController.h; sourceTree = "<group>"; };
 		A7CD959119FA821E008E3A41 /* PLYOpineComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLYOpineComposeViewController.m; sourceTree = "<group>"; };
@@ -1484,6 +1490,7 @@
 				A7B44247183F91E700E8A170 /* PLYServer.m */,
 				A7A38CD01A2B4FFD005D8395 /* PLYFunctions.h */,
 				A7A38CD11A2B4FFD005D8395 /* PLYFunctions.m */,
+				A7C19F261CCCC68900C10A0B /* CategoryManager.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -1835,6 +1842,7 @@
 				A74988671B6EA8C600A66234 /* PLYJavaTimestampFunctions.h in Headers */,
 				A749886B1B6EA8E400A66234 /* PLYEntity.h in Headers */,
 				A749887A1B6EA8E400A66234 /* PLYVotableEntity.h in Headers */,
+				A7C19F491CCCC81400C10A0B /* PLYLostPasswordViewController.h in Headers */,
 				A749886F1B6EA8E400A66234 /* PLYList.h in Headers */,
 				A74988771B6EA8E400A66234 /* PLYUserAvatar.h in Headers */,
 				A749886C1B6EA8E400A66234 /* PLYErrorMessage.h in Headers */,
@@ -1843,6 +1851,7 @@
 				A749886A1B6EA8E400A66234 /* PLYCategory.h in Headers */,
 				A74988751B6EA8E400A66234 /* PLYReview.h in Headers */,
 				A749887B1B6EA8E400A66234 /* PLYCompatibility.h in Headers */,
+				A7C19F481CCCC71400C10A0B /* PLYLevelUpAchievement.h in Headers */,
 				A74988731B6EA8E400A66234 /* PLYProblemReport.h in Headers */,
 				A749886E1B6EA8E400A66234 /* PLYImage.h in Headers */,
 				A74988711B6EA8E400A66234 /* PLYOpine.h in Headers */,
@@ -2083,6 +2092,7 @@
 		A7B214EE183F842000C38635 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Cocoanetics;
 				TargetAttributes = {
@@ -2566,6 +2576,7 @@
 				A77665A01A1B547B008AB88C /* PLYNonEmptyValidator.m in Sources */,
 				A7590B1019ED77B80084EBCA /* PLYEntity.m in Sources */,
 				A76293401A5FF20300208A27 /* PLYSocialAuthFunctions.m in Sources */,
+				A7C19F281CCCC68900C10A0B /* CategoryManager.swift in Sources */,
 				A72592B41A757D5900952685 /* PLYCategory.m in Sources */,
 				A7590B2419ED77B80084EBCA /* PLYUser.m in Sources */,
 				A7A77B141BFF8972002FF5B7 /* PLYChoosePasswordViewController.m in Sources */,
@@ -2642,6 +2653,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A76D3F69198650770032FE59 /* PLYLoginViewController.m in Sources */,
+				A7C19F271CCCC68900C10A0B /* CategoryManager.swift in Sources */,
 				C98CD2671910E0D70035647C /* PLYPackaging.m in Sources */,
 				A77FFACE1A77E5790019DD5C /* PLYBrandOwnerPickerViewController.m in Sources */,
 				A764789A1A18A8830000500C /* PLYSearchableTableViewController.m in Sources */,
@@ -2712,6 +2724,7 @@
 				A7EA07091A2B139C00B61CCE /* PLYErrorMessage.m in Sources */,
 				A7EA071F1A2B139C00B61CCE /* PLYProductCategory.m in Sources */,
 				A7665D451A9FA965001734B8 /* PLYUploadImage.m in Sources */,
+				A7C19F291CCCC68900C10A0B /* CategoryManager.swift in Sources */,
 				A7EA07071A2B139C00B61CCE /* PLYEntity.m in Sources */,
 				A76E95391BE73CC3007A52DA /* PLYAchievement.m in Sources */,
 				A72592B51A757D5900952685 /* PLYCategory.m in Sources */,
@@ -2826,7 +2839,7 @@
 		A7590AF419ED77710084EBCA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2852,6 +2865,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ProductLayerSDK;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2862,7 +2876,7 @@
 		A7590AF519ED77710084EBCA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2898,7 +2912,7 @@
 		A7590AF619ED77710084EBCA /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -3034,6 +3048,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Demo/ProductLayerSDK-Prefix.pch";
 				INFOPLIST_FILE = "Demo/ProductLayerSDK-Info.plist";
@@ -3052,11 +3067,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ENABLE_MODULES = YES;
 				DSTROOT = /tmp/ProductLayer.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = ProductLayerSDK;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTFoundation/\"/** \"${PROJECT_DIR}/Externals/DTKeychain/\"/**";
 			};
 			name = Coverage;
@@ -3080,7 +3098,7 @@
 		A75CF7CF1A319B14007E30FC /* Coverage */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -3106,6 +3124,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ProductLayerSDK;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -3116,6 +3135,7 @@
 		A75CF7D01A319B14007E30FC /* Coverage */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -3140,6 +3160,7 @@
 				PRODUCT_NAME = ProductLayerSDK;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -3305,6 +3326,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Demo/ProductLayerSDK-Prefix.pch";
 				INFOPLIST_FILE = "Demo/ProductLayerSDK-Info.plist";
@@ -3326,6 +3348,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Demo/ProductLayerSDK-Prefix.pch";
 				INFOPLIST_FILE = "Demo/ProductLayerSDK-Info.plist";
@@ -3344,11 +3367,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ENABLE_MODULES = YES;
 				DSTROOT = /tmp/ProductLayer.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = ProductLayerSDK;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTFoundation/\"/** \"${PROJECT_DIR}/Externals/DTKeychain/\"/**";
 			};
 			name = Debug;
@@ -3357,9 +3383,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ENABLE_MODULES = YES;
 				DSTROOT = /tmp/ProductLayer.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = ProductLayerSDK;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTFoundation/\"/** \"${PROJECT_DIR}/Externals/DTKeychain/\"/**";
@@ -3369,6 +3397,7 @@
 		A7D997FF1A2B11A800C80C2B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -3393,6 +3422,7 @@
 				PRODUCT_NAME = ProductLayerSDK;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -3402,6 +3432,7 @@
 		A7D998001A2B11A800C80C2B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -3436,6 +3467,7 @@
 		A7D998011A2B11A800C80C2B /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -3514,6 +3546,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Demo/ProductLayerSDK-Prefix.pch";
 				INFOPLIST_FILE = "Demo/ProductLayerSDK-Info.plist";
@@ -3532,9 +3565,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ENABLE_MODULES = YES;
 				DSTROOT = /tmp/ProductLayer.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Core/ProductLayer-Prefix.pch";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = ProductLayerSDK;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTFoundation/\"/** \"${PROJECT_DIR}/Externals/DTKeychain/\"/**";

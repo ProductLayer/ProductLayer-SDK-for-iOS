@@ -34,3 +34,6 @@
 #import "PLYScannerViewController.h"
 #import "PLYVideoPreviewInterestBox.h"
 #import "PLYVideoPreviewView.h"
+
+// Functions
+#import "PLYAVFoundationFunctions.h"

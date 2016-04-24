@@ -24,6 +24,8 @@
 
 #import "NSString+DTPaths.h"
 
+#import <ProductLayerSDK/ProductLayerSDK-Swift.h>
+
 
 // this is the URL for the endpoint server
 #define PLY_ENDPOINT_URL [NSURL URLWithString:@"https://api.productlayer.com"]
@@ -51,6 +53,8 @@
 	
 	// cached categories for the user main language
 	NSDictionary *_categories;
+    
+    PLYCategoryManager *_categoryManager;
 }
 
 - (instancetype)initWithSessionConfiguration:(NSURLSessionConfiguration *)configuration
@@ -88,6 +92,8 @@
 	
 	// use default config, we need credential & caching
 	NSURLSessionConfiguration *config = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+    
+    _categoryManager = [PLYCategoryManager new];
 	
 	return [self initWithSessionConfiguration:config];
 }
@@ -2963,6 +2969,8 @@
 
 - (void)_refreshCategories
 {
+    NSLog(@"Load Categories");
+    
 	[self categoriesWithLanguage:nil completion:^(id result, NSError *error) {
 		if (error)
 		{
@@ -2972,6 +2980,10 @@
 		{
 			if ([result isKindOfClass:[NSArray class]])
 			{
+                [_categoryManager mergeCategories:result];
+                
+                NSLog(@"%ld first-level Categories loaded", (long)[result count]);
+                
 				// turn into flattened dictionary for more efficient lookup
 				NSMutableDictionary *tmpDict = [NSMutableDictionary dictionary];
 				[self _appendCategoriesRecursivelyToDictionary:tmpDict fromArray:result];

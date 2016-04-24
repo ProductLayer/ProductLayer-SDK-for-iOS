@@ -20,8 +20,8 @@ Pod::Spec.new do |spec|
     ss.dependency 'ProductLayerSDK/PLYEntities'
     ss.ios.dependency 'DTFoundation/UIKit', '~>1.7.4'
     ss.ios.dependency 'DTFoundation/UIKit_BlocksAdditions'
-    ss.osx.source_files = 'Core/Source/*.{h,m}'
-    ss.ios.source_files = 'Core/Source/*.{h,m}', 'Core/Source/iOS/*.{h,m}'
+    ss.osx.source_files = 'Core/Source/*.{h,m,swift}'
+    ss.ios.source_files = 'Core/Source/*.{h,m,swift}', 'Core/Source/iOS/*.{h,m}'
 	ss.ios.frameworks = 'AVFoundation'
   	ss.ios.resource_bundles = { 'ProductLayerSDK' => ['Core/Resources/*'] }
   end
@@ -29,6 +29,6 @@ Pod::Spec.new do |spec|
   spec.subspec 'PLYEntities' do |ss|
     ss.ios.deployment_target = '8.0'
     ss.osx.deployment_target = '10.8'
-    ss.source_files = 'Core/Source/PLYEntities/*.{h,m}'
+    ss.source_files = 'Core/Source/PLYEntities/*.{h,m,swift}'
   end
 end
