@@ -72,6 +72,30 @@ import DTFoundation
 		}
 	}
 	
+	public func localizedCategoryPathForKey(categoryKey: String) -> String?
+	{
+		let workerContext = NSManagedObjectContext(concurrencyType:.PrivateQueueConcurrencyType)
+		workerContext.persistentStoreCoordinator = persistentStoreCoordinator
+		
+		let fetchRequest = NSFetchRequest(entityName: "ManagedCategory")
+		fetchRequest.predicate = NSPredicate(format: "key == %@", categoryKey)
+		fetchRequest.fetchLimit = 1
+		
+		guard let results = try? workerContext.executeFetchRequest(fetchRequest) as! [NSManagedObject] where results.count > 0 else
+		{
+			return nil
+		}
+		
+		if let firstObject = results.first
+		{
+			return firstObject.valueForKey("localizedPath") as? String
+		}
+		else
+		{
+			return nil
+		}
+	}
+	
 	public func categoriesMatchingSearch(search: String) throws -> [PLYCategory]
 	{
 		let workerContext = NSManagedObjectContext(concurrencyType:.MainQueueConcurrencyType)
@@ -121,10 +145,12 @@ import DTFoundation
 			
 			let key = managedObject.valueForKey("key")
 			let localizedName = managedObject.valueForKey("localizedName")
+			let localizedPath = managedObject.valueForKey("localizedPath")
 			
 			// set it via setValue because they are read-only
 			category.setValue(key, forKey: "key")
 			category.setValue(localizedName, forKey: "localizedName")
+			category.setValue(localizedPath, forKey: "localizedPath")
 			
 			tmpArray.append(category)
 		}

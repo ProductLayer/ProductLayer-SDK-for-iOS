@@ -123,13 +123,20 @@ NSArray *_sortedKeys = nil;
 
 - (void)_updateCategories
 {
-    NSDictionary *categories = self.productLayerServer.cachedCategories;
-	_sortedKeys = [categories keysSortedByValueWithOptions:0 usingComparator:^NSComparisonResult(PLYCategory *obj1, PLYCategory *obj2) {
+	NSMutableDictionary *tmpDict = [NSMutableDictionary dictionary];
+	
+	for (PLYCategory *category in [self.productLayerServer categoriesMatchingSearch:@""])
+	{
+		tmpDict[category.key] = category;
+	}
+	
+	
+	_sortedKeys = [tmpDict keysSortedByValueWithOptions:0 usingComparator:^NSComparisonResult(PLYCategory *obj1, PLYCategory *obj2) {
 		
 		return [obj1.key localizedStandardCompare:obj2.key];
 	}];
 	
-	_categoryDictionary = [categories copy];
+	_categoryDictionary = [tmpDict copy];
 	
 	[self.tableView reloadData];
 	
@@ -140,19 +147,28 @@ NSArray *_sortedKeys = nil;
 {
 	NSArray *searchTerms = [self currentSearchTerms];
 	
-	NSMutableArray *tmpArray = [NSMutableArray array];
-	
-	for (NSString *oneKey in _sortedKeys)
+	if (searchTerms)
 	{
-        NSString *categoryPath = [self.productLayerServer localizedCategoryPathForKey:oneKey];
+		NSMutableArray *tmpArray = [NSMutableArray array];
 		
-		if ([self _text:categoryPath containsAllTerms:searchTerms])
+		for (NSString *oneKey in _sortedKeys)
 		{
-			[tmpArray addObject:oneKey];
+			PLYCategory *category = _categoryDictionary[oneKey];
+			
+			NSString *categoryPath = category.localizedPath;
+			
+			if ([self _text:categoryPath containsAllTerms:searchTerms])
+			{
+				[tmpArray addObject:oneKey];
+			}
 		}
+		
+		_filteredKeys = [tmpArray copy];
 	}
-	
-	_filteredKeys = [tmpArray copy];
+	else
+	{
+		_filteredKeys = _sortedKeys;
+	}
 	
 	[self.tableView reloadData];
 }
@@ -214,15 +230,19 @@ NSArray *_sortedKeys = nil;
 	if (self.searchController.isActive)
 	{
 		NSString *key = _filteredKeys[indexPath.row];
-        NSString *categoryPath = [self.productLayerServer localizedCategoryPathForKey:key];
-		cell.textLabel.attributedText	= [self _attributedStringForText:categoryPath withSearchTermsMarked:[self currentSearchTerms]];
+		PLYCategory *category = _categoryDictionary[key];
+		
+		cell.textLabel.attributedText	= [self _attributedStringForText:category.localizedPath withSearchTermsMarked:[self currentSearchTerms]];
         cell.indentationLevel = 0;
         cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+		
+		cell.textLabel.lineBreakMode = NSLineBreakByTruncatingHead;
 	}
 	else
 	{
 		NSString *key = _sortedKeys[indexPath.row];
-        NSString *categoryPath = [self.productLayerServer localizedCategoryPathForKey:key];
+		PLYCategory *category = _categoryDictionary[key];
+        NSString *categoryPath = category.localizedPath;
         
         NSArray *pathComps = [categoryPath componentsSeparatedByString:@"/"];
         categoryPath = [pathComps lastObject];
@@ -241,10 +261,12 @@ NSArray *_sortedKeys = nil;
         {
             cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
         }
+		
+		cell.textLabel.lineBreakMode = NSLineBreakByTruncatingTail;
 	}
 	
-	cell.textLabel.adjustsFontSizeToFitWidth = YES;
-	cell.textLabel.minimumScaleFactor = 0.5;
+//	cell.textLabel.adjustsFontSizeToFitWidth = YES;
+//	cell.textLabel.minimumScaleFactor = 0.5;
  
 	return cell;
 }

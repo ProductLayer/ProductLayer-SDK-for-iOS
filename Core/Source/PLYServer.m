@@ -72,9 +72,6 @@
 		// load last state (login user)
 		[self _loadState];
 		
-		// try to load categories
-		[self _loadCategoriesFromCache];
-		
 #if TARGET_OS_IPHONE
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:[UIApplication sharedApplication]];
 		
@@ -2980,86 +2977,30 @@
 		{
 			if ([result isKindOfClass:[NSArray class]])
 			{
-                [_categoryManager mergeCategories:result];
-                
-                NSLog(@"%ld first-level Categories loaded", (long)[result count]);
-                
-				// turn into flattened dictionary for more efficient lookup
-				NSMutableDictionary *tmpDict = [NSMutableDictionary dictionary];
-				[self _appendCategoriesRecursivelyToDictionary:tmpDict fromArray:result];
-				_categories = [tmpDict copy];
-                
-                DTLogInfo(@"Loaded %ld categories", [_categories count]);
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidUpdateProductCategoriesNotification object:nil];
+				[_categoryManager mergeCategories:result];
 				
-				[self _storeCategoriesInCache];
+				NSLog(@"%ld first-level Categories loaded", (long)[result count]);
+				
+				// turn into flattened dictionary for more efficient lookup
+				[[NSNotificationCenter defaultCenter] postNotificationName:PLYServerDidUpdateProductCategoriesNotification object:nil];
 			}
 		}
 	}];
 }
 
-- (PLYCategory *)_parentCategoryOfCategory:(PLYCategory *)category
-{
-	for (PLYCategory *oneCategory in [_categories allValues])
-	{
-		if ([oneCategory.subCategories containsObject:category])
-		{
-			return oneCategory;
-		}
-	}
-	
-	return nil;
-}
-
-- (void)_appendCategoriesRecursivelyToDictionary:(NSMutableDictionary *)dict fromArray:(NSArray *)array
-{
-	for (PLYCategory *category in array)
-	{
-		dict[category.key] = category;
-		
-		if (category.subCategories)
-		{
-			[self _appendCategoriesRecursivelyToDictionary:dict fromArray:category.subCategories];
-		}
-	}
-}
-
 - (NSString *)localizedCategoryPathForKey:(NSString *)categoryKey
 {
-	if (!categoryKey || !_categories)
+	if (!categoryKey)
 	{
 		return nil;
 	}
 	
-	NSMutableString *tmpStr = [NSMutableString string];
-	
-	PLYCategory *category = _categories[categoryKey];
-	
-	if (!category)
-	{
-		DTLogError(@"Unknown category key '%@'", categoryKey);
-		return nil;
-	}
-	
-	[tmpStr appendString:category.localizedName];
-	
-	PLYCategory *parent = [self _parentCategoryOfCategory:category];
-	
-	while (parent)
-	{
-		[tmpStr insertString:@" / " atIndex:0];
-		[tmpStr insertString:parent.localizedName atIndex:0];
-		
-		parent = [self _parentCategoryOfCategory:parent];
-	}
-	
-	return [tmpStr copy];
+	return [_categoryManager localizedCategoryPathForKey:categoryKey];
 }
 
-- (NSDictionary *)cachedCategories
+- (NSArray *)categoriesMatchingSearch:(nonnull NSString *)search
 {
-    return _categories;
+	return [_categoryManager categoriesMatchingSearch:search error:NULL];
 }
 
 - (void)categoryForKey:(NSString *)key language:(NSString *)language completion:(PLYCompletion)completion
@@ -3071,42 +3012,6 @@
 	NSDictionary *params = @{@"language": language?language:@"auto"};
 	
 	[self _performMethodCallWithPath:path HTTPMethod:@"GET" parameters:params payload:nil completion:completion];
-}
-
-
-- (void)_storeCategoriesInCache
-{
-	NSMutableDictionary *tmpDict = [NSMutableDictionary dictionary];
-	
-	for (NSString *key in [_categories allKeys])
-	{
-		PLYCategory *category = _categories[key];
-		NSDictionary *dict = [category dictionaryRepresentation];
-		tmpDict[key] = dict;
-	}
-	
-	NSString *path = [[NSString cachesPath] stringByAppendingFormat:@"PLYCategories.plist"];
-	[tmpDict writeToFile:path atomically:YES];
-}
-
-- (void)_loadCategoriesFromCache
-{
-	NSString *path = [[NSString cachesPath] stringByAppendingFormat:@"PLYCategories.plist"];
-	NSDictionary *cache = [NSDictionary dictionaryWithContentsOfFile:path];
-	
-	if (!cache)
-	{
-		return;
-	}
-	
-	NSMutableDictionary *tmpDict = [NSMutableDictionary dictionary];
-	for (NSDictionary *categoryDict in [cache allValues])
-	{
-		PLYCategory *category = (PLYCategory *)[PLYCategory entityFromDictionary:categoryDict];
-		tmpDict[category.key] = category;
-	}
-	
-	_categories = [tmpDict copy];
 }
 
 - (void)categoriesWithLanguage:(NSString *)language completion:(PLYCompletion)completion

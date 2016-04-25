@@ -628,6 +628,9 @@ typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
  @name Working with Categories
  */
 
+- (nonnull NSArray *)categoriesMatchingSearch:(nonnull NSString *)search;
+
+
 /**
  Retrieves the PLCategory object for a given key and language
  @param key The category key
@@ -649,13 +652,6 @@ typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
  @returns The category path string
  */
 - (nonnull NSString *)localizedCategoryPathForKey:(nonnull NSString *)categoryKey;
-
-
-/**
- Returns the cached category objects in a flat dictionary, i.e. sub-categories are also at the first level
- @returns The PLYCategory objects
- */
-- (nullable NSDictionary *)cachedCategories;
 
 /**
  @name Entity Handling

@@ -31,7 +31,13 @@
 - (NSArray *)currentSearchTerms
 {
 	NSString *searchText = self.searchController.searchBar.text;
-	return [searchText componentsSeparatedByCharactersInSet:[[NSCharacterSet alphanumericCharacterSet] invertedSet]];
+	
+	if ([searchText length])
+	{
+		return [searchText componentsSeparatedByCharactersInSet:[[NSCharacterSet alphanumericCharacterSet] invertedSet]];
+	}
+	
+	return nil;
 }
 
 #pragma mark - Helpers

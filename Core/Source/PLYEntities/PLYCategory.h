@@ -28,4 +28,9 @@
  */
 @property (nonatomic, readonly) NSArray *subCategories;
 
+
+// calculated categories
+
+@property (nonatomic, copy) NSString *localizedPath;
+
 @end
