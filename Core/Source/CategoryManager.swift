@@ -41,7 +41,59 @@ import DTFoundation
         }
     }
     
+    public func categoriesMatchingSearch(search: String) throws -> [PLYCategory]
+    {
+        let workerContext = NSManagedObjectContext(concurrencyType:.MainQueueConcurrencyType)
+        workerContext.persistentStoreCoordinator = persistentStoreCoordinator
+
+        let fetchRequest = NSFetchRequest(entityName: "ManagedCategory")
+        fetchRequest.predicate = predicateForSearch(search)
+        
+        let results = try workerContext.executeFetchRequest(fetchRequest) as! [NSManagedObject]
+        return categoryObjectsFromManagedObjects(results)
+    }
+    
     // MARK: - Helpers
+    
+    private func predicateForSearch(search: String) -> NSPredicate
+    {
+        let separators = NSCharacterSet.alphanumericCharacterSet().invertedSet
+        let parts = search.componentsSeparatedByCharactersInSet(separators)
+        
+        var subPredicates = [NSPredicate]()
+        
+        for part in parts
+        {
+            // skip empty parts
+            guard !part.isEmpty else { continue }
+            
+            let predicate = NSPredicate(format: "localizedName MATCHES[cd] %@", ".*\\b\(part).*")
+            subPredicates.append(predicate)
+        }
+        
+        return NSCompoundPredicate(orPredicateWithSubpredicates: subPredicates)
+    }
+    
+    private func categoryObjectsFromManagedObjects(managedObjects: [NSManagedObject]) -> [PLYCategory]
+    {
+        var tmpArray = [PLYCategory]()
+        
+        for managedObject in managedObjects
+        {
+            let category = PLYCategory()
+            
+            let key = managedObject.valueForKey("key")
+            let localizedName = managedObject.valueForKey("localizedName")
+            
+            // set it via setValue because they are read-only
+            category.setValue(key, forKey: "key")
+            category.setValue(localizedName, forKey: "localizedName")
+            
+            tmpArray.append(category)
+        }
+        
+        return tmpArray
+    }
     
     private var managedObjectModel: NSManagedObjectModel = {
         
@@ -267,8 +319,13 @@ extension NSPersistentStoreCoordinator
                 }
                 else // Fallback on earlier versions
                 {
+                    // make copy of request with some modifications
+                    let deleteRequest = NSFetchRequest(entityName: fetchRequest.entityName!)
+                    deleteRequest.predicate = fetchRequest.predicate
+                    deleteRequest.includesPropertyValues = false
+                    
                     // fetch all
-                    let result = try context.executeFetchRequest(fetchRequest) as! [NSManagedObject]
+                    let result = try context.executeFetchRequest(deleteRequest) as! [NSManagedObject]
                     
                     // delete
                     for object in result
