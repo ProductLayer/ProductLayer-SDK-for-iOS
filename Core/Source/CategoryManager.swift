@@ -78,7 +78,12 @@ import DTFoundation
 		workerContext.persistentStoreCoordinator = persistentStoreCoordinator
 		
 		let fetchRequest = NSFetchRequest(entityName: "ManagedCategory")
-		fetchRequest.predicate = predicateForSearch(search)
+		
+		if !search.isEmpty
+		{
+			fetchRequest.predicate = predicateForSearch(search)
+		}
+		
 		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "localizedName", ascending: true)]
 		
 		let results = try workerContext.executeFetchRequest(fetchRequest) as! [NSManagedObject]
@@ -103,7 +108,7 @@ import DTFoundation
 			subPredicates.append(predicate)
 		}
 		
-		return NSCompoundPredicate(orPredicateWithSubpredicates: subPredicates)
+		return NSCompoundPredicate(andPredicateWithSubpredicates: subPredicates)
 	}
 	
 	private func categoryObjectsFromManagedObjects(managedObjects: [NSManagedObject]) -> [PLYCategory]
