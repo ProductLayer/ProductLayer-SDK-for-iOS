@@ -108,7 +108,7 @@ import DTFoundation
   
         // create attributes for entity
         
-        var properties = [NSAttributeDescription]()
+        var properties = [NSPropertyDescription]()
         
         // key
         var keyAttribute = NSAttributeDescription()
@@ -118,13 +118,33 @@ import DTFoundation
         keyAttribute.indexed = true
         properties.append(keyAttribute)
         
-        // localizedName
+        // category name
         var nameAttribute = NSAttributeDescription()
         nameAttribute.name = "localizedName"
         nameAttribute.attributeType = .StringAttributeType
         nameAttribute.optional = false
         nameAttribute.indexed = true
         properties.append(nameAttribute)
+        
+        // parent
+        var parentRelation = NSRelationshipDescription()
+        parentRelation.name = "parent"
+        parentRelation.destinationEntity = entity
+        parentRelation.maxCount = 1
+        parentRelation.minCount = 0
+        parentRelation.optional = true
+        parentRelation.indexed = true
+        properties.append(parentRelation)
+        
+        // children
+        var childrenRelation = NSRelationshipDescription()
+        childrenRelation.name = "children"
+        childrenRelation.destinationEntity = entity
+        childrenRelation.maxCount = 0
+        childrenRelation.minCount = 0
+        childrenRelation.optional = true
+        childrenRelation.indexed = true
+        properties.append(childrenRelation)
         
         // set properties on entity
         entity.properties = properties
@@ -152,13 +172,7 @@ import DTFoundation
         catch let error as NSError
         {
            NSLog("%@", error.localizedDescription)
-            
-            // try again
-            try! persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: nil)
         }
-        
-        
-
     }
     
     
