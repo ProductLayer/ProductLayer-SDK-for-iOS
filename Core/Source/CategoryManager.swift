@@ -48,6 +48,7 @@ import DTFoundation
 
         let fetchRequest = NSFetchRequest(entityName: "ManagedCategory")
         fetchRequest.predicate = predicateForSearch(search)
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "localizedName", ascending: true)]
         
         let results = try workerContext.executeFetchRequest(fetchRequest) as! [NSManagedObject]
         return categoryObjectsFromManagedObjects(results)
