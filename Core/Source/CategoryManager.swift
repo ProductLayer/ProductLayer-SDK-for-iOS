@@ -51,22 +51,34 @@ import DTFoundation
 		}
 	}
 	
-	public func mergeCategories(categories: [PLYCategory])
+	public func mergeCategories(categories: [PLYCategory]) throws
 	{
 		let fetchRequest = NSFetchRequest(entityName: "ManagedCategory")
-		try! persistentStoreCoordinator.batchDelete(fetchRequest)
+		try persistentStoreCoordinator.batchDelete(fetchRequest)
 		
 		let workerContext = NSManagedObjectContext(concurrencyType:.PrivateQueueConcurrencyType)
 		workerContext.persistentStoreCoordinator = persistentStoreCoordinator
 		
-		workerContext.performBlockAndWait
+		var retError: NSError!
+		
+		workerContext.performBlockAndWait {
+			for category in categories
 			{
-				for category in categories
-				{
-					self.addManagedCategory(category, inContext: workerContext)
-				}
-				
-				try! workerContext.save()
+				self.addManagedCategory(category, inContext: workerContext)
+			}
+			
+			do {
+				try workerContext.save()
+			}
+			catch let error as NSError
+			{
+				retError = error
+			}
+		}
+		
+		if retError != nil
+		{
+			throw retError
 		}
 	}
 	

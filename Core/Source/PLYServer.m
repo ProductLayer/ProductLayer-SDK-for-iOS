@@ -31,7 +31,7 @@
 #define PLY_ENDPOINT_URL [NSURL URLWithString:@"https://api.productlayer.com"]
 
 // this is a prefix added before REST methods, e.g. for a version of the API
-#define PLY_PATH_PREFIX @"0.5"
+#define PLY_PATH_PREFIX @"0.5-staging"
 
 @interface PLYServer () <NSCacheDelegate>
 
@@ -3002,7 +3002,7 @@
 			}
 			else if ([result isKindOfClass:[NSArray class]])
 			{
-				[_categoryManager mergeCategories:result];
+				[_categoryManager mergeCategories:result error:NULL];
 				
 				NSLog(@"%ld first-level Categories loaded", (long)[result count]);
 				
