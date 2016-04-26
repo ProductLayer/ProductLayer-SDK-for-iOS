@@ -263,7 +263,8 @@
 	
 	if ([path hasSuffix:@"/categories"])
 	{
-		NSString *key = [NSString stringWithFormat:@"%@-Last-Modified", methodURL.absoluteString];
+		NSString *lang = [[NSLocale preferredLanguages] firstObject];
+		NSString *key = [NSString stringWithFormat:@"%@-Last-Modified-%@", methodURL.absoluteString, lang];
 		NSString *lastModified = [[NSUserDefaults standardUserDefaults] objectForKey:key];
 		
 		if (lastModified)
@@ -479,7 +480,8 @@
 													
 													if (lastModified)
 													{
-														NSString *key = [NSString stringWithFormat:@"%@-Last-Modified", request.URL.absoluteString];
+														NSString *lang = [[NSLocale preferredLanguages] firstObject];
+														NSString *key = [NSString stringWithFormat:@"%@-Last-Modified-%@", request.URL.absoluteString, lang];
 														[[NSUserDefaults standardUserDefaults] setObject:lastModified forKey:key];
 													}
 												}
@@ -3133,6 +3135,14 @@
 
 - (void)_localeDidChange:(NSNotification *)notification
 {
+	// remove last modified to trigger new loading
+	NSString *function = @"/categories";
+	NSString *path = [self _functionPathForFunction:function];
+	NSURL *methodURL = [self _methodURLForPath:path parameters:@{ @"language": @"auto" }];
+	NSString *lang = [[NSLocale preferredLanguages] firstObject];
+	NSString *key = [NSString stringWithFormat:@"%@-Last-Modified-%@", methodURL.absoluteString, lang];
+	[[NSUserDefaults standardUserDefaults] removeObjectForKey:key];
+	
 	// language might have changed
 	[self _refreshCategories];
 }
