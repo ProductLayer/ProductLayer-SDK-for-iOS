@@ -42,8 +42,6 @@ import DTFoundation
 		newEntry.setValue(currentPath, forKey: "localizedPath")
 		newEntry.setValue(level, forKey: "level")
 		
-		print(currentPath)
-		
 		if let subCategories = category.subCategories as? [PLYCategory]
 		{
 			for subCategory in subCategories
