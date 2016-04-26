@@ -26,7 +26,7 @@ import DTFoundation
 		newEntry.setValue(category.key, forKey: "key")
 		newEntry.setValue(category.localizedName, forKey: "localizedName")
 		
-		newEntry.setValue(newEntry, forKey: "parent")
+		newEntry.setValue(parentCategory, forKey: "parent")
 		
 		var currentPath = path
 		
@@ -112,10 +112,13 @@ import DTFoundation
 		workerContext.persistentStoreCoordinator = persistentStoreCoordinator
 		
 		let fetchRequest = NSFetchRequest(entityName: "ManagedCategory")
+		fetchRequest.includesSubentities = true
 		
 		if !search.isEmpty
 		{
-			fetchRequest.predicate = predicateForSearch(search)
+			let leafPredicate = NSPredicate(format: "children.@count = 0")
+			let searchPredicate = predicateForSearch(search)
+			fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [leafPredicate, searchPredicate])
 		}
 		
 		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "localizedName", ascending: true)]
@@ -216,27 +219,25 @@ import DTFoundation
 		
 		// parent
 		var parentRelation = NSRelationshipDescription()
+		var childrenRelation = NSRelationshipDescription()
+		
 		parentRelation.name = "parent"
 		parentRelation.destinationEntity = entity
 		parentRelation.maxCount = 1
 		parentRelation.minCount = 0
-		parentRelation.optional = true
-		parentRelation.indexed = true
+		parentRelation.inverseRelationship = childrenRelation
+		childrenRelation.deleteRule = .NullifyDeleteRule
 		properties.append(parentRelation)
 		
 		// children
-		var childrenRelation = NSRelationshipDescription()
-		childrenRelation.inverseRelationship = parentRelation
-		parentRelation.inverseRelationship = childrenRelation
 		childrenRelation.name = "children"
 		childrenRelation.destinationEntity = entity
 		childrenRelation.maxCount = 0
 		childrenRelation.minCount = 0
-		childrenRelation.optional = true
-		childrenRelation.indexed = true
+		childrenRelation.inverseRelationship = parentRelation
+		childrenRelation.deleteRule = .CascadeDeleteRule
 		properties.append(childrenRelation)
-		
-		
+
 		
 		// set properties on entity
 		entity.properties = properties
