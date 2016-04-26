@@ -172,13 +172,6 @@ NSArray *_sortedKeys = nil;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 	return [_categories count];
-//	
-//	if (self.searchController.isActive)
-//	{
-//		return [_filteredKeys count];
-//	}
-//	
-//	return [_sortedKeys count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -228,9 +221,6 @@ NSArray *_sortedKeys = nil;
 		cell.textLabel.lineBreakMode = NSLineBreakByTruncatingTail;
 	}
 	
-//	cell.textLabel.adjustsFontSizeToFitWidth = YES;
-//	cell.textLabel.minimumScaleFactor = 0.5;
- 
 	return cell;
 }
 
