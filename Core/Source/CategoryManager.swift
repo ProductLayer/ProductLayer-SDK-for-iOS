@@ -112,17 +112,20 @@ import DTFoundation
 		workerContext.persistentStoreCoordinator = persistentStoreCoordinator
 		
 		let fetchRequest = NSFetchRequest(entityName: "ManagedCategory")
-		fetchRequest.includesSubentities = true
 		
 		if !search.isEmpty
 		{
-			let leafPredicate = NSPredicate(format: "children.@count = 0")
-			let searchPredicate = predicateForSearch(search)
-			fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [leafPredicate, searchPredicate])
+			fetchRequest.predicate = predicateForSearch(search)
 		}
-		
-		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "localizedName", ascending: true)]
-		
+//		else
+//		{
+//			let leafPredicate = NSPredicate(format: "children.@count > 0")
+//			let levelPredicate = NSPredicate(format: "level = 1")
+//			fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [leafPredicate, levelPredicate])
+//		}
+
+		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "localizedPath", ascending: true)]
+
 		let results = try workerContext.executeFetchRequest(fetchRequest) as! [NSManagedObject]
 		return categoryObjectsFromManagedObjects(results)
 	}

@@ -29,7 +29,8 @@ NSArray *_sortedKeys = nil;
 
 @implementation PLYCategoryPickerViewController
 {
-	NSArray *_filteredKeys;
+	//NSArray *_filteredKeys;
+	NSArray *_categories;
 }
 
 - (void)viewDidLoad
@@ -54,8 +55,9 @@ NSArray *_sortedKeys = nil;
 {
 	[super viewWillAppear:animated];
 	
-    [self _updateCategories];
-    
+	[self _updateCategoriesAndSelectCurrent:true];
+
+	
 	// workaround for iPhone 6+ bug
 	if (self.traitCollection.displayScale==3)
 	{
@@ -116,81 +118,43 @@ NSArray *_sortedKeys = nil;
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
-	[self _updateFilter];
+	[self _updateCategoriesAndSelectCurrent:!searchController.isActive];
 }
 
 #pragma mark - Helpers
 
-- (void)_updateCategories
+- (void)_updateCategoriesAndSelectCurrent:(BOOL)selectCurrent
 {
-	NSMutableDictionary *tmpDict = [NSMutableDictionary dictionary];
-	
-	for (PLYCategory *category in [self.productLayerServer categoriesMatchingSearch:@""])
-	{
-		tmpDict[category.key] = category;
-	}
-	
-	
-	_sortedKeys = [tmpDict keysSortedByValueWithOptions:0 usingComparator:^NSComparisonResult(PLYCategory *obj1, PLYCategory *obj2) {
-		
-		return [obj1.key localizedStandardCompare:obj2.key];
-	}];
-	
-	_categoryDictionary = [tmpDict copy];
-	
-	[self.tableView reloadData];
-	
-	[self _selectRowForCategoryKey:_selectedCategoryKey animated:YES];
-}
+	_categories = [self.productLayerServer categoriesMatchingSearch:self.searchController.searchBar.text];
 
-- (void)_updateFilter
-{
-	NSArray *searchTerms = [self currentSearchTerms];
-	
-	if (searchTerms)
-	{
-		NSMutableArray *tmpArray = [NSMutableArray array];
-		
-		for (NSString *oneKey in _sortedKeys)
-		{
-			PLYCategory *category = _categoryDictionary[oneKey];
-			
-			NSString *categoryPath = category.localizedPath;
-			
-			if ([self _text:categoryPath containsAllTerms:searchTerms])
-			{
-				[tmpArray addObject:oneKey];
-			}
-		}
-		
-		_filteredKeys = [tmpArray copy];
-	}
-	else
-	{
-		_filteredKeys = _sortedKeys;
-	}
-	
 	[self.tableView reloadData];
+	
+	if (selectCurrent)
+	{
+		[self _selectRowForCategoryKey:_selectedCategoryKey animated:YES];
+	}
 }
 
 - (void)_selectRowForCategoryKey:(NSString *)key animated:(BOOL)animated
 {
-	if (!key || !_sortedKeys)
+	if (!key)
 	{
 		return;
 	}
 	
-	[_sortedKeys enumerateObjectsUsingBlock:^(NSString *catKey, NSUInteger idx, BOOL *stop) {
+	for (NSUInteger index=0; index < [_categories count]; index++)
+	{
+		PLYCategory *category = _categories[index];
 		
-		if ([catKey isEqualToString:key])
+		if ([category.key isEqualToString:key])
 		{
 			// need next run loop or else the inset is not set yet from presentation
 			dispatch_async(dispatch_get_main_queue(), ^{
-				[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] animated:animated scrollPosition:UITableViewScrollPositionMiddle];
+				[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:animated scrollPosition:UITableViewScrollPositionMiddle];
 			});
-			*stop = YES;
+			break;
 		}
-	}];
+	}
 }
 
 - (NSString *)_currentLanguage
@@ -207,12 +171,14 @@ NSArray *_sortedKeys = nil;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	if (self.searchController.isActive)
-	{
-		return [_filteredKeys count];
-	}
-	
-	return [_sortedKeys count];
+	return [_categories count];
+//	
+//	if (self.searchController.isActive)
+//	{
+//		return [_filteredKeys count];
+//	}
+//	
+//	return [_sortedKeys count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -227,11 +193,10 @@ NSArray *_sortedKeys = nil;
 	
 	cell.textLabel.highlightedTextColor = [UIColor whiteColor];
  
+	PLYCategory *category = _categories[indexPath.row];
+	
 	if (self.searchController.isActive)
 	{
-		NSString *key = _filteredKeys[indexPath.row];
-		PLYCategory *category = _categoryDictionary[key];
-		
 		cell.textLabel.attributedText	= [self _attributedStringForText:category.localizedPath withSearchTermsMarked:[self currentSearchTerms]];
         cell.indentationLevel = 0;
         cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
@@ -240,8 +205,6 @@ NSArray *_sortedKeys = nil;
 	}
 	else
 	{
-		NSString *key = _sortedKeys[indexPath.row];
-		PLYCategory *category = _categoryDictionary[key];
         NSString *categoryPath = category.localizedPath;
         
         NSArray *pathComps = [categoryPath componentsSeparatedByString:@"/"];
@@ -273,17 +236,18 @@ NSArray *_sortedKeys = nil;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	PLYCategory *category = _categories[indexPath.row];
+
 	if (self.searchController.isActive)
 	{
-		self.selectedCategoryKey = _filteredKeys[indexPath.row];
+		self.selectedCategoryKey = category.key;
 		
 		[self.searchController setActive:NO];
 	}
 	else
 	{
-		self.selectedCategoryKey = _sortedKeys[indexPath.row];
+		self.selectedCategoryKey = category.key;
 	}
-	
 	
 	if ([_delegate respondsToSelector:@selector(categoryPicker:didSelectCategoryWithKey:)])
 	{
@@ -296,7 +260,7 @@ NSArray *_sortedKeys = nil;
 - (void)_updatedCategories:(NSNotification *)notification
 {
     DTBlockPerformSyncIfOnMainThreadElseAsync(^{
-        [self _updateCategories];
+		 [self _updateCategoriesAndSelectCurrent:true];
     });
 }
 
