@@ -261,6 +261,17 @@
 		[request setValue:_authToken forHTTPHeaderField:@"X-ProductLayer-Auth-Token"];
 	}
 	
+	if ([path hasSuffix:@"/categories"])
+	{
+		NSString *key = [NSString stringWithFormat:@"%@-Last-Modified", methodURL.absoluteString];
+		NSString *lastModified = [[NSUserDefaults standardUserDefaults] objectForKey:key];
+		
+		if (lastModified)
+		{
+			[request setValue:lastModified forHTTPHeaderField:@"If-Modified-Since"];
+		}
+	}
+	
 	// add body if set
 	if (payload)
 	{
@@ -463,6 +474,14 @@
 												else if (statusCode < 400)
 												{
 													[self _updateAuthTokenFromHeaders:headers];
+													
+													NSString *lastModified = headers[@"Last-Modified"];
+													
+													if (lastModified)
+													{
+														NSString *key = [NSString stringWithFormat:@"%@-Last-Modified", request.URL.absoluteString];
+														[[NSUserDefaults standardUserDefaults] setObject:lastModified forKey:key];
+													}
 												}
 												
 												if ([data length])
@@ -2975,7 +2994,11 @@
 		}
 		else
 		{
-			if ([result isKindOfClass:[NSArray class]])
+			if (result == nil)
+			{
+				DTLogInfo(@"Categories not changed");
+			}
+			else if ([result isKindOfClass:[NSArray class]])
 			{
 				[_categoryManager mergeCategories:result];
 				
