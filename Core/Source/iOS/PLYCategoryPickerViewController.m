@@ -20,10 +20,6 @@
 
 #define CELL_IDENTIFIER @"Identifier"
 
-// category cache
-NSDictionary *_categoryDictionary = nil;
-NSArray *_sortedKeys = nil;
-
 @interface PLYCategoryPickerViewController () <UISearchResultsUpdating>
 @end
 
