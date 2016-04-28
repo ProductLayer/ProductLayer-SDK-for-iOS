@@ -173,7 +173,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELL_IDENTIFIER forIndexPath:indexPath];
-    cell.indentationWidth = 20.0;
+    cell.indentationWidth = 10.0;
 	
 	// set product layer color as background
 	UIView *bgColorView = [[UIView alloc] init];
@@ -184,22 +184,14 @@
  
 	PLYCategory *category = _categories[indexPath.row];
 	
-	if (self.searchController.isActive)
-	{
-		cell.textLabel.attributedText	= [self _attributedStringForText:category.localizedPath withSearchTermsMarked:[self currentSearchTerms]];
-        cell.indentationLevel = 0;
-        cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-		
-		cell.textLabel.lineBreakMode = NSLineBreakByTruncatingHead;
-	}
-	else
-	{
         NSString *categoryPath = category.localizedPath;
         
-        NSArray *pathComps = [categoryPath componentsSeparatedByString:@"/"];
-        categoryPath = [pathComps lastObject];
-		cell.textLabel.text = categoryPath;
-        cell.indentationLevel = [pathComps count] - 1;
+     //   NSArray *pathComps = [categoryPath componentsSeparatedByString:@"/"];
+    //    categoryPath = [pathComps lastObject];
+//		cell.textLabel.text = categoryPath;
+    
+    cell.textLabel.attributedText	= [self _attributedStringForText:category.localizedName withSearchTermsMarked:[self currentSearchTerms]];
+        cell.indentationLevel = category.level - 1;
         
         if (cell.indentationLevel==0)
         {
@@ -215,7 +207,7 @@
         }
 		
 		cell.textLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-	}
+	//}
 	
 	return cell;
 }

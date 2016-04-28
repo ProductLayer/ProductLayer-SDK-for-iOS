@@ -442,7 +442,9 @@
 #pragma mark - Notifications
 - (void)_updatedCategories:(NSNotification *)notification
 {
-    [self _updateCategory];
+    DTBlockPerformSyncIfOnMainThreadElseAsync(^{
+        [self _updateCategory];
+    });
 }
 
 @end

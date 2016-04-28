@@ -121,17 +121,7 @@ import DTFoundation
 		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "localizedPath", ascending: true)]
 
 		let results = try workerContext.executeFetchRequest(fetchRequest) as! [NSManagedObject]
-		
-		if !search.isEmpty
-		{
-			// return hierarchy structure
-			return categoryObjectsStructureFromManagedObjects(results)
-		}
-		else
-		{
-			// return flat array
-			return categoryObjectsFromManagedObjects(results)
-		}
+        return categoryObjectsStructureFromManagedObjects(results, addParents: !search.isEmpty)
 	}
 	
 	// MARK: - Helpers
@@ -155,87 +145,52 @@ import DTFoundation
 		return NSCompoundPredicate(andPredicateWithSubpredicates: subPredicates)
 	}
 	
-	private func categoryObjectsFromManagedObjects(managedObjects: [NSManagedObject]) -> [PLYCategory]
+    private func categoryObjectsStructureFromManagedObjects(managedObjects: [NSManagedObject], addParents: Bool = false) -> [PLYCategory]
 	{
-		var tmpArray = [PLYCategory]()
-		
-		var allObjectsAndParents = Set<NSManagedObject>()
-		
-		for managedObject in managedObjects
-		{
-			let category = PLYCategory()
-			
-			let key = managedObject.valueForKey("key")
-			let localizedName = managedObject.valueForKey("localizedName")
-			let localizedPath = managedObject.valueForKey("localizedPath")
-			
-			// set it via setValue because they are read-only
-			category.setValue(key, forKey: "key")
-			category.setValue(localizedName, forKey: "localizedName")
-			category.setValue(localizedPath, forKey: "localizedPath")
-			
-			tmpArray.append(category)
-		}
-		
-		return tmpArray
+		var allObjectsAndParents = NSMutableSet()
+        
+        for managedObject in managedObjects
+        {
+            allObjectsAndParents.addObject(managedObject)
+            
+            if !addParents
+            {
+                continue;
+            }
+            
+            // add all missing parents
+            var object = managedObject
+            
+            while let parent = object.valueForKey("parent") as? NSManagedObject
+            {
+                allObjectsAndParents.addObject(parent)
+                
+                object = parent
+            }
+        }
+        
+        let sort = NSSortDescriptor(key: "localizedPath", ascending: true)
+        let sorted = allObjectsAndParents.sortedArrayUsingDescriptors([sort]) as! [NSManagedObject]
+        
+        return sorted.map({ (object) -> PLYCategory in
+            
+            return PLYCategoryFromManagedCategory(object)
+        })
 	}
-	
-	private func categoryObjectsStructureFromManagedObjects(managedObjects: [NSManagedObject]) -> [PLYCategory]
-	{
-		var tmpArray = [PLYCategory]()
-		
-		var allObjectsAndParents = Set<NSManagedObject>()
-		
-		var lookup = Dictionary<NSManagedObjectID, PLYCategory>()
-		var rootCategories = Set<NSManagedObjectID>()
-		
-		for managedObject in managedObjects
-		{
-			// make sure that we have the found objects plus all parents
-			allObjectsAndParents.insert(managedObject)
-
-			var object = managedObject
-			
-			while let parent = object.valueForKey("parent") as? NSManagedObject
-			{
-				allObjectsAndParents.insert(parent)
-				
-				object = parent
-				
-				let category = PLYCategoryFromManagedCategory(object)
-				lookup[object.objectID] = category
-			}
-			
-			if object != managedObject
-			{
-				// object must be a new root
-				rootCategories.insert(object.objectID)
-			}
-			
-			// create PLYCategory for this object
-			var category = PLYCategoryFromManagedCategory(managedObject)
-			lookup[managedObject.objectID] = category
-			
-			if let parent = managedObject.valueForKey("parent") as? NSManagedObject
-			{
-				// append to subCategories of parent
-				let parentCategory = lookup[parent.objectID]!
-				
-				var subCategories = parentCategory.valueForKey("subCategories") as? Array<PLYCategory> ?? Array<PLYCategory>()
-				subCategories.append(category)
-				parentCategory.setValue(subCategories, forKey: "subCategories")
-			}
-			else
-			{
-				// no parent
-				rootCategories.insert(managedObject.objectID)
-			}
-		}
-		
-		return rootCategories.map { (objectID) -> PLYCategory in
-			return lookup[objectID]!
-		}
-	}
+    
+    
+    private func appendflattenedStructure(structure: [PLYCategory], inout toArray array: [PLYCategory])
+    {
+        for category in structure
+        {
+            array.append(category)
+            
+            if let subCategories = category.subCategories as? [PLYCategory]
+            {
+                appendflattenedStructure(subCategories, toArray: &array)
+            }
+        }
+    }
 	
 	private func PLYCategoryFromManagedCategory(managedCategory: NSManagedObject) -> PLYCategory
 	{
@@ -249,6 +204,8 @@ import DTFoundation
 		category.setValue(key, forKey: "key")
 		category.setValue(localizedName, forKey: "localizedName")
 		category.setValue(localizedPath, forKey: "localizedPath")
+        
+        category.level =  managedCategory.valueForKey("level") as! UInt
 		
 		return category
 	}

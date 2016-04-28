@@ -31,6 +31,14 @@
 
 // calculated categories
 
+/**
+ The indentation level (temporary)
+ */
+@property (nonatomic, assign) NSUInteger level;
+
+/**
+ The localized category path (temporary)
+ */
 @property (nonatomic, copy) NSString *localizedPath;
 
 @end
