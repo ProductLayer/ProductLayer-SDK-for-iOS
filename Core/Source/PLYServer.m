@@ -31,7 +31,7 @@
 #define PLY_ENDPOINT_URL [NSURL URLWithString:@"https://api.productlayer.com"]
 
 // this is a prefix added before REST methods, e.g. for a version of the API
-#define PLY_PATH_PREFIX @"0.5-staging"
+#define PLY_PATH_PREFIX @"0.5"
 
 @interface PLYServer () <NSCacheDelegate>
 
@@ -254,6 +254,9 @@
 	// Add preferred languages
 	NSString *languages = [[NSLocale preferredLanguages] componentsJoinedByString:@", "];
 	[request setValue:languages forHTTPHeaderField:@"Accept-Language"];
+    
+    // accept gzip
+    [request setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
 	
 	// add auth token if present
 	if (_authToken)
