@@ -44,6 +44,8 @@
 
 - (void)dealloc
 {
+    [self.searchController.view removeFromSuperview];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -114,7 +116,7 @@
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
-	[self _updateCategoriesAndSelectCurrent:!searchController.isActive];
+	[self _updateCategoriesAndSelectCurrent:!searchController.isActive && !self.isBeingDismissed];
 }
 
 #pragma mark - Helpers
