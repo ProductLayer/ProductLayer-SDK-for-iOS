@@ -323,7 +323,7 @@ extension NSPersistentStoreCoordinator
 			{
 				do
 				{
-					if #available(iOS 9.0, *)
+					if #available(iOS 9.0, OSX 10.11, *)
 					{
 						let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 						

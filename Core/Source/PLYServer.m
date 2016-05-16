@@ -6,23 +6,19 @@
 //  Copyright (c) 2013 Cocoanetics. All rights reserved.
 //
 
+@import DTFoundation;
+
 #import "ProductLayerSDK.h"
 
-#import "NSString+DTURLEncoding.h"
-#import "DTBlockFunctions.h"
 #import "DTKeychain.h"
 #import "DTKeychainGenericPassword.h"
 
-#import <DTFoundation/DTLog.h>
 
 #if TARGET_OS_IPHONE
 
-#import "UIApplication+DTNetworkActivity.h"
 #import "PLYLoginViewController.h"
 
 #endif
-
-#import "NSString+DTPaths.h"
 
 #import <ProductLayerSDK/ProductLayerSDK-Swift.h>
 
@@ -1434,6 +1430,7 @@
     [self _performMethodCallWithPath:path HTTPMethod:@"PUT" parameters:parameters payload:nil completion:wrappedCompletion];
 }
 
+#if TARGET_OS_IPHONE
 - (void)registerPushToken:(NSData *)deviceToken completion:(__nullable PLYCompletion)completion
 {
     NSBundle *mainBundle = [NSBundle mainBundle];
@@ -1467,6 +1464,7 @@
 
     [self _performMethodCallWithPath:path HTTPMethod:@"POST" parameters:nil payload:payload completion:completion];
 }
+#endif
 
 
 - (void)loadDetailsForUser:(PLYUser *)user completion:(PLYCompletion)completion

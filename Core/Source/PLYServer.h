@@ -190,12 +190,16 @@ typedef void (^PLYCompletion)(id _Nullable result, NSError * _Nullable error);
 - (void)updateSetting:(nonnull NSString *)setting parameters:(nonnull NSDictionary *)parameters completion:(nullable PLYCompletion)completion;
 
 
+#if TARGET_OS_IPHONE
+
 /**
  Registers the app/device for receiving remote push notification
  @param deviceToken The token returned by the UIApplicationDelegate method
  @param completion The completion handler for the request
  */
 - (void)registerPushToken:(nonnull NSData *)deviceToken completion:(nullable PLYCompletion)completion;
+
+#endif
 
 /**
  Refreshes/completes a user's details. Updating of the properties is done on the main thread because some controls might be KVO-watching properties. The completion handler returns the passed user object if successful or nil and an `NSError` if not.

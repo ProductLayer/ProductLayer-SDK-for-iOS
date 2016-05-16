@@ -52,6 +52,11 @@
 		A740BB7D19F23FA100DA3943 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7590B4019ED7CDF0084EBCA /* QuartzCore.framework */; };
 		A741707E1CEA093900F15DA9 /* ProductLayerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7590ADA19ED77710084EBCA /* ProductLayerSDK.framework */; };
 		A74170811CEA09A700F15DA9 /* DTFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7EA08351A2B31B500B61CCE /* DTFoundation.framework */; };
+		A74170961CEA0DF100F15DA9 /* DTKeychain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A74170911CEA0DE300F15DA9 /* DTKeychain.framework */; };
+		A74170991CEA0E2D00F15DA9 /* DTKeychain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A74170911CEA0DE300F15DA9 /* DTKeychain.framework */; };
+		A741709C1CEA0EE200F15DA9 /* DTKeychain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A74170931CEA0DE300F15DA9 /* DTKeychain.framework */; };
+		A741709D1CEA0FBE00F15DA9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B442B7183F9D0300E8A170 /* AVFoundation.framework */; };
+		A741709F1CEA17F600F15DA9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FD183F842000C38635 /* UIKit.framework */; };
 		A74396011A4090160096CF2F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A74396001A4090160096CF2F /* AddressBookUI.framework */; };
 		A74988191B6EA4E600A66234 /* libDTFoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B4420E183F913000E8A170 /* libDTFoundation.a */; };
 		A74988621B6EA88900A66234 /* PLYBrandOwnerPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A77FFAAC1A77E5120019DD5C /* PLYBrandOwnerPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -249,8 +254,6 @@
 		A7A77B121BFF8972002FF5B7 /* PLYChoosePasswordViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A77B0F1BFF8972002FF5B7 /* PLYChoosePasswordViewController.h */; };
 		A7A77B131BFF8972002FF5B7 /* PLYChoosePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A77B101BFF8972002FF5B7 /* PLYChoosePasswordViewController.m */; };
 		A7A77B141BFF8972002FF5B7 /* PLYChoosePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A77B101BFF8972002FF5B7 /* PLYChoosePasswordViewController.m */; };
-		A7ACC99D1A307ABC004EE5BD /* libDTKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7730FBD1A3078D600CCBB7C /* libDTKeychain.a */; };
-		A7ACC9A51A307B57004EE5BD /* libDTKeychain.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A7730FBF1A3078D600CCBB7C /* libDTKeychain.dylib */; };
 		A7ACC9A81A307B86004EE5BD /* libDTKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7730FBD1A3078D600CCBB7C /* libDTKeychain.a */; };
 		A7B214FA183F842000C38635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214F9183F842000C38635 /* Foundation.framework */; };
 		A7B214FC183F842000C38635 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B214FB183F842000C38635 /* CoreGraphics.framework */; };
@@ -484,6 +487,55 @@
 			remoteGlobalIDString = A7EA07B71A2B2F6A00B61CCE;
 			remoteInfo = "DTFoundation (iOS)";
 		};
+		A74170881CEA0C7D00F15DA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B4418A183F90B900E8A170 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 384470EB1BA3330F0037C68D;
+			remoteInfo = "Static Library (tvOS)";
+		};
+		A741708A1CEA0C7D00F15DA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B4418A183F90B900E8A170 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 384471551BA33ED80037C68D;
+			remoteInfo = "DTFoundation (tvOS)";
+		};
+		A74170901CEA0DE300F15DA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7730F931A3078D600CCBB7C /* DTKeychain.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4B520F6D1C0DDF4C0069CA0B;
+			remoteInfo = "DTKeychain (iOS)";
+		};
+		A74170921CEA0DE300F15DA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7730F931A3078D600CCBB7C /* DTKeychain.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A78F83D31C9B1DA700F7C7E4;
+			remoteInfo = "DTKeychain (OSX)";
+		};
+		A74170941CEA0DE700F15DA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7730F931A3078D600CCBB7C /* DTKeychain.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4B520F6C1C0DDF4C0069CA0B;
+			remoteInfo = "DTKeychain (iOS)";
+		};
+		A74170971CEA0E2900F15DA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7730F931A3078D600CCBB7C /* DTKeychain.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4B520F6C1C0DDF4C0069CA0B;
+			remoteInfo = "DTKeychain (iOS)";
+		};
+		A741709A1CEA0ED700F15DA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7730F931A3078D600CCBB7C /* DTKeychain.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A78F83D21C9B1DA700F7C7E4;
+			remoteInfo = "DTKeychain (OSX)";
+		};
 		A74988171B6EA4D800A66234 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A7B4418A183F90B900E8A170 /* DTFoundation.xcodeproj */;
@@ -553,20 +605,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = A7858B671A3038F200DAF6D0;
 			remoteInfo = "Unit Tests (OSX)";
-		};
-		A7ACC99E1A307AC5004EE5BD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A7730F931A3078D600CCBB7C /* DTKeychain.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = A7858B1B1A3033BE00DAF6D0;
-			remoteInfo = "Static Library (iOS)";
-		};
-		A7ACC9A01A307ACD004EE5BD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A7730F931A3078D600CCBB7C /* DTKeychain.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = A7858B5C1A3038F100DAF6D0;
-			remoteInfo = "Static Library (OSX)";
 		};
 		A7ACC9A61A307B80004EE5BD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1069,9 +1107,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A74170961CEA0DF100F15DA9 /* DTKeychain.framework in Frameworks */,
 				A74396011A4090160096CF2F /* AddressBookUI.framework in Frameworks */,
 				A77860951A40830200560889 /* CoreLocation.framework in Frameworks */,
-				A7ACC99D1A307ABC004EE5BD /* libDTKeychain.a in Frameworks */,
 				A7EA08411A2B341300B61CCE /* DTFoundation.framework in Frameworks */,
 				A740BB7D19F23FA100DA3943 /* QuartzCore.framework in Frameworks */,
 				A740BB7C19F23F9200DA3943 /* CoreGraphics.framework in Frameworks */,
@@ -1086,6 +1124,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A741709F1CEA17F600F15DA9 /* UIKit.framework in Frameworks */,
+				A741709D1CEA0FBE00F15DA9 /* AVFoundation.framework in Frameworks */,
+				A74170991CEA0E2D00F15DA9 /* DTKeychain.framework in Frameworks */,
 				A74170811CEA09A700F15DA9 /* DTFoundation.framework in Frameworks */,
 				A741707E1CEA093900F15DA9 /* ProductLayerSDK.framework in Frameworks */,
 			);
@@ -1129,7 +1170,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7ACC9A51A307B57004EE5BD /* libDTKeychain.dylib in Frameworks */,
+				A741709C1CEA0EE200F15DA9 /* DTKeychain.framework in Frameworks */,
 				A7EA07A81A2B24F600B61CCE /* DTFoundation.framework in Frameworks */,
 				A7EA072B1A2B164E00B61CCE /* AppKit.framework in Frameworks */,
 				A7EA07291A2B161400B61CCE /* Foundation.framework in Frameworks */,
@@ -1306,6 +1347,8 @@
 				A7730FBF1A3078D600CCBB7C /* libDTKeychain.dylib */,
 				A7730FC11A3078D600CCBB7C /* Unit Tests (iOS).xctest */,
 				A7730FC31A3078D600CCBB7C /* Unit Tests (OSX).xctest */,
+				A74170911CEA0DE300F15DA9 /* DTKeychain.framework */,
+				A74170931CEA0DE300F15DA9 /* DTKeychain.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1388,6 +1431,7 @@
 			isa = PBXGroup;
 			children = (
 				A7B4420E183F913000E8A170 /* libDTFoundation.a */,
+				A74170891CEA0C7D00F15DA9 /* libStatic Library (tvOS).a */,
 				A7B44212183F913000E8A170 /* libDTFoundation_Mac.a */,
 				A76D3F8A198666FE0032FE59 /* libDTAnimatedGIF.a */,
 				A7B44214183F913000E8A170 /* libDTAWS.a */,
@@ -1412,6 +1456,7 @@
 				A7B44210183F913000E8A170 /* Unit Tests.xctest */,
 				A7EA08351A2B31B500B61CCE /* DTFoundation.framework */,
 				A7EA07561A2B21A300B61CCE /* DTFoundation.framework */,
+				A741708B1CEA0C7D00F15DA9 /* DTFoundation.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1981,7 +2026,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				A7ACC99F1A307AC5004EE5BD /* PBXTargetDependency */,
+				A74170951CEA0DE700F15DA9 /* PBXTargetDependency */,
 				A7EA083F1A2B33F400B61CCE /* PBXTargetDependency */,
 			);
 			name = "ProductLayer (iOS)";
@@ -2000,6 +2045,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A74170981CEA0E2900F15DA9 /* PBXTargetDependency */,
 				A74170801CEA09A200F15DA9 /* PBXTargetDependency */,
 				A741707D1CEA093000F15DA9 /* PBXTargetDependency */,
 			);
@@ -2067,9 +2113,9 @@
 			productReference = A7B21721183F8A3800C38635 /* libProductLayerSDK.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		A7D997EA1A2B11A800C80C2B /* ProductLayer (Mac) */ = {
+		A7D997EA1A2B11A800C80C2B /* ProductLayer (OSX) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A7D997FE1A2B11A800C80C2B /* Build configuration list for PBXNativeTarget "ProductLayer (Mac)" */;
+			buildConfigurationList = A7D997FE1A2B11A800C80C2B /* Build configuration list for PBXNativeTarget "ProductLayer (OSX)" */;
 			buildPhases = (
 				A7D997E61A2B11A800C80C2B /* Sources */,
 				A7D997E71A2B11A800C80C2B /* Frameworks */,
@@ -2079,10 +2125,10 @@
 			buildRules = (
 			);
 			dependencies = (
-				A7ACC9A11A307ACD004EE5BD /* PBXTargetDependency */,
+				A741709B1CEA0ED700F15DA9 /* PBXTargetDependency */,
 				A7EA07AA1A2B250200B61CCE /* PBXTargetDependency */,
 			);
-			name = "ProductLayer (Mac)";
+			name = "ProductLayer (OSX)";
 			productName = ProductLayer_Mac;
 			productReference = A7D997EB1A2B11A800C80C2B /* ProductLayerSDK.framework */;
 			productType = "com.apple.product-type.framework";
@@ -2148,7 +2194,7 @@
 				A7B21720183F8A3800C38635 /* Static Library (iOS) */,
 				A76A570B1986937D00751454 /* Resource Bundle */,
 				A7590AD919ED77710084EBCA /* ProductLayer (iOS) */,
-				A7D997EA1A2B11A800C80C2B /* ProductLayer (Mac) */,
+				A7D997EA1A2B11A800C80C2B /* ProductLayer (OSX) */,
 				A75CF7AF1A31965E007E30FC /* Unit Tests (iOS) */,
 			);
 		};
@@ -2195,6 +2241,34 @@
 			fileType = wrapper.application;
 			path = ImageDownload.app;
 			remoteRef = A71C2BA41843AD8D00B77DB4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A74170891CEA0C7D00F15DA9 /* libStatic Library (tvOS).a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libStatic Library (tvOS).a";
+			remoteRef = A74170881CEA0C7D00F15DA9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A741708B1CEA0C7D00F15DA9 /* DTFoundation.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DTFoundation.framework;
+			remoteRef = A741708A1CEA0C7D00F15DA9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A74170911CEA0DE300F15DA9 /* DTKeychain.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DTKeychain.framework;
+			remoteRef = A74170901CEA0DE300F15DA9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A74170931CEA0DE300F15DA9 /* DTKeychain.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DTKeychain.framework;
+			remoteRef = A74170921CEA0DE300F15DA9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		A76D3F8A198666FE0032FE59 /* libDTAnimatedGIF.a */ = {
@@ -2762,6 +2836,21 @@
 			name = "DTFoundation (iOS)";
 			targetProxy = A741707F1CEA09A200F15DA9 /* PBXContainerItemProxy */;
 		};
+		A74170951CEA0DE700F15DA9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "DTKeychain (iOS)";
+			targetProxy = A74170941CEA0DE700F15DA9 /* PBXContainerItemProxy */;
+		};
+		A74170981CEA0E2900F15DA9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "DTKeychain (iOS)";
+			targetProxy = A74170971CEA0E2900F15DA9 /* PBXContainerItemProxy */;
+		};
+		A741709B1CEA0ED700F15DA9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "DTKeychain (OSX)";
+			targetProxy = A741709A1CEA0ED700F15DA9 /* PBXContainerItemProxy */;
+		};
 		A74988181B6EA4D800A66234 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Static Library";
@@ -2776,16 +2865,6 @@
 			isa = PBXTargetDependency;
 			target = A76A570B1986937D00751454 /* Resource Bundle */;
 			targetProxy = A76A5716198693A400751454 /* PBXContainerItemProxy */;
-		};
-		A7ACC99F1A307AC5004EE5BD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Static Library (iOS)";
-			targetProxy = A7ACC99E1A307AC5004EE5BD /* PBXContainerItemProxy */;
-		};
-		A7ACC9A11A307ACD004EE5BD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Static Library (OSX)";
-			targetProxy = A7ACC9A01A307ACD004EE5BD /* PBXContainerItemProxy */;
 		};
 		A7ACC9A71A307B80004EE5BD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2949,6 +3028,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Test/UnitTests-Prefix.pch";
@@ -2965,6 +3045,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Test/UnitTests-Prefix.pch";
@@ -2981,6 +3062,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Test/UnitTests-Prefix.pch";
@@ -3036,6 +3118,7 @@
 					/usr/include/libxml2,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -3155,7 +3238,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Externals/DTDownload/Externals/DTFoundation/build/Debug",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = ProductLayerSDK;
 				SDKROOT = macosx;
@@ -3171,6 +3253,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Test/UnitTests-Prefix.pch";
@@ -3274,6 +3357,7 @@
 					/usr/include/libxml2,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -3314,6 +3398,7 @@
 					/usr/include/libxml2,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -3417,7 +3502,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Externals/DTDownload/Externals/DTFoundation/build/Debug",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = ProductLayerSDK;
 				SDKROOT = macosx;
@@ -3453,7 +3537,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Externals/DTDownload/Externals/DTFoundation/build/Debug",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = ProductLayerSDK;
 				SDKROOT = macosx;
@@ -3488,7 +3571,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Externals/DTDownload/Externals/DTFoundation/build/Debug",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = ProductLayerSDK;
 				SDKROOT = macosx;
@@ -3534,6 +3616,7 @@
 					/usr/include/libxml2,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -3645,7 +3728,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A7D997FE1A2B11A800C80C2B /* Build configuration list for PBXNativeTarget "ProductLayer (Mac)" */ = {
+		A7D997FE1A2B11A800C80C2B /* Build configuration list for PBXNativeTarget "ProductLayer (OSX)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A7D997FF1A2B11A800C80C2B /* Debug */,

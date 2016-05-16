@@ -6,15 +6,12 @@
 //  Copyright (c) 2014 Cocoanetics. All rights reserved.
 //
 
+@import DTFoundation;
+
 #import "PLYCategoryPickerViewController.h"
 #import "UIViewController+ProductLayer.h"
 
 #import "ProductLayerSDK.h"
-
-#import "NSString+DTPaths.h"
-
-#import <DTFoundation/DTLog.h>
-#import <DTFoundation/DTBlockFunctions.h>
 
 @import UIKit;
 
