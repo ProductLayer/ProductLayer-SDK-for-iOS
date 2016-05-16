@@ -186,12 +186,6 @@
  
 	PLYCategory *category = _categories[indexPath.row];
 	
-        NSString *categoryPath = category.localizedPath;
-        
-     //   NSArray *pathComps = [categoryPath componentsSeparatedByString:@"/"];
-    //    categoryPath = [pathComps lastObject];
-//		cell.textLabel.text = categoryPath;
-    
     cell.textLabel.attributedText	= [self _attributedStringForText:category.localizedName withSearchTermsMarked:[self currentSearchTerms]];
         cell.indentationLevel = category.level - 1;
         

@@ -147,7 +147,7 @@ import DTFoundation
 	
     private func categoryObjectsStructureFromManagedObjects(managedObjects: [NSManagedObject], addParents: Bool = false) -> [PLYCategory]
 	{
-		var allObjectsAndParents = NSMutableSet()
+		let allObjectsAndParents = NSMutableSet()
         
         for managedObject in managedObjects
         {

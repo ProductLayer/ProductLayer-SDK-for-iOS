@@ -835,7 +835,7 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
 
 - (void)setScannerActive:(BOOL)scannerActive
 {
-	if (!_scannerActive == scannerActive)
+	if (_scannerActive != scannerActive)
 	{
 		_scannerActive = scannerActive;
 		
