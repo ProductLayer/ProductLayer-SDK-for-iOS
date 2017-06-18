@@ -12,7 +12,6 @@
 #import "ProductLayerUI.h"
 
 #import "DTBlockFunctions.h"
-#import "DTAlertView.h"
 
 @interface PLYChoosePasswordViewController() <PLYFormValidationDelegate, UITextFieldDelegate>
 
