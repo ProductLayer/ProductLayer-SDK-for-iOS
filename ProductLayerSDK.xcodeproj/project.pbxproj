@@ -2945,6 +2945,7 @@
 				PRODUCT_NAME = ProductLayerSDK;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2981,6 +2982,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ProductLayerSDK;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -3017,6 +3019,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ProductLayerSDK;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -3158,6 +3161,7 @@
 				PRODUCT_NAME = ProductLayerSDK;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTFoundation/\"/** \"${PROJECT_DIR}/Externals/DTKeychain/\"/**";
 			};
 			name = Coverage;
@@ -3208,6 +3212,7 @@
 				PRODUCT_NAME = ProductLayerSDK;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -3243,6 +3248,7 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -3460,6 +3466,7 @@
 				PRODUCT_NAME = ProductLayerSDK;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTFoundation/\"/** \"${PROJECT_DIR}/Externals/DTKeychain/\"/**";
 			};
 			name = Debug;
@@ -3475,6 +3482,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = ProductLayerSDK;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTFoundation/\"/** \"${PROJECT_DIR}/Externals/DTKeychain/\"/**";
 			};
 			name = Release;
@@ -3507,6 +3515,7 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -3541,6 +3550,7 @@
 				PRODUCT_NAME = ProductLayerSDK;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -3575,6 +3585,7 @@
 				PRODUCT_NAME = ProductLayerSDK;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Externals/** $(inherited)";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -3655,6 +3666,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = ProductLayerSDK;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTFoundation/\"/** \"${PROJECT_DIR}/Externals/DTKeychain/\"/**";
 			};
 			name = AdHoc;
